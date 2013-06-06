@@ -13,6 +13,13 @@ use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
+
+use Usuario\Model\Usuario;
+use Usuario\Model\UsuarioTable;
+use Zend\Db\Adapter\Driver\ResultInterface;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+
 class Module implements AutoloaderProviderInterface
 {
     public function getAutoloaderConfig()
@@ -34,7 +41,29 @@ class Module implements AutoloaderProviderInterface
     {
         return include __DIR__ . '/config/module.config.php';
     }
+//inicio
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'Usuario\Model\UsuarioTable' =>  function($sm) {
+                    $tableGateway = $sm->get('UsuarioTableGateway');
+                    $table = new UsuarioTable($tableGateway);
+                    return $table;
+                },
+                'UsuarioTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Usuario());
+                    return new TableGateway('Usuario', $dbAdapter, null, $resultSetPrototype);
+                },
+            ),
+        );
+    }
 
+
+
+    //fin
     public function onBootstrap(MvcEvent $e)
     {
         // You may not need to do this if you're doing it elsewhere in your

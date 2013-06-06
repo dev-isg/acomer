@@ -1,4 +1,16 @@
-<strong>Module:</strong>        UsuarioModule &raquo;
-<strong>Controller:</strong>    Index &raquo;
-<strong>Action:</strong>        index
-<p>Modulo de Usuarios , registro, edicion, borrado del sistema</p>
+
+
+<table class="table">
+<tr>
+    <th>Nombre</th>
+    <th>Direccion</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach ($usuarios as $usuario) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($usuario->nombre);?></td>
+    <td><?php echo $this->escapeHtml($usuario->direccion);?></td>
+</tr>
+<?php endforeach; ?>
+</table>
+
