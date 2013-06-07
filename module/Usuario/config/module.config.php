@@ -3,7 +3,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Usuario\Controller\Index' => 'Usuario\Controller\IndexController',
-            'Usuario\Controller\Restaurant' => 'Usuario\Controller\RestaurantController'
+            'Usuario\Controller\Restaurant' => 'Usuario\Controller\RestaurantController',
+            
         ),
     ),
     'router' => array(
@@ -27,15 +28,19 @@ return array(
                     // as you solidify the routes for your module, however,
                     // you may want to remove it and replace it with more
                     // specific routes.
-                    'default' => array(
+                    'default' => array( //'default' => array( 
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                            'route'    =>'/[:controller[/:action[/:texto]]]',//'/usuario[/][:action]', //'/[:controller[/:action[/:texto]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'texto'=>'[0-9]+',
                             ),
                             'defaults' => array(
+                                'controller' => 'Usuario\Controllers\Index',
+                                'action'     => 'index',
+
                             ),
                         ),
                     ),
