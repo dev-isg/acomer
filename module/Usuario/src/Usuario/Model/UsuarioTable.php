@@ -52,4 +52,11 @@ class UsuarioTable
     {
         $this->tableGateway->delete(array('id' => $id));
     }
+
+    public function buscarUsuario($datos,$filtro){
+
+
+    }
+
+
 }
