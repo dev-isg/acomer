@@ -53,8 +53,16 @@ class UsuarioTable
         $this->tableGateway->delete(array('id' => $id));
     }
 
-    public function buscarUsuario($datos,$filtro){
+    public function buscarUsuario($datos,$tipo){
 
+       // $rowset = $this->tableGateway->select(array('nombre' => $datos));
+
+         $rowset = $this->tableGateway->select()->where->like($tipo,$datos);
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $id");
+        }
+        return $row;
 
     }
 

@@ -40,13 +40,14 @@ class IndexController extends AbstractActionController
          if ($request->isPost()) {
        //$datos=$request->post()->toArray();
        $datos=$this->params()->fromPost('texto');
-      // $tipo=$this->params()->fromPost('listado');
+       $tipo=$this->params()->fromPost('listado');
 
        //$this->redirect()->toUrl('http://zf2.isg.com:81/usuario/index');
 
-      //$val= $this->getUsuarioTable()->buscarUsuario($datos,$tipo);
+      $val= $this->getUsuarioTable()->buscarUsuario($datos,$tipo);
+      var_dump($val);exit;
 
-      var_dump($datos);exit;
+     // var_dump($datos);exit;
           // var_dump($datos);exit;
         //print_r($_REQUEST);
     }
