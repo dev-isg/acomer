@@ -15,7 +15,9 @@ return array(
     // ...AGREGASTE PARA LA CONEXION GLOBAL
         'db' => array(
         'driver'         => 'Pdo',
-        'dsn'            => 'mysql:dbname=prueba;host=192.168.1.35',
+            'username' => 'kevin',
+        'password' => '123456',
+        'dsn'            => 'mysql:dbname=bd_acomer;host=192.168.1.35',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         ),
