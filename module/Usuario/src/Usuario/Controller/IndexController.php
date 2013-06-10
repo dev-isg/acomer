@@ -22,8 +22,8 @@ class IndexController extends AbstractActionController
         //retorna la vista nueva forma oo
         //$this->view->data='hola mundo';
         return new ViewModel(array(
-            'usuarios' => $this->getUsuarioTable()->fetchAll(),
-            'data'=>'Hola'    
+                             'usuarios' => $this->getUsuarioTable()->fetchAll(),
+                                  'data'=>'Hola'    
         ));
     }
 

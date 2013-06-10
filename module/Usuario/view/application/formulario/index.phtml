@@ -1,0 +1,83 @@
+<h1><?php echo $this->titulo?></h1>
+<?php
+$form = $this->form;
+$form->prepare();
+/*
+// Assuming the "contact/process" route exists...
+$form->setAttribute('action', $this->url('application/formulario/recibe'));
+
+// Set the method attribute for the form
+$form->setAttribute('method', 'post');
+*/
+
+$form->setAttributes(array(
+    'action' => $this->url.'/application/formulario/recibe',
+    'method' => 'post'
+));
+// Get the form label plugin
+$formLabel = $this->plugin('formLabel');
+
+// Render the opening tag
+echo $this->form()->openTag($form);
+?>
+
+<div class="form_element">
+<?php
+    $name = $form->get('nombre');
+    echo $formLabel->openTag().$name->getOption('label')." ";
+    
+    //echo $this->formElementErrors($name);
+    echo $formLabel->closeTag();
+    echo $this->formInput($name);
+?>
+</div>
+<div class="form_element">
+
+<?php
+    $apellido = $form->get('apellido');
+    echo $formLabel->openTag().$apellido->getOption('label')." ";
+    
+    //echo $this->formElementErrors($name);
+    echo $formLabel->closeTag();
+    echo $this->formInput($apellido);
+?>
+</div>
+<div class="form_element">
+<?php
+    $pass = $form->get('pass');
+    echo $formLabel->openTag().$pass->getOption('label')." ";
+    
+    echo $this->formElementErrors($name);
+    echo $formLabel->closeTag();
+    echo $this->formInput($pass);
+?>
+</div>
+
+
+<div class="form_element">
+
+<?php
+    $email = $form->get('email');
+    echo $formLabel->openTag().$email->getOption('label')." ";
+    
+    //echo $this->formElementErrors($name);
+    echo $formLabel->closeTag();
+    echo $this->formInput($email);
+?>
+</div>
+     <div class="form_element">
+    <?php
+    $pais = $form->get('rol');
+    echo $formLabel->openTag() . $pais->getLabel();
+    echo $formLabel->closeTag();
+    echo $this->formSelect($pais);
+    echo $this->formElementErrors($pais);
+    ?></div>
+<hr />
+
+   
+<hr />
+<?php echo $this->formHidden($form->get('oculto')) ?>
+<?php echo $this->formElement($form->get('send')) ?>
+
+<?php echo $this->form()->closeTag() ?>

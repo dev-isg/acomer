@@ -39,10 +39,11 @@ return array(
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                            'route'    => '/[:controller[/:action[/:in_id]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'in_id'         => '[0-9]*',
                             ),
                             'defaults' => array(
                             ),
@@ -73,7 +74,10 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Hola' => 'Application\Controller\HolaController',
+             'Application\Controller\Formulario' => 'Application\Controller\FormularioController'
+            
         ),
     ),
     'view_manager' => array(
