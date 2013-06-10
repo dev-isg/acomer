@@ -3,14 +3,14 @@ namespace Usuario\Model;
 
 class Usuario
 {
-    public $id;
-    public $nombre;
+    public $in_id;
+    public $va_nombre;
     public $direccion;
 
     public function exchangeArray($data)
     {
-        $this->id     = (!empty($data['id'])) ? $data['id'] : null;
-        $this->nombre = (!empty($data['nombre'])) ? $data['nombre'] : null;
+        $this->in_id     = (!empty($data['in_id'])) ? $data['in_id'] : null;
+        $this->va_nombre = (!empty($data['va_nombre'])) ? $data['va_nombre'] : null;
         $this->direccion  = (!empty($data['direccion'])) ? $data['direccion'] : null;
     }
 }

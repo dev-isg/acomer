@@ -5,20 +5,26 @@
 
 <form name='form_busqueda' action='<?php echo $this->basePath();?>/usuario/index/listar' method ="post">
 	<input type='text' name='texto'/>
-<input type='radio' name='listado'  id='nom' value='nombre'/>Por nombre
+<input type='radio' name='listado'  id='nom' value='nombre'checked/>Por nombre
 <input type='radio' name='listado' id='dire' value='direccion'/>Por direccion
 <input name=submit type='submit'/>
+<a href='http://192.168.1.35:81/usuario/index/jsonlistar'>Ver listado con Json</a>
+
 <table class="table">
 <tr>
+	<th>ID</th>
     <th>Nombre</th>
     <th>Direccion</th>
     <th>&nbsp;</th>
     <th><?php echo $this->data;?></th>
+    <th>&nbsp;</th>
 </tr>
 <?php foreach ($usuarios as $usuario) : ?>
 <tr>
-    <td><?php echo $this->escapeHtml($usuario->nombre);?></td>
+	<td><?php echo $this->escapeHtml($usuario->in_id);?></td>
+    <td><?php echo $this->escapeHtml($usuario->va_nombre);?></td> 
     <td><?php echo $this->escapeHtml($usuario->direccion);?></td>
+    <td><a href="/usuario/index/obtonerjoin?id=<?php echo $usuario->in_id?>">VER</a> </td>
 </tr>
 <?php endforeach; ?>
 </table>

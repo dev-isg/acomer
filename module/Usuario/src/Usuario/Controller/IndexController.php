@@ -12,6 +12,8 @@ namespace Usuario\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
+use Zend\View\Model\JsonModel;
+use Zend\Json\Json;
 
 class IndexController extends AbstractActionController
 {
@@ -21,9 +23,11 @@ class IndexController extends AbstractActionController
         //return array();
         //retorna la vista nueva forma oo
         //$this->view->data='hola mundo';
+       
+       // var_dump($var);exit;
         return new ViewModel(array(
-                             'usuarios' => $this->getUsuarioTable()->fetchAll(),
-                                  'data'=>'Hola'    
+            'usuarios' => $this->getUsuarioTable()->fetchAll(),
+            'data'=>'Hola'    
         ));
     }
 
@@ -44,19 +48,53 @@ class IndexController extends AbstractActionController
 
        //$this->redirect()->toUrl('http://zf2.isg.com:81/usuario/index');
 
-      $val= $this->getUsuarioTable()->buscarUsuario($datos,$tipo);
-      var_dump($val);exit;
+      $val=$this->getUsuarioTable()->buscarUsuario($datos,$tipo);
 
-     // var_dump($datos);exit;
-          // var_dump($datos);exit;
-        //print_r($_REQUEST);
-    }
-    //$texto=5;
-        //$texto = $form->getValue('texto');
-        //$this->params()->fromPost('texto'); 
-        return array('texto'=>$texto);
+              return new ViewModel(array(
+            'lista' => $val  
+        ));
       //echo  $this->_request->getParam('texto');exit;
     }
+  }
+  //retorna json 
+
+      public function jsonlistarAction(){
+        //echo 'holla mundddo';exit;
+        $request = $this->getRequest();
+               $datos=$this->getUsuarioTable()->listar();
+         $result = Json::encode(array('datos'=>$datos));
+       //var_dump($result);exit;
+      return $result;
+
+         /*if ($request->isPost()) {
+          //$datos=$this->params()->fromPost('texto');
+          $datos=$this->getUsuarioTable()->listar();
+         $result = Json::encode(array('datos'=>$datos));
+        var_dump($result);exit;
+      return $result;
+
+    }*/
+  }
+
+    public function listarvariosAction(){
+      $datos=$this->getUsuarioTable()->listar2();
+      var_dump($datos);exit;
+    }
+    //imprimer con roles desde sql del zend
+    public function moreAction(){
+
+        $datos=$this->getUsuarioTable()->moretablas();
+
+    }
+
+    public function obtonerjoinAction(){
+      $id=$this->params()->fromQuery('id');
+      //var_dump($id);exit;
+      $datos=$this->getUsuarioTable()->getAlbum($id);
+      var_dump($datos);exit;
+      
+    }
+
 
      public function getUsuarioTable()
     {
