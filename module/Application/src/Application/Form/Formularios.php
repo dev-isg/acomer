@@ -97,12 +97,11 @@ class Formularios extends Form
      $select->setAttribute('multiple', true);
     //$select->setEmptyOption('Seleccione...');
     $this->add($select);
-       // $pera = new IndexController ();
-      //  $sa =$pera->rolesAction();
-     $pais = new Element\Select('rol');
-     $pais->setLabel('Cuál es tu rol?');
-     $pais->setEmptyOption('Seleccione...');
-     $pais->setValueOptions(array(
+
+       $pais = new Element\Select('rol');
+       $pais->setLabel('Cuál es tu rol?');
+       $pais->setEmptyOption('Seleccione...');
+       $pais->setValueOptions(array(
       'european' => array(
          'options' => array(
             '1' => 'administrador',

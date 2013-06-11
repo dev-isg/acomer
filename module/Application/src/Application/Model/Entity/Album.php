@@ -15,6 +15,7 @@ class Album extends TableGateway
 public function fetchAll()
     {
         $resultSet = $this->select();
+ 
         return $resultSet->toArray();
     }
     
@@ -24,7 +25,8 @@ public function fetchAll()
                  ->from('ta_rol');
       $selectString = $sql->getSqlStringForSqlObject($select);
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-       $row = $results->current();
+
+       $row = $results->toArray();
         if (!$row) {
             throw new \Exception("No existe registro con el parametro $id");
         }
@@ -40,6 +42,7 @@ public function fetchAll()
              ->where(array('f.in_id'=>$id));
              $selectString = $sql->getSqlStringForSqlObject($select);
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+
        $row = $results->current();
         if (!$row) {
             throw new \Exception("No existe registro con el parametro $id");

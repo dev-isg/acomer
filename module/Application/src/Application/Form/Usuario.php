@@ -96,14 +96,14 @@ class Usuario extends Form
     //$select->setEmptyOption('Seleccione...');
     $this->add($select);
      
-        $pais = new Element\Select('rol');
+     $pais = new Element\Select('rol');
      $pais->setLabel('Cuál es tu rol?');
      $pais->setEmptyOption('Seleccione...');
      $pais->setValueOptions(array(
       'european' => array(
          'options' => array(
-            '0' => 'administrador',
-            '1' => 'editor',
+            '1' => 'administrador',
+            '2' => 'editor',
          ),
       ),
 
