@@ -22,7 +22,7 @@ class HolaController extends AbstractActionController
     {
         $hora =date('y-m-d h:m:s');
         $array = array("josmel","noel","yupanqui");
-        return new ViewModel(array('perra'=>'eres una perra','hora'=>$hora,'ya'=>$array));
+        return new ViewModel(array('perra'=>'sss','hora'=>$hora,'ya'=>$array));
       
     }
 }
