@@ -1,14 +1,2 @@
 
-<?php
-$title = 'My album';
-$this->headTitle($title);
-echo $this->hola;
-?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
-  <td><a href="/application/index/index/" title="regresar">regresar</a></td>
-  <br>
-<table class="table">
-<tr><th>Id</th> <td><?php echo $yea['id' ];?></td></tr>
- <tr><th>Titulo</th> <td><?php echo $yea['title'];?></td></tr>   
- <tr><th>obra</th>  <td><?php echo $yea['artist'];?></td></td></tr> 
-</table>
+<h1><?php print_r($_POST)?></h1>

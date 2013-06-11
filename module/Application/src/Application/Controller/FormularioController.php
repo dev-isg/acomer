@@ -11,16 +11,16 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Application\Form\Formularios;
+use Application\Form\Usuario;
 use Application\Model\Entity\Procesa;
 
 class FormularioController extends AbstractActionController
 {
     public function indexAction()
     {
-        $form=new Formularios("form");
-
-        return new ViewModel(array("titulo"=>"Formularios en ZF2","form"=>$form,'url'=>$this->getRequest()->getBaseUrl()));
+        $form=new Usuario("form");
+        
+        return new ViewModel(array("titulo"=>"Formularios en Ingreso de Usuarios","form"=>$form,'url'=>$this->getRequest()->getBaseUrl()));
     }
     public function formularioAction()
     {

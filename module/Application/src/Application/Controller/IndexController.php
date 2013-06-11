@@ -27,8 +27,19 @@ class IndexController extends AbstractActionController
         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $adapter = $this->dbAdapter;
         $u = new Album($adapter);
-        $array = array('hola'=>'desde sql',
+        $array = array('hola'=>'LISTADO DE USUARIOS',
                         'yea'=>$u->fetchAll());
+       return new ViewModel($array);
+    }
+    
+    public function rolesAction()
+    { 
+        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $u = new Album($adapter);
+        $s=$u->rolAll($adapter);
+        $array = array('hola'=>'desde sql',
+                        'yea'=>$u->rolAll($adapter)); 
        return new ViewModel($array);
     }
      public function verAction()
@@ -36,7 +47,8 @@ class IndexController extends AbstractActionController
         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $adapter = $this->dbAdapter;
         
-        $id =(int)$this->params()->fromRoute('in_id',0);
+        $id =(int)$this->params()->fromRoute('in_id',0); 
+       
         $u = new Album($adapter);
         $array = array('hola'=>'desde verrr',
                         'yea'=>$u->getAlbum($id,$adapter));
@@ -47,13 +59,54 @@ class IndexController extends AbstractActionController
         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $adapter = $this->dbAdapter;
         $id =(int)$this->params()->fromRoute('in_id',0);
+        //var_dump($id);exit;
         $u = new Album($adapter);
         $array = array('artist'=>'sandra' , 
-                        'title'=>'te quiero meter pinga');
+                        'title'=>'ss');
         $u->deleteAlbum($id);
 
        return new ViewModel($array);
     }
+    public function delAction()
+    { 
+        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $id =(int)$this->params()->fromRoute('in_id',0);
+        //var_dump($id);exit;
+        $u = new Album($adapter);
+        $u->deleteAlbum($id);
+
+       //return new ViewModel($array);
+    }
+    public function recibeAction()
+    {
+        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $data = $this->request->getPost();
+        $u = new Album($adapter);
+        $array = array('va_nombre'=>$data['nombre'],
+                    'va_apellidos'=>$data['apellido'],
+                        'va_email'=>$data['email'],
+                  'va_contrasenia'=>$data['pass'],
+                    'Ta_rol_in_id'=>$data['rol']);
+      $u->addAlbum($array);
+        
+        //return new ViewModel(array('mal'=>$array));
+    }
+    
+    public function actualizarusuarioAction()
+    {
+        $form=new Formularios("form");
+        return new ViewModel(array("titulo"=>"Ingrese Nuevo Usuario","form"=>$form,'url'=>$this->getRequest()->getBaseUrl()));
+        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter; 
+        $id =(int)$this->params()->fromRoute('in_id',0); 
+        $u = new Album($adapter);
+        $array = array('hola'=>'desde verrr',
+                        'yea'=>$u->getAlbum($id,$adapter));
+       return new ViewModel($array);
+    }
+
     public function joinAction()
     {  
         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
@@ -72,9 +125,7 @@ class IndexController extends AbstractActionController
      public function forAction()
     { 
         $form=new Formularios("form");
-
-        return new ViewModel(array("titulo"=>"Formularios en ZF2","form"=>$form,'url'=>$this->getRequest()->getBaseUrl()));
+        return new ViewModel(array("titulo"=>"Ingrese Nuevo Usuario","form"=>$form,'url'=>$this->getRequest()->getBaseUrl()));
   
     }
 }
-

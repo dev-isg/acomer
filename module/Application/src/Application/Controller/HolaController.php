@@ -1,28 +1,60 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
-
 namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Application\Model\Usuario;          // <-- Add this import
+use Application\Form\usuario; 
 
-class HolaController extends AbstractActionController
+class AlbumController extends AbstractActionController
 {
-    public function indexAction()
+    
+    protected $albumTable;
+
+
+   public function indexAction()
     {
-        return new ViewModel();
+        return new ViewModel(array(
+            'albums' => $this->getAlbumTable()->fetchAll(),
+        ));
     }
-    public function malaAction()
+
+        public function addAction()
     {
-        $hora =date('y-m-d h:m:s');
-        $array = array("josmel","noel","yupanqui");
-        return new ViewModel(array('perra'=>'eres una perra','hora'=>$hora,'ya'=>$array));
-      
+        $form = new AlbumForm();
+        $form->get('submit')->setValue('Add');
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $album = new Album();
+            $form->setInputFilter($album->getInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+                $album->exchangeArray($form->getData());
+                $this->getAlbumTable()->saveAlbum($album);
+
+                // Redirect to list of albums
+                return $this->redirect()->toRoute('application');
+            }
+        }
+        return array('form' => $form);
+    }
+
+    public function editAction()
+    {
+    }
+
+    public function deleteAction()
+    {
+    }
+    
+   public function getAlbumTable()
+    {
+        if (!$this->albumTable) {
+            $sm = $this->getServiceLocator();
+            $this->albumTable = $sm->get('Application\Model\UsuarioTable');
+        }
+        return $this->albumTable;
     }
 }

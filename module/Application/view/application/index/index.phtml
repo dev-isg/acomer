@@ -4,7 +4,9 @@ $title = 'My album';
 $this->headTitle($title);
 echo $this->hola;
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
+<h1><?php //echo $this->escapeHtml($title); ?></h1>
+
+<td><a href="/application/index/for" title="ingrese usuaerio del sistema"><h1>ingresar usuario</h1></a></td>
 <table class="table">
 <tr><th>Id</th>
     <th>Titulo</th>
@@ -20,6 +22,7 @@ echo $this->hola;
     <td>  <?php echo $yea['va_email'];?></td>
     <!--<td><?php echo $yea['id_pais'];?></td>-->
     <td><a href="<?php echo $this->basePath();?>/application/index/ver/<?php echo $yea['in_id'];?>" title="ver valores">ver</a></td>
-    <td><a href="<?php echo $this->basePath();?>/application/index/add/<?php echo $yea['in_id'];?>" title="ver valores">eliminar</a></td>
+    <td><a href="<?php echo $this->basePath();?>/application/index/actualizarusuario/<?php echo $yea['in_id'];?>" title="ver valores">actualizar</a></td>
+    <td><a href="<?php echo $this->basePath();?>/application/index/del/<?php echo $yea['in_id'];?>" title="ver valores">eliminar</a></td>
 </tr>
 <?php endforeach; ?>

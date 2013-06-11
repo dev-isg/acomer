@@ -3,7 +3,7 @@
 $form = $this->form;
 $form->prepare();
 $form->setAttributes(array(
-    'action' => $this->url.'/application/formulario/recibe',
+    'action' => $this->url.'/application/index/add',
     'method' => 'post'
 ));
 $formLabel = $this->plugin('formLabel');
@@ -66,5 +66,4 @@ echo $this->form()->openTag($form);
 <hr />
 <?php echo $this->formHidden($form->get('oculto')) ?>
 <?php echo $this->formElement($form->get('send')) ?>
-
 <?php echo $this->form()->closeTag() ?>
