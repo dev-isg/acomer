@@ -17,6 +17,19 @@ public function fetchAll()
         $resultSet = $this->select();
         return $resultSet->toArray();
     }
+    
+    public function rolAll($adapter)
+    { $sql = new Sql($adapter);
+        $select = $sql->select()
+                 ->from('ta_rol');
+      $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+       $row = $results->current();
+        if (!$row) {
+            throw new \Exception("No existe registro con el parametro $id");
+        }
+        return $row;  
+    }
 
     public function getAlbum($id,$adapter)
     {
@@ -46,6 +59,7 @@ public function fetchAll()
 
     public function deleteAlbum($id)
     {
-        $this->delete(array('id' => $id));
+        $this->delete(array('in_id' => $id));
+       
     }
 }

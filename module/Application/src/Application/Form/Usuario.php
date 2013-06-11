@@ -11,10 +11,8 @@ use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\Captcha;
 use Zend\Form\Factory;
-use  Application\Controller\IndexController;
 
-
-class Formularios extends Form
+class Usuario extends Form
 {
     public function __construct($name = null)
      {
@@ -97,16 +95,15 @@ class Formularios extends Form
      $select->setAttribute('multiple', true);
     //$select->setEmptyOption('Seleccione...');
     $this->add($select);
-       // $pera = new IndexController ();
-      //  $sa =$pera->rolesAction();
-     $pais = new Element\Select('rol');
+     
+        $pais = new Element\Select('rol');
      $pais->setLabel('Cuál es tu rol?');
      $pais->setEmptyOption('Seleccione...');
      $pais->setValueOptions(array(
       'european' => array(
          'options' => array(
-            '1' => 'administrador',
-            '2' => 'editor',
+            '0' => 'administrador',
+            '1' => 'editor',
          ),
       ),
 

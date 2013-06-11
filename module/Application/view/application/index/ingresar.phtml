@@ -1,32 +1,33 @@
-<?php
-$title = 'ingresar usuario';
-$this->headTitle($title);
-echo $this->hola;
-?>
-
 <h1><?php echo $this->titulo?></h1>
 <?php
 $form = $this->form;
 $form->prepare();
 $form->setAttributes(array(
-    'action' => $this->url.'/application/index/recibe',
+    'action' => $this->url.'/application/index/add',
     'method' => 'post'
 ));
 $formLabel = $this->plugin('formLabel');
+
 echo $this->form()->openTag($form);
 ?>
+
 <div class="form_element">
 <?php
     $name = $form->get('nombre');
     echo $formLabel->openTag().$name->getOption('label')." ";
+    
+    //echo $this->formElementErrors($name);
     echo $formLabel->closeTag();
     echo $this->formInput($name);
 ?>
 </div>
 <div class="form_element">
+
 <?php
     $apellido = $form->get('apellido');
     echo $formLabel->openTag().$apellido->getOption('label')." ";
+    
+    //echo $this->formElementErrors($name);
     echo $formLabel->closeTag();
     echo $this->formInput($apellido);
 ?>
@@ -41,10 +42,15 @@ echo $this->form()->openTag($form);
     echo $this->formInput($pass);
 ?>
 </div>
+
+
 <div class="form_element">
+
 <?php
     $email = $form->get('email');
     echo $formLabel->openTag().$email->getOption('label')." ";
+    
+    //echo $this->formElementErrors($name);
     echo $formLabel->closeTag();
     echo $this->formInput($email);
 ?>
@@ -57,7 +63,6 @@ echo $this->form()->openTag($form);
     echo $this->formSelect($pais);
     echo $this->formElementErrors($pais);
     ?></div>
-<hr />
 <hr />
 <?php echo $this->formHidden($form->get('oculto')) ?>
 <?php echo $this->formElement($form->get('send')) ?>

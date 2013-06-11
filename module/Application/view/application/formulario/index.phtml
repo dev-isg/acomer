@@ -2,22 +2,12 @@
 <?php
 $form = $this->form;
 $form->prepare();
-/*
-// Assuming the "contact/process" route exists...
-$form->setAttribute('action', $this->url('application/formulario/recibe'));
-
-// Set the method attribute for the form
-$form->setAttribute('method', 'post');
-*/
-
 $form->setAttributes(array(
     'action' => $this->url.'/application/formulario/recibe',
     'method' => 'post'
 ));
-// Get the form label plugin
 $formLabel = $this->plugin('formLabel');
 
-// Render the opening tag
 echo $this->form()->openTag($form);
 ?>
 
@@ -73,9 +63,6 @@ echo $this->form()->openTag($form);
     echo $this->formSelect($pais);
     echo $this->formElementErrors($pais);
     ?></div>
-<hr />
-
-   
 <hr />
 <?php echo $this->formHidden($form->get('oculto')) ?>
 <?php echo $this->formElement($form->get('send')) ?>
