@@ -27,7 +27,7 @@ class IndexController extends AbstractActionController
         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $adapter = $this->dbAdapter;
         $u = new Album($adapter);
-        $array = array('hola'=>'desde sql',
+        $array = array('hola'=>'LISTADO DE USUARIOS',
                         'yea'=>$u->fetchAll());
        return new ViewModel($array);
     }
