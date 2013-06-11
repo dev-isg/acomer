@@ -5,10 +5,15 @@
 
 <form name='form_busqueda' action='<?php echo $this->basePath();?>/usuario/index/listar' method ="post">
 	<input type='text' name='texto'/>
-<input type='radio' name='listado'  id='nom' value='nombre'checked/>Por nombre
-<input type='radio' name='listado' id='dire' value='direccion'/>Por direccion
+<input type='radio' name='listado'  id='nom' value='va_nombre' />Por nombre
+<!--<input type='radio' name='listado' id='dire' value='direccion'/>Por direccion checked-->
+
+<input type='radio' name='rol' id='dire1' value='1'/>Por Administrador
+<input type='radio' name='rol' id='dire2' value='2'/>Por Editor
+
 <input name=submit type='submit'/>
-<a href='http://192.168.1.35:81/usuario/index/jsonlistar'>Ver listado con Json</a>
+<p>JSON</p>
+<a href='http://192.168.1.35:8080/usuario/index/jsonlistar'>Ver listado con Json</a>
 
 <table class="table">
 <tr>
@@ -25,6 +30,7 @@
     <td><?php echo $this->escapeHtml($usuario->va_nombre);?></td> 
     <td><?php echo $this->escapeHtml($usuario->va_apellidos);?></td>
     <td><a href="/usuario/index/obtonerjoin?id=<?php echo $usuario->in_id?>">VER</a> </td>
+    <td><a href="/usuario/index/eliminarusu?id=<?php echo $usuario->in_id?>">ELIMINAR</a> </td>
 </tr>
 <?php endforeach; ?>
 </table>

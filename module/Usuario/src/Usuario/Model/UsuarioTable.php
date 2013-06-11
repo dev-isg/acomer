@@ -58,7 +58,9 @@ public function getAlbum($id)
             ->where(array('f.in_id'=>$id));
             $selectString = $sql->getSqlStringForSqlObject($select);
            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-      $row = $results->current();
+             $row = $results->current();
+      
+            
        if (!$row) {
            throw new \Exception("No existe registro con el parametro $id");
        }
@@ -68,8 +70,47 @@ public function getAlbum($id)
    }
 
 //----------------------------FIN---------------------------------------------------
+ public function buscarUsuario($datos,$tipo){
+        $adapter=$this->tableGateway->getAdapter();
+           $sql = new Sql($adapter);
+        
+           if($tipo=='va_nombre'){
 
+             $select = $sql->select()
+            ->from(array('f' => 'ta_usuario')) 
+            ->join(array('b' => 'ta_rol'),'f.Ta_rol_in_id = b.in_id')
+            ->where(array($tipo.' LIKE ?'=>'%'.$datos.'%')); //->where(array('f.in_id'=>$id));
+//             $selectString = $sql->getSqlStringForSqlObject($select);
+//            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//            $rowset = $results;//->ToArray();
+           }else{
+                $select = $sql->select()
+                ->from(array('f' => 'ta_usuario')) 
+                ->join(array('b' => 'ta_rol'),'f.Ta_rol_in_id=b.in_id')
+                ->where(array('b.in_id'=>$tipo));
+//            //$rowset = $this->tableGateway->select(array('Ta_rol_in_id'=>$tipo));               
+//            $selectString = $sql->getSqlStringForSqlObject($select);
+//            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//            $rowset = $results;//->ToArray();
 
+            }
+            
+                        $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            $rowset = $results;
+           /* $array=array();
+            foreach($rowset as $resul){
+                $array[]=$resul;   
+            }
+             var_dump( $array);exit;*/
+
+               if (!$rowset) {
+            throw new \Exception("No hay data");
+        }
+       
+      
+        return $rowset;
+    }
 
 
 
@@ -102,36 +143,23 @@ public function getAlbum($id)
             }
         }
     }
-
+    
+    public function estadoUsuario($id,$estado){
+         $this->tableGateway->update($estado, array('in_id' => $id));
+    }
+    
     public function deleteUsuario($id)
     {
-        $this->tableGateway->delete(array('id' => $id));
+        
+        $this->tableGateway->delete(array('in_id' => $id));
     }
-
-    public function buscarUsuario($datos,$tipo){
-
-       $rowset = $this->tableGateway->select(array($tipo => $datos));
-      //$rowset=  $this->tableGateway->select();
-     /* $rowset=  $this->tableGateway->select();   select(function (Select $select) {
-     $select->where->like('nombre',$datos);
-   
-    });*/
-
-      // $rowset = $this->tableGateway->select()->like($tipo,$datos);
-        //$row = $rowset->current();
-        //if (!$row) {
-            //throw new \Exception("Could not find row $id");
-               if (!$rowset) {
-            throw new \Exception("No hay data");
-        }
-        //}
-      
-        return $rowset;
-    }
+    
 
     public function listar(){   
+        
         //obtener el adaptador x defecto defino en module
-        $lista = $this->tableGateway->getAdapter()->query("SELECT * FROM USUARIO")->execute();//select()->from('usuario')->query()->fetchAll(); //fetchAll("SELECT * FROM USUARIO");
+        $lista = $this->tableGateway->getAdapter()->query("SELECT * FROM ta_usuario")->execute();//select()->from('usuario')->query()->fetchAll(); //fetchAll("SELECT * FROM USUARIO");
+        
         /*$select = new Select();
         $lista = $this->tableGateway->getAdapter()->select()->from('usuario',array('nombre','direccion'));
 
@@ -144,7 +172,7 @@ public function getAlbum($id)
             $returnArray[] = $result;
         }
 
-       // var_dump($returnArray);exit;
+       //var_dump($returnArray);exit;
         return $returnArray;
     }
 
@@ -157,7 +185,7 @@ public function getAlbum($id)
         });*/
         $adapter=$this->tableGateway->getAdapter();
         $sql = new sql($adapter);
-        $select = $sql->select()->from('usuario')->where(array('nombre' => 'kevin'));//where('nombre=kevin');//
+        $select = $sql->select()->from('ta_usuario')->where(array('va_nombre' => 'kevin'));//where('nombre=kevin');//
         //$select->from('usuario'); 
         //$select->where(array('nombre' => 'kevin'));
 

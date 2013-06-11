@@ -23,11 +23,12 @@ public function fetchAll()
         $sql = new Sql($adapter);
         $select = $sql->select()
             ->from(array('f' => 'ta_usuario')) 
-            ->join(array('b' => 'ta_rol'),'f.Ta_rol_in_id = b.in_id')
-             ->where(array('f.in_id'=>$id));
+            ->join(array('b' => 'ta_rol'),'f.Ta_rol_in_id = b.in_id');
+             //->where(array('f.in_id'=>$id));
              $selectString = $sql->getSqlStringForSqlObject($select);
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-       $row = $results->current();
+            $row = $results->ToArray();//->current();
+       var_dump($row);exit;
         if (!$row) {
             throw new \Exception("No existe registro con el parametro $id");
         }

@@ -44,7 +44,11 @@ class IndexController extends AbstractActionController
          if ($request->isPost()) {
        //$datos=$request->post()->toArray();
        $datos=$this->params()->fromPost('texto');
-       $tipo=$this->params()->fromPost('listado');
+       $nom=$this->params()->fromPost('listado');
+       $rol=$this->params()->fromPost('rol');
+       
+       $tipo=(isset($nom))?$nom:$rol;
+       // var_dump($tipo);exit;
 
        //$this->redirect()->toUrl('http://zf2.isg.com:81/usuario/index');
 
@@ -59,13 +63,13 @@ class IndexController extends AbstractActionController
   //retorna json 
 
       public function jsonlistarAction(){
-        //echo 'holla mundddo';exit;
-        $request = $this->getRequest();
-               $datos=$this->getUsuarioTable()->listar();
+        
+        //$request = $this->getRequest();
+        $datos=$this->getUsuarioTable()->listar();
          $result = Json::encode(array('datos'=>$datos));
-       //var_dump($result);exit;
-      return $result;
-
+         var_dump($result);exit;
+        // return $result;
+  
          /*if ($request->isPost()) {
           //$datos=$this->params()->fromPost('texto');
           $datos=$this->getUsuarioTable()->listar();
@@ -76,6 +80,18 @@ class IndexController extends AbstractActionController
     }*/
   }
 
+  public function eliminarusuAction(){
+      $id=$this->params()->fromQuery('id');
+      $this->getUsuarioTable()->deleteUsuario((int)$id);
+      $this->redirect()->toUrl('/usuario/index');
+  }
+  
+  public function cambiaestadoAction(){
+      $id=$this->params()->fromQuery('id');
+      $estado=$this->params()->fromQuery('estado');
+      $this->getUsuarioTable()->estadoUsuario((int)$id,$estado);
+      $this->redirect()->toUrl('/usuario/index');
+  }
     public function listarvariosAction(){
       $datos=$this->getUsuarioTable()->listar2();
       var_dump($datos);exit;
