@@ -8,8 +8,8 @@
 <input type='radio' name='listado'  id='nom' value='va_nombre' />Por nombre
 <!--<input type='radio' name='listado' id='dire' value='direccion'/>Por direccion checked-->
 
-<input type='radio' name='rol' id='dire1' value='1'/>Por Administrador
-<input type='radio' name='rol' id='dire2' value='2'/>Por Editor
+<input type='radio' name='listado' id='dire1' value='1'/>Por Administrador
+<input type='radio' name='listado' id='dire2' value='2'/>Por Editor
 
 <input name=submit type='submit'/>
 <p>JSON</p>
@@ -31,6 +31,8 @@
     <td><?php echo $this->escapeHtml($usuario->va_apellidos);?></td>
     <td><a href="/usuario/index/obtonerjoin?id=<?php echo $usuario->in_id?>">VER</a> </td>
     <td><a href="/usuario/index/eliminarusu?id=<?php echo $usuario->in_id?>">ELIMINAR</a> </td>
+    <td><a href="/usuario/index/cambiaestado?id=<?php echo $usuario->in_id?>&estado=activo">ACTIVAR</a> </td>
+    <td><a href="/usuario/index/cambiaestado?id=<?php echo $usuario->in_id?>&estado=desactivo">DESACTIVAR</a> </td>
 </tr>
 <?php endforeach; ?>
 </table>

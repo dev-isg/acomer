@@ -45,9 +45,9 @@ class IndexController extends AbstractActionController
        //$datos=$request->post()->toArray();
        $datos=$this->params()->fromPost('texto');
        $nom=$this->params()->fromPost('listado');
-       $rol=$this->params()->fromPost('rol');
+       //$rol=$this->params()->fromPost('rol');
        
-       $tipo=(isset($nom))?$nom:$rol;
+       $tipo=$nom;//(isset($nom))?$nom:$rol;
        // var_dump($tipo);exit;
 
        //$this->redirect()->toUrl('http://zf2.isg.com:81/usuario/index');
