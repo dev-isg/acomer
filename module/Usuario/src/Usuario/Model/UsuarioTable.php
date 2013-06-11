@@ -145,7 +145,10 @@ public function getAlbum($id)
     }
     
     public function estadoUsuario($id,$estado){
-         $this->tableGateway->update($estado, array('in_id' => $id));
+                $data = array(
+                    'Ta_rol_in_id' => $estado,
+                 );
+         $this->tableGateway->update($data, array('in_id' => $id));
     }
     
     public function deleteUsuario($id)
