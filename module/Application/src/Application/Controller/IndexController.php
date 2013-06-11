@@ -93,6 +93,19 @@ class IndexController extends AbstractActionController
         
         //return new ViewModel(array('mal'=>$array));
     }
+    
+    public function actualizarusuarioAction()
+    {
+        $form=new Formularios("form");
+        return new ViewModel(array("titulo"=>"Ingrese Nuevo Usuario","form"=>$form,'url'=>$this->getRequest()->getBaseUrl()));
+        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter; 
+        $id =(int)$this->params()->fromRoute('in_id',0); 
+        $u = new Album($adapter);
+        $array = array('hola'=>'desde verrr',
+                        'yea'=>$u->getAlbum($id,$adapter));
+       return new ViewModel($array);
+    }
 
     public function joinAction()
     {  
@@ -112,7 +125,7 @@ class IndexController extends AbstractActionController
      public function forAction()
     { 
         $form=new Formularios("form");
-        return new ViewModel(array("titulo"=>"Formularios en ZF2","form"=>$form,'url'=>$this->getRequest()->getBaseUrl()));
+        return new ViewModel(array("titulo"=>"Ingrese Nuevo Usuario","form"=>$form,'url'=>$this->getRequest()->getBaseUrl()));
   
     }
 }

@@ -57,7 +57,7 @@ public function fetchAll()
 
     public function updateAlbum($id, $data = array())
     {
-        $this->update($data, array('id' => $id));
+        $this->update($data, array('in_id' => $id));
     }
 
     public function deleteAlbum($id)
