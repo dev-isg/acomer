@@ -31,11 +31,11 @@ class UsuarioTable
        
 //       
          $select = $sql->select()
-        ->from(array('f' => 'ta_usuario'))//,array('in_id','va_nombre','va_apellidos','va_email','en_estado')) 
-        ->join(array('b' => 'ta_rol'),'f.Ta_rol_in_id=b.in_id')//,array('va_nombre_rol'))
+        ->from(array('f' => 'ta_usuario'),array('in_id'))//,array('in_id','va_nombre','va_apellidos','va_email','en_estado')) 
+        ->join(array('b' => 'ta_rol'),'f.Ta_rol_in_id=b.in_id',array('va_nombre_rol'))//,array('va_nombre_rol'))
          ->where(array('f.Ta_rol_in_id=b.in_id'));
        $selectString = $sql->getSqlStringForSqlObject($select);
-        //var_dump($selectString);exit;
+        var_dump($selectString);exit;
         $resultSet= $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
 
            return $resultSet;//->toArray();
