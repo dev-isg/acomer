@@ -106,7 +106,7 @@ class IndexController extends AbstractActionController
   public function eliminarusuAction(){
       $id=$this->params()->fromQuery('id');
       $this->getUsuarioTable()->deleteUsuario((int)$id);
-      $this->redirect()->toUrl('/usuario/index');
+     // $this->redirect()->toUrl('/usuario/index');
   }
   
   public function cambiaestadoAction(){
