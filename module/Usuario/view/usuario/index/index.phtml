@@ -25,7 +25,7 @@
 </tr>
 </thead>
 <?php $count=1; 
-foreach ($usuarios as $usuario) : ?>
+foreach ($this->usuarios as $usuario) : ?>
 <tr id="<?php echo $this->escapeHtml($usuario->in_id);?>">
     <td><input id="<?php echo $this->escapeHtml($usuario->in_id);?>" type="checkbox" class="check"> </td>
     <td><?php echo $count++?></td>
