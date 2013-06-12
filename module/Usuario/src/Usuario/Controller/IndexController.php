@@ -14,6 +14,8 @@ use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
 use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
+use Usuario\Model\Usuario;          // <-- Add this import
+use Usuario\Form\UsuarioForm;       // <-- Add this import
 
 class IndexController extends AbstractActionController
 {
@@ -29,6 +31,73 @@ class IndexController extends AbstractActionController
             'usuarios' => $this->getUsuarioTable()->fetchAll(),
             //'data'=>'Hola'    
         ));
+    }
+    public function agregarusuarioAction()
+    {
+        $form = new UsuarioForm();
+        $form->get('submit')->setValue('Add');
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $usuario = new Usuario();
+            $form->setInputFilter($usuario->getInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+                $usuario->exchangeArray($form->getData());
+                $this->getUsuarioTable()->guardarUsuario($usuario);
+
+                // Redirect to list of albums
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/rese');
+       
+            }
+        }
+        return array('form' => $form);
+    }
+    
+    
+     public function editarusuarioAction()
+     
+    {
+        $id = (int) $this->params()->fromRoute('in_id', 0);
+        //var_dump($id);exit;
+        if (!$id) {
+           return $this->redirect()->toUrl($this->
+            getRequest()->getBaseUrl().'/usuario/index/rese');  
+        }
+        try {
+            $usuario = $this->getUsuarioTable()->getUsuario($id);
+            //var_dump($usuario);exit;
+        }
+        catch (\Exception $ex) {
+            return $this->redirect()->toUrl($this->
+            getRequest()->getBaseUrl().'/usuario/index/rese'); 
+        }
+        $form  = new UsuarioForm();
+        $form->bind($usuario);
+        $form->get('submit')->setAttribute('value', 'Edit');
+        $request = $this->getRequest();      
+        if ($request->isPost()) {
+            $form->setInputFilter($usuario->getInputFilter());
+            $form->setData($request->getPost());         
+           if ($form->isValid()) {
+              $this->getUsuarioTable()->guardarUsuario($usuario);         
+              return $this->redirect()->toUrl($this->
+            getRequest()->getBaseUrl().'/usuario/index/rese');
+            }
+        }
+
+        return array(
+            'in_id' => $id,
+            'form' => $form,
+        );
+    }
+    public function reseAction()
+    {
+      
+        $array = array('hola'=>'LISTADO DE USUARIOS',
+                        'yea' => $this->getUsuarioTable()->fetchAll(),);
+       return new ViewModel($array);
     }
 
     public function fooAction()

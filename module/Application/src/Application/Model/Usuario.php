@@ -30,6 +30,12 @@ class Usuario implements InputFilterAwareInterface
         $this->Ta_rol_in_id = (!empty($data['Ta_rol_in_id'])) ? $data['Ta_rol_in_id'] : null;
 //$this->direccion  = (!empty($data['direccion'])) ? $data['direccion'] : null;
     }
+    
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
+
     // Add content to these methods:
     public function setInputFilter(InputFilterInterface $inputFilter)
     {

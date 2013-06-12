@@ -76,7 +76,7 @@ public function getAlbum($id)
     public function getUsuario($id)
     {
         $id  = (int) $id;
-        $rowset = $this->tableGateway->select(array('id' => $id));
+        $rowset = $this->tableGateway->select(array('in_id' => $id));
         $row = $rowset->current();
         if (!$row) {
             throw new \Exception("Could not find row $id");
@@ -102,7 +102,27 @@ public function getAlbum($id)
             }
         }
     }
-
+public function guardarUsuario(Usuario $usuario)
+    {
+        $data = array(
+            'va_nombre' => $usuario->va_nombre,
+            'va_apellidos'  => $usuario->va_apellidos,
+            'va_email' => $usuario->va_email,
+            'va_contrasenia'  => $usuario->va_contrasenia,
+            'Ta_rol_in_id'  => $usuario->Ta_rol_in_id,  
+        );
+        
+        $id = (int)$usuario->in_id;
+        if ($id == 0) {
+            $this->tableGateway->insert($data);
+        } else {
+            if ($this->getUsuario($id)) {
+                $this->tableGateway->update($data, array('in_id' => $id));
+            } else {
+                throw new \Exception('Form id does not exist');
+            }
+        }
+    }
     public function deleteUsuario($id)
     {
         $this->tableGateway->delete(array('id' => $id));

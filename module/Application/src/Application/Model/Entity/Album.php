@@ -6,11 +6,25 @@ use Zend\Db\Adapter\Adapter;
 class Album extends TableGateway 
 {
      public $dbAdapter;
+     private $nombre;
+     private $apellido;
+     private $pass;
+     private $email;
+     private $rol;
+     private $estado;
    public function __construct(Adapter $adapter = null, $databaseSchema = null, 
         ResultSet $selectResultPrototype = null)
     {
         return parent::__construct('ta_usuario', $adapter, $databaseSchema, 
             $selectResultPrototype);
+    }
+    private function cargaAtributos($datos=array())
+    {
+        $this->nombre=$datos["nombre"];
+        $this->apellido=$datos["apellido"];
+        $this->pass=$datos["pass"];
+        $this->email=$datos["email"];
+        $this->rol=$datos["rol"];
     }
 public function fetchAll()
     {
@@ -42,22 +56,46 @@ public function fetchAll()
              ->where(array('f.in_id'=>$id));
              $selectString = $sql->getSqlStringForSqlObject($select);
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-
        $row = $results->current();
         if (!$row) {
             throw new \Exception("No existe registro con el parametro $id");
         }
         return $row;  
     }
+    
+    public function obtenerUsuario($id)
+    {
+        $id  = (int) $id;
+        $rowset = $this->select(array('in_id' => $id)); 
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("No existe registro con el parametro $id");
+        }
+        return $row;
+    }
 
     public function addAlbum($data = array())
     {
-    $this->insert($data);
+         self::cargaAtributos($data);
+         $array=array
+             (  'va_nombre'=>$this->nombre,
+                'va_apellidos'=>$this->apellido,
+                'va_contrasenia'=>$this->pass,
+                'va_email'=>$this->email,
+                'Ta_rol_in_id'=>$this->rol );
+               $this->insert($array);
     }
 
     public function updateAlbum($id, $data = array())
     {
-        $this->update($data, array('in_id' => $id));
+          self::cargaAtributos($data);
+         $array=array
+             (  'va_nombre'=>$this->nombre,
+                'va_apellidos'=>$this->apellido,
+                'va_contrasenia'=>$this->pass,
+                'va_email'=>$this->email,
+                'Ta_rol_in_id'=>$this->rol );
+        $this->update($array, array('in_id' => $id));
     }
 
     public function deleteAlbum($id)

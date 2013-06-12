@@ -15,6 +15,7 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql;
 use Application\Form\Formularios;
 use Application\Model\Entity\Procesa;
+use Application\Model\Usuario;
 use Application\Model\Entity\Album;
 
 
@@ -72,39 +73,76 @@ class IndexController extends AbstractActionController
         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $adapter = $this->dbAdapter;
         $id =(int)$this->params()->fromRoute('in_id',0);
-        //var_dump($id);exit;
         $u = new Album($adapter);
         $u->deleteAlbum($id);
+         $valores=array
+            ( 
+                'url'=>$this->getRequest()->getBaseUrl(),
+                'in_id'=>$id );
+            return new ViewModel($valores);
 
-       //return new ViewModel($array);
-    }
-    public function recibeAction()
-    {
-        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $adapter = $this->dbAdapter;
-        $data = $this->request->getPost();
-        $u = new Album($adapter);
-        $array = array('va_nombre'=>$data['nombre'],
-                    'va_apellidos'=>$data['apellido'],
-                        'va_email'=>$data['email'],
-                  'va_contrasenia'=>$data['pass'],
-                    'Ta_rol_in_id'=>$data['rol']);
-      $u->addAlbum($array);
-        
-        //return new ViewModel(array('mal'=>$array));
+    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/application/index/index');
+       
     }
     
     public function actualizarusuarioAction()
-    {
-        $form=new Formularios("form");
-        return new ViewModel(array("titulo"=>"Ingrese Nuevo Usuario","form"=>$form,'url'=>$this->getRequest()->getBaseUrl()));
-        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $adapter = $this->dbAdapter; 
-        $id =(int)$this->params()->fromRoute('in_id',0); 
-        $u = new Album($adapter);
-        $array = array('hola'=>'desde verrr',
-                        'yea'=>$u->getAlbum($id,$adapter));
-       return new ViewModel($array);
+    { 
+        /* $id = (int) $this->params()->fromRoute('in_id', 0);
+        if (!$id) {
+            return $this->redirect()
+           ->toUrl($this->getRequest()
+           ->getBaseUrl().'/application/index/actualizarusuario');
+        }
+        try {
+            $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+             $adapter = $this->dbAdapter; 
+             $id = (int) $this->params()->fromRoute('in_id', 0);
+             $u = new Album($adapter);
+             $u->obtenerUsuario($id); 
+        }
+        catch (\Exception $ex) {
+            return $this->redirect()
+           ->toUrl($this->getRequest()
+           ->getBaseUrl().'/application/index/index');
+        }
+             */
+
+         if($this->getRequest()->isPost())
+        {
+             $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+             $adapter = $this->dbAdapter; 
+             $id = (int) $this->params()->fromRoute('in_id', 0);
+             $u = new Album($adapter);
+             $data = $this->request->getPost();
+             $u->updateAlbum($id,$data);
+             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/application/index/actualizarusuario/1');
+        }
+        else
+        {    
+             $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+             $adapter = $this->dbAdapter; 
+             $id = (int) $this->params()->fromRoute('in_id', 0);
+             $u = new Album($adapter);
+             $datos=$u->obtenerUsuario($id); 
+             $form=new Formularios("form");
+               $dao = array  ('nombre'=>$datos['va_nombre'],
+              'apellido'=>$datos['va_apellidos'],
+              'pass'=>$datos['va_contrasenia'],
+              'email'=>$datos['va_email'],
+              'rol'=>$datos['Ta_rol_in_id']);
+          //var_dump($dao);exit;
+              //var_dump($values);exit;
+              // $form->populate($values);
+            // $va=$form->bind($datos);           
+            // $form->setAttribute($values);
+             $valores=array
+            ( "titulo"=>"Actualizar Usuario",
+                "form"=>$form,
+                'url'=>$this->getRequest()->getBaseUrl(),
+                'in_id'=>$id,
+                 'ye' => $dao );
+            return new ViewModel($valores);
+        }
     }
 
     public function joinAction()
@@ -122,10 +160,27 @@ class IndexController extends AbstractActionController
             return new ViewModel(array('hola'=>'desde sql','yea'=>$results));
     }
     
-     public function forAction()
+     public function agregarusuarioAction()
     { 
-        $form=new Formularios("form");
-        return new ViewModel(array("titulo"=>"Ingrese Nuevo Usuario","form"=>$form,'url'=>$this->getRequest()->getBaseUrl()));
-  
+         if($this->getRequest()->isPost())
+        {
+             $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+             $adapter = $this->dbAdapter; 
+             $u = new Album($adapter);
+             $data = $this->request->getPost();
+             $u->addAlbum($data);
+             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/application/index/agregarusuario/1');
+        }
+        else
+        {
+             $form=new Formularios("form");
+             $id = (int) $this->params()->fromRoute('in_id', 0);
+             $valores=array
+            ( "titulo"=>"Registro de Usuario",
+                "form"=>$form,
+                'url'=>$this->getRequest()->getBaseUrl(),
+                'in_id'=>$id );
+            return new ViewModel($valores);
+        }
     }
 }
