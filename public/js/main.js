@@ -381,6 +381,21 @@ $(".eli").on("click",function(){
 	$("#" + user).closest('tr').remove();
 	$('#eli-user').modal('hide');
 	console.log(user);
+  var request = $.ajax({
+  url: "/usuario/index/eliminarusu?id=",
+  type: "get",
+  data: {id: user},
+  dataType: "html"
+  });
+   
+  request.done(function(msg) {
+    alert(msg);
+    //$("#log").html( msg );
+  });
+   
+  request.fail(function(jqXHR, textStatus) {
+    alert( "Request failed: " + textStatus );
+  });
 });
 
 
