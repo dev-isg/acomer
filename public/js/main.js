@@ -290,57 +290,57 @@ $.getJSON('rest.json', function(data) {
 $.getJSON('/usuario/index/jsonlistar',{format:"json"}, function(data) {
  var key =1;
  var estado; 
-  $.each(data, function(key, val) {
-  	 key=key+1;   
-         console.log(data);
+  // $.each(data, function(key, val) {
+  // 	 key=key+1;   
+  //        console.log(data);
          
-          	if(val.en_estado=="activo"){
-  	estado="Activo";
-  	   $('#table').append(
-    	 "<tr id="+val.in_id+"><td><input id=" + val.in_id + " type='checkbox' class='check' name='checkname' checked='checked'>"+
-            "</td><td>" + key + "</td><td> <span id=la"+ val.in_id  + " class='label label-success'>" + estado +
-            "</span></td><td>" + val.va_nombre + 
-            "</td><td>" + val.va_apellidos +
-             "</td><td>" + val.va_email +
-             "</td><td>" + val.va_nombre_rol +
-             "</td><td><a data-id=" + val.in_id  + " class='modificar btn btn-info' ><i class='icon-edit icon-white'></i></a> " +
-             "<a href='#' name="+ val.va_nombre +" class='eli btn btn-danger' data-id="+ val.in_id +" ><i class='icon-trash icon-white'></i></a>"+
-             "</td></tr>"
-    	);
-      }else{
-     	estado="Inactivo";
-     	 $('#table').append(
-    	 "<tr id="+val.in_id+"><td><input id=" + val.in_id + " type='checkbox' class='check' name='checkname' >"+
-            "</td><td>" + key + "</td><td> <span id=la"+ val.in_id +" class='label label-important' >" + estado +
-            "</span></td><td>" + val.va_nombre + 
-            "</td><td>" + val.va_apellidos +
-             "</td><td>" + val.va_email +
-             "</td><td>" + val.va_nombre_rol +
-             "</td><td><a data-id=" + val.in_id  + "  class='modificar btn btn-info' data-toggle='modal'><i class='icon-edit icon-white'></i></a> " +
-             "<a href='#' name=" + val.va_nombre + " class='eli btn btn-danger' data-id="+ val.in_id +" ><i class='icon-trash icon-white'></i></a>"+
-             "</td></tr>"
-    	);
-     };
+   //        	if(val.en_estado=="activo"){
+  	// estado="Activo";
+  	//    $('#table').append(
+   //  	 "<tr id="+val.in_id+"><td><input id=" + val.in_id + " type='checkbox' class='check' name='checkname' checked='checked'>"+
+   //          "</td><td>" + key + "</td><td> <span id=la"+ val.in_id  + " class='label label-success'>" + estado +
+   //          "</span></td><td>" + val.va_nombre + 
+   //          "</td><td>" + val.va_apellidos +
+   //           "</td><td>" + val.va_email +
+   //           "</td><td>" + val.va_nombre_rol +
+   //           "</td><td><a data-id=" + val.in_id  + " class='modificar btn btn-info' ><i class='icon-edit icon-white'></i></a> " +
+   //           "<a href='#' name="+ val.va_nombre +" class='eli btn btn-danger' data-id="+ val.in_id +" ><i class='icon-trash icon-white'></i></a>"+
+   //           "</td></tr>"
+   //  	);
+   //    }else{
+   //   	estado="Inactivo";
+   //   	 $('#table').append(
+   //  	 "<tr id="+val.in_id+"><td><input id=" + val.in_id + " type='checkbox' class='check' name='checkname' >"+
+   //          "</td><td>" + key + "</td><td> <span id=la"+ val.in_id +" class='label label-important' >" + estado +
+   //          "</span></td><td>" + val.va_nombre + 
+   //          "</td><td>" + val.va_apellidos +
+   //           "</td><td>" + val.va_email +
+   //           "</td><td>" + val.va_nombre_rol +
+   //           "</td><td><a data-id=" + val.in_id  + "  class='modificar btn btn-info' data-toggle='modal'><i class='icon-edit icon-white'></i></a> " +
+   //           "<a href='#' name=" + val.va_nombre + " class='eli btn btn-danger' data-id="+ val.in_id +" ><i class='icon-trash icon-white'></i></a>"+
+   //           "</td></tr>"
+   //  	);
+   //   };
    	
   });
 
 $('.modificar').on("click",function(){	
 	var id_unica = $(this).attr('data-id');
-	var todo_json;
-	var posicion_en_array;
-	 $.each(data, function (i, val) {
-                if (val) {
-                    if (val.in_id == id_unica) {
-                        posicion_en_array = i;
-                        $('#modificar-form #nombre').val(val.va_nombre);
-                        $('#modificar-form #apellido').val(val.va_apellidos);
-                        $('#modificar-form #email').val(val.va_email);
-                        $('#modificar-form #pass').val(val.va_contrasenia);
-                        $("#modificar-form #rol option[value=" +  val.Ta_rol_in_id + "]").prop("selected",true);										
+	// var todo_json;
+	// var posicion_en_array;
+	//  $.each(data, function (i, val) {
+ //                if (val) {
+ //                    if (val.in_id == id_unica) {
+ //                        posicion_en_array = i;
+ //                        $('#modificar-form #nombre').val(val.va_nombre);
+ //                        $('#modificar-form #apellido').val(val.va_apellidos);
+ //                        $('#modificar-form #email').val(val.va_email);
+ //                        $('#modificar-form #pass').val(val.va_contrasenia);
+ //                        $("#modificar-form #rol option[value=" +  val.Ta_rol_in_id + "]").prop("selected",true);										
                       
-                    }
-                }
-            });
+ //                    }
+ //                }
+ //            });
 	  $('#mod-usuario').modal('show');
   
 });
