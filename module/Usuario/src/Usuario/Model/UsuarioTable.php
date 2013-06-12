@@ -22,9 +22,21 @@ class UsuarioTable
 
     public function fetchAll()
     {
-        $resultSet = $this->tableGateway->select();
+       // $resultSet = $this->tableGateway->select();
 
-        return $resultSet;
+  
+        
+               $adapter=$this->tableGateway->getAdapter();
+                $sql = new Sql($adapter);
+       
+       
+         $select = $sql->select()
+        ->from(array('f' => 'ta_usuario')) 
+        ->join(array('b' => 'ta_rol'),'f.Ta_rol_in_id=b.in_id');
+       $selectString = $sql->getSqlStringForSqlObject($select);
+        $resultSet= $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        
+           return $resultSet;
     }
 
     public function moretablas(){
