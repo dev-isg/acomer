@@ -384,14 +384,10 @@ $(".eli").on("click",function(){
   var request = $.ajax({
   url: "/usuario/index/eliminarusu?id="+user,
   type: "GET",
-  data: {id: user},
-  dataType: "html"
+  data: {id: user}
+ 
   });
-   
-  request.done(function(msg) {
-    alert(msg);
-    //$("#log").html( msg );
-  });
+
     
 });
 
