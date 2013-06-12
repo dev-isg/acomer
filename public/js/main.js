@@ -287,9 +287,9 @@ $.getJSON('rest.json', function(data) {
       
   });
 //json para usuarios - operaciones para usuarios
-$.getJSON('/usuario/index/jsonlistar',{format:"json"}, function(data) {
- var key =1;
- var estado; 
+// $.getJSON('/usuario/index/jsonlistar',{format:"json"}, function(data) {
+//  var key =1;
+//  var estado; 
   // $.each(data, function(key, val) {
   // 	 key=key+1;   
   //        console.log(data);
@@ -322,7 +322,7 @@ $.getJSON('/usuario/index/jsonlistar',{format:"json"}, function(data) {
    //  	);
    //   };
    	
-  });
+  //});
 
 $('.modificar').on("click",function(){	
 	var id_unica = $(this).attr('data-id');
@@ -375,7 +375,7 @@ $(".eli").on("click",function(){
     });	
 
 
-});
+//});
   $("#delete").on("click",function(){
 	var user=$("#verusuario").attr("data-id");
 	$("#" + user).closest('tr').remove();
