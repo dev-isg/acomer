@@ -161,9 +161,19 @@ public function getAlbum($id)
     public function listar(){   
         
         //obtener el adaptador x defecto defino en module
-        $lista = $this->tableGateway->getAdapter()->query("SELECT * FROM ta_usuario")->execute();//select()->from('usuario')->query()->fetchAll(); //fetchAll("SELECT * FROM USUARIO");
+       // $lista = $this->tableGateway->getAdapter()->query("SELECT * FROM ta_usuario")->execute();//select()->from('usuario')->query()->fetchAll(); //fetchAll("SELECT * FROM USUARIO");
         
-        /*$select = new Select();
+       $adapter=$this->tableGateway->getAdapter();
+       $sql = new Sql($adapter);
+       
+       
+         $select = $sql->select()
+        ->from(array('f' => 'ta_usuario')) 
+        ->join(array('b' => 'ta_rol'),'f.Ta_rol_in_id=b.in_id');
+        //->where(array('b.in_id'=>'f.Ta_rol_in_id'));
+       $selectString = $sql->getSqlStringForSqlObject($select);
+        $lista= $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+    /*$select = new Select();
         $lista = $this->tableGateway->getAdapter()->select()->from('usuario',array('nombre','direccion'));
 
         $sql = new Sql($this->tableGateway->getAdapter());
@@ -177,6 +187,18 @@ public function getAlbum($id)
 
        //var_dump($returnArray);exit;
         return $returnArray;
+    }
+    
+    public function estado(){
+        
+        $datos=$this->tableGateway->getAdapter()->query("SELECT * FROM ta_rol")->execute();
+                $returnArray=array();
+        foreach ($datos as $result) {
+            $returnArray[] = $result;
+        }
+        
+        return  $returnArray;
+        
     }
 
     public function listar2(){

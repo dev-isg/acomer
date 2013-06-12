@@ -1,6 +1,4 @@
-
-
-
+ 
 
 
 <form name='form_busqueda' action='<?php echo $this->basePath();?>/usuario/index/listar' method ="post">
@@ -15,24 +13,34 @@
 <p>JSON</p>
 <a href='http://192.168.1.35:8080/usuario/index/jsonlistar'>Ver listado con Json</a>
 
-<table class="table">
+<table class="table table-bordered table-hover">
+    <thead>  
 <tr>
-	<th>ID</th>
+    <th>#</th> 
+    <th>N°</th>
+    <th>Status</th>
     <th>Nombre</th>
     <th>Apellidos</th>
-    <th>&nbsp;</th>
-    <th><?php echo $this->data;?></th>
-    <th>&nbsp;</th>
+    <th>Email</th>
+    <th>Rol</th>
+    <th>Operaciones;</th>
 </tr>
+</thead>
 <?php foreach ($usuarios as $usuario) : ?>
-<tr>
-	<td><?php echo $this->escapeHtml($usuario->in_id);?></td>
+<tr id="<?php echo $this->escapeHtml($usuario->in_id);?>">
+    <td><input id="<?php echo $this->escapeHtml($usuario->in_id);?>" type="checkbox" class="check"> </td>
+    <td></td>
+    <td><span class='label label-success'> <?php echo $this->escapeHtml($usuario->en_estado);?></span></td>
     <td><?php echo $this->escapeHtml($usuario->va_nombre);?></td> 
     <td><?php echo $this->escapeHtml($usuario->va_apellidos);?></td>
-    <td><a href="/usuario/index/obtonerjoin?id=<?php echo $usuario->in_id?>">VER</a> </td>
-    <td><a href="/usuario/index/eliminarusu?id=<?php echo $usuario->in_id?>">ELIMINAR</a> </td>
-    <td><a href="/usuario/index/cambiaestado?id=<?php echo $usuario->in_id?>&estado=activo">ACTIVAR</a> </td>
-    <td><a href="/usuario/index/cambiaestado?id=<?php echo $usuario->in_id?>&estado=desactivo">DESACTIVAR</a> </td>
+    <td><?php echo $this->escapeHtml($usuario->va_email);?></td>
+    <td></td>
+<!--    <td><a href="/usuario/index/obtonerjoin?id=<?php echo $usuario->in_id?>" class='modificar btn btn-info'><i class='icon-edit icon-white'></i>Editar</a></td>
+    <td><a href="/usuario/index/eliminarusu?id=<?php echo $usuario->in_id?>" class='eli btn btn-danger'><i class='icon-trash icon-white'></i>ELIMINAR</a> </td>-->
+    <td><a data-id="<?php echo $this->escapeHtml($usuario->in_id);?>" href="#" class='modificar btn btn-info'><i class='icon-edit icon-white'></i>Editar</a></td>
+    <td><a data-id="<?php echo $this->escapeHtml($usuario->in_id);?>" href="#" class='eli btn btn-danger'><i class='icon-trash icon-white'></i>ELIMINAR</a> </td>
+<!--    <td><a href="/usuario/index/cambiaestado?id=<?php echo $usuario->in_id?>&estado=activo">ACTIVAR</a> </td>
+    <td><a href="/usuario/index/cambiaestado?id=<?php echo $usuario->in_id?>&estado=desactivo">DESACTIVAR</a> </td>-->
 </tr>
 <?php endforeach; ?>
 </table>

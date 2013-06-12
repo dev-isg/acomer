@@ -20,6 +20,7 @@ class IndexController extends AbstractActionController
   protected $usuarioTable;
     public function indexAction()
     {
+
         //return array();
         //retorna la vista nueva forma oo
         //$this->view->data='hola mundo';
@@ -66,8 +67,18 @@ class IndexController extends AbstractActionController
         
         //$request = $this->getRequest();
         $datos=$this->getUsuarioTable()->listar();
-         $result = Json::encode(array('datos'=>$datos));
-         var_dump($result);exit;
+         //var_dump(Json::encode(array('datos'=>$datos)));exit; 
+        echo Json::encode($datos);
+        exit();
+        
+        
+      //  $result = new JsonModel($datos);
+       // echo $result;//var_dump($result);
+ //return $result;
+         //var_dump($json);exit;
+       //  echo $json;
+         //return new ViewModel(array('lista'=>$json));
+         //var_dump($result);exit;
         // return $result;
   
          /*if ($request->isPost()) {
@@ -78,6 +89,13 @@ class IndexController extends AbstractActionController
       return $result;
 
     }*/
+  }
+  //obitenen el estado de la bd
+  public function jsonestadoAction(){
+          
+        $datos=$this->getUsuarioTable()->estado();
+        echo Json::encode($datos);
+        exit();
   }
 
   public function eliminarusuAction(){
@@ -100,7 +118,7 @@ class IndexController extends AbstractActionController
     public function moreAction(){
 
         $datos=$this->getUsuarioTable()->moretablas();
-
+        
     }
 
     public function obtonerjoinAction(){
