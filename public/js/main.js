@@ -383,7 +383,7 @@ $(".eli").on("click",function(){
 	console.log(user);
   var request = $.ajax({
   url: "/usuario/index/eliminarusu?id="+user,
-  type: "get",
+  type: "GET",
   data: {id: user},
   dataType: "html"
   });
@@ -392,10 +392,7 @@ $(".eli").on("click",function(){
     alert(msg);
     //$("#log").html( msg );
   });
-   
-  request.fail(function(jqXHR, textStatus) {
-    alert( "Request failed: " + textStatus );
-  });
+    
 });
 
 
