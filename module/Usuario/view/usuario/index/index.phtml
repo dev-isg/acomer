@@ -44,4 +44,141 @@ foreach ($this->usuarios as $usuario) : ?>
 </tr>
 <?php endforeach; ?>
 </table>
+     <div class="span4">
+                 <div class="modal hide fade" id="ins-usuario">
+                    <div class="modal-header">
+                      <a class="close"  id="cerrar_insert_usuario">×</a>
+                      <h4>Ingresar Usuario</h4>
+                    </div>
+                    <div class="modal-body">
+                         <form class="form-horizantal span12" id="ingreso-form" action="">
+                          <fieldset>
+                             <div class="row-fluid">
+                            <div class="control-group span6" >
+                            <label>Nombre de usuario</label>
+                            <input type="text" class="span10" placeholder="Ingrese su nombre" id="nombre" name="nombre" >
+                            </div>
+                            <div class="control-group span6">
+                            <label>Apellido de usuario</label>
+                            <input type="text" class="span10" placeholder="Ingrese su Apellido" id="apellido" name="apellido" >
+                            </div>
+                          </div>
+                            <div class="row-fluid">
+                            <div class="control-group span6" >
+                            <label>Password</label>
+                            <input type="password" class="span10" placeholder="Ingrese su Password" id="pass" name="pass" >
+                            </div>
+                            <div class="control-group span6">
+                            <label>Repetir Password</label>
+                            <input type="password" class="span10" placeholder="Repetir su Password" id="pass2" name="pass2">
+                            </div>
+                            </div>
+                            <div class="row-fluid">
+                            <div class="control-group span6">
+                            <label>Email</label>                             
+                            <input type="text" class="span10" placeholder="Ingrese su Correo" id="email" name="email">
+                            </div>
+                            <div class="control-group span6">
+                            <label>Rol</label>
+                            <select  class="span10" id="rol" name="rol">
+                              <option value="">Seleccione Rol:</option>
+                           
+                            </select>
+                            </div>
+                            </div>
+
+                            <div class="span11 text-right">
+                              <input type="reset" class="btn btn-danger" value="LIMPIAR">
+                            <input type="submit" class="btn btn-success" value="GRABAR">                            
+                          </div>
+                               </fieldset>
+                          </form>
+                    </div>
+                   
+            </div>
+                <div class="modal hide fade" id="ins-rol">
+                    <div class="modal-header">
+                      <a class="close" id="cerrar_rol">×</a>
+                      <h4>REGISTRO ROL USUARIO</h4>
+                    </div>
+                    <div class="modal-body">
+                         <form class="form-horizontal span12" id="form_rol">
+                          <fieldset>
+                            <div class="control-group">
+                            <label>Nombre del ROL</label>
+                            <input type="text" class="span11" placeholder="ROL" id="nombre_rol" name="nombre_rol">
+                             </div>
+                             <div class="span11 text-right">
+                               <input type="submit" value="GRABAR" class="btn btn-success">
+                             </div>
+                          </fieldset>
+                          </form>
+                    </div>
+                 
+            </div>
+            <div class="modal small hide fade" id="eli-user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h3 id="myModalLabel">Confirmación de Eliminación</h3>
+                  </div>
+                  <div class="modal-body">
+                      <p class="error-text"><strong><label id="verusuario"></label></strong></p>
+
+                  </div>
+                  <div class="modal-footer">
+                      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                      <button class="btn btn-danger" id="delete">Eliminar</button>
+                  </div>
+              </div>
+              <div class="modal hide fade" id="mod-usuario">
+                    <div class="modal-header">
+                      <a class="close" id="cerrar_update_usuario">×</a>
+                      <h4>Modificar Usuario</h4>
+                    </div>
+                    <div class="modal-body">
+                          <form class="form-horizantal span12" id="modificar-form" action="">
+                          <fieldset>
+                            <div class="control-group span6" >
+                            <label>Nombre de usuario</label>
+                            <input type="text" class="span10" placeholder="Ingrese su nombre" id="nombre" name="nombre" >
+                            </div>
+                            <div class="control-group span6">
+                            <label>Apellido de usuario</label>
+                            <input type="text" class="span10" placeholder="Ingrese su Apellido" id="apellido" name="apellido" >
+                            </div>
+                            <div class="row-fluid">
+                            <div class="control-group span6" >
+                            <label>Password</label>
+                            <input type="password" class="span10" placeholder="Ingrese su Password" id="pass" name="pass" >
+                            </div>
+                            <div class="control-group span6">
+                            <label>Repetir Password</label>
+                            <input type="password" class="span10" placeholder="Repetir su Password" id="pass2" name="pass2">
+                            </div>
+                            </div>
+                            <div class="row-fluid">
+                            <div class="control-group span6">
+                            <label>Email</label>                             
+                            <input type="text" class="span10" placeholder="Ingrese su Correo" id="email" name="email">
+                            </div>
+                            <div class="control-group span6">
+                            <label>Rol</label>
+                            <select  class="span10" id="rol" name="rol">
+                              <option value="">Seleccione Rol:</option>
+                              
+                            </select>
+                            </div>
+                            </div>
+
+                            <div class="span11 text-right">
+                              <input type="reset" class="btn btn-danger" value="LIMPIAR">
+                            <input type="submit" class="btn btn-success" value="MODIFICAR">                            
+                          </div>
+                               </fieldset>
+                          </form>
+                    </div>
+                    
+               </div>
+
+                </div>
 
