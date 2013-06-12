@@ -382,7 +382,7 @@ $(".eli").on("click",function(){
 	$('#eli-user').modal('hide');
 	console.log(user);
   var request = $.ajax({
-  url: "/usuario/index/eliminarusu?id=",
+  url: "/usuario/index/eliminarusu?id="+user,
   type: "get",
   data: {id: user},
   dataType: "html"
