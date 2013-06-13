@@ -328,10 +328,10 @@ $('.modificar').on("click",function(){
 	var id_unica = $(this).attr('data-id');
   $.ajax({
                 type: "get",
-                url: "usuario/index/getusuarioid?id="+id_unica
+                url: "/usuario/index/getusuarioid?id="+id_unica
                 //data: { id: id_unica }
             }).done(function(data) {
-                console.log(data);
+                
                 $.each(data, function(index, val) {
                  $('#modificar-form #nombre').val(val.va_nombre);
                     
