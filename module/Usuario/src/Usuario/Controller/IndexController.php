@@ -18,6 +18,7 @@ use Zend\Json\Json;
 class IndexController extends AbstractActionController
 {
   protected $usuarioTable;
+  
     public function indexAction() {
         $filtrar = $this->params()->fromPost('submit'); //$this->_request->getParams();
         $datos = $this->params()->fromPost('texto');
@@ -30,48 +31,64 @@ class IndexController extends AbstractActionController
             $lista = $this->getUsuarioTable()->fetchAll();
         }
         
+       // $paginator = new Zend\Paginator\Paginator($lista);
+
         return new ViewModel(array(
-                    'usuarios' => $lista,
+                    'usuarios' => $lista,//'paginador'=>$paginator
                 ));
 //        retorna la vista nueva forma oo
 //        $this->view->data='hola mundo';
 //       $val=$this->getUsuarioTable()->fetchAll();
-
     }
 
-  //obitenen el estado de la bd
-  public function jsonestadoAction(){
-          
-        $datos=$this->getUsuarioTable()->estado();
+    //obitenen el estado de la bd
+    public function jsonestadoAction() {
+
+        $datos = $this->getUsuarioTable()->estado();
         echo Json::encode($datos);
         exit();
-  }
+    }
 
-  public function eliminarusuAction(){
-      $id=$this->params()->fromPost('id');
-      $this->getUsuarioTable()->deleteUsuario((int)$id);
-      $this->redirect()->toUrl('/usuario/index');
-  }
-  
-  public function cambiaestadoAction(){
-      $id=$this->params()->fromQuery('id');
-      $estado=$this->params()->fromQuery('estado');
-      $this->getUsuarioTable()->estadoUsuario((int)$id,$estado);
-      $this->redirect()->toUrl('/usuario/index');
-  }
-  
-  public function editarAction(){
-       $datos=$this->getUsuarioTable()->fetchAll()->toArray();
-     // var_dump($datos);exit;
+    public function eliminarusuAction() {
+        $id = $this->params()->fromPost('id');
+        $this->getUsuarioTable()->deleteUsuario((int) $id);
+        $this->redirect()->toUrl('/usuario/index');
+    }
+
+    public function cambiaestadoAction() {
+        $id = $this->params()->fromQuery('id');
+        $estado = $this->params()->fromQuery('estado');
+        $this->getUsuarioTable()->estadoUsuario((int) $id, $estado);
+        $this->redirect()->toUrl('/usuario/index');
+    }
+
+    public function editarAction() {
+         $id = $this->params()->fromPost('id');
+         $data=$this->params()->fromPost('datos');
+        $this->getUsuarioTable()->editarUsuario($id,$data)->toArray();
+        // var_dump($datos);exit;
 //               return new ViewModel(array(
 //                    $datos
 //                ));
-       return $datos;
-      
-  }
-  
-  
-  //------------------------pruebas no usados----------------------------------------------
+      //  return $datos;
+    }
+
+    public function getUsuarioTable() {
+        if (!$this->usuarioTable) {
+            $sm = $this->getServiceLocator();
+            $this->usuarioTable = $sm->get('Usuario\Model\UsuarioTable');
+        }
+        return $this->usuarioTable;
+    }
+
+    
+    public function getusuarioidAction(){
+      $id=$this->params()->fromPost('id');
+      $datos=$this->getUsuarioTable()->getUsuario($id);
+      var_dump($datos);exit;
+      return $datos;
+    }
+    //------------------------pruebas no usados----------------------------------------------
    public function fooAction()
     {
         // This shows the :controller and :action parameters in default route
@@ -150,14 +167,6 @@ class IndexController extends AbstractActionController
     }
 
 
-     public function getUsuarioTable()
-    {
-        if (!$this->usuarioTable) {
-            $sm = $this->getServiceLocator();
-            $this->usuarioTable = $sm->get('Usuario\Model\UsuarioTable');
-        }
-        return $this->usuarioTable;
-    }
 
 
 

@@ -100,7 +100,16 @@ class UsuarioTable
         var_dump($returnArray);exit;
 
     }
-
+    public function getUsuario($id)
+    {
+        $id  = (int) $id;
+        $rowset = $this->tableGateway->select(array('in_id' => $id));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $id");
+        }
+        return $row;
+    }
     //-----------------------------INICIO--------------------------------------------
 
 public function getAlbum($id)
@@ -127,16 +136,16 @@ public function getAlbum($id)
 //----------------------------FIN---------------------------------------------------
  
 
-    public function getUsuario($id)
-    {
-        $id  = (int) $id;
-        $rowset = $this->tableGateway->select(array('id' => $id));
-        $row = $rowset->current();
-        if (!$row) {
-            throw new \Exception("Could not find row $id");
-        }
-        return $row;
-    }
+//    public function getUsuario($id)
+//    {
+//        $id  = (int) $id;
+//        $rowset = $this->tableGateway->select(array('id' => $id));
+//        $row = $rowset->current();
+//        if (!$row) {
+//            throw new \Exception("Could not find row $id");
+//        }
+//        return $row;
+//    }
 
     public function saveUsuario(Usuario $usuario)
     {
@@ -169,7 +178,10 @@ public function getAlbum($id)
         
         $this->tableGateway->delete(array('in_id' => $id));
     }
-    
+    public function editarUsuario($id,$data){
+        
+        $this->tableGateway->update($data, array('in_id' => $id));
+    }
 
     public function listar(){   
         
