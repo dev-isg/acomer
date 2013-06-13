@@ -163,10 +163,15 @@ class IndexController extends AbstractActionController
 
     
     public function getusuarioidAction(){
+        //$this->_helper->layout->disableLayout();
       $id=$this->params()->fromQuery('id');
       $datos=$this->getUsuarioTable()->getUsuario($id);
-      var_dump($datos);exit;
-      return $datos;
+            
+       echo Json::encode($datos);
+        exit();
+      
+      
+   
     }
     //------------------------pruebas no usados----------------------------------------------
    public function fooAction()
