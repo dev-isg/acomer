@@ -179,7 +179,15 @@ public function getAlbum($id)
         $this->tableGateway->delete(array('in_id' => $id));
     }
     public function editarUsuario($id,$data){
-        
+                $data = array(
+            'nombre' => $usuario->va_nombre,
+            'direccion'  => $usuario->va_apellidos,
+            'direccion'  => $usuario->va_email,
+            'direccion'  => $usuario->va_contraseña,
+            'direccion'  => $usuario->en_estado,
+            'direccion'  => $usuario->Ta_rol_in_id,
+            'direccion'  => $usuario->direccion,
+        );
         $this->tableGateway->update($data, array('in_id' => $id));
     }
 
