@@ -44,7 +44,7 @@ class IndexController extends AbstractActionController
     public function agregarusuarioAction()
     {
         $form = new UsuarioForm();
-        $form->get('submit')->setValue('Add');
+        $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
         if ($request->isPost()) {
             $usuario = new Usuario();
@@ -53,7 +53,7 @@ class IndexController extends AbstractActionController
             if ($form->isValid()) {
                 $usuario->exchangeArray($form->getData());
                 $this->getUsuarioTable()->guardarUsuario($usuario);
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/rese');      
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario');      
             }
         }
         return array('form' => $form);
@@ -74,18 +74,18 @@ class IndexController extends AbstractActionController
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
-            getRequest()->getBaseUrl().'/usuario/index/rese'); 
+            getRequest()->getBaseUrl().'/usuario'); 
         }
         $form  = new UsuarioForm();
         $form->bind($usuario);
-        $form->get('submit')->setAttribute('value', 'Edit');
+        $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setInputFilter($usuario->getInputFilter());
             $form->setData($request->getPost());
             if ($form->isValid()) {
                 $this->getUsuarioTable()->guardarUsuario($usuario);
-                $this->redirect()->toUrl('/usuario/index/rese');
+                $this->redirect()->toUrl('/usuario');
             }
         }
        /* if($this->getRequest()->isPost())

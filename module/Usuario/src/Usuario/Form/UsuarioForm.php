@@ -17,13 +17,24 @@ class UsuarioForm extends Form
         $this->add(array(
             'name' => 'va_nombre',
             'type' => 'Text',
+          
             'options' => array(
-                'label' => 'Nombre',
+                'label' => 'Nombre',          
+            ),
+            'attributes' => array(               
+                'class' => 'span10',
+                'id'   => 'va_nombre',
+                'placeholder'=>'Ingrese su nombre'
             ),
         ));
         $this->add(array(
             'name' => 'va_apellidos',
             'type' => 'Text',
+              'attributes' => array(               
+                'class' => 'span10',
+                'id'   => 'va_nombre',
+                'placeholder'=>'Ingrese su Apellido'
+            ),
             'options' => array(
                 'label' => 'Apellidos',
             ),
@@ -31,6 +42,11 @@ class UsuarioForm extends Form
         $this->add(array(
             'name' => 'va_email',
             'type' => 'Email',
+            'attributes' => array(               
+                'class' => 'span10',
+                'id'   => 'va_email',
+                'placeholder'=>'Ingrese su Correo'
+            ),
             'options' => array(
                 'label' => 'Correo',
             ),
@@ -38,8 +54,12 @@ class UsuarioForm extends Form
         $this->add(array(
             'name' => 'Ta_rol_in_id',
             'type' => 'Select',
+             'attributes' => array(               
+                'class' => 'span10',
+                'id'   => 'Ta_rol_in_id'
+            ),
            'options' => array(
-                     'label' => 'Rol?',
+                     'label' => 'Rol',
                      'value_options' => array(
                              '1' => 'Administrador',
                              '2' => 'Editor',                   
@@ -53,8 +73,25 @@ class UsuarioForm extends Form
         $this->add(array(
             'name' => 'va_contrasenia',
             'type' => 'password',
+             'attributes' => array(               
+                'class' => 'span10',
+                'id'   => 'va_contrasenia',
+                 'placeholder'=>'Ingrese su Password'
+            ),
             'options' => array(
-                'label' => 'Contrasenia',
+                'label' => 'Password',
+            ),
+        ));
+        $this->add(array(
+            'name' => 'va_contrasenia2',
+            'type' => 'password',
+             'attributes' => array(               
+                'class' => 'span10',
+                'id'   => 'va_contrasenia',
+                 'placeholder'=>'Repita su Password'
+            ),
+            'options' => array(
+                'label' => 'Repita su Password',
             ),
         ));
         
@@ -64,6 +101,7 @@ class UsuarioForm extends Form
             'type' => 'Submit',
             'attributes' => array(
                 'value' => 'Go',
+                'class' => 'btn btn-success',
                 'id' => 'submitbutton',
             ),
         ));

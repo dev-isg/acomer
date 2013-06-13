@@ -4,7 +4,7 @@
 $title = 'Agregar nuevo usuario';
 $this->headTitle($title);
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
+
 
 <?php
 $form = $this->form;
@@ -17,11 +17,20 @@ $form->setAttributes(array(
 $form->prepare();
 
 echo $this->form()->openTag($form);
+?><div class="modal-header">
+<a id="cerrar_update_usuario" class="close">×</a>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+</div><?php
 echo $this->formHidden($form->get('in_id'));
-?> <h1 style="color: #222;"><?php echo $this->formRow($form->get('va_nombre'));?></h1><?php 
-echo $this->formRow($form->get('va_apellidos'));
-echo $this->formRow($form->get('va_email'));
-echo $this->formRow($form->get('va_contrasenia'));
-echo $this->formRow($form->get('Ta_rol_in_id'));
-echo $this->formSubmit($form->get('submit'));
-echo $this->form()->closeTag();
+
+
+?><div class="span8"><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('va_nombre'));?><div class="control-group "><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('va_apellidos'));?><div class="control-group "><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('va_email'));?><div class="control-group "><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('va_contrasenia'));?><div class="control-group "><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('va_contrasenia2'));?><div class="control-group "><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('Ta_rol_in_id'));?><div class="control-group "><?php
+?><div class="control-group "><?php echo $this->formSubmit($form->get('submit'));?><div class="control-group "><?php
+?><div class="span10"><?php
+echo $this->form()->closeTag(); 

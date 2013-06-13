@@ -324,28 +324,31 @@ $.getJSON('rest.json', function(data) {
    	
   //});
 
-$('.modificar').on("click",function(){	
-  var id_unica = $(this).attr('data-id');
-  var url= "/usuario/index/getusuarioid?id=" + id_unica;
-  $.getJSON(url, function(data) {             
-  
-//	 $.each(data, function (i, val) {
-//                if (val) {
-                    
-                        console.log(data.in_id);
-                        $('#modificar-form #nombre').val(data.va_nombre);
-                        $('#modificar-form #apellido').val(data.va_apellidos);
-                        $('#modificar-form #email').val(data.va_email);
-                        $('#modificar-form #pass').val(data.va_contrasenia);
-                        $("#modificar-form #rol option[value=" +  data.Ta_rol_in_id + "]").prop("selected",true);										
+//$('.modificar').on("click",function(){	
+
+
+  // var id_unica = $(this).attr('data-id');
+  // var url= "usuario/index/getusuarioid?id=" + id_unica;
+  // $.getJSON(url, function(data) {             
+  // var posicion_en_array;
+	 // $.each(data, function (i, val) {
+  //               if (val) {
+  //                   if (val.in_id == id_unica) {
+  //                       posicion_en_array = i;
+  //                       $('#modificar-form #nombre').val(val.va_nombre);
+  //                       $('#modificar-form #apellido').val(val.va_apellidos);
+  //                       $('#modificar-form #email').val(val.va_email);
+  //                       $('#modificar-form #pass').val(val.va_contrasenia);
+  //                       $("#modificar-form #rol option[value=" +  val.Ta_rol_in_id + "]").prop("selected",true);										
                       
-//                  
-//                }
-//            });
-   });
-   $('#mod-usuario').modal('show');
+  //                   }
+  //               }
+  //           });
+  //  });
+  //  $('#mod-usuario').modal('show');
+
    
-});
+//});
 
 $(".eli").on("click",function(){
 	var id = $(this).attr('data-id');
