@@ -37,14 +37,22 @@ class UsuarioForm extends Form
         ));
         $this->add(array(
             'name' => 'Ta_rol_in_id',
-            'type' => 'Text',
-            'options' => array(
-                'label' => 'roles',
-            ),
+            'type' => 'Select',
+           'options' => array(
+                     'label' => 'Rol?',
+                     'value_options' => array(
+                             '1' => 'Administrador',
+                             '2' => 'Editor',                   
+                     ),
+             )
         ));
+        
+        
+  
+     
         $this->add(array(
             'name' => 'va_contrasenia',
-            'type' => 'Password',
+            'type' => 'password',
             'options' => array(
                 'label' => 'Contrasenia',
             ),

@@ -14,12 +14,47 @@ use Zend\Db\Adapter\Platform;
 class UsuarioTable
 {
     protected $tableGateway;
+    
+    private $nombre;
+    private $apellido;
+     private $pass;
+    private $correo;
+    private $rol;
+    private $id;
+    
 
     public function __construct(TableGateway $tableGateway)
     {
         $this->tableGateway = $tableGateway;
+      
     }
-    
+    private function cargaAtributos($usuario=array())
+    {
+        $this->nombre=$usuario["va_apellidos"];
+        $this->apellido=$usuario["va_email"];
+         $this->pass=$usuario["va_contrasenia"];
+        $this->correo=$usuario["va_email"];
+         $this->id=$usuario["in_id"];
+        $this->rol=$usuario["Ta_rol_in_id"];
+        
+        
+    }
+    public function updateUsuario($id, $data=array())
+    {
+
+    $adapter=$this->tableGateway->getAdapter();
+       $sql = new Sql($adapter);
+       $update = $sql->update('ta_usuario',$data, array('in_id' => $id));
+            $selectString = $sql->getSqlStringForSqlObject($update);
+           $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+          // var_dump($selectString);exit;
+             $row = $results->current(); 
+       if (!$row) {
+           throw new \Exception("No existe registro con el parametro $id");
+       }
+        return $row;
+     
+    }
     public function todosUsuarios()
     {
         $resultSet = $this->tableGateway->select();
@@ -34,14 +69,16 @@ class UsuarioTable
                $adapter=$this->tableGateway->getAdapter();
                 $sql = new Sql($adapter);
        
-       
+//       
          $select = $sql->select()
-        ->from(array('f' => 'ta_usuario')) 
-        ->join(array('b' => 'ta_rol'),'f.Ta_rol_in_id=b.in_id');
+        ->from(array('f' => 'ta_usuario'))//,array('in_id','va_nombre','va_apellidos','va_email','en_estado')) 
+        ->join(array('b' => 'ta_rol'),'f.Ta_rol_in_id=b.in_id',array('va_nombre_rol'))//,array('va_nombre_rol'))
+         ->where(array('f.Ta_rol_in_id=b.in_id'));
        $selectString = $sql->getSqlStringForSqlObject($select);
+       // var_dump($selectString);exit;
         $resultSet= $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-        
-           return $resultSet;
+
+           return $resultSet;//->toArray();
     }
 
     public function moretablas(){
@@ -172,6 +209,28 @@ public function guardarUsuario(Usuario $usuario)
         );
         
         $id = (int)$usuario->in_id;
+        if ($id == 0) {
+            $this->tableGateway->insert($data);
+        } else {
+            if ($this->getUsuario($id)) {
+                $this->tableGateway->update($data, array('in_id' => $id));
+            } else {
+                throw new \Exception('no existe el usuario');
+            }
+        }
+    }
+    
+    public function actualizaUsuario(Usuario $usuario)
+    {
+        $data = array(
+           'va_nombre'     => $usuario["va_nombre"],
+           'va_apellidos'  => $usuario["va_apellidos"],
+           'va_email'      => $usuario["va_email"],
+           'va_contrasenia'=> $usuario["va_pass"],
+           'Ta_rol_in_id'  => $usuario["Ta_rol_in_id"],  
+        );
+        
+        $id = (int)$usuario["in_id"];
         if ($id == 0) {
             $this->tableGateway->insert($data);
         } else {

@@ -9,7 +9,7 @@ use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
 use Usuario\Model\Usuario;          // <-- Add this import
 use Usuario\Form\UsuarioForm;       // <-- Add this import
-
+use Usuario\Model\UsuarioTable;  
 class IndexController extends AbstractActionController
 {
   protected $usuarioTable;
@@ -19,8 +19,13 @@ class IndexController extends AbstractActionController
         //return array();
         //retorna la vista nueva forma oo
         //$this->view->data='hola mundo';
-       
-       // var_dump($var);exit;
+//       $val=$this->getUsuarioTable()->fetchAll();
+//      
+//       foreach($val as $re){
+//           $aux[]=$re;
+//           
+//       }
+//       var_dump($aux);exit;
         return new ViewModel(array(
             'usuarios' => $this->getUsuarioTable()->fetchAll(),
             //'data'=>'Hola'    
@@ -56,7 +61,6 @@ class IndexController extends AbstractActionController
         }
         try {
             $usuario = $this->getUsuarioTable()->getUsuario($id);
-            //var_dump($usuario);exit;
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
@@ -65,22 +69,45 @@ class IndexController extends AbstractActionController
         $form  = new UsuarioForm();
         $form->bind($usuario);
         $form->get('submit')->setAttribute('value', 'Edit');
-        $request = $this->getRequest();      
-      if ($request->isPost()) {
-            //$usuario = new Usuario();
+        $request = $this->getRequest();
+        if ($request->isPost()) {
             $form->setInputFilter($usuario->getInputFilter());
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $usuario->exchangeArray($form->getData());
                 $this->getUsuarioTable()->guardarUsuario($usuario);
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/rese');      
+                $this->redirect()->toUrl('/usuario/index/rese');
             }
         }
-
-        return array(
+       /* if($this->getRequest()->isPost())
+        {
+         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $id =(int)$this->params()->fromRoute('in_id',0);
+            // var_dump($id);exit;
+        /* $data = $this->request->getPost();
+         
+         $apellido=$data["va_apellidos"];
+         $nombre=$data["va_nombre"];
+         $pas=$data["va_contrasenia"];
+         $email=$data["va_email"];
+         $rol=$data["Ta_rol_in_id"];
+            $valore = array(
+                    'va_nombre'  => $nombre,
+                   'va_apellidos'  => $apellido,
+                   'va_email'      => $email,
+                   'va_contrasenia'=> $pas,
+                   'Ta_rol_in_id'  => $rol   
+            );
+         $u = new UsuarioTable($adapter);
+          $u->updateUsuario($id,$valore);
+        $this->redirect()->toUrl('/usuario/index');*/
+        
+       /* }*/
+     return array(
             'in_id' => $id,
             'form' => $form,
         );
+        
     }
     public function reseAction()
     {
@@ -157,7 +184,9 @@ class IndexController extends AbstractActionController
   }
 
   public function eliminarusuAction(){
-      $id=$this->params()->fromQuery('id');
+     // var_dump('HOLA MUNDO');exit;
+      $id=$this->params()->fromPost('id');
+     //var_dump($id);exit;
       $this->getUsuarioTable()->deleteUsuario((int)$id);
       $this->redirect()->toUrl('/usuario/index');
   }
