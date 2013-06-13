@@ -370,6 +370,8 @@ $(".eli").on("click",function(){
             $(this).prop("checked", "checked");
             $("#" + id).addClass("success");
             $("#la" + id).removeClass().addClass("label label-success");
+            $("#la" + id).html("");
+            $("#la" + id).html("activo");
                  };
         }else{
           var est="desactivo";
@@ -380,6 +382,8 @@ $(".eli").on("click",function(){
                    });
         	$("#" + id).removeClass("success");
         	$("#la" + id).removeClass().addClass("label label-important");
+          $("#la" + id).html("");
+            $("#la" + id).html("desactivo");
               }
     });	
 
