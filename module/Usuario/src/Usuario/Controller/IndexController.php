@@ -65,7 +65,7 @@ class IndexController extends AbstractActionController
     public function editarAction() {
          $id = $this->params()->fromPost('id');
          $data=$this->params()->fromPost('datos');
-        $this->getUsuarioTable()->editarUsuario($id,$data)->toArray();
+        $this->getUsuarioTable()->editarUsuario($id,$data);
         // var_dump($datos);exit;
 //               return new ViewModel(array(
 //                    $datos
