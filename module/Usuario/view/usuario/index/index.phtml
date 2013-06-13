@@ -1,184 +1,187 @@
  
-<form name='form_busqueda' action='<?php echo $this->basePath();?>/usuario/index/listar' method ="post">
-	<input type='text' name='texto'/>
-<input type='radio' name='listado'  id='nom' value='va_nombre' />Por nombre
-<!--<input type='radio' name='listado' id='dire' value='direccion'/>Por direccion checked-->
+<form name='form_busqueda' action='<?php echo $this->basePath(); ?>/usuario/index/listar' method ="post">
+    <input type='text' name='texto'/>
+    <input type='radio' name='listado'  id='nom' value='va_nombre' />Por nombre
+    <input type='radio' name='listado' id='dire' value='direccion'/>Por direccion checked
 
-<input type='radio' name='listado' id='dire1' value='1'/>Por Administrador
-<input type='radio' name='listado' id='dire2' value='2'/>Por Editor
+    <input type='radio' name='listado' id='dire1' value='1'/>Por Administrador
+    <input type='radio' name='listado' id='dire2' value='2'/>Por Editor
 
-<input name=submit type='submit'/>
+    <input name=submit type='submit'/>
+</form>
 <p>JSON</p>
 <a href='http://192.168.1.35:8080/usuario/index/jsonlistar'>Ver listado con Json</a>
 
 <table class="table table-bordered table-hover">
     <thead>  
-<tr>
-    <th>#</th> 
-    <th>N°</th>
-    <th>Status</th>
-    <th>Nombre</th>
-    <th>Apellidos</th>
-    <th>Email</th>
-    <th>Rol</th>
-    <th>Operaciones</th>
-</tr>
-</thead>
-<?php $count=1; 
-foreach ($this->usuarios as $usuario) : ?>
-<tr id="<?php echo $this->escapeHtml($usuario->in_id);?>">
-    <td><?php echo $this->escapeHtml($usuario->in_id);?></td>
-    <td><input id="<?php echo $this->escapeHtml($usuario->in_id);?>" type="checkbox" class="check"> </td>
-    <td><?php echo $count++?></td>
-    <td><span id="la<?php echo $this->escapeHtml($usuario->in_id);?>" class='label label-success'> <?php echo $this->escapeHtml($usuario->en_estado);?></span></td>
-    <td><?php echo $this->escapeHtml($usuario->va_nombre);?></td> 
-    <td><?php echo $this->escapeHtml($usuario->va_apellidos);?></td>
-    <td><?php echo $this->escapeHtml($usuario->va_email);?></td>
-    <td><?php echo $this->escapeHtml($usuario->va_nombre_rol);?></td>
-<!--    <td><a href="/usuario/index/obtonerjoin?id=<?php echo $usuario->in_id?>" class='modificar btn btn-info'><i class='icon-edit icon-white'></i>Editar</a></td>
-    <td><a href="/usuario/index/eliminarusu?id=<?php echo $usuario->in_id?>" class='eli btn btn-danger'><i class='icon-trash icon-white'></i>ELIMINAR</a> </td>-->
-    <td><a data-id="<?php echo $this->escapeHtml($usuario->in_id);?>" href="#" class='modificar btn btn-info'><i class='icon-edit icon-white'></i>Editar</a></td>
-    <td><a data-id="<?php echo $this->escapeHtml($usuario->in_id);?>" href="#" class='eli btn btn-danger'><i class='icon-trash icon-white'></i>ELIMINAR</a> </td>
-<!--    <td><a href="/usuario/index/cambiaestado?id=<?php echo $usuario->in_id?>&estado=activo">ACTIVAR</a> </td>
-    <td><a href="/usuario/index/cambiaestado?id=<?php echo $usuario->in_id?>&estado=desactivo">DESACTIVAR</a> </td>-->
-</tr>
+        <tr>
+            <th>#</th> 
+            <th>N°</th>
+            <th>Status</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Operaciones</th>
+        </tr>
+    </thead>
+
+    <?php $count = 1;
+    foreach ($this->usuarios as $usuario) :
+        ?>
+        <tr>
+            <td><?php echo $count++ ?></td>
+    <?php if ($usuario->en_estado == 'activo') { ?>
+                <td><input id="<?php echo $this->escapeHtml($usuario->in_id); ?>" type="checkbox" class="check" checked="checked"> </td>
+                <td><span id="la<?php echo $this->escapeHtml($usuario->in_id); ?>" class='label label-success'> <?php echo $this->escapeHtml($usuario->en_estado); ?></span></td>
+    <?php } else { ?>
+                <td><input id="<?php echo $this->escapeHtml($usuario->in_id); ?>" type="checkbox" class="check"> </td>
+                <td><span id="la<?php echo $this->escapeHtml($usuario->in_id); ?>" class='label label-success'> <?php echo $this->escapeHtml($usuario->en_estado); ?></span></td>
+    <?php } ?>
+            <td><?php echo $this->escapeHtml($usuario->va_nombre); ?></td> 
+            <td><?php echo $this->escapeHtml($usuario->va_apellidos); ?></td>
+            <td><?php echo $this->escapeHtml($usuario->va_email); ?></td>
+            <td><?php echo $this->escapeHtml($usuario->va_nombre_rol); ?></td>
+            <td><a data-id="<?php echo $this->escapeHtml($usuario->in_id); ?>" href="#" class='modificar btn btn-info'><i class='icon-edit icon-white'></i>Editar</a></td>
+            <td><a data-id="<?php echo $this->escapeHtml($usuario->in_id); ?>" href="#" class='eli btn btn-danger'><i class='icon-trash icon-white'></i>ELIMINAR</a> </td>
+        </tr>
 <?php endforeach; ?>
 </table>
-     <div class="span4">
-                 <div class="modal hide fade" id="ins-usuario">
-                    <div class="modal-header">
-                      <a class="close"  id="cerrar_insert_usuario">×</a>
-                      <h4>Ingresar Usuario</h4>
-                    </div>
-                    <div class="modal-body">
-                         <form class="form-horizantal span12" id="ingreso-form" action="">
-                          <fieldset>
-                             <div class="row-fluid">
-                            <div class="control-group span6" >
+<div class="span4">
+    <div class="modal hide fade" id="ins-usuario">
+        <div class="modal-header">
+            <a class="close"  id="cerrar_insert_usuario">×</a>
+            <h4>Ingresar Usuario</h4>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizantal span12" id="ingreso-form" action="">
+                <fieldset>
+                    <div class="row-fluid">
+                        <div class="control-group span6" >
                             <label>Nombre de usuario</label>
                             <input type="text" class="span10" placeholder="Ingrese su nombre" id="nombre" name="nombre" >
-                            </div>
-                            <div class="control-group span6">
+                        </div>
+                        <div class="control-group span6">
                             <label>Apellido de usuario</label>
                             <input type="text" class="span10" placeholder="Ingrese su Apellido" id="apellido" name="apellido" >
-                            </div>
-                          </div>
-                            <div class="row-fluid">
-                            <div class="control-group span6" >
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="control-group span6" >
                             <label>Password</label>
                             <input type="password" class="span10" placeholder="Ingrese su Password" id="pass" name="pass" >
-                            </div>
-                            <div class="control-group span6">
+                        </div>
+                        <div class="control-group span6">
                             <label>Repetir Password</label>
                             <input type="password" class="span10" placeholder="Repetir su Password" id="pass2" name="pass2">
-                            </div>
-                            </div>
-                            <div class="row-fluid">
-                            <div class="control-group span6">
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="control-group span6">
                             <label>Email</label>                             
                             <input type="text" class="span10" placeholder="Ingrese su Correo" id="email" name="email">
-                            </div>
-                            <div class="control-group span6">
+                        </div>
+                        <div class="control-group span6">
                             <label>Rol</label>
                             <select  class="span10" id="rol" name="rol">
-                              <option value="">Seleccione Rol:</option>
-                           
+                                <option value="">Seleccione Rol:</option>
+
                             </select>
-                            </div>
-                            </div>
+                        </div>
+                    </div>
 
-                            <div class="span11 text-right">
-                              <input type="reset" class="btn btn-danger" value="LIMPIAR">
-                            <input type="submit" class="btn btn-success" value="GRABAR">                            
-                          </div>
-                               </fieldset>
-                          </form>
+                    <div class="span11 text-right">
+                        <input type="reset" class="btn btn-danger" value="LIMPIAR">
+                        <input type="submit" class="btn btn-success" value="GRABAR">                            
                     </div>
-                   
-            </div>
-                <div class="modal hide fade" id="ins-rol">
-                    <div class="modal-header">
-                      <a class="close" id="cerrar_rol">×</a>
-                      <h4>REGISTRO ROL USUARIO</h4>
-                    </div>
-                    <div class="modal-body">
-                         <form class="form-horizontal span12" id="form_rol">
-                          <fieldset>
-                            <div class="control-group">
-                            <label>Nombre del ROL</label>
-                            <input type="text" class="span11" placeholder="ROL" id="nombre_rol" name="nombre_rol">
-                             </div>
-                             <div class="span11 text-right">
-                               <input type="submit" value="GRABAR" class="btn btn-success">
-                             </div>
-                          </fieldset>
-                          </form>
-                    </div>
-                 
-            </div>
-            <div class="modal small hide fade" id="eli-user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                      <h3 id="myModalLabel">Confirmación de Eliminación</h3>
-                  </div>
-                  <div class="modal-body">
-                      <p class="error-text"><strong><label id="verusuario"></label></strong></p>
+                </fieldset>
+            </form>
+        </div>
 
-                  </div>
-                  <div class="modal-footer">
-                      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                      <button class="btn btn-danger" id="delete">Eliminar</button>
-                  </div>
-              </div>
-              <div class="modal hide fade" id="mod-usuario">
-                    <div class="modal-header">
-                      <a class="close" id="cerrar_update_usuario">×</a>
-                      <h4>Modificar Usuario</h4>
+    </div>
+    <div class="modal hide fade" id="ins-rol">
+        <div class="modal-header">
+            <a class="close" id="cerrar_rol">×</a>
+            <h4>REGISTRO ROL USUARIO</h4>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal span12" id="form_rol">
+                <fieldset>
+                    <div class="control-group">
+                        <label>Nombre del ROL</label>
+                        <input type="text" class="span11" placeholder="ROL" id="nombre_rol" name="nombre_rol">
                     </div>
-                    <div class="modal-body">
-                          <form class="form-horizantal span12" id="modificar-form" action="">
-                          <fieldset>
-                            <div class="control-group span6" >
-                            <label>Nombre de usuario</label>
-                            <input type="text" class="span10" placeholder="Ingrese su nombre" id="nombre" name="nombre" >
-                            </div>
-                            <div class="control-group span6">
-                            <label>Apellido de usuario</label>
-                            <input type="text" class="span10" placeholder="Ingrese su Apellido" id="apellido" name="apellido" >
-                            </div>
-                            <div class="row-fluid">
-                            <div class="control-group span6" >
+                    <div class="span11 text-right">
+                        <input type="submit" value="GRABAR" class="btn btn-success">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+    <div class="modal small hide fade" id="eli-user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Confirmación de Eliminación</h3>
+        </div>
+        <div class="modal-body">
+            <p class="error-text"><strong><label id="verusuario"></label></strong></p>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+            <button class="btn btn-danger" id="delete">Eliminar</button>
+        </div>
+    </div>
+    <div class="modal hide fade" id="mod-usuario">
+        <div class="modal-header">
+            <a class="close" id="cerrar_update_usuario">×</a>
+            <h4>Modificar Usuario</h4>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizantal span12" id="modificar-form" action="">
+                <fieldset>
+                    <div class="control-group span6" >
+                        <label>Nombre de usuario</label>
+                        <input type="text" class="span10" placeholder="Ingrese su nombre" id="nombre" name="nombre" >
+                    </div>
+                    <div class="control-group span6">
+                        <label>Apellido de usuario</label>
+                        <input type="text" class="span10" placeholder="Ingrese su Apellido" id="apellido" name="apellido" >
+                    </div>
+                    <div class="row-fluid">
+                        <div class="control-group span6" >
                             <label>Password</label>
                             <input type="password" class="span10" placeholder="Ingrese su Password" id="pass" name="pass" >
-                            </div>
-                            <div class="control-group span6">
+                        </div>
+                        <div class="control-group span6">
                             <label>Repetir Password</label>
                             <input type="password" class="span10" placeholder="Repetir su Password" id="pass2" name="pass2">
-                            </div>
-                            </div>
-                            <div class="row-fluid">
-                            <div class="control-group span6">
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="control-group span6">
                             <label>Email</label>                             
                             <input type="text" class="span10" placeholder="Ingrese su Correo" id="email" name="email">
-                            </div>
-                            <div class="control-group span6">
+                        </div>
+                        <div class="control-group span6">
                             <label>Rol</label>
                             <select  class="span10" id="rol" name="rol">
-                              <option value="">Seleccione Rol:</option>
-                              
+                                <option value="">Seleccione Rol:</option>
+
                             </select>
-                            </div>
-                            </div>
-
-                            <div class="span11 text-right">
-                              <input type="reset" class="btn btn-danger" value="LIMPIAR">
-                            <input type="submit" class="btn btn-success" value="MODIFICAR">                            
-                          </div>
-                               </fieldset>
-                          </form>
+                        </div>
                     </div>
-                    
-               </div>
 
-                </div>
+                    <div class="span11 text-right">
+                        <input type="reset" class="btn btn-danger" value="LIMPIAR">
+                        <input type="submit" class="btn btn-success" value="MODIFICAR">                            
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+
+</div>
 
