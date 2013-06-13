@@ -326,6 +326,17 @@ $.getJSON('rest.json', function(data) {
 
 $('.modificar').on("click",function(){	
 	var id_unica = $(this).attr('data-id');
+  $.ajax({
+                type: "POST",
+                url: "usuario/index/getusuarioid"+id_unica,
+                data: { id: id_unica }
+            }).done(function(data) {
+                console.log(data);
+                $.each(data, function(index, val) {
+                 $('#modificar-form #nombre').val(val.va_nombre);
+                    
+                });
+            });
 	// var todo_json;
 	// var posicion_en_array;
 	//  $.each(data, function (i, val) {
