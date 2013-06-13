@@ -325,8 +325,9 @@ $.getJSON('rest.json', function(data) {
   //});
 
 $('.modificar').on("click",function(){	
+  var id_unica = $(this).attr('data-id');
   var url= "usuario/index/getusuarioid?id=" + id_unica;
-  $.getJSON(url,{format:"json"}, function(data) {             
+  $.getJSON(url, function(data) {             
   var posicion_en_array;
 	 $.each(data, function (i, val) {
                 if (val) {
