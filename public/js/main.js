@@ -325,9 +325,9 @@ $.getJSON('rest.json', function(data) {
   //});
 
 $('.modificar').on("click",function(){	
-  var url= "usuario/index/getusuarioid?id="+id_unica;
+  var url= "usuario/index/getusuarioid?id=" + id_unica;
   $.getJSON(url,{format:"json"}, function(data) {             
-var posicion_en_array;
+  var posicion_en_array;
 	 $.each(data, function (i, val) {
                 if (val) {
                     if (val.in_id == id_unica) {
@@ -341,7 +341,7 @@ var posicion_en_array;
                     }
                 }
             });
-   }
+   });
    $('#mod-usuario').modal('show');
    
 });
