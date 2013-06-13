@@ -361,8 +361,8 @@ $(".eli").on("click",function(){
         	if (confirm("Desea Activar al usuario ?") ){
             var est="activo";
             var request = $.ajax({
-            url: "/usuario/index/cambiaestado?id="+id + " estado=" + est,
-            type: "POST",
+            url: "/usuario/index/cambiaestado?id="+id + " &estado=" + est,
+            type: "get",
             data: {id: id , estado:est}
                    });
             $(this).prop("checked", "checked");
@@ -373,8 +373,8 @@ $(".eli").on("click",function(){
         }else{
           var est="desactivo";
             var request = $.ajax({
-            url: "/usuario/index/cambiaestado?id="+id + " estado=" + est,
-            type: "POST",
+            url: "/usuario/index/cambiaestado?id="+id + " &estado=" + est,
+            type: "get",
             data: {id: id , estado:est}
                    });
         	$("#" + id).removeClass("success");
