@@ -356,24 +356,25 @@ $(".eli").on("click",function(){
 });
   $('.check').mousedown(function() {
   	var id = $(this).attr('id');
+    console.log(id);
+    console.log()
     var est;
         if (!$(this).is(':checked')) {
         	if (confirm("Desea Activar al usuario ?") ){
             var est="activo";
             var request = $.ajax({
-            url: "/usuario/index/cambiaestado?id="+id + " &estado=" + est,
+            url: "/usuario/index/cambiaestado?id="+id + "&estado=" + est,
             type: "get",
             data: {id: id , estado:est}
                    });
             $(this).prop("checked", "checked");
             $("#" + id).addClass("success");
             $("#la" + id).removeClass().addClass("label label-success");
-         
-         	estado="Activo"};
+                 };
         }else{
           var est="desactivo";
             var request = $.ajax({
-            url: "/usuario/index/cambiaestado?id="+id + " &estado=" + est,
+            url: "/usuario/index/cambiaestado?id="+id + "&estado=" + est,
             type: "get",
             data: {id: id , estado:est}
                    });
