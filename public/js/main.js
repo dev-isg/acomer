@@ -133,17 +133,17 @@ $('#form_rol').validate({
 		})
 });
 
- $.getJSON('especialidad.json',function(data){
-    $.each(data,function(i,val){
-      $('#esp_rol').append("<option value=" + val.id + " >" + val.nombre + " </option>" );            
-    })
-});
-
- $.getJSON('mod.json',function(data){
-    $.each(data,function(i,val){
-      $('#check-mod').append( "<input type='checkbox' id=" + val.id + " >" + val.nombre+ "</br>");            
-    })
-});
+// $.getJSON('especialidad.json',function(data){
+//    $.each(data,function(i,val){
+//      $('#esp_rol').append("<option value=" + val.id + " >" + val.nombre + " </option>" );            
+//    })
+//});
+//
+// $.getJSON('mod.json',function(data){
+//    $.each(data,function(i,val){
+//      $('#check-mod').append( "<input type='checkbox' id=" + val.id + " >" + val.nombre+ "</br>");            
+//    })
+//});
 
 //mapa
 var map;
@@ -244,45 +244,45 @@ $('#para').click(function(){
 });
 
 //json para restaurante
-$.getJSON('rest.json', function(data) {
- var key =1;
- $.each(data, function(key, val) {
-     key=key+1;   
-
-    var nombre =val.nombre;
-    var demo2 = nombre.replace(' ','');
-       $('#table-res').append(
-       "<tr id="+ val.id + "><td>" + key + "</td><td><img src='img/"+ val.imagen + "' class='list-img img-polaroid'/></td><td><a href=''> " + val.nombre + 
-            " </a></td><td>" + val.razon +
-             "</td><td>" + val.web +
-             "</td><td>" + val.ruc +
-             "</td><td><a data-id=" + val.id  + " class='modificar btn btn-info' ><i class='icon-edit icon-white'></i></a> " +
-             "<a href='#' name="+ demo2 + " class='eli-resta btn btn-danger' data-id="+ val.id +" ><i class='icon-trash icon-white'></i></a> "+
-             "<a data-id=" + val.id  + " class='listar btn btn-primary' ><i class='icon-tasks icon-white'></i></a> " +
-             "</td></tr>"
-      );
-   
-      });
-
-  $(".eli-resta").on("click",function(){
-  var id = $(this).attr('data-id');
-  var nom =$(this).attr("name");
-  $('#eli-rest').modal('show');
-  $('#verestaurante').attr({'data-id':id});
-  $('#verestaurante').html("Esta seguro de Eliminar el restaurante " + nom + " ?");
- });
-   $('#direccion_loc').keyup(function () {
-      var value = $(this).val();
-      var d = $("#distrito option:selected").text()
-      var p = $("#provincia option:selected").text()
-      var pa = $("#pais option:selected").text()
-      $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
-    }).keyup();
-
-  $('.listar').on("click",function(){
-      $('#local').modal('show');
-   
-});
+//$.getJSON('rest.json', function(data) {
+// var key =1;
+// $.each(data, function(key, val) {
+//     key=key+1;   
+//
+//    var nombre =val.nombre;
+//    var demo2 = nombre.replace(' ','');
+//       $('#table-res').append(
+//       "<tr id="+ val.id + "><td>" + key + "</td><td><img src='img/"+ val.imagen + "' class='list-img img-polaroid'/></td><td><a href=''> " + val.nombre + 
+//            " </a></td><td>" + val.razon +
+//             "</td><td>" + val.web +
+//             "</td><td>" + val.ruc +
+//             "</td><td><a data-id=" + val.id  + " class='modificar btn btn-info' ><i class='icon-edit icon-white'></i></a> " +
+//             "<a href='#' name="+ demo2 + " class='eli-resta btn btn-danger' data-id="+ val.id +" ><i class='icon-trash icon-white'></i></a> "+
+//             "<a data-id=" + val.id  + " class='listar btn btn-primary' ><i class='icon-tasks icon-white'></i></a> " +
+//             "</td></tr>"
+//      );
+//   
+//      });
+//
+//  $(".eli-resta").on("click",function(){
+//  var id = $(this).attr('data-id');
+//  var nom =$(this).attr("name");
+//  $('#eli-rest').modal('show');
+//  $('#verestaurante').attr({'data-id':id});
+//  $('#verestaurante').html("Esta seguro de Eliminar el restaurante " + nom + " ?");
+// });
+//   $('#direccion_loc').keyup(function () {
+//      var value = $(this).val();
+//      var d = $("#distrito option:selected").text()
+//      var p = $("#provincia option:selected").text()
+//      var pa = $("#pais option:selected").text()
+//      $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
+//    }).keyup();
+//
+//  $('.listar').on("click",function(){
+//      $('#local').modal('show');
+//   
+//});
 
       
   });
