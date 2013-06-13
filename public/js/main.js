@@ -327,8 +327,8 @@ $.getJSON('rest.json', function(data) {
 $('.modificar').on("click",function(){	
 	var id_unica = $(this).attr('data-id');
   $.ajax({
-                type: "POST",
-                url: "usuario/index/getusuarioid"+id_unica,
+                type: "get",
+                url: "usuario/index/getusuarioid?id="+id_unica,
                 data: { id: id_unica }
             }).done(function(data) {
                 console.log(data);
