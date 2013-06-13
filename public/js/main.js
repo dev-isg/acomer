@@ -361,28 +361,25 @@ $(".eli").on("click",function(){
         	if (confirm("Desea Activar al usuario ?") ){
             var est="activo";
             var request = $.ajax({
-            url: "/usuario/index/cambiaestado?id="+id + "estado=" + est,
+            url: "/usuario/index/cambiaestado?id="+id + " estado=" + est,
             type: "POST",
             data: {id: id , estado:est}
                    });
             $(this).prop("checked", "checked");
             $("#" + id).addClass("success");
             $("#la" + id).removeClass().addClass("label label-success");
-            $("#la" + id).html("");
-            $("#la" + id).html("Activo");
+         
          	estado="Activo"};
         }else{
           var est="desactivo";
             var request = $.ajax({
-            url: "/usuario/index/cambiaestado?id="+id + "estado=" + est,
+            url: "/usuario/index/cambiaestado?id="+id + " estado=" + est,
             type: "POST",
             data: {id: id , estado:est}
                    });
         	$("#" + id).removeClass("success");
         	$("#la" + id).removeClass().addClass("label label-important");
-            $("#la" + id).html("");
-            $("#la" + id).html("desactivo");
-        }
+              }
     });	
 
 
