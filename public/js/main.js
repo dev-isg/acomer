@@ -359,7 +359,12 @@ $(".eli").on("click",function(){
     var est;
         if (!$(this).is(':checked')) {
         	if (confirm("Desea Activar al usuario ?") ){
-            var est=1;
+            var est="activo";
+            var request = $.ajax({
+            url: "/usuario/index/cambiaestado?id="+id + "estado=" + est,
+            type: "POST",
+            data: {id: id , estado:est}
+                   });
             $(this).prop("checked", "checked");
             $("#" + id).addClass("success");
             $("#la" + id).removeClass().addClass("label label-success");
@@ -367,11 +372,16 @@ $(".eli").on("click",function(){
             $("#la" + id).html("Activo");
          	estado="Activo"};
         }else{
-          var est=0;
+          var est="desactivo";
+            var request = $.ajax({
+            url: "/usuario/index/cambiaestado?id="+id + "estado=" + est,
+            type: "POST",
+            data: {id: id , estado:est}
+                   });
         	$("#" + id).removeClass("success");
         	$("#la" + id).removeClass().addClass("label label-important");
             $("#la" + id).html("");
-            $("#la" + id).html("Inactivo");
+            $("#la" + id).html("desactivo");
         }
     });	
 
@@ -382,7 +392,7 @@ $(".eli").on("click",function(){
 	$("#" + user).closest('tr').remove();
 	$('#eli-user').modal('hide');
 	console.log(user);
-  $.ajax({
+  var request = $.ajax({
   url: "/usuario/index/eliminarusu?id="+user,
   type: "POST",
   data: {id: user}

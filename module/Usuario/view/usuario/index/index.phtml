@@ -33,7 +33,7 @@
             <td><?php echo $count++ ?></td>
     <?php if ($usuario->en_estado == 'activo') { ?>
                 <td><input id="<?php echo $this->escapeHtml($usuario->in_id); ?>" type="checkbox" class="check" checked="checked"> </td>
-                <td><span id="la<?php echo $this->escapeHtml($usuario->in_id); ?>" class='label label-success'> <?php echo $this->escapeHtml($usuario->en_estado); ?></span></td>
+                <td><span id="la<?php echo $this->escapeHtml($usuario->in_id); ?>" class='label label-important'> <?php echo $this->escapeHtml($usuario->en_estado); ?></span></td>
     <?php } else { ?>
                 <td><input id="<?php echo $this->escapeHtml($usuario->in_id); ?>" type="checkbox" class="check"> </td>
                 <td><span id="la<?php echo $this->escapeHtml($usuario->in_id); ?>" class='label label-success'> <?php echo $this->escapeHtml($usuario->en_estado); ?></span></td>
