@@ -27,7 +27,7 @@
 <?php $count=1; 
 foreach ($this->usuarios as $usuario) : ?>
 <tr id="<?php echo $this->escapeHtml($usuario->in_id);?>">
-
+    <td><?php echo $this->escapeHtml($usuario->in_id);?></td>
     <td><input id="<?php echo $this->escapeHtml($usuario->in_id);?>" type="checkbox" class="check"> </td>
     <td><?php echo $count++?></td>
     <td><span id="la<?php echo $this->escapeHtml($usuario->in_id);?>" class='label label-success'> <?php echo $this->escapeHtml($usuario->en_estado);?></span></td>
