@@ -5,14 +5,17 @@
 <table class="table">
 <tr>
     <th>Nombre</th>
-    <th>Direccion</th>
+    <th>Apellidos</th>
+    <th>Rol</th>
     <th>&nbsp;</th>
     <th><?php echo $this->data;?></th>
 </tr>
 <?php foreach ($lista as $usuario) : ?>
 <tr>
-    <td><?php echo $this->escapeHtml($usuario->nombre);?></td>
-    <td><?php echo $this->escapeHtml($usuario->direccion);?></td>
+    <td><?php echo $this->escapeHtml($usuario->va_nombre);?></td>
+    <td><?php echo $this->escapeHtml($usuario->va_apellidos);?></td>
+    <td><?php echo $this->escapeHtml($usuario->va_nombre_rol);?></td>
+    
 </tr>
 <?php endforeach; ?>
 </table>

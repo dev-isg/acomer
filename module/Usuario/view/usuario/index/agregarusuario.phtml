@@ -18,7 +18,7 @@ $form->prepare();
 
 echo $this->form()->openTag($form);
 echo $this->formHidden($form->get('in_id'));
-echo $this->formRow($form->get('va_nombre'));
+?> <h1 style="color: #222;"><?php echo $this->formRow($form->get('va_nombre'));?></h1><?php 
 echo $this->formRow($form->get('va_apellidos'));
 echo $this->formRow($form->get('va_email'));
 echo $this->formRow($form->get('va_contrasenia'));

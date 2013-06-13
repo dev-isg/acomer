@@ -1,11 +1,4 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonModule for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 
 namespace Usuario\Controller;
 
@@ -22,6 +15,7 @@ class IndexController extends AbstractActionController
   protected $usuarioTable;
     public function indexAction()
     {
+
         //return array();
         //retorna la vista nueva forma oo
         //$this->view->data='hola mundo';
@@ -36,20 +30,15 @@ class IndexController extends AbstractActionController
     {
         $form = new UsuarioForm();
         $form->get('submit')->setValue('Add');
-
         $request = $this->getRequest();
         if ($request->isPost()) {
             $usuario = new Usuario();
             $form->setInputFilter($usuario->getInputFilter());
             $form->setData($request->getPost());
-
             if ($form->isValid()) {
                 $usuario->exchangeArray($form->getData());
                 $this->getUsuarioTable()->guardarUsuario($usuario);
-
-                // Redirect to list of albums
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/rese');
-       
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/rese');      
             }
         }
         return array('form' => $form);
@@ -63,7 +52,7 @@ class IndexController extends AbstractActionController
         //var_dump($id);exit;
         if (!$id) {
            return $this->redirect()->toUrl($this->
-            getRequest()->getBaseUrl().'/usuario/index/rese');  
+            getRequest()->getBaseUrl().'/usuario/index/agregarusuario');  
         }
         try {
             $usuario = $this->getUsuarioTable()->getUsuario($id);
@@ -77,13 +66,14 @@ class IndexController extends AbstractActionController
         $form->bind($usuario);
         $form->get('submit')->setAttribute('value', 'Edit');
         $request = $this->getRequest();      
-        if ($request->isPost()) {
+      if ($request->isPost()) {
+            //$usuario = new Usuario();
             $form->setInputFilter($usuario->getInputFilter());
-            $form->setData($request->getPost());         
-           if ($form->isValid()) {
-              $this->getUsuarioTable()->guardarUsuario($usuario);         
-              return $this->redirect()->toUrl($this->
-            getRequest()->getBaseUrl().'/usuario/index/rese');
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $usuario->exchangeArray($form->getData());
+                $this->getUsuarioTable()->guardarUsuario($usuario);
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/rese');      
             }
         }
 
@@ -96,7 +86,7 @@ class IndexController extends AbstractActionController
     {
       
         $array = array('hola'=>'LISTADO DE USUARIOS',
-                        'yea' => $this->getUsuarioTable()->fetchAll(),);
+                        'yea' => $this->getUsuarioTable()->todosUsuarios(),);
        return new ViewModel($array);
     }
 
@@ -113,7 +103,11 @@ class IndexController extends AbstractActionController
          if ($request->isPost()) {
        //$datos=$request->post()->toArray();
        $datos=$this->params()->fromPost('texto');
-       $tipo=$this->params()->fromPost('listado');
+       $nom=$this->params()->fromPost('listado');
+       //$rol=$this->params()->fromPost('rol');
+       
+       $tipo=$nom;//(isset($nom))?$nom:$rol;
+       // var_dump($tipo);exit;
 
        //$this->redirect()->toUrl('http://zf2.isg.com:81/usuario/index');
 
@@ -128,13 +122,23 @@ class IndexController extends AbstractActionController
   //retorna json 
 
       public function jsonlistarAction(){
-        //echo 'holla mundddo';exit;
-        $request = $this->getRequest();
-               $datos=$this->getUsuarioTable()->listar();
-         $result = Json::encode(array('datos'=>$datos));
-       //var_dump($result);exit;
-      return $result;
-
+        
+        //$request = $this->getRequest();
+        $datos=$this->getUsuarioTable()->listar();
+         //var_dump(Json::encode(array('datos'=>$datos)));exit; 
+        echo Json::encode($datos);
+        exit();
+        
+        
+      //  $result = new JsonModel($datos);
+       // echo $result;//var_dump($result);
+ //return $result;
+         //var_dump($json);exit;
+       //  echo $json;
+         //return new ViewModel(array('lista'=>$json));
+         //var_dump($result);exit;
+        // return $result;
+  
          /*if ($request->isPost()) {
           //$datos=$this->params()->fromPost('texto');
           $datos=$this->getUsuarioTable()->listar();
@@ -144,7 +148,26 @@ class IndexController extends AbstractActionController
 
     }*/
   }
+  //obitenen el estado de la bd
+  public function jsonestadoAction(){
+          
+        $datos=$this->getUsuarioTable()->estado();
+        echo Json::encode($datos);
+        exit();
+  }
 
+  public function eliminarusuAction(){
+      $id=$this->params()->fromQuery('id');
+      $this->getUsuarioTable()->deleteUsuario((int)$id);
+      $this->redirect()->toUrl('/usuario/index');
+  }
+  
+  public function cambiaestadoAction(){
+      $id=$this->params()->fromQuery('id');
+      $estado=$this->params()->fromQuery('estado');
+      $this->getUsuarioTable()->estadoUsuario((int)$id,$estado);
+      $this->redirect()->toUrl('/usuario/index');
+  }
     public function listarvariosAction(){
       $datos=$this->getUsuarioTable()->listar2();
       var_dump($datos);exit;
@@ -153,7 +176,7 @@ class IndexController extends AbstractActionController
     public function moreAction(){
 
         $datos=$this->getUsuarioTable()->moretablas();
-
+        
     }
 
     public function obtonerjoinAction(){
