@@ -349,6 +349,7 @@ $(".eli").on("click",function(){
 	var id = $(this).attr('data-id');
 	var nom =$(this).attr('name');
         $('#eli-user').modal('show');
+          console.log(id);
 	$('#verusuario').attr({'data-id':id});
 	$('#verusuario').html("Estas seguro de eliminar al usuario " + nom + " ?");
 
@@ -383,7 +384,7 @@ $(".eli").on("click",function(){
 	console.log(user);
   var request = $.ajax({
   url: "/usuario/index/eliminarusu?id="+user,
-  type: "GET",
+  type: "POST",
   data: {id: user}
  
   });
