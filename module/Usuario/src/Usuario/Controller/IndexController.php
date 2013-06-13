@@ -47,7 +47,7 @@ class IndexController extends AbstractActionController
             if ($form->isValid()) {
                 $usuario->exchangeArray($form->getData());
                 $this->getUsuarioTable()->guardarUsuario($usuario);
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/rese');      
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario');      
             }
         }
         return array('form' => $form);
@@ -68,7 +68,7 @@ class IndexController extends AbstractActionController
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
-            getRequest()->getBaseUrl().'/usuario/index/rese'); 
+            getRequest()->getBaseUrl().'/usuario'); 
         }
         $form  = new UsuarioForm();
         $form->bind($usuario);
@@ -79,7 +79,7 @@ class IndexController extends AbstractActionController
             $form->setData($request->getPost());
             if ($form->isValid()) {
                 $this->getUsuarioTable()->guardarUsuario($usuario);
-                $this->redirect()->toUrl('/usuario/index/rese');
+                $this->redirect()->toUrl('/usuario');
             }
         }
        /* if($this->getRequest()->isPost())
