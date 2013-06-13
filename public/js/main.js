@@ -326,6 +326,7 @@ $.getJSON('rest.json', function(data) {
 
 $('.modificar').on("click",function(){	
 	var id_unica = $(this).attr('data-id');
+<<<<<<< HEAD
   $.ajax({
                 type: "get",
                 url: "/usuario/index/getusuarioid?id="+id_unica
@@ -348,10 +349,25 @@ $('.modificar').on("click",function(){
  //                        $('#modificar-form #email').val(val.va_email);
  //                        $('#modificar-form #pass').val(val.va_contrasenia);
  //                        $("#modificar-form #rol option[value=" +  val.Ta_rol_in_id + "]").prop("selected",true);										
+=======
+  var url: "usuario/index/getusuarioid?id="+id_unica
+  $.getJSON(url,{format:"json"}, function(data) {
+             
+var posicion_en_array;
+	 $.each(data, function (i, val) {
+                if (val) {
+                    if (val.in_id == id_unica) {
+                        posicion_en_array = i;
+                        $('#modificar-form #nombre').val(val.va_nombre);
+                        $('#modificar-form #apellido').val(val.va_apellidos);
+                        $('#modificar-form #email').val(val.va_email);
+                        $('#modificar-form #pass').val(val.va_contrasenia);
+                        $("#modificar-form #rol option[value=" +  val.Ta_rol_in_id + "]").prop("selected",true);										
+>>>>>>> 25515e85f6a42bb9f180992697a36946b0aa76fb
                       
- //                    }
- //                }
- //            });
+                    }
+                }
+            });
 	  $('#mod-usuario').modal('show');
   
 });
