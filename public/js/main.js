@@ -285,7 +285,7 @@ $('#para').click(function(){
 //});
 
       
-  });
+  //});
 //json para usuarios - operaciones para usuarios
 // $.getJSON('/usuario/index/jsonlistar',{format:"json"}, function(data) {
 //  var key =1;
@@ -402,12 +402,7 @@ $(".eli").on("click",function(){
   var request = $.ajax({
   url: "/usuario/index/eliminarusu?id="+user,
   type: "POST",
-  data: {id: user}
- 
+  data: {id: user} 
   });
-
-    
-
-
-
+});
 });
