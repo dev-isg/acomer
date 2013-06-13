@@ -83,7 +83,7 @@ class IndexController extends AbstractActionController
 
     
     public function getusuarioidAction(){
-      $id=$this->params()->fromPost('id');
+      $id=$this->params()->fromQuery('id');
       $datos=$this->getUsuarioTable()->getUsuario($id);
       var_dump($datos);exit;
       return $datos;
