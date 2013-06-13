@@ -369,7 +369,7 @@ var posicion_en_array;
                 }
             });
 	  $('#mod-usuario').modal('show');
-  
+   }
 });
 
 $(".eli").on("click",function(){
