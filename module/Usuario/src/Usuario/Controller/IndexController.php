@@ -38,7 +38,7 @@ class IndexController extends AbstractActionController
     public function agregarusuarioAction()
     {
         $form = new UsuarioForm();
-        $form->get('submit')->setValue('Add');
+        $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
         if ($request->isPost()) {
             $usuario = new Usuario();
@@ -72,7 +72,7 @@ class IndexController extends AbstractActionController
         }
         $form  = new UsuarioForm();
         $form->bind($usuario);
-        $form->get('submit')->setAttribute('value', 'Edit');
+        $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setInputFilter($usuario->getInputFilter());

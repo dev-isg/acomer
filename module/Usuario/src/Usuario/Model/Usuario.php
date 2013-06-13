@@ -109,6 +109,24 @@ class Usuario
                     ),
                 ),
             )));
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_contrasenia2',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 6,
+                            'max'      =>20 ,
+                        ),
+                    ),
+                ),
+            )));
    $inputFilter->add($factory->createInput(array(
                 'name'     => 'Ta_rol_in_id',
                 'required' => true,
