@@ -26,7 +26,7 @@
     </thead>
 
     <?php $count = 1;
-    foreach ($this->usuarios as $usuario) :
+    foreach ($this->paginator as $usuario) :
         ?>
         <tr>
             <td><?php echo $count++ ?></td>
@@ -46,6 +46,9 @@
         </tr>
 
 <?php endforeach; ?>
+
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding','my_pagination_control', array('route' => '')); ?>
 </table>
 <div class="span4">
     <div class="modal hide fade" id="ins-usuario">
