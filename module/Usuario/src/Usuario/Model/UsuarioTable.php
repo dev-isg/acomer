@@ -63,23 +63,64 @@ class UsuarioTable
     public function fetchAll()
     {
        // $resultSet = $this->tableGateway->select();
+      $adapter = $this->tableGateway->getAdapter();
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+                ->from(array('f' => 'ta_usuario'))//,array('in_id','va_nombre','va_apellidos','va_email','en_estado')) 
+                ->join(array('b' => 'ta_rol'), 'f.Ta_rol_in_id=b.in_id', array('va_nombre_rol'))//,array('va_nombre_rol'))
+                ->where(array('f.Ta_rol_in_id=b.in_id'));
+   
+   
+                
+        $selectString = $sql->getSqlStringForSqlObject($select);
+        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
 
-  
-        
-               $adapter=$this->tableGateway->getAdapter();
-                $sql = new Sql($adapter);
-       
-//       
-         $select = $sql->select()
-        ->from(array('f' => 'ta_usuario'))//,array('in_id','va_nombre','va_apellidos','va_email','en_estado')) 
-        ->join(array('b' => 'ta_rol'),'f.Ta_rol_in_id=b.in_id',array('va_nombre_rol'))//,array('va_nombre_rol'))
-         ->where(array('f.Ta_rol_in_id=b.in_id'));
-       $selectString = $sql->getSqlStringForSqlObject($select);
-       // var_dump($selectString);exit;
-        $resultSet= $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-
-           return $resultSet;//->toArray();
+        return $resultSet;
     }
+    
+    public function buscarUsuario($datos,$tipo){
+        $adapter=$this->tableGateway->getAdapter();
+           $sql = new Sql($adapter);
+        
+           if($tipo=='va_nombre' ){
+
+             $select = $sql->select()
+            ->from(array('f' => 'ta_usuario')) 
+            ->join(array('b' => 'ta_rol'),'f.Ta_rol_in_id = b.in_id',array('va_nombre_rol'))
+            ->where(array($tipo.' LIKE ?'=>'%'.$datos.'%')); //->where(array('f.in_id'=>$id));
+//             $selectString = $sql->getSqlStringForSqlObject($select);
+//            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//            $rowset = $results;//->ToArray();
+           }else{
+                $select = $sql->select()
+                ->from(array('f' => 'ta_usuario')) 
+                ->join(array('b' => 'ta_rol'),'f.Ta_rol_in_id=b.in_id',array('va_nombre_rol'))
+                ->where(array('b.in_id'=>$tipo));
+//            //$rowset = $this->tableGateway->select(array('Ta_rol_in_id'=>$tipo));               
+//            $selectString = $sql->getSqlStringForSqlObject($select);
+//            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//            $rowset = $results;//->ToArray();
+
+            }
+            
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            $rowset = $results;
+           /* $array=array();
+            foreach($rowset as $resul){
+                $array[]=$resul;   
+            }
+             var_dump( $array);exit;*/
+
+               if (!$rowset) {
+            throw new \Exception("No hay data");
+        }
+       
+      
+        return $rowset;
+    }
+
+
 
     public function moretablas(){
 
@@ -99,7 +140,16 @@ class UsuarioTable
         var_dump($returnArray);exit;
 
     }
-
+    public function getUsuario($id)
+    {
+        $id  = (int) $id;
+        $rowset = $this->tableGateway->select(array('in_id' => $id));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $id");
+        }
+        return $row;
+    }
     //-----------------------------INICIO--------------------------------------------
 
 public function getAlbum($id)
@@ -124,60 +174,18 @@ public function getAlbum($id)
    }
 
 //----------------------------FIN---------------------------------------------------
- public function buscarUsuario($datos,$tipo){
-        $adapter=$this->tableGateway->getAdapter();
-           $sql = new Sql($adapter);
-        
-           if($tipo=='va_nombre'){
+ 
 
-             $select = $sql->select()
-            ->from(array('f' => 'ta_usuario')) 
-            ->join(array('b' => 'ta_rol'),'f.Ta_rol_in_id = b.in_id')
-            ->where(array($tipo.' LIKE ?'=>'%'.$datos.'%')); //->where(array('f.in_id'=>$id));
-//             $selectString = $sql->getSqlStringForSqlObject($select);
-//            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-//            $rowset = $results;//->ToArray();
-           }else{
-                $select = $sql->select()
-                ->from(array('f' => 'ta_usuario')) 
-                ->join(array('b' => 'ta_rol'),'f.Ta_rol_in_id=b.in_id')
-                ->where(array('b.in_id'=>$tipo));
-//            //$rowset = $this->tableGateway->select(array('Ta_rol_in_id'=>$tipo));               
-//            $selectString = $sql->getSqlStringForSqlObject($select);
-//            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-//            $rowset = $results;//->ToArray();
-
-            }
-            
-                        $selectString = $sql->getSqlStringForSqlObject($select);
-            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-            $rowset = $results;
-           /* $array=array();
-            foreach($rowset as $resul){
-                $array[]=$resul;   
-            }
-             var_dump( $array);exit;*/
-
-               if (!$rowset) {
-            throw new \Exception("No hay data");
-        }
-       
-      
-        return $rowset;
-    }
-
-
-
-    public function getUsuario($id)
-    {
-        $id  = (int) $id;
-        $rowset = $this->tableGateway->select(array('in_id' => $id));
-        $row = $rowset->current();
-        if (!$row) {
-            throw new \Exception("Could not find row $id");
-        }
-        return $row;
-    }
+//    public function getUsuario($id)
+//    {
+//        $id  = (int) $id;
+//        $rowset = $this->tableGateway->select(array('id' => $id));
+//        $row = $rowset->current();
+//        if (!$row) {
+//            throw new \Exception("Could not find row $id");
+//        }
+//        return $row;
+//    }
 
     public function saveUsuario(Usuario $usuario)
     {
@@ -255,7 +263,18 @@ public function guardarUsuario(Usuario $usuario)
         
         $this->tableGateway->delete(array('in_id' => $id));
     }
-    
+    public function editarUsuario($id,$data){
+                $data = array(
+            'nombre' => $usuario->va_nombre,
+            'direccion'  => $usuario->va_apellidos,
+            'direccion'  => $usuario->va_email,
+            'direccion'  => $usuario->va_contraseña,
+            'direccion'  => $usuario->en_estado,
+            'direccion'  => $usuario->Ta_rol_in_id,
+            'direccion'  => $usuario->direccion,
+        );
+        $this->tableGateway->update($data, array('in_id' => $id));
+    }
 
     public function listar(){   
         
