@@ -29,6 +29,8 @@ class UsuarioTable
         return $row;
     }
 
+    
+    
     public function saveAlbum(Album $album)
     {
         $data = array(

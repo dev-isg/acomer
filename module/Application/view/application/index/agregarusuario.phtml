@@ -9,11 +9,20 @@ echo $this->hola;
 $form = $this->form;
 $form->prepare();
 $form->setAttributes(array(
-    'action' => $this->url.'/application/index/recibe',
+    'action' => $this->url.'/application/index/agregarusuario',
     'method' => 'post'
 ));
 $formLabel = $this->plugin('formLabel');
 echo $this->form()->openTag($form);
+?>
+<td><a href="/application/index/index" title="regresar al listado"><p>regresar</p></a></td>
+<?php
+if(!empty($this->in_id))
+{
+    ?>
+    <p style="color: green;">El registro se ingreso correctamente</p>
+    <?php
+}
 ?>
 <div class="form_element">
 <?php
@@ -52,10 +61,9 @@ echo $this->form()->openTag($form);
      <div class="form_element">
     <?php
     $pais = $form->get('rol');
-    echo $formLabel->openTag() . $pais->getLabel();
+    echo $formLabel->openTag().$pais->getOption('label')." ";
     echo $formLabel->closeTag();
-    echo $this->formSelect($pais);
-    echo $this->formElementErrors($pais);
+    echo $this->formInput($pais);
     ?></div>
 <hr />
 <?php echo $this->formHidden($form->get('oculto')) ?>

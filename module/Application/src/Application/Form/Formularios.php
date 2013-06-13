@@ -98,7 +98,25 @@ class Formularios extends Form
     //$select->setEmptyOption('Seleccione...');
     $this->add($select);
 
-       $pais = new Element\Select('rol');
+    
+    
+      $pais = $factory->createElement(array(
+            'type' => 'Zend\Form\Element\Text',
+            'name' => 'rol',
+            'options' => array(
+                'label' => 'rol',
+            ),
+            'attributes' => array(
+                
+                'class' => 'input'
+            ),
+                ));
+
+        $this->add($pais);
+        
+        
+    
+      /* $pais = new Element\Select('rol');
        $pais->setLabel('Cuál es tu rol?');
        $pais->setEmptyOption('Seleccione...');
        $pais->setValueOptions(array(
@@ -110,7 +128,7 @@ class Formularios extends Form
       ),
 
      ));
-     $this->add($pais);
+     $this->add($pais);*/
         //campo oculto
         $oculto = new Element\Hidden('oculto');
         $this->add($oculto);

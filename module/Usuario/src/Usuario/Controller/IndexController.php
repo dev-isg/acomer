@@ -1,11 +1,4 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonModule for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 
 namespace Usuario\Controller;
 
@@ -14,7 +7,9 @@ use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
 use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
-
+use Usuario\Model\Usuario;          // <-- Add this import
+use Usuario\Form\UsuarioForm;       // <-- Add this import
+use Usuario\Model\UsuarioTable;  
 class IndexController extends AbstractActionController
 {
   protected $usuarioTable;
@@ -39,6 +34,91 @@ class IndexController extends AbstractActionController
 //        retorna la vista nueva forma oo
 //        $this->view->data='hola mundo';
 //       $val=$this->getUsuarioTable()->fetchAll();
+    }
+    public function agregarusuarioAction()
+    {
+        $form = new UsuarioForm();
+        $form->get('submit')->setValue('Add');
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $usuario = new Usuario();
+            $form->setInputFilter($usuario->getInputFilter());
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $usuario->exchangeArray($form->getData());
+                $this->getUsuarioTable()->guardarUsuario($usuario);
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/rese');      
+            }
+        }
+        return array('form' => $form);
+    }
+    
+    
+     public function editarusuarioAction()
+     
+    {
+        $id = (int) $this->params()->fromRoute('in_id', 0);
+        //var_dump($id);exit;
+        if (!$id) {
+           return $this->redirect()->toUrl($this->
+            getRequest()->getBaseUrl().'/usuario/index/agregarusuario');  
+        }
+        try {
+            $usuario = $this->getUsuarioTable()->getUsuario($id);
+        }
+        catch (\Exception $ex) {
+            return $this->redirect()->toUrl($this->
+            getRequest()->getBaseUrl().'/usuario/index/rese'); 
+        }
+        $form  = new UsuarioForm();
+        $form->bind($usuario);
+        $form->get('submit')->setAttribute('value', 'Edit');
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setInputFilter($usuario->getInputFilter());
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $this->getUsuarioTable()->guardarUsuario($usuario);
+                $this->redirect()->toUrl('/usuario/index/rese');
+            }
+        }
+       /* if($this->getRequest()->isPost())
+        {
+         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $id =(int)$this->params()->fromRoute('in_id',0);
+            // var_dump($id);exit;
+        /* $data = $this->request->getPost();
+         
+         $apellido=$data["va_apellidos"];
+         $nombre=$data["va_nombre"];
+         $pas=$data["va_contrasenia"];
+         $email=$data["va_email"];
+         $rol=$data["Ta_rol_in_id"];
+            $valore = array(
+                    'va_nombre'  => $nombre,
+                   'va_apellidos'  => $apellido,
+                   'va_email'      => $email,
+                   'va_contrasenia'=> $pas,
+                   'Ta_rol_in_id'  => $rol   
+            );
+         $u = new UsuarioTable($adapter);
+          $u->updateUsuario($id,$valore);
+        $this->redirect()->toUrl('/usuario/index');*/
+        
+       /* }*/
+     return array(
+            'in_id' => $id,
+            'form' => $form,
+        );
+        
+    }
+    public function reseAction()
+    {
+      
+        $array = array('hola'=>'LISTADO DE USUARIOS',
+                        'yea' => $this->getUsuarioTable()->todosUsuarios(),);
+       return new ViewModel($array);
     }
 
     //obitenen el estado de la bd

@@ -31,11 +31,11 @@ return array(
                     'default' => array( //'default' => array( 
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    =>'/[:controller[/:action[/:texto]]]',//'/usuario[/][:action]', //'/[:controller[/:action[/:texto]]]',
+                            'route'    =>'/[:controller[/:action[/:in_id]]]',//'/usuario[/][:action]', //'/[:controller[/:action[/:texto]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'texto'=>'[0-9]+',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',                          
+                                'in_id'=>'[0-9]+',
                             ),
                             'defaults' => array(
                                 'controller' => 'Usuario\Controllers\Index',

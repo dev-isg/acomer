@@ -1,0 +1,30 @@
+<?php
+// module/Album/view/album/album/index.phtml:
+
+//$title = 'My albums';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<h1><?php echo $this->hola; ?></h1>
+<p>
+   <td><a href="/usuario/index/agregarusuario" title="ingrese usuaerio del sistema"><p>ingresar usuario</p></a></td>
+</p>
+
+<table class="table">
+<tr>
+    <th>Title</th>
+    <th>Artist</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach ($yea as $album) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($album->va_nombre);?></td>
+    <td><?php echo $this->escapeHtml($album->va_apellidos);?></td>
+    <td><?php echo $this->escapeHtml($album->in_id);?></td>
+    <td>
+           
+    <td><a href="<?php echo $this->basePath();?>/usuario/index/editarusuario/<?php echo $album->in_id;?>" title="ver valores">actualizar</a></td>
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>

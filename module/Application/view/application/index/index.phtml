@@ -6,7 +6,9 @@ echo $this->hola;
 ?>
 <h1><?php //echo $this->escapeHtml($title); ?></h1>
 
-<td><a href="/application/index/for" title="ingrese usuaerio del sistema"><h1>ingresar usuario</h1></a></td>
+<td><a href="/application/index/agregarusuario" title="ingrese usuaerio del sistema"><p>ingresar usuario</p></a></td>
+
+
 <table class="table">
 <tr><th>Id</th>
     <th>Titulo</th>
@@ -14,7 +16,14 @@ echo $this->hola;
    <!-- <th>Artista</th>
     <th>&nbsp;</th>-->
 </tr>
-
+<?php
+if(!empty($this->in_id))
+{
+    ?>
+    <p style="color: green;">El registro se elimino correctamente</p>
+    <?php
+}
+?>
 <?php foreach($yea as $yea)  : ?>
 <tr>
     <td><?php echo $yea['va_nombre' ];?></td>

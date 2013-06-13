@@ -1,32 +1,38 @@
-<?php
-$title = 'ingresar usuario';
-$this->headTitle($title);
-echo $this->hola;
-?>
-
 <h1><?php echo $this->titulo?></h1>
 <?php
 $form = $this->form;
 $form->prepare();
 $form->setAttributes(array(
-    'action' => $this->url.'/application/index/recibe',
-    'method' => 'post'
+    'action' => $this->url.'/application/index/actualizarusuario',
+    'method' => 'post',
+    'in_id'     => $this->in_id,
 ));
 $formLabel = $this->plugin('formLabel');
+//$formValue = $this->getValue('getValue');
+
 echo $this->form()->openTag($form);
 ?>
+
 <div class="form_element">
+
 <?php
     $name = $form->get('nombre');
+
     echo $formLabel->openTag().$name->getOption('label')." ";
     echo $formLabel->closeTag();
+    echo $formLabel->closeTag();
+    
     echo $this->formInput($name);
+
 ?>
 </div>
 <div class="form_element">
+
 <?php
     $apellido = $form->get('apellido');
+   // echo $this->ye['apellido'];
     echo $formLabel->openTag().$apellido->getOption('label')." ";
+    echo $this->ye['apellido'];
     echo $formLabel->closeTag();
     echo $this->formInput($apellido);
 ?>
@@ -35,16 +41,21 @@ echo $this->form()->openTag($form);
 <?php
     $pass = $form->get('pass');
     echo $formLabel->openTag().$pass->getOption('label')." ";
-    
+    echo $this->ye['pass'];
     echo $this->formElementErrors($name);
+    //echo $this->setValue() == $this->ye['email']);
     echo $formLabel->closeTag();
     echo $this->formInput($pass);
 ?>
 </div>
+
+
 <div class="form_element">
+
 <?php
     $email = $form->get('email');
     echo $formLabel->openTag().$email->getOption('label')." ";
+    echo $this->ye['email'];
     echo $formLabel->closeTag();
     echo $this->formInput($email);
 ?>
@@ -52,10 +63,10 @@ echo $this->form()->openTag($form);
      <div class="form_element">
     <?php
     $pais = $form->get('rol');
-    echo $formLabel->openTag() . $pais->getLabel();
+    echo $formLabel->openTag().$pais->getOption('label')." ";
+    echo $this->ye['rol'];
     echo $formLabel->closeTag();
-    echo $this->formSelect($pais);
-    echo $this->formElementErrors($pais);
+    echo $this->formInput($pais);
     ?></div>
 <hr />
 <?php echo $this->formHidden($form->get('oculto')) ?>

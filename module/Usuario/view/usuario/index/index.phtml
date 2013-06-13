@@ -12,6 +12,7 @@
 
 <table class="table table-bordered table-hover">
     <thead>  
+
         <tr>
             <th>#</th> 
             <th>N°</th>
@@ -43,6 +44,7 @@
             <td><a data-id="<?php echo $this->escapeHtml($usuario->in_id); ?>" href="#" class='modificar btn btn-info'><i class='icon-edit icon-white'></i>Editar</a></td>
             <td><a name="<?php echo $this->escapeHtml($usuario->va_nombre); ?>" data-id="<?php echo $this->escapeHtml($usuario->in_id); ?>" href="#" class='eli btn btn-danger'><i class='icon-trash icon-white'></i>ELIMINAR</a> </td>
         </tr>
+
 <?php endforeach; ?>
 </table>
 <div class="span4">
@@ -146,6 +148,7 @@
                     <div class="control-group span6">
                         <label>Apellido de usuario</label>
                         <input type="text" class="span10" placeholder="Ingrese su Apellido" id="apellido" name="apellido" >
+                       
                     </div>
                     <div class="row-fluid">
                         <div class="control-group span6" >
