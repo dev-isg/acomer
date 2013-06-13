@@ -17,8 +17,13 @@ class UsuarioForm extends Form
         $this->add(array(
             'name' => 'va_nombre',
             'type' => 'Text',
+          
             'options' => array(
-                'label' => 'Nombre',
+                'label' => 'Nombre',          
+            ),
+            'attributes' => array(               
+                'class' => 'input',
+                'id'   => 'nombre'
             ),
         ));
         $this->add(array(
