@@ -77,6 +77,7 @@ class IndexController extends AbstractActionController
             }
              }
         }
+      
         return array('form' => $form);
     }
     
@@ -101,6 +102,7 @@ class IndexController extends AbstractActionController
         $form  = new UsuarioForm();
         $form->bind($usuario);
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
+         
        // $form->get('password')->setAttribute('renderPassword', true);
         $request = $this->getRequest();
         if ($request->isPost()) {
