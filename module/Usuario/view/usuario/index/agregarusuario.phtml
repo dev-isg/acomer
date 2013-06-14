@@ -17,10 +17,8 @@ $form->setAttributes(array(
 $form->prepare();
 
 echo $this->form()->openTag($form);
-?><div class="modal-header">
-<a id="cerrar_update_usuario" class="close">×</a>
-<h3><?php echo $this->escapeHtml($title); ?></h3>
-</div><?php
+?><h3><?php echo $this->escapeHtml($title); ?></h3>
+<?php
 echo $this->formHidden($form->get('in_id'));
 
 
