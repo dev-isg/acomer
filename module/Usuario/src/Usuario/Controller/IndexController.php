@@ -2,6 +2,8 @@
 
 namespace Usuario\Controller;
 
+
+
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
@@ -35,26 +37,32 @@ class IndexController extends AbstractActionController
 //        $this->view->data='hola mundo';
 //       $val=$this->getUsuarioTable()->fetchAll();
     }
-    public function agregarusuarioAction()
+   public function agregarusuarioAction()
     {
         $form = new UsuarioForm();
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $usuario = new Usuario();
+           $datos =$this->request->getPost();
+           $pass1 = $datos['va_contrasenia'];
+           $pass2 = $datos['va_contrasenia2'];
+           $usuario = new Usuario();
             $form->setInputFilter($usuario->getInputFilter());
             $form->setData($request->getPost());
+              
             if ($form->isValid()) {
                 $usuario->exchangeArray($form->getData());
+                if($pass1==$pass2){
                 $this->getUsuarioTable()->guardarUsuario($usuario);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario');      
             }
+             }
         }
         return array('form' => $form);
     }
     
     
-     public function editarusuarioAction()
+          public function editarusuarioAction()
      
     {
         $id = (int) $this->params()->fromRoute('in_id', 0);
@@ -65,6 +73,7 @@ class IndexController extends AbstractActionController
         }
         try {
             $usuario = $this->getUsuarioTable()->getUsuario($id);
+           // var_dump($usuario);exit;
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
@@ -75,11 +84,16 @@ class IndexController extends AbstractActionController
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();
         if ($request->isPost()) {
+            $datos =$this->request->getPost();
+            $pass1 = $datos['va_contrasenia'];
+            $pass2 = $datos['va_contrasenia2'];
             $form->setInputFilter($usuario->getInputFilter());
             $form->setData($request->getPost());
             if ($form->isValid()) {
+                 if($pass1==$pass2){
                 $this->getUsuarioTable()->guardarUsuario($usuario);
                 $this->redirect()->toUrl('/usuario');
+                }
             }
         }
        /* if($this->getRequest()->isPost())
@@ -233,6 +247,9 @@ class IndexController extends AbstractActionController
     }*/
   }
     public function listarvariosAction(){
+         $echo = new IndexController();
+        $mas =$echo->rolesAction();
+        var_dump($mas);exit;
       $datos=$this->getUsuarioTable()->listar2();
       var_dump($datos);exit;
     }
@@ -240,6 +257,8 @@ class IndexController extends AbstractActionController
     public function moreAction(){
 
         $datos=$this->getUsuarioTable()->moretablas();
+      
+        return new viewModel();
         
     }
 
@@ -252,6 +271,17 @@ class IndexController extends AbstractActionController
     }
 
 
+    
+    public function rolesAction()
+    { 
+        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $u = new Usuario($adapter);
+        $s=$u->rolAll($adapter);
+        $array = array('hola'=>'desde sql',
+                        'yea'=>$u->rolAll($adapter)); 
+       return new ViewModel($array);
+    }
 
 
 
