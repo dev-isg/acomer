@@ -32,7 +32,7 @@ class IndexController extends AbstractActionController
     // $lista = $this->getUsuarioTable()->fetch();
          $lista->buffer();
          $lista->next();
-         //$lista->count();
+
          $iteratorAdapter    = new \Zend\Paginator\Adapter\Iterator($lista);
          
         $paginator          = new \Zend\Paginator\Paginator($iteratorAdapter);
@@ -42,8 +42,8 @@ class IndexController extends AbstractActionController
 //        $pagingInfoCount = $paginator->getPages()->pageCount;
 //        $pagingInfoRange = $paginator->getPages()->pagesInRange;
 //        var_dump($paginator->getPages());exit;
-       // $pagingInfo = $paginator->getPages();
-       // $paginator = new Zend\Paginator\Paginator($lista);
+//        $pagingInfo = $paginator->getPages();
+//        $paginator = new Zend\Paginator\Paginator($lista);
 
         return new ViewModel(array(
                     'usuarios' => $lista,
