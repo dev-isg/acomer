@@ -9,7 +9,7 @@ requirejs.config({
     });
 
 
-require(['jquery',,'upload','bootstrap', 'validate','gmap'], function ($) {
+require(['jquery','upload','bootstrap', 'validate','gmap'], function ($) {
 //funciones de usuarios
 
        
@@ -86,27 +86,6 @@ var cerrar_mod = function(mod,form){
     limpiar_modal();
  }
 
-//validar rol
-$('#form_rol').validate({
-	rules:{
-	nombre_rol : {
-		required :true
-	}
-},
-	messages : {
-		nombre_rol :{
-		required : "Por favor ingrese el nombre del Rol"
-		}
-	},
-	highlight: function(element) {
-				$(element).closest('.control-group').removeClass('success').addClass('error');
-			},
-			success: function(element) {
-				element
-				.text('OK!').addClass('valid')
-				.closest('.control-group').removeClass('error').addClass('success');
-			}
-});
 
 //utilizando funciones 
  validar('#usuario');
