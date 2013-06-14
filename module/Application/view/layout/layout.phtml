@@ -18,11 +18,7 @@
          <script data-main="/js/main" src="<?php echo $this->basePath()?>/js/require.js"></script>  
          
         <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/main.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
-                      
-        
-
-                                      
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>                                
                                    
     </head>
     <body>
@@ -33,10 +29,21 @@
                         <div class="navbar navbar-inverse nav">
                         <div class="navbar-inner">              
                             <a class="brand" href="/">AREA ADMINISTRACION</a>
+                            <div class="nav-collapse collapse">
+                              <ul class="nav">
+                              <li><a href="<?php echo $this->basePath();?>/usuario/index/agregarusuario"><i class="icon-home icon-white"></i> MODLULO USUARIOS</a></li>
+                              <li class="divider-vertical"></li>
+                              <li class="active"><a href="#"><i class="icon-file icon-white"></i> MODULO RESTAURANTES</a></li>
+                              <li class="divider-vertical"></li>
+                              <li><a href="#"><i class="icon-envelope icon-white"></i> MODULO PLATOS</a></li>
+                              <li class="divider-vertical"></li>                             
+                              </ul>
+                              </div>
+                          
                                   <div class="nav-collapse collapse">
                                     <div class="pull-right">
                                     <ul class="nav pull-right">
-                                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, User <b class="caret"></b></a>
+                                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido, Admin <b class="caret"></b></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="#"><i class="icon-cog"></i> Configuración</a></li>
                                                   <li class="divider"></li>
@@ -51,7 +58,7 @@
                    </div>
                   <div class="row-fluid">
                 <!-- sidebar-->
-                <div class="span2">
+              <!--   <div class="span2">
                     <ul class="nav nav-list">
                         <li class="active" ><a href="#"><i class="icon-home "></i> INICIO</a></li>
                         <li class="nav-header">USUARIOS</li>
@@ -66,7 +73,7 @@
                         <li class="nav-header">PLATOS</li>
                             <li><a href="#"><i class="icon-inbox"></i> Listado Platos</a></li>
                         </ul>
-                </div>
+                </div> -->
   
                 <?php echo $this->content; ?>
                 

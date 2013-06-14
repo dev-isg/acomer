@@ -27,11 +27,17 @@ class IndexController extends AbstractActionController
 
             $lista = $this->getUsuarioTable()->fetchAll();
         }
-        
+         $pag = $this->params()->fromQuery('page');
+      // var_dump($pag);exit;
+         $iteratorAdapter    = new \Zend\Paginator\Adapter\Iterator($lista);
+        $paginator          = new \Zend\Paginator\Paginator($iteratorAdapter);
+        $paginator->setCurrentPageNumber($pag,1);
+        $paginator->setItemCountPerPage(5);
+         $paginator ->setPageRange(4);
        // $paginator = new Zend\Paginator\Paginator($lista);
 
         return new ViewModel(array(
-                    'usuarios' => $lista,//'paginador'=>$paginator
+                    'usuarios' => $lista,'paginator' => $paginator,//'paginador'=>$paginator
                 ));
 //        retorna la vista nueva forma oo
 //        $this->view->data='hola mundo';

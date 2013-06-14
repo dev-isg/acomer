@@ -133,17 +133,17 @@ $('#form_rol').validate({
 		})
 });
 
- $.getJSON('especialidad.json',function(data){
-    $.each(data,function(i,val){
-      $('#esp_rol').append("<option value=" + val.id + " >" + val.nombre + " </option>" );            
-    })
-});
-
- $.getJSON('mod.json',function(data){
-    $.each(data,function(i,val){
-      $('#check-mod').append( "<input type='checkbox' id=" + val.id + " >" + val.nombre+ "</br>");            
-    })
-});
+// $.getJSON('especialidad.json',function(data){
+//    $.each(data,function(i,val){
+//      $('#esp_rol').append("<option value=" + val.id + " >" + val.nombre + " </option>" );            
+//    })
+//});
+//
+// $.getJSON('mod.json',function(data){
+//    $.each(data,function(i,val){
+//      $('#check-mod').append( "<input type='checkbox' id=" + val.id + " >" + val.nombre+ "</br>");            
+//    })
+//});
 
 //mapa
 var map;
@@ -244,48 +244,48 @@ $('#para').click(function(){
 });
 
 //json para restaurante
-$.getJSON('rest.json', function(data) {
- var key =1;
- $.each(data, function(key, val) {
-     key=key+1;   
-
-    var nombre =val.nombre;
-    var demo2 = nombre.replace(' ','');
-       $('#table-res').append(
-       "<tr id="+ val.id + "><td>" + key + "</td><td><img src='img/"+ val.imagen + "' class='list-img img-polaroid'/></td><td><a href=''> " + val.nombre + 
-            " </a></td><td>" + val.razon +
-             "</td><td>" + val.web +
-             "</td><td>" + val.ruc +
-             "</td><td><a data-id=" + val.id  + " class='modificar btn btn-info' ><i class='icon-edit icon-white'></i></a> " +
-             "<a href='#' name="+ demo2 + " class='eli-resta btn btn-danger' data-id="+ val.id +" ><i class='icon-trash icon-white'></i></a> "+
-             "<a data-id=" + val.id  + " class='listar btn btn-primary' ><i class='icon-tasks icon-white'></i></a> " +
-             "</td></tr>"
-      );
-   
-      });
-
-  $(".eli-resta").on("click",function(){
-  var id = $(this).attr('data-id');
-  var nom =$(this).attr("name");
-  $('#eli-rest').modal('show');
-  $('#verestaurante').attr({'data-id':id});
-  $('#verestaurante').html("Esta seguro de Eliminar el restaurante " + nom + " ?");
- });
-   $('#direccion_loc').keyup(function () {
-      var value = $(this).val();
-      var d = $("#distrito option:selected").text()
-      var p = $("#provincia option:selected").text()
-      var pa = $("#pais option:selected").text()
-      $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
-    }).keyup();
-
-  $('.listar').on("click",function(){
-      $('#local').modal('show');
-   
-});
+//$.getJSON('rest.json', function(data) {
+// var key =1;
+// $.each(data, function(key, val) {
+//     key=key+1;   
+//
+//    var nombre =val.nombre;
+//    var demo2 = nombre.replace(' ','');
+//       $('#table-res').append(
+//       "<tr id="+ val.id + "><td>" + key + "</td><td><img src='img/"+ val.imagen + "' class='list-img img-polaroid'/></td><td><a href=''> " + val.nombre + 
+//            " </a></td><td>" + val.razon +
+//             "</td><td>" + val.web +
+//             "</td><td>" + val.ruc +
+//             "</td><td><a data-id=" + val.id  + " class='modificar btn btn-info' ><i class='icon-edit icon-white'></i></a> " +
+//             "<a href='#' name="+ demo2 + " class='eli-resta btn btn-danger' data-id="+ val.id +" ><i class='icon-trash icon-white'></i></a> "+
+//             "<a data-id=" + val.id  + " class='listar btn btn-primary' ><i class='icon-tasks icon-white'></i></a> " +
+//             "</td></tr>"
+//      );
+//   
+//      });
+//
+//  $(".eli-resta").on("click",function(){
+//  var id = $(this).attr('data-id');
+//  var nom =$(this).attr("name");
+//  $('#eli-rest').modal('show');
+//  $('#verestaurante').attr({'data-id':id});
+//  $('#verestaurante').html("Esta seguro de Eliminar el restaurante " + nom + " ?");
+// });
+//   $('#direccion_loc').keyup(function () {
+//      var value = $(this).val();
+//      var d = $("#distrito option:selected").text()
+//      var p = $("#provincia option:selected").text()
+//      var pa = $("#pais option:selected").text()
+//      $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
+//    }).keyup();
+//
+//  $('.listar').on("click",function(){
+//      $('#local').modal('show');
+//   
+//});
 
       
-  });
+  //});
 //json para usuarios - operaciones para usuarios
 // $.getJSON('/usuario/index/jsonlistar',{format:"json"}, function(data) {
 //  var key =1;
@@ -324,28 +324,31 @@ $.getJSON('rest.json', function(data) {
    	
   //});
 
-$('.modificar').on("click",function(){	
-  var id_unica = $(this).attr('data-id');
-  var url= "usuario/index/getusuarioid?id=" + id_unica;
-  $.getJSON(url, function(data) {             
-  var posicion_en_array;
-	 $.each(data, function (i, val) {
-                if (val) {
-                    if (val.in_id == id_unica) {
-                        posicion_en_array = i;
-                        $('#modificar-form #nombre').val(val.va_nombre);
-                        $('#modificar-form #apellido').val(val.va_apellidos);
-                        $('#modificar-form #email').val(val.va_email);
-                        $('#modificar-form #pass').val(val.va_contrasenia);
-                        $("#modificar-form #rol option[value=" +  val.Ta_rol_in_id + "]").prop("selected",true);										
+//$('.modificar').on("click",function(){	
+
+
+  // var id_unica = $(this).attr('data-id');
+  // var url= "usuario/index/getusuarioid?id=" + id_unica;
+  // $.getJSON(url, function(data) {             
+  // var posicion_en_array;
+	 // $.each(data, function (i, val) {
+  //               if (val) {
+  //                   if (val.in_id == id_unica) {
+  //                       posicion_en_array = i;
+  //                       $('#modificar-form #nombre').val(val.va_nombre);
+  //                       $('#modificar-form #apellido').val(val.va_apellidos);
+  //                       $('#modificar-form #email').val(val.va_email);
+  //                       $('#modificar-form #pass').val(val.va_contrasenia);
+  //                       $("#modificar-form #rol option[value=" +  val.Ta_rol_in_id + "]").prop("selected",true);										
                       
-                    }
-                }
-            });
-   });
-   $('#mod-usuario').modal('show');
+  //                   }
+  //               }
+  //           });
+  //  });
+  //  $('#mod-usuario').modal('show');
+
    
-});
+//});
 
 $(".eli").on("click",function(){
 	var id = $(this).attr('data-id');
@@ -399,12 +402,7 @@ $(".eli").on("click",function(){
   var request = $.ajax({
   url: "/usuario/index/eliminarusu?id="+user,
   type: "POST",
-  data: {id: user}
- 
+  data: {id: user} 
   });
-
-    
 });
-
-
 });

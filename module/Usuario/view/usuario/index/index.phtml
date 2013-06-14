@@ -1,4 +1,4 @@
- 
+ <div class="span12"><a href="href="<?php echo $this->basePath();?>/usuario/index/agregarusuario"">AGREGAR USUARIO</a></div>
 <form name='form_busqueda' action='<?php echo $this->basePath(); ?>/usuario/index' method ="post">
     <input type='text' name='texto'/>
     <input type='radio' name='listado'  id='nom' value='va_nombre' checked/>Por nombre
@@ -7,8 +7,6 @@
 
     <input name=submit type='submit'/>
 </form>
-<p>JSON</p>
-<a href='http://192.168.1.35:8080/usuario/index/jsonlistar'>Ver listado con Json</a>
 
 <table class="table table-bordered table-hover">
     <thead>  
@@ -26,7 +24,7 @@
     </thead>
 
     <?php $count = 1;
-    foreach ($this->usuarios as $usuario) :
+    foreach ($this->paginator as $usuario) :
         ?>
         <tr>
             <td><?php echo $count++ ?></td>
@@ -46,6 +44,9 @@
         </tr>
 
 <?php endforeach; ?>
+
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding','my_pagination_control', array('route' => '')); ?>
 </table>
 <div class="span4">
     <div class="modal hide fade" id="ins-usuario">
