@@ -109,8 +109,7 @@ $('#form_rol').validate({
 });
 
 //utilizando funciones 
- validar('#ingreso-form');
- validar('#modificar-form');
+ validar('#usuario');
  
  // $('#cerrar_insert_usuario').on('click', function(){
  // 	cerrar_mod('#ins-usuario','#ingreso-form');
