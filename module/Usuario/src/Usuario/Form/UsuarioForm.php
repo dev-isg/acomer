@@ -34,7 +34,7 @@ class UsuarioForm extends Form
             'type' => 'Text',
               'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'va_nombre',
+                'id'   => 'va_apellidos',
                 'placeholder'=>'Ingrese su Apellido'
             ),
             'options' => array(
