@@ -12,7 +12,7 @@ class UsuarioForm extends Form
         // we want to ignore the name passed
         parent::__construct('usuario');
         $this->setAttribute('method', 'post');
-        $this->add(array(
+       $this->add(array(
             'name' => 'in_id',
             'type' => 'Hidden',
         ));
@@ -34,7 +34,7 @@ class UsuarioForm extends Form
             'type' => 'Text',
               'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'va_nombre',
+                'id'   => 'va_apellidos',
                 'placeholder'=>'Ingrese su Apellido'
             ),
             'options' => array(
@@ -66,6 +66,7 @@ class UsuarioForm extends Form
            'options' => array(
                      'label' => 'Rol',
                      'value_options' => array(
+                          '' => 'selecccione..',
                              '1' => 'Administrador',
                              '2' => 'Editor',                   
                      ),
