@@ -24,7 +24,6 @@ echo $this->form()->openTag($form);
 </div><?php
 echo $this->formHidden($form->get('in_id'));
 
-
 ?><div class="span8"><?php
 ?><div class="control-group "><?php echo $this->formRow($form->get('va_nombre'));?><div class="control-group "><?php
 ?><div class="control-group "><?php echo $this->formRow($form->get('va_apellidos'));?><div class="control-group "><?php
@@ -35,3 +34,4 @@ echo $this->formHidden($form->get('in_id'));
 ?><div class="control-group "><?php echo $this->formSubmit($form->get('submit'));?><div class="control-group "><?php
 ?><div class="span10"><?php
 echo $this->form()->closeTag();  
+//echo $this->$form->get('va_contrasenia');

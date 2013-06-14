@@ -11,6 +11,8 @@ use Zend\Db\Adapter\Adapter;
 
 use Zend\Db\Adapter\Platform;
 
+
+
 class UsuarioTable
 {
     protected $tableGateway;
@@ -60,6 +62,10 @@ class UsuarioTable
         $resultSet = $this->tableGateway->select();
         return $resultSet;
     }
+    public function fetch(){
+        $resultSet = $this->tableGateway->select();
+        return $resultSet;
+    }
     public function fetchAll()
     {
        // $resultSet = $this->tableGateway->select();
@@ -73,8 +79,9 @@ class UsuarioTable
    
                 
         $selectString = $sql->getSqlStringForSqlObject($select);
+       
         $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-
+  
         return $resultSet;
     }
     
@@ -140,6 +147,7 @@ class UsuarioTable
         var_dump($returnArray);exit;
 
     }
+ 
     public function getUsuario($id)
     {
         $id  = (int) $id;
@@ -354,5 +362,19 @@ public function guardarUsuario(Usuario $usuario)
 
     }
 
+    
+    public function rolAll($adapter)
+    { $sql = new Sql($adapter);
+        $select = $sql->select()
+                 ->from('ta_rol');
+      $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+
+       $row = $results->toArray();
+        if (!$row) {
+            throw new \Exception("No existe registro con el parametro $id");
+        }
+        return $row;  
+    }
 
 }

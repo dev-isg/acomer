@@ -1,4 +1,4 @@
-<?php if ($this->pageCount): ?>
+<?php var_dump($this->pageCount); if ($this->pageCount): ?>
 <div class="paginationControl">
 <!-- Previous page link -->
 <?php if (isset($this->previous)): ?>
@@ -13,8 +13,8 @@
 <!-- Numbered page links -->
 <?php foreach ($this->pagesInRange as $page): ?>
   <?php if ($page != $this->current): ?>
-    <a href='/usuario/index?page=<?php echo $this->previous?>'>
-        <?php echo $page; ?>
+    <a href='/usuario/index?page=<?php echo $page; ?>'>
+        
     </a> |
   <?php else: ?>
     <?php echo $page; ?> |
