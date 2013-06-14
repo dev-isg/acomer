@@ -2,6 +2,8 @@
 namespace Usuario\Form;
 
 use Zend\Form\Form;
+use Usuario\Controller\IndexController;
+
 
 class UsuarioForm extends Form
 {
@@ -51,6 +53,9 @@ class UsuarioForm extends Form
                 'label' => 'Correo',
             ),
         ));
+        
+       // $echo = new IndexController();
+       //$echo->rolesAction();
         $this->add(array(
             'name' => 'Ta_rol_in_id',
             'type' => 'Select',
@@ -72,7 +77,7 @@ class UsuarioForm extends Form
      
         $this->add(array(
             'name' => 'va_contrasenia',
-            'type' => 'password',
+            'type' => 'Password',
              'attributes' => array(               
                 'class' => 'span10',
                 'id'   => 'va_contrasenia',
