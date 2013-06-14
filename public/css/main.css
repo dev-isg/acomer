@@ -121,7 +121,9 @@ label.valid {
 #map_canvas{
   display: none;
 }
-
+.ra{
+  padding: 0 10px;
+}
 
 
 
