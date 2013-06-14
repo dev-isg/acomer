@@ -24,48 +24,48 @@ $('.control-group').removeClass('success');
 var validar=function(elemento){
 $(elemento).validate({
 	    rules: {
-	      nombre: {
+	      va_nombre: {
 	          required: true
 	      },
-	      apellido: {
+	      va_apellidos: {
 	   	        required: true
 	      },
-	      rol :{
+	      Ta_rol_in_id :{
 	      required:true},
-	      email: {
+	      va_email: {
 	        required: true,
 	        email: true
 	      },
-	      pass:{
+	      va_contrasenia:{
                 required : true,
                 minlength:6             
             },
-          pass2:{
+        va_contrasenia2:{
                 required : true,
-                equalTo: "#pass",
+                equalTo: "#va_contrasenia",
                 minlength:6               
             }
 	    },
 	    messages:{
-            nombre: {
+            va_nombre: {
                 required:"Por favor ingresar el nombre"
             },
-            apellido:{
+            va_apellidos:{
                 required:"Por favor ingresar el apellido"
             },
-            email:{
+            va_email:{
                 required:"Por favor ingresa un Email Valido"
             },
-            pass: {
+            va_contrasenia: {
                 required : "Ingrese la clave",
                 minlength:"Ingresa un password de 6 caracteres a mas"
             },
-            pass2: {
+            va_contrasenia2: {
                 required : "Repita la clave",            
                 minlength:"Ingresa un password de 6 caracteres a mas",
                 equalTo : "Ingrese el mismo valor de Clave"
             },
-            rol :{
+            Ta_rol_in_id :{
             	required : "Por favor ingresar un rol"            		
             }
         },
@@ -112,19 +112,19 @@ $('#form_rol').validate({
  validar('#ingreso-form');
  validar('#modificar-form');
  
- $('#cerrar_insert_usuario').on('click', function(){
- 	cerrar_mod('#ins-usuario','#ingreso-form');
- });
+ // $('#cerrar_insert_usuario').on('click', function(){
+ // 	cerrar_mod('#ins-usuario','#ingreso-form');
+ // });
  
- $('#cerrar_update_usuario').on('click', function(){
- 	cerrar_mod('#mod-usuario','#modificar-form');
- });
+ // $('#cerrar_update_usuario').on('click', function(){
+ // 	cerrar_mod('#mod-usuario','#modificar-form');
+ // });
  $('#cerrar_rol').on('click', function(){
  	cerrar_mod('#ins-rol','#form_rol');
  });
- $('#cerrar_insert_rest').on('click', function(){
-  cerrar_mod('#ing-restaurante','#ingrest-form');
- });
+ // $('#cerrar_insert_rest').on('click', function(){
+ //  cerrar_mod('#ing-restaurante','#ingrest-form');
+ // });
 //json para rol
  $.getJSON('/usuario/index/jsonestado',function(data){
 		$.each(data,function(i,val){
