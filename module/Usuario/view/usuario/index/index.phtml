@@ -4,21 +4,20 @@
     <div class="span2">
     <div class="btn-group pull-right" data-toggle="buttons-radio">
     <button class="btn active">Todos</button>
-    <a href="href=" class="btn" <?php echo $this->basePath();?>/usuario/index/agregarusuario"">AGREGAR USUARIO</a>
+    <a  class="btn" href="<?php echo $this->basePath();?>/usuario/index/agregarusuario">AGREGAR USUARIO</a>
     </div>
     </div>
     <div class="span4">
     <form class="form-search" name='form_busqueda' action='<?php echo $this->basePath(); ?>/usuario/index' method ="post">
-    <div class="input-append">
-    <input type="text" class="span2">
+    <div class="input-append"> 
 
  <div class="span12"><a href="<?php echo $this->basePath();?>/usuario/index/agregarusuario">AGREGAR USUARIO</a></div>
 <form name='form_busqueda' action='<?php echo $this->basePath(); ?>/usuario/index' method ="post">
     <input type='text' name='texto'/>
-    <input type='radio' name='listado'  id='nom' value='va_nombre' checked/>Por nombre
+    <input type='radio' name='listado'  id='nom' value='va_nombre' checked/>Por nombre    
+    <button type="submit" class="btn">Search</button>
     <input type='radio' name='listado' id='dire1' value='1'/>Por Administrador
     <input type='radio' name='listado' id='dire2' value='2'/>Por Editor
-    <button type="submit" class="btn">Search</button>
     </div>
     </form>
     </div>
