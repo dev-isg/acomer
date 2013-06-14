@@ -25,17 +25,30 @@ class IndexController extends AbstractActionController
 
             $lista = $this->getUsuarioTable()->fetchAll();
         }
-         $pag = $this->params()->fromQuery('page');
+         $pag = $this->params()->fromQuery('page')?(int)$this->params()->fromQuery('page'):1;
       // var_dump($pag);exit;
+    // $lista = $this->getUsuarioTable()->fetch();
+         $lista->buffer();
+         $lista->next();
+         //$lista->count();
          $iteratorAdapter    = new \Zend\Paginator\Adapter\Iterator($lista);
+         
         $paginator          = new \Zend\Paginator\Paginator($iteratorAdapter);
-        $paginator->setCurrentPageNumber($pag,1);
-        $paginator->setItemCountPerPage(5);
-         $paginator ->setPageRange(4);
+        $paginator->setCurrentPageNumber($pag)->setItemCountPerPage(4)
+                        ->setPageRange(3);
+       
+//        $pagingInfoCount = $paginator->getPages()->pageCount;
+//        $pagingInfoRange = $paginator->getPages()->pagesInRange;
+//        var_dump($paginator->getPages());exit;
+       // $pagingInfo = $paginator->getPages();
        // $paginator = new Zend\Paginator\Paginator($lista);
 
         return new ViewModel(array(
-                    'usuarios' => $lista,'paginator' => $paginator,//'paginador'=>$paginator
+                    'usuarios' => $lista,
+                    'paginator' => $paginator,
+//                    'pagingInfo'=> $pagingInfo
+//                    'pageCount'=>$pagingInfoCount,
+//                    'pagesInRange'=>$pagingInfoRange
                 ));
 //        retorna la vista nueva forma oo
 //        $this->view->data='hola mundo';
@@ -79,6 +92,7 @@ class IndexController extends AbstractActionController
         $form  = new UsuarioForm();
         $form->bind($usuario);
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
+       // $form->get('password')->setAttribute('renderPassword', true);
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setInputFilter($usuario->getInputFilter());

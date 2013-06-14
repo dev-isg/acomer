@@ -60,6 +60,10 @@ class UsuarioTable
         $resultSet = $this->tableGateway->select();
         return $resultSet;
     }
+    public function fetch(){
+        $resultSet = $this->tableGateway->select();
+        return $resultSet;
+    }
     public function fetchAll()
     {
        // $resultSet = $this->tableGateway->select();
@@ -73,8 +77,9 @@ class UsuarioTable
    
                 
         $selectString = $sql->getSqlStringForSqlObject($select);
+       
         $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-
+  
         return $resultSet;
     }
     
