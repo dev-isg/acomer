@@ -14,11 +14,15 @@
  <div class="span12"><a href="<?php echo $this->basePath();?>/usuario/index/agregarusuario">AGREGAR USUARIO</a></div>
 <form name='form_busqueda'class="form-search" action='<?php echo $this->basePath(); ?>/usuario/index' method ="post">
     <input type='text' name='texto'/>
-    <input type='radio' name='listado'  id='nom' value='va_nombre' checked/>Por nombre    
+      
      <div class="control-group">
-    <input type='radio' class="ra"name='listado' id='dire1' value='1'/>Por Administrador
-    <input type='radio' name='listado' id='dire2' value='2'/>Por Editor
-    <input type="submit" class="btn" value="Buscar">
+        <label for="">Por nombre </label>
+     <input type='radio' name='listado'  id='nom' value='va_nombre' checked/>
+     <label for="">Por Administrador</label>    
+    <input type='radio' name='listado' id='dire1' value='1'/>
+    <label for="">Por Editor</label>
+    <input type='radio' name='listado' id='dire2' value='2'/>
+    <input type="submit" class="btn" name="submit" value="Buscar">
     </div>
     </div>
     </form>
