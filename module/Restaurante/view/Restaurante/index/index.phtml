@@ -1,5 +1,6 @@
 
-
+<a  class="btn" href="<?php echo $this->basePath();?>/restaurante/index/agregarrestaurante">AGREGAR RESTAURANTE</a>
+   
 <table class="table table-bordered table-hover">
     <thead>  
 
@@ -8,6 +9,7 @@
             <th>N°</th>
             <th>Status</th>
             <th>Nombre</th>
+            <th>comida</th>
             
         </tr>
     </thead>
@@ -18,6 +20,7 @@
              <td><?php echo $this->escapeHtml($usuario->va_razon_social); ?></td>
               <td><?php echo $this->escapeHtml($usuario->va_web); ?></td>
                <td><?php echo $this->escapeHtml($usuario->va_ruc); ?></td>
+               <td><?php echo $this->escapeHtml($usuario->Ta_tipo_comida_in_id); ?></td>
              </tr>
 
 <?php endforeach; ?>

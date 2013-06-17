@@ -10,65 +10,77 @@ class RestauranteForm extends Form
     public function __construct($name = null)
     {
         // we want to ignore the name passed
-        parent::__construct('usuario');
+        parent::__construct('restaurante');
         $this->setAttribute('method', 'post');
        $this->add(array(
             'name' => 'in_id',
             'type' => 'Hidden',
         ));
         $this->add(array(
-            'name' => 'va_nombre',
+            'name' => 'name_rest',
             'type' => 'Text',
           
             'options' => array(
-                'label' => 'Nombre',          
+                'label' => 'Nombre del Restaurante',          
             ),
             'attributes' => array(               
-                'class' => 'span10',
-                'id'   => 'va_nombre',
-                'placeholder'=>'Ingrese su nombre'
+                'class' => 'span10  ',
+                'id'   => 'name_rest',
+                'placeholder'=>'Ingrese nombre del restaurante'
             ),
         ));
         $this->add(array(
-            'name' => 'va_apellidos',
+            'name' => 'raz_rest',
             'type' => 'Text',
               'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'va_apellidos',
-                'placeholder'=>'Ingrese su Apellido'
+                'id'   => 'raz_rest',
+                'placeholder'=>'Ingrese la Razon Social'
             ),
             'options' => array(
-                'label' => 'Apellidos',
+                'label' => 'Razon Social',
             ),
         ));
         $this->add(array(
-            'name' => 'va_email',
-            'type' => 'Email',
+            'name' => 'web_rest',
+            'type' => 'Text',
             'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'va_email',
-                'placeholder'=>'Ingrese su Correo'
+                'id'   => 'web_rest',
+                'placeholder'=>'Ingrese su página Web'
             ),
             'options' => array(
-                'label' => 'Correo',
+                'label' => 'Página Web',
+            ),
+        ));
+        $this->add(array(
+            'name' => 'va_imagen',
+            'type' => 'File',
+              'attributes' => array(               
+                'class' => '',
+                'id'   => '',
+                'placeholder'=>'Ingrese su página Web'
+            ),
+            'options' => array(
+                'label' => 'Imagen : ',
             ),
         ));
         
        // $echo = new IndexController();
        //$echo->rolesAction();
         $this->add(array(
-            'name' => 'Ta_rol_in_id',
+            'name' => 'esp_rol',
             'type' => 'Select',
              'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'Ta_rol_in_id'
+                'id'   => 'esp_rol'
             ),
            'options' => array(
-                     'label' => 'Rol',
+                     'label' => 'Especialidad',
                      'value_options' => array(
-                          '' => 'selecccione..',
-                             '1' => 'Administrador',
-                             '2' => 'Editor',                   
+                          '' => 'selecccione :',
+                             '1' => 'Criolla',
+                             '2' => 'Marina',                   
                      ),
              )
         ));
@@ -76,31 +88,36 @@ class RestauranteForm extends Form
         
   
      
+        
         $this->add(array(
-            'name' => 'va_contrasenia',
-            'type' => 'Password',
+            'name' => 'ruc_rest',
+            'type' => 'Text',
              'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'va_contrasenia',
-                 'placeholder'=>'Ingrese su Password'
+                'id'   => 'ruc_rest',
+                 'placeholder'=>'Repita su Ruc'
             ),
             'options' => array(
-                'label' => 'Password',
-            ),
-        ));
-        $this->add(array(
-            'name' => 'va_contrasenia2',
-            'type' => 'password',
-             'attributes' => array(               
-                'class' => 'span10',
-                'id'   => 'va_contrasenia',
-                 'placeholder'=>'Repita su Password'
-            ),
-            'options' => array(
-                'label' => 'Repita su Password',
+                'label' => 'Ruc',
             ),
         ));
         
+        $this->add(array(
+            'name' => 'va_modalidad',
+            'type' => 'MultiCheckbox',
+             'attributes' => array(               
+                'class' => 'checkbox inline',
+                'id'   => 'check-mod',
+                 'placeholder'=>'Ingrese su modalidad de pago'
+            ),
+            'options' => array(
+                     'label' => 'Modalidad de Pago?',
+                     'value_options' => array(
+                             '1' => 'visa',
+                             '2' => 'mastercard',                
+                     ),
+             )
+        ));
 
         $this->add(array(
             'name' => 'submit',

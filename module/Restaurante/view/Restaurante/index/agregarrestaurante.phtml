@@ -1,0 +1,33 @@
+<?php
+
+
+$title = 'Agregar nuevo restaurante';
+$this->headTitle($title);
+?>
+
+
+<?php
+$form = $this->form;
+//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
+
+$form->setAttributes(array(
+    'action' => $this->url.'/usuario/index/agregarusuario',
+    'method' => 'post'
+));
+
+?><div class=""><?php
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?><h3><?php echo $this->escapeHtml($title); ?></h3>
+<?php
+echo $this->formHidden($form->get('in_id'));
+?><div class="control-group "><?php echo $this->formRow($form->get('name_rest'));?></div><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('raz_rest'));?></div ><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('web_rest'));?></div><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('va_imagen'));?></div><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('ruc_rest'));?></div><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('esp_rol'));?></div><?php
+?><div class="control-group"><?php echo $this->formRow($form->get('va_modalidad'));?></div><?php
+?><div class="control-group "><?php echo $this->formSubmit($form->get('submit'));?></div><?php
+echo $this->form()->closeTag();?> </div>
