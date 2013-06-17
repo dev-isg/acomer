@@ -11,12 +11,15 @@ namespace Restaurant\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Restaurant\Model\Restaurant; 
 
 class IndexController extends AbstractActionController
 {
     protected $restaurantTable;
     public function indexAction()
     {
+        
+     
         return new ViewModel(array(
             'restaurantes' => $this->getRestaurantTable()->fetchAll(),
         ));
@@ -24,9 +27,8 @@ class IndexController extends AbstractActionController
 
     public function fooAction()
     {
-        // This shows the :controller and :action parameters in default route
-        // are working when you browse to /module-specific-root/skeleton/foo
-        return array();
+       echo "ccc"
+;exit;        return array();
     }
     
     public function getRestaurantTable()
@@ -34,7 +36,13 @@ class IndexController extends AbstractActionController
         if (!$this->restaurantTable) {
             $sm = $this->getServiceLocator();
             $this->restaurantTable = $sm->get('Restaurant\Model\RestaurantTable');
-        }
+            echo "sss";
+        }  else {
+            
+         {
+            
+            echo "sss";
+        }}
         return $this->restaurantTable;
     }
 }
