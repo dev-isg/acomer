@@ -27,27 +27,29 @@ class IndexController extends AbstractActionController
 
             $lista = $this->getUsuarioTable()->fetchAll();
         }
-         $pag = $this->params()->fromQuery('page')?(int)$this->params()->fromQuery('page'):1;
+//         $pag = $this->params()->fromQuery('page')?(int)$this->params()->fromQuery('page'):1;
+//         
       // var_dump($pag);exit;
     // $lista = $this->getUsuarioTable()->fetch();
-         $lista->buffer();
-         $lista->next();
-         //$lista->count();
-         $iteratorAdapter    = new \Zend\Paginator\Adapter\Iterator($lista);
-         
-        $paginator          = new \Zend\Paginator\Paginator($iteratorAdapter);
-        $paginator->setCurrentPageNumber($pag)->setItemCountPerPage(4)
-                        ->setPageRange(3);
+    
+//         $lista->buffer();
+//         $lista->next();
+//
+//         $iteratorAdapter    = new \Zend\Paginator\Adapter\Iterator($lista);
+//         
+//        $paginator          = new \Zend\Paginator\Paginator($iteratorAdapter);
+//        $paginator->setCurrentPageNumber($pag)->setItemCountPerPage(4)
+//                        ->setPageRange(3);
        
 //        $pagingInfoCount = $paginator->getPages()->pageCount;
 //        $pagingInfoRange = $paginator->getPages()->pagesInRange;
 //        var_dump($paginator->getPages());exit;
-       // $pagingInfo = $paginator->getPages();
-       // $paginator = new Zend\Paginator\Paginator($lista);
+//        $pagingInfo = $paginator->getPages();
+//        $paginator = new Zend\Paginator\Paginator($lista);
 
         return new ViewModel(array(
                     'usuarios' => $lista,
-                    'paginator' => $paginator,
+//                    'paginator' => $paginator,
 //                    'pagingInfo'=> $pagingInfo
 //                    'pageCount'=>$pagingInfoCount,
 //                    'pagesInRange'=>$pagingInfoRange
