@@ -2,7 +2,7 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Restaurant\Controller\Skeleton' => 'Restaurant\Controller\SkeletonController',
+            'Restaurant\Controller\Index' => 'Restaurant\Controller\IndexController',
         ),
     ),
     'router' => array(
