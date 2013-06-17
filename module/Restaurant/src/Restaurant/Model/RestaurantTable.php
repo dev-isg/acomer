@@ -15,6 +15,7 @@ class RestaurantTable
     public function fetchAll()
     {
         $resultSet = $this->tableGateway->select();
+        
         return $resultSet;
     }
 

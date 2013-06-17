@@ -17,7 +17,9 @@ class IndexController extends AbstractActionController
     protected $restaurantTable;
     public function indexAction()
     {
-        return new ViewModel();
+        return new ViewModel(array(
+            'restaurantes' => $this->getRestaurantTable()->fetchAll(),
+        ));
     }
 
     public function fooAction()

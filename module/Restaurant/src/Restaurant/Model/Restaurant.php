@@ -5,7 +5,7 @@ use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
 
 
-class Usuario
+class Restaurant
 {
     public $in_id;
     public $va_nombre;
