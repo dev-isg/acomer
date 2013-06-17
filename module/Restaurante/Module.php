@@ -7,13 +7,18 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Restaurant;
-use Restaurant\Model\Restaurant;
-use Restaurant\Model\RestaurantTable;
+namespace Restaurante;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+
+
+use Restaurante\Model\Restaurante;
+use Restaurante\Model\RestauranteTable;
+use Zend\Db\Adapter\Driver\ResultInterface;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 
 class Module implements AutoloaderProviderInterface
 {
@@ -31,19 +36,25 @@ class Module implements AutoloaderProviderInterface
             ),
         );
     }
-        public function getServiceConfig()
+
+    public function getConfig()
+    {
+        return include __DIR__ . '/config/module.config.php';
+    }
+//inicio
+    public function getServiceConfig()
     {
         return array(
             'factories' => array(
-                'Restaurant\Model\RestaurantTable' =>  function($sm) {
-                    $tableGateway = $sm->get('RestaurantTableGateway');
-                    $table = new RestaurantTable($tableGateway);
+                'Restaurante\Model\RestauranteTable' =>  function($sm) {
+                    $tableGateway = $sm->get('RestauranteTableGateway');
+                    $table = new RestauranteTable($tableGateway);
                     return $table;
                 },
-                'RestaurantTableGateway' => function ($sm) {
+                'RestauranteTableGateway' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Restaurant());
+                    $resultSetPrototype->setArrayObjectPrototype(new Restaurante());
                     return new TableGateway('ta_restaurante', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
@@ -51,11 +62,8 @@ class Module implements AutoloaderProviderInterface
     }
 
 
-    public function getConfig()
-    {
-        return include __DIR__ . '/config/module.config.php';
-    }
 
+    //fin
     public function onBootstrap(MvcEvent $e)
     {
         // You may not need to do this if you're doing it elsewhere in your

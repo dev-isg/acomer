@@ -1,0 +1,30 @@
+<?php
+
+
+$title = 'Agregar nuevo usuario';
+$this->headTitle($title);
+?>
+
+
+<?php
+$form = $this->form;
+//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
+
+$form->setAttributes(array(
+    'action' => $this->url.'/usuario/index/agregarusuario',
+    'method' => 'post'
+));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?><h3><?php echo $this->escapeHtml($title); ?></h3>
+<?php
+echo $this->formHidden($form->get('in_id'));
+?><div class="control-group "><?php echo $this->formRow($form->get('va_nombre'));?></div><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('va_apellidos'));?></div ><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('va_email'));?></div><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('va_contrasenia'));?></div><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('va_contrasenia2'));?></div><?php
+?><div class="control-group "><?php echo $this->formRow($form->get('Ta_rol_in_id'));?></div><?php
+?><div class="control-group "><?php echo $this->formSubmit($form->get('submit'));?></div><?php
+echo $this->form()->closeTag(); 

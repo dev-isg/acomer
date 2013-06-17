@@ -295,7 +295,6 @@ class IndexController extends AbstractActionController
     }
 
 
-    
     public function rolesAction()
     { 
         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');

@@ -1,0 +1,155 @@
+<?php
+namespace Restaurante\Model;
+
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+
+class Restaurante
+{
+
+    
+   public $in_id;
+    public $va_nombre;
+    public $va_razon_social;
+    public $va_web;
+    public $va_imagen;
+    public $va_ruc;
+    public $Ta_tipo_comida_in_id;
+    protected $inputFilter;
+
+    
+    
+    public function exchangeArray($data)
+    {
+        $this->in_id     = (!empty($data['in_id'])) ? $data['in_id'] : null;
+        $this->va_nombre = (!empty($data['va_nombre'])) ? $data['va_nombre'] : null;
+       $this->va_razon_social = (!empty($data['va_razon_social'])) ? $data['va_razon_social'] : null;
+        $this->va_web    = (!empty($data['va_web'])) ? $data['va_web'] : null;
+        $this->va_imagen = (!empty($data['va_imagen'])) ? $data['va_imagen'] : null;
+        $this->va_ruc    = (!empty($data['va_ruc'])) ? $data['va_ruc'] : null;
+        $this->Ta_tipo_comida_in_id = (!empty($data['Ta_tipo_comida_in_id'])) ? $data['Ta_tipo_comida_in_id'] : null;
+//$this->direccion  = (!empty($data['direccion'])) ? $data['direccion'] : null;
+    }
+// Add content to these methods:
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new \Exception("Not used");
+    }
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
+
+    public function getInputFilter()
+    {
+        if (!$this->inputFilter) {
+            $inputFilter = new InputFilter();
+            $factory     = new InputFactory();
+
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'in_id',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'Int'),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_nombre',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 100,
+                        ),
+                    ),
+                ),
+            )));
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_email',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 100,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_contrasenia',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 6,
+                            'max'      =>20 ,
+                        ),
+                    ),
+                ),
+            )));
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_contrasenia2',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 6,
+                            'max'      =>20 ,
+                        ),
+                    ),
+                ),
+            )));
+   $inputFilter->add($factory->createInput(array(
+                'name'     => 'Ta_rol_in_id',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 100,
+                        ),
+                    ),
+                ),
+            )));
+            $this->inputFilter = $inputFilter;
+        }
+
+        return $this->inputFilter;
+    }
+}
