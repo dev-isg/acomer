@@ -31,3 +31,50 @@ echo $this->formHidden($form->get('in_id'));
 ?><div class="control-group"><?php echo $this->formRow($form->get('va_modalidad'));?></div><?php
 ?><div class="control-group "><?php echo $this->formSubmit($form->get('submit'));?></div><?php
 echo $this->form()->closeTag();?> </div>
+ <div class="control-group span4" >
+                              <div id="contenedorImagen">
+                                     
+                              <img id="fotografia" class="img-polaroid" src="img/nofoto.jpg">
+                              </br> 
+                              <button class="btn btn-info" id="addImage" >Cambiar Imagen</button>                           
+                            </div>
+                           
+                               <div class="loaderAjax" id="loaderAjax">
+                              <img src="img/default-loader.gif">
+                                <span>Publicando Logo...</span>
+                            </div>   
+                  </div>   
+<script>
+	$(document).ready(function(){
+		   var btn_firma = $('#addImage'), interval;    
+      new AjaxUpload('#addImage', {
+        action: 'includes/uploadFile.php',onSubmit : function(file , ext){
+          if (! (ext && /^(jpg|png)$/.test(ext))){
+            alert('Sólo se permiten Imagenes .jpg o .png');
+            return false;
+          } else {
+            $('#loaderAjax').show();
+            btn_firma.text('Espere por favor');
+            this.disable();
+          }
+        },
+        onComplete: function(file, response){
+     
+          btn_firma.text('Cambiar Imagen');          
+          respuesta = $.parseJSON(response);
+          if(respuesta.respuesta == 'done'){
+            $('#fotografia').removeAttr('scr');
+            $('#fotografia').attr('src','img/' + respuesta.fileName);
+            $('#loaderAjax').show();
+          }
+          else{
+            alert(respuesta.mensaje);
+          }
+            
+          $('#loaderAjax').hide();  
+          this.enable();  
+        }
+    });
+	});
+
+</script>
