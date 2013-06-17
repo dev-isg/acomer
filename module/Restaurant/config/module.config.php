@@ -35,6 +35,8 @@ return array(
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
                             'defaults' => array(
+                                'controller' => 'Restaurant\Controllers\Index',
+                                'action'     => 'index',
                             ),
                         ),
                     ),

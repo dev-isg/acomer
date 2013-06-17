@@ -1,27 +1,19 @@
 <?php
-
-
 $title = 'Modificar  usuario';
 $this->headTitle($title);
 ?>
-
-
 <?php
 $form = $this->form;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
-
 $form->setAttributes(array(
     'action' => $this->url.'/usuario/index/editarusuario/'.$this->in_id,
     'method' => 'post',
     'in_id'   =>$this->in_id,
 ));
 $form->prepare();
-
 echo $this->form()->openTag($form);
-?><div class="modal-header">
-<a id="cerrar_update_usuario" class="close">×</a>
-<h3><?php echo $this->escapeHtml($title); ?></h3>
-</div><?php
+?><h3><?php echo $this->escapeHtml($title); ?></h3>
+<?php
 echo $this->formHidden($form->get('in_id'));
 ?><div class="control-group "><?php echo $this->formRow($form->get('va_nombre'));?></div><?php
 ?><div class="control-group "><?php echo $this->formRow($form->get('va_apellidos'));?></div ><?php

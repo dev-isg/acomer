@@ -1,3 +1,21 @@
 <strong>Module:</strong>        ZendSkeletonModule &raquo;
 <strong>Controller:</strong>    Skeleton &raquo;
-<strong>Action:</strong>        index
+<strong>Action:</strong>        foo
+<h1>dddddddddddddd</h1>
+
+<table class="table">
+<tr>
+    <th>Title</th>
+    <th>Artist</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach ($this->restaurantes as $album) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($album->va_razon_social);?></td>
+    <td><?php echo $this->escapeHtml($album->va_web);?></td>
+    <td>
+       
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>

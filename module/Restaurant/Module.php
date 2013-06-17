@@ -8,10 +8,16 @@
  */
 
 namespace Restaurant;
+use Restaurant\Model\Restaurant;
+use Restaurant\Model\RestaurantTable;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+
+use Zend\Db\Adapter\Driver\ResultInterface;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 
 class Module implements AutoloaderProviderInterface
 {
@@ -26,6 +32,24 @@ class Module implements AutoloaderProviderInterface
 		    // if we're in a namespace deeper than one level we need to fix the \ in the path
                     __NAMESPACE__ => __DIR__ . '/src/' . str_replace('\\', '/' , __NAMESPACE__),
                 ),
+            ),
+        );
+    }
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'Restaurant\Model\RestaurantTable' =>  function($sm) {
+                    $tableGateway = $sm->get('RestaurantTableGateway');
+                    $table = new RestaurantTable($tableGateway);
+                    return $table;
+                },
+                'RestaurantTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Restaurant());
+                    return new TableGateway('ta_restaurante', $dbAdapter, null, $resultSetPrototype);
+                },
             ),
         );
     }
