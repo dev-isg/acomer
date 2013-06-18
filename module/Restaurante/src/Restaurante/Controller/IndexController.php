@@ -15,6 +15,7 @@ class IndexController extends AbstractActionController
   
     public function indexAction() 
             {
+        $var=$this->getRestauranteTable()->buscar();
         return new ViewModel(array(
             'restaurante' => $this->getRestauranteTable()->fetchAll(),
         ));
@@ -52,6 +53,7 @@ class IndexController extends AbstractActionController
       
         return array('form' => $form);
     }
+    
    
 
 

@@ -60,6 +60,7 @@ class Module implements AutoloaderProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Restaurante());
                     return new TableGateway('ta_restaurante', $dbAdapter, null, $resultSetPrototype);
                 },
+         
             ),
         );
     }
