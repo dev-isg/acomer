@@ -13,7 +13,7 @@ class IndexController extends AbstractActionController
 {
   protected $restauranteTable;
   
-<<<<<<< HEAD
+
    
      public function indexAction() {
         $filtrar = $this->params()->fromPost('submit'); //$this->_request->getParams();
@@ -27,11 +27,11 @@ class IndexController extends AbstractActionController
 
             $lista = $this->getRestauranteTable()->fetchAll();
         }
-=======
-    public function indexAction() 
-            {
-        $var=$this->getRestauranteTable()->buscar();
->>>>>>> 059c92a22f6764bdb9907c38ddfd1efeb7f91818
+
+//    public function indexAction() 
+//            {
+//        $var=$this->getRestauranteTable()->buscar();
+
         return new ViewModel(array(
                     'restaurante' => $lista,
          ));
@@ -107,19 +107,14 @@ class IndexController extends AbstractActionController
         );
         
     }
-<<<<<<< HEAD
-            public function cambiaestadoAction() {
-                   $id = $this->params()->fromQuery('id');
-                   $estado = $this->params()->fromQuery('estado');
-                   $this->getRestauranteTable()->estadoRestaurante((int) $id, $estado);
-                   $this->redirect()->toUrl('/restaurante/index');
-               }
-               
-=======
     
-   
 
+//            public function cambiaestadoAction() {
+//                   $id = $this->params()->fromQuery('id');
+//                   $estado = $this->params()->fromQuery('estado');
+//                   $this->getRestauranteTable()->estadoRestaurante((int) $id, $estado);
+//                   $this->redirect()->toUrl('/restaurante/index');
+//               }
+               
 
-
->>>>>>> 059c92a22f6764bdb9907c38ddfd1efeb7f91818
 }
