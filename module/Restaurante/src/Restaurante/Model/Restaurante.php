@@ -10,12 +10,13 @@ class Restaurante
 {
 
     
-   public $in_id;
+    public $in_id;
     public $va_nombre;
     public $va_razon_social;
     public $va_web;
     public $va_imagen;
     public $va_ruc;
+    public $en_estado;
     public $Ta_tipo_comida_in_id;
     protected $inputFilter;
 
@@ -29,6 +30,7 @@ class Restaurante
         $this->va_web    = (!empty($data['va_web'])) ? $data['va_web'] : null;
         $this->va_imagen = (!empty($data['va_imagen'])) ? $data['va_imagen'] : null;
         $this->va_ruc    = (!empty($data['va_ruc'])) ? $data['va_ruc'] : null;
+         $this->en_estado    = (!empty($data['en_estado'])) ? $data['en_estado'] : null;
         $this->Ta_tipo_comida_in_id = (!empty($data['Ta_tipo_comida_in_id'])) ? $data['Ta_tipo_comida_in_id'] : null;
 //$this->direccion  = (!empty($data['direccion'])) ? $data['direccion'] : null;
     }
@@ -68,14 +70,14 @@ class Restaurante
                         'name'    => 'StringLength',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'min'      => 1,
+                            'min'      => 8,
                             'max'      => 100,
                         ),
                     ),
                 ),
             )));
             $inputFilter->add($factory->createInput(array(
-                'name'     => 'va_email',
+                'name'     => 'va_razon_social',
                 'required' => true,
                 'filters'  => array(
                     array('name' => 'StripTags'),
@@ -86,16 +88,84 @@ class Restaurante
                         'name'    => 'StringLength',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'min'      => 1,
+                            'min'      => 10,
                             'max'      => 100,
                         ),
                     ),
                 ),
             )));
+$inputFilter->add($factory->createInput(array(
+                'name'     => 'va_web',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 10,
+                            'max'      => 100,
+                        ),
+                    ),
+                ),
+            )));
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_imagen',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 6,
+                            'max'      =>20 ,
+                        ),
+                    ),
+                ),
+            )));
+             $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_ruc',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 10,
+                            'max'      =>20 ,
+                        ),
+                    ),
+                ),
+            )));
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'Ta_tipo_comida_in_id',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
 
-            $inputFilter->add($factory->createInput(array(
-                'name'     => 'va_contrasenia',
-                'required' => true,
+                    ),
+                ),
+            )));
+   
+    $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_modalidad',
+                'required' => false,
                 'filters'  => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
@@ -103,50 +173,15 @@ class Restaurante
                 'validators' => array(
                     array(
                         'name'    => 'StringLength',
-                        'options' => array(
+                        /*'options' => array(
                             'encoding' => 'UTF-8',
-                            'min'      => 6,
-                            'max'      =>20 ,
-                        ),
+                            'min'      => 10,
+                            'max'      => 12,
+                        ),*/
                     ),
                 ),
             )));
-            $inputFilter->add($factory->createInput(array(
-                'name'     => 'va_contrasenia2',
-                'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-                    array(
-                        'name'    => 'StringLength',
-                        'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min'      => 6,
-                            'max'      =>20 ,
-                        ),
-                    ),
-                ),
-            )));
-   $inputFilter->add($factory->createInput(array(
-                'name'     => 'Ta_rol_in_id',
-                'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-                    array(
-                        'name'    => 'StringLength',
-                        'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min'      => 1,
-                            'max'      => 100,
-                        ),
-                    ),
-                ),
-            )));
+    
             $this->inputFilter = $inputFilter;
         }
 

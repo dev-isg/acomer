@@ -4,19 +4,16 @@
 $title = 'Agregar nuevo restaurante';
 $this->headTitle($title);
 ?>
-
-
 <?php
 $form = $this->form;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
-
 $form->setAttributes(array(
-    'action' => $this->url.'/restaurante/index/agregarrestaurante',
-    'method' => 'post'
+    'action' => $this->url.'/restaurante/index/editarrestaurante/'.$this->in_id,
+    'method' => 'post',
+    'in_id'   =>$this->in_id,
 ));
-
-?><div class=""><?php
 $form->prepare();
+
 
 echo $this->form()->openTag($form);
 ?><h3><?php echo $this->escapeHtml($title); ?></h3>

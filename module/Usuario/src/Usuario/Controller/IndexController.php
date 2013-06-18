@@ -27,36 +27,10 @@ class IndexController extends AbstractActionController
 
             $lista = $this->getUsuarioTable()->fetchAll();
         }
-//         $pag = $this->params()->fromQuery('page')?(int)$this->params()->fromQuery('page'):1;
-//         
-      // var_dump($pag);exit;
-    // $lista = $this->getUsuarioTable()->fetch();
-    
-//         $lista->buffer();
-//         $lista->next();
-//
-//         $iteratorAdapter    = new \Zend\Paginator\Adapter\Iterator($lista);
-//         
-//        $paginator          = new \Zend\Paginator\Paginator($iteratorAdapter);
-//        $paginator->setCurrentPageNumber($pag)->setItemCountPerPage(4)
-//                        ->setPageRange(3);
-       
-//        $pagingInfoCount = $paginator->getPages()->pageCount;
-//        $pagingInfoRange = $paginator->getPages()->pagesInRange;
-//        var_dump($paginator->getPages());exit;
-//        $pagingInfo = $paginator->getPages();
-//        $paginator = new Zend\Paginator\Paginator($lista);
-
-        return new ViewModel(array(
+ return new ViewModel(array(
                     'usuarios' => $lista,
-//                    'paginator' => $paginator,
-//                    'pagingInfo'=> $pagingInfo
-//                    'pageCount'=>$pagingInfoCount,
-//                    'pagesInRange'=>$pagingInfoRange
                 ));
-//        retorna la vista nueva forma oo
-//        $this->view->data='hola mundo';
-//       $val=$this->getUsuarioTable()->fetchAll();
+
     }
    public function agregarusuarioAction()
     {
@@ -120,31 +94,7 @@ class IndexController extends AbstractActionController
                 }
             }
         }
-       /* if($this->getRequest()->isPost())
-        {
-         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $adapter = $this->dbAdapter;
-        $id =(int)$this->params()->fromRoute('in_id',0);
-            // var_dump($id);exit;
-        /* $data = $this->request->getPost();
-         
-         $apellido=$data["va_apellidos"];
-         $nombre=$data["va_nombre"];
-         $pas=$data["va_contrasenia"];
-         $email=$data["va_email"];
-         $rol=$data["Ta_rol_in_id"];
-            $valore = array(
-                    'va_nombre'  => $nombre,
-                   'va_apellidos'  => $apellido,
-                   'va_email'      => $email,
-                   'va_contrasenia'=> $pas,
-                   'Ta_rol_in_id'  => $rol   
-            );
-         $u = new UsuarioTable($adapter);
-          $u->updateUsuario($id,$valore);
-        $this->redirect()->toUrl('/usuario/index');*/
-        
-       /* }*/
+
      return array(
             'in_id' => $id,
             'form' => $form,
