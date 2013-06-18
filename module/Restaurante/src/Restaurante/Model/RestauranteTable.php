@@ -1,6 +1,8 @@
 <?php
 namespace Restaurante\Model;
 
+
+
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
@@ -75,14 +77,12 @@ class RestauranteTable
            $sql = new Sql($adapter);
         
            if($comida=='' and $estado == ''){
-
              $select = $sql->select()
             ->from(array('f' => 'ta_restaurante')) 
             ->join(array('b' => 'ta_tipo_comida'),'f.Ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
            ->where(array('f.va_nombre'=>$datos));
            }
            if($datos=='' and $estado == ''){
-
              $select = $sql->select()
             ->from(array('f' => 'ta_restaurante')) 
             ->join(array('b' => 'ta_tipo_comida'),'f.Ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
@@ -96,7 +96,6 @@ class RestauranteTable
            ->where(array('f.en_estado'=>$estado));
            }
             if($datos=='' and $comida != '' and $estado != '' ){
-
              $select = $sql->select()
             ->from(array('f' => 'ta_restaurante')) 
             ->join(array('b' => 'ta_tipo_comida'),'f.Ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
@@ -109,14 +108,9 @@ class RestauranteTable
          if (!$rowset) {
             throw new \Exception("No hay data");
         }
-       
-      
         return $rowset;
     }
 
-      
-       
- 
         public function estadoRestaurante($id,$estado)
                 {
                         $data = array(
@@ -158,6 +152,21 @@ class RestauranteTable
         return $results;
     }
     
-    
+   public function rolA($adapter)
+    { $sql = new Sql($adapter);
+        $select = $sql->select()
+                 ->from('ta_cliente');
+      $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
 
+       $row = $results->toArray();
+        if (!$row) {
+            throw new \Exception("No existe registro con el parametro $id");
+        }
+        return $row;  
+    }
+
+    
+    
+    
 }

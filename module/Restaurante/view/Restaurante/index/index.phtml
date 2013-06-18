@@ -13,8 +13,11 @@
    POR TIPO :
    <SELECT NAME="comida" SIZE="1">
    <OPTION VALUE="">seleccione:</OPTION>
-   <OPTION VALUE="1">criolla</OPTION>
-   <OPTION VALUE="2">marina</OPTION>
+      <?php 
+    foreach ($this->comida as $comida) :
+        ?>
+ <OPTION VALUE="<?php echo $comida['in_id']; ?>"><?php echo $comida['va_nombre_tipo']; ?></OPTION>
+<?php endforeach; ?>
    </SELECT>
    </label>
    <label class="ra radio">    
@@ -50,6 +53,7 @@
             <th>Operaciones</th>
         </tr>
     </thead>
+ 
 
     <?php $count = 1;
     foreach ($this->restaurante  as $usuario) :// foreach ($this->paginator as $usuario) :

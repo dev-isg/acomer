@@ -6,16 +6,34 @@ use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
 use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
+use Zend\Db\Sql\Sql;
 use Restaurante\Model\Restaurante;        
 use Restaurante\Form\RestauranteForm;       
 use Restaurante\Model\RestauranteTable;  
+use Zend\Db\Adapter\Adapter;
+
 class IndexController extends AbstractActionController
 {
   protected $restauranteTable;
+  public $dbAdapter;
   
+    public function roleAction()
+    { 
+       
+        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+            ->from('ta_tipo_comida');
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            return $results;
+           
+    }
 
-   
      public function indexAction() {
+        
+        $u = $this->roleAction();
         $filtrar = $this->params()->fromPost('submit'); //$this->_request->getParams();
         $datos = $this->params()->fromPost('texto');
         $comida = $this->params()->fromPost('comida');
@@ -27,15 +45,11 @@ class IndexController extends AbstractActionController
 
             $lista = $this->getRestauranteTable()->fetchAll();
         }
-
-//    public function indexAction() 
-//            {
-//        $var=$this->getRestauranteTable()->buscar();
-
-        return new ViewModel(array(
-                    'restaurante' => $lista,
-         ));
-
+        return array(
+          'restaurante' => $lista,
+            'comida' => $this->roleAction()
+        );
+  
     }
   
     public function getRestauranteTable() {
