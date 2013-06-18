@@ -3,7 +3,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Restaurante\Controller\Index' => 'Restaurante\Controller\IndexController',
-            'Restaurante\Controller\Restaurant' => 'Usuarios\Controller\RestaurantController',
+            'Restaurante\Controller\Local' => 'Restaurante\Controller\LocalController',
             
         ),
     ),

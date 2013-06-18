@@ -25,7 +25,7 @@ class Restaurante
     {
         $this->in_id     = (!empty($data['in_id'])) ? $data['in_id'] : null;
         $this->va_nombre = (!empty($data['va_nombre'])) ? $data['va_nombre'] : null;
-       $this->va_razon_social = (!empty($data['va_razon_social'])) ? $data['va_razon_social'] : null;
+        $this->va_razon_social = (!empty($data['va_razon_social'])) ? $data['va_razon_social'] : null;
         $this->va_web    = (!empty($data['va_web'])) ? $data['va_web'] : null;
         $this->va_imagen = (!empty($data['va_imagen'])) ? $data['va_imagen'] : null;
         $this->va_ruc    = (!empty($data['va_ruc'])) ? $data['va_ruc'] : null;
