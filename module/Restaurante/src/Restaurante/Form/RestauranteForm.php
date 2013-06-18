@@ -17,7 +17,7 @@ class RestauranteForm extends Form
             'type' => 'Hidden',
         ));
         $this->add(array(
-            'name' => 'name_rest',
+            'name' => 'va_nombre',
             'type' => 'Text',
           
             'options' => array(
@@ -30,7 +30,7 @@ class RestauranteForm extends Form
             ),
         ));
         $this->add(array(
-            'name' => 'raz_rest',
+            'name' => 'va_razon_social',
             'type' => 'Text',
               'attributes' => array(               
                 'class' => 'span10',
@@ -42,7 +42,7 @@ class RestauranteForm extends Form
             ),
         ));
         $this->add(array(
-            'name' => 'web_rest',
+            'name' => 'va_web',
             'type' => 'Text',
             'attributes' => array(               
                 'class' => 'span10',
@@ -55,7 +55,7 @@ class RestauranteForm extends Form
         ));
         $this->add(array(
             'name' => 'va_imagen',
-            'type' => 'File',
+            'type' => 'text',
               'attributes' => array(               
                 'class' => '',
                 'id'   => '',
@@ -69,7 +69,7 @@ class RestauranteForm extends Form
        // $echo = new IndexController();
        //$echo->rolesAction();
         $this->add(array(
-            'name' => 'esp_rol',
+            'name' => 'Ta_tipo_comida_in_id',
             'type' => 'Select',
              'attributes' => array(               
                 'class' => 'span10',
@@ -90,7 +90,7 @@ class RestauranteForm extends Form
      
         
         $this->add(array(
-            'name' => 'ruc_rest',
+            'name' => 'va_ruc',
             'type' => 'Text',
              'attributes' => array(               
                 'class' => 'span10',

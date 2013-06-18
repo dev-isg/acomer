@@ -13,12 +13,29 @@ class IndexController extends AbstractActionController
 {
   protected $restauranteTable;
   
+<<<<<<< HEAD
+   
+     public function indexAction() {
+        $filtrar = $this->params()->fromPost('submit'); //$this->_request->getParams();
+        $datos = $this->params()->fromPost('texto');
+        $comida = $this->params()->fromPost('comida');
+        $estado = $this->params()->fromPost('estado');
+         if (isset($filtrar)) {
+            $lista = $this->getRestauranteTable()->buscarRestaurante($datos,$comida,$estado);
+        }
+        else {
+
+            $lista = $this->getRestauranteTable()->fetchAll();
+        }
+=======
     public function indexAction() 
             {
         $var=$this->getRestauranteTable()->buscar();
+>>>>>>> 059c92a22f6764bdb9907c38ddfd1efeb7f91818
         return new ViewModel(array(
-            'restaurante' => $this->getRestauranteTable()->fetchAll(),
-        ));
+                    'restaurante' => $lista,
+         ));
+
     }
   
     public function getRestauranteTable() {
@@ -29,33 +46,80 @@ class IndexController extends AbstractActionController
         return $this->restauranteTable;
     }
 
+   public function getrestauranteoidAction(){
+        //$this->_helper->layout->disableLayout();
+      $id=$this->params()->fromQuery('id');
+      $datos=$this->getRestauranteTable()->getRestaurante($id);
+            
+       echo Json::encode($datos);
+        exit();
+      
+      
+   
+    }
     public function agregarrestauranteAction()
     {
         $form = new RestauranteForm();
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
         if ($request->isPost()) {
-           $datos =$this->request->getPost();
-           $pass1 = $datos['va_contrasenia'];
-           $pass2 = $datos['va_contrasenia2'];
-           $usuario = new Usuario();
-            $form->setInputFilter($usuario->getInputFilter());
-            $form->setData($request->getPost());
-              
+           $restaurante = new Restaurante();
+            $form->setInputFilter($restaurante->getInputFilter());
+            $form->setData($request->getPost());      
             if ($form->isValid()) {
-                $usuario->exchangeArray($form->getData());
-                if($pass1==$pass2){
-                $this->getUsuarioTable()->guardarUsuario($usuario);
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario');      
+                $restaurante->exchangeArray($form->getData());
+                $this->getRestauranteTable()->guardarRestaurante($restaurante);
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');      
             }
-             }
-        }
-      
+           }     
         return array('form' => $form);
     }
+            public function editarrestauranteAction()
+     
+    {
+        $id = (int) $this->params()->fromRoute('in_id', 0);
+        if (!$id) {
+           return $this->redirect()->toUrl($this->
+            getRequest()->getBaseUrl().'/restaurante/index/agregarrestaurante');  
+        }
+        try {
+            $restaurante = $this->getUsuarioTable()->getRestaurante($id);
+        }
+        catch (\Exception $ex) {
+            return $this->redirect()->toUrl($this->
+            getRequest()->getBaseUrl().'/restaurante'); 
+        }
+        $form  = new RestauranteForm();
+        $form->bind($restaurante);
+        $form->get('submit')->setAttribute('value', 'MODIFICAR');
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setInputFilter($restaurante->getInputFilter());
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                  $this->getRestauranteTable()->guardarRestaurante($restaurante);
+                $this->redirect()->toUrl('/restaurante');            
+            }
+        }
+     return array(
+            'in_id' => $id,
+            'form' => $form,
+        );
+        
+    }
+<<<<<<< HEAD
+            public function cambiaestadoAction() {
+                   $id = $this->params()->fromQuery('id');
+                   $estado = $this->params()->fromQuery('estado');
+                   $this->getRestauranteTable()->estadoRestaurante((int) $id, $estado);
+                   $this->redirect()->toUrl('/restaurante/index');
+               }
+               
+=======
     
    
 
 
 
+>>>>>>> 059c92a22f6764bdb9907c38ddfd1efeb7f91818
 }
