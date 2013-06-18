@@ -4,8 +4,8 @@ return array(
     'modules' => array(
         'Application',
         'Usuario',
-        'Admin',
-        'Restaurant',
+        'Restaurante',
+        'Admin'
 
     ),
 

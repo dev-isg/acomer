@@ -2,20 +2,22 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Restaurant\Controller\Index' => 'Restaurant\Controller\IndexController',
+            'Restaurante\Controller\Index' => 'Restaurante\Controller\IndexController',
+            'Restaurante\Controller\Restaurant' => 'Usuarios\Controller\RestaurantController',
+            
         ),
     ),
     'router' => array(
         'routes' => array(
-            'restaurant' => array(
+            'restaurante' => array(
                 'type'    => 'Literal',
                 'options' => array(
                     // Change this to something specific to your module
-                    'route'    => '/restaurant',
+                    'route'    => '/restaurante',
                     'defaults' => array(
                         // Change this value to reflect the namespace in which
                         // the controllers for your module are found
-                        '__NAMESPACE__' => 'Restaurant\Controller',
+                        '__NAMESPACE__' => 'Restaurante\Controller',
                         'controller'    => 'Index',
                         'action'        => 'index',
                     ),
@@ -26,17 +28,21 @@ return array(
                     // as you solidify the routes for your module, however,
                     // you may want to remove it and replace it with more
                     // specific routes.
-                    'default' => array(
+                    'default' => array( //'default' => array( 
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                            'route'    =>'/[:controller[/:action[/:in_id]]]',//'/usuario[/][:action]', //'/[:controller[/:action[/:texto]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',                          
+                                'in_id'=>'[0-9]+',
                             ),
                             'defaults' => array(
-                                'controller' => 'Restaurant\Controllers\Index',
+
+                                'controller' => 'Restaurante\Controllers\Index',
                                 'action'     => 'index',
+
+
                             ),
                         ),
                     ),
@@ -46,7 +52,7 @@ return array(
     ),
     'view_manager' => array(
         'template_path_stack' => array(
-            'Restaurant' => __DIR__ . '/../view',
+            'restaurante' => __DIR__ . '/../view',
         ),
     ),
 );
