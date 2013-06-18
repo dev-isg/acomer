@@ -35,7 +35,7 @@ class Module implements AutoloaderProviderInterface
             ),
         );
     }
-    public function getServiceConfig()
+        public function getServiceConfig()
     {
         return array(
             'factories' => array(
@@ -53,6 +53,7 @@ class Module implements AutoloaderProviderInterface
             ),
         );
     }
+
 
     public function getConfig()
     {
