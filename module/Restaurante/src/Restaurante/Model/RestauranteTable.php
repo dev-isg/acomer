@@ -25,6 +25,7 @@ class RestauranteTable
 
     public function fetchAll()
     {
+<<<<<<< HEAD
  
       $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
@@ -115,4 +116,39 @@ class RestauranteTable
                  $this->tableGateway->update($data, array('in_id' => $id));
             }
 
+=======
+        $resultSet = $this->tableGateway->select();
+        return $resultSet;
+    }
+    
+    public function buscar()
+    {
+
+  
+     
+//    $rowset = $this->tableGateway->select(function (Select $select) {           
+//            $select->where('(va_nombre LIKE "%'.'restaurante tres tenedores'.'%") OR (va_nombre LIKE "%'.'tres cuchillos'.'%")');     
+//      });
+      $var=2;
+      $select = $this->tableGateway->getSql()->select()
+        ->join('ta_tipo_comida', 'ta_tipo_comida_in_id=ta_tipo_comida.in_id')//,array('ta_tipo_comida_in_id'=>'va_nombre_tipo'))
+        ->where('ta_restaurante.ta_tipo_comida_in_id='.$var);
+     //echo $select->getSqlString();exit;
+   //     $resultSet = $this->tableGateway->selectWith($select);
+            $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($select);
+            $adapter=$this->tableGateway->getAdapter();
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            
+        $returnArray=array();
+         foreach ($results as $result) {
+            $returnArray[] = $result;
+        }
+   
+        var_dump($returnArray);exit; 
+   
+        return $results;
+    }
+    
+    
+>>>>>>> 059c92a22f6764bdb9907c38ddfd1efeb7f91818
 }
