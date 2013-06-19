@@ -32,29 +32,36 @@ class Ubigeo extends TableGateway{
             $selectString = $this->getSql()->getSqlStringForSqlObject($select);
             $adapter=$this->getAdapter();
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-//                    $array=array();
-//             foreach($results as $result){
-//                 $array[]=$result;
-//             }
-//             
-//    var_dump($array);exit;
-       return $results;//->toArray();
+
+       return $results->toArray();
        
    }
    
    public function getProvincia($depart){
-       $rowset=$this->select()->from($this, array('DISTINCT in_idprov'))
-    ->where('in_iddep = ?', $depart);
-      // var_dump($rowset->toArray());exit;
-       return $rowset->toArray();
+      
+              $select=$this->getSql()->select()
+               ->columns(array('in_iddep','in_idprov','ch_provincia'))
+               ->where(array('in_iddep'=>$depart))
+                ->group('in_idprov'); 
+            $selectString = $this->getSql()->getSqlStringForSqlObject($select);
+            $adapter=$this->getAdapter();
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            
+       return $results->toArray();
        
    }
    
       public function getDistrito($prov,$depart){
-       $rowset=$this->select()->from($this, array('DISTINCT in_iddis'))
-    ->where(array('in_idprov'=>$prov,'in_iddep'=>$depart));
-      // var_dump($rowset->toArray());exit;
-       return $rowset->toArray();
+
+        $select=$this->getSql()->select()
+               ->columns(array('in_iddep','in_idprov','in_iddis','ch_distrito'))
+               ->where(array('in_iddep'=>$depart,'in_idprov'=>$prov))
+                ->group('in_iddis'); 
+            $selectString = $this->getSql()->getSqlStringForSqlObject($select);
+            $adapter=$this->getAdapter();
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            
+       return $results->toArray();
        
    }
     
