@@ -66,17 +66,38 @@ class IndexController extends AbstractActionController
     public function jsonubigeoAction(){
         $this->getUbigeoTable()->getDepartamento();
         $ubigeo=$this->getUbigeoTable()->getUbigeo();
+        
         echo Json::encode($ubigeo);
         exit();
         //print_r($a);exit;
     }
     
     public function jsondepartamentoAction(){
-            
+   
         $ubigeo=$this->getUbigeoTable()->getDepartamento();
+//        var_dump($this->getUbigeoTable()->getDepartamento());exit;
         echo Json::encode($ubigeo);
         exit();
     }
+    
+        public function jsonprovinciaAction(){
+         $iddepar=$this->params()->fromQuery('iddepa');
+        $ubigeo=$this->getUbigeoTable()->getProvincia($iddepar);
+//        var_dump($this->getUbigeoTable()->getProvincia($iddepar));exit;
+        echo Json::encode($ubigeo);
+        exit();
+    }
+
+    
+        public function jsondistritoAction(){
+          $iddepar=$this->params()->fromQuery('iddepa');
+          $idprovi=$this->params()->fromQuery('iddpro');
+        $ubigeo=$this->getUbigeoTable()->getDistrito($idprovi,$iddepar);
+        var_dump($this->getUbigeoTable()->getDistrito($idprovi,$iddepar));exit;
+        echo Json::encode($ubigeo);
+        exit();
+    }
+
 
     public function fooAction()
     {
