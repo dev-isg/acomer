@@ -19,8 +19,7 @@ class Ubigeo extends TableGateway{
     
     public function getUbigeo(){
             $datos = $this->select();
-            return $datos->toArray();
-       
+            return $datos->toArray();     
     }
     
 
