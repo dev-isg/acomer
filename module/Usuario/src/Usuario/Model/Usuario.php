@@ -127,13 +127,13 @@ class Usuario
                     ),
                 ),
             )));
-   /*$inputFilter->add($factory->createInput(array(
+   $inputFilter->add($factory->createInput(array(
                 'name'     => 'Ta_rol_in_id',
-                'required' => true,
+               /* 'required' => true,
                 'filters'  => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
-                ),
+                ),*/
                 'validators' => array(
                     array(
                         'name'    => 'StringLength',
@@ -144,7 +144,7 @@ class Usuario
                         ),
                     ),
                 ),
-            )));*/
+            )));
             $this->inputFilter = $inputFilter;
         }
 

@@ -1185,6 +1185,8 @@ $.format = $.validator.format;
 			});
 		}
 	});
+
+})(jQuery);
 	$.validator.addMethod("rucReal", function(value, element){
             var factor = "5432765432";
             if(typeof value === "undefined" || value.length != 11){
@@ -1216,5 +1218,3 @@ $.format = $.validator.format;
                     return false;
             };
         }, "Ruc inválido");
-})(jQuery);
-
