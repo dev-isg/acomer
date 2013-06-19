@@ -198,7 +198,7 @@ $.getJSON('/local/index/jsondepartamento',function(data){
     var pro=parseInt($(this).val());
    var url="/local/index/jsondistrito?iddepa=" + dep + "&iddpro=" + pro
  console.log(pro);
-      $.getJSON('url',function(data){
+      $.getJSON(url,function(data){
          $("#distrito").empty();
   
     $.each(data,function(i,val){  
