@@ -66,6 +66,7 @@ class IndexController extends AbstractActionController
     public function jsonubigeoAction(){
         $this->getUbigeoTable()->getDepartamento();
         $ubigeo=$this->getUbigeoTable()->getUbigeo();
+        
         echo Json::encode($ubigeo);
         exit();
         //print_r($a);exit;
@@ -74,6 +75,7 @@ class IndexController extends AbstractActionController
     public function jsondepartamentoAction(){
             
         $ubigeo=$this->getUbigeoTable()->getDepartamento();
+        var_dump($this->getUbigeoTable()->getDepartamento());exit;
         echo Json::encode($ubigeo);
         exit();
     }
