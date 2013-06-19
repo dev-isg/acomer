@@ -202,7 +202,8 @@ $.getJSON('/local/index/jsonservicios',function(data){
    var url="/local/index/jsonprovincia?iddepa=" + dep;
  console.log(dep);
       $.getJSON(url,function(data){
-         $("#provincia").empty();      
+         $("#provincia").empty();
+          $("#provincia").append("<option value=''>Seleccione</option>");      
             $.each(data,function(i,val){         
                 $('#provincia').append( "<option value=" + val.in_idprov + " >" + val.ch_provincia + " </option>");                                
                       });  
@@ -217,7 +218,7 @@ $.getJSON('/local/index/jsonservicios',function(data){
  console.log(pro);
       $.getJSON(url,function(data){
          $("#distrito").empty();
-  
+        $("#distrito").append("<option value=''>Seleccione</option>");
     $.each(data,function(i,val){  
           
                 $('#distrito').append( "<option value=" + val.in_iddis + " >" + val.ch_distrito + " </option>");   
