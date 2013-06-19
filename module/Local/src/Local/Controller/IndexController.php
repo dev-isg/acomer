@@ -31,13 +31,13 @@ class IndexController extends AbstractActionController
        // var_dump($u->getUbigeo());exit;
 
        $filtrar = $this->params()->fromPost('submit');
-       $id = $this->params()->fromPost('in_id');
-       
+       $id = (int) $this->params()->fromRoute('in_id', 0);
+       var_dump($id);exit;
        if(isset($filtrar)){
            $consulta=$this->params()->fromPost('texto');
                $lista =  $this->getLocalTable()->listar($consulta);         
            }else{
-               $lista =  $this->getLocalTable()->listar();
+               $lista =  $this->getLocalTable()->listar($id);
            }
 //       $lista =  $this->getLocalTable()->listar();
 //      var_dump($lista);exit;
