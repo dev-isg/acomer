@@ -63,8 +63,8 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
         $comida = $this->params()->fromPost('va_modalidad');
         if ($request->isPost()) {
-         // $datos =$this->request->getPost();
-        // var_dump($datos);exit;
+          $datos =$this->request->getPost();
+         var_dump($datos);exit;
             $restaurante = new Restaurante();
             $form->setInputFilter($restaurante->getInputFilter());
             $form->setData($request->getPost());      
@@ -183,15 +183,10 @@ class IndexController extends AbstractActionController
         exit();
     }
     public function medioAction()
-        {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-            $adapter = $this->dbAdapter;
-            $sql = new Sql($adapter);
-            $select = $sql->select()
-                ->from('ta_medio_pago');
-                $selectString = $sql->getSqlStringForSqlObject($select);
-                $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-                return $results;
-                echo Json::encode($results);
-                exit();
-         }
+        {
+
+        $datos = $this->getRestauranteTable()->medio();
+        echo Json::encode($datos);
+        exit();
+    }
 }

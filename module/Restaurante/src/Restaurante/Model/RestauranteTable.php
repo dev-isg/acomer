@@ -77,18 +77,14 @@ class RestauranteTable
            'va_ruc'            => $restaurante->va_ruc,
            'Ta_tipo_comida_in_id'  => $restaurante->Ta_tipo_comida_in_id  
         );
-
         $id = (int)$restaurante->in_id;
-        if ($id == 0) {
-           
+        if ($id == 0) {         
             $this->tableGateway->insert($data);             
                 if($comida != '')
                 {
-                //    var_dump($comida);exit;
-        $sql = new Sql($adapter);
-       for ($i = 0; $i<sizeof($comida); $i++) {
-    
-   $insert = $sql->insert()
+                  $sql = new Sql($adapter);
+                      for ($i = 0; $i<sizeof($comida); $i++) {
+                           $insert = $sql->insert()
                                ->into('ta_restaurante_has_ta_medio_pago')
                                ->values(array(
                        'Ta_restaurante_in_id' => 66,
@@ -96,16 +92,9 @@ class RestauranteTable
                         $selectString = $sql->getSqlStringForSqlObject($insert);
                         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
                         return $results;
-
-}
-  //      exit;
-      /* for($i=0;$i<sizeof($comida);$i++){
-           echo "s";
-                        
-                    }    exit;*/
-            }
-                            
-        } else {
+                  } 
+                }                      
+              } else {
             if ($this->getRestaurante($id)) {
                 $this->tableGateway->update($data, array('in_id' => $id));
             } else {
@@ -217,7 +206,17 @@ class RestauranteTable
         
     }
     
-    
+      public function medio(){
+        
+        $datos=$this->tableGateway->getAdapter()->query("SELECT * FROM ta_medio_pago")->execute();
+                $returnArray=array();
+        foreach ($datos as $result) {
+            $returnArray[] = $result;
+        }
+        
+        return  $returnArray;
+        
+    }
     
 
 }
