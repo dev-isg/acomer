@@ -59,7 +59,7 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
         if ($request->isPost()) {
            $local = new Local();
-            $form->setInputFilter($local->getInputFilter());
+            //$form->setInputFilter($local->getInputFilter());
             $form->setData($request->getPost());          
             if ($form->isValid()) {
                 $local->exchangeArray($form->getData());
