@@ -93,7 +93,7 @@ class IndexController extends AbstractActionController
           $iddepar=$this->params()->fromQuery('iddepa');
           $idprovi=$this->params()->fromQuery('iddpro');
         $ubigeo=$this->getUbigeoTable()->getDistrito($idprovi,$iddepar);
-        var_dump($this->getUbigeoTable()->getDistrito($idprovi,$iddepar));exit;
+
         echo Json::encode($ubigeo);
         exit();
     }

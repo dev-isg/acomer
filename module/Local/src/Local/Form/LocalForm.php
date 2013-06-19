@@ -25,12 +25,16 @@ class LocalForm extends Form
         $this->add(array(
             'name' => 'de_latitud',
             'type' => 'Hidden',
+             'attributes' => array(               
+                'id' => 'de_latitud')
         ));
                 
         $this->add(array(
             'name' => 'de_longitud',
             'type' => 'Hidden',
-        ));
+            'attributes' => array(               
+           'id' => 'de_longitud')
+        ) );
                 
         $this->add(array(
             'name' => 'va_telefono',
