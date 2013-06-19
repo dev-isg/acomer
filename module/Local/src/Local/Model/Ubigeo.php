@@ -24,12 +24,20 @@ class Ubigeo extends TableGateway{
             return $datos->toArray();     
     }
    public function getDepartamento($pais=1){
-       $rowset=$this->select(array('in_idpais'=>$pais));//select('in_idpais='.$pais);//->from($this, array('DISTINCT in_iddep'))
+       //$rowset=$this->select(array('in_idpais'=>$pais));
+
+       $select=$this->getSql()->select()
+               ->where(array('in_idpais'=>$pais));
+     
+       //select('in_idpais='.$pais);//->from($this, array('DISTINCT in_iddep'))
        // ->where(array('in_idpais'=>$pais));
       // var_dump($rowset->toArray());exit;
-       
+     
+            $selectString = $this->getSql()->getSqlStringForSqlObject($select);
+            $adapter=$this->getAdapter();
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
                     $array=array();
-             foreach($rowset as $result){
+             foreach($results as $result){
                  $array[]=$result;
              }
              
