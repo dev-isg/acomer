@@ -18,7 +18,11 @@ class Local
     public $ta_ubigeo_in_id;
     public $ta_horario_in_id;
     public $ta_dia_in_id;
-
+    
+    public $de_latitud;
+    public $de_longitud;
+    public $va_horario_opcional;
+    
     public function exchangeArray($data)
     {
         $this->in_id     = (!empty($data['in_id'])) ? $data['in_id'] : null;
