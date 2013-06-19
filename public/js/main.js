@@ -337,6 +337,40 @@ $(".eli").on("click",function(){
 	$('#verusuario').html("Estas seguro de eliminar al usuario " + nom + " ?");
 
 });
+
+$('.check_rest').mousedown(function() {
+    var id = $(this).attr('id');
+    console.log(id);
+    console.log()
+    var est;
+        if (!$(this).is(':checked')) {
+          if (confirm("Desea Activar al Restaurante ?") ){
+            var est="activo";
+            var request = $.ajax({
+            url: "restaurante/index/cambiaestadoAction?id="+id + "&estado=" + est,
+            type: "get",
+            data: {id: id , estado:est}
+                   });
+            $(this).prop("checked", "checked");
+            $("#" + id).addClass("success");
+            $("#la" + id).removeClass().addClass("label label-success");
+            $("#la" + id).html("");
+            $("#la" + id).html("activo");
+                 };
+        }else{
+          var est="desactivo";
+            var request = $.ajax({
+            url: "restaurante/index/cambiaestadoActionid="+id + "&estado=" + est,
+            type: "get",
+            data: {id: id , estado:est}
+                   });
+          $("#" + id).removeClass("success");
+          $("#la" + id).removeClass().addClass("label label-important");
+          $("#la" + id).html("");
+            $("#la" + id).html("desactivo");
+              }
+    }); 
+
   $('.check').mousedown(function() {
   	var id = $(this).attr('id');
     console.log(id);
