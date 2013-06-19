@@ -60,13 +60,12 @@ class Module implements AutoloaderProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Restaurante());
                     return new TableGateway('ta_restaurante', $dbAdapter, null, $resultSetPrototype);
                 },
-                 'Local\Model\LocalTable'=>function($sm){
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-//                    $tableGateway =new TableGateway('ta_local', $dbAdapter, null, null);
-                    $table = new LocalTable($dbAdapter);
-                    return $table;
-                    
-                 },
+//                 'Local\Model\LocalTable'=>function($sm){
+//                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+//                    $table = new LocalTable($dbAdapter);
+//                    return $table;
+//                    
+//                 },
                 
          
             ),

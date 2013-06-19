@@ -161,11 +161,13 @@ class RestauranteTable
         return $rowset;
     }
 
+
          public function estadoRestaurante($id,$estado){
                 $data = array(
                     'en_estado' => $estado,
                  );
          $this->tableGateway->update($data, array('in_id' => $id));
+
     }
     
     public function buscar()
@@ -213,4 +215,5 @@ class RestauranteTable
     
     
     
+
 }
