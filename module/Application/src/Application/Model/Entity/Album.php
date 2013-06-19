@@ -36,7 +36,7 @@ public function fetchAll()
     public function rolAll($adapter)
     { $sql = new Sql($adapter);
         $select = $sql->select()
-                 ->from('ta_rol');
+                 ->from('ta_cliente');
       $selectString = $sql->getSqlStringForSqlObject($select);
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
 

@@ -6,15 +6,18 @@ use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
 use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
+use Zend\Db\Sql\Sql;
 use Restaurante\Model\Restaurante;        
 use Restaurante\Form\RestauranteForm;       
 use Restaurante\Model\RestauranteTable;  
+use Zend\Db\Adapter\Adapter;
+
 class IndexController extends AbstractActionController
 {
   protected $restauranteTable;
+  public $dbAdapter;
   
-
-   
+    
      public function indexAction() {
         $filtrar = $this->params()->fromPost('submit'); //$this->_request->getParams();
         $datos = $this->params()->fromPost('texto');
@@ -24,18 +27,13 @@ class IndexController extends AbstractActionController
             $lista = $this->getRestauranteTable()->buscarRestaurante($datos,$comida,$estado);
         }
         else {
-
             $lista = $this->getRestauranteTable()->fetchAll();
         }
-
-//    public function indexAction() 
-//            {
-//        $var=$this->getRestauranteTable()->buscar();
-
-        return new ViewModel(array(
-                    'restaurante' => $lista,
-         ));
-
+        return array(
+          'restaurante' => $lista,
+            'comida' => $this->comidas()
+        );
+  
     }
   
     public function getRestauranteTable() {
@@ -58,17 +56,20 @@ class IndexController extends AbstractActionController
    
     }
     public function agregarrestauranteAction()
-    {
+    {$this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
         $form = new RestauranteForm();
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
+        $comida = $this->params()->fromPost('va_modalidad');
         if ($request->isPost()) {
-           $restaurante = new Restaurante();
+            //$datos =$this->request->getPost();
+            $restaurante = new Restaurante();
             $form->setInputFilter($restaurante->getInputFilter());
             $form->setData($request->getPost());      
             if ($form->isValid()) {
                 $restaurante->exchangeArray($form->getData());
-                $this->getRestauranteTable()->guardarRestaurante($restaurante);
+                $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$adapter);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');      
             }
            }     
@@ -107,14 +108,22 @@ class IndexController extends AbstractActionController
         );
         
     }
-    
+    public function comidas()
+    {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+            ->from('ta_tipo_comida');
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            return $results;
+     }
 
-//            public function cambiaestadoAction() {
-//                   $id = $this->params()->fromQuery('id');
-//                   $estado = $this->params()->fromQuery('estado');
-//                   $this->getRestauranteTable()->estadoRestaurante((int) $id, $estado);
-//                   $this->redirect()->toUrl('/restaurante/index');
-//               }
-               
+        public function cambiaestadoAction() {
+              $id = $this->params()->fromQuery('id');
+              $estado = $this->params()->fromQuery('estado');
+              $this->getRestauranteTable()->estadoRestaurante((int) $id, $estado);
+              $this->redirect()->toUrl('/restaurante/index');
+    }            
 
 }
