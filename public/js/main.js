@@ -179,7 +179,18 @@ $.getJSON('/local/index/jsondepartamento',function(data){
     });
 
 });
- 
+
+$.getJSON('/restaurante/index/medio',function(data){
+    $.each(data,function(i,val){
+          $('#modalidad').append("<label for="">Modalidad de Pago</label>"+
+              "<label class='checkbox inline'>"+ "<input type='checkbox' name='va_modalidad[]' id="+ val.in_id+"/> " + val.va_nombre
+              +"</label>"  
+            ); 
+                   
+    });
+
+});
+
   $("#departamento").change(function(evento){
    var dep=parseInt($(this).val());
    var url="/local/index/jsonprovincia?iddepa=" + dep;
