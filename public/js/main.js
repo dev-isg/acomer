@@ -252,12 +252,12 @@ var infoWindow = null;
  
 function openInfoWindow(marker) {
     var markerLatLng = marker.getPosition();
-   $('#latitude').html("");
-    $('#longitude').html("");
+   $('#de_latitude').html("");
+    $('#de_longitude').html("");
     var l= markerLatLng.lat();
     var lo = markerLatLng.lng();
-   $('#latitude').text(l);
-    $('#longitude').text(lo);
+   $('#de_latitude').text(l);
+    $('#de_longitude').text(lo);
 
 }
  
@@ -273,8 +273,8 @@ function geocodeResult(results, status) {
         map = new google.maps.Map($("#map_canvas").get(0), mapOptions);
         // fitBounds acercará el mapa con el zoom adecuado de acuerdo a lo buscado
         map.fitBounds(results[0].geometry.viewport);
-        $('#latitude').text(results[0].geometry.location.lat());
-      $('#longitude').text(results[0].geometry.location.lng());
+        $('#de_latitude').text(results[0].geometry.location.lat());
+      $('#de_longitude').text(results[0].geometry.location.lng());
         // Dibujamos un marcador con la ubicación del primer resultado obtenido
         var markerOptions = { position: results[0].geometry.location ,draggable: true}
         var marker = new google.maps.Marker(markerOptions);

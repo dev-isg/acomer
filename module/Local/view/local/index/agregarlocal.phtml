@@ -36,5 +36,10 @@ echo $this->formHidden($form->get('in_id'));
 <div class="control-group "><?php echo $this->formRow($form->get('provincia'));?></div><?php?>
 <div class="control-group "><?php echo $this->formRow($form->get('distrito'));?></div><?php?>
 <div class="control-group "><?php echo $this->formRow($form->get('va_direccion'));?></div><?php?>
+<div class="control-group span12">
+                              <label>Encontrar latitud y longitud</label>
+                              <div><input type="text" maxlength="100" id="address" class="span10"/> <input type="button" class="btn btn-info" id="search" value="Buscar" /></div><br/>
+                              <div id='map_canvas' style="height:200px;"></div>                           
+                             </div>
 <div class="control-group "><?php echo $this->formSubmit($form->get('submit'));?></div><?php
 echo $this->form()->closeTag();?> </div> 
