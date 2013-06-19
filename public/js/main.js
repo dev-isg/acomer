@@ -110,7 +110,11 @@ var cerrar_mod = function(mod,form){
 			$('#modificar-form #rol').append("<option value=" + val.in_id + " >" + val.va_nombre_rol + " </option>" );			
 		})
 });
-
+ $.getJSON('restaurante/index/jsoncomida',function(data){
+    $.each(data,function(i,val){
+      $('#esp_rol').append("<option value=" + val.in_id + " >" + va_nombre_tipo + " </option>" );            
+    })
+});
 // $.getJSON('especialidad.json',function(data){
 //    $.each(data,function(i,val){
 //      $('#esp_rol').append("<option value=" + val.id + " >" + val.nombre + " </option>" );            
