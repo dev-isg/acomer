@@ -147,6 +147,45 @@ class Local
                 ),
             )));
   
+             $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_horario_opcional',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 70,
+                        ),
+                    ),
+                ),
+            )));
+             
+             $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_direccion',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 250,
+                        ),
+                    ),
+                ),
+            )));
+             
+
             //fin de validaciones
             $this->inputFilter = $inputFilter;
         }
