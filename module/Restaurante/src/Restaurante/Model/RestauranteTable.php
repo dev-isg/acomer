@@ -213,6 +213,19 @@ class RestauranteTable
     }
 
     
+    public function comidas(){
+        
+        $datos=$this->tableGateway->getAdapter()->query("SELECT * FROM ta_tipo_comida")->execute();
+        var_dump($datos);exit;
+                $returnArray=array();
+        foreach ($datos as $result) {
+            $returnArray[] = $result;
+        }
+        
+        return  $returnArray;
+        
+    }
+    
     
     
 
