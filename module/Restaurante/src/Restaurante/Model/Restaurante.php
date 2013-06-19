@@ -163,7 +163,7 @@ $inputFilter->add($factory->createInput(array(
                 ),
             )));
    
-    $inputFilter->add($factory->createInput(array(
+    /*$inputFilter->add($factory->createInput(array(
                 'name'     => 'va_modalidad',
                 'required' => false,
                 'filters'  => array(
@@ -180,7 +180,7 @@ $inputFilter->add($factory->createInput(array(
                         ),
                     ),
                 ),
-            )));
+            )));*/
     
             $this->inputFilter = $inputFilter;
         }

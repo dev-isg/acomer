@@ -39,7 +39,8 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
         if ($request->isPost()) {
            $datos =$this->request->getPost();
-           //var_dump($datos);exit;
+        //   var_dump($datos);exit;
+           
            $pass1 = $datos['va_contrasenia'];
            $pass2 = $datos['va_contrasenia2'];
            $usuario = new Usuario();
