@@ -31,6 +31,7 @@ class IndexController extends AbstractActionController
        // var_dump($u->getUbigeo());exit;
 
        $filtrar = $this->params()->fromPost('submit');
+       $id = $this->params()->fromPost('in_id');
        
        if(isset($filtrar)){
            $consulta=$this->params()->fromPost('texto');

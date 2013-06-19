@@ -1,14 +1,14 @@
 <?php
 
 
-$title = 'Agregar nuevo restaurante';
+$title = 'EDITAR RESTAURANTE '.$this->va_nombre;
 $this->headTitle($title);
 ?>
 <?php
 $form = $this->form;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
 $form->setAttributes(array(
-    'action' => $this->url.'/restaurante/index/editarrestaurante/'.$this->in_id,
+    'action' => $this->url.'/restaurante/index/editarrestaurante/'.$this->in_id.'/'.$this->va_nombre,
     'method' => 'post',
     'in_id'   =>$this->in_id,
 ));

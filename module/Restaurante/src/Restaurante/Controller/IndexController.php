@@ -79,6 +79,7 @@ class IndexController extends AbstractActionController
      
     {
         $id = (int) $this->params()->fromRoute('in_id', 0);
+        $va_nombre = $this->params()->fromRoute('va_nombre',0);
         //var_dump($id);exit;
         if (!$id) {
            return $this->redirect()->toUrl($this->
@@ -107,6 +108,7 @@ class IndexController extends AbstractActionController
  
      return array(
             'in_id' => $id,
+            'va_nombre' => $va_nombre,
             'form' => $form,
         );
         
