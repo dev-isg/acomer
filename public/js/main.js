@@ -106,13 +106,12 @@ var cerrar_mod = function(mod,form){
 //json para rol
  $.getJSON('/usuario/index/jsonestado',function(data){
 		$.each(data,function(i,val){
-			$('#rol').append("<option value=" + val.in_id + " >" + val.va_nombre_rol + " </option>" );
-			$('#modificar-form #rol').append("<option value=" + val.in_id + " >" + val.va_nombre_rol + " </option>" );			
+			$('#rTa_rol_in_id').append("<option value=" + val.in_id + " >" + val.va_nombre_rol + " </option>" );			
 		})
 });
- $.getJSON('restaurante/index/jsoncomida',function(data){
+ $.getJSON('/restaurante/index/jsoncomida',function(data){
     $.each(data,function(i,val){
-      $('#esp_rol').append("<option value=" + val.in_id + " >" + va_nombre_tipo + " </option>" );            
+      $('#esp_rol').append("<option value=" + val.in_id + " >" + val.va_nombre_tipo + " </option>" );            
     })
 });
 // $.getJSON('especialidad.json',function(data){
