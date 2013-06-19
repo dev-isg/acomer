@@ -171,6 +171,48 @@ var cerrar_mod = function(mod,form){
 //});
 
 //mapa
+
+$.getJSON('/local/index/jsondepartamento',function(data){
+    $.each(data,function(i,val){
+          $('#departamento').append( "<option value=" + val.in_iddep + " >" + val.ch_departamento + " </option>"); 
+       }
+               
+    });
+
+
+});
+ 
+  $("#departamento").change(function(evento){
+   var dep=parseInt($(this).val());
+   var url="/local/index/jsonprovincia?iddepa=" + dep;
+ console.log(dep);
+      $.getJSON(url,function(data){
+         $("#provincia").empty();      
+            $.each(data,function(i,val){         
+                $('#provincia').append( "<option value=" + val.in_idprov + " >" + val.ch_provincia + " </option>");                                
+            }
+              
+          });  
+     });
+});
+
+  $("#provincia").change(function(evento){
+ 
+   var dep=parseInt($('#departamento').val());
+    var pro=parseInt($(this).val());
+   var url="/local/index/jsondistrito?iddepa=" + dep + "&iddpro=" + pro
+ console.log(pro);
+      $.getJSON('url',function(data){
+         $("#distrito").empty();
+  
+    $.each(data,function(i,val){  
+          
+                $('#distrito').append( "<option value=" + val.in_iddis + " >" + val.ch_distrito + " </option>");   
+           
+          });  
+     });
+});
+
 var map;
  
 function load_map() {
