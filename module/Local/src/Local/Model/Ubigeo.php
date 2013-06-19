@@ -81,9 +81,9 @@ class Ubigeo extends TableGateway{
         foreach ($select as $result) {
             $returnArray[] = $result;
         }
-        var_dump($returnArray);exit;
+//        var_dump($returnArray);exit;
         
-       return $select;//->toArray();
+       return $returnArray;//->toArray();
        
    }
     

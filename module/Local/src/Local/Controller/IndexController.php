@@ -19,6 +19,9 @@ use Local\Form\LocalForm;        // <-- Add this import
 use Local\Model\LocalTable;
 use Local\Model\Ubigeo;
 
+use Zend\Db\TableGateway\TableGateway,
+    Zend\Db\Adapter\Adapter,
+    Zend\Db\ResultSet\ResultSet;
 class IndexController extends AbstractActionController
 {
      protected $localTable;
@@ -115,7 +118,7 @@ class IndexController extends AbstractActionController
     
     public function jsonserviciosAction(){
         $servicios=$this->getUbigeoTable()->getServicios();
-        var_dump($servicios);exit;
+       // var_dump($servicios);exit;
         echo Json::encode($servicios);
         exit();
     }
