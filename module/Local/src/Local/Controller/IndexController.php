@@ -60,10 +60,8 @@ class IndexController extends AbstractActionController
             $form->setData($request->getPost());          
             if ($form->isValid()) {
                 $local->exchangeArray($form->getData());
-
                 $this->getUsuarioTable()->guardarLocal($local);
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/local');      
-       
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/local');          
              }
         }
         
@@ -112,6 +110,12 @@ class IndexController extends AbstractActionController
         $ubigeo=$this->getUbigeoTable()->getDistrito($idprovi,$iddepar);
 
         echo Json::encode($ubigeo);
+        exit();
+    }
+    
+    public function jsonserviciosAction(){
+        $servicios=$this->getUbigeoTable()->getServicios();
+        echo Json::encode($servicios);
         exit();
     }
 
