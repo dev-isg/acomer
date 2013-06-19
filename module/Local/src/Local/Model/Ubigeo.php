@@ -66,7 +66,7 @@ class Ubigeo extends TableGateway{
    }
    
    public function getServicios(){
-            $select=$this->getAdapter()->select()->from('ta_servicio_local',array('in_id','va_nombre'));
+            $select=$this->getAdapter()->select()->from('ta_servicio_local');
             $selectString = $this->getSql()->getSqlStringForSqlObject($select);
             $adapter=$this->getAdapter();
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
