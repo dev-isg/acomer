@@ -37,7 +37,7 @@ class IndexController extends AbstractActionController
            $consulta=$this->params()->fromPost('texto');
                $lista =  $this->getLocalTable()->listar($consulta);         
            }else{
-               $lista =  $this->getLocalTable()->listar($id);
+               $lista =  $this->getLocalTable()->listar($id);//$id
            }
 //       $lista =  $this->getLocalTable()->listar();
 //      var_dump($lista);exit;

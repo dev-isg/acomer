@@ -25,10 +25,25 @@ class Ubigeo extends TableGateway{
        $rowset=$this->select()->from($this, array('DISTINCT in_iddep'))
     ->where('in_idpais = ?', $pais);
       // var_dump($rowset->toArray());exit;
-       return $rowset;
+       return $rowset->toArray();
        
    }
-
+   
+   public function getProvincia($depart){
+       $rowset=$this->select()->from($this, array('DISTINCT in_idprov'))
+    ->where('in_iddep = ?', $depart);
+      // var_dump($rowset->toArray());exit;
+       return $rowset->toArray();
+       
+   }
+   
+      public function getDistrito($prov,$depart){
+       $rowset=$this->select()->from($this, array('DISTINCT in_iddis'))
+    ->where(array('in_idprov'=>$prov,'in_iddep'=>$depart));
+      // var_dump($rowset->toArray());exit;
+       return $rowset->toArray();
+       
+   }
     
     public function hcer(){
 //                $sql = new Sql($adapter);
