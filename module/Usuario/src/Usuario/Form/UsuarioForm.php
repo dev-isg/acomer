@@ -92,7 +92,7 @@ class UsuarioForm extends Form
             'type' => 'password',
              'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'va_contrasenia',
+                'id'   => 'va_contrasenia2',
                  'placeholder'=>'Repita su Password'
             ),
             'options' => array(

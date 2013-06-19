@@ -63,7 +63,8 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
         $comida = $this->params()->fromPost('va_modalidad');
         if ($request->isPost()) {
-            //$datos =$this->request->getPost();
+          //  $datos =$this->request->getPost();
+         //   var_dump($datos);exit;
             $restaurante = new Restaurante();
             $form->setInputFilter($restaurante->getInputFilter());
             $form->setData($request->getPost());      
