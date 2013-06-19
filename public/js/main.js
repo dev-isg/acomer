@@ -35,7 +35,7 @@ $('#restaurante').validate({
                 rucReal:true            
             },
         esp_rol:{
-                required : true,
+                required : true
              
                             
             }
@@ -157,7 +157,7 @@ var cerrar_mod = function(mod,form){
 });
  $.getJSON('/restaurante/index/jsoncomida',function(data){
     $.each(data,function(i,val){
-      $('#esp_rol').append("<option value=" + val.in_id + " >" + val.va_nombre_tipo + " </option>" );            
+      $('#Ta_tipo_comida_in_id').append("<option value=" + val.in_id + " >" + val.va_nombre_tipo + " </option>" );            
     })
 });
 // $.getJSON('especialidad.json',function(data){
