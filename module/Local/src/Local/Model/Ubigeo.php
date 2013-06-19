@@ -4,6 +4,8 @@ use Zend\Db\TableGateway\TableGateway,
     Zend\Db\Adapter\Adapter,
     Zend\Db\ResultSet\ResultSet;
 use Zend\Db\ResultSet\AbstractResultSet;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Sql;
 //namespace Application\Modelo\Entity;
 
 
@@ -22,10 +24,17 @@ class Ubigeo extends TableGateway{
             return $datos->toArray();     
     }
    public function getDepartamento($pais=1){
-       $rowset=$this->getSql()->select();//->from($this, array('DISTINCT in_iddep'))
-       // ->where('in_idpais='.$pais);
+       $rowset=$this->select(array('in_idpais'=>$pais));//select('in_idpais='.$pais);//->from($this, array('DISTINCT in_iddep'))
+       // ->where(array('in_idpais'=>$pais));
       // var_dump($rowset->toArray());exit;
-       return $rowset->toArray();
+       
+                    $array=array();
+             foreach($rowset as $result){
+                 $array[]=$result;
+             }
+             
+    var_dump($array);exit;
+       return $rowset;//->toArray();
        
    }
    
