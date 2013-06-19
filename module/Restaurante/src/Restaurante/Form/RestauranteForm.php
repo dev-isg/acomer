@@ -68,6 +68,7 @@ class RestauranteForm extends Form
         
        // $echo = new IndexController();
        //$echo->rolesAction();
+
         $this->add(array(
             'name' => 'Ta_tipo_comida_in_id',
             'type' => 'Select',
