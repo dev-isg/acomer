@@ -22,39 +22,37 @@ $('.control-group').removeClass('success');
 };
 $('#restaurante').validate({
       rules: {
-        name_rest: {
+        va_nombre: {
             required: true
         },
         va_razon_social: {
               required: true
         },
-        web_rest :{
+        va_web :{
                    url:true},
-        ruc_rest:{
+        va_ruc:{
                 required : true,
                 rucReal:true            
             },
-        esp_rol:{
+        Ta_tipo_comida_in_id:{
                 required : true
-             
-                            
-            }
+              }       
       },
       messages:{
-            name_rest: {
+            va_nombre: {
                 required:"Por favor ingresar el nombre del restaurante"
             },
             va_razon_social:{
                 required:"Por favor ingresar la razon social"
             },
-            web_rest:{
+            va_web:{
                 url:"Por favor ingresa una Url valida"
             },
-            ruc_rest: {
+            va_ruc: {
                 required : "Por favor ingrese un Ruc",
                 rucReal:" Ingresa un Ruc valido "
             },           
-            esp_rol :{
+            Ta_tipo_comida_in_id :{
               required : "Por favor ingresar un tipo de plato"                
             }
         },
