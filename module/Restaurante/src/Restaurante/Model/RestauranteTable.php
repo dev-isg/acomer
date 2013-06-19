@@ -91,7 +91,7 @@ class RestauranteTable
    $insert = $sql->insert()
                                ->into('ta_restaurante_has_ta_medio_pago')
                                ->values(array(
-                       'Ta_restaurante_in_id' => 46,
+                       'Ta_restaurante_in_id' => 65,
                        'Ta_medio_pago_in_id' => $comida[0] ));
                         $selectString = $sql->getSqlStringForSqlObject($insert);
                         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
