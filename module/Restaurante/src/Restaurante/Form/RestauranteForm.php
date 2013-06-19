@@ -80,8 +80,7 @@ class RestauranteForm extends Form
                      'label' => 'Especialidad',
                      'value_options' => array(
                           '' => 'selecccione :',
-                             '1' => 'Criolla',
-                             '2' => 'Marina',                   
+                                               
                      ),
              )
         ));
