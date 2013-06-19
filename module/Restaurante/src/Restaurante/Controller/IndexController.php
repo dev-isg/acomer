@@ -166,6 +166,7 @@ class IndexController extends AbstractActionController
             $selectString = $sql->getSqlStringForSqlObject($select);
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             return $results;
+            
      }
 
         public function cambiaestadoAction() {
@@ -181,5 +182,16 @@ class IndexController extends AbstractActionController
         echo Json::encode($datos);
         exit();
     }
-
+    public function medioAction()
+        {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+            $adapter = $this->dbAdapter;
+            $sql = new Sql($adapter);
+            $select = $sql->select()
+                ->from('ta_medio_pago');
+                $selectString = $sql->getSqlStringForSqlObject($select);
+                $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+                return $results;
+                echo Json::encode($results);
+                exit();
+         }
 }

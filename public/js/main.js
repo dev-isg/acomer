@@ -22,39 +22,44 @@ $('.control-group').removeClass('success');
 };
 $('#restaurante').validate({
       rules: {
-        name_rest: {
+        va_nombre: {
             required: true
         },
         va_razon_social: {
               required: true
         },
-        web_rest :{
+        va_web :{
                    url:true},
-        ruc_rest:{
+        va_ruc:{
                 required : true,
                 rucReal:true            
             },
+<<<<<<< HEAD
+        Ta_tipo_comida_in_id:{
+                required : true,            
+=======
         esp_rol:{
-                required : true,
+                required : true
              
+>>>>>>> 70bf0cddbf370b1391f422d21615e3cc14b12d40
                             
             }
       },
       messages:{
-            name_rest: {
+            va_nombre: {
                 required:"Por favor ingresar el nombre del restaurante"
             },
             va_razon_social:{
                 required:"Por favor ingresar la razon social"
             },
-            web_rest:{
+            va_web:{
                 url:"Por favor ingresa una Url valida"
             },
-            ruc_rest: {
+            va_ruc: {
                 required : "Por favor ingrese un Ruc",
                 rucReal:" Ingresa un Ruc valido "
             },           
-            esp_rol :{
+            Ta_tipo_comida_in_id :{
               required : "Por favor ingresar un tipo de plato"                
             }
         },
@@ -157,7 +162,7 @@ var cerrar_mod = function(mod,form){
 });
  $.getJSON('/restaurante/index/jsoncomida',function(data){
     $.each(data,function(i,val){
-      $('#esp_rol').append("<option value=" + val.in_id + " >" + val.va_nombre_tipo + " </option>" );            
+      $('#Ta_tipo_comida_in_id').append("<option value=" + val.in_id + " >" + val.va_nombre_tipo + " </option>" );            
     })
 });
 // $.getJSON('especialidad.json',function(data){
