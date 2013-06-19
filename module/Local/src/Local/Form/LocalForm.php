@@ -61,6 +61,20 @@ class LocalForm extends Form
             ),
         ));
         
+                $this->add(array(
+            'name' => 'va_horario_opcional',
+            'type' => 'Text',
+              'attributes' => array(               
+                'class' => 'span10',
+                'id'   => 'raz_rest',
+                'placeholder'=>'Ingrese el horario opcional'
+            ),
+            'options' => array(
+                'label' => 'Horario opcional',
+            ),
+        ));
+                
+        
         $this->add(array(
             'name' => 'va_rango_precio',
             'type' => 'Text',
