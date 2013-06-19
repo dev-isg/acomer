@@ -14,7 +14,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
 use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
-//use Usuario\Model\Usuario;          // <-- Add this import
+use Local\Model\Local;          // <-- Add this import
 use Local\Form\LocalForm;        // <-- Add this import
 use Local\Model\LocalTable;
 use Local\Model\Ubigeo;
@@ -50,7 +50,24 @@ class IndexController extends AbstractActionController
     }
     
     public function agregarlocalAction(){
-        $form = new LocalForm();
+           $form = new LocalForm();
+              
+        $form->get('submit')->setValue('INSERTAR');
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+           $local = new Local();
+            $form->setInputFilter($local->getInputFilter());
+            $form->setData($request->getPost());          
+            if ($form->isValid()) {
+                $local->exchangeArray($form->getData());
+
+                $this->getUsuarioTable()->guardarLocal($local);
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/local');      
+       
+             }
+        }
+        
+     
         return array('form' => $form);
     }
     
