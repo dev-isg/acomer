@@ -32,7 +32,7 @@ class IndexController extends AbstractActionController
 
        $filtrar = $this->params()->fromPost('submit');
        $id = (int) $this->params()->fromRoute('in_id', 0);
-       var_dump($id);exit;
+       //var_dump($id);exit;
        if(isset($filtrar)){
            $consulta=$this->params()->fromPost('texto');
                $lista =  $this->getLocalTable()->listar($consulta);         
@@ -43,6 +43,7 @@ class IndexController extends AbstractActionController
 //      var_dump($lista);exit;
         return new ViewModel(array(
                     'locales' => $lista,
+            'in_id'=>$id
                 ));
        //var_dump($this->getLocaTable()->fetchAll());exit;
        // return array();

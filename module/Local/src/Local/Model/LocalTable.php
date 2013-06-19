@@ -26,7 +26,7 @@ class LocalTable
         return $resultSet; 
     }
     
-    public function listar($consulta=null,$id){
+    public function listar($consulta = null,$id){
 //            $rowset = $this->tableGateway->select(function (Select $select) {           
 //            $select->join(array('r'=>'ta_restaurante'),'ta_restaurante_in_id=r.in_id')
 //                   ->join(array('u'=>'ta_ubigeo'),'ta_ubigeo_in_id=u.in_id',array('ch_pais','ch_departamento','ch_provincia','ch_distrito'))    
