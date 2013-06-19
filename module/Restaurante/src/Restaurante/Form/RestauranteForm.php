@@ -71,16 +71,17 @@ class RestauranteForm extends Form
 
         $this->add(array(
             'name' => 'Ta_tipo_comida_in_id',
-            'type' => 'Select',
+            'type' => 'Select',  
+            
              'attributes' => array(               
                 'class' => 'span10',
                 'id'   => 'Ta_tipo_comida_in_id'
             ),
-           'options' => array(
-                     'label' => 'Especialidad',
+           'options' => array('label' => 'Tipo de Comida : ',
                      'value_options' => array(
-                          '' => 'selecccione :',
                          
+                          '' => 'selecccione :',
+           
                                                
                      ),
              )
@@ -106,16 +107,16 @@ class RestauranteForm extends Form
         $this->add(array(
             'name' => 'va_modalidad',
             'type' => 'MultiCheckbox',
-            'Label' => 'va_modalidad',
+            'label' => 'Modalidad de Pago?',
              'attributes' => array(               
                 'class' => 'checkbox inline',
                 'id'   => 'va_modalidad',
                  'placeholder'=>'Ingrese su modalidad de pago'
             ),
             'options' => array(
-
+                     
                      'value_options' => array(
-                         '' => 'selecccione :',
+                '' => 'seleccc'
                      ),
              )
         ));
