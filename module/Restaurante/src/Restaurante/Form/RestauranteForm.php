@@ -114,8 +114,7 @@ class RestauranteForm extends Form
             'options' => array(
                      'label' => 'Modalidad de Pago?',
                      'value_options' => array(
-                             '1' => 'visa',
-                             '2' => 'mastercard',                
+              
                      ),
              )
         ));
