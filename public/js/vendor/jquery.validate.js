@@ -1185,4 +1185,36 @@ $.format = $.validator.format;
 			});
 		}
 	});
+	$.validator.addMethod("rucReal", function(value, element){
+            var factor = "5432765432";
+            if(typeof value === "undefined" || value.length != 11){
+                    return false;
+            }
+            var dig_valid = [10, 20, 17, 15],
+                    dig = value.substr(0,2),
+                    flag_dig = dig_valid.indexOf(parseInt(dig));
+            if(flag_dig == -1){
+                    return false;
+            }
+            var dig_verif = value.substr(10, 1),
+                    narray = [];
+            for(var i = 0;i < 10; i++){
+                    var item = value.substr(i, 1) * factor.substr(i, 1);
+                    narray.push( item );
+            }
+            var suma = 0;
+            for(var j = 0;j < narray.length; j++){
+                    suma = suma + narray[j];
+            }
+            //calculando el residuo
+            var residuo = suma%11;
+                    resta = 11 - residuo,
+                    dig_verif_aux = resta.toString().substr(-1);
+            if(dig_verif == dig_verif_aux){
+                    return true;
+            }else{
+                    return false;
+            };
+        }, "Ruc inválido");
 })(jQuery);
+

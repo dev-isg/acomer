@@ -20,7 +20,53 @@ $('.control-group').removeClass('success');
   $('label').remove(":contains('OK!')");
   $('.error').remove();
 };
-
+$('#restaurante').validate({
+      rules: {
+        name_rest: {
+            required: true
+        },
+        va_razon_social: {
+              required: true
+        },
+        web_rest :{
+                   url:true},
+        ruc_rest:{
+                required : true,
+                rucReal:true            
+            },
+        esp_rol:{
+                required : true,
+             
+                            
+            }
+      },
+      messages:{
+            name_rest: {
+                required:"Por favor ingresar el nombre del restaurante"
+            },
+            va_razon_social:{
+                required:"Por favor ingresar la razon social"
+            },
+            web_rest:{
+                url:"Por favor ingresa una Url valida"
+            },
+            ruc_rest: {
+                required : "Por favor ingrese un Ruc",
+                rucReal:" Ingresa un Ruc valido "
+            },           
+            esp_rol :{
+              required : "Por favor ingresar un tipo de plato"                
+            }
+        },
+      highlight: function(element) {
+        $(element).closest('.control-group').removeClass('success').addClass('error');
+      },
+      success: function(element) {
+        element
+        .text('OK!').addClass('valid')
+        .closest('.control-group').removeClass('error').addClass('success');
+      }
+    });
 var validar=function(elemento){
 $(elemento).validate({
 	    rules: {
