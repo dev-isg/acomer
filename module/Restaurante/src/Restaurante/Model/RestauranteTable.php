@@ -25,7 +25,7 @@ class RestauranteTable
 
     public function fetchAll()
     {
-<<<<<<< HEAD
+
  
       $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
@@ -114,9 +114,9 @@ class RestauranteTable
                             'en_estado' => $estado,
                          );
                  $this->tableGateway->update($data, array('in_id' => $id));
-            }
+            
 
-=======
+
         $resultSet = $this->tableGateway->select();
         return $resultSet;
     }
@@ -150,5 +150,5 @@ class RestauranteTable
     }
     
     
->>>>>>> 059c92a22f6764bdb9907c38ddfd1efeb7f91818
+
 }
