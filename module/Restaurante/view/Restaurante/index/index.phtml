@@ -13,9 +13,7 @@
    POR TIPO :
    <SELECT NAME="comida" SIZE="1">
    <OPTION VALUE="">seleccione:</OPTION>
-      <?php 
-    foreach ($this->comida as $comida) :
-        ?>
+ <?php  foreach ($this->comida as $comida) : ?>
  <OPTION VALUE="<?php echo $comida['in_id']; ?>"><?php echo $comida['va_nombre_tipo']; ?></OPTION>
 <?php endforeach; ?>
    </SELECT>

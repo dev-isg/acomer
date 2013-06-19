@@ -11,11 +11,19 @@ use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Platform;
 
+
+
+
+
+use Zend\Http\Request;
+
+
 class RestauranteTable
 {
    
 
      protected $tableGateway;
+     public $dbAdapter;
     
 
     public function __construct(TableGateway $tableGateway)
@@ -49,20 +57,52 @@ class RestauranteTable
         }
         return $row;
     }
-    public function guardarRestaurante(Restaurante $restaurante)
+    public function getRestauranteRuc($ruc)
+    {
+      
+        $rowset = $this->tableGateway->select(array('va_ruc' => $ruc));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $id");
+        }
+        return $row;
+    }
+    public function guardarRestaurante(Restaurante $restaurante, $comida,$adapter)
     {
         $data = array(
            'va_nombre'         => $restaurante->va_nombre,
            'va_razon_social'   => $restaurante->va_razon_social,
            'va_web'            => $restaurante->va_web,
            'va_imagen'         => $restaurante->va_imagen,
-           'va_ruc'            => $restaurante->va_ruc,  
-       'Ta_tipo_comida_in_id'  => $restaurante->Ta_tipo_comida_in_id  
+           'va_ruc'            => $restaurante->va_ruc,
+           'Ta_tipo_comida_in_id'  => $restaurante->Ta_tipo_comida_in_id  
         );
 
         $id = (int)$restaurante->in_id;
         if ($id == 0) {
-            $this->tableGateway->insert($data);
+           
+            $this->tableGateway->insert($data);             
+                if($comida != '')
+                {
+                  //  var_dump($comida);exit;
+        $sql = new Sql($adapter);
+        for ($i = 0; $i <= 1; $i++) {
+    
+   $insert = $sql->insert()
+                               ->into('ta_restaurante_has_ta_medio_pago')
+                               ->values(array(
+                       'Ta_restaurante_in_id' => 44,
+                       'Ta_medio_pago_in_id' => $comida[$i] ));
+                        $selectString = $sql->getSqlStringForSqlObject($insert);
+                        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+                        return $results;
+}
+        exit;
+       for($i=0;$i<1;$i++){
+                        
+                    }    
+            }
+                            
         } else {
             if ($this->getRestaurante($id)) {
                 $this->tableGateway->update($data, array('in_id' => $id));
@@ -111,17 +151,11 @@ class RestauranteTable
         return $rowset;
     }
 
-        public function estadoRestaurante($id,$estado)
-                {
-                        $data = array(
-                            'en_estado' => $estado,
-                         );
-                 $this->tableGateway->update($data, array('in_id' => $id));
-            
-
-
-        $resultSet = $this->tableGateway->select();
-        return $resultSet;
+         public function estadoRestaurante($id,$estado){
+                $data = array(
+                    'en_estado' => $estado,
+                 );
+         $this->tableGateway->update($data, array('in_id' => $id));
     }
     
     public function buscar()
