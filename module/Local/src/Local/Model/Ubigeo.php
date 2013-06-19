@@ -65,7 +65,7 @@ class Ubigeo extends TableGateway{
        
    }
     
-    public function hcer(){
+
 //                $sql = new Sql($adapter);
 //        $select = $sql->select()
 //                 ->from('ta_rol');
@@ -73,7 +73,7 @@ class Ubigeo extends TableGateway{
 //            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
 //
 //       $row = $results->toArray();
-    }
+
     
     
     

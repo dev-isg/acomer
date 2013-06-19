@@ -25,12 +25,16 @@ class LocalForm extends Form
         $this->add(array(
             'name' => 'de_latitud',
             'type' => 'Hidden',
+             'attributes' => array(               
+                'id' => 'de_latitud')
         ));
                 
         $this->add(array(
             'name' => 'de_longitud',
             'type' => 'Hidden',
-        ));
+            'attributes' => array(               
+           'id' => 'de_longitud')
+        ) );
                 
         $this->add(array(
             'name' => 'va_telefono',
@@ -115,62 +119,57 @@ class LocalForm extends Form
         ));
         
             $this->add(array(
-            'name' => 'ch_distrito',
+            'name' => 'distrito',
             'type' => 'Select',
              'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'esp_rol'
+                'id'   => 'distrito'
             ),
            'options' => array(
                      'label' => 'Distrito',
                      'value_options' => array(
-                          '' => 'selecccione :',
-                             '1' => 'Criolla',
-                             '2' => 'Marina',                   
+                          '' => 'selecccione :'                                                
                      ),
              )
         ));
             
             $this->add(array(
-            'name' => 'ch_provincia',
+            'name' => 'provincia',
             'type' => 'Select',
              'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'esp_rol'
+                'id'   => 'provincia'
             ),
            'options' => array(
                      'label' => 'Provincia',
                      'value_options' => array(
-                          '' => 'selecccione :',
-                             '1' => 'Criolla',
-                             '2' => 'Marina',                   
+                          '' => 'selecccione :'                                                
                      ),
              )
         ));
         
-                        $this->add(array(
-            'name' => 'ch_departamento',
+            $this->add(array(
+            'name' => 'departamento',
             'type' => 'Select',
              'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'esp_rol'
+                'id'   => 'departamento'
             ),
            'options' => array(
                      'label' => 'Departamento',
                      'value_options' => array(
                           '' => 'selecccione :',
-                             '1' => 'Criolla',
-                             '2' => 'Marina',                   
+                                          
                      ),
              )
         ));
                         
                $this->add(array(
-            'name' => 'ch_pais',
+            'name' => 'pais',
             'type' => 'Select',
              'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'esp_rol'
+                'id'   => 'pais'
             ),
            'options' => array(
                      'label' => 'Pais',
