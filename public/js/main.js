@@ -106,7 +106,7 @@ var cerrar_mod = function(mod,form){
 //json para rol
  $.getJSON('/usuario/index/jsonestado',function(data){
 		$.each(data,function(i,val){
-			$('#rTa_rol_in_id').append("<option value=" + val.in_id + " >" + val.va_nombre_rol + " </option>" );			
+			$('#Ta_rol_in_id').append("<option value=" + val.in_id + " >" + val.va_nombre_rol + " </option>" );			
 		})
 });
  $.getJSON('/restaurante/index/jsoncomida',function(data){
