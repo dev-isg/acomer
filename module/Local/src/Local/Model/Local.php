@@ -1,6 +1,11 @@
 <?php
 namespace Local\Model;
 
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+
 class Local
 {
     public $in_id;
@@ -13,7 +18,11 @@ class Local
     public $ta_ubigeo_in_id;
     public $ta_horario_in_id;
     public $ta_dia_in_id;
-
+    
+    public $de_latitud;
+    public $de_longitud;
+    public $va_horario_opcional;
+    
     public function exchangeArray($data)
     {
         $this->in_id     = (!empty($data['in_id'])) ? $data['in_id'] : null;
@@ -28,4 +37,163 @@ class Local
         $this->ta_dia_in_id    = (!empty($data['ta_dia_in_id'])) ? $data['ta_dia_in_id'] : null;
 
     }
+        public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new \Exception("Not used");
+    }
+       public function getInputFilter()
+    {
+            if (!$this->inputFilter) {
+            $inputFilter = new InputFilter();
+            $factory     = new InputFactory();
+            //inicio de validaciones
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'in_id',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'Int'),
+                ),
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_telefono',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 18,
+                        ),
+                    ),
+                ),
+            )));
+            
+             $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_horario',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 70,
+                        ),
+                    ),
+                ),
+            )));
+             
+             
+//               $inputFilter->add($factory->createInput(array(
+//                'name'     => 'de_latitud',
+//                'required' => true,
+//                'filters'  => array(
+//                    array('name' => 'StripTags'),
+//                    array('name' => 'StringTrim'),
+//                ),
+//                'validators' => array(
+//                    array(
+//                        'name'    => 'StringLength',
+//                        'options' => array(
+//                            'encoding' => 'UTF-8',
+//                            'min'      => 1,
+//                            'max'      => 100,
+//                        ),
+//                    ),
+//                ),
+//            )));
+//                         
+//             $inputFilter->add($factory->createInput(array(
+//                'name'     => 'de_longitud',
+//                'required' => true,
+//                'filters'  => array(
+//                    array('name' => 'StripTags'),
+//                    array('name' => 'StringTrim'),
+//                ),
+//                'validators' => array(
+//                    array(
+//                        'name'    => 'StringLength',
+//                        'options' => array(
+//                            'encoding' => 'UTF-8',
+//                            'min'      => 1,
+//                            'max'      => 100,
+//                        ),
+//                    ),
+//                ),
+//            )));
+             
+                         $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_rango_precio',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 70,
+                        ),
+                    ),
+                ),
+            )));
+  
+             $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_horario_opcional',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 70,
+                        ),
+                    ),
+                ),
+            )));
+             
+             $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_direccion',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 250,
+                        ),
+                    ),
+                ),
+            )));
+             
+
+            //fin de validaciones
+            $this->inputFilter = $inputFilter;
+        }
+        return $this->inputFilter;
+    }
+    
 }

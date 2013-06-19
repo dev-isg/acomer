@@ -182,8 +182,10 @@ $.getJSON('/local/index/jsondepartamento',function(data){
 
 $.getJSON('/restaurante/index/medio',function(data){ 
     $.each(data,function(i,val){
+
           $('#cmodal').append("<input type='checkbox' name='va_modalidad[]' id="+ val.in_id+" value="+ val.in_id+"> " + val.va_nombre + "</br>" ); 
                  $('#comodal').append("<input type='checkbox' name='va_modalidad[]' id="+ val.in_id+" value="+ val.in_id+"> " + val.va_nombre + "</br>" );              
+
     });
 
 });

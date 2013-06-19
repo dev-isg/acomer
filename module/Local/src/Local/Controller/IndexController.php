@@ -14,11 +14,14 @@ use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
 use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
-//use Usuario\Model\Usuario;          // <-- Add this import
+use Local\Model\Local;          // <-- Add this import
 use Local\Form\LocalForm;        // <-- Add this import
 use Local\Model\LocalTable;
 use Local\Model\Ubigeo;
 
+use Zend\Db\TableGateway\TableGateway,
+    Zend\Db\Adapter\Adapter,
+    Zend\Db\ResultSet\ResultSet;
 class IndexController extends AbstractActionController
 {
      protected $localTable;
@@ -50,7 +53,29 @@ class IndexController extends AbstractActionController
     }
     
     public function agregarlocalAction(){
-        $form = new LocalForm();
+           $form = new LocalForm();
+              
+        $form->get('submit')->setValue('INSERTAR');
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+           $local = new Local();
+            //$form->setInputFilter($local->getInputFilter());
+            $form->setData($request->getPost());          
+           if ($form->isValid()) {
+                $local->exchangeArray($form->getData());
+                $this->getLocalTable()->guardarLocal($local);
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/local');          
+             }else{
+                                 $local->exchangeArray($form->getData());
+                $this->getLocalTable()->guardarLocal($local);
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/local');   
+ 
+                 
+                 
+             }
+        }
+        
+     
         return array('form' => $form);
     }
     
@@ -95,6 +120,13 @@ class IndexController extends AbstractActionController
         $ubigeo=$this->getUbigeoTable()->getDistrito($idprovi,$iddepar);
 
         echo Json::encode($ubigeo);
+        exit();
+    }
+    
+    public function jsonserviciosAction(){
+        $servicios=$this->getUbigeoTable()->getServicios();
+       // var_dump($servicios);exit;
+        echo Json::encode($servicios);
         exit();
     }
 

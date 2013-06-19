@@ -60,7 +60,7 @@ class LocalTable
     public function guardarLocal(Local $local){
         
                 $data = array(
-           'va_telefono'         => $local->va_nombre,
+           'va_telefono'         => $local->va_telefono,
            'va_horario'   => $local->va_horario,
            'de_latitud'            => $local->de_latitud,
            'de_longitud'         => $local->de_longitud,

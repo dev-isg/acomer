@@ -7,7 +7,11 @@ use Zend\Db\ResultSet\AbstractResultSet;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 //namespace Application\Modelo\Entity;
+use Zend\Db\Adapter\Platform\PlatformInterface;
 
+
+
+use Zend\Db\Adapter\Platform;
 
 class Ubigeo extends TableGateway{
     protected $tableGateway;
@@ -62,6 +66,24 @@ class Ubigeo extends TableGateway{
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             
        return $results->toArray();
+       
+   }
+   
+   public function getServicios(){
+       $select=$this->getAdapter()->query("SELECT * FROM ta_servicio_local")->execute();
+//            $select=$this->getAdapter()->select()->from('ta_servicio_local');
+//            $selectString = $this->getSql()->getSqlStringForSqlObject($select);
+//            $adapter=$this->getAdapter();
+//            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//            
+            
+                 $returnArray=array();
+        foreach ($select as $result) {
+            $returnArray[] = $result;
+        }
+//        var_dump($returnArray);exit;
+        
+       return $returnArray;//->toArray();
        
    }
     
