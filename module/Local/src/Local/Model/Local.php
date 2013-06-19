@@ -64,7 +64,84 @@ class Local
                         'options' => array(
                             'encoding' => 'UTF-8',
                             'min'      => 1,
+                            'max'      => 18,
+                        ),
+                    ),
+                ),
+            )));
+            
+             $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_horario',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 70,
+                        ),
+                    ),
+                ),
+            )));
+             
+             
+                         $inputFilter->add($factory->createInput(array(
+                'name'     => 'de_latitud',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
                             'max'      => 100,
+                        ),
+                    ),
+                ),
+            )));
+                         
+             $inputFilter->add($factory->createInput(array(
+                'name'     => 'de_longitud',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 100,
+                        ),
+                    ),
+                ),
+            )));
+             
+                         $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_rango_precio',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 70,
                         ),
                     ),
                 ),
