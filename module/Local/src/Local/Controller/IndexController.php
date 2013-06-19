@@ -60,13 +60,16 @@ class IndexController extends AbstractActionController
         if ($request->isPost()) {
            $local = new Local();
             //$form->setInputFilter($local->getInputFilter());
-            $form->setData($request->getPost());          
+            $form->setData($request->getPost());     
+                
            if ($form->isValid()) {
+               echo 'HOLa';exit;
                 $local->exchangeArray($form->getData());
                 $this->getLocalTable()->guardarLocal($local);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/local');          
              }else{
-                                 $local->exchangeArray($form->getData());
+               echo 'HOLa else';exit;
+                $local->exchangeArray($form->getData());
                 $this->getLocalTable()->guardarLocal($local);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/local');   
  
