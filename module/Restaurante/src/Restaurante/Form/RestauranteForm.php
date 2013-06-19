@@ -25,7 +25,7 @@ class RestauranteForm extends Form
             ),
             'attributes' => array(               
                 'class' => 'span10  ',
-                'id'   => 'name_rest',
+                'id'   => 'va_nombre',
                 'placeholder'=>'Ingrese nombre del restaurante'
             ),
         ));
@@ -34,7 +34,7 @@ class RestauranteForm extends Form
             'type' => 'Text',
               'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'raz_rest',
+                'id'   => 'va_razon_social',
                 'placeholder'=>'Ingrese la Razon Social'
             ),
             'options' => array(
@@ -46,7 +46,7 @@ class RestauranteForm extends Form
             'type' => 'Text',
             'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'web_rest',
+                'id'   => 'va_web',
                 'placeholder'=>'Ingrese su página Web'
             ),
             'options' => array(
@@ -58,7 +58,7 @@ class RestauranteForm extends Form
             'type' => 'text',
               'attributes' => array(               
                 'class' => '',
-                'id'   => '',
+                'id'   => 'va_imagen',
                 'placeholder'=>'Ingrese su página Web'
             ),
             'options' => array(
@@ -74,7 +74,7 @@ class RestauranteForm extends Form
             'type' => 'Select',
              'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'esp_rol'
+                'id'   => 'Ta_tipo_comida_in_id'
             ),
            'options' => array(
                      'label' => 'Especialidad',
@@ -95,7 +95,7 @@ class RestauranteForm extends Form
             'type' => 'Text',
              'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'ruc_rest',
+                'id'   => 'va_ruc',
                  'placeholder'=>'Repita su Ruc'
             ),
             'options' => array(
@@ -108,7 +108,7 @@ class RestauranteForm extends Form
             'type' => 'MultiCheckbox',
              'attributes' => array(               
                 'class' => 'checkbox inline',
-                'id'   => 'check-mod',
+                'id'   => 'va_modalidad',
                  'placeholder'=>'Ingrese su modalidad de pago'
             ),
             'options' => array(
