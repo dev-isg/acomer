@@ -58,16 +58,21 @@ class LocalTable
     }
     
     public function guardarLocal(Local $local){
+        
                 $data = array(
-           'va_nombre'         => $restaurante->va_nombre,
-           'va_razon_social'   => $restaurante->va_razon_social,
-           'va_web'            => $restaurante->va_web,
-           'va_imagen'         => $restaurante->va_imagen,
-           'va_ruc'            => $restaurante->va_ruc,  
-           'Ta_tipo_comida_in_id'  => $restaurante->Ta_tipo_comida_in_id  
+           'va_telefono'         => $local->va_nombre,
+           'va_horario'   => $local->va_horario,
+           'de_latitud'            => $local->de_latitud,
+           'de_longitud'         => $local->de_longitud,
+           'va_rango_precio'            => $local->va_rango_precio,  
+           'va_horario_opcional'  => $local->va_horario_opcional,
+            'va_direccion' => $local->va_direccion,
+           'ta_restaurante_in_id' => $local->ta_restaurante_in_id,
+            'ta_ubigeo_in_id' => $local->ta_ubigeo_in_id
+                    
         );
 
-        $id = (int)$restaurante->in_id;
+        $id = (int)$local->in_id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
         } else {
