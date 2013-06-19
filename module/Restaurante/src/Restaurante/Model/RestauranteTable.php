@@ -82,6 +82,7 @@ class RestauranteTable
             $this->tableGateway->insert($data);             
                 if($comida != '')
                 {
+                    var_dump($comida);exit;
                   $sql = new Sql($adapter);
                       for ($i = 0; $i<sizeof($comida); $i++) {
                            $insert = $sql->insert()

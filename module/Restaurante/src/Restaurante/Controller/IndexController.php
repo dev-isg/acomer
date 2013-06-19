@@ -64,7 +64,8 @@ class IndexController extends AbstractActionController
         $comida = $this->params()->fromPost('va_modalidad');
         if ($request->isPost()) {
           $datos =$this->request->getPost();
-         var_dump($datos);exit;
+       
+        var_dump($comida);exit;
             $restaurante = new Restaurante();
             $form->setInputFilter($restaurante->getInputFilter());
             $form->setData($request->getPost());      
@@ -187,6 +188,7 @@ class IndexController extends AbstractActionController
 
         $datos = $this->getRestauranteTable()->medio();
         echo Json::encode($datos);
+        //var_dump($datos);
         exit();
     }
 }

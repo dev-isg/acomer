@@ -39,17 +39,20 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
         if ($request->isPost()) {
            $datos =$this->request->getPost();
-        //   var_dump($datos);exit;
+         
            
            $pass1 = $datos['va_contrasenia'];
            $pass2 = $datos['va_contrasenia2'];
+           $rol = $datos['Ta_rol_in_id'];
+      
            $usuario = new Usuario();
             $form->setInputFilter($usuario->getInputFilter());
-            $form->setData($request->getPost());
-              
+            $form->setData($request->getPost());              
             if ($form->isValid()) {
+             
                 $usuario->exchangeArray($form->getData());
-                if($pass1==$pass2){
+                if($pass1==$pass2 ){
+                  
                 $this->getUsuarioTable()->guardarUsuario($usuario);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario');      
             }

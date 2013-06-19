@@ -116,7 +116,7 @@ class RestauranteForm extends Form
             'options' => array(
                      
                      'value_options' => array(
-                '' => 'seleccc'
+                
                      ),
              )
         ));
