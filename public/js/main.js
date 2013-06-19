@@ -175,10 +175,8 @@ var cerrar_mod = function(mod,form){
 $.getJSON('/local/index/jsondepartamento',function(data){
     $.each(data,function(i,val){
           $('#departamento').append( "<option value=" + val.in_iddep + " >" + val.ch_departamento + " </option>"); 
-       }
-               
+                   
     });
-
 
 });
  
@@ -190,9 +188,7 @@ $.getJSON('/local/index/jsondepartamento',function(data){
          $("#provincia").empty();      
             $.each(data,function(i,val){         
                 $('#provincia').append( "<option value=" + val.in_idprov + " >" + val.ch_provincia + " </option>");                                
-            }
-              
-          });  
+                      });  
      });
 });
 
