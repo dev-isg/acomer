@@ -200,25 +200,17 @@ class IndexController extends AbstractActionController
          //var_dump(Json::encode(array('datos'=>$datos)));exit; 
         echo Json::encode($datos);
         exit();
-        
-        
-      //  $result = new JsonModel($datos);
-       // echo $result;//var_dump($result);
- //return $result;
-         //var_dump($json);exit;
-       //  echo $json;
-         //return new ViewModel(array('lista'=>$json));
-         //var_dump($result);exit;
-        // return $result;
-  
-         /*if ($request->isPost()) {
-          //$datos=$this->params()->fromPost('texto');
-          $datos=$this->getUsuarioTable()->listar();
-         $result = Json::encode(array('datos'=>$datos));
-        var_dump($result);exit;
-      return $result;
 
-    }*/
+  }
+  
+    public function jsonrolAction(){
+        
+        //$request = $this->getRequest();
+        $datos=$this->getUsuarioTable()->estado();
+         //var_dump(Json::encode(array('datos'=>$datos)));exit; 
+        echo Json::encode($datos);
+        exit();
+
   }
     public function listarvariosAction(){
          $echo = new IndexController();

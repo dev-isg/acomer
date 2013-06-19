@@ -65,10 +65,9 @@ class UsuarioForm extends Form
             ),
            'options' => array(
                      'label' => 'Rol',
-                     'value_options' => array(
-                          '' => 'selecccione..',
-                             '1' => 'Administrador',
-                             '2' => 'Editor',                   
+                  'value_options' => array(
+                          '' => 'selecccione :',
+                                               
                      ),
              )
         ));

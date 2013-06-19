@@ -315,7 +315,7 @@ public function guardarUsuario(Usuario $usuario)
         return $returnArray;
     }
     
-    public function estado(){
+     public function estado(){
         
         $datos=$this->tableGateway->getAdapter()->query("SELECT * FROM ta_rol")->execute();
                 $returnArray=array();
@@ -326,6 +326,7 @@ public function guardarUsuario(Usuario $usuario)
         return  $returnArray;
         
     }
+    
 
     public function listar2(){
 
