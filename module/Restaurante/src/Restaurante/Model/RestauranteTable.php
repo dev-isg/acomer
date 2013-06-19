@@ -84,28 +84,20 @@ class RestauranteTable
             $this->tableGateway->insert($data);             
                 if($comida != '')
                 {
-                    var_dump($comida);exit;
+                //    var_dump($comida);exit;
         $sql = new Sql($adapter);
-      //  for ($i = 0; $i<sizeof($comida); $i++) {
+       for ($i = 0; $i<sizeof($comida); $i++) {
     
    $insert = $sql->insert()
                                ->into('ta_restaurante_has_ta_medio_pago')
                                ->values(array(
-                       'Ta_restaurante_in_id' => 45,
+                       'Ta_restaurante_in_id' => 46,
                        'Ta_medio_pago_in_id' => $comida[0] ));
                         $selectString = $sql->getSqlStringForSqlObject($insert);
                         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
                         return $results;
-                        
-                        $insert = $sql->insert()
-                               ->into('ta_restaurante_has_ta_medio_pago')
-                               ->values(array(
-                       'Ta_restaurante_in_id' => 45,
-                       'Ta_medio_pago_in_id' => $comida[1] ));
-                        $selectString = $sql->getSqlStringForSqlObject($insert);
-                        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-                        return $results;
-//}
+
+}
   //      exit;
       /* for($i=0;$i<sizeof($comida);$i++){
            echo "s";
