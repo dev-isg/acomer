@@ -112,7 +112,7 @@ var cerrar_mod = function(mod,form){
 });
  $.getJSON('/restaurante/index/jsoncomida',function(data){
     $.each(data,function(i,val){
-      $('#esp_rol').append("<option value=" + val.in_id + " >" + va_nombre_tipo + " </option>" );            
+      $('#esp_rol').append("<option value=" + val.in_id + " >" + val.va_nombre_tipo + " </option>" );            
     })
 });
 // $.getJSON('especialidad.json',function(data){
