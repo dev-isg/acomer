@@ -26,10 +26,8 @@ echo $this->formHidden($form->get('in_id'));
 ?><div class="control-group "><?php echo $this->formRow($form->get('va_razon_social'));?></div ><?php
 ?><div class="control-group "><?php echo $this->formRow($form->get('va_web'));?></div><?php
 ?><div class="control-group "><?php echo $this->formRow($form->get('va_imagen'));?></div><?php
-?><div class="control-group "><?php echo $this->formRow($form->get('va_ruc'));?></div><?php
-?><div class="control-group "><?php echo $this->formRow($form->get('Ta_tipo_comida_in_id'));?></div><?php
-
-?>
+?><div class="control-group "><?php echo $this->formRow($form->get('va_ruc'));?></div><?php?>
+<div class="control-group "><select name="Ta_tipo_comida_in_id" id="Ta_tipo_comida_in_id"></select></div>
 <div id="modalidad">
   <label>Modalidad de Pago</label>
   <label class='checkbox inline' id="cmodal">
