@@ -203,6 +203,7 @@ $.getJSON('/local/index/jsonservicios',function(data){
  console.log(dep);
       $.getJSON(url,function(data){
          $("#provincia").empty();
+          $("#distrito").empty();
           $("#provincia").append("<option value=''>Seleccione</option>");      
             $.each(data,function(i,val){         
                 $('#provincia').append( "<option value=" + val.in_idprov + " >" + val.ch_provincia + " </option>");                                
