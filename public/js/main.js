@@ -34,15 +34,11 @@ $('#restaurante').validate({
                 required : true,
                 rucReal:true            
             },
-<<<<<<< HEAD
         Ta_tipo_comida_in_id:{
                 required : true,            
-=======
+
         esp_rol:{
-                required : true
-             
->>>>>>> 70bf0cddbf370b1391f422d21615e3cc14b12d40
-                            
+                required : true                             
             }
       },
       messages:{
