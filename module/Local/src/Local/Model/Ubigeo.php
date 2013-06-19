@@ -21,7 +21,13 @@ class Ubigeo extends TableGateway{
             $datos = $this->select();
             return $datos->toArray();     
     }
-    
+   public function getDepartamento($pais=1){
+       $rowset=$this->select()->from($this, array('DISTINCT in_iddep'))
+    ->where('in_idpais = ?', $pais);
+      // var_dump($rowset->toArray());exit;
+       return $rowset;
+       
+   }
 
     
     public function hcer(){

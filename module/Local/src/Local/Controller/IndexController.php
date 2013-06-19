@@ -63,10 +63,18 @@ class IndexController extends AbstractActionController
         $this->redirect()->toUrl('/local/index');
     }
     public function jsonubigeoAction(){
+        $this->getUbigeoTable()->getDepartamento();
         $ubigeo=$this->getUbigeoTable()->getUbigeo();
         echo Json::encode($ubigeo);
         exit();
         //print_r($a);exit;
+    }
+    
+    public function jsondepartamentoAction(){
+            
+        $ubigeo=$this->getUbigeoTable()->getDepartamento();
+        echo Json::encode($ubigeo);
+        exit();
     }
 
     public function fooAction()
