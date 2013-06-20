@@ -215,7 +215,6 @@ INNER JOIN `Ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
         foreach ($datos as $result) {
             $returnArray[] = $result;
         }
-        
         return  $returnArray;
         
     }

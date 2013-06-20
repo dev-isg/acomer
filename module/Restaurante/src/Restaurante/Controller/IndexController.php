@@ -58,34 +58,7 @@ class IndexController extends AbstractActionController
    
     }
     
-      public function medio()
-    {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $adapter = $this->dbAdapter;
-        $sql = new Sql($adapter);
-        $select = $sql->select()
-            ->from('ta_medio_pago');
-            $selectString = $sql->getSqlStringForSqlObject($select);
-            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-            return $results;
-            
-     }
      
-      public function mediosAction()
-        {
-       $id = (int) $this->params()->fromRoute('in_id', 0);
-        $datos = $this->getRestauranteTable()->medio(104);
-        echo Json::encode($datos);
-        //var_dump($datos);
-        exit();
-       }
-        public function probandoAction()
-        {
-       $id = (int) $this->editarrestauranteAction();
-        $datos = $this->medio($id);
-        echo Json::encode($datos);
-        //var_dump($datos);
-        exit();
-       }
     public function agregarrestauranteAction()
     {
         
@@ -165,12 +138,29 @@ class IndexController extends AbstractActionController
             return $results;       
      }
  
+      public function medio()
+    {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+            ->from('ta_medio_pago');
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            return $results;
+            
+     }
      
-     
+
+     public function mediAction(){
+         $id=$this->params()->fromQuery('in_id');
+        $ubigeo=$this->getRestauranteTable()->medio($id);
+//        var_dump($this->getUbigeoTable()->getProvincia($iddepar));exit;
+        echo Json::encode($ubigeo);
+        exit();
+    }
       public function editarrestauranteAction()
      
-    {
-                
+    {   
         $id = (int) $this->params()->fromRoute('in_id', 0);
         $va_nombre = $this->params()->fromRoute('va_nombre',0);
         //var_dump($id);exit;
