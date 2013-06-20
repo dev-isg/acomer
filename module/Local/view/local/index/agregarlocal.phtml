@@ -48,3 +48,11 @@ echo $this->formHidden($form->get('ta_restaurante_in_id'));
                              </div>
 <div class="control-group "><?php echo $this->formSubmit($form->get('submit'));?></div><?php
 echo $this->form()->closeTag();?> </div> 
+
+<script>
+	$(document).ready(function(){
+		var id_r = $('h5').text;
+console.log(id_r);
+$('#ta_restaurante_in_id').val(id_r);
+	})
+</script>

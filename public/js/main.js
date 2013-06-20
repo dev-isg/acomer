@@ -124,8 +124,7 @@ $(elemento).validate({
 
 }
 validar('#usuario');
-var id_r = $('h5').text;
-console.log(id_r);
+
 $('#ta_restaurante_in_id').val(id_r);
  //llenado de combo
  $.getJSON('/usuario/index/jsonestado',function(data){
