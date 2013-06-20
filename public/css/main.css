@@ -96,16 +96,15 @@ textarea {
 label.valid {
       width: 24px;
       height: 24px;
-      background: url(./img/valid.png) center center no-repeat;
+      background: url(../img/valid.png) center center no-repeat;
       display: inline-block;
       text-indent: -9999px;
       vertical-align: top;
     }
-    label.error {
-     
-      color: red;
-     
+label.error {
+    color: red;
     }
+    
 .list-img{
   width: 150px;
   height: 80px;
@@ -124,18 +123,6 @@ label.valid {
 .ra{
   padding: 0 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* ==========================================================================
    Helper classes
