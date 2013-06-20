@@ -13,6 +13,7 @@ use Restaurante\Model\RestauranteTable;
 use Zend\Db\Adapter\Adapter;
 use Zend\Validator\File\Size;
 
+
 class IndexController extends AbstractActionController
 {
   protected $restauranteTable;
@@ -68,6 +69,23 @@ class IndexController extends AbstractActionController
             return $results;
             
      }
+     
+      public function mediosAction()
+        {
+       $id = (int) $this->params()->fromRoute('in_id', 0);
+        $datos = $this->getRestauranteTable()->medio(104);
+        echo Json::encode($datos);
+        //var_dump($datos);
+        exit();
+       }
+        public function probandoAction()
+        {
+       $id = (int) $this->editarrestauranteAction();
+        $datos = $this->medio($id);
+        echo Json::encode($datos);
+        //var_dump($datos);
+        exit();
+       }
     public function agregarrestauranteAction()
     {
         
@@ -96,18 +114,59 @@ class IndexController extends AbstractActionController
                         $this->getRequest()->getPost()->toArray(),          
                        $this->getRequest()->getFiles()->toArray()
                    ); 
-            $form->setData($data);    
+            $form->setData($data);     
+     
+            
             if ($form->isValid()) {
-             $nonFile = $request->getPost()->toArray();
-               $File = $this->params()->fromFiles('va_imagen');
-               $restaurante->exchangeArray($form->getData());
-                $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');      
-            }
+                
+      $nonFile = $request->getPost()->toArray();
+      $File = $this->params()->fromFiles('va_imagen');
+      $restaurante->exchangeArray($form->getData());
+      $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
+      return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');        
+                
+      
+   
+    $adapter = new \Zend\File\Transfer\Adapter\Http();
+    $adapter->setValidators($File['name']);
+     // var_dump($adapter);exit;
+    if (!$adapter->isValid()){
+      
+        $dataError = $adapter->getMessages();
+        $error = array();
+        foreach($dataError as $key=>$row)
+        {
+            $error[] = $row;
+        }
+        $form->setMessages(array('fileupload'=>$error ));
+    } else {
+       
+        $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
+        if ($adapter->receive($File['name'])) {
+            
+            echo 'entrroriiii';
+           }
+        }}
            }     
         return array('form' => $form);
     }
 
+    
+        public function restaurantemedio($id)
+    {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select() 
+           ->from(array('f' => 'ta_restaurante_has_ta_medio_pago')) 
+            ->join(array('b' => 'Ta_medio_pago'),'f.Ta_medio_pago_in_id = b.in_id',array('va_nombre'))
+           ->where(array('f.Ta_restaurante_in_id'=>$id)); 
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            return $results;       
+     }
+ 
+     
+     
       public function editarrestauranteAction()
      
     {
@@ -156,7 +215,7 @@ class IndexController extends AbstractActionController
                 $nonFile = $request->getPost()->toArray();
                $File = $this->params()->fromFiles('va_imagen');
                //$e=$File['name'];
-               var_dump($File);exit;
+               //var_dump($File);exit;
                 $this->getRestauranteTable()->guardarRestaurante($restaurante,$File);
                 $this->redirect()->toUrl('/restaurante');
             }
@@ -223,6 +282,11 @@ class IndexController extends AbstractActionController
             return $results;
             
      }
+     
+     
+
+     
+     
 
         public function cambiaestadoAction() {
               $id = $this->params()->fromQuery('id');
