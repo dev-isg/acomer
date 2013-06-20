@@ -1,19 +1,18 @@
-requirejs.config({
-      paths: {
-        'jquery': 'lib/jquery-1.8.3.min',
-        'bootstrap': 'lib/bootstrap.min',
-        'validate': 'vendor/jquery.validate',
-        'gmap' : 'vendor/gmap3.min',
-        'upload' : 'vendor/AjaxUpload.2.0.min'
-      }
-    });
+// requirejs.config({
+//       paths: {
+//         'jquery': 'lib/jquery-1.8.3.min',
+//         'bootstrap': 'lib/bootstrap.min',
+//         'validate': 'vendor/jquery.validate',
+//         'gmap' : 'vendor/gmap3.min',
+//         'upload' : 'vendor/AjaxUpload.2.0.min'
+//       }
+//     });
 
 
-require(['jquery','upload','bootstrap', 'validate','gmap'], function ($) {
+//require(['jquery','upload','bootstrap', 'validate','gmap'], function ($) {
 //funciones de usuarios
-
+$(document).ready(function(){
        
-
 var limpiar_modal =function(){
 $('.control-group').removeClass('success');
   $('.control-group').removeClass('error');
@@ -124,30 +123,8 @@ $(elemento).validate({
 	  });
 
 }
-var cerrar_mod = function(mod,form){
-    $(mod).modal('hide');
-    $(form)[0].reset();
-    limpiar_modal();
- }
-
-
-//utilizando funciones 
- validar('#usuario');
- 
- // $('#cerrar_insert_usuario').on('click', function(){
- // 	cerrar_mod('#ins-usuario','#ingreso-form');
- // });
- 
- // $('#cerrar_update_usuario').on('click', function(){
- // 	cerrar_mod('#mod-usuario','#modificar-form');
- // });
- $('#cerrar_rol').on('click', function(){
- 	cerrar_mod('#ins-rol','#form_rol');
- });
- // $('#cerrar_insert_rest').on('click', function(){
- //  cerrar_mod('#ing-restaurante','#ingrest-form');
- // });
-//json para rol
+validar('#usuario');
+ //llenado de combo
  $.getJSON('/usuario/index/jsonestado',function(data){
 		$.each(data,function(i,val){
 			$('#Ta_rol_in_id').append("<option value=" + val.in_id + " >" + val.va_nombre_rol + " </option>" );			
@@ -158,44 +135,30 @@ var cerrar_mod = function(mod,form){
       $('#Ta_tipo_comida_in_id').append("<option value=" + val.in_id + " >" + val.va_nombre_tipo + " </option>" );            
     })
 });
-// $.getJSON('especialidad.json',function(data){
-//    $.each(data,function(i,val){
-//      $('#esp_rol').append("<option value=" + val.id + " >" + val.nombre + " </option>" );            
-//    })
-//});
-//
-// $.getJSON('mod.json',function(data){
-//    $.each(data,function(i,val){
-//      $('#check-mod').append( "<input type='checkbox' id=" + val.id + " >" + val.nombre+ "</br>");            
-//    })
-//});
-
-//mapa
-
-$.getJSON('/local/index/jsondepartamento',function(data){
-    $.each(data,function(i,val){
-          $('#departamento').append( "<option value=" + val.in_iddep + " >" + val.ch_departamento + " </option>"); 
-                   
-    });
-
-});
 
 $.getJSON('/restaurante/index/medio',function(data){ 
     $.each(data,function(i,val){
-
           $('#cmodal').append("<input type='checkbox' name='va_modalidad[]' id="+ val.in_id+" value="+ val.in_id+"> " + val.va_nombre + "</br>" ); 
-                 $('#comodal').append("<input type='checkbox' name='va_modalidad[]' id="+ val.in_id+" value="+ val.in_id+"> " + val.va_nombre + "</br>" );              
-
+          $('#comodal').append("<input type='checkbox' name='va_modalidad[]' id="+ val.in_id+" value="+ val.in_id+"> " + val.va_nombre + "</br>" );              
     });
-
 });
 $.getJSON('/local/index/jsonservicios',function(data){ 
     $.each(data,function(i,val){
           $('#servicio_local').append("<input type='checkbox' name='servicio_local[]' id="+ val.in_id+"> " + val.va_nombre + "</br>" );                     
     });
-
 });
 
+//llenado de combos
+$("#pais").change(function(evento){
+   var pais=parseInt($(this).val());
+$.getJSON('/local/index/jsondepartamento',function(data){
+    if(pais==1){
+       $.each(data,function(i,val){
+          $('#departamento').append( "<option value=" + val.in_iddep + " >" + val.ch_departamento + " </option>");                    
+    });          
+    }
+});
+});
 
   $("#departamento").change(function(evento){
    var dep=parseInt($(this).val());
@@ -216,7 +179,7 @@ $.getJSON('/local/index/jsonservicios',function(data){
    var dep=parseInt($('#departamento').val());
     var pro=parseInt($(this).val());
    var url="/local/index/jsondistrito?iddepa=" + dep + "&iddpro=" + pro
- console.log(pro);
+  console.log(pro);
       $.getJSON(url,function(data){
          $("#distrito").empty();
         $("#distrito").append("<option value=''>Seleccione</option>");
@@ -227,6 +190,8 @@ $.getJSON('/local/index/jsonservicios',function(data){
           });  
      });
 });
+
+//mapa
 
 var map;
  
@@ -243,13 +208,8 @@ function load_map() {
 $('#search').on('click', function() {
   load_map();
   $('#map_canvas').css("display","block");
-    // Obtenemos la dirección y la asignamos a una variable
     var address = $('#address').val();
-    // Creamos el Objeto Geocoder
     var geocoder = new google.maps.Geocoder();
-
-    // Hacemos la petición indicando la dirección e invocamos la función
-    // geocodeResult enviando todo el resultado obtenido
     geocoder.geocode({ 'address': address}, geocodeResult);
 });
 var infoWindow = null;
@@ -291,68 +251,40 @@ function geocodeResult(results, status) {
     }
 }
 
-$('#para').click(function(){
   //carga imagen
-
-      var btn_firma = $('#addImage'), interval;    
-      new AjaxUpload('#addImage', {
-        action: 'includes/uploadFile.php',onSubmit : function(file , ext){
-          if (! (ext && /^(jpg|png)$/.test(ext))){
-            alert('Sólo se permiten Imagenes .jpg o .png');
-            return false;
-          } else {
-            $('#loaderAjax').show();
-            btn_firma.text('Espere por favor');
-            this.disable();
-          }
-        },
-        onComplete: function(file, response){
+// $('#para').click(function(){
+//       var btn_firma = $('#addImage'), interval;    
+//       new AjaxUpload('#addImage', {
+//         action: 'includes/uploadFile.php',onSubmit : function(file , ext){
+//           if (! (ext && /^(jpg|png)$/.test(ext))){
+//             alert('Sólo se permiten Imagenes .jpg o .png');
+//             return false;
+//           } else {
+//             $('#loaderAjax').show();
+//             btn_firma.text('Espere por favor');
+//             this.disable();
+//           }
+//         },
+//         onComplete: function(file, response){
      
-          btn_firma.text('Cambiar Imagen');          
-          respuesta = $.parseJSON(response);
-          if(respuesta.respuesta == 'done'){
-            $('#fotografia').removeAttr('scr');
-            $('#fotografia').attr('src','img/' + respuesta.fileName);
-            $('#loaderAjax').show();
-          }
-          else{
-            alert(respuesta.mensaje);
-          }
+//           btn_firma.text('Cambiar Imagen');          
+//           respuesta = $.parseJSON(response);
+//           if(respuesta.respuesta == 'done'){
+//             $('#fotografia').removeAttr('scr');
+//             $('#fotografia').attr('src','img/' + respuesta.fileName);
+//             $('#loaderAjax').show();
+//           }
+//           else{
+//             alert(respuesta.mensaje);
+//           }
             
-          $('#loaderAjax').hide();  
-          this.enable();  
-        }
-    });
-});
-
-//json para restaurante
-//$.getJSON('rest.json', function(data) {
-// var key =1;
-// $.each(data, function(key, val) {
-//     key=key+1;   
-//
-//    var nombre =val.nombre;
-//    var demo2 = nombre.replace(' ','');
-//       $('#table-res').append(
-//       "<tr id="+ val.id + "><td>" + key + "</td><td><img src='img/"+ val.imagen + "' class='list-img img-polaroid'/></td><td><a href=''> " + val.nombre + 
-//            " </a></td><td>" + val.razon +
-//             "</td><td>" + val.web +
-//             "</td><td>" + val.ruc +
-//             "</td><td><a data-id=" + val.id  + " class='modificar btn btn-info' ><i class='icon-edit icon-white'></i></a> " +
-//             "<a href='#' name="+ demo2 + " class='eli-resta btn btn-danger' data-id="+ val.id +" ><i class='icon-trash icon-white'></i></a> "+
-//             "<a data-id=" + val.id  + " class='listar btn btn-primary' ><i class='icon-tasks icon-white'></i></a> " +
-//             "</td></tr>"
-//      );
-//   
-//      });
-//
-//  $(".eli-resta").on("click",function(){
-//  var id = $(this).attr('data-id');
-//  var nom =$(this).attr("name");
-//  $('#eli-rest').modal('show');
-//  $('#verestaurante').attr({'data-id':id});
-//  $('#verestaurante').html("Esta seguro de Eliminar el restaurante " + nom + " ?");
+//           $('#loaderAjax').hide();  
+//           this.enable();  
+//         }
+//     });
 // });
+
+
 //   $('#direccion_loc').keyup(function () {
 //      var value = $(this).val();
 //      var d = $("#distrito option:selected").text()
@@ -361,85 +293,14 @@ $('#para').click(function(){
 //      $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
 //    }).keyup();
 //
-//  $('.listar').on("click",function(){
-//      $('#local').modal('show');
-//   
-//});
-
-      
-  //});
-//json para usuarios - operaciones para usuarios
-// $.getJSON('/usuario/index/jsonlistar',{format:"json"}, function(data) {
-//  var key =1;
-//  var estado; 
-  // $.each(data, function(key, val) {
-  // 	 key=key+1;   
-  //        console.log(data);
-         
-   //        	if(val.en_estado=="activo"){
-  	// estado="Activo";
-  	//    $('#table').append(
-   //  	 "<tr id="+val.in_id+"><td><input id=" + val.in_id + " type='checkbox' class='check' name='checkname' checked='checked'>"+
-   //          "</td><td>" + key + "</td><td> <span id=la"+ val.in_id  + " class='label label-success'>" + estado +
-   //          "</span></td><td>" + val.va_nombre + 
-   //          "</td><td>" + val.va_apellidos +
-   //           "</td><td>" + val.va_email +
-   //           "</td><td>" + val.va_nombre_rol +
-   //           "</td><td><a data-id=" + val.in_id  + " class='modificar btn btn-info' ><i class='icon-edit icon-white'></i></a> " +
-   //           "<a href='#' name="+ val.va_nombre +" class='eli btn btn-danger' data-id="+ val.in_id +" ><i class='icon-trash icon-white'></i></a>"+
-   //           "</td></tr>"
-   //  	);
-   //    }else{
-   //   	estado="Inactivo";
-   //   	 $('#table').append(
-   //  	 "<tr id="+val.in_id+"><td><input id=" + val.in_id + " type='checkbox' class='check' name='checkname' >"+
-   //          "</td><td>" + key + "</td><td> <span id=la"+ val.in_id +" class='label label-important' >" + estado +
-   //          "</span></td><td>" + val.va_nombre + 
-   //          "</td><td>" + val.va_apellidos +
-   //           "</td><td>" + val.va_email +
-   //           "</td><td>" + val.va_nombre_rol +
-   //           "</td><td><a data-id=" + val.in_id  + "  class='modificar btn btn-info' data-toggle='modal'><i class='icon-edit icon-white'></i></a> " +
-   //           "<a href='#' name=" + val.va_nombre + " class='eli btn btn-danger' data-id="+ val.in_id +" ><i class='icon-trash icon-white'></i></a>"+
-   //           "</td></tr>"
-   //  	);
-   //   };
-   	
-  //});
-
-//$('.modificar').on("click",function(){	
-
-
-  // var id_unica = $(this).attr('data-id');
-  // var url= "usuario/index/getusuarioid?id=" + id_unica;
-  // $.getJSON(url, function(data) {             
-  // var posicion_en_array;
-	 // $.each(data, function (i, val) {
-  //               if (val) {
-  //                   if (val.in_id == id_unica) {
-  //                       posicion_en_array = i;
-  //                       $('#modificar-form #nombre').val(val.va_nombre);
-  //                       $('#modificar-form #apellido').val(val.va_apellidos);
-  //                       $('#modificar-form #email').val(val.va_email);
-  //                       $('#modificar-form #pass').val(val.va_contrasenia);
-  //                       $("#modificar-form #rol option[value=" +  val.Ta_rol_in_id + "]").prop("selected",true);										
-                      
-  //                   }
-  //               }
-  //           });
-  //  });
-  //  $('#mod-usuario').modal('show');
-
-   
-//});
 
 $(".eli").on("click",function(){
 	var id = $(this).attr('data-id');
 	var nom =$(this).attr('name');
-        $('#eli-user').modal('show');
-          console.log(id);
+  $('#eli-user').modal('show');
+  console.log(id);
 	$('#verusuario').attr({'data-id':id});
 	$('#verusuario').html("Estas seguro de eliminar al usuario " + nom + " ?");
-
 });
 
 $('.check_rest').mousedown(function() {
@@ -508,8 +369,6 @@ $('.check_rest').mousedown(function() {
               }
     });	
 
-
-//});
   $("#delete").on("click",function(){
 	var user=$("#verusuario").attr("data-id");
 	$("#" + user).closest('tr').remove();
