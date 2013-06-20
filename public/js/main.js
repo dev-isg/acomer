@@ -125,24 +125,24 @@ $(elemento).validate({
 }
 validar('#usuario');
 
- //llenado de combo
- $.getJSON('/usuario/index/jsonestado',function(data){
-		$.each(data,function(i,val){
-			$('#Ta_rol_in_id').append("<option value=" + val.in_id + " >" + val.va_nombre_rol + " </option>" );			
-		})
-});
- $.getJSON('/restaurante/index/jsoncomida',function(data){
-    $.each(data,function(i,val){
-      $('#Ta_tipo_comida_in_id').append("<option value=" + val.in_id + " >" + val.va_nombre_tipo + " </option>" );            
-    })
-});
+//  //llenado de combo
+//  $.getJSON('/usuario/index/jsonestado',function(data){
+// 		$.each(data,function(i,val){
+// 			$('#Ta_rol_in_id').append("<option value=" + val.in_id + " >" + val.va_nombre_rol + " </option>" );			
+// 		})
+// });
+//  $.getJSON('/restaurante/index/jsoncomida',function(data){
+//     $.each(data,function(i,val){
+//       $('#Ta_tipo_comida_in_id').append("<option value=" + val.in_id + " >" + val.va_nombre_tipo + " </option>" );            
+//     })
+// });
 
-$.getJSON('/restaurante/index/medio',function(data){ 
-    $.each(data,function(i,val){
-          $('#cmodal').append("<input type='checkbox' name='va_modalidad[]' id="+ val.in_id+" value="+ val.in_id+"> " + val.va_nombre + "</br>" ); 
-          $('#comodal').append("<input type='checkbox' name='va_modalidad[]' id="+ val.in_id+" value="+ val.in_id+"> " + val.va_nombre + "</br>" );              
-    });
-});
+// $.getJSON('/restaurante/index/medio',function(data){ 
+//     $.each(data,function(i,val){
+//           $('#cmodal').append("<input type='checkbox' name='va_modalidad[]' id="+ val.in_id+" value="+ val.in_id+"> " + val.va_nombre + "</br>" ); 
+//           $('#comodal').append("<input type='checkbox' name='va_modalidad[]' id="+ val.in_id+" value="+ val.in_id+"> " + val.va_nombre + "</br>" );              
+//     });
+// });
 $.getJSON('/local/index/jsonservicios',function(data){ 
     $.each(data,function(i,val){
           $('#servicio_local').append("<input type='checkbox' name='servicio_local[]' id="+ val.in_id+" value="+val.in_id +"> " + val.va_nombre + "</br>" );                     
