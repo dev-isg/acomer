@@ -67,17 +67,18 @@ class RestauranteTable
         }
         return $row;
     }
-    public function guardarRestaurante(Restaurante $restaurante, $comida)
+    public function guardarRestaurante(Restaurante $restaurante, $comida ,$d)
     {
         $data = array(
            'va_nombre'         => $restaurante->va_nombre,
            'va_razon_social'   => $restaurante->va_razon_social,
            'va_web'            => $restaurante->va_web,
-           'va_imagen'         => $restaurante->va_imagen,
+           'va_imagen'         =>  $d['name'],
            'va_ruc'            => $restaurante->va_ruc,
            'Ta_tipo_comida_in_id'  => $restaurante->Ta_tipo_comida_in_id  
         );
         $id = (int)$restaurante->in_id;
+       // var_dump($d['name']);exit;
         if ($id == 0) {
             $this->tableGateway->insert($data); 
              $idRestaurante=$this->tableGateway->getLastInsertValue();
@@ -95,6 +96,7 @@ class RestauranteTable
         } else {
            
             if ($this->getRestaurante($id)) {
+              //  var_dump($d['name']);exit
                 $this->tableGateway->update($data, array('in_id' => $id));
             } else {
                 throw new \Exception('no existe el usuario');
