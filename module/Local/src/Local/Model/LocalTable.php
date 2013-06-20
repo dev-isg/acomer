@@ -95,15 +95,19 @@ class LocalTable
 //            
 //            $idserv=$this->tableGateway->getLastInsertValue();
            
-            
+          //   var_dump($servicio);exit;
             $this->tableGateway->insert($data);
             $idlocal=$this->tableGateway->getLastInsertValue();
-             var_dump($idlocal);exit;
-            $insert = $this->tableGateway->getSql()->insert()->into('ta_local_has_ta_servicio_local')
-                    ->values(array('ta_local_in_id'=>$idlocal,'ta_servicio_local_in_id'=>$idserv));
+             //var_dump($idlocal);exit;
+            foreach($servicio as $key=>$value){
+                
+             $insert = $this->tableGateway->getSql()->insert()->into('ta_local_has_ta_servicio_local')
+                    ->values(array('ta_local_in_id'=>$idlocal,'ta_servicio_local_in_id'=>$value));
             $selectString2 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insert);
             $adapter=$this->tableGateway->getAdapter();
             $result = $adapter->query($selectString2, $adapter::QUERY_MODE_EXECUTE);
+            }
+
             
             
             
