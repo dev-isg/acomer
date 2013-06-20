@@ -169,8 +169,8 @@ class IndexController extends AbstractActionController
                      '1' => 'Orange',
                      '2' => 'Lemon'
              ));
-          $form->get('departamento')->setValueOptions(array($local['in_idpais']));
-        $form->get('departamento')->setValueOptions(array($local['in_iddep']));
+          $form->get('departamento')->setValueOptions(array('value_options'=>array('1'=>$local['in_idpais'])));
+        $form->get('departamento')->setValueOptions(array('value_options'=>array($local['in_iddep'])));//setValueOptions(array($local['in_iddep']));
         $form->get('provincia')->setValueOptions(array($local['in_idprov']));
         $form->get('distrito')->setValueOptions(array($local['in_iddis']));
        // var_dump($form->get('servicio'));exit;
