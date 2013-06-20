@@ -112,24 +112,12 @@ $inputFilter->add($factory->createInput(array(
                     ),
                 ),
             )));
-            $inputFilter->add($factory->createInput(array(
-                'name'     => 'va_imagen',
-                'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-                    array(
-                        'name'    => 'StringLength',
-                        'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min'      => 6,
-                            'max'      =>20 ,
-                        ),
-                    ),
-                ),
-            )));
+             $inputFilter->add(
+                $factory->createInput(array(
+                    'name'     => 'va_imagen',
+                    'required' => true,
+                ))
+            );
              $inputFilter->add($factory->createInput(array(
                 'name'     => 'va_ruc',
                 'required' => true,

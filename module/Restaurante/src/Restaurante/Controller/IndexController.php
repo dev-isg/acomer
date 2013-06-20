@@ -11,6 +11,7 @@ use Restaurante\Model\Restaurante;
 use Restaurante\Form\RestauranteForm;       
 use Restaurante\Model\RestauranteTable;  
 use Zend\Db\Adapter\Adapter;
+use Zend\Validator\File\Size;
 
 class IndexController extends AbstractActionController
 {
@@ -89,10 +90,18 @@ class IndexController extends AbstractActionController
         if ($request->isPost()) {
            $restaurante = new Restaurante();
            $form->setInputFilter($restaurante->getInputFilter());
-            $form->setData($request->getPost());      
+            $nonFile = $request->getPost()->toArray();
+            $File    = $this->params()->fromFiles('va_imagen');
+            $data    = array_merge_recursive(
+                        $this->getRequest()->getPost()->toArray(),          
+                       $this->getRequest()->getFiles()->toArray()
+                   ); 
+            $form->setData($data);    
             if ($form->isValid()) {
+             $nonFile = $request->getPost()->toArray();
+               $File = $this->params()->fromFiles('va_imagen');
                $restaurante->exchangeArray($form->getData());
-                $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida);
+                $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');      
             }
            }     
@@ -111,7 +120,7 @@ class IndexController extends AbstractActionController
             getRequest()->getBaseUrl().'/restaurante/index/agregarrestaurante');  
         }
         try {
-            $usuario = $this->getRestauranteTable()->getRestaurante($id);
+            $restaurante = $this->getRestauranteTable()->getRestaurante($id);
            // var_dump($usuario);exit;
         }
         catch (\Exception $ex) {
@@ -124,21 +133,31 @@ class IndexController extends AbstractActionController
         foreach($medio as $yes){
             $medi[$yes['in_id']] = $yes['va_nombre'];
         }
-       $comidas =  $this->comidas()->toArray();
+        $comidas =  $this->comidas()->toArray();
         $com = array();
         foreach($comidas as $y){
             $com[$y['in_id']] = $y['va_nombre_tipo'];
         }
         $form->get('Ta_tipo_comida_in_id')->setValueOptions($com);
         $form->get('va_modalidad')->setValueOptions($medi);
-        $form->bind($usuario);
+        $form->bind($restaurante);
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $form->setInputFilter($usuario->getInputFilter());
-            $form->setData($request->getPost());
+            $form->setInputFilter($restaurante->getInputFilter());
+            $nonFile = $request->getPost()->toArray();
+            $File    = $this->params()->fromFiles('va_imagen');
+            $data    = array_merge_recursive(
+                        $this->getRequest()->getPost()->toArray(),          
+                       $this->getRequest()->getFiles()->toArray()
+                   ); 
+            $form->setData($data); 
             if ($form->isValid()) {
-                $this->getRestauranteTable()->guardarRestaurante($usuario);
+                $nonFile = $request->getPost()->toArray();
+               $File = $this->params()->fromFiles('va_imagen');
+               //$e=$File['name'];
+               var_dump($File);exit;
+                $this->getRestauranteTable()->guardarRestaurante($restaurante,$File);
                 $this->redirect()->toUrl('/restaurante');
             }
         }
