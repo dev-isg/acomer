@@ -49,23 +49,17 @@ class IndexController extends AbstractActionController
   public function agregarusuarioAction()
     {
         $form = new UsuarioForm();
+        $comidas =  $this->roles()->toArray();
+        $com = array();
+        foreach($comidas as $y){
+            $com[$y['in_id']] = $y['va_nombre_rol'];
+        }
+        $form->get('Ta_rol_in_id')->setValueOptions($com);
         $form->get('submit')->setValue('INSERTAR');
-        $opera = $this->roles();
-      //$ddd =$opera->toArray();
-      //var_dump($ddd);exit;
-        foreach ($opera as $comida) 
-              {
-               array
-             (
-                $comida['in_id']=>$comida['va_nombre_rol'],
-             );
-            
-                 }
-                 $a = array($comida['in_id']=>$comida['va_nombre_rol'],);
-        $form->get('Ta_rol_in_id')->setValueOptions($a);
         $request = $this->getRequest();
         if ($request->isPost()) {
            $datos =$this->request->getPost();
+       
            $pass1 = $datos['va_contrasenia'];
            $pass2 = $datos['va_contrasenia2'];
            $usuario = new Usuario();
@@ -87,22 +81,12 @@ class IndexController extends AbstractActionController
     
           public function editarusuarioAction()
      
-    { $opera =$this->roles();
+    { $comidas =  $this->roles()->toArray();
+        $com = array();
+        foreach($comidas as $y){
+            $com[$y['in_id']] = $y['va_nombre_rol'];
+        }
         
-        foreach ($opera as $comida) 
-              {
-               array
-             (
-                $comida['in_id']=>$comida['va_nombre_rol'],
-             );
-            
-                 }
-   /*$array=array
-             (
-                $comida['in_id']=>$comida['va_nombre_rol'],
-             );*/
-            // var_dump($array);exit;
-        $a = array($comida['in_id']=>$comida['va_nombre_rol'],);
         $id = (int) $this->params()->fromRoute('in_id', 0);
         //var_dump($id);exit;
         if (!$id) {
@@ -118,7 +102,7 @@ class IndexController extends AbstractActionController
             getRequest()->getBaseUrl().'/usuario'); 
         }
         $form  = new UsuarioForm();
-        $form->get('Ta_rol_in_id')->setValueOptions($a);
+        $form->get('Ta_rol_in_id')->setValueOptions($com);
         $form->bind($usuario);
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();
@@ -263,11 +247,8 @@ class IndexController extends AbstractActionController
     }
     //imprimer con roles desde sql del zend
     public function moreAction(){
-
-        $datos=$this->getUsuarioTable()->moretablas();
-      
-        return new viewModel();
-        
+        $datos=$this->getUsuarioTable()->moretablas();      
+        return new viewModel();   
     }
 
     public function obtonerjoinAction(){

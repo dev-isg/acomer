@@ -83,13 +83,13 @@ class RestauranteTable
            
             $this->tableGateway->insert($data);             
                 if($comida != '')
-                { //echo 'e ntrooooo';exit;
+                {                 //   var_dump($comida);exit;
         $sql = new Sql($adapter);
         for ($i = 0; $i <= 1; $i++) { 
             $insert = $sql->insert()
                                ->into('ta_restaurante_has_ta_medio_pago')
                                ->values(array(
-                       'Ta_restaurante_in_id' =>81,
+                       'Ta_restaurante_in_id' =>88,
                        'Ta_medio_pago_in_id' => $comida[$i] ));
                         $selectString = $sql->getSqlStringForSqlObject($insert);
                         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);

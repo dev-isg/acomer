@@ -90,11 +90,13 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
         $comida = $this->params()->fromPost('va_modalidad');
         if ($request->isPost()) {
+              $datos =$this->request->getPost();
+                var_dump($datos);exit;
             $restaurante = new Restaurante();
            $form->setInputFilter($restaurante->getInputFilter());
             $form->setData($request->getPost());      
             if ($form->isValid()) {
-                //echo 'xxxx';exit;
+  
                $restaurante->exchangeArray($form->getData());
                 $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$adapter);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');      
