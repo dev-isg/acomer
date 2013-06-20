@@ -1,7 +1,7 @@
 <?php
 
 
-$title = 'Agregar nuevo local';
+$title = 'Editar local';
 $this->headTitle($title);
 ?>
 
@@ -11,11 +11,13 @@ $form = $this->form;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
 
 $form->setAttributes(array(
-    'action' => $this->url.'/local/index/agregarlocal',
+    'action' => $this->url.'/local/index/editarlocal?id='.$this->id,
     'method' => 'post',
-    'class'=>'form-horizontal span7'
+    'in_id'   =>$this->id,
 ));
 $form->prepare();
+
+
 
 echo $this->form()->openTag($form);
 ?><h3><?php echo $this->escapeHtml($title); ?></h3>
@@ -26,6 +28,9 @@ echo $this->formHidden($form->get('in_id'));
 echo $this->formHidden($form->get('ta_restaurante_in_id'));
 ?>
 <h5><?php echo $this->id ;?></h5>
+
+<div class="control-group "><?php echo $this->formRow($form->get('servicio'));?></div>
+
 <div class="control-group "><?php echo $this->formRow($form->get('de_latitud'));?></div>
 <div class="control-group "><?php echo $this->formRow($form->get('de_longitud'));?></div>
 <div class="control-group "><?php echo $this->formRow($form->get('va_telefono'));?></div><?php?>
@@ -35,9 +40,7 @@ echo $this->formHidden($form->get('ta_restaurante_in_id'));
 <div class="control-group "><?php echo $this->formRow($form->get('ta_dia_in_id'));?></div><?php?>
 <div class="control-group">
 	<label for="">Seleccione Servicio que ofrece</label>
-	<label class="checkbox inline">
-   <?php echo $this->formRow($form->get('servicio'));?> 
-  </label>
+	<label id="servicio_local"></label>
 </div>
 <div class="control-group "><?php echo $this->formRow($form->get('pais'));?></div><?php?>
 <div class="control-group "><?php echo $this->formRow($form->get('departamento'));?></div><?php?>

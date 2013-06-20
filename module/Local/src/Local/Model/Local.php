@@ -23,6 +23,12 @@ class Local
     public $de_longitud;
     public $va_horario_opcional;
     
+    public $pais;
+    public $departamento;
+    public $provincia;
+    public $distrito;
+    
+    
     public function exchangeArray($data)
     {
         $this->in_id     = (!empty($data['in_id'])) ? $data['in_id'] : null;
@@ -39,11 +45,23 @@ class Local
         $this->de_latitud = (!empty($data['de_latitud'])) ? $data['de_latitud'] : null;
         $this->de_longitud = (!empty($data['de_longitud'])) ? $data['de_longitud'] : null;
         $this->va_horario_opcional = (!empty($data['va_horario_opcional'])) ? $data['va_horario_opcional'] : null;
+        
+        $this->pais = (!empty($data['pais'])) ? $data['pais'] : null;
+        $this->departamento = (!empty($data['departamento'])) ? $data['departamento'] : null;
+        $this->provincia = (!empty($data['provincia'])) ? $data['provincia'] : null;
+        $this->distrito = (!empty($data['distrito'])) ? $data['distrito'] : null;
     }
+    
         public function setInputFilter(InputFilterInterface $inputFilter)
     {
         throw new \Exception("Not used");
     }
+    
+        public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
+    
        public function getInputFilter()
     {
             if (!$this->inputFilter) {
