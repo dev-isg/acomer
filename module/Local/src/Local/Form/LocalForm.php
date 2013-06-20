@@ -20,6 +20,9 @@ class LocalForm extends Form
         $this->add(array(
             'name' => 'ta_restaurante_in_id',
             'type' => 'Hidden',
+            'attributes'=>array(
+                'id'=>'ta_restaurante_in_id'
+            )
         ));
         
         $this->add(array(
@@ -60,6 +63,20 @@ class LocalForm extends Form
                 'label' => 'Horario',
             ),
         ));
+        
+                $this->add(array(
+            'name' => 'va_horario_opcional',
+            'type' => 'Text',
+              'attributes' => array(               
+                'class' => 'span10',
+                'id'   => 'raz_rest',
+                'placeholder'=>'Ingrese el horario opcional'
+            ),
+            'options' => array(
+                'label' => 'Horario opcional',
+            ),
+        ));
+                
         
         $this->add(array(
             'name' => 'va_rango_precio',
@@ -115,6 +132,7 @@ class LocalForm extends Form
                              '1' => 'Criolla',
                              '2' => 'Marina',                   
                      ),
+                
              )
         ));
         
@@ -130,6 +148,7 @@ class LocalForm extends Form
                      'value_options' => array(
                           '' => 'selecccione :'                                                
                      ),
+                     'disable_inarray_validator' => true
              )
         ));
             
@@ -145,6 +164,7 @@ class LocalForm extends Form
                      'value_options' => array(
                           '' => 'selecccione :'                                                
                      ),
+               'disable_inarray_validator' => true
              )
         ));
         
@@ -161,6 +181,7 @@ class LocalForm extends Form
                           '' => 'selecccione :',
                                           
                      ),
+               'disable_inarray_validator' => true
              )
         ));
                         
@@ -177,6 +198,7 @@ class LocalForm extends Form
                           '' => 'selecccione :',
                              '1' => 'Peru'                  
                      ),
+               'disable_inarray_validator' => true
              )
         ));
 

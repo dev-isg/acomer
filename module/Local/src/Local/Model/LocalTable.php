@@ -59,7 +59,7 @@ class LocalTable
     
     public function guardarLocal(Local $local){
         
-                $data = array(
+          $data = array(
            'va_telefono'         => $local->va_telefono,
            'va_horario'   => $local->va_horario,
            'de_latitud'            => $local->de_latitud,
@@ -71,16 +71,26 @@ class LocalTable
             'ta_ubigeo_in_id' => $local->ta_ubigeo_in_id
                     
         );
+          
 
+          
+          foreach($data as $index=>$valor){
+                if(empty($data[$index])){
+                    $data[$index]=1;
+                    //if($index=='cantidad')$datosAviso['cantidad']=1;
+                }
+            }
+            
+          //print_r($data);exit;
         $id = (int)$local->in_id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
         } else {
-            if ($this->getRestaurante($id)) {
-                $this->tableGateway->update($data, array('in_id' => $id));
-            } else {
-                throw new \Exception('no existe el usuario');
-            }
+//            if ($this->getRestaurante($id)) {
+//                $this->tableGateway->update($data, array('in_id' => $id));
+//            } else {
+//                throw new \Exception('no existe el usuario');
+//            }
         }
     }
 }

@@ -21,10 +21,15 @@ echo $this->form()->openTag($form);
 <?php
 echo $this->formHidden($form->get('in_id'));
 ?>
+<?php
+echo $this->formHidden($form->get('ta_restaurante_in_id'));
+?>
+<h5><?php echo $this->id ;?></h5>
 <div class="control-group "><?php echo $this->formRow($form->get('de_latitud'));?></div>
 <div class="control-group "><?php echo $this->formRow($form->get('de_longitud'));?></div>
 <div class="control-group "><?php echo $this->formRow($form->get('va_telefono'));?></div><?php?>
 <div class="control-group "><?php echo $this->formRow($form->get('va_horario'));?></div ><?php?>
+<div class="control-group "><?php echo $this->formRow($form->get('va_horario_opcional'));?></div ><?php?>
 <div class="control-group "><?php echo $this->formRow($form->get('va_rango_precio'));?></div><?php?>
 <div class="control-group "><?php echo $this->formRow($form->get('ta_dia_in_id'));?></div><?php?>
 <div class="control-group">
@@ -43,3 +48,11 @@ echo $this->formHidden($form->get('in_id'));
                              </div>
 <div class="control-group "><?php echo $this->formSubmit($form->get('submit'));?></div><?php
 echo $this->form()->closeTag();?> </div> 
+
+<script>
+	$(document).ready(function(){
+		var id_r = $('h5').text();
+console.log(id_r);
+$('#ta_restaurante_in_id').val(id_r);
+	})
+</script>

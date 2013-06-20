@@ -35,7 +35,10 @@ class Local
         $this->ta_ubigeo_in_id     = (!empty($data['ta_ubigeo_in_id'])) ? $data['ta_ubigeo_in_id'] : null;
         $this->ta_horario_in_id    = (!empty($data['ta_horario_in_id'])) ? $data['ta_horario_in_id'] : null;
         $this->ta_dia_in_id    = (!empty($data['ta_dia_in_id'])) ? $data['ta_dia_in_id'] : null;
-
+        
+        $this->de_latitud = (!empty($data['de_latitud'])) ? $data['de_latitud'] : null;
+        $this->de_longitud = (!empty($data['de_longitud'])) ? $data['de_longitud'] : null;
+        $this->va_horario_opcional = (!empty($data['va_horario_opcional'])) ? $data['va_horario_opcional'] : null;
     }
         public function setInputFilter(InputFilterInterface $inputFilter)
     {
