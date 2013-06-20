@@ -61,7 +61,7 @@ class UsuarioForm extends Form
             'type' => 'Select',
              'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'Ta_rol_in_id'
+                'id'   => 'Ta_rolin_id'
             ),
            'options' => array(
                      'label' => 'Rol',

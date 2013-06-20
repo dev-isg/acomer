@@ -55,31 +55,59 @@ class IndexController extends AbstractActionController
       
    
     }
+    
+      public function medio()
+    {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+            ->from('ta_medio_pago');
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            return $results;
+            
+     }
     public function agregarrestauranteAction()
-    {$this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+    {
+        
+       
+        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $adapter = $this->dbAdapter;
         $form = new RestauranteForm();
+        $medio =  $this->medio()->toArray();
+        $medi = array();
+        foreach($medio as $yes){
+            $medi[$yes['in_id']] = $yes['va_nombre'];
+        }
+       $comidas =  $this->comidas()->toArray();
+        $com = array();
+        foreach($comidas as $y){
+            $com[$y['in_id']] = $y['va_nombre_tipo'];
+        }
+        $form->get('Ta_tipo_comida_in_id')->setValueOptions($com);
+        $form->get('va_modalidad')->setValueOptions($medi);
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
         $comida = $this->params()->fromPost('va_modalidad');
         if ($request->isPost()) {
-          $datos =$this->request->getPost();
-       
-        var_dump($comida);exit;
             $restaurante = new Restaurante();
-            $form->setInputFilter($restaurante->getInputFilter());
+           $form->setInputFilter($restaurante->getInputFilter());
             $form->setData($request->getPost());      
             if ($form->isValid()) {
-                $restaurante->exchangeArray($form->getData());
+                //echo 'xxxx';exit;
+               $restaurante->exchangeArray($form->getData());
                 $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$adapter);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');      
             }
            }     
         return array('form' => $form);
     }
+
                    public function editarrestauranteAction()
      
     {
+                       
+                       
         $id = (int) $this->params()->fromRoute('in_id', 0);
         $va_nombre = $this->params()->fromRoute('va_nombre',0);
         //var_dump($id);exit;
@@ -96,6 +124,18 @@ class IndexController extends AbstractActionController
             getRequest()->getBaseUrl().'/restaurante'); 
         }
         $form  = new RestauranteForm();
+         $medio =  $this->medio()->toArray();
+        $medi = array();
+        foreach($medio as $yes){
+            $medi[$yes['in_id']] = $yes['va_nombre'];
+        }
+       $comidas =  $this->comidas()->toArray();
+        $com = array();
+        foreach($comidas as $y){
+            $com[$y['in_id']] = $y['va_nombre_tipo'];
+        }
+        $form->get('Ta_tipo_comida_in_id')->setValueOptions($com);
+        $form->get('va_modalidad')->setValueOptions($medi);
         $form->bind($usuario);
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();

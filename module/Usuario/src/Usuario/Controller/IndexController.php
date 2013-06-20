@@ -11,11 +11,14 @@ use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
 use Usuario\Model\Usuario;          // <-- Add this import
 use Usuario\Form\UsuarioForm;       // <-- Add this import
-use Usuario\Model\UsuarioTable;  
+use Usuario\Model\UsuarioTable; 
+use Zend\Db\Sql\Sql;
+use Zend\Db\Adapter\Adapter;
+
 class IndexController extends AbstractActionController
 {
   protected $usuarioTable;
-  
+  public $dbAdapter;
     public function indexAction() {
         $filtrar = $this->params()->fromPost('submit'); //$this->_request->getParams();
         $datos = $this->params()->fromPost('texto');
@@ -32,27 +35,46 @@ class IndexController extends AbstractActionController
                 ));
 
     }
-   public function agregarusuarioAction()
+    
+    public function roles()
+    {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+            ->from('ta_rol');
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            return $results;       
+     }
+  public function agregarusuarioAction()
     {
         $form = new UsuarioForm();
         $form->get('submit')->setValue('INSERTAR');
+        $opera = $this->roles();
+      //$ddd =$opera->toArray();
+      //var_dump($ddd);exit;
+        foreach ($opera as $comida) 
+              {
+               array
+             (
+                $comida['in_id']=>$comida['va_nombre_rol'],
+             );
+            
+                 }
+                 $a = array($comida['in_id']=>$comida['va_nombre_rol'],);
+        $form->get('Ta_rol_in_id')->setValueOptions($a);
         $request = $this->getRequest();
         if ($request->isPost()) {
            $datos =$this->request->getPost();
-         
-           
            $pass1 = $datos['va_contrasenia'];
            $pass2 = $datos['va_contrasenia2'];
-           $rol = $datos['Ta_rol_in_id'];
-      
            $usuario = new Usuario();
             $form->setInputFilter($usuario->getInputFilter());
-            $form->setData($request->getPost());              
+            $form->setData($request->getPost());
+              
             if ($form->isValid()) {
-             
                 $usuario->exchangeArray($form->getData());
-                if($pass1==$pass2 ){
-                  
+                if($pass1==$pass2){
                 $this->getUsuarioTable()->guardarUsuario($usuario);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario');      
             }
@@ -65,7 +87,22 @@ class IndexController extends AbstractActionController
     
           public function editarusuarioAction()
      
-    {
+    { $opera =$this->roles();
+        
+        foreach ($opera as $comida) 
+              {
+               array
+             (
+                $comida['in_id']=>$comida['va_nombre_rol'],
+             );
+            
+                 }
+   /*$array=array
+             (
+                $comida['in_id']=>$comida['va_nombre_rol'],
+             );*/
+            // var_dump($array);exit;
+        $a = array($comida['in_id']=>$comida['va_nombre_rol'],);
         $id = (int) $this->params()->fromRoute('in_id', 0);
         //var_dump($id);exit;
         if (!$id) {
@@ -81,25 +118,25 @@ class IndexController extends AbstractActionController
             getRequest()->getBaseUrl().'/usuario'); 
         }
         $form  = new UsuarioForm();
+        $form->get('Ta_rol_in_id')->setValueOptions($a);
         $form->bind($usuario);
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
-         
-       // $form->get('password')->setAttribute('renderPassword', true);
         $request = $this->getRequest();
         if ($request->isPost()) {
             $datos =$this->request->getPost();
+          
             $pass1 = $datos['va_contrasenia'];
             $pass2 = $datos['va_contrasenia2'];
             $form->setInputFilter($usuario->getInputFilter());
             $form->setData($request->getPost());
             if ($form->isValid()) {
+                echo 'dddd';exit;
                  if($pass1==$pass2){
                 $this->getUsuarioTable()->guardarUsuario($usuario);
                 $this->redirect()->toUrl('/usuario');
                 }
             }
         }
-
      return array(
             'in_id' => $id,
             'form' => $form,
