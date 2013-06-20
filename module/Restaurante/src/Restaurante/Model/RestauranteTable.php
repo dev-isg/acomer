@@ -67,7 +67,7 @@ class RestauranteTable
         }
         return $row;
     }
-    public function guardarRestaurante(Restaurante $restaurante, $comida,$adapter)
+    public function guardarRestaurante(Restaurante $restaurante, $comida)
     {
         $data = array(
            'va_nombre'         => $restaurante->va_nombre,
@@ -77,28 +77,20 @@ class RestauranteTable
            'va_ruc'            => $restaurante->va_ruc,
            'Ta_tipo_comida_in_id'  => $restaurante->Ta_tipo_comida_in_id  
         );
-
         $id = (int)$restaurante->in_id;
         if ($id == 0) {
-           
-            $this->tableGateway->insert($data);             
+            $this->tableGateway->insert($data); 
+             $idRestaurante=$this->tableGateway->getLastInsertValue();
                 if($comida != '')
-                {                 //   var_dump($comida);exit;
-        $sql = new Sql($adapter);
-        for ($i = 0; $i <= 1; $i++) { 
-            $insert = $sql->insert()
-                               ->into('ta_restaurante_has_ta_medio_pago')
-                               ->values(array(
-                       'Ta_restaurante_in_id' =>88,
-                       'Ta_medio_pago_in_id' => $comida[$i] ));
-                        $selectString = $sql->getSqlStringForSqlObject($insert);
-                        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-                        return $results;
-                      }
-       for($i=0;$i<1;$i++){
-                        
-                    }    
+                { 
+            foreach($comida as $key=>$value){               
+             $insert = $this->tableGateway->getSql()->insert()->into('ta_restaurante_has_ta_medio_pago')
+                    ->values(array('Ta_restaurante_in_id'=>$idRestaurante,'Ta_medio_pago_in_id'=>$value));
+            $selectString2 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insert);
+            $adapter=$this->tableGateway->getAdapter();
+            $result = $adapter->query($selectString2, $adapter::QUERY_MODE_EXECUTE);
             }
+  }            
                             
         } else {
            

@@ -70,9 +70,6 @@ class IndexController extends AbstractActionController
     public function agregarrestauranteAction()
     {
         
-       
-        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $adapter = $this->dbAdapter;
         $form = new RestauranteForm();
         $medio =  $this->medio()->toArray();
         $medi = array();
@@ -90,26 +87,22 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
         $comida = $this->params()->fromPost('va_modalidad');
         if ($request->isPost()) {
-              $datos =$this->request->getPost();
-                var_dump($datos);exit;
-            $restaurante = new Restaurante();
+           $restaurante = new Restaurante();
            $form->setInputFilter($restaurante->getInputFilter());
             $form->setData($request->getPost());      
             if ($form->isValid()) {
-  
                $restaurante->exchangeArray($form->getData());
-                $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$adapter);
+                $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');      
             }
            }     
         return array('form' => $form);
     }
 
-                   public function editarrestauranteAction()
+      public function editarrestauranteAction()
      
     {
-                       
-                       
+                
         $id = (int) $this->params()->fromRoute('in_id', 0);
         $va_nombre = $this->params()->fromRoute('va_nombre',0);
         //var_dump($id);exit;
