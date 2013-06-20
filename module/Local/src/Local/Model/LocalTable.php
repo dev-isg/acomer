@@ -59,6 +59,21 @@ class LocalTable
     
     public function guardarLocal(Local $local, $servicio){
        //  var_dump($servicio);exit;
+          $pais=$local->pais;
+          $departamento=$local->departamento;
+          $provincia=$local->provincia;
+          $distrito=$local->distrito;
+          
+           $adapter=$this->tableGateway->getAdapter();
+             $sql = new Sql($adapter);
+          $idubigeo=$sql->select()->from('ta_ubigeo')
+                  ->columns(array('in_id'))
+                  ->where(array('in_idpais'=>$pais,'in_iddep'=>$departamento,'in_idprov'=>$provincia,'in_iddis'=>$distrito));
+          $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
+
+            $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);
+            $convertir=$result->toArray();
+
           $data = array(
            'va_telefono'         => $local->va_telefono,
            'va_horario'   => $local->va_horario,
@@ -68,12 +83,12 @@ class LocalTable
            'va_horario_opcional'  => $local->va_horario_opcional,
             'va_direccion' => $local->va_direccion,
            'ta_restaurante_in_id' => $local->ta_restaurante_in_id,
-            'ta_ubigeo_in_id' => $local->ta_ubigeo_in_id
+            'ta_ubigeo_in_id' => $convertir[0]['in_id']//$local->ta_ubigeo_in_id
                     
         );
-          
 
-          
+
+         // var_dump($departamento);exit;
           foreach($data as $index=>$valor){
                 if(empty($data[$index])){
                     $data[$index]=1;
@@ -121,4 +136,36 @@ class LocalTable
 //            }
         }
     }
+    
+    
+        public function getLocal($id)
+    {
+        //$id  = (int) $id;
+//        $rowset = $this->tableGateway->select(array('in_id' => $id));
+//        $row = $rowset->current();
+//        if (!$row) {
+//            throw new \Exception("Could not find row $id");
+//        }
+//        return $row;
+        
+        
+        
+            $select = $this->tableGateway->getSql()->select()
+             ->join(array('u'=>'ta_ubigeo'),'ta_ubigeo_in_id=u.in_id',array('in_idpais','in_iddep','in_idprov','in_iddis'))
+        
+              ->where(array('ta_local.in_id'=>$id));//('ta_restaurante_in_id='.'1');//r.in_id
+              $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($select);
+             // var_dump($selectString);exit;
+            $adapter=$this->tableGateway->getAdapter();
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+          
+//           $array=array();
+//             foreach($results as $result){
+//                 $array[]=$result;
+//             }
+//            var_dump($array);exit;
+            
+            return $results;
+    }
+    
 }

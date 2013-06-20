@@ -54,8 +54,8 @@
             <td><?php echo $this->escapeHtml($local->ch_distrito); ?></td>
             
             
-            <td><a data-id="<?php echo $this->escapeHtml($local->in_id); ?>" href="/local/index/editarlocal/<?php echo $local->in_id;?>" class='modificar btn btn-info'><i class='icon-edit icon-white'></i>Editar</a></td>
-            <td><a data-id="<?php echo $this->escapeHtml($local->in_id); ?>" href="/local/index/editarlocal/<?php echo $local->in_id;?>" class='eli btn btn-danger'><i class='icon-trash icon-white'></i>Eliminar</a> </td>
+            <td><a data-id="<?php echo $this->escapeHtml($local->in_id); ?>" href="/local/index/editarlocal?id=<?php echo $local->in_id;?>" class='modificar btn btn-info'><i class='icon-edit icon-white'></i>Editar</a></td>
+            <td><a data-id="<?php echo $this->escapeHtml($local->in_id); ?>" href="/local/index/editarlocal?id=<?php echo $local->in_id;?>" class='eli btn btn-danger'><i class='icon-trash icon-white'></i>Eliminar</a> </td>
         </tr>
 
 <?php endforeach; ?>
