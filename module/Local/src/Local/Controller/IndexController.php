@@ -155,11 +155,26 @@ class IndexController extends AbstractActionController
 //                     '1' => 'Orange',
 //                     '2' => 'Lemon'
 //             )));
-          $form->get('departamento')->setValueOptions(array($local[0]['in_idpais']));
-        $form->get('departamento')->setValueOptions(array($local[0]['in_iddep']));
-        $form->get('provincia')->setValueOptions(array($local[0]['in_idprov']));
-        $form->get('distrito')->setValueOptions(array($local[0]['in_iddis']));
-        
+       $a= array(
+            
+                     '0' => 'Apple',
+                     '1' => 'Orange',
+                     '2' => 'Lemon'
+             );
+       
+           $b= array(
+               array(
+            
+                     '0' => 'Apple',
+                     '1' => 'Orange',
+                     '2' => 'Lemon'
+             ));
+          $form->get('departamento')->setValueOptions(array($local['in_idpais']));
+        $form->get('departamento')->setValueOptions(array($local['in_iddep']));
+        $form->get('provincia')->setValueOptions(array($local['in_idprov']));
+        $form->get('distrito')->setValueOptions(array($local['in_iddis']));
+       // var_dump($form->get('servicio'));exit;
+        $form->get('servicio')->setValueOptions($b);
 //        var_dump($local);exit;
         $form->bind($local);
 //        echo 'hello world';exit;
