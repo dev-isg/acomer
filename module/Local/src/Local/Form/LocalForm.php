@@ -213,5 +213,24 @@ class LocalForm extends Form
         ));
         
         
+                $this->add(array(
+            'name' => 'servicio',
+            'type' => 'MultiCheckbox',
+            'label' => 'Modalidad de Pago?',
+             'attributes' => array(               
+                'class' => 'checkbox inline',
+                'id'   => 'servicio',
+                 'placeholder'=>'Ingrese su modalidad de pago'
+            ),
+            'options' => array(
+                     
+                     'value_options' => array(
+                
+                     ),
+             )
+        ));
+
+        
+        
     }
 }

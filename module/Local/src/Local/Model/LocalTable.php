@@ -58,7 +58,7 @@ class LocalTable
     }
     
     public function guardarLocal(Local $local, $servicio){
-         var_dump($servicio);exit;
+       //  var_dump($servicio);exit;
           $data = array(
            'va_telefono'         => $local->va_telefono,
            'va_horario'   => $local->va_horario,
@@ -87,22 +87,23 @@ class LocalTable
         if ($id == 0) {
             
             
-            $inservicio = $this->tableGateway->getSql()->insert()->into('ta_servicio_local')
-                    ->values(array('va_nombre'=>$servicio));
-            $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($inservicio);
-            $adapter=$this->tableGateway->getAdapter();
-            $resultserv = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-            
-            $idserv=$this->tableGateway->getLastInsertValue();
+//            $inservicio = $this->tableGateway->getSql()->insert()->into('ta_servicio_local')
+//                    ->values(array('va_nombre'=>$servicio));
+//            $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($inservicio);
+//            $adapter=$this->tableGateway->getAdapter();
+//            $resultserv = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//            
+//            $idserv=$this->tableGateway->getLastInsertValue();
+           
             
             $this->tableGateway->insert($data);
             $idlocal=$this->tableGateway->getLastInsertValue();
-            
+             var_dump($idlocal);exit;
             $insert = $this->tableGateway->getSql()->insert()->into('ta_local_has_ta_servicio_local')
                     ->values(array('ta_local_in_id'=>$idlocal,'ta_servicio_local_in_id'=>$idserv));
-            $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($insert);
+            $selectString2 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insert);
             $adapter=$this->tableGateway->getAdapter();
-            $result = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            $result = $adapter->query($selectString2, $adapter::QUERY_MODE_EXECUTE);
             
             
             

@@ -25,6 +25,9 @@ echo $this->formHidden($form->get('in_id'));
 echo $this->formHidden($form->get('ta_restaurante_in_id'));
 ?>
 <h5><?php echo $this->id ;?></h5>
+
+<div class="control-group "><?php echo $this->formRow($form->get('servicio'));?></div>
+
 <div class="control-group "><?php echo $this->formRow($form->get('de_latitud'));?></div>
 <div class="control-group "><?php echo $this->formRow($form->get('de_longitud'));?></div>
 <div class="control-group "><?php echo $this->formRow($form->get('va_telefono'));?></div><?php?>

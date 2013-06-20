@@ -70,9 +70,19 @@ class IndexController extends AbstractActionController
            $id=$this->params()->fromQuery('id');
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
+        
+        $servi=$this->getUbigeoTable()->getServicios();
+        
+        $array = array();
+        foreach($servi as $y){
+            $array[$y['in_id']] = $y['va_nombre'];
+        }
+
+        $form->get('servicio')->setValueOptions($array);
+        
         if ($request->isPost()) {
-            $servicio=$this->params()->fromPost('servicio_local[]');
-            var_dump($servicio);exit;
+            $servicio=$this->params()->fromPost('servicio');
+            //  var_dump($servicio);exit;
            $local = new Local();
             //$form->setInputFilter($local->getInputFilter());
             $form->setData($request->getPost());     
