@@ -1,7 +1,9 @@
 
    <div class="row-fluid">
-
     <div class="span4">
+    <div class="btn-group" data-toggle="buttons-radio">
+        <a  class="btn" href="<?php echo $this->basePath();?>/local/index/agregarlocal?id=<?php echo $this->in_id?>">AGREGAR LOCAL</a>
+    </div>
       <div class="input-append"> 
     <form name='form_busqueda'class="form-search" action='/local/index' method ="post">
    <div class="control-group">
@@ -10,9 +12,12 @@
     <input type='text' name='texto' id="texto" placeholder="Restaurant,Distrito" />
     <input type="submit" class="btn" name="submit" value="Buscar">
     </div>
-    </div>
     </form>
     </div>
+
+    </div>
+       
+     
     </div>
 
 <div class="row-fluid">

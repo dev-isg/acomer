@@ -20,6 +20,9 @@ class LocalForm extends Form
         $this->add(array(
             'name' => 'ta_restaurante_in_id',
             'type' => 'Hidden',
+            'attributes'=>array(
+                'id'=>'ta_restaurante_in_id'
+            )
         ));
         
         $this->add(array(
@@ -129,6 +132,7 @@ class LocalForm extends Form
                              '1' => 'Criolla',
                              '2' => 'Marina',                   
                      ),
+                
              )
         ));
         
@@ -144,6 +148,7 @@ class LocalForm extends Form
                      'value_options' => array(
                           '' => 'selecccione :'                                                
                      ),
+                     'disable_inarray_validator' => true
              )
         ));
             
@@ -159,6 +164,7 @@ class LocalForm extends Form
                      'value_options' => array(
                           '' => 'selecccione :'                                                
                      ),
+               'disable_inarray_validator' => true
              )
         ));
         
@@ -175,6 +181,7 @@ class LocalForm extends Form
                           '' => 'selecccione :',
                                           
                      ),
+               'disable_inarray_validator' => true
              )
         ));
                         
@@ -191,6 +198,7 @@ class LocalForm extends Form
                           '' => 'selecccione :',
                              '1' => 'Peru'                  
                      ),
+               'disable_inarray_validator' => true
              )
         ));
 

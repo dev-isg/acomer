@@ -32,21 +32,31 @@ class IndexController extends AbstractActionController
         //$this->dbAdapter=$this->getServiceLocator()->get('Zend\Db\Adapter');
         //$u=new Ubigeo($this->dbAdapter);
        // var_dump($u->getUbigeo());exit;
-
+        
        $filtrar = $this->params()->fromPost('submit');
        $id = (int) $this->params()->fromRoute('in_id', 0);
        //var_dump($id);exit;
+       if(!empty($id)){
        if(isset($filtrar)){
            $consulta=$this->params()->fromPost('texto');
                $lista =  $this->getLocalTable()->listar($consulta);         
            }else{
                $lista =  $this->getLocalTable()->listar($id);//$id
            }
+       }else{
+           if(isset($filtrar)){
+           $consulta=$this->params()->fromPost('texto');
+               $lista =  $this->getLocalTable()->listar($consulta);         
+           }else{
+               $lista =  $this->getLocalTable()->listar();//$id
+           }
+           
+       }
 //       $lista =  $this->getLocalTable()->listar();
 //      var_dump($lista);exit;
         return new ViewModel(array(
                     'locales' => $lista,
-            'in_id'=>$id
+                'in_id'=>$id
                 ));
        //var_dump($this->getLocaTable()->fetchAll());exit;
        // return array();
@@ -54,22 +64,31 @@ class IndexController extends AbstractActionController
     
     public function agregarlocalAction(){
            $form = new LocalForm();
-              
+              $id=$this->params()->fromQuery('id');
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
         if ($request->isPost()) {
            $local = new Local();
             //$form->setInputFilter($local->getInputFilter());
             $form->setData($request->getPost());     
-                
+//             $form->get('pais');
+//             $form->get('departamento');
+//              $form->get('provincia');
+//               $form->get('distrito');
+               $hiddenControl = $form->get('ta_restaurante_in_id');
+               $hiddenControl->setAttribute('value', $id);
+               $form->add($hiddenControl);
+              // var_dump($hiddenControl);exit;
            if ($form->isValid()) {
               
                 $local->exchangeArray($form->getData());
                 $this->getLocalTable()->guardarLocal($local);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/local');          
-             }else{
+             }
+             else{
                
                 $local->exchangeArray($form->getData());
+                var_dump($local);exit;
                 $this->getLocalTable()->guardarLocal($local);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/local');   
  
@@ -79,7 +98,7 @@ class IndexController extends AbstractActionController
         }
         
      
-        return array('form' => $form);
+        return array('form' => $form,'id'=>$id);
     }
     
     public function editarlocalAction(){
