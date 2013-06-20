@@ -58,7 +58,7 @@ class LocalTable
     }
     
     public function guardarLocal(Local $local, $servicio){
-        
+         var_dump($servicio);exit;
           $data = array(
            'va_telefono'         => $local->va_telefono,
            'va_horario'   => $local->va_horario,

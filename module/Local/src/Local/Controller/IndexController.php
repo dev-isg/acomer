@@ -63,13 +63,16 @@ class IndexController extends AbstractActionController
     }
     
     public function agregarlocalAction(){
-            $servicio=$this->params()->fromPost('servicio_local[]');
-            var_dump($servicio);exit;
+            
+           
+            
            $form = new LocalForm();
            $id=$this->params()->fromQuery('id');
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
         if ($request->isPost()) {
+            $servicio=$this->params()->fromPost('servicio_local[]');
+            var_dump($servicio);exit;
            $local = new Local();
             //$form->setInputFilter($local->getInputFilter());
             $form->setData($request->getPost());     
@@ -77,14 +80,14 @@ class IndexController extends AbstractActionController
 //             $form->get('departamento');
 //              $form->get('provincia');
 //               $form->get('distrito');
-               $hiddenControl = $form->get('ta_restaurante_in_id');
-               $hiddenControl->setAttribute('value', $id);
-               $form->add($hiddenControl);
+    //               $hiddenControl = $form->get('ta_restaurante_in_id');
+    //               $hiddenControl->setAttribute('value', $id);
+    //               $form->add($hiddenControl);
               // var_dump($hiddenControl);exit;
            if ($form->isValid()) {
               
                 $local->exchangeArray($form->getData());
-                $this->getLocalTable()->guardarLocal($local);
+                $this->getLocalTable()->guardarLocal($local,$servicio);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/local');          
              }
              else{
@@ -99,7 +102,7 @@ class IndexController extends AbstractActionController
              }
         }
         
-     
+
         return array('form' => $form,'id'=>$id);
     }
     
