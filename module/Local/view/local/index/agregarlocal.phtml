@@ -5,7 +5,7 @@ $title = 'Agregar nuevo local';
 $this->headTitle($title);
 ?>
 
-
+<div class="span8">
 <?php
 $form = $this->form;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
@@ -13,7 +13,7 @@ $form = $this->form;
 $form->setAttributes(array(
     'action' => $this->url.'/local/index/agregarlocal',
     'method' => 'post',
-    'class'=>'form-horizontal span7'
+    'class'=>'form-horizontal'
 ));
 $form->prepare();
 
@@ -26,8 +26,6 @@ echo $this->formHidden($form->get('in_id'));
 echo $this->formHidden($form->get('ta_restaurante_in_id'));
 ?>
 <h5><?php echo $this->id ;?></h5>
-<div class="control-group span6"><?php echo $this->formRow($form->get('de_latitud'));?></div>
-<div class="control-group span6"><?php echo $this->formRow($form->get('de_longitud'));?></div>
 <div class="control-group span6"><?php echo $this->formRow($form->get('va_telefono'));?></div><?php?>
 <div class="control-group span6"><?php echo $this->formRow($form->get('va_horario'));?></div ><?php?>
 <div class="control-group span6"><?php echo $this->formRow($form->get('va_horario_opcional'));?></div ><?php?>
@@ -49,9 +47,11 @@ echo $this->formHidden($form->get('ta_restaurante_in_id'));
                               <div><input type="text" maxlength="100" id="address" class="span10"/> <input type="button" class="btn btn-info" id="search" value="Buscar" /></div><br/>
                               <div id='map_canvas' style="height:200px;width:700px;"></div>                           
                              </div>
-<div class="control-group "><?php echo $this->formSubmit($form->get('submit'));?></div><?php
+<div class="control-group"><?php echo $this->formRow($form->get('de_latitud'));?></div>
+<div class="control-group"><?php echo $this->formRow($form->get('de_longitud'));?></div>
+<div class="control-group span6"><?php echo $this->formSubmit($form->get('submit'));?></div><?php
 echo $this->form()->closeTag();?> </div> 
-
+</div>
 <script>
 	$(document).ready(function(){
 		var id_r = $('h5').text();
