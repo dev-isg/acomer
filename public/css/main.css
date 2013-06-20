@@ -131,7 +131,9 @@ label.error {
 /*
  * Image replacement
  */
-
+h5{
+  display: none;
+}
 .ir {
     background-color: transparent;
     border: 0;

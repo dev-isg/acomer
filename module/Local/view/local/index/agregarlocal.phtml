@@ -25,9 +25,6 @@ echo $this->formHidden($form->get('in_id'));
 echo $this->formHidden($form->get('ta_restaurante_in_id'));
 ?>
 <h5><?php echo $this->id ;?></h5>
-
-<div class="control-group "><?php echo $this->formRow($form->get('servicio'));?></div>
-
 <div class="control-group "><?php echo $this->formRow($form->get('de_latitud'));?></div>
 <div class="control-group "><?php echo $this->formRow($form->get('de_longitud'));?></div>
 <div class="control-group "><?php echo $this->formRow($form->get('va_telefono'));?></div><?php?>
@@ -37,7 +34,9 @@ echo $this->formHidden($form->get('ta_restaurante_in_id'));
 <div class="control-group "><?php echo $this->formRow($form->get('ta_dia_in_id'));?></div><?php?>
 <div class="control-group">
 	<label for="">Seleccione Servicio que ofrece</label>
-	<label id="servicio_local"></label>
+	<label class="checkbox inline">
+   <?php echo $this->formRow($form->get('servicio'));?> 
+  </label>
 </div>
 <div class="control-group "><?php echo $this->formRow($form->get('pais'));?></div><?php?>
 <div class="control-group "><?php echo $this->formRow($form->get('departamento'));?></div><?php?>
