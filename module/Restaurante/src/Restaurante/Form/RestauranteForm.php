@@ -55,14 +55,14 @@ class RestauranteForm extends Form
         ));
         $this->add(array(
             'name' => 'va_imagen',
-            'type' => 'text',
+            'type' => 'File',
               'attributes' => array(               
                 'class' => '',
-                'id'   => 'va_imaen',
+                'id'   => 'va_imagen',
                 'placeholder'=>'Ingrese su página Web'
             ),
             'options' => array(
-                'label' => 'Imagen : ',
+                'label' => 'Agregar Imagen : ',
             ),
         ));
         
