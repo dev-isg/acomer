@@ -94,7 +94,7 @@ class RestauranteForm extends Form
         
         $this->add(array(
             'name' => 'va_ruc',
-            'type' => 'Text',
+            'type' => 'Number',
              'attributes' => array(               
                 'class' => 'span10',
                 'id'   => 'va_ruc',

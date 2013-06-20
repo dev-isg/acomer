@@ -142,8 +142,8 @@ $inputFilter->add($factory->createInput(array(
                         'name'    => 'StringLength',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'min'      => 10,
-                            'max'      =>20 ,
+                            'min'      => 11,
+                            'max'      => 11,
                         ),
                     ),
                 ),
