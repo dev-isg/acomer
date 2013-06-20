@@ -77,25 +77,31 @@ class RestauranteTable
            'va_ruc'            => $restaurante->va_ruc,
            'Ta_tipo_comida_in_id'  => $restaurante->Ta_tipo_comida_in_id  
         );
+
         $id = (int)$restaurante->in_id;
-        if ($id == 0) {         
+        if ($id == 0) {
+           
             $this->tableGateway->insert($data);             
                 if($comida != '')
-                {
-                    var_dump($comida);exit;
-                  $sql = new Sql($adapter);
-                      for ($i = 0; $i<sizeof($comida); $i++) {
-                           $insert = $sql->insert()
+                { //echo 'e ntrooooo';exit;
+        $sql = new Sql($adapter);
+        for ($i = 0; $i <= 1; $i++) { 
+            $insert = $sql->insert()
                                ->into('ta_restaurante_has_ta_medio_pago')
                                ->values(array(
-                       'Ta_restaurante_in_id' => 66,
-                       'Ta_medio_pago_in_id' => $comida[0] ));
+                       'Ta_restaurante_in_id' =>81,
+                       'Ta_medio_pago_in_id' => $comida[$i] ));
                         $selectString = $sql->getSqlStringForSqlObject($insert);
                         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
                         return $results;
-                  } 
-                }                      
-              } else {
+                      }
+       for($i=0;$i<1;$i++){
+                        
+                    }    
+            }
+                            
+        } else {
+           
             if ($this->getRestaurante($id)) {
                 $this->tableGateway->update($data, array('in_id' => $id));
             } else {

@@ -58,7 +58,7 @@ class RestauranteForm extends Form
             'type' => 'text',
               'attributes' => array(               
                 'class' => '',
-                'id'   => 'va_imagen',
+                'id'   => 'va_imaen',
                 'placeholder'=>'Ingrese su página Web'
             ),
             'options' => array(
@@ -75,12 +75,13 @@ class RestauranteForm extends Form
             
              'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'Ta_tipo_comida_in_id'
+                'id'   => 'Ta_tipocomida_in_id'
             ),
            'options' => array('label' => 'Tipo de Comida : ',
                      'value_options' => array(
                          
                           '' => 'selecccione :',
+                         
            
                                                
                      ),

@@ -127,7 +127,7 @@ class Usuario
                     ),
                 ),
             )));
-  /* $inputFilter->add($factory->createInput(array(
+  $inputFilter->add($factory->createInput(array(
                 'name'     => 'Ta_rol_in_id',
                 'required' => true,
                 'filters'  => array(
@@ -144,7 +144,7 @@ class Usuario
                         ),
                     ),
                 ),
-            )));*/
+            )));
             $this->inputFilter = $inputFilter;
         }
 
