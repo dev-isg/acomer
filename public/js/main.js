@@ -124,6 +124,9 @@ $(elemento).validate({
 
 }
 validar('#usuario');
+var id_r = $('h5').text;
+console.log(id_r);
+$('#ta_restaurante_in_id').val(id_r);
  //llenado de combo
  $.getJSON('/usuario/index/jsonestado',function(data){
 		$.each(data,function(i,val){
@@ -302,6 +305,7 @@ $(".eli").on("click",function(){
 	$('#verusuario').attr({'data-id':id});
 	$('#verusuario').html("Estas seguro de eliminar al usuario " + nom + " ?");
 });
+
 
 $('.check_rest').mousedown(function() {
     var id = $(this).attr('id');
