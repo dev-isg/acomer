@@ -143,11 +143,11 @@ validar('#usuario');
 //           $('#comodal').append("<input type='checkbox' name='va_modalidad[]' id="+ val.in_id+" value="+ val.in_id+"> " + val.va_nombre + "</br>" );              
 //     });
 // });
-$.getJSON('/local/index/jsonservicios',function(data){ 
-    $.each(data,function(i,val){
-          $('#servicio_local').append("<input type='checkbox' name='servicio_local[]' id="+ val.in_id+" value="+val.in_id +"> " + val.va_nombre + "</br>" );                     
-    });
-});
+// $.getJSON('/local/index/jsonservicios',function(data){ 
+//     $.each(data,function(i,val){
+//           $('#servicio_local').append("<input type='checkbox' name='servicio_local[]' id="+ val.in_id+" value="+val.in_id +"> " + val.va_nombre + "</br>" );                     
+//     });
+// });
 
 //llenado de combos
 $("#pais").change(function(evento){
