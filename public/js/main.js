@@ -125,7 +125,6 @@ $(elemento).validate({
 }
 validar('#usuario');
 
-$('#ta_restaurante_in_id').val(id_r);
  //llenado de combo
  $.getJSON('/usuario/index/jsonestado',function(data){
 		$.each(data,function(i,val){
