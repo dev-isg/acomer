@@ -158,7 +158,7 @@ class LocalTable
              // var_dump($selectString);exit;
             $adapter=$this->tableGateway->getAdapter();
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-          
+            //$results->current();
 //           $array=array();
 //             foreach($results as $result){
 //                 $array[]=$result;

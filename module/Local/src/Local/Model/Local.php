@@ -51,10 +51,12 @@ class Local
         $this->provincia = (!empty($data['provincia'])) ? $data['provincia'] : null;
         $this->distrito = (!empty($data['distrito'])) ? $data['distrito'] : null;
     }
+    
         public function setInputFilter(InputFilterInterface $inputFilter)
     {
         throw new \Exception("Not used");
     }
+    
         public function getArrayCopy()
     {
         return get_object_vars($this);
