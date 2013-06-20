@@ -145,7 +145,7 @@ $.getJSON('/restaurante/index/medio',function(data){
 });
 $.getJSON('/local/index/jsonservicios',function(data){ 
     $.each(data,function(i,val){
-          $('#servicio_local').append("<input type='checkbox' name='servicio_local[]' id="+ val.in_id+"> " + val.va_nombre + "</br>" );                     
+          $('#servicio_local').append("<input type='checkbox' name='servicio_local[]' id="+ val.in_id+" value="+val.in_id +"> " + val.va_nombre + "</br>" );                     
     });
 });
 
