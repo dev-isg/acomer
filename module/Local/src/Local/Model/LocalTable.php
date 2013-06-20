@@ -57,7 +57,7 @@ class LocalTable
  
     }
     
-    public function guardarLocal(Local $local){
+    public function guardarLocal(Local $local, $servicio){
         
           $data = array(
            'va_telefono'         => $local->va_telefono,
@@ -83,8 +83,31 @@ class LocalTable
             
           //print_r($data);exit;
         $id = (int)$local->in_id;
+        //var_dump($id);exit;
         if ($id == 0) {
+            
+            
+            $inservicio = $this->tableGateway->getSql()->insert()->into('ta_servicio_local')
+                    ->values(array('va_nombre'=>$servicio));
+            $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($inservicio);
+            $adapter=$this->tableGateway->getAdapter();
+            $resultserv = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            
+            $idserv=$this->tableGateway->getLastInsertValue();
+            
             $this->tableGateway->insert($data);
+            $idlocal=$this->tableGateway->getLastInsertValue();
+            
+            $insert = $this->tableGateway->getSql()->insert()->into('ta_local_has_ta_servicio_local')
+                    ->values(array('ta_local_in_id'=>$idlocal,'ta_servicio_local_in_id'=>$idserv));
+            $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($insert);
+            $adapter=$this->tableGateway->getAdapter();
+            $result = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            
+            
+            
+            
+            
         } else {
 //            if ($this->getRestaurante($id)) {
 //                $this->tableGateway->update($data, array('in_id' => $id));

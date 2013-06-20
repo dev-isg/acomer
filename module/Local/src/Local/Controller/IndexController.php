@@ -63,8 +63,10 @@ class IndexController extends AbstractActionController
     }
     
     public function agregarlocalAction(){
+            $servicio=$this->params()->fromPost('servicio_local[]');
+            var_dump($servicio);exit;
            $form = new LocalForm();
-              $id=$this->params()->fromQuery('id');
+           $id=$this->params()->fromQuery('id');
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -88,8 +90,8 @@ class IndexController extends AbstractActionController
              else{
                
                 $local->exchangeArray($form->getData());
-                var_dump($local);exit;
-                $this->getLocalTable()->guardarLocal($local);
+                //var_dump($local);exit;
+                $this->getLocalTable()->guardarLocal($local,$servicio);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/local');   
  
                  
