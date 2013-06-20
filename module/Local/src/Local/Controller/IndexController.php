@@ -126,7 +126,7 @@ class IndexController extends AbstractActionController
         }
         //$local = $this->getLocalTable()->getLocal($id);
         try {
-            $local = $this->getLocalTable()->getLocal($id)->toArray();
+            $local = $this->getLocalTable()->getLocal($id);//->toArray();
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
@@ -148,11 +148,17 @@ class IndexController extends AbstractActionController
         $form  = new LocalForm();
        // var_dump($local[0]['in_idpais']);EXIT;
 //        $form->get('pais')->setValueOptions(array($local[0]['in_idpais']));
-        $aux[]=$local[0]['in_iddep'];
-        $form->get('departamento')->setValueOptions($aux);
-//        $form->get('departamento')->setValueOptions(array($local[0]['in_iddep']));
-//        $form->get('provincia')->setValueOptions(array($local[0]['in_idprov']));
-//        $form->get('distrito')->setValueOptions(array($local[0]['in_iddis']));
+//        $aux[]=$local[0]['in_iddep'];
+//        $form->get('departamento')->setValueOptions(array(
+//             array(
+//                     '0' => 'Apple',
+//                     '1' => 'Orange',
+//                     '2' => 'Lemon'
+//             )));
+          $form->get('departamento')->setValueOptions(array($local[0]['in_idpais']));
+        $form->get('departamento')->setValueOptions(array($local[0]['in_iddep']));
+        $form->get('provincia')->setValueOptions(array($local[0]['in_idprov']));
+        $form->get('distrito')->setValueOptions(array($local[0]['in_iddis']));
         
 //        var_dump($local);exit;
         $form->bind($local);
