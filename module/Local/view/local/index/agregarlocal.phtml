@@ -38,7 +38,7 @@ echo $this->formHidden($form->get('ta_restaurante_in_id'));
 <div class="control-group span5"><?php echo $this->formRow($form->get('va_direccion'));?></div><?php?>
 <div class="control-group span5">
                               <label>Encontrar latitud y longitud</label>
-                              <div><input type="text" maxlength="100" id="address" class="span5 uneditable-input"/> <input type="button" class="btn btn-info" id="search" value="Buscar" /></div><br/>
+                              <div><input type="text" maxlength="100" id="address" name="address" class="span5 uneditable-input"/> <input type="button" class="btn btn-info" id="search" value="Buscar" /></div><br/>
                               <div id='map_canvas' style="height:200px;width:700px;"></div>                           
                              </div>
 <div class="control-group span5">

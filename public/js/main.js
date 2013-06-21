@@ -19,6 +19,62 @@ $('.control-group').removeClass('success');
   $('label').remove(":contains('OK!')");
   $('.error').remove();
 };
+$('#local').validate({
+      rules: {
+        va_telefono: {
+            required: true                       
+        },
+        va_horario: { required: true },
+        va_rango_precio :{ required:true},
+        ta_dia_in_id:{ required : true },
+        pais : { required : true}, 
+        departamento : { required : true},
+        provincia : { required : true},
+        distrito : { required : true},        
+        va_direccion:{ required : true  },
+        address : { required : true}       
+      },
+      messages:{
+            va_telefono: {
+                required:"Por favor ingresar el numero telefonico"
+             },
+            va_razon_social:{
+                required:"Por favor ingresar un horario"
+                       },
+            va_rango_precio:{
+                required:"Por favor ingresa un rango de precio"
+            },
+            ta_dia_in_id: {
+                required : "Por favor ingrese dia de atencion"
+            },           
+            va_pais : {
+              required : "Por favor seleccione el pais"
+            },       
+            departamento :{
+              required : "Por favor seleccione el departamento"                
+            },
+            provincia : {
+              required : "Por favor seleccione la provincia"
+            },
+            distrito : {
+              required : "Por favor seleccione el distrito"
+            },
+            va_direccion : {
+              required : "Por favor ingrese la dirección "
+            },
+            address : {
+              required : "Por favor busque la latitud y longitud"
+            }
+        },
+      highlight: function(element) {
+        $(element).closest('.control-group').removeClass('success').addClass('error');
+      },
+      success: function(element) {
+        element
+        .text('OK!').addClass('valid')
+        .closest('.control-group').removeClass('error').addClass('success');
+      }
+    });
 $('#restaurante').validate({
       rules: {
         va_nombre: {
@@ -167,7 +223,7 @@ validar('#usuario');
 //     });
 // });
 
-  $('#direccion_loc').keyup(function () {
+  $('#va_direccion').keyup(function () {
      var value = $(this).val();
     $('#address').val("");
      var d = $("#distrito option:selected").text();
