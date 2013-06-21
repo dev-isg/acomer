@@ -27,6 +27,22 @@ echo $this->formHidden($form->get('in_id'));
 <?php
 echo $this->formHidden($form->get('ta_restaurante_in_id'));
 ?>
+
+
+<?php
+echo $this->formHidden($form->get('h_pais'));
+?>
+<?php
+echo $this->formHidden($form->get('h_departamento'));
+?>
+<?php
+echo $this->formHidden($form->get('h_provincia'));
+?>
+<?php
+echo $this->formHidden($form->get('h_distrito'));
+?>
+
+
 <h5><?php echo $this->id ;?></h5>
 
 <div class="control-group "><?php echo $this->formRow($form->get('servicio'));?></div>
@@ -42,10 +58,12 @@ echo $this->formHidden($form->get('ta_restaurante_in_id'));
 	<label for="">Seleccione Servicio que ofrece</label>
 	<label id="servicio_local"></label>
 </div>
+
 <div class="control-group "><?php echo $this->formRow($form->get('pais'));?></div><?php?>
 <div class="control-group "><?php echo $this->formRow($form->get('departamento'));?></div><?php?>
 <div class="control-group "><?php echo $this->formRow($form->get('provincia'));?></div><?php?>
 <div class="control-group "><?php echo $this->formRow($form->get('distrito'));?></div><?php?>
+
 <div class="control-group "><?php echo $this->formRow($form->get('va_direccion'));?></div><?php?>
 <div class="control-group span12">
                               <label>Encontrar latitud y longitud</label>

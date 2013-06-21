@@ -148,7 +148,7 @@ class LocalForm extends Form
                      'value_options' => array(
                           '' => 'selecccione :'                                                
                      ),
-                     'disable_inarray_validator' => true
+                    'disable_inarray_validator' => true
              )
         ));
             
