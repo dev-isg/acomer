@@ -82,14 +82,13 @@ echo $this->form()->closeTag();?> </div>
          var prov=parseInt($('#h_provincia').val());
          var dis=parseInt($('#h_distrito').val());
       $.getJSON('/local/index/jsondepartamento',function(data){
-          if(pais==1){
-                     $.each(data,function(i,val){              
+              $.each(data,function(i,val){              
                 $('#departamento').append( "<option value=" + val.in_iddep + ">" + val.ch_departamento + " </option>");
-                                                
+                   $("#departamento" +" option[value='" +depa +" ']").attr("selected","selected");                        
           });          
-          }
+        
       });
-    $("#departamento" +" option[value='" +depa +" ']").attr("selected","selected");
+    
   
     var url="/local/index/jsonprovincia?iddepa=" + depa;
      console.log(depa);
