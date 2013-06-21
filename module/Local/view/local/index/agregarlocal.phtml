@@ -57,14 +57,6 @@ echo $this->formHidden($form->get('ta_restaurante_in_id'));
 	$(document).ready(function(){
 		var id_r = $('h5').text();
     $('#address').val("");
-    $('#va_direccion').keyup(function () {
-     var value = $(this).val();
-    $('#address').val("");
-     var d = $("#distrito option:selected").text();
-     var p = $("#provincia option:selected").text();
-     var pa = $("#pais option:selected").text();
-     $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
-   }).keyup();
-      $('#ta_restaurante_in_id').val(id_r);
+     $('#ta_restaurante_in_id').val(id_r);
 	})
 </script>
