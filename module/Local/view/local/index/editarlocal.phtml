@@ -111,6 +111,19 @@ echo $this->form()->closeTag();?> </div>
                   $("#distrito" +" option[value=" +dis +"]").attr("selected","selected");
           });  
      });
+        var url3="/local/index/jsonservicios?id=" + id
+    $.getJSON(url3,function(data){ 
+             
+            $.each(data,function(i,val){
+            $(".checkbox").each(function(){ 
+              var va = $(this).attr('value');
+              console.log(val.ta_servicio_local_in_id);
+           if (va==val.ta_servicio_local_in_id ){
+                $(this).prop("checked" , true ); 
+             } 
+             });                       
+    });
+});
 
 
 
