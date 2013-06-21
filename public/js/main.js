@@ -288,9 +288,9 @@ function geocodeResult(results, status) {
 
     $('#address').keyup(function () {
      var value = $(this).val();
-     var d = $("#distrito option:selected").text()
-     var p = $("#provincia option:selected").text()
-     var pa = $("#pais option:selected").text()
+     var d = $("#distrito option:selected").val()
+     var p = $("#provincia option:selected").val()
+     var pa = $("#pais option:selected").val()
      $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
    }).keyup();
 //
