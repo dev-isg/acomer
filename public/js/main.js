@@ -474,7 +474,8 @@ $('.check_rest').mousedown(function() {
   console.log(user);
   var request = $.ajax({
   url: "/local/index/editarlocal?id="+user,
-  type: "POST"
+  type: "POST",
+  data: {id: user} 
   });
 });
 
