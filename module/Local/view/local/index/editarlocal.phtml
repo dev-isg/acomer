@@ -82,8 +82,8 @@ echo $this->form()->closeTag();?> </div>
           if(pais==1){
              $("#departamento").empty(); 
              $.each(data,function(i,val){              
-              $("#departamento").append("<option value=''>"+ val.ch_departamento +"</option>");  
-                $('#departamento').append( "<option value=" + val.in_iddep + " >" + val.ch_departamento + " </option>");                    
+              
+                $('#departamento').append( "<option value=" + val.in_iddep + " :select>" + val.ch_departamento + " </option>");                    
           });          
           }
       });
@@ -93,9 +93,8 @@ echo $this->form()->closeTag();?> </div>
           $.getJSON(url,function(data){
                   $("#provincia").empty();  
                 $.each(data,function(i,val){ 
-                
-                $("#provincia").append("<option value=''>"+ val.ch_provincia +"</option>");        
-                    $('#provincia').append( "<option value=" + val.in_idprov + " >" + val.ch_provincia + " </option>");                                
+                                 
+                    $('#provincia').append( "<option value=" + val.in_idprov + " :select>" + val.ch_provincia + " </option>");                                
                           });  
          });
 
