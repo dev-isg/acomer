@@ -22,10 +22,12 @@ $('.control-group').removeClass('success');
 $('#restaurante').validate({
       rules: {
         va_nombre: {
-            required: true
+            required: true,
+            minlength : 8
         },
         va_razon_social: {
-              required: true
+              required: true ,
+              minlength : 10
         },
         va_web :{
                    url:true},
@@ -33,16 +35,23 @@ $('#restaurante').validate({
                 required : true,
                 rucReal:true            
             },
+        va_imagen : { required : true},
+        va_modalidad :{
+          required: true,
+          minlength: 1
+        },
         Ta_tipo_comida_in_id:{
                 required : true
               }       
       },
       messages:{
             va_nombre: {
-                required:"Por favor ingresar el nombre del restaurante"
+                required:"Por favor ingresar el nombre del restaurante",
+                minlength : "Minimo 8 caracteres"
             },
             va_razon_social:{
-                required:"Por favor ingresar la razon social"
+                required:"Por favor ingresar la razon social",
+                minlength : "Minimo 10 caractertes"
             },
             va_web:{
                 url:"Por favor ingresa una Url valida"
@@ -50,7 +59,14 @@ $('#restaurante').validate({
             va_ruc: {
                 required : "Por favor ingrese un Ruc",
                 rucReal:" Ingresa un Ruc valido "
-            },           
+            },
+            va_modalidad : {
+               required: "Por favor seleccionar una modalida",
+               minlength : "Seleccionar al menos 1"
+            },
+            va_imagen : {
+              required : "Por favor ingresar una imagen"
+            };           
             Ta_tipo_comida_in_id :{
               required : "Por favor ingresar un tipo de plato"                
             }
