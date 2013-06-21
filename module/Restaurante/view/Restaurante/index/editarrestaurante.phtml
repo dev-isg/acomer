@@ -35,10 +35,11 @@ echo $this->form()->closeTag();?>
 		var id=$('#in_di');
 		var url="/restaurante/index/medi?in_id=" + id
 		$.getJSON('/local/index/jsonservicios',function(data){ 
-              $(".checkbox").each(function(){ 
+             
             $.each(data,function(i,val){
-              
+            $(".checkbox").each(function(){ 
               var va = $(this).attr('value');
+              console.log(va);
     	     if (va==val.in_id ){
                 $(this).prop("checked" , true ); 
              }else{
