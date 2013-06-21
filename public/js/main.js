@@ -33,6 +33,7 @@ $('#restaurante').validate({
                    url:true},
         va_ruc:{
                 required : true,
+                number:true,
                 rucReal:true            
             },
         va_imagen : { required : true},
@@ -58,6 +59,7 @@ $('#restaurante').validate({
             },
             va_ruc: {
                 required : "Por favor ingrese un Ruc",
+                number : "Por favor ingresar solo numeros",
                 rucReal:" Ingresa un Ruc valido "
             },
             "va_modalidad[]" : {
