@@ -39,11 +39,9 @@ echo $this->form()->closeTag();?>
             $.each(data,function(i,val){
             $(".checkbox").each(function(){ 
               var va = $(this).attr('value');
-              console.log(va);
+              console.log(val.in_id);
     	     if (va==val.in_id ){
                 $(this).prop("checked" , true ); 
-             }else{
-                $(this).prop("checked", false );
              } 
              });                       
     });
