@@ -191,7 +191,7 @@ class IndexController extends AbstractActionController
         $form->get('servicio')->setValueOptions($array);
    
         
-//        $form->get('pais')->setValue($local['in_idpais']);
+        $form->get('pais')->setValue($local['in_idpais']);
 //        $form->get('departamento')->setValueOptions(array($local['in_iddep']));//setValue($local['in_iddep']);
 //        $form->get('provincia')->setValueOptions(array($local['in_idprov']));
 //        $form->get('distrito')->setValueOptions(array($local['in_iddis']));
