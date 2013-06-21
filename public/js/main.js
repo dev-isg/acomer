@@ -286,13 +286,7 @@ function geocodeResult(results, status) {
 // });
 
 
-    $('#address').keyup(function () {
-     var value = $(this).text();
-     var d = $("#distrito option:selected").text();
-     var p = $("#provincia option:selected").text();
-     var pa = $("#pais option:selected").text();
-     $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
-   }).keyup();
+   
 //
 
 $(".eli").on("click",function(){
