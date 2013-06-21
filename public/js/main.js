@@ -223,7 +223,8 @@ validar('#usuario');
 //     });
 // });
 
-  $('#va_direccion').keyup(function () {
+   $('#address').val("");
+    $('#va_direccion').keyup(function () {
      var value = $(this).val();
     $('#address').val("");
      var d = $("#distrito option:selected").text();
