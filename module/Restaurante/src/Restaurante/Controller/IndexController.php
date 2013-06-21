@@ -62,8 +62,6 @@ class IndexController extends AbstractActionController
      
     public function agregarrestauranteAction()
     {  
-       
-       
         $form = new RestauranteForm();
         $medio =  $this->medio()->toArray();
         $medi = array();
@@ -95,10 +93,8 @@ class IndexController extends AbstractActionController
             $File = $this->params()->fromFiles('va_imagen');
             $restaurante->exchangeArray($form->getData());
             $adapter = new \Zend\File\Transfer\Adapter\Http();
-          //$adapter->setValidators($File['name']);
-           //var_dump($adapter);exit;
           if (!$adapter->isValid()){
-                    echo 'error al cargar imagen';exit;
+                  
                      $dataError = $adapter->getMessages();
                      $error = array();
                      foreach($dataError as $key=>$row)
@@ -119,41 +115,7 @@ class IndexController extends AbstractActionController
        }     
         return array('form' => $form);
     }
-
-        public function restaurantemedio($id)
-    {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $adapter = $this->dbAdapter;
-        $sql = new Sql($adapter);
-        $select = $sql->select() 
-           ->from(array('f' => 'ta_restaurante_has_ta_medio_pago')) 
-            ->join(array('b' => 'Ta_medio_pago'),'f.Ta_medio_pago_in_id = b.in_id',array('va_nombre'))
-           ->where(array('f.Ta_restaurante_in_id'=>$id)); 
-            $selectString = $sql->getSqlStringForSqlObject($select);
-            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-            return $results;       
-     }
- 
-      public function medio()
-    {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $adapter = $this->dbAdapter;
-        $sql = new Sql($adapter);
-        $select = $sql->select()
-            ->from('ta_medio_pago');
-            $selectString = $sql->getSqlStringForSqlObject($select);
-            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-            return $results;
-            
-     }
-     
-
-     public function mediAction(){
-         $id=$this->params()->fromQuery('in_id');
-        $ubigeo=$this->getRestauranteTable()->medio($id);
-//        var_dump($this->getUbigeoTable()->getProvincia($iddepar));exit;
-        echo Json::encode($ubigeo);
-        exit();
-    }
-      public function editarrestauranteAction()
+ public function editarrestauranteAction()
      
     {   
         $id = (int) $this->params()->fromRoute('in_id', 0);
@@ -203,10 +165,17 @@ class IndexController extends AbstractActionController
             if ($form->isValid()) {
                 $nonFile = $request->getPost()->toArray();
                $File = $this->params()->fromFiles('va_imagen');
-               //$e=$File['name'];
-               //var_dump($File);exit;
-                $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
+               
+                $adapter = new \Zend\File\Transfer\Adapter\Http();
+                $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
+                
+               //  $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
+                  if ($adapter->receive($File['name'])) { //echo 'dddds';exit;
+                        //$restaurante->exchangeArray($form->getData());
+                         $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
                 $this->redirect()->toUrl('/restaurante');
+                    }
+                
             }
         }
  
@@ -217,6 +186,40 @@ class IndexController extends AbstractActionController
         );
         
     }
+        public function restaurantemedio($id)
+    {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select() 
+           ->from(array('f' => 'ta_restaurante_has_ta_medio_pago')) 
+            ->join(array('b' => 'Ta_medio_pago'),'f.Ta_medio_pago_in_id = b.in_id',array('va_nombre'))
+           ->where(array('f.Ta_restaurante_in_id'=>$id)); 
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            return $results;       
+     }
+ 
+      public function medio()
+    {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+            ->from('ta_medio_pago');
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            return $results;
+            
+     }
+     
+
+     public function mediAction(){
+         $id=$this->params()->fromQuery('in_id');
+        $ubigeo=$this->getRestauranteTable()->medio($id);
+//        var_dump($this->getUbigeoTable()->getProvincia($iddepar));exit;
+        echo Json::encode($ubigeo);
+        exit();
+    }
+     
            public function editarAction()
      
     {
