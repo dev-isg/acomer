@@ -381,6 +381,14 @@ $(".eli").on("click",function(){
 	$('#verusuario').html("Estas seguro de eliminar al usuario " + nom + " ?");
 });
 
+$(".eli-lo").on("click",function(){
+  var id = $(this).attr('data-id');
+  $('#eli-local').modal('show');
+  console.log(id);
+  $('#verlocal').attr({'data-id':id});
+  $('#verlocal').html("Estas seguro de eliminar el local ?");
+});
+
 
 $('.check_rest').mousedown(function() {
     var id = $(this).attr('id');
@@ -459,4 +467,16 @@ $('.check_rest').mousedown(function() {
   data: {id: user} 
   });
 });
+ $("#delete-local").on("click",function(){
+  var user=$("#verlocal").attr("data-id");
+  $("#" + user).closest('tr').remove();
+  $('#eli-local').modal('hide');
+  console.log(user);
+  var request = $.ajax({
+  url: "/local/index/eliminarlocal?id="+user,
+  type: "POST",
+  data: {id: user} 
+  });
+});
+
 });
