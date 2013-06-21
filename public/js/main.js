@@ -473,7 +473,7 @@ $('.check_rest').mousedown(function() {
   $('#eli-local').modal('hide');
   console.log(user);
   var request = $.ajax({
-  url: "/local/index/editarlocal?id="+user,
+  url: "/local/index/eliminarlocal?id="+user,
   type: "POST",
   data: {id: user} 
   });
