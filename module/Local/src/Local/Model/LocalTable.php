@@ -89,11 +89,9 @@ class LocalTable
         );
 
 
-         // var_dump($departamento);exit;
           foreach($data as $index=>$valor){
                 if(empty($data[$index])){
                     $data[$index]=1;
-                    //if($index=='cantidad')$datosAviso['cantidad']=1;
                 }
             }
             
