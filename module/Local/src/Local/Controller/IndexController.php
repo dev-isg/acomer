@@ -76,8 +76,16 @@ class IndexController extends AbstractActionController
         $array = array();
         foreach($servi as $y){
             $array[$y['in_id']] = $y['va_nombre'];
+           
         }
-
+//        for($i=1;$i<=count($array);$i++){
+//            $form->get('servicio')->setAttributes(array('id'   => 'servicio'.$i));
+//        }
+         
+        //'id'   => 'servicio'
+//        foreach($array as $key=>$value){
+//        $form->get('servicio')->setAttributes(array('id'   => $array[$key]));
+//        }
         $form->get('servicio')->setValueOptions($array);
         
         if ($request->isPost()) {
@@ -169,8 +177,9 @@ class IndexController extends AbstractActionController
                      '1' => 'Orange',
                      '2' => 'Lemon'
              ));
-          $form->get('departamento')->setValueOptions(array('value_options'=>array('1'=>$local['in_idpais'])));
-        $form->get('departamento')->setValueOptions(array('value_options'=>array($local['in_iddep'])));//setValueOptions(array($local['in_iddep']));
+//           var_dump($form->get('departamento')->setValue(''));exit; 
+          $form->get('pais')->setValue($local['in_idpais']);
+        $form->get('departamento')->setValueOptions(array($local['in_iddep']));//setValue($local['in_iddep']);
         $form->get('provincia')->setValueOptions(array($local['in_idprov']));
         $form->get('distrito')->setValueOptions(array($local['in_iddis']));
        // var_dump($form->get('servicio'));exit;
@@ -184,16 +193,16 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
         if ($request->isPost()) {
 
-            $form->setInputFilter($local->getInputFilter());
+            //$form->setInputFilter($local->getInputFilter());
             $form->setData($request->getPost());
-
-            if ($form->isValid()) {
-                $this->getLocalTable()->guardarLocal($local);
-
-                // Redirect to list of albums
+           
+            $servicio=$this->params()->fromPost('servicio');
+            
+           // if ($form->isValid()) {
+                $this->getLocalTable()->guardarLocal($local,$servicio);
                           return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/local/index/index');
-            }
+            //}
         }
 
         return array(
