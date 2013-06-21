@@ -30,3 +30,21 @@ echo $this->formHidden($form->get('in_id'));
 ?><div class="control-group "><?php echo $this->formSubmit($form->get('submit'));?></div><?php
 echo $this->form()->closeTag();?> 
 
+<script>
+	$(document).ready(function(){
+		var id=$('#in_di');
+		var url="/restaurante/index/medi?in_id=" + id
+		$.getJSON('/local/index/jsonservicios',function(data){ 
+            $.each(data,function(i,val){
+                $(".checkbox").each(function(){ 
+              var va = $(this).attr('value');
+    	     if (va==val.in_id ){
+                $(this).prop("checked" , true ); 
+             }else{
+                $(this).prop("checked", false );
+             } 
+             });                       
+    });
+});
+	});
+</script>
