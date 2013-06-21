@@ -66,7 +66,7 @@ $('#restaurante').validate({
             },
             va_imagen : {
               required : "Por favor ingresar una imagen"
-            };           
+            },       
             Ta_tipo_comida_in_id :{
               required : "Por favor ingresar un tipo de plato"                
             }
