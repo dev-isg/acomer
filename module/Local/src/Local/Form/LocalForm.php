@@ -15,6 +15,9 @@ class LocalForm extends Form
         $this->add(array(
             'name' => 'in_id',
             'type' => 'Hidden',
+            'attributes'=>array(
+                'id'=>'id'
+            )
         ));
         
         $this->add(array(
