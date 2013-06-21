@@ -149,6 +149,15 @@ validar('#usuario');
 //     });
 // });
 
+  $('#direccion_loc').keyup(function () {
+     var value = $(this).val();
+    $('#address').val("");
+     var d = $("#distrito option:selected").text();
+     var p = $("#provincia option:selected").text();
+     var pa = $("#pais option:selected").text();
+     $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
+   }).keyup();
+
 //llenado de combos
 $("#pais").change(function(evento){
    var pais=parseInt($(this).val());
@@ -285,14 +294,7 @@ function geocodeResult(results, status) {
 //     });
 // });
 
-  $('#direccion_loc').keyup(function () {
-     var value = $(this).val();
-    $('#address').val("");
-     var d = $("#distrito option:selected").text();
-     var p = $("#provincia option:selected").text();
-     var pa = $("#pais option:selected").text();
-     $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
-   }).keyup();
+
 //
 
 $(".eli").on("click",function(){

@@ -75,7 +75,7 @@ echo $this->formHidden($form->get('h_distrito'));
 		  var id_r = $('h5').text();
       var id =$("#id").val();
       var url3="/local/index/jsonservicios?id=" + id;
-      
+
     $.getJSON(url3,function(data){              
             $.each(data,function(i,val){
             $(".checkbox").each(function(){ 
@@ -102,10 +102,7 @@ echo $this->formHidden($form->get('h_distrito'));
     
   
     var url="/local/index/jsonprovincia?iddepa=" + depa;
-     console.log(depa);
-     console.log(prov);
-     console.log(dis);
-          $.getJSON(url,function(data){
+              $.getJSON(url,function(data){
                   $("#provincia").empty();  
                 $.each(data,function(i,val){ 
                                  
