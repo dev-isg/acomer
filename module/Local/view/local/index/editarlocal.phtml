@@ -75,14 +75,14 @@ echo $this->form()->closeTag();?> </div>
 </div>
 <script>
 	$(document).ready(function(){
-		var id_r = $('h5').text();
+		  var id_r = $('h5').text();
       $('#ta_restaurante_in_id').val(id_r);
        var pais=parseInt($('#pais').val());
       $.getJSON('/local/index/jsondepartamento',function(data){
           if(pais==1){
-             $.each(data,function(i,val){
-              $("#departamento").empty();  
-              $("#departamento").append("<option value=''>"+ val.ch_provincia +"</option>");  
+             $("#departamento").empty(); 
+             $.each(data,function(i,val){              
+              $("#departamento").append("<option value=''>"+ val.ch_departamento +"</option>");  
                 $('#departamento').append( "<option value=" + val.in_iddep + " >" + val.ch_departamento + " </option>");                    
           });          
           }
@@ -91,9 +91,9 @@ echo $this->form()->closeTag();?> </div>
     var url="/local/index/jsonprovincia?iddepa=" + depa;
      console.log(depa);
           $.getJSON(url,function(data){
-                  
+                  $("#provincia").empty();  
                 $.each(data,function(i,val){ 
-                $("#provincia").empty();  
+                
                 $("#provincia").append("<option value=''>"+ val.ch_provincia +"</option>");        
                     $('#provincia').append( "<option value=" + val.in_idprov + " >" + val.ch_provincia + " </option>");                                
                           });  
