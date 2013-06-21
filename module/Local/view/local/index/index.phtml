@@ -34,7 +34,7 @@
         <?php $count = 1;
     foreach ($this->locales  as $local) :// foreach ($this->paginator as $usuario) :
         ?>
-        <tr>
+        <tr id="<?php echo $this->escapeHtml($local->in_id); ?>">
             <td><?php echo $count++ ?></td>
             <td><?php echo $this->escapeHtml($local->va_nombre); ?></td> 
             <td><?php echo $this->escapeHtml($local->va_telefono); ?></td>
