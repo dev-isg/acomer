@@ -243,7 +243,7 @@ class IndexController extends AbstractActionController
                           return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/local/index/index');
             }else{ 
-                  
+                  $this->getLocalTable()->guardarLocal();
                 echo 'no validado';exit;}
         }
 

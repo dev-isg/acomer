@@ -89,15 +89,15 @@ class LocalTable
         );
 
 
-          foreach($data as $index=>$valor){
-                if(empty($data[$index])){
-                    $data[$index]=1;
-                }
-            }
+//          foreach($data as $index=>$valor){
+//                if(empty($data[$index])){
+//                    $data[$index]=1;
+//                }
+//            }
             
-          //print_r($data);exit;
+
         $id = (int)$local->in_id;
-        //var_dump($id);exit;
+
         if ($id == 0) {
             
             
