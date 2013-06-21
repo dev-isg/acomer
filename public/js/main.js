@@ -22,35 +22,53 @@ $('.control-group').removeClass('success');
 $('#restaurante').validate({
       rules: {
         va_nombre: {
-            required: true
+            required: true,
+            minlength : 8
         },
         va_razon_social: {
-              required: true
+              required: true ,
+              minlength : 10
         },
         va_web :{
                    url:true},
         va_ruc:{
                 required : true,
+                number:true,
                 rucReal:true            
             },
+        va_imagen : { required : true},
+        // "va_modalidad[]" :{
+        //   required: true,
+        //   minlength: 1
+        // },
         Ta_tipo_comida_in_id:{
                 required : true
               }       
       },
       messages:{
             va_nombre: {
-                required:"Por favor ingresar el nombre del restaurante"
+                required:"Por favor ingresar el nombre del restaurante",
+                minlength : "Minimo 8 caracteres"
             },
             va_razon_social:{
-                required:"Por favor ingresar la razon social"
+                required:"Por favor ingresar la razon social",
+                minlength : "Minimo 10 caractertes"
             },
             va_web:{
                 url:"Por favor ingresa una Url valida"
             },
             va_ruc: {
                 required : "Por favor ingrese un Ruc",
+                number : "Por favor ingresar solo numeros",
                 rucReal:" Ingresa un Ruc valido "
-            },           
+            },
+            // "va_modalidad[]" : {
+            //    required: "Por favor seleccionar una modalida",
+            //    minlength : "Seleccionar al menos 1"
+            // },
+            va_imagen : {
+              required : "Por favor ingresar una imagen"
+            },       
             Ta_tipo_comida_in_id :{
               required : "Por favor ingresar un tipo de plato"                
             }
@@ -148,6 +166,15 @@ validar('#usuario');
 //           $('#servicio_local').append("<input type='checkbox' name='servicio_local[]' id="+ val.in_id+" value="+val.in_id +"> " + val.va_nombre + "</br>" );                     
 //     });
 // });
+
+  $('#direccion_loc').keyup(function () {
+     var value = $(this).val();
+    $('#address').val("");
+     var d = $("#distrito option:selected").text();
+     var p = $("#provincia option:selected").text();
+     var pa = $("#pais option:selected").text();
+     $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
+   }).keyup();
 
 //llenado de combos
 $("#pais").change(function(evento){
@@ -285,14 +312,7 @@ function geocodeResult(results, status) {
 //     });
 // });
 
-  $('#direccion_loc').keyup(function () {
-     var value = $(this).val();
-    $('#address').val("");
-     var d = $("#distrito option:selected").text();
-     var p = $("#provincia option:selected").text();
-     var pa = $("#pais option:selected").text();
-     $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
-   }).keyup();
+
 //
 
 $(".eli").on("click",function(){

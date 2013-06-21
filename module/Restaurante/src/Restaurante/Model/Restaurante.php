@@ -96,7 +96,7 @@ class Restaurante implements InputFilterAwareInterface
             )));
 $inputFilter->add($factory->createInput(array(
                 'name'     => 'va_web',
-                'required' => true,
+                'required' => false,
                 'filters'  => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),

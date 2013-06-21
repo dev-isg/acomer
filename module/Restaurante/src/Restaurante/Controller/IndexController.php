@@ -62,6 +62,8 @@ class IndexController extends AbstractActionController
      
     public function agregarrestauranteAction()
     {  
+       
+       
         $form = new RestauranteForm();
         $medio =  $this->medio()->toArray();
         $medi = array();
@@ -87,35 +89,29 @@ class IndexController extends AbstractActionController
                         $this->getRequest()->getPost()->toArray(),          
                        $this->getRequest()->getFiles()->toArray()
                    ); 
-            $form->setData($data);     
-  
-            if ($form->isValid()) {
-                
-      $nonFile = $request->getPost()->toArray();
-      $File = $this->params()->fromFiles('va_imagen');
-      $restaurante->exchangeArray($form->getData());
-          
-                
-      
-   
-    $adapter = new \Zend\File\Transfer\Adapter\Http();
-    //$adapter->setValidators($File['name']);
-     //var_dump($adapter);exit;
-    if (!$adapter->isValid()){
-       echo 'error al cargar imagen';exit;
-        $dataError = $adapter->getMessages();
-        $error = array();
-        foreach($dataError as $key=>$row)
-        {
-            $error[] = $row;
-        }
-        $form->setMessages(array('fileupload'=>$error ));
-    } else {//echo 'entro';exit;
-        $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
-       // $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
-     $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
-     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
-           }       
+    $form->setData($data);     
+    if ($form->isValid()) {               
+            $nonFile = $request->getPost()->toArray();
+            $File = $this->params()->fromFiles('va_imagen');
+            $restaurante->exchangeArray($form->getData());
+            $adapter = new \Zend\File\Transfer\Adapter\Http();
+          //$adapter->setValidators($File['name']);
+           //var_dump($adapter);exit;
+          if (!$adapter->isValid()){
+                    echo 'error al cargar imagen';exit;
+                     $dataError = $adapter->getMessages();
+                     $error = array();
+                     foreach($dataError as $key=>$row)
+                     {
+                         $error[] = $row;
+                     }
+                     $form->setMessages(array('imagen'=>$error ));
+          } else {//echo 'entro';exit;
+                    $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
+                   // $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
+                    $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
+                 }       
          }
        }     
         return array('form' => $form);
@@ -172,6 +168,7 @@ class IndexController extends AbstractActionController
             return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/restaurante'); 
         }
+      
         $form  = new RestauranteForm();
          $medio =  $this->medio()->toArray();
         $medi = array();
