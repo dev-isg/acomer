@@ -56,6 +56,7 @@ echo $this->formHidden($form->get('ta_restaurante_in_id'));
 <script>
 	$(document).ready(function(){
 		var id_r = $('h5').text();
+    $('#address').val("");
 console.log(id_r);
 $('#ta_restaurante_in_id').val(id_r);
 	})
