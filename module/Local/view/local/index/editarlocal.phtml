@@ -54,26 +54,38 @@ echo $this->formHidden($form->get('h_distrito'));
 <div class="control-group span5"><?php echo $this->formRow($form->get('departamento'));?></div><?php?>
 <div class="control-group span5"><?php echo $this->formRow($form->get('provincia'));?></div><?php?>
 <div class="control-group span5"><?php echo $this->formRow($form->get('distrito'));?></div><?php?>
+<div class="control-group span5"><?php echo $this->formRow($form->get('va_direccion'));?></div><?php?>
 <div class="control-group span5">
+               <label>Encontrar latitud y longitud</label>
+               <div><input type="text" maxlength="100" id="address" class="span8  uneditable-input"/> <input type="button" class="btn btn-info" id="search" value="Buscar" /></div><br/>
+              <div id='map_canvas' style="height:200px;width:700px;"></div>                           
+  </div>
+  <div class="control-group span5">
   <label for="">Seleccione Servicio que ofrece</label>
   <label id="servicio_local"></label>
   <?php echo $this->formRow($form->get('servicio'));?>
 </div>
-<div class="control-group span5"><?php echo $this->formRow($form->get('va_direccion'));?></div><?php?>
+<div class="control-group span12"><?php echo $this->formSubmit($form->get('submit'));?></div>
 <div class="control-group span5 "><?php echo $this->formRow($form->get('de_latitud'));?></div>
 <div class="control-group span5"><?php echo $this->formRow($form->get('de_longitud'));?></div>
-<div class="control-group span5">
-                              <label>Encontrar latitud y longitud</label>
-                              <div><input type="text" maxlength="100" id="address" class="span10"/> <input type="button" class="btn btn-info" id="search" value="Buscar" /></div><br/>
-                              <div id='map_canvas' style="height:200px;width:700px;"></div>                           
-                             </div>
-<div class="control-group span12"><?php echo $this->formSubmit($form->get('submit'));?></div><?php
-echo $this->form()->closeTag();?> </div> 
+<?php echo $this->form()->closeTag();?> </div> 
 </div>
 <script>
 	$(document).ready(function(){
 		  var id_r = $('h5').text();
       var id =$("#id").val();
+      var url3="/local/index/jsonservicios?id=" + id
+    $.getJSON(url3,function(data){              
+            $.each(data,function(i,val){
+            $(".checkbox").each(function(){ 
+              var va = $(this).attr('value');
+              console.log(val.ta_servicio_local_in_id);
+           if (va==val.ta_servicio_local_in_id ){
+                $(this).prop("checked" , true ); 
+             } 
+             });                       
+    });
+});
       $('#ta_restaurante_in_id').val(id_r);
        var pais=parseInt($('#pais').val());
          var depa=parseInt($('#h_departamento').val());
@@ -109,18 +121,8 @@ echo $this->form()->closeTag();?> </div>
                   $("#distrito" +" option[value=" +dis +"]").attr("selected","selected");
           });  
      });
-    var url3="/local/index/jsonservicios?id=" + id
-    $.getJSON(url3,function(data){              
-            $.each(data,function(i,val){
-            $(".checkbox").each(function(){ 
-              var va = $(this).attr('value');
-              console.log(val.ta_servicio_local_in_id);
-           if (va==val.ta_servicio_local_in_id ){
-                $(this).prop("checked" , true ); 
-             } 
-             });                       
-    });
-});
+
+  
 
 
 

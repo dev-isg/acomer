@@ -286,13 +286,13 @@ function geocodeResult(results, status) {
 // });
 
 
-//   $('#direccion_loc').keyup(function () {
-//      var value = $(this).val();
-//      var d = $("#distrito option:selected").text()
-//      var p = $("#provincia option:selected").text()
-//      var pa = $("#pais option:selected").text()
-//      $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
-//    }).keyup();
+    $('#address').keyup(function () {
+     var value = $(this).val();
+     var d = $("#distrito option:selected").text()
+     var p = $("#provincia option:selected").text()
+     var pa = $("#pais option:selected").text()
+     $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
+   }).keyup();
 //
 
 $(".eli").on("click",function(){
