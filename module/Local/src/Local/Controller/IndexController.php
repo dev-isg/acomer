@@ -158,15 +158,7 @@ class IndexController extends AbstractActionController
         
        // var_dump($local);exit;
         $form  = new LocalForm();
-       // var_dump($local[0]['in_idpais']);EXIT;
-//        $form->get('pais')->setValueOptions(array($local[0]['in_idpais']));
-//        $aux[]=$local[0]['in_iddep'];
-//        $form->get('departamento')->setValueOptions(array(
-//             array(
-//                     '0' => 'Apple',
-//                     '1' => 'Orange',
-//                     '2' => 'Lemon'
-//             )));
+
        $a= array(
             
                      '0' => 'Apple',
@@ -181,7 +173,7 @@ class IndexController extends AbstractActionController
                      '1' => 'Orange',
                      '2' => 'Lemon'
              ));
-//           var_dump($form->get('departamento')->setValue(''));exit; 
+
         $servi=$this->getUbigeoTable()->getServicios();
         $array = array();
         foreach($servi as $y){
@@ -190,10 +182,10 @@ class IndexController extends AbstractActionController
            
         }
         
-      // var_dump($local);exit;
+       //var_dump($local);exit;
         $form->get('servicio')->setValueOptions($array);
    
-        
+       var_dump($local->toArray());exit; 
         $form->get('pais')->setValue($local['in_idpais']);
 //        $form->get('departamento')->setValueOptions(array($local['in_iddep']));//setValue($local['in_iddep']);
 //        $form->get('provincia')->setValueOptions(array($local['in_idprov']));
@@ -231,7 +223,7 @@ class IndexController extends AbstractActionController
         if ($request->isPost()) {
            // var_dump($local->getInputFilter());exit;
             
-//            $form->setInputFilter($local->getInputFilter());
+            $form->setInputFilter($local->getInputFilter());
             $form->setData($request->getPost());
            
             $servicio=$this->params()->fromPost('servicio');
