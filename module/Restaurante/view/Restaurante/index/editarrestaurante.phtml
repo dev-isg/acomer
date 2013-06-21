@@ -39,8 +39,8 @@ echo $this->form()->closeTag();?>
             $.each(data,function(i,val){
             $(".checkbox").each(function(){ 
               var va = $(this).attr('value');
-              console.log(val.in_id);
-    	     if (va==val.in_id ){
+              console.log(val.Ta_medio_pago_in_id);
+    	     if (va==val.Ta_medio_pago_in_id ){
                 $(this).prop("checked" , true ); 
              } 
              });                       
