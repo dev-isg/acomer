@@ -3,8 +3,6 @@ namespace Restaurante\Form;
 
 use Zend\Form\Form;
 use Restaurante\Controller\IndexController;
-
-
 class RestauranteForm extends Form
 {
     public function __construct($name = null)
