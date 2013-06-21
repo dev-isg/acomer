@@ -170,7 +170,8 @@ class LocalTable
     
           public function getServiciosId($id){
            $select = $this->tableGateway->getSql()->select()
-             ->join(array('u'=>'ta_ubigeo'),'ta_ubigeo_in_id=u.in_id',array('in_idpais','in_iddep','in_idprov','in_iddis'))
+               ->columns(array('in_id'))
+            // ->join(array('u'=>'ta_ubigeo'),'ta_ubigeo_in_id=u.in_id',array('in_idpais','in_iddep','in_idprov','in_iddis'))
              ->join(array('t'=>'ta_local_has_ta_servicio_local'),'ta_local.in_id=t.ta_local_in_id',array('ta_servicio_local_in_id'))       
               ->where(array('ta_local.in_id'=>$id));
               $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($select);

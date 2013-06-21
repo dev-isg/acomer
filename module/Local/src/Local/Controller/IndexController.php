@@ -186,7 +186,7 @@ class IndexController extends AbstractActionController
         $array = array();
         foreach($servi as $y){
             $array[$y['in_id']] = $y['va_nombre'];
-                 $form->get('servicio')->setValue($y['in_id']   );
+//                 $form->get('servicio')->setValue($y['in_id']   );
            
         }
         
