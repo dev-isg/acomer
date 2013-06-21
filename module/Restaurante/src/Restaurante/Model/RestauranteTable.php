@@ -95,10 +95,28 @@ class RestauranteTable
                             
         } else {
            
-            if ($this->getRestaurante($id)) {
+            if ($this->getRestaurante($id)) {//
               //  var_dump($d['name']);exit
                 $this->tableGateway->update($data, array('in_id' => $id));
-            } else {
+                 if($comida != '')
+                {     //   echo 'hol';exit;
+            $borrar = $this->tableGateway->getSql()->delete()->from('ta_restaurante_has_ta_medio_pago')
+                    ->where(array('Ta_restaurante_in_id'=>$id));
+            $selectStri = $this->tableGateway->getSql()->getSqlStringForSqlObject($borrar);
+            $adapter=$this->tableGateway->getAdapter();
+            $result = $adapter->query($selectStri, $adapter::QUERY_MODE_EXECUTE); 
+          //  var_dump($selectStri);exit;
+ //echo 'holaaa';exit;
+         foreach($comida as $key=>$value){               
+             $insert = $this->tableGateway->getSql()->insert()->into('ta_restaurante_has_ta_medio_pago')
+                    ->values(array('Ta_restaurante_in_id'=>$id,'Ta_medio_pago_in_id'=>$value));
+            $selectString3 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insert);
+            $adapter=$this->tableGateway->getAdapter();
+            $result = $adapter->query($selectString3, $adapter::QUERY_MODE_EXECUTE);
+            }
+             }
+           }
+         else {
                 throw new \Exception('no existe el usuario');
             }
         }

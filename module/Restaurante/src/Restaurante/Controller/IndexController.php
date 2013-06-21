@@ -124,7 +124,6 @@ class IndexController extends AbstractActionController
         return array('form' => $form);
     }
 
-    
         public function restaurantemedio($id)
     {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $adapter = $this->dbAdapter;
@@ -192,6 +191,7 @@ class IndexController extends AbstractActionController
         $form->bind($restaurante);
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();
+        $comida = $this->params()->fromPost('va_modalidad');
         if ($request->isPost()) {
             $form->setInputFilter($restaurante->getInputFilter());
             $nonFile = $request->getPost()->toArray();
@@ -206,7 +206,7 @@ class IndexController extends AbstractActionController
                $File = $this->params()->fromFiles('va_imagen');
                //$e=$File['name'];
                //var_dump($File);exit;
-                $this->getRestauranteTable()->guardarRestaurante($restaurante,$File);
+                $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
                 $this->redirect()->toUrl('/restaurante');
             }
         }
