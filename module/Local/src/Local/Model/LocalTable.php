@@ -57,7 +57,7 @@ class LocalTable
  
     }
     
-    public function guardarLocal(Local $local, $servicio){
+    public function guardarLocal(Local $local, $servicio=null){
        //  var_dump($servicio);exit;
           $pais=$local->pais;
           $departamento=$local->departamento;

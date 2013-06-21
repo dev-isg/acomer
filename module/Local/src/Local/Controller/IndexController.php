@@ -90,8 +90,8 @@ class IndexController extends AbstractActionController
         $form->get('servicio')->setValueOptions($array);
         
         if ($request->isPost()) {
-            $aux=$this->params()->fromPost('servicio');
-            $servicio=(!empty($aux))?$aux:0;
+     
+            $servicio=$this->params()->fromPost('servicio',0);
             //  var_dump($servicio);exit;
            $local = new Local();
             //$form->setInputFilter($local->getInputFilter());
@@ -234,7 +234,7 @@ class IndexController extends AbstractActionController
             $servicio=$this->params()->fromPost('servicio');
             
            // if ($form->isValid()) {
-                $this->getLocalTable()->guardarLocal($local,$servicio);
+                $this->getLocalTable()->guardarLocal($local);
                           return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/local/index/index');
             //}
