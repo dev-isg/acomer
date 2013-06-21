@@ -229,7 +229,8 @@ class IndexController extends AbstractActionController
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-
+            var_dump($local->getInputFilter());exit;
+            
             $form->setInputFilter($local->getInputFilter());
             $form->setData($request->getPost());
            
