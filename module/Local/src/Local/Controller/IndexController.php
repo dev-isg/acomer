@@ -9,6 +9,7 @@
 
 namespace Local\Controller;
 
+
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
@@ -131,12 +132,12 @@ class IndexController extends AbstractActionController
     public function editarlocalAction(){
         
       $id = (int) $this->params()->fromQuery('id',0);
-      //var_dump($id);exit;
+
         if (!$id) {
            return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/local/index/agregarlocal'); 
         }
-        //$local = $this->getLocalTable()->getLocal($id);
+
         try {
             $local = $this->getLocalTable()->getLocal($id);//->toArray();
         }
@@ -144,19 +145,7 @@ class IndexController extends AbstractActionController
             return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/local'); 
         }
-//        
-//             $array=array();
-//             foreach($local as $result){
-//                 $array[]=$result;
-//             }
-//            
-//         foreach($array as $index=>$valor){
-//                if(empty($array[$index])){
-//                    $array[$index]=1;
-//                }
-//            }
-        
-       // var_dump($local);exit;
+
         $form  = new LocalForm();
 
        $a= array(
@@ -215,14 +204,14 @@ class IndexController extends AbstractActionController
        // $form->get('servicio')->setValueOptions($b);
 //        var_dump($local);exit;
         $form->bind($local);
-//        echo 'hello world';exit;
+
                    
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
 
         $request = $this->getRequest();
         if ($request->isPost()) {
 //            var_dump($local->getInputFilter());exit;
-            
+           
             $form->setInputFilter($local->getInputFilter());
             $form->setData($request->getPost());
            
