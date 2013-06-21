@@ -236,16 +236,16 @@ class IndexController extends AbstractActionController
            
             $servicio=$this->params()->fromPost('servicio');
             
-            if ($form->isValid()) {
-            
-                $this->getLocalTable()->guardarLocal($local,$servicio);
-                
-                          return $this->redirect()->toUrl($this->
-            getRequest()->getBaseUrl().'/local/index/index');
-            }else{ 
-                  $this->getLocalTable()->guardarLocal();
+//            if ($form->isValid()) {
+//            
+//                $this->getLocalTable()->guardarLocal($local,$servicio);
+//                
+//                          return $this->redirect()->toUrl($this->
+//            getRequest()->getBaseUrl().'/local/index/index');
+//            }else{ 
+                  $this->getLocalTable()->guardarLocal($local,$servicio);
                 echo 'no validado';exit;}
-        }
+//        }
 
         return array(
             'id' => $id,
