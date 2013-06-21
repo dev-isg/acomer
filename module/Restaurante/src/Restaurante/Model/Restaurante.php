@@ -115,7 +115,7 @@ $inputFilter->add($factory->createInput(array(
              $inputFilter->add(
                 $factory->createInput(array(
                     'name'     => 'va_imagen',
-                    'required' => true,
+                    'required' => false,
                 ))
             );
              $inputFilter->add($factory->createInput(array(
