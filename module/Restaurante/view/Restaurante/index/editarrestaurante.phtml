@@ -17,9 +17,10 @@ $form->prepare();
 
 
 echo $this->form()->openTag($form);
+
 ?><h3><?php echo $this->escapeHtml($title); ?></h3>
 <?php
-echo $this->formHidden($form->get('in_id'));
+echo $this->formHidden($form->get('inid'));
 ?><div class="control-group "><?php echo $this->formRow($form->get('va_nombre'));?></div><?php
 ?><div class="control-group "><?php echo $this->formRow($form->get('va_razon_social'));?></div ><?php
 ?><div class="control-group "><?php echo $this->formRow($form->get('va_web'));?></div><?php

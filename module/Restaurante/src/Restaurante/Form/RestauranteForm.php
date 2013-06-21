@@ -98,7 +98,7 @@ class RestauranteForm extends Form
         $this->add(array(
             'name' => 'va_modalidad',
             'type' => 'MultiCheckbox',
-            'label' => 'Modalidad de Pago?',
+           // 'label' => 'Modalidad de Pago?',
              'attributes' => array(               
                 'class' => 'checkbox inline',
                 'id'   => 'va_modalidad',
