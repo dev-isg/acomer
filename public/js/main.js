@@ -36,7 +36,7 @@ $('#restaurante').validate({
                 rucReal:true            
             },
         va_imagen : { required : true},
-        va_modalidad :{
+        "va_modalidad[]" :{
           required: true,
           minlength: 1
         },
@@ -60,7 +60,7 @@ $('#restaurante').validate({
                 required : "Por favor ingrese un Ruc",
                 rucReal:" Ingresa un Ruc valido "
             },
-            va_modalidad : {
+            "va_modalidad[]" : {
                required: "Por favor seleccionar una modalida",
                minlength : "Seleccionar al menos 1"
             },
