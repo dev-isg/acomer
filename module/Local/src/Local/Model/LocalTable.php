@@ -57,7 +57,7 @@ class LocalTable
  
     }
     
-    public function guardarLocal(Local $local, $servicio=null){
+    public function guardarLocal(Local $local, $servicio){
        //  var_dump($servicio);exit;
           $pais=$local->pais;
           $departamento=$local->departamento;
@@ -167,5 +167,24 @@ class LocalTable
             
             return $results->current();
     }
+    
+          public function getServiciosId($id){
+           $select = $this->tableGateway->getSql()->select()
+             ->join(array('u'=>'ta_ubigeo'),'ta_ubigeo_in_id=u.in_id',array('in_idpais','in_iddep','in_idprov','in_iddis'))
+             ->join(array('t'=>'ta_local_has_ta_servicio_local'),'ta_local.in_id=t.ta_local_in_id',array('ta_servicio_local_in_id'))       
+              ->where(array('ta_local.in_id'=>$id));
+              $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($select);
+//              var_dump($selectString);exit;
+            $adapter=$this->tableGateway->getAdapter();
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            
+//          $array=array();
+//             foreach($results as $result){
+//                 $array[]=$result;
+//             }
+////            var_dump($array);exit;
+            
+            return $results->toArray();
+      }
     
 }

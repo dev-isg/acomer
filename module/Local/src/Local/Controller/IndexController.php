@@ -126,9 +126,11 @@ class IndexController extends AbstractActionController
         return array('form' => $form,'id'=>$id);
     }
     
+ 
+    
     public function editarlocalAction(){
         
-      $id = (int) $this->params()->fromQuery('id', 0);
+      $id = (int) $this->params()->fromQuery('id',0);
       //var_dump($id);exit;
         if (!$id) {
            return $this->redirect()->toUrl($this->
@@ -234,7 +236,7 @@ class IndexController extends AbstractActionController
             $servicio=$this->params()->fromPost('servicio');
             
            // if ($form->isValid()) {
-                $this->getLocalTable()->guardarLocal($local);
+                $this->getLocalTable()->guardarLocal($local,$servicio);
                           return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/local/index/index');
             //}
@@ -287,8 +289,10 @@ class IndexController extends AbstractActionController
     }
     
     public function jsonserviciosAction(){
-        $servicios=$this->getUbigeoTable()->getServicios();
-       // var_dump($servicios);exit;
+        //$servicios=$this->getUbigeoTable()->getServicios();
+         $id = (int) $this->params()->fromQuery('id',0);
+        $servicios=$this->getLocalTable()->getServiciosId($id);
+//        var_dump($servicios);exit;
         echo Json::encode($servicios);
         exit();
     }
