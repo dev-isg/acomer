@@ -198,18 +198,22 @@ class IndexController extends AbstractActionController
         
         $hiddenpais = new Element\Hidden('h_pais');
         $hiddenpais->setValue($local['in_idpais']);
+        $hiddenpais->setAttribute('id', 'h_pais');
         $form->add($hiddenpais);
         
         $hiddendepa = new Element\Hidden('h_departamento');
         $hiddendepa->setValue($local['in_iddep']);
+        $hiddendepa->setAttribute('id', 'h_departamento');
         $form->add($hiddendepa);
         
         $hiddenprov = new Element\Hidden('h_provincia');
         $hiddenprov->setValue($local['in_idprov']);
+        $hiddenprov->setAttribute('id', 'h_provincia');
         $form->add($hiddenprov);
         
         $hiddendist = new Element\Hidden('h_distrito');
         $hiddendist->setValue($local['in_iddis']);
+        $hiddendist->setAttribute('id', 'h_distrito');
         $form->add($hiddendist);
         
        // var_dump($form->get('servicio'));exit;
