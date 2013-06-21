@@ -163,7 +163,7 @@ class LocalTable
 //             foreach($results as $result){
 //                 $array[]=$result;
 //             }
-//            var_dump($array);exit;
+            //var_dump($array);exit;
             
             return $results->current();
     }

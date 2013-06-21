@@ -63,11 +63,14 @@ class IndexController extends AbstractActionController
        //var_dump($this->getLocaTable()->fetchAll());exit;
        // return array();
     }
+
     
     public function agregarlocalAction() {
 
         $form = new LocalForm();
         $id = $this->params()->fromQuery('id');
+
+
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
 
@@ -117,6 +120,9 @@ class IndexController extends AbstractActionController
 
         try {
             $local = $this->getLocalTable()->getLocal($id); //->toArray();
+            var_dump($local);
+            echo get_class($local);exit;
+           //print_r(get_class_methods($local));exit;
         } catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
                                     getRequest()->getBaseUrl() . '/local');

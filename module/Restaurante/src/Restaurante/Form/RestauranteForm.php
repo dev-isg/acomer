@@ -9,6 +9,7 @@ class RestauranteForm extends Form
         // we want to ignore the name passed
         parent::__construct('restaurante');
         $this->setAttribute('method', 'post');
+        $this->setAttribute('endtype', 'multipart/form-data');
        $this->add(array(
             'name' => 'in_id',
             'type' => 'Hidden',
