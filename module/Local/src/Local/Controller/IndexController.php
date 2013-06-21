@@ -90,7 +90,8 @@ class IndexController extends AbstractActionController
         $form->get('servicio')->setValueOptions($array);
         
         if ($request->isPost()) {
-            $servicio=(!empty($this->params()->fromPost('servicio')))?$this->params()->fromPost('servicio'):0;
+            $aux=$this->params()->fromPost('servicio');
+            $servicio=(!empty($aux))?$aux:0;
             //  var_dump($servicio);exit;
            $local = new Local();
             //$form->setInputFilter($local->getInputFilter());
