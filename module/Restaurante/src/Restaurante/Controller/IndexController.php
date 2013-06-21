@@ -105,9 +105,12 @@ class IndexController extends AbstractActionController
                          $error[] = $row;
                      }
                      $form->setMessages(array('imagen'=>$error ));
-          } else {//echo 'entro';exit;
-                    $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
-                   // $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
+          } else {
+                $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
+               //  $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
+                  if ($adapter->receive($File['name'])) {
+                        $restaurante->exchangeArray($form->getData());
+                    }
                     $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
                  }       
