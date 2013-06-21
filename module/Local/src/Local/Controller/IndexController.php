@@ -18,7 +18,8 @@ use Local\Model\Local;          // <-- Add this import
 use Local\Form\LocalForm;        // <-- Add this import
 use Local\Model\LocalTable;
 use Local\Model\Ubigeo;
-
+use Zend\Form\Element;
+use Zend\Form\Form;
 use Zend\Db\TableGateway\TableGateway,
     Zend\Db\Adapter\Adapter,
     Zend\Db\ResultSet\ResultSet;
@@ -178,12 +179,41 @@ class IndexController extends AbstractActionController
                      '2' => 'Lemon'
              ));
 //           var_dump($form->get('departamento')->setValue(''));exit; 
-          $form->get('pais')->setValue($local['in_idpais']);
-        $form->get('departamento')->setValueOptions(array($local['in_iddep']));//setValue($local['in_iddep']);
-        $form->get('provincia')->setValueOptions(array($local['in_idprov']));
-        $form->get('distrito')->setValueOptions(array($local['in_iddis']));
+        $servi=$this->getUbigeoTable()->getServicios();
+        $array = array();
+        foreach($servi as $y){
+            $array[$y['in_id']] = $y['va_nombre'];
+                 $form->get('servicio')->setValue($y['in_id']   );
+           
+        }
+        
+      // var_dump($local);exit;
+        $form->get('servicio')->setValueOptions($array);
+   
+        
+//        $form->get('pais')->setValue($local['in_idpais']);
+//        $form->get('departamento')->setValueOptions(array($local['in_iddep']));//setValue($local['in_iddep']);
+//        $form->get('provincia')->setValueOptions(array($local['in_idprov']));
+//        $form->get('distrito')->setValueOptions(array($local['in_iddis']));
+        
+        $hiddenpais = new Element\Hidden('h_pais');
+        $hiddenpais->setValue($local['in_idpais']);
+        $form->add($hiddenpais);
+        
+        $hiddendepa = new Element\Hidden('h_departamento');
+        $hiddendepa->setValue($local['in_iddep']);
+        $form->add($hiddendepa);
+        
+        $hiddenprov = new Element\Hidden('h_provincia');
+        $hiddenprov->setValue($local['in_idprov']);
+        $form->add($hiddenprov);
+        
+        $hiddendist = new Element\Hidden('h_distrito');
+        $hiddendist->setValue($local['in_iddis']);
+        $form->add($hiddendist);
+        
        // var_dump($form->get('servicio'));exit;
-        $form->get('servicio')->setValueOptions($b);
+       // $form->get('servicio')->setValueOptions($b);
 //        var_dump($local);exit;
         $form->bind($local);
 //        echo 'hello world';exit;

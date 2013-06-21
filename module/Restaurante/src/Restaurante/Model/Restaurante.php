@@ -151,24 +151,24 @@ $inputFilter->add($factory->createInput(array(
                 ),
             )));
    
-    /*$inputFilter->add($factory->createInput(array(
-                'name'     => 'va_modalidad',
-                'required' => false,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-                    array(
-                        'name'    => 'StringLength',
-                        'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min'      => 10,
-                            'max'      => 12,
-                        ),
-                    ),
-                ),
-            )));*/
+//    $inputFilter->add($factory->createInput(array(
+//                'name'     => 'va_modalidad',
+//                'required' => false,
+//                'filters'  => array(
+//                    array('name' => 'StripTags'),
+//                    array('name' => 'StringTrim'),
+//                ),
+//                'validators' => array(
+//                    array(
+//                        'name'    => 'StringLength',
+//                        'options' => array(
+//                            'encoding' => 'UTF-8',
+//                            'min'      => 10,
+//                            'max'      => 12,
+//                        ),
+//                    ),
+//                ),
+//            )));
     
             $this->inputFilter = $inputFilter;
         }
