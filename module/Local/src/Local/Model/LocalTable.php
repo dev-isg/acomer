@@ -130,12 +130,12 @@ class LocalTable
             
             
         } else {
-            if ($this->getRestaurante($id)) {
+//            if ($this->getRestaurante($id)) {
                 
                 $this->tableGateway->update($data, array('in_id' => $id));
-            } else {
-                throw new \Exception('no existe el usuario');
-            }
+//            } else {
+//                throw new \Exception('no existe el usuario');
+//            }
         }
     }
     
