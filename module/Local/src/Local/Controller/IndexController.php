@@ -37,7 +37,7 @@ class IndexController extends AbstractActionController
         
        $filtrar = $this->params()->fromPost('submit');
        $id = (int) $this->params()->fromRoute('in_id', 0);
-       //var_dump($id);exit;
+
        if(!empty($id)){
        if(isset($filtrar)){
            $consulta=$this->params()->fromPost('texto');
@@ -64,168 +64,121 @@ class IndexController extends AbstractActionController
        // return array();
     }
     
-    public function agregarlocalAction(){
-            
-           
-            
-           $form = new LocalForm();
-           $id=$this->params()->fromQuery('id');
+    public function agregarlocalAction() {
+
+        $form = new LocalForm();
+        $id = $this->params()->fromQuery('id');
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
-        
-        $servi=$this->getUbigeoTable()->getServicios();
-        
-        $array = array();
-        foreach($servi as $y){
-            $array[$y['in_id']] = $y['va_nombre'];
-           
-        }
-//        for($i=1;$i<=count($array);$i++){
-//            $form->get('servicio')->setAttributes(array('id'   => 'servicio'.$i));
-//        }
-         
-        //'id'   => 'servicio'
-//        foreach($array as $key=>$value){
-//        $form->get('servicio')->setAttributes(array('id'   => $array[$key]));
-//        }
-        $form->get('servicio')->setValueOptions($array);
-        
-        if ($request->isPost()) {
-     
-            $servicio=$this->params()->fromPost('servicio',0);
-            //  var_dump($servicio);exit;
-           $local = new Local();
-            //$form->setInputFilter($local->getInputFilter());
-            $form->setData($request->getPost());     
-//             $form->get('pais');
-//             $form->get('departamento');
-//              $form->get('provincia');
-//               $form->get('distrito');
-    //               $hiddenControl = $form->get('ta_restaurante_in_id');
-    //               $hiddenControl->setAttribute('value', $id);
-    //               $form->add($hiddenControl);
-              // var_dump($hiddenControl);exit;
-           if ($form->isValid()) {
-              
-                $local->exchangeArray($form->getData());
-                $this->getLocalTable()->guardarLocal($local,$servicio);
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/local');          
-             }
-             else{
-               
-                $local->exchangeArray($form->getData());
-                //var_dump($local);exit;
-                $this->getLocalTable()->guardarLocal($local,$servicio);
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/local');   
- 
-                 
-                 
-             }
-        }
-        
 
-        return array('form' => $form,'id'=>$id);
+        $servi = $this->getUbigeoTable()->getServicios();
+
+        $array = array();
+        foreach ($servi as $y) {
+            $array[$y['in_id']] = $y['va_nombre'];
+        }
+
+        $form->get('servicio')->setValueOptions($array);
+
+        if ($request->isPost()) {
+
+            $servicio = $this->params()->fromPost('servicio', 0);
+            $local = new Local();
+            $form->setInputFilter($local->getInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+
+                $local->exchangeArray($form->getData());
+                $this->getLocalTable()->guardarLocal($local, $servicio);
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/local');
+            } else {
+
+                $local->exchangeArray($form->getData());
+                $this->getLocalTable()->guardarLocal($local, $servicio);
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/local');
+            }
+        }
+
+
+        return array('form' => $form, 'id' => $id);
     }
     
  
     
-    public function editarlocalAction(){
-        
-      $id = (int) $this->params()->fromQuery('id',0);
+    public function editarlocalAction() {
+
+        $id = (int) $this->params()->fromQuery('id', 0);
 
         if (!$id) {
-           return $this->redirect()->toUrl($this->
-            getRequest()->getBaseUrl().'/local/index/agregarlocal'); 
+            return $this->redirect()->toUrl($this->
+                                    getRequest()->getBaseUrl() . '/local/index/agregarlocal');
         }
 
         try {
-            $local = $this->getLocalTable()->getLocal($id);//->toArray();
-        }
-        catch (\Exception $ex) {
+            $local = $this->getLocalTable()->getLocal($id); //->toArray();
+        } catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
-            getRequest()->getBaseUrl().'/local'); 
+                                    getRequest()->getBaseUrl() . '/local');
         }
 
-        $form  = new LocalForm();
+        $form = new LocalForm();
 
-       $a= array(
-            
-                     '0' => 'Apple',
-                     '1' => 'Orange',
-                     '2' => 'Lemon'
-             );
-       
-           $b= array(
-               array(
-            
-                     '0' => 'Apple',
-                     '1' => 'Orange',
-                     '2' => 'Lemon'
-             ));
-
-        $servi=$this->getUbigeoTable()->getServicios();
+        $servi = $this->getUbigeoTable()->getServicios();
         $array = array();
-        foreach($servi as $y){
+        foreach ($servi as $y) {
             $array[$y['in_id']] = $y['va_nombre'];
-//                 $form->get('servicio')->setValue($y['in_id']   );
-           
         }
-        
-       //var_dump($local);exit;
+
         $form->get('servicio')->setValueOptions($array);
-   
-       //var_dump($local->current());exit; 
+
         $form->get('pais')->setValue($local['in_idpais']);
 //        $form->get('departamento')->setValueOptions(array($local['in_iddep']));//setValue($local['in_iddep']);
 //        $form->get('provincia')->setValueOptions(array($local['in_idprov']));
 //        $form->get('distrito')->setValueOptions(array($local['in_iddis']));
-        
+
         $hiddenpais = new Element\Hidden('h_pais');
         $hiddenpais->setValue($local['in_idpais']);
         $hiddenpais->setAttribute('id', 'h_pais');
         $form->add($hiddenpais);
-        
+
         $hiddendepa = new Element\Hidden('h_departamento');
         $hiddendepa->setValue($local['in_iddep']);
         $hiddendepa->setAttribute('id', 'h_departamento');
         $form->add($hiddendepa);
-        
+
         $hiddenprov = new Element\Hidden('h_provincia');
         $hiddenprov->setValue($local['in_idprov']);
         $hiddenprov->setAttribute('id', 'h_provincia');
         $form->add($hiddenprov);
-        
+
         $hiddendist = new Element\Hidden('h_distrito');
         $hiddendist->setValue($local['in_iddis']);
         $hiddendist->setAttribute('id', 'h_distrito');
-        $form->add($hiddendist);
-        
-       // var_dump($form->get('servicio'));exit;
-       // $form->get('servicio')->setValueOptions($b);
-//        var_dump($local);exit;
-        $form->bind($local);
 
-                   
+        $form->add($hiddendist);
+        $form->bind($local);
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-//            var_dump($local->getInputFilter());exit;
-           
+
             $form->setInputFilter($local->getInputFilter());
             $form->setData($request->getPost());
-           
-            $servicio=$this->params()->fromPost('servicio');
-            
+
+            $servicio = $this->params()->fromPost('servicio');
+
             if ($form->isValid()) {
-            
-                $this->getLocalTable()->guardarLocal($local,$servicio);
-                
-                          return $this->redirect()->toUrl($this->
-            getRequest()->getBaseUrl().'/local/index/index');
-            }else{ 
-                  $this->getLocalTable()->guardarLocal($local,$servicio);
-                echo 'no validado';exit;}
+
+                $this->getLocalTable()->guardarLocal($local, $servicio);
+
+                return $this->redirect()->toUrl($this->
+                                        getRequest()->getBaseUrl() . '/local/index/index');
+            } else {
+                $this->getLocalTable()->guardarLocal($local, $servicio);
+                echo 'no validado';
+                exit;
+            }
         }
 
         return array(

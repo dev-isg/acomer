@@ -50,7 +50,7 @@ class LocalForm extends Form
             ),
             'attributes' => array(               
                 'class' => 'span10  ',
-                'id'   => 'name_rest',
+                'id'   => 'va_telefono',
                 'placeholder'=>'Ingrese el telefono'
             ),
         ));
@@ -59,7 +59,7 @@ class LocalForm extends Form
             'type' => 'Text',
               'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'raz_rest',
+                'id'   => 'va_horario',
                 'placeholder'=>'Ingrese el horario'
             ),
             'options' => array(
@@ -72,7 +72,7 @@ class LocalForm extends Form
             'type' => 'Text',
               'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'raz_rest',
+                'id'   => 'va_horario_opcional',
                 'placeholder'=>'Ingrese el horario opcional'
             ),
             'options' => array(
@@ -86,7 +86,7 @@ class LocalForm extends Form
             'type' => 'Text',
             'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'web_rest',
+                'id'   => 'va_rango_precio',
                 'placeholder'=>'Ingrese el precio'
             ),
             'options' => array(
@@ -99,7 +99,7 @@ class LocalForm extends Form
             'type' => 'Text',
             'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'web_rest',
+                'id'   => 'ta_dia_in_id',
                 'placeholder'=>'Ingrese el/los dia(s) de atencion'
             ),
             'options' => array(
@@ -112,7 +112,7 @@ class LocalForm extends Form
             'type' => 'Text',
             'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'direccion_loc',
+                'id'   => 'va_direccion',
                 'placeholder'=>'Ingrese el direccion'
             ),
             'options' => array(
@@ -126,7 +126,7 @@ class LocalForm extends Form
             'type' => 'Select',
              'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'esp_rol'
+                'id'   => 'Ta_tipo_comida_in_id'
             ),
            'options' => array(
                      'label' => 'Especialidad',
