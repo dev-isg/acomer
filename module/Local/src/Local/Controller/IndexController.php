@@ -120,8 +120,8 @@ class IndexController extends AbstractActionController
 
         try {
             $local = $this->getLocalTable()->getLocal($id); //->toArray();
-            var_dump($local);
-            echo get_class($local);exit;
+//            var_dump($local);
+           // echo get_class($local);exit;
            //print_r(get_class_methods($local));exit;
         } catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
@@ -167,8 +167,14 @@ class IndexController extends AbstractActionController
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
 
         $request = $this->getRequest();
+        
+       //$this->getLocalTable()->editarLocal($id,$data);
+        
         if ($request->isPost()) {
-
+            $aux=$form->setData($request->getPost());
+            
+            var_dump($aux->departamento );exit;
+            
            $form->setInputFilter($local->getInputFilter());
             $form->setData($request->getPost());
 
@@ -181,7 +187,7 @@ class IndexController extends AbstractActionController
                 return $this->redirect()->toUrl($this->
                                         getRequest()->getBaseUrl() . '/local/index/index');
             } else {
-                $this->getLocalTable()->guardarLocal($local, $servicio);
+                //$this->getLocalTable()->guardarLocal($local, $servicio);
                 echo 'no validado';
                 exit;
             }

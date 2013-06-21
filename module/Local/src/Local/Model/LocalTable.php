@@ -51,6 +51,23 @@ class LocalTable
       
     }
     
+    public function editarLocal($id,$data){
+        //$adapter=$this->tableGateway->select();
+         $data = array(
+           'va_telefono'         => $local->va_telefono,
+           'va_horario'   => $local->va_horario,
+           'de_latitud'            => $local->de_latitud,
+           'de_longitud'         => $local->de_longitud,
+           'va_rango_precio'            => $local->va_rango_precio,  
+           'va_horario_opcional'  => $local->va_horario_opcional,
+            'va_direccion' => $local->va_direccion,
+           'ta_restaurante_in_id' => $local->ta_restaurante_in_id,
+            'ta_ubigeo_in_id' => $convertir[0]['in_id']   
+           
+        );
+        $this->tableGateway->update($data, array('in_id' => $id));
+    }
+    
     public function eliminarLocal($id){
         
         $this->tableGateway->delete(array('in_id' => $id));
