@@ -67,59 +67,59 @@ class RestauranteTable
         }
         return $row;
     }
-    public function guardarRestaurante(Restaurante $restaurante, $comida ,$d)
+    public function guardarRestaurante(Restaurante $restaurante, $comida ,$imagen)
     {
         $data = array(
            'va_nombre'         => $restaurante->va_nombre,
            'va_razon_social'   => $restaurante->va_razon_social,
            'va_web'            => $restaurante->va_web,
-           'va_imagen'         =>  $d['name'],
+           'va_imagen'         =>  $imagen['name'],
            'va_ruc'            => $restaurante->va_ruc,
-           'Ta_tipo_comida_in_id'  => $restaurante->Ta_tipo_comida_in_id  
-        );
+           'Ta_tipo_comida_in_id'  => $restaurante->Ta_tipo_comida_in_id );
         $id = (int)$restaurante->in_id;
-       // var_dump($d['name']);exit;
-        if ($id == 0) {
-            $this->tableGateway->insert($data); 
-             $idRestaurante=$this->tableGateway->getLastInsertValue();
-                if($comida != '')
-                { 
-            foreach($comida as $key=>$value){               
-             $insert = $this->tableGateway->getSql()->insert()->into('ta_restaurante_has_ta_medio_pago')
-                    ->values(array('Ta_restaurante_in_id'=>$idRestaurante,'Ta_medio_pago_in_id'=>$value));
-            $selectString2 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insert);
-            $adapter=$this->tableGateway->getAdapter();
-            $result = $adapter->query($selectString2, $adapter::QUERY_MODE_EXECUTE);
-            }
-  }            
-                            
-        } else {
-           
-            if ($this->getRestaurante($id)) {//
-              //  var_dump($d['name']);exit
-                $this->tableGateway->update($data, array('in_id' => $id));
-                 if($comida != '')
-                {     //   echo 'hol';exit;
-            $borrar = $this->tableGateway->getSql()->delete()->from('ta_restaurante_has_ta_medio_pago')
-                    ->where(array('Ta_restaurante_in_id'=>$id));
-            $selectStri = $this->tableGateway->getSql()->getSqlStringForSqlObject($borrar);
-            $adapter=$this->tableGateway->getAdapter();
-            $result = $adapter->query($selectStri, $adapter::QUERY_MODE_EXECUTE); 
-          //  var_dump($selectStri);exit;
- //echo 'holaaa';exit;
-         foreach($comida as $key=>$value){               
-             $insert = $this->tableGateway->getSql()->insert()->into('ta_restaurante_has_ta_medio_pago')
-                    ->values(array('Ta_restaurante_in_id'=>$id,'Ta_medio_pago_in_id'=>$value));
-            $selectString3 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insert);
-            $adapter=$this->tableGateway->getAdapter();
-            $result = $adapter->query($selectString3, $adapter::QUERY_MODE_EXECUTE);
-            }
-             }
+        if ($id == 0) 
+          {
+                $this->tableGateway->insert($data); 
+                $idRestaurante=$this->tableGateway->getLastInsertValue();
+                    if($comida != '')
+                    { 
+                    foreach($comida as $key=>$value)
+                      {               
+                        $insert = $this->tableGateway->getSql()->insert()->into('ta_restaurante_has_ta_medio_pago')
+                                ->values(array('Ta_restaurante_in_id'=>$idRestaurante,'Ta_medio_pago_in_id'=>$value));
+                        $selectString2 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insert);
+                        $adapter=$this->tableGateway->getAdapter();
+                        $result = $adapter->query($selectString2, $adapter::QUERY_MODE_EXECUTE);
+                      }
+                    }            
            }
-         else {
-                throw new \Exception('no existe el usuario');
-            }
-        }
+        else 
+             {
+                if ($this->getRestaurante($id)) 
+                   {
+                    $this->tableGateway->update($data, array('in_id' => $id));
+                     if($comida != '')
+                    {     
+                        $borrar = $this->tableGateway->getSql()->delete()->from('ta_restaurante_has_ta_medio_pago')
+                                ->where(array('Ta_restaurante_in_id'=>$id));
+                        $selectStri = $this->tableGateway->getSql()->getSqlStringForSqlObject($borrar);
+                        $adapter=$this->tableGateway->getAdapter();
+                        $result = $adapter->query($selectStri, $adapter::QUERY_MODE_EXECUTE); 
+                        foreach($comida as $key=>$value)
+                          {               
+                               $insertar = $this->tableGateway->getSql()->insert()->into('ta_restaurante_has_ta_medio_pago')
+                                       ->values(array('Ta_restaurante_in_id'=>$id,'Ta_medio_pago_in_id'=>$value));
+                               $selectString3 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insertar);
+                               $adapter=$this->tableGateway->getAdapter();
+                               $result = $adapter->query($selectString3, $adapter::QUERY_MODE_EXECUTE);
+                         }
+                   }
+               }
+               else 
+                   {
+                    throw new \Exception('error al crear el restaurante');
+                   }
+           }
     }
 
      public function buscarRestaurante($datos,$comida,$estado){

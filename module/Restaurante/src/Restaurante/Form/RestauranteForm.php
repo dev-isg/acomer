@@ -2,7 +2,6 @@
 namespace Restaurante\Form;
 
 use Zend\Form\Form;
-use Restaurante\Controller\IndexController;
 class RestauranteForm extends Form
 {
     public function __construct($name = null)
@@ -66,9 +65,6 @@ class RestauranteForm extends Form
                 'label' => 'Agregar Imagen : ',
             ),
         ));
-        
-       // $echo = new IndexController();
-       //$echo->rolesAction();
 
         $this->add(array(
             'name' => 'Ta_tipo_comida_in_id',
@@ -82,17 +78,10 @@ class RestauranteForm extends Form
                      'value_options' => array(
                          
                           '' => 'selecccione :',
-                         
-           
-                                               
-                     ),
+              ),
              )
         ));
-        
-        
-  
-     
-        
+
         $this->add(array(
             'name' => 'va_ruc',
             'type' => 'Number',
