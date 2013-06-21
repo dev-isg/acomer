@@ -4,6 +4,7 @@
 $title = 'EDITAR RESTAURANTE '.$this->va_nombre;
 $this->headTitle($title);
 ?>
+<div class="span10">
 <?php
 $form = $this->form;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
@@ -29,19 +30,19 @@ echo $this->formHidden($form->get('in_id'));
 ?><div class="control-group "><?php echo $this->formRow($form->get('va_modalidad'));?></div><?php
 ?><div class="control-group "><?php echo $this->formSubmit($form->get('submit'));?></div><?php
 echo $this->form()->closeTag();?> 
-
+</div>
 <script>
 	$(document).ready(function(){
-		var id=$('#in_di');
+		var id=$('#in_id').val();
 		var url="/restaurante/index/medi?in_id=" + id
-		$.getJSON('/local/index/jsonservicios',function(data){ 
+		$.getJSON(url,function(data){ 
+             
             $.each(data,function(i,val){
-                $(".checkbox").each(function(){ 
+            $(".checkbox").each(function(){ 
               var va = $(this).attr('value');
-    	     if (va==val.in_id ){
+              console.log(val.Ta_medio_pago_in_id);
+    	     if (va==val.Ta_medio_pago_in_id ){
                 $(this).prop("checked" , true ); 
-             }else{
-                $(this).prop("checked", false );
              } 
              });                       
     });
