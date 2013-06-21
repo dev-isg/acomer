@@ -3,8 +3,6 @@ namespace Restaurante\Form;
 
 use Zend\Form\Form;
 use Restaurante\Controller\IndexController;
-
-
 class RestauranteForm extends Form
 {
     public function __construct($name = null)
@@ -15,6 +13,9 @@ class RestauranteForm extends Form
        $this->add(array(
             'name' => 'in_id',
             'type' => 'Hidden',
+           'attributes' => array(               
+                'id'   => 'in_id',         
+            ),
         ));
         $this->add(array(
             'name' => 'va_nombre',
