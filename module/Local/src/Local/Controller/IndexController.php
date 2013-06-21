@@ -64,11 +64,9 @@ class IndexController extends AbstractActionController
     }
     
     public function agregarlocalAction(){
-            
-           
-            
-           $form = new LocalForm();
-           $id=$this->params()->fromQuery('id');
+    
+        $form = new LocalForm();
+        $id=$this->params()->fromQuery('id');
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
         
