@@ -1,35 +1,25 @@
-
-    <!--  <div class="span2">
-    <div class="btn-group" data-toggle="buttons-radio">
-    <button class="btn active">Todos</button>
-    <a  class="btn" href="<?php echo $this->basePath();?>/usuario/index/agregarusuario">AGREGAR USUARIO</a>
-    </div>
-    </div> -->
     <div class="span10">
       <div class="input-append"> 
-     <form name='form_busqueda'class="form-search" action='<?php echo $this->basePath(); ?>/usuario/index' method ="post">
-     
-     <div class="control-group">
-        <label class="ra radio">
-     <input type='radio' name='listado'  id='nom' value='va_nombre' checked/>Por nombre 
-     </label>
-     <label class="ra radio">    
-    <input type='radio' name='listado' id='dire1' value='1'/>Por Administrador
-    </label>
-    <label class="ra radio">
-    <input type='radio' name='listado' id='dire2' value='2'/>Por Editor</label>
-     <input type='text' name='texto' id="texto"/>
-    <input type="submit" class="btn" name="submit" value="Buscar">
+             <form name='form_busqueda'class="form-search" action='<?php echo $this->basePath(); ?>/usuario/index' method ="post">
+             
+                 <div class="control-group">
+                    <label class="ra radio">
+                 <input type='radio' name='listado'  id='nom' value='va_nombre' checked/>Por nombre 
+                 </label>
+                 <label class="ra radio">    
+                <input type='radio' name='listado' id='dire1' value='1'/>Por Administrador
+                </label>
+                <label class="ra radio">
+                <input type='radio' name='listado' id='dire2' value='2'/>Por Editor</label>
+                 <input type='text' name='texto' id="texto"/>
+                <input type="submit" class="btn" name="submit" value="Buscar">
+                </div>
+            </div>
+            </form>
     </div>
-    </div>
-    </form>
-    </div>
-    </div>
-
 <div class="span10">
 <table class="table table-bordered table-hover">
     <thead>  
-
         <tr>
             <th>#</th> 
             <th>N°</th>
@@ -71,8 +61,6 @@
 
 
 <!-- -------------------------fin---------------------------------------->
-
-
 </table>
 </div>
 <div class="span4">
