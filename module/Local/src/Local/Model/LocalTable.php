@@ -152,10 +152,10 @@ class LocalTable
         
             $select = $this->tableGateway->getSql()->select()
              ->join(array('u'=>'ta_ubigeo'),'ta_ubigeo_in_id=u.in_id',array('in_idpais','in_iddep','in_idprov','in_iddis'))
-        
+//             ->join(array('t'=>'ta_local_has_ta_servicio_local'),'ta_local.in_id=t.ta_local_in_id',array('ta_servicio_local_in_id'))       
               ->where(array('ta_local.in_id'=>$id));//('ta_restaurante_in_id='.'1');//r.in_id
               $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($select);
-             // var_dump($selectString);exit;
+//              var_dump($selectString);exit;
             $adapter=$this->tableGateway->getAdapter();
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             //$results->current();
