@@ -28,6 +28,7 @@ class Local
     public $provincia;
     public $distrito;
     
+//    public $servicio;
     
     public function exchangeArray($data)
     {
@@ -50,6 +51,8 @@ class Local
         $this->departamento = (!empty($data['departamento'])) ? $data['departamento'] : null;
         $this->provincia = (!empty($data['provincia'])) ? $data['provincia'] : null;
         $this->distrito = (!empty($data['distrito'])) ? $data['distrito'] : null;
+        
+//        $this->servicio=(!empty($data['servicio'])) ? $data['servicio'] : null;
     }
     
         public function setInputFilter(InputFilterInterface $inputFilter)

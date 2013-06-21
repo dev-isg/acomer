@@ -58,7 +58,8 @@ class LocalTable
     }
     
     public function guardarLocal(Local $local, $servicio){
-       //  var_dump($servicio);exit;
+        //var_dump('hola');exit;
+//         var_dump($servicio);exit;
           $pais=$local->pais;
           $departamento=$local->departamento;
           $provincia=$local->provincia;
@@ -129,11 +130,12 @@ class LocalTable
             
             
         } else {
-//            if ($this->getRestaurante($id)) {
-//                $this->tableGateway->update($data, array('in_id' => $id));
-//            } else {
-//                throw new \Exception('no existe el usuario');
-//            }
+            if ($this->getRestaurante($id)) {
+                
+                $this->tableGateway->update($data, array('in_id' => $id));
+            } else {
+                throw new \Exception('no existe el usuario');
+            }
         }
     }
     
