@@ -60,15 +60,14 @@ class IndexController extends AbstractActionController
     
      
     public function agregarrestauranteAction()
-    {
-        
+    {  
         $form = new RestauranteForm();
         $medio =  $this->medio()->toArray();
         $medi = array();
         foreach($medio as $yes){
             $medi[$yes['in_id']] = $yes['va_nombre'];
         }
-       $comidas =  $this->comidas()->toArray();
+        $comidas =  $this->comidas()->toArray();
         $com = array();
         foreach($comidas as $y){
             $com[$y['in_id']] = $y['va_nombre_tipo'];
@@ -81,30 +80,28 @@ class IndexController extends AbstractActionController
         if ($request->isPost()) {
            $restaurante = new Restaurante();
            $form->setInputFilter($restaurante->getInputFilter());
-            $nonFile = $request->getPost()->toArray();
-            $File    = $this->params()->fromFiles('va_imagen');
-            $data    = array_merge_recursive(
+           $nonFile = $request->getPost()->toArray();
+           $File    = $this->params()->fromFiles('va_imagen');
+           $data    = array_merge_recursive(
                         $this->getRequest()->getPost()->toArray(),          
                        $this->getRequest()->getFiles()->toArray()
                    ); 
             $form->setData($data);     
-     
-            
+  
             if ($form->isValid()) {
                 
       $nonFile = $request->getPost()->toArray();
       $File = $this->params()->fromFiles('va_imagen');
       $restaurante->exchangeArray($form->getData());
-      $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
-      return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');        
+          
                 
       
    
     $adapter = new \Zend\File\Transfer\Adapter\Http();
-    $adapter->setValidators($File['name']);
-     // var_dump($adapter);exit;
+    //$adapter->setValidators($File['name']);
+     //var_dump($adapter);exit;
     if (!$adapter->isValid()){
-      
+       echo 'error al cargar imagen';exit;
         $dataError = $adapter->getMessages();
         $error = array();
         foreach($dataError as $key=>$row)
@@ -112,15 +109,14 @@ class IndexController extends AbstractActionController
             $error[] = $row;
         }
         $form->setMessages(array('fileupload'=>$error ));
-    } else {
-       
-        $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
-        if ($adapter->receive($File['name'])) {
-            
-            echo 'entrroriiii';
-           }
-        }}
-           }     
+    } else {//echo 'entro';exit;
+        $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
+       // $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
+     $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
+     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
+           }       
+         }
+       }     
         return array('form' => $form);
     }
 

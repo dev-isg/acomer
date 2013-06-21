@@ -73,7 +73,7 @@ class RestauranteTable
            'va_nombre'         => $restaurante->va_nombre,
            'va_razon_social'   => $restaurante->va_razon_social,
            'va_web'            => $restaurante->va_web,
-           'va_imagen'         =>  $imagen['name'],
+           'va_imagen'         => $imagen['name'],
            'va_ruc'            => $restaurante->va_ruc,
            'Ta_tipo_comida_in_id'  => $restaurante->Ta_tipo_comida_in_id );
         $id = (int)$restaurante->in_id;
@@ -99,7 +99,7 @@ class RestauranteTable
                    {
                     $this->tableGateway->update($data, array('in_id' => $id));
                      if($comida != '')
-                    {     
+                    {   
                         $borrar = $this->tableGateway->getSql()->delete()->from('ta_restaurante_has_ta_medio_pago')
                                 ->where(array('Ta_restaurante_in_id'=>$id));
                         $selectStri = $this->tableGateway->getSql()->getSqlStringForSqlObject($borrar);
