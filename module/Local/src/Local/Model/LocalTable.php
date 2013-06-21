@@ -165,7 +165,7 @@ class LocalTable
 //             }
 //            var_dump($array);exit;
             
-            return $results;//->current();
+            return $results->current();
     }
     
           public function getServiciosId($id){

@@ -185,7 +185,7 @@ class IndexController extends AbstractActionController
        //var_dump($local);exit;
         $form->get('servicio')->setValueOptions($array);
    
-       var_dump($local->toArray());exit; 
+       //var_dump($local->current());exit; 
         $form->get('pais')->setValue($local['in_idpais']);
 //        $form->get('departamento')->setValueOptions(array($local['in_iddep']));//setValue($local['in_iddep']);
 //        $form->get('provincia')->setValueOptions(array($local['in_idprov']));
@@ -221,23 +221,23 @@ class IndexController extends AbstractActionController
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-           // var_dump($local->getInputFilter());exit;
+//            var_dump($local->getInputFilter());exit;
             
             $form->setInputFilter($local->getInputFilter());
             $form->setData($request->getPost());
            
             $servicio=$this->params()->fromPost('servicio');
             
-//            if ($form->isValid()) {
-//            
-//                $this->getLocalTable()->guardarLocal($local,$servicio);
-//                
-//                          return $this->redirect()->toUrl($this->
-//            getRequest()->getBaseUrl().'/local/index/index');
-//            }else{ 
+            if ($form->isValid()) {
+            
+                $this->getLocalTable()->guardarLocal($local,$servicio);
+                
+                          return $this->redirect()->toUrl($this->
+            getRequest()->getBaseUrl().'/local/index/index');
+            }else{ 
                   $this->getLocalTable()->guardarLocal($local,$servicio);
                 echo 'no validado';exit;}
-//        }
+        }
 
         return array(
             'id' => $id,

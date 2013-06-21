@@ -69,9 +69,9 @@ class Local
        public function getInputFilter()
     {
             if (!$this->inputFilter) {
-//            $inputFilter = new InputFilter();
-//            $factory     = new InputFactory();
-//            //inicio de validaciones
+            $inputFilter = new InputFilter();
+            $factory     = new InputFactory();
+            //inicio de validaciones
 //            $inputFilter->add($factory->createInput(array(
 //                'name'     => 'in_id',
 //                'required' => true,
@@ -79,26 +79,26 @@ class Local
 //                    array('name' => 'Int'),
 //                ),
 //            )));
-//            
-//            $inputFilter->add($factory->createInput(array(
-//                'name'     => 'va_telefono',
-//                'required' => true,
-//                'filters'  => array(
-//                    array('name' => 'StripTags'),
-//                    array('name' => 'StringTrim'),
-//                ),
-//                'validators' => array(
-//                    array(
-//                        'name'    => 'StringLength',
-//                        'options' => array(
-//                            'encoding' => 'UTF-8',
-//                            'min'      => 1,
-//                            'max'      => 18,
-//                        ),
-//                    ),
-//                ),
-//            )));
-//            
+            
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_telefono',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 18,
+                        ),
+                    ),
+                ),
+            )));
+            
 //             $inputFilter->add($factory->createInput(array(
 //                'name'     => 'va_horario',
 //                'required' => true,
