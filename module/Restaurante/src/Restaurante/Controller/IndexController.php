@@ -156,13 +156,14 @@ class IndexController extends AbstractActionController
         $id = (int) $this->params()->fromRoute('in_id', 0);
         $va_nombre = $this->params()->fromRoute('va_nombre',0);
         //var_dump($id);exit;
+
         if (!$id) {
            return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/restaurante/index/agregarrestaurante');  
         }
         try {
             $restaurante = $this->getRestauranteTable()->getRestaurante($id);
-           // var_dump($usuario);exit;
+            var_dump($restaurante);exit;
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->

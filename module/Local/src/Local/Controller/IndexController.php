@@ -96,7 +96,7 @@ class IndexController extends AbstractActionController
 
                 $local->exchangeArray($form->getData());
                 $this->getLocalTable()->guardarLocal($local, $servicio);
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/local');
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/local/in_id/'.$id);
             }
         }
 
@@ -163,7 +163,7 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
         if ($request->isPost()) {
 
-            $form->setInputFilter($local->getInputFilter());
+           $form->setInputFilter($local->getInputFilter());
             $form->setData($request->getPost());
 
             $servicio = $this->params()->fromPost('servicio');
