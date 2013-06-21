@@ -35,6 +35,13 @@ echo $this->formHidden($form->get('ta_restaurante_in_id'));
 <div class="control-group span5"><?php echo $this->formRow($form->get('departamento'));?></div><?php?>
 <div class="control-group span5"><?php echo $this->formRow($form->get('provincia'));?></div><?php?>
 <div class="control-group span5"><?php echo $this->formRow($form->get('distrito'));?></div><?php?>
+<div class="control-group span5">
+  <label for="">Seleccione Servicio que ofrece</label>
+  <label class="checkbox inline">
+   <?php echo $this->formRow($form->get('servicio'));?> 
+  </label>
+</div>
+
 <div class="control-group span5"><?php echo $this->formRow($form->get('va_direccion'));?></div><?php?>
 <div class="control-group span5">
                               <label>Encontrar latitud y longitud</label>
@@ -43,12 +50,6 @@ echo $this->formHidden($form->get('ta_restaurante_in_id'));
                              </div>
 <div class="control-group"><?php echo $this->formRow($form->get('de_latitud'));?></div>
 <div class="control-group"><?php echo $this->formRow($form->get('de_longitud'));?></div>
-<div class="control-group span5">
-  <label for="">Seleccione Servicio que ofrece</label>
-  <label class="checkbox inline">
-   <?php echo $this->formRow($form->get('servicio'));?> 
-  </label>
-</div>
 <div class="control-group span12"><?php echo $this->formSubmit($form->get('submit'));?></div><?php
 echo $this->form()->closeTag();?> </div> 
 </div>
