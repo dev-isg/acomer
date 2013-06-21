@@ -15,6 +15,9 @@ class RestauranteForm extends Form
        $this->add(array(
             'name' => 'in_id',
             'type' => 'Hidden',
+           'attributes' => array(               
+                'id'   => 'in_id',         
+            ),
         ));
         $this->add(array(
             'name' => 'va_nombre',
