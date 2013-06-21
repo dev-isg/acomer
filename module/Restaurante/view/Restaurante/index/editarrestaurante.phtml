@@ -34,7 +34,7 @@ echo $this->form()->closeTag();?>
 	$(document).ready(function(){
 		var id=$('#in_di');
 		var url="/restaurante/index/medi?in_id=" + id
-		$.getJSON('/local/index/jsonservicios',function(data){ 
+		$.getJSON(url,function(data){ 
              
             $.each(data,function(i,val){
             $(".checkbox").each(function(){ 
