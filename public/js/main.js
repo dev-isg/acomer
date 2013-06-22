@@ -31,8 +31,8 @@ $('#local').validate({
         departamento : { required : true},
         provincia : { required : true},
         distrito : { required : true},        
-        va_direccion:{ required : true  },
-        address : { required : true}       
+        va_direccion:{ required : true  }
+        // address : { required : true}       
       },
       messages:{
             va_telefono: {
@@ -61,10 +61,10 @@ $('#local').validate({
             },
             va_direccion : {
               required : "Por favor ingrese la dirección "
-            },
-            address : {
-              required : "Por favor busque la latitud y longitud"
             }
+            // address : {
+            //   required : "Por favor busque la latitud y longitud"
+            // }
         },
       highlight: function(element) {
         $(element).closest('.control-group').removeClass('success').addClass('error');

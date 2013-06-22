@@ -42,7 +42,7 @@ echo $this->formHidden($form->get('h_provincia'));
 echo $this->formHidden($form->get('h_distrito'));
 ?>
 
-
+<div class="row-fluid">
 <h5><?php echo $this->id ;?></h5>
 
 <div class="control-group span5"><?php echo $this->formRow($form->get('va_telefono'));?></div><?php?>
@@ -69,6 +69,7 @@ echo $this->formHidden($form->get('h_distrito'));
 <div class="control-group span5 "><?php echo $this->formRow($form->get('de_latitud'));?></div>
 <div class="control-group span5"><?php echo $this->formRow($form->get('de_longitud'));?></div>
 <?php echo $this->form()->closeTag();?> </div> 
+</div>
 </div>
 <script>
 	$(document).ready(function(){
