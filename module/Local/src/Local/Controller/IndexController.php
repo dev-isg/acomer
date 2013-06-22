@@ -171,26 +171,28 @@ class IndexController extends AbstractActionController
        //$this->getLocalTable()->editarLocal($id,$data);
         
         if ($request->isPost()) {
-            $aux=$form->setData($request->getPost());
+
+            $aux=$this->getRequest()->getPost()->toArray();
+              $this->getLocalTable()->editarLocal($aux,$id);
             
-            var_dump($aux->departamento );exit;
+//            var_dump($aux);exit;
             
-           $form->setInputFilter($local->getInputFilter());
-            $form->setData($request->getPost());
-
-            $servicio = $this->params()->fromPost('servicio');
-
-            if ($form->isValid()) {
-
-                $this->getLocalTable()->guardarLocal($local, $servicio);
-
-                return $this->redirect()->toUrl($this->
-                                        getRequest()->getBaseUrl() . '/local/index/index');
-            } else {
-                //$this->getLocalTable()->guardarLocal($local, $servicio);
-                echo 'no validado';
-                exit;
-            }
+//           $form->setInputFilter($local->getInputFilter());
+//            $form->setData($request->getPost());
+//
+//            $servicio = $this->params()->fromPost('servicio');
+//
+//            if ($form->isValid()) {
+//
+//                $this->getLocalTable()->editarLocal($id,$local);//guardarLocal($local, $servicio);
+//
+//                return $this->redirect()->toUrl($this->
+//                                        getRequest()->getBaseUrl() . '/local/index/index');
+//            } else {
+//                //$this->getLocalTable()->guardarLocal($local, $servicio);
+//                echo 'no validado';
+//                exit;
+//            }
         }
 
         return array(

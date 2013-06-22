@@ -51,20 +51,38 @@ class LocalTable
       
     }
     
-    public function editarLocal($id,$data){
+    public function editarLocal($local,$id){
+//        var_dump($local);exit;
         //$adapter=$this->tableGateway->select();
+          $pais=$local['pais'];
+          $departamento=$local['departamento'];
+          $provincia=$local['provincia'];
+          $distrito=$local['distrito'];
+          
+           $adapter=$this->tableGateway->getAdapter();
+             $sql = new Sql($adapter);
+          $idubigeo=$sql->select()->from('ta_ubigeo')
+                  ->columns(array('in_id'))
+                  ->where(array('in_idpais'=>$pais,'in_iddep'=>$departamento,'in_idprov'=>$provincia,'in_iddis'=>$distrito));
+          $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
+
+            $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);
+            $convertir=$result->toArray();
+            
          $data = array(
-           'va_telefono'         => $local->va_telefono,
-           'va_horario'   => $local->va_horario,
-           'de_latitud'            => $local->de_latitud,
-           'de_longitud'         => $local->de_longitud,
-           'va_rango_precio'            => $local->va_rango_precio,  
-           'va_horario_opcional'  => $local->va_horario_opcional,
-            'va_direccion' => $local->va_direccion,
-           'ta_restaurante_in_id' => $local->ta_restaurante_in_id,
+           'va_telefono'         => $local['va_telefono'],
+           'va_horario'   => $local['va_horario'],
+           'de_latitud'            => $local['de_latitud'],
+           'de_longitud'         => $local['de_longitud'],
+           'va_rango_precio'            => $local['va_rango_precio'],  
+           'va_horario_opcional'  => $local['va_horario_opcional'],
+            'va_direccion' => $local['va_direccion'],
+           'ta_restaurante_in_id' => $local['ta_restaurante_in_id'],
             'ta_ubigeo_in_id' => $convertir[0]['in_id']   
            
         );
+         $id=$local['in_id'];
+//         var_dump($id);Exit;
         $this->tableGateway->update($data, array('in_id' => $id));
     }
     
