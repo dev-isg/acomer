@@ -392,6 +392,13 @@ $(".eli-lo").on("click",function(){
   $('#verlocal').html("Estas seguro de eliminar el local ?");
 });
 
+$(".eli-com").on("click",function(){
+  var id = $(this).attr('data-id');
+  $('#eli-com').modal('show');
+  console.log(id);
+  $('#vercom').attr({'data-id':id});
+  $('#vercom').html("Estas seguro de eliminar el comentario ?");
+});
 
 $('.check_rest').mousedown(function() {
     var id = $(this).attr('id');
@@ -429,8 +436,7 @@ $('.check_rest').mousedown(function() {
   $('.check').mousedown(function() {
   	var id = $(this).attr('id');
     console.log(id);
-    console.log()
-    var est;
+     var est;
         if (!$(this).is(':checked')) {
         	if (confirm("Desea Activar al usuario ?") ){
             var est="activo";
@@ -458,7 +464,37 @@ $('.check_rest').mousedown(function() {
             $("#la" + id).html("desactivo");
               }
     });	
-
+  $('.check-com').mousedown(function() {
+    var id = $(this).attr('id');
+    console.log(id);
+     var est;
+        if (!$(this).is(':checked')) {
+          if (confirm("Desea Aprobar el comentario ?") ){
+            var est="aprobado";
+            var request = $.ajax({
+            url: "/usuario/comentarios/cambiaestado?id="+id + "&estado=" + est,
+            type: "get",
+            data: {id: id , estado:est}
+                   });
+            $(this).prop("checked", "checked");
+            $("#" + id).addClass("success");
+            $("#la" + id).removeClass().addClass("label label-success");
+            $("#la" + id).html("");
+            $("#la" + id).html("aprobado");
+                 };
+        }else{
+          var est="desaprobado";
+            var request = $.ajax({
+            url: "/usuario/comentarios/cambiaestado?id="+id + "&estado=" + est,
+            type: "get",
+            data: {id: id , estado:est}
+                   });
+          $("#" + id).removeClass("success");
+          $("#la" + id).removeClass().addClass("label label-important");
+          $("#la" + id).html("");
+            $("#la" + id).html("desaprobado");
+              }
+    }); 
   $("#delete").on("click",function(){
 	var user=$("#verusuario").attr("data-id");
 	$("#" + user).closest('tr').remove();
@@ -477,6 +513,17 @@ $('.check_rest').mousedown(function() {
   console.log(user);
   var request = $.ajax({
   url: "/local/index/eliminarlocal?id="+user,
+  type: "POST",
+  data: {id: user} 
+  });
+});
+  $("#delete-comentario").on("click",function(){
+  var user=$("#vercom").attr("data-id");
+  $("#" + user).closest('tr').remove();
+  $('#eli-com').modal('hide');
+  console.log(user);
+  var request = $.ajax({
+  url: "usuario/comentarios/eliminarComentario?id="+user,
   type: "POST",
   data: {id: user} 
   });
