@@ -1,0 +1,35 @@
+    <div class="span10">
+    <div class="control-group"> 
+            <form name='form_busqueda'class="form-search" action='/usuario/clientes/clientes' method ="post">
+                    <div class="control-group">
+                    <label class="ra radio">Buscar:
+                    <input type='text' name='texto' id="texto" placeholder="Codigo,Nombre,Email" />
+                    <input type="submit" class="btn" name="submit" value="Buscar">
+                    </div>
+            </form>
+    </div>
+
+    </div>
+<div class="span10">
+<table class="table table-bordered table-hover">
+    <thead>  
+        <tr>
+            <th>#</th> 
+            <th>Nombre del cliente</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    
+        <?php $count = 1;
+    foreach ($this->clientes  as $cliente) :// foreach ($this->paginator as $usuario) :
+        ?>
+        <tr id="<?php echo $cliente->in_id; ?>">
+            <td><?php echo $count++ ?></td>
+            <td><?php echo $cliente->va_nombre; ?></td> 
+            <td><?php echo $cliente->va_email; ?></td>
+        </tr>
+
+<?php endforeach; ?>
+    
+</table>
+</div>

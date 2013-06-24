@@ -1,5 +1,5 @@
 <?php
-namespace Local\Model;
+namespace Usuario\Model;
 use Zend\Db\TableGateway\TableGateway,
     Zend\Db\Adapter\Adapter,
     Zend\Db\ResultSet\ResultSet;
@@ -19,9 +19,12 @@ class Cliente extends TableGateway{
             $selectResultPrototype);
     }
     
-        public function getCliente(){
-            $datos = $this->select();
-            return $datos->toArray();     
+        public function getCliente($consulta=null){
+            $datos = $this->select('(in_id LIKE "%'.$consulta.'%") OR (va_nombre LIKE "%'.$consulta.'%") 
+                        OR (va_email LIKE "%'.$consulta.'%")');
+//                    ->where('(in_id LIKE "%'.$consulta.'%") OR (va_nombre LIKE "%'.$consulta.'%") 
+//                        OR (va_email LIKE "%'.$consulta.'%")');
+            return $datos;//->toArray();     
     }
     
          public function getClientePorId($id)
