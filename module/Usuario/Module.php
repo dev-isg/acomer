@@ -59,7 +59,7 @@ class Module implements AutoloaderProviderInterface
                     return new TableGateway('ta_usuario', $dbAdapter, null, $resultSetPrototype);
                 },
 
-
+ 
 
             ),
         );
