@@ -46,7 +46,7 @@
         ?>
         <tr>
             <td><?php echo $count++ ?></td>
-    <?php if ($cometarios->en_estado == 'activo') { ?>
+    <?php if ($cometarios->en_estado == 'aprobado') { ?>
                 <td><input id="<?php echo $this->escapeHtml($cometarios->in_id); ?>" type="checkbox" class="check" checked="checked"> </td>
                 <td><span id="la<?php echo $this->escapeHtml($cometarios->in_id); ?>" class='label label-success'> <?php echo $this->escapeHtml($cometarios->en_estado); ?></span></td>
     <?php } else { ?>

@@ -128,7 +128,7 @@ class IndexController extends AbstractActionController
         }
         try {
             $restaurante = $this->getRestauranteTable()->getRestaurante($id);
-            var_dump($restaurante);exit;
+           // var_dump($restaurante);exit;
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
