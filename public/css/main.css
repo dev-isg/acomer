@@ -117,7 +117,7 @@ label.error {
   height: 120px;
   margin-bottom: 10px;
 }
-#map_canvas{
+#map_canvas , #mostrar_map{
   display: none;
 }
 .ra{
@@ -134,7 +134,10 @@ label.error {
 h5{
   display: none;
 }
-
+#flip-scroll {
+font-size: 1em;
+font-family: georgia;
+}
 
 
 .ir {
@@ -243,6 +246,7 @@ padding: 0 10px;
         display: block;
     }
     #navigation{ display: none ;}
+    label.valid {display: none;}
 }
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
