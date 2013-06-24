@@ -56,8 +56,9 @@ echo $this->formHidden($form->get('h_distrito'));
 <div class="control-group span3"><?php echo $this->formRow($form->get('distrito'));?></div><?php?>
  <div class="control-group span3">
   <label for="">Seleccione Servicio que ofrece</label>
-  <label id="servicio_local"></label>
+  <label id="servicio_local" class="checkbox inline">
   <?php echo $this->formRow($form->get('servicio'));?>
+  </label>
 </div>
 <div class="control-group span3"><?php echo $this->formRow($form->get('va_direccion'));?></div><?php?>
 <div class="control-group span2">
