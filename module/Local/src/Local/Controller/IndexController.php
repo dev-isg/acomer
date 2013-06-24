@@ -185,7 +185,8 @@ class IndexController extends AbstractActionController
             $aux=$this->getRequest()->getPost()->toArray();
 //             var_dump($aux);exit;
               $this->getLocalTable()->editarLocal($aux,$id);
-            
+             return $this->redirect()->toUrl($this->
+                                        getRequest()->getBaseUrl() . '/local/index/index');
 //            var_dump($aux);exit;
             
 //           $form->setInputFilter($local->getInputFilter());
