@@ -21,7 +21,7 @@ class Cliente extends TableGateway{
     
         public function getCliente(){
             $datos = $this->select();
-            return $datos->toArray();     
+            return $datos;//->toArray();     
     }
     
          public function getClientePorId($id)
