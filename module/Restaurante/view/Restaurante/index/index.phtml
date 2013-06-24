@@ -4,32 +4,35 @@
     </div>
     </div> -->
     <div class="span10">
-     <div class="span12"> 
+   
 <form name='form_busqueda'class="form-search" action='<?php echo $this->basePath(); ?>/restaurante' method ="post">
-   <div class="control-group">
+   <div class="control-group span4">
    <label class="ra radio">    
    POR TIPO :
+   </label>
    <SELECT NAME="comida" SIZE="1">
    <OPTION VALUE="">seleccione:</OPTION>
- <?php  foreach ($this->comida as $comida) : ?>
- <OPTION VALUE="<?php echo $comida['in_id']; ?>"><?php echo $comida['va_nombre_tipo']; ?></OPTION>
-<?php endforeach; ?>
+      <?php  foreach ($this->comida as $comida) : ?>
+     <OPTION VALUE="<?php echo $comida['in_id']; ?>"><?php echo $comida['va_nombre_tipo']; ?></OPTION>
+     <?php endforeach; ?>
    </SELECT>
-   </label>
+   </div>
+   <div class="control-group span4">
    <label class="ra radio">    
    POR ESTADO :
+   </label>
    <SELECT NAME="estado" SIZE="1">
    <OPTION VALUE="">seleccione:</OPTION>
    <OPTION VALUE="activo">activo</OPTION>
    <OPTION VALUE="desactivo">desactivo</OPTION>
    </SELECT>
-   </label>
-    <label class="ra radio">POR NOMBRE:
+   </div>
+   <div class="control-group span4">
+    <label class="ra radio">POR NOMBRE: </label>
     <input type='text' name='texto' id="texto"/>
     <input type="submit" class="btn" name="submit" value="Buscar">
     </div>
-    </div>
-    </form>
+    </form>  
     </div>    
 
 <div class="span10" id="flip-scroll">
