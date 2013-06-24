@@ -523,7 +523,7 @@ $('.check_rest').mousedown(function() {
   $('#eli-com').modal('hide');
   console.log(user);
   var request = $.ajax({
-  url: "/usuario/comentarios/eliminarComentario?id="+user,
+  url: "/usuario/comentarios/eliminarcomentario?id="+user,
   type: "POST",
   data: {id: user} 
   });
