@@ -16,8 +16,7 @@ use Zend\Mvc\MvcEvent;
 
 use Usuario\Model\Usuario;
 use Usuario\Model\UsuarioTable;
-use Usuario\Model\Comentarios;
-use Usuario\Model\CometariosTable;
+
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
@@ -60,17 +59,7 @@ class Module implements AutoloaderProviderInterface
                     return new TableGateway('ta_usuario', $dbAdapter, null, $resultSetPrototype);
                 },
 
-                'Usuario\Model\ComentariosTable' =>  function($sm) {
-                    $tableGateway = $sm->get('ComentariosTableGateway');
-                    $table = new Model\ComentariosTable($tableGateway);
-                    return $table;
-                },
-                'ComentariosTableGateway' => function ($sm) {
-                    $dbAdapte = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Comentarios());
-                    return new TableGateway('ta_comentario', $dbAdapte, null, $resultSetPrototype);
-                },
+
 
             ),
         );
