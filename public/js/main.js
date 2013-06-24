@@ -294,6 +294,7 @@ function load_map() {
  
 $('#search').on('click', function() {
   load_map();
+  $('#mostrar_map').css("display","block");
   $('#map_canvas').css("display","block");
     var address = $('#address').val();
     var geocoder = new google.maps.Geocoder();
@@ -334,7 +335,7 @@ function geocodeResult(results, status) {
     } else {
         // En caso de no haber resultados o que haya ocurrido un error
         // lanzamos un mensaje con el error
-        alert("Geocoding no tuvo éxito debido a: " + status);
+        alert("La direccion es encontrado en google maps : " + status);
     }
 }
 
