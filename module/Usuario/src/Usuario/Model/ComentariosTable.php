@@ -27,19 +27,12 @@ class ComentariosTable
     public function come()
     {
         $resultSet = $this->tableGateway->select();
-        //var_dump($resultSet);exit;
         return $resultSet;
     }
 
-    public function getAlbum($id)
+    public function getAlbum()
     {
-        $id  = (int) $id;
-        $rowset = $this->tableGateway->select(array('id' => $id));
-        $row = $rowset->current();
-        if (!$row) {
-            throw new \Exception("Could not find row $id");
-        }
-        return $row;
+      
     }
 
     public function saveAlbum(Album $album)

@@ -9,6 +9,7 @@
 
 namespace Local\Controller;
 
+
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
@@ -20,6 +21,12 @@ use Local\Model\LocalTable;
 use Local\Model\Ubigeo;
 use Zend\Form\Element;
 use Zend\Form\Form;
+use Zend\Http\Response;
+
+use PHPExcel; 
+use PHPExcel\Reader\Excel5; 
+
+
 use Zend\Db\TableGateway\TableGateway,
     Zend\Db\Adapter\Adapter,
     Zend\Db\ResultSet\ResultSet;
@@ -35,8 +42,8 @@ class IndexController extends AbstractActionController
        // var_dump($u->getUbigeo());exit;
         
        $filtrar = $this->params()->fromPost('submit');
-       $id = (int) $this->params()->fromRoute('in_id', 0);
-       //var_dump($id);exit;
+        $id = (int) $this->params()->fromRoute('in_id', 0);
+
        if(!empty($id)){
        if(isset($filtrar)){
            $consulta=$this->params()->fromPost('texto');
@@ -62,182 +69,142 @@ class IndexController extends AbstractActionController
        //var_dump($this->getLocaTable()->fetchAll());exit;
        // return array();
     }
+
     
-    public function agregarlocalAction(){
-    
+    public function agregarlocalAction() {
+
         $form = new LocalForm();
-        $id=$this->params()->fromQuery('id');
+        $id = $this->params()->fromQuery('id');
+
+
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
-        
-        $servi=$this->getUbigeoTable()->getServicios();
-        
-        $array = array();
-        foreach($servi as $y){
-            $array[$y['in_id']] = $y['va_nombre'];
-           
-        }
-//        for($i=1;$i<=count($array);$i++){
-//            $form->get('servicio')->setAttributes(array('id'   => 'servicio'.$i));
-//        }
-         
-        //'id'   => 'servicio'
-//        foreach($array as $key=>$value){
-//        $form->get('servicio')->setAttributes(array('id'   => $array[$key]));
-//        }
-        $form->get('servicio')->setValueOptions($array);
-        
-        if ($request->isPost()) {
-     
-            $servicio=$this->params()->fromPost('servicio',0);
-            //  var_dump($servicio);exit;
-           $local = new Local();
-            //$form->setInputFilter($local->getInputFilter());
-            $form->setData($request->getPost());     
-//             $form->get('pais');
-//             $form->get('departamento');
-//              $form->get('provincia');
-//               $form->get('distrito');
-    //               $hiddenControl = $form->get('ta_restaurante_in_id');
-    //               $hiddenControl->setAttribute('value', $id);
-    //               $form->add($hiddenControl);
-              // var_dump($hiddenControl);exit;
-           if ($form->isValid()) {
-              
-                $local->exchangeArray($form->getData());
-                $this->getLocalTable()->guardarLocal($local,$servicio);
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/local');          
-             }
-             else{
-               
-                $local->exchangeArray($form->getData());
-                //var_dump($local);exit;
-                $this->getLocalTable()->guardarLocal($local,$servicio);
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/local');   
- 
-                 
-                 
-             }
-        }
-        
 
-        return array('form' => $form,'id'=>$id);
+        $servi = $this->getUbigeoTable()->getServicios();
+
+        $array = array();
+        foreach ($servi as $y) {
+            $array[$y['in_id']] = $y['va_nombre'];
+        }
+
+        $form->get('servicio')->setValueOptions($array);
+
+        if ($request->isPost()) {
+            $idretau=$this->params()->fromPost('ta_restaurante_in_id',0);
+            
+            $servicio = $this->params()->fromPost('servicio', 0);
+            $local = new Local();
+            $form->setInputFilter($local->getInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+                
+                $local->exchangeArray($form->getData());
+                $this->getLocalTable()->guardarLocal($local, $servicio);
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/local/index/index/'.$idretau);
+            } else {
+                
+                $local->exchangeArray($form->getData());
+                $this->getLocalTable()->guardarLocal($local, $servicio);
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/local/index/index/'.$idretau);
+            }
+        }
+
+
+        return array('form' => $form, 'id' => $id);
     }
     
  
     
-    public function editarlocalAction(){
-        
-      $id = (int) $this->params()->fromQuery('id',0);
-      //var_dump($id);exit;
+    public function editarlocalAction() {
+
+        $id = (int) $this->params()->fromQuery('id', 0);
+
         if (!$id) {
-           return $this->redirect()->toUrl($this->
-            getRequest()->getBaseUrl().'/local/index/agregarlocal'); 
-        }
-        //$local = $this->getLocalTable()->getLocal($id);
-        try {
-            $local = $this->getLocalTable()->getLocal($id);//->toArray();
-        }
-        catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
-            getRequest()->getBaseUrl().'/local'); 
+                                    getRequest()->getBaseUrl() . '/local/index/agregarlocal');
         }
-//        
-//             $array=array();
-//             foreach($local as $result){
-//                 $array[]=$result;
-//             }
-//            
-//         foreach($array as $index=>$valor){
-//                if(empty($array[$index])){
-//                    $array[$index]=1;
-//                }
-//            }
-        
-       // var_dump($local);exit;
-        $form  = new LocalForm();
-       // var_dump($local[0]['in_idpais']);EXIT;
-//        $form->get('pais')->setValueOptions(array($local[0]['in_idpais']));
-//        $aux[]=$local[0]['in_iddep'];
-//        $form->get('departamento')->setValueOptions(array(
-//             array(
-//                     '0' => 'Apple',
-//                     '1' => 'Orange',
-//                     '2' => 'Lemon'
-//             )));
-       $a= array(
-            
-                     '0' => 'Apple',
-                     '1' => 'Orange',
-                     '2' => 'Lemon'
-             );
-       
-           $b= array(
-               array(
-            
-                     '0' => 'Apple',
-                     '1' => 'Orange',
-                     '2' => 'Lemon'
-             ));
-//           var_dump($form->get('departamento')->setValue(''));exit; 
-        $servi=$this->getUbigeoTable()->getServicios();
-        $array = array();
-        foreach($servi as $y){
-            $array[$y['in_id']] = $y['va_nombre'];
-                 $form->get('servicio')->setValue($y['in_id']   );
+
+        try {
            
+            $local = $this->getLocalTable()->getLocal($id); //->toArray();
+           
+           // echo get_class($local);exit;
+           //print_r(get_class_methods($local));exit;
+        } catch (\Exception $ex) {
+             //echo 'mal';exit;
+            return $this->redirect()->toUrl($this->
+                                    getRequest()->getBaseUrl() . '/local');
         }
-        
-      // var_dump($local);exit;
+
+        $form = new LocalForm();
+
+        $servi = $this->getUbigeoTable()->getServicios();
+        $array = array();
+        foreach ($servi as $y) {
+            $array[$y['in_id']] = $y['va_nombre'];
+        }
+
         $form->get('servicio')->setValueOptions($array);
-   
-        
+
         $form->get('pais')->setValue($local['in_idpais']);
 //        $form->get('departamento')->setValueOptions(array($local['in_iddep']));//setValue($local['in_iddep']);
 //        $form->get('provincia')->setValueOptions(array($local['in_idprov']));
 //        $form->get('distrito')->setValueOptions(array($local['in_iddis']));
-        
+
         $hiddenpais = new Element\Hidden('h_pais');
         $hiddenpais->setValue($local['in_idpais']);
         $hiddenpais->setAttribute('id', 'h_pais');
         $form->add($hiddenpais);
-        
+
         $hiddendepa = new Element\Hidden('h_departamento');
         $hiddendepa->setValue($local['in_iddep']);
         $hiddendepa->setAttribute('id', 'h_departamento');
         $form->add($hiddendepa);
-        
+
         $hiddenprov = new Element\Hidden('h_provincia');
         $hiddenprov->setValue($local['in_idprov']);
         $hiddenprov->setAttribute('id', 'h_provincia');
         $form->add($hiddenprov);
-        
+
         $hiddendist = new Element\Hidden('h_distrito');
         $hiddendist->setValue($local['in_iddis']);
         $hiddendist->setAttribute('id', 'h_distrito');
+
         $form->add($hiddendist);
-        
-       // var_dump($form->get('servicio'));exit;
-       // $form->get('servicio')->setValueOptions($b);
-//        var_dump($local);exit;
         $form->bind($local);
-//        echo 'hello world';exit;
-                   
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
 
         $request = $this->getRequest();
+        
+       //$this->getLocalTable()->editarLocal($id,$data);
+        
         if ($request->isPost()) {
-
-            //$form->setInputFilter($local->getInputFilter());
-            $form->setData($request->getPost());
-           
-            $servicio=$this->params()->fromPost('servicio');
             
-           // if ($form->isValid()) {
-                $this->getLocalTable()->guardarLocal($local,$servicio);
-                          return $this->redirect()->toUrl($this->
-            getRequest()->getBaseUrl().'/local/index/index');
-            //}
+            
+            $aux=$this->getRequest()->getPost()->toArray();
+//             var_dump($aux);exit;
+              $this->getLocalTable()->editarLocal($aux,$id);
+             return $this->redirect()->toUrl($this->
+                                        getRequest()->getBaseUrl() . '/local/index/index');
+//            var_dump($aux);exit;
+            
+//           $form->setInputFilter($local->getInputFilter());
+//            $form->setData($request->getPost());
+//
+//            $servicio = $this->params()->fromPost('servicio');
+//
+//            if ($form->isValid()) {
+//
+//                $this->getLocalTable()->editarLocal($id,$local);//guardarLocal($local, $servicio);
+//
+//                return $this->redirect()->toUrl($this->
+//                                        getRequest()->getBaseUrl() . '/local/index/index');
+//            } else {
+//                //$this->getLocalTable()->guardarLocal($local, $servicio);
+//                echo 'no validado';
+//                exit;
+//            }
         }
 
         return array(
@@ -294,7 +261,70 @@ class IndexController extends AbstractActionController
         echo Json::encode($servicios);
         exit();
     }
+    
+public function LoginAction() 
+{ 
 
+//    use Classes\PHPExcel; 
+//use Classes\PHPExcel\Reader\Excel5; 
+    error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
+date_default_timezone_set('Europe/London');
+
+if (PHP_SAPI == 'cli')
+	die('This example should only be run from a Web Browser');
+ require './vendor/Classes/PHPExcel.php';
+ include './vendor/Classes/PHPExcel/Writer/Excel2007.php';
+
+// Create new PHPExcel object
+$objPHPExcel = new \PHPExcel();
+
+// Set document properties
+$objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+							 ->setLastModifiedBy("Maarten Balliauw")
+							 ->setTitle("Office 2007 XLSX Test Document")
+							 ->setSubject("Office 2007 XLSX Test Document")
+							 ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+							 ->setKeywords("office 2007 openxml php")
+							 ->setCategory("Test result file");
+
+
+// Add some data
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'Hello')
+            ->setCellValue('B2', 'world!')
+            ->setCellValue('C1', 'Hello')
+            ->setCellValue('D2', 'world!');
+
+// Miscellaneous glyphs, UTF-8
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A4', 'Miscellaneous glyphs')
+            ->setCellValue('A5', 'éàèùâêîôûëïüÿäöüç');
+
+// Rename worksheet
+$objPHPExcel->getActiveSheet()->setTitle('Simple');
+
+
+// Set active sheet index to the first sheet, so Excel opens this as the first sheet
+$objPHPExcel->setActiveSheetIndex(0);
+
+
+// Redirect output to a client’s web browser (Excel2007)
+
+header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8');
+header('Content-Disposition: attachment;filename="01simple.xlsx"');
+header('Cache-Control: max-age=0');
+
+$objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+$objWriter->save('01simple.xlsx');//save('php://output');
+
+
+
+//https://gist.github.com/nebiros/288725
+//http://zend-framework-community.634137.n4.nabble.com/intergrate-PHPWord-and-PHPExcel-in-ZF2-td4659566.html
+   exit;
+} 
 
     public function fooAction()
     {
@@ -319,4 +349,6 @@ class IndexController extends AbstractActionController
         }
         return $this->ubigeoTable;
     }
+    
+    
 }

@@ -59,6 +59,7 @@ class Module implements AutoloaderProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Usuario());
                     return new TableGateway('ta_usuario', $dbAdapter, null, $resultSetPrototype);
                 },
+
                 'Usuario\Model\ComentariosTable' =>  function($sm) {
                     $tableGateway = $sm->get('ComentariosTableGateway');
                     $table = new Model\ComentariosTable($tableGateway);
@@ -70,6 +71,7 @@ class Module implements AutoloaderProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Comentarios());
                     return new TableGateway('ta_comentario', $dbAdapte, null, $resultSetPrototype);
                 },
+
             ),
         );
     }

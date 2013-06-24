@@ -10,11 +10,10 @@ class Comentarios
 {
     public $in_id;
     public $tx_descripcion;
-     public $en_estado;
-     public $da_fecha;
-      public $Ta_cliente_in_id;
-      public $Ta_plato_in_id;
-         public $Ta_puntaje_in_id;
+    public $en_estado;
+    public $da_fecha;
+    public $Ta_cliente_in_id;
+    public $Ta_plato_in_id;     public $Ta_puntaje_in_id;
   
     protected $inputFilter;
     

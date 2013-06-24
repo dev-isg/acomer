@@ -12,7 +12,7 @@
 //require(['jquery','upload','bootstrap', 'validate','gmap'], function ($) {
 //funciones de usuarios
 $(document).ready(function(){
-       
+        $('#simple-menu').sidr();
 var limpiar_modal =function(){
 $('.control-group').removeClass('success');
   $('.control-group').removeClass('error');
@@ -31,8 +31,8 @@ $('#local').validate({
         departamento : { required : true},
         provincia : { required : true},
         distrito : { required : true},        
-        va_direccion:{ required : true  },
-        address : { required : true}       
+        va_direccion:{ required : true  }
+           
       },
       messages:{
             va_telefono: {
@@ -61,10 +61,8 @@ $('#local').validate({
             },
             va_direccion : {
               required : "Por favor ingrese la dirección "
-            },
-            address : {
-              required : "Por favor busque la latitud y longitud"
             }
+        
         },
       highlight: function(element) {
         $(element).closest('.control-group').removeClass('success').addClass('error');
@@ -222,6 +220,7 @@ validar('#usuario');
 //           $('#servicio_local').append("<input type='checkbox' name='servicio_local[]' id="+ val.in_id+" value="+val.in_id +"> " + val.va_nombre + "</br>" );                     
 //     });
 // });
+
 
    $('#address').val("");
     $('#va_direccion').keyup(function () {

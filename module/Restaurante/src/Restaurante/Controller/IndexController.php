@@ -14,6 +14,7 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Validator\File\Size;
 
 
+
 class IndexController extends AbstractActionController
 {
   protected $restauranteTable;
@@ -120,13 +121,14 @@ class IndexController extends AbstractActionController
         $id = (int) $this->params()->fromRoute('in_id', 0);
         $va_nombre = $this->params()->fromRoute('va_nombre',0);
         //var_dump($id);exit;
+
         if (!$id) {
            return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/restaurante/index/agregarrestaurante');  
         }
         try {
             $restaurante = $this->getRestauranteTable()->getRestaurante($id);
-           // var_dump($usuario);exit;
+            var_dump($restaurante);exit;
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
@@ -151,6 +153,7 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
         $comida = $this->params()->fromPost('va_modalidad');
         if ($request->isPost()) {
+
             $form->setInputFilter($restaurante->getInputFilter());
             $nonFile = $request->getPost()->toArray();
             $File    = $this->params()->fromFiles('va_imagen');

@@ -17,6 +17,7 @@
        
 <!--         <script data-main="/js/main" src="<?php echo $this->basePath()?>/js/require.js"></script>  -->
          <script src="<?php echo $this->basePath()?>/js/lib/jquery-1.8.3.min.js"></script> 
+         <script src="<?php echo $this->basePath()?>/js/vendor/jquery.sidr.min.js"></script> 
          <script src="<?php echo $this->basePath()?>/js/lib/bootstrap.min.js"></script> 
          <script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.js"></script> 
          <script src="<?php echo $this->basePath()?>/js/vendor/gmap3.min.js"></script> 
@@ -54,6 +55,8 @@
                   <div class="row-fluid">
                 <!-- sidebar-->
                 <div class="span2">
+                  <a id="simple-menu" href="#sidr">Toogle menu</a>
+                  <div id="sidr">
                     <ul class="nav nav-list">
                         <li class="active" ><a href="#"><i class="icon-home "></i> INICIO</a></li>
                         <li class="nav-header">USUARIOS</li>
@@ -65,6 +68,7 @@
                          <li class="nav-header">PLATOS</li>
                           <li><a href="#"><i class="icon-inbox"></i>Modulo de Plato</a></li>
                         </ul>
+                      </div>
                 </div>
   
                 <?php echo $this->content; ?>
