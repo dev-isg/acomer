@@ -52,7 +52,7 @@ class ComentariosController extends AbstractActionController
     
      public function eliminarcomentarioAction() {
         $id = $this->params()->fromPost('id');
-        $this->getUsuarioTable()->deleteComentario((int) $id);
+        $this->getComentariosTable()->deleteComentario((int) $id);
         $this->redirect()->toUrl('/usuario/comentarios/index');
     }
 
