@@ -4,6 +4,7 @@ namespace Local\Model;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\Update;
 
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\ResultSet\ResultSet;
@@ -77,13 +78,34 @@ class LocalTable
            'va_rango_precio'            => $local['va_rango_precio'],  
            'va_horario_opcional'  => $local['va_horario_opcional'],
             'va_direccion' => $local['va_direccion'],
-           'ta_restaurante_in_id' => $local['ta_restaurante_in_id'],
+           //'ta_restaurante_in_id' => $local['ta_restaurante_in_id'],
             'ta_ubigeo_in_id' => $convertir[0]['in_id']   
            
         );
-         $id=$local['in_id'];
+         //$id=(int)$local['in_id'];
+//         print_r($data);
 //         var_dump($id);Exit;
-        $this->tableGateway->update($data, array('in_id' => $id));
+//        
+//        $this->tableGateway->update($data,array('in_id'=> $id));//array('in_id='=>$id)
+        
+            $idupda=$sql
+                  ->update('ta_local')->set($data)
+                  ->where(array('in_id'=>$id));
+          $selectString3 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idupda);
+//          var_dump($selectString3);exit;
+            $result3 = $adapter->query($selectString3, $adapter::QUERY_MODE_EXECUTE);
+            
+    
+            
+//            foreach($servicio as $key=>$value){
+//                
+//             $insert = $this->tableGateway->getSql()->insert()->into('ta_local_has_ta_servicio_local')
+//                    ->values(array('ta_local_in_id'=>$idlocal,'ta_servicio_local_in_id'=>$value));
+//            $selectString2 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insert);
+//            $adapter=$this->tableGateway->getAdapter();
+//            $result = $adapter->query($selectString2, $adapter::QUERY_MODE_EXECUTE);
+//            }
+            
     }
     
     public function eliminarLocal($id){
@@ -166,6 +188,8 @@ class LocalTable
 //            if ($this->getRestaurante($id)) {
                 
                 $this->tableGateway->update($data, array('in_id' => $id));
+                
+                
 //            } else {
 //                throw new \Exception('no existe el usuario');
 //            }
@@ -198,7 +222,7 @@ class LocalTable
 //             foreach($results as $result){
 //                 $array[]=$result;
 //             }
-            //var_dump($array);exit;
+//            var_dump($array);exit;
             
             return $results->current();
     }

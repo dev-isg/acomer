@@ -36,7 +36,7 @@ class IndexController extends AbstractActionController
        // var_dump($u->getUbigeo());exit;
         
        $filtrar = $this->params()->fromPost('submit');
-       $id = (int) $this->params()->fromRoute('in_id', 0);
+        $id = (int) $this->params()->fromRoute('in_id', 0);
 
        if(!empty($id)){
        if(isset($filtrar)){
@@ -84,22 +84,23 @@ class IndexController extends AbstractActionController
         $form->get('servicio')->setValueOptions($array);
 
         if ($request->isPost()) {
-
+            $idretau=$this->params()->fromPost('ta_restaurante_in_id',0);
+            
             $servicio = $this->params()->fromPost('servicio', 0);
             $local = new Local();
             $form->setInputFilter($local->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-
+                
                 $local->exchangeArray($form->getData());
                 $this->getLocalTable()->guardarLocal($local, $servicio);
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/local');
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/local/index/index/'.$idretau);
             } else {
-
+                
                 $local->exchangeArray($form->getData());
                 $this->getLocalTable()->guardarLocal($local, $servicio);
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/local/in_id/'.$id);
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/local/index/index/'.$idretau);
             }
         }
 
@@ -119,11 +120,13 @@ class IndexController extends AbstractActionController
         }
 
         try {
+           
             $local = $this->getLocalTable()->getLocal($id); //->toArray();
-//            var_dump($local);
+           
            // echo get_class($local);exit;
            //print_r(get_class_methods($local));exit;
         } catch (\Exception $ex) {
+             //echo 'mal';exit;
             return $this->redirect()->toUrl($this->
                                     getRequest()->getBaseUrl() . '/local');
         }
@@ -171,8 +174,10 @@ class IndexController extends AbstractActionController
        //$this->getLocalTable()->editarLocal($id,$data);
         
         if ($request->isPost()) {
-
+            
+            
             $aux=$this->getRequest()->getPost()->toArray();
+//             var_dump($aux);exit;
               $this->getLocalTable()->editarLocal($aux,$id);
             
 //            var_dump($aux);exit;
