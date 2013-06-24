@@ -61,10 +61,11 @@ class ComentariosTable
 
     }
     
-     public function buscarComentario($datos,$estado){
+     public function buscarComentario($datos,$estado,$puntaje){
         $adapter=$this->tableGateway->getAdapter();
+       // var_dump($datos);exit;
            $sql = new Sql($adapter);
-           if($datos==''){
+           if($datos=='' and $puntaje== ''){
              $select = $sql->select()
             ->from(array('f' => 'ta_comentario')) 
             ->join(array('r'=>'ta_plato'),'f.ta_plato_in_id=r.in_id',array('va_nombre'))
@@ -72,13 +73,29 @@ class ComentariosTable
             ->join(array('m'=>'ta_puntaje'),'f.ta_puntaje_in_id=m.in_id',array('va_valor'))
             ->where(array('f.en_estado'=>$estado));
            }
-         if($estado==''){
+         if($estado==''and $puntaje== ''){
              $select = $sql->select()
             ->from(array('f' => 'ta_comentario')) 
             ->join(array('r'=>'ta_plato'),'f.ta_plato_in_id=r.in_id',array('va_nombre'))
             ->join(array('u'=>'ta_cliente'),'f.ta_cliente_in_id=u.in_id',array('va_nombre_cliente'))
             ->join(array('m'=>'ta_puntaje'),'f.ta_puntaje_in_id=m.in_id',array('va_valor'))
-            ->where(array('ta_plato.va_nombre'=>$datos));
+            ->where(array('r.va_nombre'=>$datos));
+           }
+           if($estado==''and $datos== ''){
+             $select = $sql->select()
+            ->from(array('f' => 'ta_comentario')) 
+            ->join(array('r'=>'ta_plato'),'f.ta_plato_in_id=r.in_id',array('va_nombre'))
+            ->join(array('u'=>'ta_cliente'),'f.ta_cliente_in_id=u.in_id',array('va_nombre_cliente'))
+            ->join(array('m'=>'ta_puntaje'),'f.ta_puntaje_in_id=m.in_id',array('va_valor'))
+            ->where(array('f.ta_puntaje_in_id'=>$puntaje));
+           }
+           if($datos=='' and $puntaje != '' and $estado != '' ){
+             $select = $sql->select()
+           ->from(array('f' => 'ta_comentario')) 
+            ->join(array('r'=>'ta_plato'),'f.ta_plato_in_id=r.in_id',array('va_nombre'))
+            ->join(array('u'=>'ta_cliente'),'f.ta_cliente_in_id=u.in_id',array('va_nombre_cliente'))
+            ->join(array('m'=>'ta_puntaje'),'f.ta_puntaje_in_id=m.in_id',array('va_valor'))
+            ->where(array('r.va_nombre'=>$estado,'f.ta_puntaje_in_id'=>$puntaje));
            }
             $selectString = $sql->getSqlStringForSqlObject($select);
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
