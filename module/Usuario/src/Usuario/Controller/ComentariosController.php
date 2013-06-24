@@ -52,13 +52,19 @@ class ComentariosController extends AbstractActionController
               $this->redirect()->toUrl('/usuario/comentarios/index');
     }
     
+    public function comentariocorreoAction() {
+              $id = $this->params()->fromQuery('id');
+              $estado = $this->params()->fromQuery('estado');
+              $this->getComentariosTable()->estadoComentario((int) $id, $estado);
+              $this->redirect()->toUrl('/usuario/comentarios/index');
+    }
+    
      public function eliminarcomentarioAction() {
         $id = $this->params()->fromPost('id');
         $this->getComentariosTable()->deleteComentario((int) $id);
         $this->redirect()->toUrl('/usuario/comentarios/index');
     }
 
-    
       public function puntaje()
     {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $adapter = $this->dbAdapter;
@@ -70,4 +76,20 @@ class ComentariosController extends AbstractActionController
             return $results;
             
      }
+        public function comentariosexcelAction(){
+          if (empty($_GET["estado"])and empty($_GET["puntaje"])and empty($_GET["texto"]) )
+                {
+               $comentarios = $this->getComentariosTable()->fetchAll();
+                }
+          else {
+                $datos=$_GET["texto"];
+                $estado = $_GET["estado"];
+                $puntaje =$_GET["puntaje"];
+                $comentarios = $this->getComentariosTable()->buscarComentario($datos,$estado,$puntaje);  
+                }
+       return array(
+          'comentarios' => $comentarios,
+           'puntaje' =>$this-> puntaje()
+        );
+    }
 }
