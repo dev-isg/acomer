@@ -1,16 +1,17 @@
 
-    <div class="span10">
-    <div class="control-group span2" data-toggle="buttons-radio">
-        <a  class="btn" href="<?php echo $this->basePath();?>/local/index/agregarlocal?id=<?php echo $this->in_id?>">AGREGAR LOCAL</a>
-    </div>
-    <div class="control-group"> 
-            <form name='form_busqueda'class="form-search" action='/local/index' method ="post">
-                    <div class="control-group">
-                    <label class="ra radio">Buscar:
-                    <input type='text' name='texto' id="texto" placeholder="Restaurant,Distrito" />
-                    <input type="submit" class="btn" name="submit" value="Buscar">
+    <div class="span10" style="padding: 10px 0px;">
+   
+    <div class="control-group span8 "> 
+            <form name='form_busqueda'class="form-search" action='/local/index' method ="post" style=" margin: 0px;">
+                    <div class="span12">
+                     <input type='text' name='texto' id="texto" class="span8 " placeholder="Restaurant,Distrito" />
+                 <!--    <input type="submit" class="btn" name="submit" value="Buscar"> -->
+                    <button type="submit" class="btn" name="submit" style="">Buscar</button>
                     </div>
             </form>
+    </div>
+     <div class="control-group span4 text-right" >
+        <a  class="btn" href="<?php echo $this->basePath();?>/local/index/agregarlocal?id=<?php echo $this->in_id?>">AGREGAR LOCAL</a>
     </div>
 
     </div>
@@ -19,14 +20,14 @@
     <thead class="cf">  
         <tr>
           <th >#</th> 
-            <th>Nombre de Restaurant</th>
+            <th>Nombre</th>
             <th>Telefono</th>
             <th>Horario</th>
 <!--            <th>Rango de precio</th>-->
             <th>Direccion</th>
-            <th>Pais</th>
-            <th>Departamento</th>
-            <th>Provincia</th>
+           <!--  <th>Pais</th>
+           <th>Departamento</th>
+           <th>Provincia</th> -->
             <th>Distrito</th>
             <th>Operaciones</th>
         </tr>
@@ -42,12 +43,12 @@
             <td><?php echo $this->escapeHtml($local->va_horario); ?></td>
 <!--            <td><?php echo $this->escapeHtml($local->va_rango_precio); ?></td>-->
             <td><?php echo $this->escapeHtml($local->va_direccion); ?></td>
-            <td><?php echo $this->escapeHtml($local->ch_pais); ?></td>
-            <td><?php echo $this->escapeHtml($local->ch_departamento); ?></td>
-            <td><?php echo $this->escapeHtml($local->ch_provincia); ?></td>
+           <!--  <td><?php echo $this->escapeHtml($local->ch_pais); ?></td>
+           <td><?php echo $this->escapeHtml($local->ch_departamento); ?></td>
+           <td><?php echo $this->escapeHtml($local->ch_provincia); ?></td> -->
             <td><?php echo $this->escapeHtml($local->ch_distrito); ?></td>
             
-             <td><a data-id="<?php echo $this->escapeHtml($local->in_id); ?>" href="/local/index/editarlocal?id=<?php echo $local->in_id;?>" class='modificar btn btn-info'><i class='icon-edit icon-white'></i>Editar </a>
+             <td><a data-id="<?php echo $this->escapeHtml($local->in_id); ?>" href="/local/index/editarlocal?id=<?php echo $local->in_id;?>" class='modificar btn btn-success'><i class='icon-edit icon-white'></i>Editar </a>
             <a data-id="<?php echo $this->escapeHtml($local->in_id); ?>" href="#" class='eli-lo btn btn-danger'><i class='icon-trash icon-white'></i>Eliminar</a> </td>
         </tr>
 
