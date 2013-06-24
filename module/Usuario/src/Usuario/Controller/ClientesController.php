@@ -91,7 +91,7 @@ header("Cache-Control: max-age=0");
       public function exportarexcelAction() {
         $clientes = $this->getTableClientes()->getCliente();
         $view =new ViewModel();
-       // $view->setTerminal(true);
+        $view->setTerminal(true);
         $view->setVariables(array('clientes' => $clientes));
         return $view;
    

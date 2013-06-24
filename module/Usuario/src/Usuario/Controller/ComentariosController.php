@@ -21,10 +21,18 @@ class ComentariosController extends AbstractActionController
   public $dbAdapter;
     public function indexAction()
     {
-   
-        return new ViewModel(array(
-            'comentarios' => $this->getComentariosTable()->come(),
-        ));
+        $filtrar = $this->params()->fromPost('submit'); 
+        $datos = $this->params()->fromPost('texto');
+        $estado = $this->params()->fromPost('estado');
+         if (isset($filtrar)) {
+            $cometarios = $this->getComentariosTable()->buscarComentario($datos,$estado);
+        }
+        else {
+            $cometarios = $this->getComentariosTable()->fetchAll();
+        }
+        return array(
+          'comentarios' => $cometarios
+        );
     }
     
     public function getComentariosTable() {
@@ -33,6 +41,19 @@ class ComentariosController extends AbstractActionController
             $this->comentariosTable = $s->get('Usuario\Model\ComentariosTable');
         }
         return $this->comentariosTable;
+    }
+    
+    public function cambiaestadoAction() {
+              $id = $this->params()->fromQuery('id');
+              $estado = $this->params()->fromQuery('estado');
+              $this->getComentariosTable()->estadoComentario((int) $id, $estado);
+              $this->redirect()->toUrl('/usuario/comentarios/index');
+    }
+    
+     public function eliminarComentarioAction() {
+        $id = $this->params()->fromPost('id');
+        $this->getUsuarioTable()->deleteComentario((int) $id);
+        $this->redirect()->toUrl('/usuario/comentarios/index');
     }
 
 }

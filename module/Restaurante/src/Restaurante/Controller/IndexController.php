@@ -22,7 +22,7 @@ class IndexController extends AbstractActionController
   
     
      public function indexAction() {
-        $filtrar = $this->params()->fromPost('submit'); //$this->_request->getParams();
+        $filtrar = $this->params()->fromPost('submit'); 
         $datos = $this->params()->fromPost('texto');
         $comida = $this->params()->fromPost('comida');
         $estado = $this->params()->fromPost('estado');
@@ -128,7 +128,7 @@ class IndexController extends AbstractActionController
         }
         try {
             $restaurante = $this->getRestauranteTable()->getRestaurante($id);
-            var_dump($restaurante);exit;
+           // var_dump($restaurante);exit;
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
