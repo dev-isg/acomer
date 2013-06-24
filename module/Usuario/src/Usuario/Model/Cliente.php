@@ -1,5 +1,5 @@
 <?php
-namespace Local\Model;
+namespace Usuario\Model;
 use Zend\Db\TableGateway\TableGateway,
     Zend\Db\Adapter\Adapter,
     Zend\Db\ResultSet\ResultSet;

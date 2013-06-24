@@ -16,6 +16,10 @@ use Zend\Mvc\MvcEvent;
 
 use Usuario\Model\Usuario;
 use Usuario\Model\UsuarioTable;
+
+use Usuario\Model\Cliente;
+
+
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
@@ -57,7 +61,7 @@ class Module implements AutoloaderProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Usuario());
                     return new TableGateway('ta_usuario', $dbAdapter, null, $resultSetPrototype);
                 },
-                  'Local\Model\Cliente'=>function($sm){
+                  'Usuario\Model\Cliente'=>function($sm){
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $table = new Cliente($dbAdapter);
                     return $table;
