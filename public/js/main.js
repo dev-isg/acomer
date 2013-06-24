@@ -223,6 +223,7 @@ validar('#usuario');
 //     });
 // });
 
+
    $('#address').val("");
     $('#va_direccion').keyup(function () {
      var value = $(this).val();
