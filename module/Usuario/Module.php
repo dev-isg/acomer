@@ -68,15 +68,9 @@ class Module implements AutoloaderProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Comentarios());
                     return new TableGateway('ta_comentario', $dbAdapte, null, $resultSetPrototype);
                 },
-
-
- 
-
             ),
         );
     }
-
-
 
     //fin
     public function onBootstrap(MvcEvent $e)
