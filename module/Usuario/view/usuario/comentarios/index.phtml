@@ -4,17 +4,36 @@
     </div>
     </div> -->
     <div class="span10">
+   
      <form name='form_busqueda'class="form-search" action='<?php echo $this->basePath(); ?>/usuario/comentarios/index' method ="post">
      <div class="control-group span3">
+
    <label class="ra radio">    
+   POR PUNTAJE :
+  </label>
+   <SELECT NAME="puntaje" SIZE="1">
+   <OPTION VALUE="">seleccione:</OPTION>
+ <?php  foreach ($this->puntaje as $puntaje) : ?>
+ <OPTION VALUE="<?php echo $puntaje['in_id']; ?>"><?php echo $puntaje['va_valor']; ?></OPTION>
+<?php endforeach; ?>
+ 
+ <?php   $estado =$this->escapeHtml($cometarios->en_estado); 
+  $valor =$this->escapeHtml($cometarios->va_valor);
+  $this->escapeHtml($cometarios->tx_descr);
+  ?>
+   </SELECT>
+</div>
+ <div class="control-group span3">
+   </label>
    POR ESTADO :
    </label>
-       <SELECT NAME="estado" SIZE="1" class="span12">
+    <SELECT NAME="estado" SIZE="1" class="span12">
        <OPTION VALUE="">seleccione:</OPTION>
        <OPTION VALUE="aprobado">aprobado</OPTION>
        <OPTION VALUE="desaprobado">desaprobado</OPTION>
-       </SELECT>
-   </div>
+    </SELECT>  
+     
+  </div>
     <div class="control-group span3">
     <label class="ra radio">POR NOMBRE DE PLATO: </label>
     <input type='text' name='texto' id="texto" class="span12"/>
@@ -22,14 +41,14 @@
       <div class="control-group span3">
     <input type="submit" class="btn boton" name="submit" value="BUSCAR">
       </div>
+
     </form>
     </div>
        
 
-<div class="span10" id="flip-scroll">
-<table class="table table-bordered table-hover">
+ <div class="span10" id="flip-scroll">
+ <table class="table table-bordered table-hover">
     <thead class="cf">  
-    <thead>  
         <tr>
             <th>#</th> 
             <th>N°</th>
@@ -68,7 +87,14 @@
 </table>
 </div>
 <div class="span10" style="padding: 10px 0;">
-    <a href='#' class="btn" >Exportar Datos </a>
+    
+     <?php $estado=$_POST["puntaje"];
+           $valor=$_POST["estado"];  
+           $descripcion=$_POST["text"];                 
+    ?>
+     <a onClick="location='<?php echo $this->basePath(); ?>/usuario/comentarios/comentariosexcel?estado=<?php echo $valor; 
+  ?>&puntaje=<?php echo $estado; ?>&texto=<?php echo $descripcion; ?>'" class="btn" >Exportar Datos </a></div> 
+                
 </div>
 <div class="span4">
   
