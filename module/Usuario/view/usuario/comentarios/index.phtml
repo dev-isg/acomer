@@ -4,20 +4,13 @@
     </div>
     </div> -->
     <div class="span10">
-<<<<<<< HEAD
-     <div class="span12"> 
-<form name='form_busqueda'class="form-search" action='<?php echo $this->basePath(); ?>/usuario/comentarios/index' method ="post">
-
-    <div class="control-group">
-       
-     </label>
-   </label>
-=======
+   
      <form name='form_busqueda'class="form-search" action='<?php echo $this->basePath(); ?>/usuario/comentarios/index' method ="post">
      <div class="control-group span3">
->>>>>>> 484268164452ad5141499d6673557eb4b0a51cfa
+
    <label class="ra radio">    
    POR PUNTAJE :
+  </label>
    <SELECT NAME="puntaje" SIZE="1">
    <OPTION VALUE="">seleccione:</OPTION>
  <?php  foreach ($this->puntaje as $puntaje) : ?>
@@ -29,23 +22,18 @@
   $this->escapeHtml($cometarios->tx_descr);
   ?>
    </SELECT>
+</div>
+ <div class="control-group span3">
    </label>
    POR ESTADO :
    </label>
-       <SELECT NAME="estado" SIZE="1" class="span12">
+    <SELECT NAME="estado" SIZE="1" class="span12">
        <OPTION VALUE="">seleccione:</OPTION>
        <OPTION VALUE="aprobado">aprobado</OPTION>
        <OPTION VALUE="desaprobado">desaprobado</OPTION>
-       </SELECT>
-<<<<<<< HEAD
-   </label>
-    <label class="ra radio">POR PLATO:
-    <input type='text' name='texto' id="texto"/>
-    <input type="submit" class="btn" name="submit" value="Buscar">
+    </SELECT>  
      
   </div>
-=======
-   </div>
     <div class="control-group span3">
     <label class="ra radio">POR NOMBRE DE PLATO: </label>
     <input type='text' name='texto' id="texto" class="span12"/>
@@ -53,7 +41,7 @@
       <div class="control-group span3">
     <input type="submit" class="btn boton" name="submit" value="BUSCAR">
       </div>
->>>>>>> 484268164452ad5141499d6673557eb4b0a51cfa
+
     </form>
     </div>
        
