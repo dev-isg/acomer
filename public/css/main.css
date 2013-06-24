@@ -243,11 +243,15 @@ padding: 0 10px;
 .ra.radio {
 padding: 10px 0 0;
 }
+.boton {
+  margin-top: 29px;
+}
 @media only screen and (max-width: 767px){
 
     #mobile-header {
         display: block;
     }
+    .boton { margin: 0px;}
     #navigation{ display: none ;}
     label.valid {display: none;}
 }
