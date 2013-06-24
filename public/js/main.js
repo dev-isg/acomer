@@ -12,7 +12,7 @@
 //require(['jquery','upload','bootstrap', 'validate','gmap'], function ($) {
 //funciones de usuarios
 $(document).ready(function(){
-       
+        $('#simple-menu').sidr();
 var limpiar_modal =function(){
 $('.control-group').removeClass('success');
   $('.control-group').removeClass('error');
