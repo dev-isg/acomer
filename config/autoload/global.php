@@ -17,7 +17,7 @@ return array(
         'driver'         => 'Pdo',
             'username' => 'kevin',
         'password' => '123456',
-        'dsn'            => 'mysql:dbname=bd_acomer;host=192.168.1.36',
+        'dsn'            => 'mysql:dbname=bd_acomer;host=192.168.1.38',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         ),

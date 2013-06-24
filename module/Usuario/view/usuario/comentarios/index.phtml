@@ -1,0 +1,57 @@
+    <div class="span10">
+      <div class="input-append"> 
+             <form name='form_busqueda'class="form-search" action='<?php echo $this->basePath(); ?>/usuario/index' method ="post">
+             
+                 <div class="control-group">
+                    <label class="ra radio">
+                 <input type='radio' name='listado'  id='nom' value='va_nombre' checked/>Por nombre 
+                 </label>
+                 <label class="ra radio">    
+                <input type='radio' name='listado' id='dire1' value='1'/>Por Administrador
+                </label>
+                <label class="ra radio">
+                <input type='radio' name='listado' id='dire2' value='2'/>Por Editor</label>
+                 <input type='text' name='texto' id="texto"/>
+                <input type="submit" class="btn" name="submit" value="Buscar">
+                </div>
+            </div>
+            </form>
+    </div>
+<div class="span10">
+<table class="table table-bordered table-hover">
+    <thead>  
+        <tr>
+            <th>#</th> 
+            <th>N°</th>
+            <th>Status</th>
+            <th>Comentario</th>
+            <th>decr</th>
+            <th>Usuario</th>
+            <th>Plato</th>
+            <th>Operaciones</th>
+        </tr>
+    </thead>
+
+    <?php $count = 1;
+    foreach ($this->comentarios as $cometarios) :
+        ?>
+        <tr>
+            <td><?php echo $count++ ?></td>
+    <?php if ($cometarios->en_estado == 'activo') { ?>
+                <td><input id="<?php echo $this->escapeHtml($cometarios->in_id); ?>" type="checkbox" class="check" checked="checked"> </td>
+                <td><span id="la<?php echo $this->escapeHtml($cometarios->in_id); ?>" class='label label-success'> <?php echo $this->escapeHtml($usuario->en_estado); ?></span></td>
+    <?php } else { ?>
+                <td><input id="<?php echo $this->escapeHtml($cometarios->in_id); ?>" type="checkbox" class="check"> </td>
+                <td><span id="la<?php echo $this->escapeHtml($cometarios->in_id); ?>" class='label label-important'> <?php echo $this->escapeHtml($usuario->en_estado); ?></span></td>
+    <?php } ?>
+            <td><?php echo $this->escapeHtml($cometarios->tx_descripcion); ?></td> 
+            <td><?php echo $this->escapeHtml($cometarios->va_apellidos); ?></td>
+            <td><?php echo $this->escapeHtml($cometarios->va_email); ?></td>
+            <td><?php echo $this->escapeHtml($cometarios->va_nombre_rol); ?></td>
+            <td><a data-id="<?php echo $this->escapeHtml($usuario->in_id); ?>" href="<?php echo $this->basePath();?>/usuario/index/editarusuario/<?php echo $usuario->in_id;?>" class='modificar btn btn-info'><i class='icon-edit icon-white'></i>Editar</a></td>
+            <td><a name="<?php echo $this->escapeHtml($usuario->va_nombre); ?>" data-id="<?php echo $this->escapeHtml($usuario->in_id); ?>" href="#" class='eli btn btn-danger'><i class='icon-trash icon-white'></i>ELIMINAR</a> </td>
+        </tr>
+
+<?php endforeach; ?>
+<!--        <div style="clear: both;">
+<?php (count($this->paginator)> 0)?$this->paginationControl($this->paginator, 'Sliding', 'usuario/index/paginador.phtml'):""; ?>

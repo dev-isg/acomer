@@ -4,6 +4,7 @@ return array(
         'invokables' => array(
             'Usuario\Controller\Index' => 'Usuario\Controller\IndexController',
             'Usuario\Controller\Restaurant' => 'Usuario\Controller\RestaurantController',
+            'Usuario\Controller\Comentarios' => 'Usuario\Controller\ComentariosController',
             
         ),
     ),
