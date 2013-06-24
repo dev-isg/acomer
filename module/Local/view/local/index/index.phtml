@@ -1,16 +1,17 @@
 
     <div class="span10">
-    <div class="control-group span2" data-toggle="buttons-radio">
-        <a  class="btn" href="<?php echo $this->basePath();?>/local/index/agregarlocal?id=<?php echo $this->in_id?>">AGREGAR LOCAL</a>
-    </div>
-    <div class="control-group"> 
+   
+    <div class="control-group span8 "> 
             <form name='form_busqueda'class="form-search" action='/local/index' method ="post">
-                    <div class="control-group">
-                    <label class="ra radio">Buscar:
-                    <input type='text' name='texto' id="texto" placeholder="Restaurant,Distrito" />
-                    <input type="submit" class="btn" name="submit" value="Buscar">
+                    <div class="input-append">
+                     <input type='text' name='texto' id="texto" class="span8 search-query" placeholder="Restaurant,Distrito" />
+                 <!--    <input type="submit" class="btn" name="submit" value="Buscar"> -->
+                    <button type="submit" class="btn" name="submit">Buscar</button>
                     </div>
             </form>
+    </div>
+     <div class="control-group span4 text-right" >
+        <a  class="btn" href="<?php echo $this->basePath();?>/local/index/agregarlocal?id=<?php echo $this->in_id?>">AGREGAR LOCAL</a>
     </div>
 
     </div>

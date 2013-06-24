@@ -240,6 +240,9 @@ padding: 0 10px;
 #mobile-header {
     display: none;
 }
+.ra.radio {
+padding: 10px 0 0;
+}
 @media only screen and (max-width: 767px){
 
     #mobile-header {
