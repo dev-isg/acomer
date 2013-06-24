@@ -25,13 +25,13 @@ class ComentariosController extends AbstractActionController
         $datos = $this->params()->fromPost('texto');
         $estado = $this->params()->fromPost('estado');
          if (isset($filtrar)) {
-            $cometarios = $this->getComentariosTable()->buscarComentario($datos,$estado);
+            $comentarios = $this->getComentariosTable()->buscarComentario($datos,$estado);
         }
         else {
-            $cometarios = $this->getComentariosTable()->fetchAll();
+            $comentarios = $this->getComentariosTable()->fetchAll();
         }
         return array(
-          'comentarios' => $cometarios
+          'comentarios' => $comentarios
         );
     }
     
@@ -50,7 +50,7 @@ class ComentariosController extends AbstractActionController
               $this->redirect()->toUrl('/usuario/comentarios/index');
     }
     
-     public function eliminarComentarioAction() {
+     public function eliminarcomentarioAction() {
         $id = $this->params()->fromPost('id');
         $this->getUsuarioTable()->deleteComentario((int) $id);
         $this->redirect()->toUrl('/usuario/comentarios/index');

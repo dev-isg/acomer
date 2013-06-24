@@ -20,7 +20,7 @@ class Cliente extends TableGateway{
     }
     
         public function getCliente($consulta=null){
-            $datos = $this->select('(in_id LIKE "%'.$consulta.'%") OR (va_nombre LIKE "%'.$consulta.'%") 
+            $datos = $this->select('(in_id LIKE "%'.$consulta.'%") OR (va_nombre_cliente LIKE "%'.$consulta.'%") 
                         OR (va_email LIKE "%'.$consulta.'%")');
 //                    ->where('(in_id LIKE "%'.$consulta.'%") OR (va_nombre LIKE "%'.$consulta.'%") 
 //                        OR (va_email LIKE "%'.$consulta.'%")');

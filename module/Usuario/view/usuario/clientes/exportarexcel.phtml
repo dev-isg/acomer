@@ -1,0 +1,40 @@
+<style type="text/css">
+table,tr,td,th
+{  
+border: 1px solid #000; 
+border-collapse: collapse;
+text-align: center;
+}
+     </style>
+     <br>
+     <br>
+ <?php  
+header("Pragma: public");
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: pre-check=0, post-check=0, max-age=0");
+header("Pragma: no-cache");
+header("Expires: 0");
+header("Content-Transfer-Encoding: none");
+header("Content-Type: application/vnd.ms-excel;");
+header("Content-type: application/x-msexcel");
+header("Content-Disposition: attachment; filename=Moderacion_".date('Ymd').".xls");
+    echo("<table>");
+    echo("<tr style='font-weight: bold;'>");
+    echo("<td>Id</td>");
+    echo("<td>Nombre del cliente</td>");
+    echo("<td>Email</td>");
+    if($this->clientes)
+        { 
+                foreach($this->clientes as $fila)
+                {   
+                ?>
+                <tr>
+                <td width="85"><?php echo $fila->in_id ?></td>
+                <td width="100"><?php echo $fila->va_nombre_cliente ?></td>
+                <td width="200"><?php echo $fila->va_email ?></td>
+                </tr>
+                <?php 
+                }               
+         } 
+                ?>
+  </table>

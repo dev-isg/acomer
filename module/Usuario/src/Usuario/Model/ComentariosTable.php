@@ -66,16 +66,18 @@ class ComentariosTable
            $sql = new Sql($adapter);
            if($datos==''){
              $select = $sql->select()
-            ->from(array('f' => 'ta_cometario')) 
+            ->from(array('f' => 'ta_comentario')) 
             ->join(array('r'=>'ta_plato'),'f.ta_plato_in_id=r.in_id',array('va_nombre'))
             ->join(array('u'=>'ta_cliente'),'f.ta_cliente_in_id=u.in_id',array('va_nombre_cliente'))
+            ->join(array('m'=>'ta_puntaje'),'f.ta_puntaje_in_id=m.in_id',array('va_valor'))
             ->where(array('f.en_estado'=>$estado));
            }
          if($estado==''){
              $select = $sql->select()
-            ->from(array('f' => 'ta_cometario')) 
+            ->from(array('f' => 'ta_comentario')) 
             ->join(array('r'=>'ta_plato'),'f.ta_plato_in_id=r.in_id',array('va_nombre'))
             ->join(array('u'=>'ta_cliente'),'f.ta_cliente_in_id=u.in_id',array('va_nombre_cliente'))
+            ->join(array('m'=>'ta_puntaje'),'f.ta_puntaje_in_id=m.in_id',array('va_valor'))
             ->where(array('r.va_nombre'=>$datos));
            }
             $selectString = $sql->getSqlStringForSqlObject($select);
