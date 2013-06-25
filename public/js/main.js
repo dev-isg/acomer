@@ -401,7 +401,7 @@ $(".eli-com").on("click",function(){
 });
 
 $('.check_rest').mousedown(function() {
-    var id = $(this).attr('id');
+    var id = $(this).attr('data-id');
     console.log(id);
     console.log()
     var est;
@@ -434,7 +434,7 @@ $('.check_rest').mousedown(function() {
     }); 
 
   $('.check').mousedown(function() {
-  	var id = $(this).attr('id');
+  	var id = $(this).attr('data-id');
     console.log(id);
      var est;
         if (!$(this).is(':checked')) {
@@ -465,7 +465,7 @@ $('.check_rest').mousedown(function() {
               }
     });	
   $('.check-com').mousedown(function() {
-    var id = $(this).attr('id');
+    var id = $(this).attr('data-id');
     console.log(id);
      var est;
         if (!$(this).is(':checked')) {

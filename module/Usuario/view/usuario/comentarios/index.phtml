@@ -63,10 +63,10 @@
             <td><?php echo $count++ ?></td>
 
     <?php if ($cometarios->en_estado == 'aprobado') { ?>
-                <td><input id="<?php echo $this->escapeHtml($cometarios->in_id); ?>" type="checkbox" class="check-com" checked="checked"> </td>
+                <td><input data-id="<?php echo $this->escapeHtml($cometarios->in_id); ?>" type="checkbox" class="check-com" checked="checked"> </td>
                 <td><span id="la<?php echo $this->escapeHtml($cometarios->in_id); ?>" class='label label-success'> <?php echo $this->escapeHtml($cometarios->en_estado); ?></span></td>
     <?php } else { ?>
-                <td><input id="<?php echo $this->escapeHtml($cometarios->in_id); ?>" type="checkbox" class="check-com"> </td>
+                <td><input data-id="<?php echo $this->escapeHtml($cometarios->in_id); ?>" type="checkbox" class="check-com"> </td>
                 <td><span id="la<?php echo $this->escapeHtml($cometarios->in_id); ?>" class='label label-important'> <?php echo $this->escapeHtml($cometarios->en_estado); ?></span></td>
     <?php } ?>
             <td><?php echo $this->escapeHtml($cometarios->tx_descripcion); ?></td> 
