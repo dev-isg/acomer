@@ -55,6 +55,8 @@ class IndexController extends AbstractActionController
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
         if ($request->isPost()) {
+            $var=$this->getRequest()->getPost()->toArray();
+            var_dump($var);exit;
            $datos =$this->request->getPost();
        
            $pass1 = $datos['va_contrasenia'];
