@@ -6,7 +6,7 @@ $this->headTitle($title);
 <?php
 $form = $this->form;
 $form->setAttributes(array(
-    'action' => $this->url.'/usuario/index/editarusuario/'.$this->in_id,
+    'action' => $this->url.'/usuario/index/editarusuario?id='.$this->in_id,
     'method' => 'post',
     'in_id'   =>$this->in_id,
 ));

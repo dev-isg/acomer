@@ -83,12 +83,11 @@
 <?php (count($this->paginator)> 0)?$this->paginationControl($this->paginator, 'Sliding', 'usuario/index/paginador.phtml'):""; ?>-->
 </table>
 </div>
-<div class="span10" style="padding: 10px 0;">
-    
+<div class="span10" style="padding: 10px 0;">  
      <?php $estado=$_POST["puntaje"];
            $valor=$_POST["estado"];  
            $descripcion=$_POST["texto"];                 
-    ?>
+      ?>
     <a onClick="location='<?php echo $this->basePath(); ?>/usuario/comentarios/comentariosexcel?estado=<?php echo $valor; 
   ?>&puntaje=<?php echo $estado; ?>&texto=<?php echo $descripcion; ?>'" class="btn" >Exportar Datos </a></div> 
                 

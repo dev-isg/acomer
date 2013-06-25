@@ -1,9 +1,6 @@
 <?php
 
 namespace Usuario\Controller;
-
-
-
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
@@ -86,8 +83,8 @@ class IndexController extends AbstractActionController
         foreach($comidas as $y){
             $com[$y['in_id']] = $y['va_nombre_rol'];
         }
-        
-        $id = (int) $this->params()->fromRoute('in_id', 0);
+        $id = (int) $this->params()->fromQuery('id', 0);
+        //$id = (int) $this->params()->fromRoute('in_id', 0);
         //var_dump($id);exit;
         if (!$id) {
            return $this->redirect()->toUrl($this->
@@ -114,7 +111,7 @@ class IndexController extends AbstractActionController
             $form->setInputFilter($usuario->getInputFilter());
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                echo 'dddd';exit;
+           
                  if($pass1==$pass2){
                 $this->getUsuarioTable()->guardarUsuario($usuario);
                 $this->redirect()->toUrl('/usuario');

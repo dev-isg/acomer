@@ -220,49 +220,7 @@ class IndexController extends AbstractActionController
         exit();
     }
      
-           public function editarAction()
-     
-    {
-        $id = (int) $this->params()->fromRoute('in_id', 0);
-        //var_dump($id);exit;
-        if (!$id) {
-           return $this->redirect()->toUrl($this->
-            getRequest()->getBaseUrl().'/usuario/index/agregarusuario');  
-        }
-        try {
-            $usuario = $this->getUsuarioTable()->getUsuario($id);
-           // var_dump($usuario);exit;
-        }
-        catch (\Exception $ex) {
-            return $this->redirect()->toUrl($this->
-            getRequest()->getBaseUrl().'/usuario'); 
-        }
-        $form  = new UsuarioForm();
-        $form->bind($usuario);
-        $form->get('submit')->setAttribute('value', 'MODIFICAR');
-         
-       // $form->get('password')->setAttribute('renderPassword', true);
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $datos =$this->request->getPost();
-            $pass1 = $datos['va_contrasenia'];
-            $pass2 = $datos['va_contrasenia2'];
-            $form->setInputFilter($usuario->getInputFilter());
-            $form->setData($request->getPost());
-            if ($form->isValid()) {
-                 if($pass1==$pass2){
-                $this->getUsuarioTable()->guardarUsuario($usuario);
-                $this->redirect()->toUrl('/usuario');
-                }
-            }
-        }
 
-     return array(
-            'in_id' => $id,
-            'form' => $form,
-        );
-        
-    }
     public function comidas()
     {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $adapter = $this->dbAdapter;
