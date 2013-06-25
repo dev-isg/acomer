@@ -11,17 +11,13 @@
    <label class="ra radio">    
    POR PUNTAJE :
   </label>
-   <SELECT NAME="puntaje" SIZE="1">
+   <SELECT NAME="puntaje" SIZE="1" class="span12">
    <OPTION VALUE="">seleccione:</OPTION>
  <?php  foreach ($this->puntaje as $puntaje) : ?>
  <OPTION VALUE="<?php echo $puntaje['in_id']; ?>"><?php echo $puntaje['va_valor']; ?></OPTION>
 <?php endforeach; ?>
  
- <?php   $estado =$this->escapeHtml($cometarios->en_estado); 
-  $valor =$this->escapeHtml($cometarios->va_valor);
-  $this->escapeHtml($cometarios->tx_descr);
-  ?>
-   </SELECT>
+ </SELECT>
 </div>
  <div class="control-group span3">
    </label>
@@ -35,13 +31,12 @@
      
   </div>
     <div class="control-group span3">
-    <label class="ra radio">POR NOMBRE DE PLATO: </label>
+    <label class="ra radio">POR PLATO: </label>
     <input type='text' name='texto' id="texto" class="span12"/>
     </div>
       <div class="control-group span3">
     <input type="submit" class="btn boton" name="submit" value="BUSCAR">
       </div>
-
     </form>
     </div>
        
@@ -79,6 +74,8 @@
             <td><?php echo $this->escapeHtml($cometarios->va_nombre); ?></td>
             <td><?php echo $this->escapeHtml($cometarios->va_nombre_cliente); ?></td>
          <td><a name="<?php echo $this->escapeHtml($cometarios->tx_descripcion); ?>" data-id="<?php echo $this->escapeHtml($cometarios->in_id); ?>" href="#" class='eli-com btn btn-danger'><i class='icon-trash icon-white'></i>ELIMINAR</a> </td>
+         <td><a data-id="<?php echo $this->escapeHtml($cometarios->in_id); ?>" href="<?php echo $this->basePath();?>/usuario/comentarios/mensajecomentario/<?php echo $cometarios->va_email;?>/<?php echo $cometarios->va_nombre_cliente;?>" class='modificar btn btn-success'><i class='icon-edit icon-white'></i>Email </a>
+        </tr>
         </tr>
 
 <?php endforeach; ?>
@@ -90,9 +87,9 @@
     
      <?php $estado=$_POST["puntaje"];
            $valor=$_POST["estado"];  
-           $descripcion=$_POST["text"];                 
+           $descripcion=$_POST["texto"];                 
     ?>
-     <a onClick="location='<?php echo $this->basePath(); ?>/usuario/comentarios/comentariosexcel?estado=<?php echo $valor; 
+    <a onClick="location='<?php echo $this->basePath(); ?>/usuario/comentarios/comentariosexcel?estado=<?php echo $valor; 
   ?>&puntaje=<?php echo $estado; ?>&texto=<?php echo $descripcion; ?>'" class="btn" >Exportar Datos </a></div> 
                 
 </div>
