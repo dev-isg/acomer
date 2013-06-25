@@ -35,6 +35,7 @@ class RestauranteTable
 
     public function fetchAll()
     {
+
       $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
         $select = $sql->select()
