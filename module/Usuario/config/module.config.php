@@ -33,7 +33,11 @@ return array(
                     'default' => array( //'default' => array( 
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    =>'/[:controller[/:action[/:in_id]]]',//'/usuario[/][:action]', //'/[:controller[/:action[/:texto]]]',
+                            'route'    =>'/[:controller[/:action[/:va_email/:va_nombre_cliente]]]',
+                           /* 'route'    =>'/[:controller[/:action[/:va_email]]]',
+                            'route'    =>'/[:controller[/:action[/:va_nombre_cliente]]]',*/
+                            ////'/usuario[/][:action]', //'/[:controller[/:action[/:texto]]]',
+             //    'route'    =>'/[:controller[/:action[/:va_email/:va_nombre]]]',//'/usuario[/][:action]', //'/[:controller[/:action[/:texto]]]',                 
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',                          

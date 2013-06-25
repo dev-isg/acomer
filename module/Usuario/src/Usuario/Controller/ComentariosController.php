@@ -3,7 +3,8 @@
 namespace Usuario\Controller;
 
 
-
+use Zend\Mail\Message;
+use Zend\Mail\Transport\Sendmail as SendmailTransport;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
@@ -111,10 +112,15 @@ class ComentariosController extends AbstractActionController
                 }
                 $view =new ViewModel();
         $view->setTerminal(true);
-        $view->setVariables(array(
+         $view->setVariables(array(
           'comentarios' => $comentarios,
            'puntaje' =>$this-> puntaje()
         ));
-
+        return $view;
+        
+       /*return array(
+          'comentarios' => $comentarios,
+           'puntaje' =>$this-> puntaje()
+        );*/
     }
 }
