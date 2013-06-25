@@ -52,12 +52,34 @@ class ComentariosController extends AbstractActionController
               $this->redirect()->toUrl('/usuario/comentarios/index');
     }
     
-    public function comentariocorreoAction() {
-              $id = $this->params()->fromQuery('id');
-              $estado = $this->params()->fromQuery('estado');
-              $this->getComentariosTable()->estadoComentario((int) $id, $estado);
-              $this->redirect()->toUrl('/usuario/comentarios/index');
-    }
+   public function mensajecomentarioAction()
+            
+    {
+        $va_email = $this->params()->fromRoute('va_nombre_cliente', 0);
+        $va_nombre_cliente = $this->params()->fromRoute('va_email',0);
+        $bodyHtml='<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+                                               <head>
+                                               <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+                                               </head>
+                                               <body>
+                                                    <div style="color: #7D7D7D"><br />
+                                                     Hola <strong style="color:#133088; font-weight: bold;">'.utf8_decode($va_nombre_cliente).'</strong><br />
+                                                     <br />Tu cuenta comentario ha sido eliminado por ser inapropiado<br/><br/>
+                                                     <br /><br /><hr /><br />Cordialmente,<br /><span style="color:#000; font-size: 18px; margin-top:8px;">El Equipo de Tuplato.com</span><br /><br />
+                                                     </div>
+                                               </body>
+                                               </html>';
+        
+        $message = new Message();
+        $message->addTo($va_email, $va_nombre_cliente)
+        ->setFrom('no-reply@listadelsabor.pe)', 'listadelsabor.com')
+        ->setSubject('Moderacion de comentario de listadelsabor.com')
+        ->setBody($bodyHtml);
+        $transport = new SendmailTransport();
+        $transport->send($message);
+        $this->redirect()->toUrl('/usuario/comentarios/index');
+
+      }
     
      public function eliminarcomentarioAction() {
         $id = $this->params()->fromPost('id');
