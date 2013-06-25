@@ -51,6 +51,7 @@ public function testAddActionRedirectsAfterValidPost()
                     ->will($this->returnValue(null));
 
     $serviceManager = $this->getApplicationServiceLocator();
+    var_dump($serviceManager);exit;
     $serviceManager->setAllowOverride(true);
     $serviceManager->setService('Usuario\Model\UsuarioTable', $usuarioTableMock);
 //           'va_nombre'     => $usuario->va_nombre,
