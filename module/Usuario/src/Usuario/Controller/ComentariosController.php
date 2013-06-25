@@ -109,9 +109,12 @@ class ComentariosController extends AbstractActionController
                 $puntaje =$_GET["puntaje"];
                 $comentarios = $this->getComentariosTable()->buscarComentario($datos,$estado,$puntaje);  
                 }
-       return array(
+                $view =new ViewModel();
+        $view->setTerminal(true);
+        $view->setVariables(array(
           'comentarios' => $comentarios,
            'puntaje' =>$this-> puntaje()
-        );
+        ));
+
     }
 }
