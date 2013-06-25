@@ -80,7 +80,7 @@ $('#restaurante').validate({
       rules: {
         va_nombre: {
             required: true,
-            minlength : 8
+            minlength : 4
         },
         va_razon_social: {
               required: true ,
@@ -105,7 +105,7 @@ $('#restaurante').validate({
       messages:{
             va_nombre: {
                 required:"Por favor ingresar el nombre del restaurante",
-                minlength : "Minimo 8 caracteres"
+                minlength : "Minimo 4 caracteres"
             },
             va_razon_social:{
                 required:"Por favor ingresar la razon social",

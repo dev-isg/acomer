@@ -57,10 +57,10 @@
         <tr>
             <td><?php echo $count++ ?></td>
     <?php if ($usuario->en_estado == 'activo') { ?>
-                <td><input id="<?php echo $this->escapeHtml($usuario->in_id); ?>" type="checkbox" class="check_rest" checked="checked"> </td>
+                <td><input data-id="<?php echo $this->escapeHtml($usuario->in_id); ?>" type="checkbox" class="check_rest" checked="checked"> </td>
                 <td><span id="la<?php echo $this->escapeHtml($usuario->in_id); ?>" class='label label-success'> <?php echo $this->escapeHtml($usuario->en_estado); ?></span></td>
     <?php } else { ?>
-                <td><input id="<?php echo $this->escapeHtml($usuario->in_id); ?>" type="checkbox" class="check_rest"> </td>
+                <td><input data-id="<?php echo $this->escapeHtml($usuario->in_id); ?>" type="checkbox" class="check_rest"> </td>
                 <td><span id="la<?php echo $this->escapeHtml($usuario->in_id); ?>" class='label label-important'> <?php echo $this->escapeHtml($usuario->en_estado); ?></span></td>
     <?php } ?>
             <td><a href="<?php echo $this->basePath();?>/local/index/index/<?php echo $usuario->in_id;?>"><?php echo $this->escapeHtml($usuario->va_nombre); ?></a></td> 
