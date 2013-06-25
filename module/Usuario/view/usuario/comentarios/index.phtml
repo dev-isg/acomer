@@ -115,17 +115,18 @@
      $(item).raty({ 
                      readOnly: true,
                       score: p, 
-                      starOff: '../public/img/star-off-big.png',
-                      starOn : '../public/img/star-on-big.png' 
+                      starOff: '/img/star-off-big.png',
+                      starOn : '/img/star-on-big.png' 
                         
       });
    }
      $("#tabla-puntaje").find(':input').each(function() {
          var elemento= this;
+         var e = $(this).attr("data-id");
          var ptaje;
          var idptje;
          if( elemento.name=="sp"){
-        idptje = elemento.data-id;
+        idptje = e;
          ptaje= elemento.value;
         puntaje("#" + idptje ,ptaje); 
          }
