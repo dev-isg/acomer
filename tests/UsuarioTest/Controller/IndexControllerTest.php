@@ -66,7 +66,7 @@ public function testAddActionRedirectsAfterValidPost()
 
         $postData = array( 'id'=> 1 ,'estado'=> 'activo');
         
-    $this->dispatch('usuario/index/cambiaestado','GET',$postData);
+    $this->dispatch('/usuario/index/cambiaestado','GET',$postData);
     
 
     $this->assertResponseStatusCode(302);

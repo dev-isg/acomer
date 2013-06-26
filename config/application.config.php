@@ -6,7 +6,8 @@ return array(
         'Application',       
         'Restaurante',
         'Admin',
-        'Local'
+        'Local',
+        'Platos'
 
     ),
 

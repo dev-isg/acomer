@@ -1,7 +1,7 @@
 <?php 
 //namespace ApplicationController;
 namespace UsuarioTest\Controller;
-
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 use ApplicationControllerIndexController;
 use ZendHttpRequest;
@@ -21,20 +21,20 @@ class ClientesControllerTest extends  PHPUnit_Framework_TestCase{
         parent::setUp();
     }   
     
-//    public function testclientesAction(){
-//        $this->routeMatch->setParam('action','clientes');
-//        
-//        $result=$this->controller->dispatch($this->request);
-//        
-//        $response=$this->controller->getResponse();
-//        $this->assertEquals(200,$response->getStatusCode());
-//        
-//        $this->assertInstanceOf('Zend\View\ViewModel',$result);
-//        
-//        $vars=$result->getVarualbes();
-//        
-//        
-//    }
+    public function testclientesAction(){
+        $this->routeMatch->setParam('action','clientes');
+        
+        $result=$this->controller->dispatch($this->request);
+        
+        $response=$this->controller->getResponse();
+        $this->assertEquals(200,$response->getStatusCode());
+        
+        $this->assertInstanceOf('Zend\View\ViewModel',$result);
+        
+        $vars=$result->getVarualbes();
+        
+        
+    }
     
     
     
