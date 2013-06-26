@@ -78,48 +78,46 @@ class IndexController extends AbstractActionController
     }
     
     
-          public function editarusuarioAction()
+                    public function editarusuarioAction()
      
     { $comidas =  $this->roles()->toArray();
         $com = array();
         foreach($comidas as $y){
             $com[$y['in_id']] = $y['va_nombre_rol'];
         }
-        $id = (int) $this->params()->fromQuery('id', 0);
-        //$id = (int) $this->params()->fromRoute('in_id', 0);
-        //var_dump($id);exit;
+        
+         $id = $this->params()->fromQuery('id');
         if (!$id) {
            return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/usuario/index/agregarusuario');  
         }
         try {
             $usuario = $this->getUsuarioTable()->getUsuario($id);
-           // var_dump($usuario);exit;
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/usuario'); 
         }
         $form  = new UsuarioForm();
+        $form->get('va_contrasenia2')->setValue($usuario->va_contrasenia);
         $form->get('Ta_rol_in_id')->setValueOptions($com);
         $form->bind($usuario);
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();
-        if ($request->isPost()) {
-            $datos =$this->request->getPost();
-          
+        if ($request->isPost()) {           
+            $datos =$this->request->getPost(); 
             $pass1 = $datos['va_contrasenia'];
             $pass2 = $datos['va_contrasenia2'];
             $form->setInputFilter($usuario->getInputFilter());
-            $form->setData($request->getPost());
+            $form->setData($request->getPost());   
             if ($form->isValid()) {
-           
                  if($pass1==$pass2){
                 $this->getUsuarioTable()->guardarUsuario($usuario);
                 $this->redirect()->toUrl('/usuario');
                 }
             }
-        }
+            
+        }   
      return array(
             'in_id' => $id,
             'form' => $form,

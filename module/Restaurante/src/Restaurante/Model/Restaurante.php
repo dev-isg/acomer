@@ -70,7 +70,7 @@ class Restaurante implements InputFilterAwareInterface
                         'name'    => 'StringLength',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'min'      => 8,
+                            'min'      => 3,
                             'max'      => 100,
                         ),
                     ),
@@ -88,7 +88,7 @@ class Restaurante implements InputFilterAwareInterface
                         'name'    => 'StringLength',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'min'      => 10,
+                            'min'      => 3,
                             'max'      => 100,
                         ),
                     ),

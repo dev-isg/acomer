@@ -77,7 +77,7 @@ class UsuarioForm extends Form
      
         $this->add(array(
             'name' => 'va_contrasenia',
-            'type' => 'Password',
+            'type' => 'text',
              'attributes' => array(               
                 'class' => 'span10',
                 'id'   => 'va_contrasenia',
@@ -89,7 +89,7 @@ class UsuarioForm extends Form
         ));
         $this->add(array(
             'name' => 'va_contrasenia2',
-            'type' => 'password',
+            'type' => 'text',
              'attributes' => array(               
                 'class' => 'span10',
                 'id'   => 'va_contrasenia2',
