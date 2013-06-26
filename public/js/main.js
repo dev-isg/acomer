@@ -94,10 +94,6 @@ $('#restaurante').validate({
                 rucReal:true            
             },
         va_imagen : { required : true},
-        // "va_modalidad[]" :{
-        //   required: true,
-        //   minlength: 1
-        // },
         Ta_tipo_comida_in_id:{
                 required : true
               }       
@@ -119,14 +115,56 @@ $('#restaurante').validate({
                 number : "Por favor ingresar solo numeros",
                 rucReal:" Ingresa un Ruc valido "
             },
-            // "va_modalidad[]" : {
-            //    required: "Por favor seleccionar una modalida",
-            //    minlength : "Seleccionar al menos 1"
-            // },
             va_imagen : {
               required : "Por favor ingresar una imagen"
             },       
             Ta_tipo_comida_in_id :{
+              required : "Por favor ingresar un tipo de plato"                
+            }
+        },
+      highlight: function(element) {
+        $(element).closest('.control-group').removeClass('success').addClass('error');
+      },
+      success: function(element) {
+        element
+        .text('OK!').addClass('valid')
+        .closest('.control-group').removeClass('error').addClass('success');
+      }
+    });
+$('#plato').validate({
+      rules: {
+        va_nombre: {
+            required: true,
+            minlength : 3
+        },
+        tx_descripcion: {
+              required: true           
+        },
+         de_precio:{
+                required : true,
+                number:true                       
+            },
+        va_imagen : { required : true},
+        Ta_tipo_plato:{
+                required : true
+              }       
+      },
+      messages:{
+            va_nombre: {
+                required:"Por favor ingresar el nombre del plato",
+                minlength : "Minimo 3 caracteres"
+            },
+            tx_descripcion:{
+                required:"Por favor ingresar la descripcion"
+                            },
+            va_precio: {
+                required : "Por favor ingrese un precio",
+                number : "Por favor ingresar solo numeros"              
+            },
+            va_imagen : {
+              required : "Por favor ingresar una imagen"
+            },       
+            Ta_tipo_plato :{
               required : "Por favor ingresar un tipo de plato"                
             }
         },
