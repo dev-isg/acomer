@@ -70,20 +70,34 @@ class UsuarioTable
     {
        // $resultSet = $this->tableGateway->select();
       $adapter = $this->tableGateway->getAdapter();
+     
         $sql = new Sql($adapter);
         $select = $sql->select()
                 ->from(array('f' => 'ta_usuario'))//,array('in_id','va_nombre','va_apellidos','va_email','en_estado')) 
                 ->join(array('b' => 'ta_rol'), 'f.Ta_rol_in_id=b.in_id', array('va_nombre_rol'))//,array('va_nombre_rol'))
                 ->where(array('f.Ta_rol_in_id=b.in_id'));
-   
-   
-                
+        
+//                ->from(array('f' => 'ta_usuario'))//,array('in_id','va_nombre','va_apellidos','va_email','en_estado')) 
+//                ->join(array('b' => 'ta_rol'), 'f.Ta_rol_in_id=b.in_id', array('va_nombre_rol'))//,array('va_nombre_rol'))
+//                ->where(array('f.Ta_rol_in_id=b.in_id'));
+        
+//                ///bien
         $selectString = $sql->getSqlStringForSqlObject($select);
        
         $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
   
         return $resultSet;
     }
+    
+         public function fetchAll2() 
+    { 
+        $sqlSelect = $this->tableGateway->getSql() 
+                          ->select()->columns(array('in_id', 'va_nombre', 'va_email',
+                              'va_contraseña','en_estado')) 
+                          ->join('ta_rol', 'ta_rol.in_id = ta_usuario.Ta_rol_in_id', array(), 'left'); 
+        
+        return $this->tableGateway->select($sqlSelect); 
+    } 
     
     public function buscarUsuario($datos,$tipo){
         $adapter=$this->tableGateway->getAdapter();
