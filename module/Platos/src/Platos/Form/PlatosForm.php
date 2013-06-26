@@ -139,7 +139,7 @@ class PlatosForm extends Form
             'name' => 'submit',
             'type' => 'Submit',
             'attributes' => array(
-                'value' => 'Go',
+                'value' => 'Guardar',
                 'class' => 'btn btn-success',
                 'id' => 'submitbutton',
             ),

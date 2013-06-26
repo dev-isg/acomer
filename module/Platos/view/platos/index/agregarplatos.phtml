@@ -3,7 +3,7 @@ $title = 'Agregar nuevo plato';
 $this->headTitle($title);
 ?>
 
-<div class="span8">
+<div class="span10">
 <?php
 $form = $this->form;
 $form->setAttributes(array(
@@ -16,7 +16,6 @@ $form->prepare();
 echo $this->form()->openTag($form);
 ?>
 <legend><?php echo $this->escapeHtml($title); ?></legend>
-
 <?php echo $this->formHidden($form->get('in_id'));?>
 <?php echo $this->formHidden($form->get('ta_usuario_in_id'));?>
 <?php echo $this->formHidden($form->get('ta_puntaje_in_id'));?>
