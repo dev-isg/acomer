@@ -40,26 +40,26 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 }
 
 
-//public function testAddActionRedirectsAfterValidPost()
-//{
-//    $albumTableMock = $this->getMockBuilder('Local\Model\UsuarioTable')
-//                            ->disableOriginalConstructor()
-//                            ->getMock();
-//
-//    $albumTableMock->expects($this->once())
-//                    ->method('guardarUsuario')
-//                    ->will($this->returnValue(null));
-//
-//    $serviceManager = $this->getApplicationServiceLocator();
-//    $serviceManager->setAllowOverride(true);
-//    $serviceManager->setService('Usuario\Model\UsuarioTable', $albumTableMock);
-//
-//    $postData = array('nombre' => 'Led Zeppelin III', 'direccion' => 'Led Zeppelin');
-//    $this->dispatch('/usuario/agregarusuario', 'POST', $postData);
-//    $this->assertResponseStatusCode(302);
-//
-//    $this->assertRedirectTo('/usuario');
-//}
+public function testAddActionRedirectsAfterValidPost()
+{
+    $albumTableMock = $this->getMockBuilder('Local\Model\UsuarioTable')
+                            ->disableOriginalConstructor()
+                            ->getMock();
+
+    $albumTableMock->expects($this->once())
+                    ->method('guardarUsuario')
+                    ->will($this->returnValue(null));
+
+    $serviceManager = $this->getApplicationServiceLocator();
+    $serviceManager->setAllowOverride(true);
+    $serviceManager->setService('Usuario\Model\UsuarioTable', $albumTableMock);
+
+    $postData = array('nombre' => 'Led Zeppelin III', 'direccion' => 'Led Zeppelin');
+    $this->dispatch('/usuario/agregarusuario', 'POST', $postData);
+    $this->assertResponseStatusCode(302);
+
+    $this->assertRedirectTo('/usuario');
+}
 
 
 }
