@@ -20,13 +20,10 @@ echo $this->form()->openTag($form);
 <?php echo $this->formHidden($form->get('in_id'));?>
 <?php echo $this->formHidden($form->get('ta_usuario_in_id'));?>
 <?php echo $this->formHidden($form->get('ta_puntaje_in_id'));?>
-
-<div class="control-group span5"><?php echo $this->formRow($form->get('va_imagen'));?></div>
+<div class="control-group span6"><?php echo $this->formRow($form->get('va_nombre'));?></div>
+<div class="control-group span6"><?php echo $this->formRow($form->get('va_imagen'));?></div>
 <div class="control-group span5"><?php echo $this->formRow($form->get('tx_descripcion'));?></div>
-<div class="control-group span5"><?php echo $this->formRow($form->get('va_nombre'));?></div>
-<div class="control-group span5"><?php echo $this->formRow($form->get('de_precio'));?></div>
-<div class="control-group span5 "><label>Destaques</label>
-<div class="control-group span5"><?php echo $this->formRow($form->get('en_destaque'));?></div>
-<div class="control-group span5"><?php echo $this->formRow($form->get('Ta_tipo_plato'));?></div>
+<div class="control-group span3"><?php echo $this->formRow($form->get('de_precio'));?></div>
+<div class="control-group span3"><?php echo $this->formRow($form->get('Ta_tipo_plato'));?></div>
 <div class="control-group span12 "><?php echo $this->formSubmit($form->get('submit'));?></div><?php echo $this->form()->closeTag();?> 
 </div>
