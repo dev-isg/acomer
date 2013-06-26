@@ -12,6 +12,12 @@ namespace Platos;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Platos\Model\Platos;
+use Platos\Model\PlatosTable;
+//use Local\Model\Ubigeo;
+use Zend\Db\Adapter\Driver\ResultInterface;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 
 class Module implements AutoloaderProviderInterface
 {
@@ -33,6 +39,26 @@ class Module implements AutoloaderProviderInterface
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
+    }
+    
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'Platos\Model\PlatosTable' =>  function($sm) {
+                    $tableGateway = $sm->get('PlatosTableGateway');
+                    $table = new PlatosTable($tableGateway);
+                    return $table;
+                },
+                'PlatosTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Platos());
+                    return new TableGateway('ta_plato', $dbAdapter, null, $resultSetPrototype);
+                }
+         
+            ),
+        );
     }
 
     public function onBootstrap(MvcEvent $e)

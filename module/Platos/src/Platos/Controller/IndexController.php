@@ -11,12 +11,20 @@ namespace Platos\Controller;
 
 use Platos\Form\PlatosForm; 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+use Zend\Json\Json;
+use Platos\Model\Platos;
+use Zend\Form\Element;
 
 class IndexController extends AbstractActionController
 {
+    protected $platosTable;
     public function indexAction()
     {
-        return array();
+        $lista=$this->getPlatosTable()->fetchAll();
+        return new ViewModel(array(
+            'platos' => $lista
+        ));
     }
 
     public function fooAction()
@@ -30,5 +38,14 @@ class IndexController extends AbstractActionController
         $form = new PlatosForm();
         return array('form' => $form);
         
+    }
+    
+        public function getPlatosTable()
+    {
+        if (!$this->platosTable) {
+            $sm = $this->getServiceLocator();
+            $this->platosTable = $sm->get('Platos\Model\PlatosTable');
+        }
+        return $this->platosTable;
     }
 }

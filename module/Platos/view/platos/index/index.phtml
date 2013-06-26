@@ -1,3 +1,64 @@
-<strong>Module:</strong>        ZendSkeletonModule &raquo;
-<strong>Controller:</strong>    Skeleton &raquo;
-<strong>Action:</strong>        index
+
+    <div class="span10" style="padding: 10px 0px;">
+   
+    <div class="control-group span8 "> 
+            <form name='form_busqueda'class="form-search" action='#' method ="post" style=" margin: 0px;">
+                    <div class="span12">
+                     <input type='text' name='texto' id="texto" class="span8 " placeholder="Restaurant,Distrito" />
+                 <!--    <input type="submit" class="btn" name="submit" value="Buscar"> -->
+                    <button type="submit" class="btn" name="submit" style="">Buscar</button>
+                    </div>
+            </form>
+    </div>
+     <div class="control-group span4 text-right" >
+        <a  class="btn" href="#">AGREGAR PLATOS</a>
+    </div>
+
+    </div>
+<div class="span10" id="flip-scroll">
+<table class="table table-bordered table-hover">
+    <thead class="cf">  
+        <tr>
+          <th >#</th> 
+            <th>Nombre</th>
+            <th>Tipo de plato</th>
+            <th>Precio</th>
+            <th>Distrito</th>
+            <th>Operaciones</th>
+        </tr>
+    </thead>
+    
+        <?php $count = 1;
+    foreach ($this->platos  as $plato) :
+        ?>
+        <tr id="<?php echo $this->escapeHtml($plato->in_id); ?>">
+            <td><?php echo $count++ ?></td>
+            <td><?php echo $this->escapeHtml($plato->va_nombre); ?></td> 
+            <td><?php echo $this->escapeHtml($plato->ch_distrito); ?></td>
+            
+             <td><a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" href="#" class='modificar btn btn-success'><i class='icon-edit icon-white'></i>Editar </a>
+            <a data-id="<?php echo $this->escapeHtml($local->in_id); ?>" href="#" class='eli-lo btn btn-danger'><i class='icon-trash icon-white'></i>Eliminar</a> </td>
+        </tr>
+
+<?php endforeach; ?>
+    
+</table>
+</div>
+<div class="span4">
+  
+    <div class="modal small hide fade" id="eli-local" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Confirmación de Eliminación</h3>
+        </div>
+        <div class="modal-body">
+            <p class="error-text"><strong><label id="verlocal"></label></strong></p>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+            <button class="btn btn-danger" id="delete-local">Eliminar</button>
+        </div>
+    </div>
+    
+</div>
