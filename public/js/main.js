@@ -131,7 +131,7 @@ $('#restaurante').validate({
         .closest('.control-group').removeClass('error').addClass('success');
       }
     });
-$('#plato').validate({
+$('#platos').validate({
       rules: {
         va_nombre: {
             required: true,
