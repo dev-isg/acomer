@@ -47,10 +47,11 @@ public function testAddActionRedirectsAfterValidPost()
                             ->getMock();
     
     $usuarioTableMock->expects($this->once())
-                    ->method('guardarUsuario')
+                    ->method('estadoUsuario')
                     ->will($this->returnValue(null));
 
     $serviceManager = $this->getApplicationServiceLocator();
+
     $serviceManager->setAllowOverride(true);
     $serviceManager->setService('Usuario\Model\UsuarioTable', $usuarioTableMock);
 //           'va_nombre'     => $usuario->va_nombre,
@@ -59,11 +60,13 @@ public function testAddActionRedirectsAfterValidPost()
 //           'va_contrasenia'=> $usuario->va_contrasenia,
 //           'Ta_rol_in_id'  => $usuario->Ta_rol_in_id,  
 //     
-    $postData = array( 'va_nombre'=> 'yosmel' ,'va_apellidos'=> 'hello' ,
-        'va_email'=>'yos@yopmail.com','va_contrasenia'=> '123456',
-        'Ta_rol_in_id'=> '1');
+//    $postData = array( 'va_nombre'=> 'yosmel' ,'va_apellidos'=> 'hello' ,
+//        'va_email'=>'yos@yopmail.com','va_contrasenia'=> '123456',
+//        'Ta_rol_in_id'=> '1');
 
-    $this->dispatch('/usuario/index/agregarusuario', 'POST', $postData);
+        $postData = array( 'id'=> 1 ,'estado'=> 'activo');
+        
+    $this->dispatch('/usuario/index/cambiaestado','GET',$postData);
     
 
     $this->assertResponseStatusCode(302);
