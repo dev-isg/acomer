@@ -26,6 +26,7 @@ class Usuario
         $this->va_apellidos = (!empty($data['va_apellidos'])) ? $data['va_apellidos'] : null;
         $this->va_email= (!empty($data['va_email'])) ? $data['va_email'] : null;
         $this->va_contrasenia     = (!empty($data['va_contrasenia'])) ? $data['va_contrasenia'] : null;
+        
         $this->en_estado= (!empty($data['en_estado'])) ? $data['en_estado'] : null;
         $this->Ta_rol_in_id = (!empty($data['Ta_rol_in_id'])) ? $data['Ta_rol_in_id'] : null;
 //$this->direccion  = (!empty($data['direccion'])) ? $data['direccion'] : null;
