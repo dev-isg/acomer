@@ -25,7 +25,7 @@ class PlatosTable
     public function fetchAll(){
 
         $sqlSelect = $this->tableGateway->getSql()->select();
-        $sqlSelect->columns(array('in_id','va_nombre','va_precio','en_estado'));
+        $sqlSelect->columns(array('in_id','va_nombre','va_precio','en_estado','en_destaque'));
         $sqlSelect->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_va_nombre'=>'va_nombre'),'left');//, 'left'
         $sqlSelect->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array('ta_local_in_id'), 'left');
          $sqlSelect->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array(), 'left');

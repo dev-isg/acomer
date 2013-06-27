@@ -22,7 +22,7 @@
           <th >#</th> 
             <th>Nombre</th>
             <th>Precio</th>
-            <th>Estado</th>
+            <th>Destaque</th>
             <th>Tipo de plato</th>
             <th>Restaurante</th>
         </tr>
@@ -36,7 +36,11 @@
             <td><?php echo $this->escapeHtml($plato->va_nombre); ?></td> 
             <td><?php echo $this->escapeHtml($plato->va_precio); ?></td>
             
-            <td><?php echo $this->escapeHtml($plato->en_estado); ?></td>
+<!--            <td><?php echo $this->escapeHtml($plato->en_estado); ?></td>-->
+            
+                <td><input data-id="<?php echo $this->escapeHtml($plato->en_destaque); ?>" type="checkbox" class="check" checked="checked"> </td>
+                <td><span id="la<?php echo $this->escapeHtml($plato->en_destaque); ?>" class='label label-success'> <?php echo $this->escapeHtml($plato->en_destaque); ?></span></td>
+                
             <td><?php echo $this->escapeHtml($plato->tipo_plato_va_nombre); ?></td>
             <td><?php echo $this->escapeHtml($plato->restaurante_va_nombre); ?></td>
           
