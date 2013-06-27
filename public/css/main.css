@@ -250,6 +250,7 @@ padding: 10px 0 0;
  #flip-scroll thead {
   background: #0088cc;
 color: white;
+font-size: 0.9em;
 }
 
 @media only screen and (max-width: 767px){
@@ -293,7 +294,7 @@ color: white;
   #flip-scroll thead { display: block; float: left; }
   #flip-scroll tbody { display: block; width: auto; position: relative; overflow-x: auto; white-space: nowrap; }
   #flip-scroll thead tr { display: block; }
-  #flip-scroll th { display: block;text-align: left; padding: 11px 46px 8px 10px; font-weight: normal; }
+  #flip-scroll th { display: block;text-align: left; padding:8px 46px 10px 10px; font-weight: normal; }
   #flip-scroll tbody tr { display: inline-block; vertical-align: top; }
   #flip-scroll td { display: block; min-height: 1.25em; text-align: left; }
 
