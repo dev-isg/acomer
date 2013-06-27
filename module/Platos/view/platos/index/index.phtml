@@ -19,12 +19,16 @@
 <table class="table table-bordered table-hover">
     <thead class="cf">  
         <tr>
+            <th>N°</th>
           <th >#</th> 
+          <th>Destaque</th>
             <th>Nombre</th>
-            <th>Precio</th>
-            <th>Destaque</th>
-            <th>Tipo de plato</th>
+             <th>Tipo de plato</th>
+            <th>Precio</th>          
             <th>Restaurante</th>
+            <th>Comentarios</th>
+            <th>Puntaje</th>
+             <th>Operaciones</th>
         </tr>
     </thead>
     
@@ -33,11 +37,7 @@
         ?>
         <tr id="<?php echo $this->escapeHtml($plato->in_id); ?>">
             <td><?php echo $count++ ?></td>
-            <td><?php echo $this->escapeHtml($plato->va_nombre); ?></td> 
-            <td><?php echo $this->escapeHtml($plato->va_precio); ?></td>
-            
-<!--            <td><?php echo $this->escapeHtml($plato->en_estado); ?></td>-->
-                <?php if($plato->en_estado=='si'){ ?>
+            <?php if($plato->en_estado=='si'){ ?>
                 <td><input data-id="<?php echo $this->escapeHtml($plato->en_destaque); ?>" type="checkbox" class="check" checked="checked"> </td>
                 <td><span id="la<?php echo $this->escapeHtml($plato->en_destaque); ?>" class='label label-success'> <?php echo $this->escapeHtml($plato->en_destaque); ?></span></td>
                 <?php }else{ ?>
@@ -45,9 +45,15 @@
                 <td><span id="la<?php echo $this->escapeHtml($plato->en_destaque); ?>" class='label label-success'> <?php echo $this->escapeHtml($plato->en_destaque); ?></span></td>
    
                 <?php } ?>
-            <td><?php echo $this->escapeHtml($plato->tipo_plato_va_nombre); ?></td>
+            <td><?php echo $this->escapeHtml($plato->va_nombre); ?></td>
+            <td><?php echo $this->escapeHtml($plato->tipo_plato_va_nombre); ?></td> 
+            <td><?php echo $this->escapeHtml($plato->va_precio); ?></td>
+            
+<!--            <td><?php echo $this->escapeHtml($plato->en_estado); ?></td>-->
+                      
             <td><?php echo $this->escapeHtml($plato->restaurante_va_nombre); ?></td>
-          
+            <td></td>
+            <td></td>
              <td><a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" href="#" class='modificar btn btn-success'><i class='icon-edit icon-white'></i>Editar </a>
             <a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" href="#" class='eli-lo btn btn-danger'><i class='icon-trash icon-white'></i>Eliminar</a> </td>
         </tr>
