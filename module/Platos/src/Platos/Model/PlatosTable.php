@@ -30,16 +30,18 @@ class PlatosTable
         $sqlSelect->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array('ta_local_in_id'), 'left');
          $sqlSelect->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array(), 'left');
          $sqlSelect->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurante_va_nombre'=>'va_nombre'), 'left');
-        $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($sqlSelect);
-          //var_dump($selectString);exit;
+//             $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($sqlSelect);
+//             var_dump($selectString);exit;
           /*
            * con este es = q el siguiente pero en este no muestra los campos q no quieres imprimir
            * no hace uso de la estructura del tablegetway para hcer los joins
            */
+
 //            $adapter=$this->tableGateway->getAdapter();
 //            $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
            /*
             * muestra todos los campos, los q no especificaste a imprimer los imprime como null
+            * para los alias es necesario ponerlos en clase de entidad sino no los imprime
             */
         $resultSet = $this->tableGateway->selectWith($sqlSelect);
 
