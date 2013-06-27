@@ -166,21 +166,24 @@ class IndexController extends AbstractActionController
      */
         public function eliminarAction()
     {
+                $id = $this->params()->fromQuery('id');
+        $estado = $this->params()->fromQuery('estado');
+        $this->getPlatosTable()->estadoPlato((int) $id, $estado);
+        $this->redirect()->toUrl('/plato/index');
         
-        $id = $this->params()->fromPost('id');
-//        var_dump($id);Exit;
-        $this->getPlatosTable()->eliminarPlato((int) $id);
-        $this->redirect()->toUrl('/platos/index');
+//        $id = $this->params()->fromPost('id');
+//        $this->getPlatosTable()->eliminarPlato((int) $id);
+//        $this->redirect()->toUrl('/platos/index');
     }
     /*
      * cambiar el destaque del plato
      */
-        public function cambiaestadoAction() {
-        $id = $this->params()->fromQuery('id');
-        $estado = $this->params()->fromQuery('estado');
-        $this->getPlatosTable()->estadoPlato((int) $id, $estado);
-        $this->redirect()->toUrl('/plato/index');
-    }
+//        public function cambiaestadoAction() {
+//        $id = $this->params()->fromQuery('id');
+//        $estado = $this->params()->fromQuery('estado');
+//        $this->getPlatosTable()->estadoPlato((int) $id, $estado);
+//        $this->redirect()->toUrl('/plato/index');
+//    }
     /*
      * para acceder a mi service manager
      */
