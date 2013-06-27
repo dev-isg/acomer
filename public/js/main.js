@@ -451,7 +451,7 @@ $('.check-plato').mousedown(function() {
     var est;
         if (!$(this).is(':checked')) {
           if (confirm("Desea Destacar el plato ?") ){
-            var est="activo";
+            var est="si";
             var request = $.ajax({
             url: "/platos/index/cambiaestado?id="+id + "&estado=" + est,
             type: "get",
@@ -464,7 +464,7 @@ $('.check-plato').mousedown(function() {
             $("#la" + id).html("Destacado");
                  };
         }else{
-          var est="desactivo";
+          var est="no";
             var request = $.ajax({
             url: "/platos/index/cambiaestado?id="+id + "&estado=" + est,
             type: "get",
@@ -483,7 +483,7 @@ $('.check_rest').mousedown(function() {
     var est;
         if (!$(this).is(':checked')) {
           if (confirm("Desea Activar al Restaurante ?") ){
-            var est="si";
+            var est="activo";
             var request = $.ajax({
             url: "restaurante/index/cambiaestado?id="+id + "&estado=" + est,
             type: "get",
@@ -496,7 +496,7 @@ $('.check_rest').mousedown(function() {
             $("#la" + id).html("activo");
                  };
         }else{
-          var est="no";
+          var est="desactivo";
             var request = $.ajax({
             url: "restaurante/index/cambiaestado?id="+id + "&estado=" + est,
             type: "get",
