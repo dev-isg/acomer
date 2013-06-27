@@ -155,14 +155,14 @@ class PlatosTable
     /*
      * update a un unico campo el destaque
      */
-        public function estadoPlato($id,$estado){
+        public function destaquePlato($id,$destaque){
 
                 $data = array(
-                    'en_destaque' => $estado,
+                    'en_destaque' => $destaque,
                  );
          $this->tableGateway->update($data, array('in_id' => $id));
     }
-    
+
     
          public function getPlato($id)
     {

@@ -182,7 +182,7 @@ class IndexController extends AbstractActionController
         public function cambiaestadoAction() {
         $id = $this->params()->fromQuery('id');
         $estado = $this->params()->fromQuery('estado');
-        $this->getPlatosTable()->estadoPlato((int) $id, $estado);
+        $this->getPlatosTable()->destaquePlato((int) $id, $estado);
         $this->redirect()->toUrl('/plato/index');
     }
     /*
