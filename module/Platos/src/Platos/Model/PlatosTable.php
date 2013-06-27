@@ -138,12 +138,30 @@ class PlatosTable
     
         public function eliminarPlato($id)
     {
-        $this->tableGateway->delete(array('id' => $id));
-        $this->tableGateway->getSql()->delete('ta_plato_has_ta_local')
-                ->where(array('ta_plato_in_id'=>$id));
-        $this->tableGateway->getSql()->delete('ta_comentario')
+          
+            $delete=$this->tableGateway->getSql()->delete()->from('ta_plato_has_ta_local')
         ->where(array('ta_plato_in_id'=>$id));
+            $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($delete);
+            $statement->execute();
+                    
+        $this->tableGateway->delete(array('in_id' => $id));
+
+        $delete2=$this->tableGateway->getSql()->delete()->from('ta_comentario')
+        ->where(array('ta_plato_in_id'=>$id));
+        $statement2 = $this->tableGateway->getSql()->prepareStatementForSqlObject($delete2);
+        $statement2->execute();
     }
+    
+    /*
+     * update a un unico campo el destaque
+     */
+        public function estadoPlato($id,$estado){
+                $data = array(
+                    'en_destaque' => $estado,
+                 );
+         $this->tableGateway->update($data, array('in_id' => $id));
+    }
+    
     
          public function getPlato($id)
     {
