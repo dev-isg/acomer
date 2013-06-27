@@ -41,6 +41,7 @@ class IndexController extends AbstractActionController
     
     public function agregarplatosAction()
     {
+        $restaurante=(int) $this->params()->fromQuery('id', 35);
         $form = new PlatosForm();      
         $form->get('submit')->setValue('Add');
         $request = $this->getRequest();
@@ -81,7 +82,7 @@ class IndexController extends AbstractActionController
                         $plato->exchangeArray($form->getData());
                     }
 //                    var_dump('hola');exit;
-                    $this->getPlatosTable()->guardarPlato($plato,$File);
+                    $this->getPlatosTable()->guardarPlato($plato,$File,$restaurante);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos'); 
                 }
 //                //guardo en bd
