@@ -39,10 +39,10 @@
             <td><?php echo $count++ ?></td>
             <?php if($plato->en_destaque=='si'){ ?>
                 <td><input data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" type="checkbox" class="check-plato" checked="checked"> </td>
-                <td><span id="la<?php echo $this->escapeHtml($plato->en_destaque); ?>" class='label label-success'> Destacado</span></td>
+                <td><span id="la<?php echo $this->escapeHtml($plato->in_id); ?>?>" class='label label-success'> Destacado</span></td>
                 <?php }else{ ?>
                  <td><input data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" type="checkbox" class="check-plato" > </td>
-                <td><span id="la<?php echo $this->escapeHtml($plato->en_destaque); ?>" class='label label-important'> No Destacado</span></td>   
+                <td><span id="la<?php echo $this->escapeHtml($plato->in_id); ?>" class='label label-important'> No Destacado</span></td>   
                 <?php } ?>
             <td><?php echo $this->escapeHtml($plato->va_nombre); ?></td>
             <td><?php echo $this->escapeHtml($plato->tipo_plato_va_nombre); ?></td> 
