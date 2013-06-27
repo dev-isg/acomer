@@ -446,6 +446,36 @@ $(".eli-lo").on("click",function(){
   $('#verplato').html("Estas seguro de eliminar el plato ?");
 });
 
+$('.check_plato').mousedown(function() {
+    var id = $(this).attr('data-id');
+    var est;
+        if (!$(this).is(':checked')) {
+          if (confirm("Desea Destacar el plato ?") ){
+            var est="activo";
+            var request = $.ajax({
+            url: "/platos/index/cambiaestado?id="+id + "&estado=" + est,
+            type: "get",
+            data: {id: id , estado:est}
+                   });
+            $(this).prop("checked", "checked");
+            $("#" + id).addClass("success");
+            $("#la" + id).removeClass().addClass("label label-success");
+            $("#la" + id).html("");
+            $("#la" + id).html("Destacado");
+                 };
+        }else{
+          var est="desactivo";
+            var request = $.ajax({
+            url: "/platos/index/cambiaestado?id="+id + "&estado=" + est,
+            type: "get",
+            data: {id: id , estado:est}
+                   });
+          $("#" + id).removeClass("success");
+          $("#la" + id).removeClass().addClass("label label-important");
+          $("#la" + id).html("");
+            $("#la" + id).html("No Destacado");
+              }
+    }); 
 $('.check_rest').mousedown(function() {
     var id = $(this).attr('data-id');
     console.log(id);
