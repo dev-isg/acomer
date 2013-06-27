@@ -140,7 +140,7 @@ $('#platos').validate({
         tx_descripcion: {
               required: true           
         },
-         de_precio:{
+         va_precio:{
                 required : true,
                 number:true                       
             },

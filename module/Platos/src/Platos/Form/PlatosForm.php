@@ -60,7 +60,7 @@ class PlatosForm extends Form
             'name' => 'tx_descripcion',
             'type' => 'Textarea',
             'attributes' => array(               
-                'class' => 'span10',
+                'class' => 'span11',
                 'id'   => 'tx_descripcion',
                 'placeholder'=>'Ingrese descripcion',
                 'colls'=>40,
@@ -80,7 +80,7 @@ class PlatosForm extends Form
                 'label' => 'Nombre del Plato',          
             ),
             'attributes' => array(               
-                'class' => 'span10  ',
+                'class' => 'span11',
                 'id'   => 'va_nombre',
                 'placeholder'=>'Ingrese nombre del Plato'
             ),
