@@ -35,12 +35,12 @@ class PlatosTable
           /*
            * con este es = q el siguiente pero en este no muestra los campos q no quieres imprimir
            */
-//            $adapter=$this->tableGateway->getAdapter();
-//            $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            $adapter=$this->tableGateway->getAdapter();
+            $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
            /*
             * muestra todos los campos, los q no especificaste a imprimer los imprime como null
             */
-        $resultSet = $this->tableGateway->select($sqlSelect);
+//        $resultSet = $this->tableGateway->select($sqlSelect);
 
         
 //        return $resultSet;
@@ -58,11 +58,11 @@ class PlatosTable
 //         $resp=$this->tableGateway->select($sqlSelect);
         
         
-            $array=array();
-             foreach($resultSet as $result){
-                 $array[]=$result;
-             }
-            var_dump($array);exit;
+//            $array=array();
+//             foreach($resultSet as $result){
+//                 $array[]=$result;
+//             }
+//            var_dump($array);exit;
         return $resultSet;//$this->tableGateway->select($sqlSelect);
         // return $resultSet;   
 
