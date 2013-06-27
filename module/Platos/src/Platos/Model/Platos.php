@@ -23,7 +23,7 @@ class Platos implements InputFilterAwareInterface
     public $Ta_tipo_plato_in_id;
     public $Ta_puntaje_in_id;
     public $Ta_usuario_in_id;
-    
+   //agregados de prueba, son campos de consulta join
     public $tipo_plato_va_nombre;
     public $restaurante_va_nombre;
 //    
@@ -54,9 +54,9 @@ class Platos implements InputFilterAwareInterface
         $this->Ta_tipo_plato_in_id = (!empty($data['Ta_tipo_plato_in_id'])) ? $data['Ta_tipo_plato_in_id'] : null;
         $this->Ta_puntaje_in_id = (!empty($data['Ta_puntaje_in_id'])) ? $data['Ta_puntaje_in_id'] : null;
         $this->Ta_usuario_in_id = (!empty($data['Ta_usuario_in_id'])) ? $data['Ta_usuario_in_id'] : null;
-        
-//            $this->tipo_plato_va_nombre;
-//    $this->restaurante_va_nombre;
+        //agregados de prueba, son campos de consulta join
+        $this->tipo_plato_va_nombre= (!empty($data['tipo_plato_va_nombre'])) ? $data['tipo_plato_va_nombre'] : null;;
+        $this->restaurante_va_nombre= (!empty($data['restaurante_va_nombre'])) ? $data['restaurante_va_nombre'] : null;;
 //        $this->hola = (!empty($data['hola'])) ? $data['hola'] : null;
     }
 // Add content to these methods:

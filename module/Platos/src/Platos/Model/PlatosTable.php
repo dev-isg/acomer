@@ -34,13 +34,14 @@ class PlatosTable
           //var_dump($selectString);exit;
           /*
            * con este es = q el siguiente pero en este no muestra los campos q no quieres imprimir
+           * no hace uso de la estructura del tablegetway para hcer los joins
            */
-            $adapter=$this->tableGateway->getAdapter();
-            $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//            $adapter=$this->tableGateway->getAdapter();
+//            $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
            /*
             * muestra todos los campos, los q no especificaste a imprimer los imprime como null
             */
-//        $resultSet = $this->tableGateway->select($sqlSelect);
+        $resultSet = $this->tableGateway->selectWith($sqlSelect);
 
         
 //        return $resultSet;
