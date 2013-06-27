@@ -170,7 +170,7 @@ class IndexController extends AbstractActionController
         $id = $this->params()->fromQuery('id');
         $estado = $this->params()->fromQuery('estado');
         $this->getPlatosTable()->estadoPlato((int) $id, $estado);
-        $this->redirect()->toUrl('/plato/index');
+        $this->redirect()->toUrl('/platos/index');
         
 //        $id = $this->params()->fromPost('id');
 //        $this->getPlatosTable()->eliminarPlato((int) $id);
@@ -183,7 +183,7 @@ class IndexController extends AbstractActionController
         $id = $this->params()->fromQuery('id');
         $estado = $this->params()->fromQuery('estado');
         $this->getPlatosTable()->destaquePlato((int) $id, $estado);
-        $this->redirect()->toUrl('/plato/index');
+
     }
     /*
      * para acceder a mi service manager
