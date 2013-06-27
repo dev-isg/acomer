@@ -123,7 +123,7 @@ class LocalTable
           $distrito=$local->distrito;
           
            $adapter=$this->tableGateway->getAdapter();
-             $sql = new Sql($adapter);
+             $sql = new Sql($adapter);      
           $idubigeo=$sql->select()->from('ta_ubigeo')
                   ->columns(array('in_id'))
                   ->where(array('in_idpais'=>$pais,'in_iddep'=>$departamento,'in_idprov'=>$provincia,'in_iddis'=>$distrito));

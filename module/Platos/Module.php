@@ -54,8 +54,15 @@ class Module implements AutoloaderProviderInterface
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Platos());
-                    return new TableGateway('ta_plato', $dbAdapter, null, $resultSetPrototype);
-                }
+                    return new TableGateway('ta_plato', $dbAdapter, null, $resultSetPrototype);//
+                },
+                        
+//               'Platos\Model\beta'=>function($sm){
+//                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+//                    $table = new beta($dbAdapter);
+//                    return $table;
+//                    
+//                 },
          
             ),
         );
