@@ -574,5 +574,16 @@ $('.check_rest').mousedown(function() {
   data: {id: user} 
   });
 });
+  $("#delete-plato").on("click",function(){
+  var user=$("#verplato").attr("data-id");
+  $("#" + user).closest('tr').remove();
+  $('#eli-plato').modal('hide');
+  console.log(user);
+  var request = $.ajax({
+  url: "/platos/index/eliminar?id="+user,
+  type: "POST",
+  data: {id: user} 
+  });
+});
 
 });
