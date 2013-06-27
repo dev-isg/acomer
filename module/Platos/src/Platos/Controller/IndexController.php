@@ -166,7 +166,7 @@ class IndexController extends AbstractActionController
      */
         public function eliminarAction()
     {
-                $id = $this->params()->fromQuery('id');
+        $id = $this->params()->fromQuery('id');
         $estado = $this->params()->fromQuery('estado');
         $this->getPlatosTable()->estadoPlato((int) $id, $estado);
         $this->redirect()->toUrl('/plato/index');
