@@ -12,10 +12,7 @@ class PlatosForm extends Form
               // we want to ignore the name passed
         parent::__construct('platos');
         $this->setAttribute('method', 'post');
-        $this->setAttribute('endtype', 'multipart/form-data');
-        
-
-       
+    $this->setAttribute('endtype', 'multipart/form-data');
        $this->add(array(
             'name' => 'in_id',
             'type' => 'Hidden',
@@ -88,7 +85,7 @@ class PlatosForm extends Form
           
          
           $this->add(array(
-            'name' => 'de_precio',
+            'name' => 'va_precio',
             'type' => 'Text',
             'attributes' => array(               
                 'class' => 'span10',
@@ -120,17 +117,18 @@ class PlatosForm extends Form
           
                
         $this->add(array(
-            'name' => 'Ta_tipo_plato',
+            'name' => 'ta_tipo_plato',
             'type' => 'Select',  
             
              'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'Ta_tipo_plato'
+                'id'   => 'ta_tipo_plato'
             ),
            'options' => array('label' => 'Tipo de Plato : ',
                      'value_options' => array(
                          
-                          '' => 'selecccione :',
+                          '0' => 'selecccione :',
+                         '1'=>'arroz con papa',
               ),
              )
         ));

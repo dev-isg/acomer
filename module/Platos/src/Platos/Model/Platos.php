@@ -27,6 +27,8 @@ class Platos implements InputFilterAwareInterface
     public $tipo_plato_va_nombre;
     public $restaurante_va_nombre;
 //    
+//    para el filter
+    protected $inputFilter;
 //    private $data=array();
 //    
 //    protected $inputFilter;
@@ -51,6 +53,7 @@ class Platos implements InputFilterAwareInterface
         $this->va_precio = (!empty($data['va_precio'])) ? $data['va_precio'] : null;
         $this->en_destaque = (!empty($data['en_destaque'])) ? $data['en_destaque'] : null;
         $this->en_estado = (!empty($data['en_estado'])) ? $data['en_estado'] : null;
+        
         $this->Ta_tipo_plato_in_id = (!empty($data['Ta_tipo_plato_in_id'])) ? $data['Ta_tipo_plato_in_id'] : null;
         $this->Ta_puntaje_in_id = (!empty($data['Ta_puntaje_in_id'])) ? $data['Ta_puntaje_in_id'] : null;
         $this->Ta_usuario_in_id = (!empty($data['Ta_usuario_in_id'])) ? $data['Ta_usuario_in_id'] : null;
@@ -72,5 +75,152 @@ class Platos implements InputFilterAwareInterface
     public function getInputFilter()
     {
 
+                if (!$this->inputFilter) {
+            $inputFilter = new InputFilter();
+            $factory     = new InputFactory();
+            //valida id
+//            $inputFilter->add($factory->createInput(array(
+//                'name'     => 'in_id',
+//                'required' => true,
+//                'filters'  => array(
+//                    array('name' => 'Int'),
+//                ),
+//            )));
+            //valida img
+            $inputFilter->add(
+                $factory->createInput(array(
+                    'name'     => 'va_imagen',
+                    'required' => false,
+//                     'validators' => array(
+//                    array(
+//                        'name'    => 'filemimetype',
+//                        'options' =>  array('mimeType' => 'image/png,image/x-png,image/jpg,image/gif,image/jpeg'),
+//                    ),
+//                    array(
+//                        'name'    => 'filesize',
+//                        'options' =>  array('max' => 204800),
+//                    ),
+//                ),
+                ))
+            );
+            //valida descripcion
+//             $inputFilter->add($factory->createInput(array(
+//                'name'     => 'tx_descripcion',
+//                'required' => true,
+//                'filters'  => array(
+//                    array('name' => 'StripTags'),
+//                    array('name' => 'StringTrim'),
+//                ),
+//                'validators' => array(
+//                    array(
+//                        'name'    => 'StringLength',
+//                        'options' => array(
+//                            'encoding' => 'UTF-8',
+//                            'min'      => 3,
+//                            'max'      => 200,
+//                        ),
+//                    ),
+//                ),
+//            )));
+                        
+             //valida nombre
+//            $inputFilter->add($factory->createInput(array(
+//                'name'     => 'va_nombre',
+//                'required' => true,
+//                'filters'  => array(
+//                    array('name' => 'StripTags'),
+//                    array('name' => 'StringTrim'),
+//                ),
+//                'validators' => array(
+//                    array(
+//                        'name'    => 'StringLength',
+//                        'options' => array(
+//                            'encoding' => 'UTF-8',
+//                            'min'      => 3,
+//                            'max'      => 100,
+//                        ),
+//                    ),
+//                ),
+//            )));
+//            
+//            
+//            $inputFilter->add($factory->createInput(array(
+//                'name'     => 'va_precio',
+//                'required' => true,
+//                'filters'  => array(
+//                    array('name' => 'StripTags'),
+//                    array('name' => 'StringTrim'),
+//                ),
+//                'validators' => array(
+//                    array(
+//                        'name'    => 'StringLength',
+//                        'options' => array(
+//                            'encoding' => 'UTF-8',
+//                            'min'      => 1,
+//                            'max'      => 100,
+//                        ),
+//                    ),
+//                ),
+//            )));
+//            
+//            
+//        $inputFilter->add($factory->createInput(array(
+//                'name'     => 'en_destaque',
+//                'required' => false,
+//                'filters'  => array(
+//                    array('name' => 'StripTags'),
+//                    array('name' => 'StringTrim'),
+//                ),
+//                'validators' => array(
+//                    array(
+//                        'name'    => 'StringLength',
+//                        'options' => array(
+//                            'encoding' => 'UTF-8',
+//                            'min'      => 1,
+//                            'max'      => 100,
+//                        ),
+//                    ),
+//                ),
+//            )));
+//
+//             
+//             $inputFilter->add($factory->createInput(array(
+//                'name'     => 'en_estado',
+//                'required' => true,
+//                'filters'  => array(
+//                    array('name' => 'StripTags'),
+//                    array('name' => 'StringTrim'),
+//                ),
+//                'validators' => array(
+//                    array(
+//                        'name'    => 'StringLength',
+//                        'options' => array(
+//                            'encoding' => 'UTF-8',
+//                            'min'      => 1,
+//                            'max'      => 100,
+//                        ),
+//                    ),
+//                ),
+//            )));
+//            $inputFilter->add($factory->createInput(array(
+//                'name'     => 'Ta_tipo_comida_in_id',
+//                'required' => false,
+//                'filters'  => array(
+//                    array('name' => 'StripTags'),
+//                    array('name' => 'StringTrim'),
+//                ),
+//                'validators' => array(
+//                    array(
+//                        'name'    => 'StringLength',
+//
+//                    ),
+//                ),
+//            )));
+//                  
+             $this->inputFilter = $inputFilter;
+        }
+
+        return $this->inputFilter;
     }
+          
 }

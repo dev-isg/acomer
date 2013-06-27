@@ -25,7 +25,7 @@ class PlatosTable
     public function fetchAll(){
 
         $sqlSelect = $this->tableGateway->getSql()->select();
-        $sqlSelect->columns(array('in_id','va_nombre','va_precio','en_estado','en_destaque'));
+        $sqlSelect->columns(array('in_id','va_nombre','va_precio','en_estado','en_destaque','Ta_puntaje_in_id'));
         $sqlSelect->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_va_nombre'=>'va_nombre'),'left');//, 'left'
         $sqlSelect->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array('ta_local_in_id'), 'left');
          $sqlSelect->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array(), 'left');
@@ -44,36 +44,20 @@ class PlatosTable
             * para los alias es necesario ponerlos en clase de entidad sino no los imprime
             */
         $resultSet = $this->tableGateway->selectWith($sqlSelect);
-
-        
-//        return $resultSet;
-        
-        
-//        
-//            $sqlSelect = $this->tableGateway->getSql()->select();
-//                $sqlSelect->columns(array('in_id', 'va_nombre', 'de_precio','en_estado'));
-//                $sqlSelect->join(array('tp'=>'ta_tipo_plato'), 'tp.in_id = ta_plato.in_id', array('va_nombre'), 'left');
-////                ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = in_id', array('ta_local_in_id'), 'left')
-////                ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array(), 'left')
-////                ->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('va_nombre'), 'left');
-//////                ->where(array('in_id'=>1));
-     
-//         $resp=$this->tableGateway->select($sqlSelect);
-        
-        
+        //$this->tableGateway->select($sqlSelect);
 //            $array=array();
 //             foreach($resultSet as $result){
 //                 $array[]=$result;
 //             }
 //            var_dump($array);exit;
-        return $resultSet;//$this->tableGateway->select($sqlSelect);
-        // return $resultSet;   
+        return $resultSet;
+
 
     }
     /*
      * otra manera
      */
-    
+    /*
     public function fetchAllx(){
         
         $adapter = $this->tableGateway->getAdapter();
@@ -101,6 +85,71 @@ class PlatosTable
              }
             var_dump($array);exit;
     }
+    
+    */
+    
+    public function guardarPlato(Platos $plato,$imagen){
+        
+        
+        $data = array(
+//            'in_id' => $plato->in_id,
+            'va_imagen' => $imagen['name'],//$plato->va_imagen,
+            'tx_descripcion' => $plato->tx_descripcion,
+            'va_nombre' => $plato->va_nombre,
+            'va_precio' => $plato->va_precio,
+            'en_destaque' => $plato->en_destaque,
+            'en_estado' => $plato->en_estado,
+            'Ta_tipo_plato_in_id' => $plato->Ta_tipo_plato_in_id,
+            'Ta_puntaje_in_id' => $plato->Ta_puntaje_in_id,
+            'Ta_usuario_in_id' => $plato->Ta_usuario_in_id,
+        );
+        foreach($data as $key=>$value){
+            if(empty($value)){
+                $data[$key]=1;
+            }
+        }
+        $data['en_destaque']='si';
+//            print_r($data);exit;
+        $id = (int) $plato->in_id;
+        if ($id == 0) {
+            $this->tableGateway->insert($data);
+            $this->tableGateway->getSql()->insert('ta_plato_has_ta_local')
+             ->values(array('ta_plato_in_id'=>$id));
+             //->where(array('ta_plato_in_id'=>$id));
+        } else {
+            
+            if ($this->getPlato($id)) {
+                $this->tableGateway->update($data, array('id' => $id));
+                $this->tableGateway->getSql()->update('ta_plato_has_ta_local')
+                        ->where(array('ta_plato_in_id'=>$id));
+            } else {
+                throw new \Exception('No existe el id');
+            }
+        }
+        
+    }
+    
+    
+        public function eliminarPlato($id)
+    {
+        $this->tableGateway->delete(array('id' => $id));
+        $this->tableGateway->getSql()->delete('ta_plato_has_ta_local')
+                ->where(array('ta_plato_in_id'=>$id));
+        $this->tableGateway->getSql()->delete('ta_comentario')
+        ->where(array('ta_plato_in_id'=>$id));
+    }
+    
+         public function getPlato($id)
+    {
+        $id  = (int) $id;
+        $rowset = $this->tableGateway->select(array('in_id' => $id));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $id");
+        }
+        return $row;
+    }
+    
     
 }
 
