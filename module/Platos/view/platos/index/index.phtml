@@ -55,7 +55,7 @@
             <td></td>
             <td></td>
              <td><a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" href="#" class='modificar btn btn-success'><i class='icon-edit icon-white'></i>Editar </a>
-            <a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" href="#" class='eli-lo btn btn-danger'><i class='icon-trash icon-white'></i>Eliminar</a> </td>
+            <a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" href="#" class='eli-pla btn btn-danger'><i class='icon-trash icon-white'></i>Eliminar</a> </td>
         </tr>
 
 <?php endforeach; ?>
@@ -64,18 +64,18 @@
 </div>
 <div class="span4">
   
-    <div class="modal small hide fade" id="eli-local" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal small hide fade" id="eli-plato" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Confirmación de Eliminación</h3>
         </div>
         <div class="modal-body">
-            <p class="error-text"><strong><label id="verlocal"></label></strong></p>
+            <p class="error-text"><strong><label id="verplato"></label></strong></p>
 
         </div>
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-            <button class="btn btn-danger" id="delete-local">Eliminar</button>
+            <button class="btn btn-danger" id="delete-plato">Eliminar</button>
         </div>
     </div>
     
