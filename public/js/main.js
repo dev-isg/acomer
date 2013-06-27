@@ -606,7 +606,7 @@ $('.check_rest').mousedown(function() {
 });
   $("#delete-plato").on("click",function(){
   var user=$("#verplato").attr("data-id");
-  $("#" + user).closest('tr').remove();
+  // $("#" + user).closest('tr').remove();
   $('#eli-plato').modal('hide');
   console.log(user);
   var request = $.ajax({
