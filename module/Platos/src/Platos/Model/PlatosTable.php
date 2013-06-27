@@ -162,8 +162,8 @@ class PlatosTable
                  );
          $this->tableGateway->update($data, array('in_id' => $id));
          
-                     var_dump($id);
-            var_dump($destaque);exit;
+//                     var_dump($id);
+//            var_dump($destaque);exit;
     }
 
     
