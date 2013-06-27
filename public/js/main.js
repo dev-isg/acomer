@@ -454,8 +454,8 @@ $('.check-plato').mousedown(function() {
             var est="si";
             var request = $.ajax({
             url: "/platos/index/cambiaestado?id="+id + "&estado=" + est,
-            type: "get",
-            data: {id: id , estado:est}
+            type: "get"
+           
                    });
             $(this).prop("checked", "checked");
             $("#" + id).addClass("success");
@@ -467,8 +467,8 @@ $('.check-plato').mousedown(function() {
           var est="no";
             var request = $.ajax({
             url: "/platos/index/cambiaestado?id="+id + "&estado=" + est,
-            type: "get",
-            data: {id: id , estado:est}
+            type: "get"
+            
                    });
           $("#" + id).removeClass("success");
           $("#la" + id).removeClass().addClass("label label-important");
