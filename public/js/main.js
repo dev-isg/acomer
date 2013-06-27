@@ -446,7 +446,7 @@ $(".eli-lo").on("click",function(){
   $('#verplato').html("Estas seguro de eliminar el plato ?");
 });
 
-$('.check_plato').mousedown(function() {
+$('.check-plato').mousedown(function() {
     var id = $(this).attr('data-id');
     var est;
         if (!$(this).is(':checked')) {
