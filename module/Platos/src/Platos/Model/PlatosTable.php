@@ -156,6 +156,7 @@ class PlatosTable
      * update a un unico campo el destaque
      */
         public function estadoPlato($id,$estado){
+
                 $data = array(
                     'en_destaque' => $estado,
                  );

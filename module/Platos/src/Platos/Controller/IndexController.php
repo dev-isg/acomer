@@ -17,7 +17,7 @@ use Platos\Model\Platos;
 use Platos\Model\PlatosTable; 
 use Platos\Form\PlatosForm; 
 use Zend\Form\Element;
-
+use Zend\Validator\File\Size;
 
 
 class IndexController extends AbstractActionController
@@ -166,6 +166,7 @@ class IndexController extends AbstractActionController
      */
         public function eliminarAction()
     {
+          
         $id = $this->params()->fromQuery('id');
         $estado = $this->params()->fromQuery('estado');
         $this->getPlatosTable()->estadoPlato((int) $id, $estado);
@@ -178,12 +179,12 @@ class IndexController extends AbstractActionController
     /*
      * cambiar el destaque del plato
      */
-//        public function cambiaestadoAction() {
-//        $id = $this->params()->fromQuery('id');
-//        $estado = $this->params()->fromQuery('estado');
-//        $this->getPlatosTable()->estadoPlato((int) $id, $estado);
-//        $this->redirect()->toUrl('/plato/index');
-//    }
+        public function cambiaestadoAction() {
+        $id = $this->params()->fromQuery('id');
+        $estado = $this->params()->fromQuery('estado');
+        $this->getPlatosTable()->estadoPlato((int) $id, $estado);
+        $this->redirect()->toUrl('/plato/index');
+    }
     /*
      * para acceder a mi service manager
      */
