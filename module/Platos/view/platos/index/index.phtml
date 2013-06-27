@@ -37,7 +37,7 @@
         ?>
         <tr >
             <td><?php echo $count++ ?></td>
-            <?php if($plato->en_estado=='si'){ ?>
+            <?php if($plato->en_destaque=='si'){ ?>
                 <td><input data-id="<?php echo $this->escapeHtml($plato->en_destaque); ?>" type="checkbox" class="check-plato" checked="checked"> </td>
                 <td><span id="la<?php echo $this->escapeHtml($plato->en_destaque); ?>" class='label label-success'> Destacado</span></td>
                 <?php }else{ ?>
