@@ -438,6 +438,14 @@ $(".eli-com").on("click",function(){
   $('#vercom').html("Estas seguro de eliminar el comentario ?");
 });
 
+$(".eli-lo").on("click",function(){
+  var id = $(this).attr('data-id');
+  $('#eli-plato').modal('show');
+  console.log(id);
+  $('#verplato').attr({'data-id':id});
+  $('#verplato').html("Estas seguro de eliminar el plato ?");
+});
+
 $('.check_rest').mousedown(function() {
     var id = $(this).attr('data-id');
     console.log(id);

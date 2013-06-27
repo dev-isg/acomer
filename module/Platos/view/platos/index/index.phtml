@@ -16,7 +16,7 @@
 
     </div>
 <div class="span10" id="flip-scroll">
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover" id="tabla-platos">
     <thead class="cf">  
         <tr>
             <th>N°</th>
@@ -35,7 +35,7 @@
         <?php $count = 1;
     foreach ($this->platos  as $plato) :
         ?>
-        <tr id="<?php echo $this->escapeHtml($plato->in_id); ?>">
+        <tr >
             <td><?php echo $count++ ?></td>
             <?php if($plato->en_estado=='si'){ ?>
                 <td><input data-id="<?php echo $this->escapeHtml($plato->en_destaque); ?>" type="checkbox" class="check" checked="checked"> </td>
@@ -53,13 +53,10 @@
                       
             <td><?php echo $this->escapeHtml($plato->restaurante_va_nombre); ?></td>
             <td></td>
-            <td></td>
+            <td><input type="hidden" name="pplato" data-id="<?php echo $this->escapeHtml($plato->in_id); ?>"  value="<?php echo $this->escapeHtml($plato->Ta_puntaje_in_id); ?>"><p id="<?php echo $this->escapeHtml($plato->in_id); ?>"></p> </td>
              <td><a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" href="#" class='modificar btn btn-success'><i class='icon-edit icon-white'></i>Editar </a>
-
             <a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" href="#" class='eli-lo btn btn-danger'><i class='icon-trash icon-white'></i>Eliminar</a> </td>
-        <td><?php echo $this->escapeHtml($plato->Ta_puntaje_in_id); ?></td>
-
-        </tr>
+             </tr>
 
 <?php endforeach; ?>
     
@@ -83,3 +80,27 @@
     </div>
     
 </div>
+<script>
+  $(document).ready(function(){
+      var puntaje = function(item,p){
+     $(item).raty({ 
+                     readOnly: true,
+                      score: p, 
+                      starOff: '/img/star-off-big.png',
+                      starOn : '/img/star-on-big.png'                         
+      });
+   }
+     $("#tabla-platos").find(':input').each(function() {
+         var elemento= this;
+         var e = $(this).attr("data-id");
+         var ptaje;
+         var idptje;
+         if( elemento.name=="pplato"){
+        idptje = e;
+         ptaje= elemento.value;
+        puntaje("#" + idptje ,ptaje); 
+         }
+        });
+
+  });
+</script>
