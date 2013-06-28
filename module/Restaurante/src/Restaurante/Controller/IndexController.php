@@ -12,14 +12,13 @@ use Restaurante\Form\RestauranteForm;
 use Restaurante\Model\RestauranteTable;  
 use Zend\Db\Adapter\Adapter;
 use Zend\Validator\File\Size;
-
-
+use ZendSearch\Lucene\Lucene;
+use ZendSearch\Lucene\Document;
 
 class IndexController extends AbstractActionController
 {
   protected $restauranteTable;
   public $dbAdapter;
-  
     
      public function indexAction() {
         $filtrar = $this->params()->fromPost('submit'); 
@@ -59,6 +58,18 @@ class IndexController extends AbstractActionController
    
     }
     
+    public function luceneAction()
+    {
+              $dd = 'C:\source\zf2\acomer\public\imagenes';                      
+              $index = \ZendSearch\Lucene\Lucene::create($dd);
+              $doc = new \ZendSearch\Lucene\Document();
+              $doc->addField(\ZendSearch\Lucene\Document\Field::UnIndexed('id','1')); 
+              $doc->addField(\ZendSearch\Lucene\Document\Field::Text('nombre', 'josmel')); 
+              $doc->addField(\ZendSearch\Lucene\Document\Field::Text('modelo', 'noel'));
+              $index->addDocument($doc);  
+   
+    }
+    
      
     public function agregarrestauranteAction()
     {  
@@ -78,8 +89,10 @@ class IndexController extends AbstractActionController
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
         $comida = $this->params()->fromPost('va_modalidad');
+        $nombre = $this->params()->fromPost('va_nombre');            
         if ($request->isPost()) {
            $restaurante = new Restaurante();
+          //  var_dump($nombre);exit;  
            $form->setInputFilter($restaurante->getInputFilter());
            $nonFile = $request->getPost()->toArray();
            $File    = $this->params()->fromFiles('va_imagen');
@@ -108,9 +121,10 @@ class IndexController extends AbstractActionController
                   if ($adapter->receive($File['name'])) {
                         $restaurante->exchangeArray($form->getData());
                     }
-                    $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
-                 }       
+  
+              return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');
+                          
+             }       
          }
        }     
         return array('form' => $form);

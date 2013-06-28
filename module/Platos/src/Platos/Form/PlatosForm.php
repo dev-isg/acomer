@@ -2,17 +2,30 @@
 namespace Platos\Form;
 
 use Zend\Form\Form;
-use Platos\Controller\IndexController;
+//use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Adapter\AdapterInterface;
+//use Platos\Controller\IndexController;
+//use Zend\Db\Adapter\Adapter;
+//use Zend\ServiceManager\ServiceLocatorAwareInterface,
+//    Zend\ServiceManager\ServiceLocatorInterface;
+
+//use Zend\Form\Form;
+//use Zend\Db\Adapter\AdapterInterface;
 
 
 class PlatosForm extends Form
 {
-    public function __construct($name = null)
+    protected $dbAdapter;
+    public function __construct(AdapterInterface $dbAdapter,$name = null) //
     {
               // we want to ignore the name passed
-        parent::__construct('platos');
+        $this->setDbAdapter($dbAdapter);
+        
+        parent::__construct('platos222');
         $this->setAttribute('method', 'post');
-    $this->setAttribute('endtype', 'multipart/form-data');
+        $this->setAttribute('endtype', 'multipart/form-data');
+        
        $this->add(array(
             'name' => 'in_id',
             'type' => 'Hidden',
@@ -117,19 +130,19 @@ class PlatosForm extends Form
           
                
         $this->add(array(
-            'name' => 'ta_tipo_plato',
+            'name' =>'Ta_tipo_plato_in_id',// 'ta_tipo_plato',
             'type' => 'Select',  
             
              'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'ta_tipo_plato'
+                'id'   => 'Ta_tipo_plato_in_id'//'ta_tipo_plato'
             ),
            'options' => array('label' => 'Tipo de Plato : ',
-                     'value_options' => array(
-                         
-                          '0' => 'selecccione :',
-                         '1'=>'arroz con papa',
-              ),
+                     'value_options' => $this->tipoPlato(),
+//               array(
+//                   '0' => 'selecccione :',
+//                   '1'=>'arroz con papa',
+//              ),
              )
         ));
 
@@ -145,5 +158,41 @@ class PlatosForm extends Form
 
         
         
+    }
+    
+    
+   public function tipoPlato()
+        {   
+
+            
+       $this->dbAdapter =$this->getDbAdapter();//getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+            ->from('ta_tipo_plato');
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            $tiplatos=$results->toArray();
+            
+        $auxtipo = array();
+        foreach($tiplatos as $tipo){
+            $auxtipo[$tipo['in_id']] = $tipo['va_nombre'];
+        }
+        
+        
+            return $auxtipo;
+            
+     }
+     
+         public function setDbAdapter(AdapterInterface $dbAdapter)
+    {
+        $this->dbAdapter = $dbAdapter;
+
+        return $this;
+    }
+
+    public function getDbAdapter()
+    {
+        return $this->dbAdapter;
     }
 }
