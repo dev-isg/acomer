@@ -1,0 +1,37 @@
+<?php
+
+
+$title = 'Editar Platos '.$this->va_nombre;
+$this->headTitle($title);
+?>
+<div class="span8">
+<?php
+$form = $this->form;
+//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
+$form->setAttributes(array(
+    'action' => $this->url.'/platos/index/editarplatos?in_id='.$this->in_id.'&va_nombre='.$this->va_nombre,
+    'method' => 'post',
+//    'in_id'   =>$this->in_id,
+));
+$form->prepare();
+
+
+echo $this->form()->openTag($form);
+
+?><legend><?php echo $this->escapeHtml($title); ?></legend>
+<?php //echo $this->formHidden($form->get('in_id'));?>
+<?php //echo $this->formHidden($form->get('ta_usuario_in_id'));?>
+<?php //echo $this->formHidden($form->get('ta_puntaje_in_id'));?>  
+<div class="row-fluid">
+<div class="control-group span6"><?php echo $this->formRow($form->get('va_nombre'));?></div>
+<div class="control-group span6"><?php echo $this->formRow($form->get('va_imagen'));?></div>
+</div>
+<div class="row-fluid">
+<div class="control-group span5"><?php echo $this->formRow($form->get('tx_descripcion'));?></div>
+<div class="control-group span3"><?php echo $this->formRow($form->get('va_precio'));?></div>
+<div class="control-group span3"><?php echo $this->formRow($form->get('Ta_tipo_plato_in_id'));?></div>
+</div>
+
+<div class="row-fluid">
+<div class="control-group span12 "><?php echo $this->formSubmit($form->get('submit'));?></div>
+</div><?php echo $this->form()->closeTag();?> 
