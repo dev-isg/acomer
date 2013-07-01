@@ -186,9 +186,12 @@ class PlatosForm extends Form
             $tiplatos=$results->toArray();
             
         $auxtipo = array();
+        
         foreach($tiplatos as $tipo){
             $auxtipo[$tipo['in_id']] = $tipo['va_nombre'];      
         }
+            $auxtipo['0']='otros';
+//        $result= array_merge($auxtipo[0],$auxtipo);
             return $auxtipo;
             
      }
