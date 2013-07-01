@@ -112,7 +112,11 @@ class PlatosTable
         $data['en_destaque']='si';
 //            print_r($data);exit;
         $id = (int) $plato->in_id;
-        
+          
+        if ($id == 0) {
+            $this->tableGateway->insert($data);
+            $idplato=$this->tableGateway->getLastInsertValue();
+            
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
         $selecttot = $sql->select()
@@ -121,16 +125,18 @@ class PlatosTable
             ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
             ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud','de_longitud'), 'left')
             ->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
-            ->where(array('ta_plato.in_id'=>2)); 
+            ->where(array('ta_plato.in_id'=>$idplato)); 
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
 //            var_dump($selectString);exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $tiplatos=$results->toArray();
         var_dump($tiplatos);exit;
-    
-        if ($id == 0) {
-            $this->tableGateway->insert($data);
-            $idplato=$this->tableGateway->getLastInsertValue();
+            
+            
+            
+            
+            
+            
              require './vendor/SolrPhpClient/Apache/Solr/Service.php';
                                 $solr = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr');  
                                            if ($solr->ping())

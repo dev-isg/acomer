@@ -2,6 +2,12 @@
 header('Content-Type: text/html; charset=utf-8');
 $limit = 10;
 $query = isset($_REQUEST['q']) ? $_REQUEST['q'] : false;
+
+ $queries = array(
+    'partno: 1 OR partno: 2',
+    'model: Boxster',
+    'name: plug'
+  );
 $results = false;
 if ($query)
 { 
