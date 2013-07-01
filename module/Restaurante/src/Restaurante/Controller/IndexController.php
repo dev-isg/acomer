@@ -11,15 +11,13 @@ use Restaurante\Model\Restaurante;
 use Restaurante\Form\RestauranteForm;       
 use Restaurante\Model\RestauranteTable;  
 use Zend\Db\Adapter\Adapter;
-use Zend\Validator\File\Size;
-
+use Zend\Validator\File\Size; 
 
 
 class IndexController extends AbstractActionController
 {
   protected $restauranteTable;
   public $dbAdapter;
-  
     
      public function indexAction() {
         $filtrar = $this->params()->fromPost('submit'); 
@@ -59,6 +57,8 @@ class IndexController extends AbstractActionController
    
     }
     
+
+    
      
     public function agregarrestauranteAction()
     {  
@@ -77,9 +77,10 @@ class IndexController extends AbstractActionController
         $form->get('va_modalidad')->setValueOptions($medi);
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
-        $comida = $this->params()->fromPost('va_modalidad');
+        $comida = $this->params()->fromPost('va_modalidad');         
         if ($request->isPost()) {
            $restaurante = new Restaurante();
+          //  var_dump($nombre);exit;  
            $form->setInputFilter($restaurante->getInputFilter());
            $nonFile = $request->getPost()->toArray();
            $File    = $this->params()->fromFiles('va_imagen');
@@ -108,9 +109,10 @@ class IndexController extends AbstractActionController
                   if ($adapter->receive($File['name'])) {
                         $restaurante->exchangeArray($form->getData());
                     }
-                    $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
-                 }       
+             $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
+              return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');
+                          
+             }       
          }
        }     
         return array('form' => $form);
@@ -258,5 +260,9 @@ class IndexController extends AbstractActionController
         echo Json::encode($datos);
         //var_dump($datos);
         exit();
+    }
+    public function fooAction()
+        {
+        return new ViewModel();
     }
 }

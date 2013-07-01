@@ -8,6 +8,7 @@ return array(
         'Admin',
         'Local',
         'Platos'
+       
 
     ),
 
