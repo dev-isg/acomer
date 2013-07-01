@@ -3,11 +3,6 @@ header('Content-Type: text/html; charset=utf-8');
 $limit = 10;
 $query = isset($_REQUEST['q']) ? $_REQUEST['q'] : false;
 
- $queries = array(
-    'partno: 1 OR partno: 2',
-    'model: Boxster',
-    'name: plug'
-  );
 $results = false;
 if ($query)
 { 
@@ -56,7 +51,7 @@ if ($results)
            <tr><td>nombre plato: <?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></td></tr>
            <tr><td>descripcion: <?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></td></tr>
            <tr><td>precio: <?php echo 'S/ '.  htmlspecialchars($doc->va_precio, ENT_QUOTES, 'utf-8'); ?></td></tr>
-               <tr><td>direccion: <?php echo htmlspecialchars($doc->va_direccion, ENT_QUOTES, 'utf-8'); ?></td></tr>
+           <tr><td>direccion: <?php echo htmlspecialchars($doc->va_direccion, ENT_QUOTES, 'utf-8'); ?></td></tr>
            <tr><td>restaurante: <?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></td></tr>
            <tr><td>tipo de plato: <?php echo htmlspecialchars($doc->plato_tipo, ENT_QUOTES, 'utf-8'); ?></td></tr>
             <tr><td>destacado: <?php echo htmlspecialchars($doc->en_destaque, ENT_QUOTES, 'utf-8'); ?></td></tr>
