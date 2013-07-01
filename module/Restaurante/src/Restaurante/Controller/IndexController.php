@@ -11,8 +11,14 @@ use Restaurante\Model\Restaurante;
 use Restaurante\Form\RestauranteForm;       
 use Restaurante\Model\RestauranteTable;  
 use Zend\Db\Adapter\Adapter;
+<<<<<<< HEAD
 use Zend\Validator\File\Size; 
 
+=======
+use Zend\Validator\File\Size;
+use ZendSearch\Lucene\Lucene;
+use ZendSearch\Lucene\Document;
+>>>>>>> eb77d7a1d0cbbe92d8c8fc1eef9aea90985ee3c6
 
 class IndexController extends AbstractActionController
 {
@@ -57,7 +63,21 @@ class IndexController extends AbstractActionController
    
     }
     
+<<<<<<< HEAD
 
+=======
+    public function luceneAction()
+    {
+              $dd = 'C:\source\zf2\acomer\public\imagenes';                      
+              $index = \ZendSearch\Lucene\Lucene::create($dd);
+              $doc = new \ZendSearch\Lucene\Document();
+              $doc->addField(\ZendSearch\Lucene\Document\Field::UnIndexed('id','1')); 
+              $doc->addField(\ZendSearch\Lucene\Document\Field::Text('nombre', 'josmel')); 
+              $doc->addField(\ZendSearch\Lucene\Document\Field::Text('modelo', 'noel'));
+              $index->addDocument($doc);  
+   
+    }
+>>>>>>> eb77d7a1d0cbbe92d8c8fc1eef9aea90985ee3c6
     
      
     public function agregarrestauranteAction()
@@ -77,7 +97,12 @@ class IndexController extends AbstractActionController
         $form->get('va_modalidad')->setValueOptions($medi);
         $form->get('submit')->setValue('INSERTAR');
         $request = $this->getRequest();
+<<<<<<< HEAD
         $comida = $this->params()->fromPost('va_modalidad');         
+=======
+        $comida = $this->params()->fromPost('va_modalidad');
+        $nombre = $this->params()->fromPost('va_nombre');            
+>>>>>>> eb77d7a1d0cbbe92d8c8fc1eef9aea90985ee3c6
         if ($request->isPost()) {
            $restaurante = new Restaurante();
           //  var_dump($nombre);exit;  
@@ -109,7 +134,11 @@ class IndexController extends AbstractActionController
                   if ($adapter->receive($File['name'])) {
                         $restaurante->exchangeArray($form->getData());
                     }
+<<<<<<< HEAD
              $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
+=======
+  
+>>>>>>> eb77d7a1d0cbbe92d8c8fc1eef9aea90985ee3c6
               return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');
                           
              }       
@@ -117,13 +146,13 @@ class IndexController extends AbstractActionController
        }     
         return array('form' => $form);
     }
- public function editarrestauranteAction()
-     
+ public function editarrestauranteAction()   
     {   
+//     var_dump('hasta aka');
         $id = (int) $this->params()->fromRoute('in_id', 0);
         $va_nombre = $this->params()->fromRoute('va_nombre',0);
         //var_dump($id);exit;
-
+               
         if (!$id) {
            return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/restaurante/index/agregarrestaurante');  
@@ -135,6 +164,7 @@ class IndexController extends AbstractActionController
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/restaurante'); 
+             
         }
       
         $form  = new RestauranteForm();
@@ -150,10 +180,13 @@ class IndexController extends AbstractActionController
         }
         $form->get('Ta_tipo_comida_in_id')->setValueOptions($com);
         $form->get('va_modalidad')->setValueOptions($medi);
+
         $form->bind($restaurante);
+
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();
         $comida = $this->params()->fromPost('va_modalidad');
+        
         if ($request->isPost()) {
 
             $form->setInputFilter($restaurante->getInputFilter());
@@ -169,7 +202,7 @@ class IndexController extends AbstractActionController
                $File = $this->params()->fromFiles('va_imagen');
                
                 $adapter = new \Zend\File\Transfer\Adapter\Http();
-                $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
+                //$adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
                 
                //  $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
                   if ($adapter->receive($File['name'])) { //echo 'dddds';exit;

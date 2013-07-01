@@ -2,17 +2,30 @@
 namespace Platos\Form;
 
 use Zend\Form\Form;
-use Platos\Controller\IndexController;
+//use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Adapter\AdapterInterface;
+//use Platos\Controller\IndexController;
+//use Zend\Db\Adapter\Adapter;
+//use Zend\ServiceManager\ServiceLocatorAwareInterface,
+//    Zend\ServiceManager\ServiceLocatorInterface;
+
+//use Zend\Form\Form;
+//use Zend\Db\Adapter\AdapterInterface;
 
 
 class PlatosForm extends Form
 {
-    public function __construct($name = null)
+    protected $dbAdapter;
+     public function __construct(AdapterInterface $dbAdapter,$name = null)
     {
               // we want to ignore the name passed
-        parent::__construct('platos');
+        $this->setDbAdapter($dbAdapter);
+        
+        parent::__construct('platos222');
         $this->setAttribute('method', 'post');
-    $this->setAttribute('endtype', 'multipart/form-data');
+        $this->setAttribute('endtype', 'multipart/form-data');
+        
        $this->add(array(
             'name' => 'in_id',
             'type' => 'Hidden',
@@ -22,19 +35,19 @@ class PlatosForm extends Form
         ));
               
         $this->add(array(
-            'name' => 'ta_usuario_in_id',
+            'name' => 'Ta_usuario_in_id',
             'type' => 'Hidden',
            'attributes' => array(               
-                'id'   => 'ta_usuario_in_id',         
+                'id'   => 'Ta_usuario_in_id',         
             ),
         ));
               
               
         $this->add(array(
-            'name' => 'ta_puntaje_in_id',
+            'name' => 'Ta_puntaje_in_id',
             'type' => 'Hidden',
            'attributes' => array(               
-                'id'   => 'ta_puntaje_in_id',         
+                'id'   => 'Ta_puntaje_in_id',         
             ),
         ));
        
@@ -97,39 +110,42 @@ class PlatosForm extends Form
             ),
         ));
           
+          //el problema NO DESCOMENTAR
 
-        $this->add(array(
-            'name' => 'en_destaque',
-            'type' => 'MultiCheckbox',
-           // 'label' => 'Modalidad de Pago?',
-             'attributes' => array(               
-                'class' => 'checkbox inline',
-                'id'   => 'en_destaque',
-                 'placeholder'=>'Ingrese su destaque'
-            ),
-            'options' => array(
-                     
-                     'value_options' => array(
-                         '0'=>'hola'
-                     ),
-             )
-        ));
+//        $this->add(array(
+//            'name' => 'en_destaque',
+//            'type' => 'MultiCheckbox',
+//           // 'label' => 'Modalidad de Pago?',
+//             'attributes' => array(               
+//                'class' => 'checkbox inline',
+//                'id'   => 'en_destaque',
+//                 'placeholder'=>'Ingrese su destaque'
+//            ),
+//            'options' => array(
+//                     
+//                     'value_options' => array(
+//                         '0'=>'hola'
+//                     ),
+//             )
+//        ));
           
                
         $this->add(array(
-            'name' => 'ta_tipo_plato',
+            'name' =>'Ta_tipo_plato_in_id',// 'ta_tipo_plato',
             'type' => 'Select',  
             
              'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'ta_tipo_plato'
+                'id'   => 'Ta_tipo_plato_in_id'//'ta_tipo_plato'
             ),
            'options' => array('label' => 'Tipo de Plato : ',
-                     'value_options' => array(
-                         
-                          '0' => 'selecccione :',
-                         '1'=>'arroz con papa',
-              ),
+                     'value_options' => 
+               $this->tipoPlato(),
+               //array(
+//                   '0' => 'selecccione :',
+//                   '1'=>'arroz con papa',
+              //),
+//               'empty_option'  => '--- Seleccionar ---'
              )
         ));
 
@@ -145,5 +161,55 @@ class PlatosForm extends Form
 
         
         
+    }
+    
+    
+   public function tipoPlato()
+        {   
+
+            
+       $this->dbAdapter =$this->getDbAdapter();//getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+           // ->from('ta_tipo_plato')
+            ->from('ta_plato')
+//            ->columns(array('in_id','va_nombre','va_precio','en_estado','en_destaque','Ta_puntaje_in_id'))
+            ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array(),'left')//, 'left'
+            ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
+            ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array(), 'left')
+            ->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array(), 'left')
+                    
+            ->join(array('ttc'=>'ta_tipo_comida'), 'ttc.in_id = tr.ta_tipo_comida_in_id', array(), 'left')
+            ->join(array('ttp'=>'ta_tipo_plato'), 'ttp.ta_tipo_comida_in_id = ttc.in_id', array('tp_va_nombre'=>'va_nombre','tp_in_id'=>'in_id'), 'left');
+            $selectString = $sql->getSqlStringForSqlObject($select);
+//            var_dump($selectString);exit;
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            $tiplatos=$results->toArray();
+            
+        $auxtipo = array();
+        foreach($tiplatos as $tipo){
+            if($tipo['tp_in_id']!=null || $tipo['tp_va_nombre']!=null){
+            $auxtipo[$tipo['tp_in_id']] = $tipo['tp_va_nombre'];
+            }
+
+        
+        }
+  
+           // var_dump($auxtipo);exit;
+            return $auxtipo;
+            
+     }
+     
+         public function setDbAdapter(AdapterInterface $dbAdapter)
+    {
+        $this->dbAdapter = $dbAdapter;
+
+        return $this;
+    }
+
+    public function getDbAdapter()
+    {
+        return $this->dbAdapter;
     }
 }

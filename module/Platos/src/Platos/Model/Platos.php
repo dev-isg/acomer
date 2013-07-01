@@ -1,13 +1,12 @@
 <?php
 namespace Platos\Model;
 
+
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
-
-use Platos\Model\beta;
-
+//use Zend\Validator\File\Size;
 
 class Platos implements InputFilterAwareInterface 
 {
@@ -54,7 +53,7 @@ class Platos implements InputFilterAwareInterface
         $this->en_destaque = (!empty($data['en_destaque'])) ? $data['en_destaque'] : null;
         $this->en_estado = (!empty($data['en_estado'])) ? $data['en_estado'] : null;
         
-        $this->Ta_tipo_plato_in_id = (!empty($data['Ta_tipo_plato_in_id'])) ? $data['Ta_tipo_plato_in_id'] : null;
+        $this->Ta_tipo_plato_in_id = (!empty($data['Ta_tipo_plato_in_id'])) ? $data['Ta_tipo_plato_in_id'] : null;//ta_tipo_plato
         $this->Ta_puntaje_in_id = (!empty($data['Ta_puntaje_in_id'])) ? $data['Ta_puntaje_in_id'] : null;
         $this->Ta_usuario_in_id = (!empty($data['Ta_usuario_in_id'])) ? $data['Ta_usuario_in_id'] : null;
         //agregados de prueba, son campos de consulta join
@@ -62,8 +61,8 @@ class Platos implements InputFilterAwareInterface
         $this->restaurante_va_nombre= (!empty($data['restaurante_va_nombre'])) ? $data['restaurante_va_nombre'] : null;;
 //        $this->hola = (!empty($data['hola'])) ? $data['hola'] : null;
     }
-// Add content to these methods:
-    public function setInputFilter(InputFilterInterface $inputFilter)
+
+        public function setInputFilter(InputFilterInterface $inputFilter)
     {
         throw new \Exception("Not used");
     }
@@ -72,10 +71,13 @@ class Platos implements InputFilterAwareInterface
         return get_object_vars($this);
     }
 
+    
+    
+    
     public function getInputFilter()
     {
 
-                if (!$this->inputFilter) {
+     if (!$this->inputFilter) {
             $inputFilter = new InputFilter();
             $factory     = new InputFactory();
             //valida id
@@ -86,11 +88,12 @@ class Platos implements InputFilterAwareInterface
 //                    array('name' => 'Int'),
 //                ),
 //            )));
+            
             //valida img
-            $inputFilter->add(
-                $factory->createInput(array(
-                    'name'     => 'va_imagen',
-                    'required' => false,
+//            $inputFilter->add(
+//                $factory->createInput(array(
+//                    'name'     => 'va_imagen',
+//                    'required' => false,
 //                     'validators' => array(
 //                    array(
 //                        'name'    => 'filemimetype',
@@ -101,8 +104,8 @@ class Platos implements InputFilterAwareInterface
 //                        'options' =>  array('max' => 204800),
 //                    ),
 //                ),
-                ))
-            );
+//                ))
+//            );
             //valida descripcion
 //             $inputFilter->add($factory->createInput(array(
 //                'name'     => 'tx_descripcion',
@@ -124,25 +127,28 @@ class Platos implements InputFilterAwareInterface
 //            )));
                         
              //valida nombre
-//            $inputFilter->add($factory->createInput(array(
-//                'name'     => 'va_nombre',
-//                'required' => true,
-//                'filters'  => array(
-//                    array('name' => 'StripTags'),
-//                    array('name' => 'StringTrim'),
-//                ),
-//                'validators' => array(
-//                    array(
-//                        'name'    => 'StringLength',
-//                        'options' => array(
-//                            'encoding' => 'UTF-8',
-//                            'min'      => 3,
-//                            'max'      => 100,
-//                        ),
-//                    ),
-//                ),
-//            )));
-//            
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_nombre',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 3,
+                            'max'      => 100,
+                        ),
+                    ),
+                ),
+            )));
+            
+
+                        
+            
 //            
 //            $inputFilter->add($factory->createInput(array(
 //                'name'     => 'va_precio',
@@ -156,14 +162,14 @@ class Platos implements InputFilterAwareInterface
 //                        'name'    => 'StringLength',
 //                        'options' => array(
 //                            'encoding' => 'UTF-8',
-//                            'min'      => 1,
+//                            'min'      => 2,
 //                            'max'      => 100,
 //                        ),
 //                    ),
 //                ),
 //            )));
-//            
-//            
+            
+            
 //        $inputFilter->add($factory->createInput(array(
 //                'name'     => 'en_destaque',
 //                'required' => false,
@@ -182,8 +188,8 @@ class Platos implements InputFilterAwareInterface
 //                    ),
 //                ),
 //            )));
-//
-//             
+
+             
 //             $inputFilter->add($factory->createInput(array(
 //                'name'     => 'en_estado',
 //                'required' => true,

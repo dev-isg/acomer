@@ -24,7 +24,8 @@
           <th>Destaque</th>
             <th>Nombre</th>
              <th>Tipo de plato</th>
-            <th>Precio</th>          
+            <th>Precio</th>   
+            <th>Estado</th>       
             <th>Restaurante</th>
             <th>Comentarios</th>
             <th>Puntaje</th>
@@ -37,24 +38,24 @@
         ?>
         <tr >
             <td><?php echo $count++ ?></td>
-            <?php if($plato->en_estado=='si'){ ?>
-                <td><input data-id="<?php echo $this->escapeHtml($plato->en_destaque); ?>" type="checkbox" class="check" checked="checked"> </td>
-                <td><span id="la<?php echo $this->escapeHtml($plato->en_destaque); ?>" class='label label-success'> <?php echo $this->escapeHtml($plato->en_destaque); ?></span></td>
+            <?php if($plato->en_destaque=='si'){ ?>
+                <td><input data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" type="checkbox" class="check-plato" checked="checked"> </td>
+                <td><span id="la<?php echo $this->escapeHtml($plato->in_id); ?>" class='label label-success'> Destacado</span></td>
                 <?php }else{ ?>
-                 <td><input data-id="<?php echo $this->escapeHtml($plato->en_destaque); ?>" type="checkbox" class="check" > </td>
-                <td><span id="la<?php echo $this->escapeHtml($plato->en_destaque); ?>" class='label label-success'> <?php echo $this->escapeHtml($plato->en_destaque); ?></span></td>
-   
+                 <td><input data-id="<?php echo $this->escapeHtml($plato->in_id);?>" type="checkbox" class="check-plato" > </td>
+                <td><span id="la<?php echo $this->escapeHtml($plato->in_id); ?>" class='label label-important'> No Destacado</span></td>   
                 <?php } ?>
             <td><?php echo $this->escapeHtml($plato->va_nombre); ?></td>
             <td><?php echo $this->escapeHtml($plato->tipo_plato_va_nombre); ?></td> 
             <td><?php echo $this->escapeHtml($plato->va_precio); ?></td>
             
-<!--            <td><?php echo $this->escapeHtml($plato->en_estado); ?></td>-->
+      <td><?php echo $this->escapeHtml($plato->en_estado); ?></td>
                       
             <td><?php echo $this->escapeHtml($plato->restaurante_va_nombre); ?></td>
             <td></td>
             <td><input type="hidden" name="pplato" data-id="<?php echo $this->escapeHtml($plato->in_id); ?>"  value="<?php echo $this->escapeHtml($plato->Ta_puntaje_in_id); ?>"><p id="<?php echo $this->escapeHtml($plato->in_id); ?>"></p> </td>
-             <td><a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" href="#" class='modificar btn btn-success'><i class='icon-edit icon-white'></i>Editar </a>
+             <td><a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" href="<?php echo $this->basePath();?>/platos/index/editarplatos/<?php echo $plato->in_id;?>/<?php echo $plato->va_nombre;?>" class='modificar btn btn-success'><i class='icon-edit icon-white'></i>Editar </a>
+<!--                 <td><a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" href="<?php echo $this->basePath();?>/platos/index/editarplatos?in_id=<?php echo $plato->in_id;?>&va_nombre=<?php echo $plato->va_nombre;?>" class='modificar btn btn-success'><i class='icon-edit icon-white'></i>Editar </a>-->
             <a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" href="#" class='eli-lo btn btn-danger'><i class='icon-trash icon-white'></i>Eliminar</a> </td>
              </tr>
 

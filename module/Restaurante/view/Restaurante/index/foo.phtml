@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 
+=======
+// make sure browsers see this page as utf-8 encoded HTML
+>>>>>>> eb77d7a1d0cbbe92d8c8fc1eef9aea90985ee3c6
 header('Content-Type: text/html; charset=utf-8');
 
 $limit = 10;
@@ -9,6 +13,7 @@ $results = false;
 
 if ($query)
 {
+<<<<<<< HEAD
 
   require './vendor/SolrPhpClient/Apache/Solr/Service.php';
 
@@ -16,18 +21,43 @@ if ($query)
   $solr = new Apache_Solr_Service('localhost', 8983, '/solr/');
 
 
+=======
+  // The Apache Solr Client library should be on the include path
+  // which is usually most easily accomplished by placing in the
+  // same directory as this script ( . or current directory is a default
+  // php include path entry in the php.ini)
+  require_once('Apache/Solr/Service.php');
+
+  // create a new solr service instance - host, port, and webapp
+  // path (all defaults in this example)
+  $solr = new Apache_Solr_Service('localhost', 8180, '/solr/');
+
+  // if magic quotes is enabled then stripslashes will be needed
+>>>>>>> eb77d7a1d0cbbe92d8c8fc1eef9aea90985ee3c6
   if (get_magic_quotes_gpc() == 1)
   {
     $query = stripslashes($query);
   }
 
+<<<<<<< HEAD
+=======
+  // in production code you'll always want to use a try /catch for any
+  // possible exceptions emitted  by searching (i.e. connection
+  // problems or a query parsing error)
+>>>>>>> eb77d7a1d0cbbe92d8c8fc1eef9aea90985ee3c6
   try
   {
     $results = $solr->search($query, 0, $limit);
   }
   catch (Exception $e)
   {
+<<<<<<< HEAD
 
+=======
+    // in production you'd probably log or email this error to an admin
+        // and then show a special message to the user but for this example
+        // we're going to show the full exception
+>>>>>>> eb77d7a1d0cbbe92d8c8fc1eef9aea90985ee3c6
         die("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");
   }
 }
@@ -39,16 +69,26 @@ if ($query)
   </head>
   <body>
     <form  accept-charset="utf-8" method="get">
+<<<<<<< HEAD
       <label for="q">Buscar:</label>
+=======
+      <label for="q">Search:</label>
+>>>>>>> eb77d7a1d0cbbe92d8c8fc1eef9aea90985ee3c6
       <input id="q" name="q" type="text" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
       <input type="submit"/>
     </form>
 <?php
 
+<<<<<<< HEAD
 
 if ($results)
 {
 
+=======
+// display results
+if ($results)
+{
+>>>>>>> eb77d7a1d0cbbe92d8c8fc1eef9aea90985ee3c6
   $total = (int) $results->response->numFound;
   $start = min(1, $total);
   $end = min($limit, $total);
@@ -56,14 +96,22 @@ if ($results)
     <div>Results <?php echo $start; ?> - <?php echo $end;?> of <?php echo $total; ?>:</div>
     <ol>
 <?php
+<<<<<<< HEAD
 
+=======
+  // iterate result documents
+>>>>>>> eb77d7a1d0cbbe92d8c8fc1eef9aea90985ee3c6
   foreach ($results->response->docs as $doc)
   {
 ?>
       <li>
         <table style="border: 1px solid black; text-align: left">
 <?php
+<<<<<<< HEAD
  
+=======
+    // iterate document fields / values
+>>>>>>> eb77d7a1d0cbbe92d8c8fc1eef9aea90985ee3c6
     foreach ($doc as $field => $value)
     {
 ?>
@@ -82,9 +130,12 @@ if ($results)
     </ol>
 <?php
 }
+<<<<<<< HEAD
  else {
     echo 'no hay datos debueltos';
 }
+=======
+>>>>>>> eb77d7a1d0cbbe92d8c8fc1eef9aea90985ee3c6
 ?>
   </body>
 </html>

@@ -88,7 +88,7 @@ class PlatosTable
     
     */
     
-    public function guardarPlato(Platos $plato,$imagen){
+    public function guardarPlato(Platos $plato,$imagen,$idrestaurant=null){
         
         
         $data = array(
@@ -103,6 +103,7 @@ class PlatosTable
             'Ta_puntaje_in_id' => $plato->Ta_puntaje_in_id,
             'Ta_usuario_in_id' => $plato->Ta_usuario_in_id,
         );
+  
         foreach($data as $key=>$value){
             if(empty($value)){
                 $data[$key]=1;
@@ -113,15 +114,27 @@ class PlatosTable
         $id = (int) $plato->in_id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
-            $this->tableGateway->getSql()->insert('ta_plato_has_ta_local')
-             ->values(array('ta_plato_in_id'=>$id));
-             //->where(array('ta_plato_in_id'=>$id));
+            $idplato=$this->tableGateway->getLastInsertValue();
+           // echo $idrestaurant;
+           // var_dump($idplato);
+            $insert=$this->tableGateway->getSql()->insert()
+            ->into('ta_plato_has_ta_local')
+             ->values(array('Ta_plato_in_id'=>$idplato,'Ta_local_in_id'=>$idrestaurant));
+            $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
+            $statement->execute();
+
         } else {
             
             if ($this->getPlato($id)) {
-                $this->tableGateway->update($data, array('id' => $id));
-                $this->tableGateway->getSql()->update('ta_plato_has_ta_local')
-                        ->where(array('ta_plato_in_id'=>$id));
+//                var_dump($data);
+//                echo '<br>';
+//                var_dump($id);exit;
+                $this->tableGateway->update($data, array('in_id' => $id));
+//                $update=$this->tableGateway->getSql()->update('ta_plato_has_ta_local')
+//                        ->set(array('ta_local_in_id'=>));
+//                        ->where(array('ta_plato_in_id'=>$id));
+//              $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);
+//            $statement->execute();
             } else {
                 throw new \Exception('No existe el id');
             }
@@ -129,27 +142,107 @@ class PlatosTable
         
     }
     
-    
-        public function eliminarPlato($id)
-    {
-        $this->tableGateway->delete(array('id' => $id));
-        $this->tableGateway->getSql()->delete('ta_plato_has_ta_local')
-                ->where(array('ta_plato_in_id'=>$id));
-        $this->tableGateway->getSql()->delete('ta_comentario')
-        ->where(array('ta_plato_in_id'=>$id));
+    public function editarPlato($platos,$imagen,$idrestaurant=null){
+        
+//                var_dump($platos);exit;
+        $data = array(
+//            'in_id' => $plato->in_id,
+            'va_imagen' => $imagen['name']='hola',//$plato->va_imagen,
+            'tx_descripcion' => $platos["tx_descripcion"],
+            'va_nombre' => $platos["va_nombre"],
+            'va_precio' => $platos["va_precio"],
+            'en_destaque' =>1,// $plato->en_destaque,
+            'en_estado' => 1,//$plato->en_estado,
+            'Ta_tipo_plato_in_id' => $platos["Ta_tipo_plato_in_id"],
+            'Ta_puntaje_in_id' => 1,//$plato->Ta_puntaje_in_id,
+            'Ta_usuario_in_id' => 1,//$plato->Ta_usuario_in_id,
+        );
+        $id=$platos["in_id"];
+//        var_dump($platos["in_id"]);exit;
+        $this->tableGateway->update($data, array('in_id' => $id));
+        
     }
+    
+    
+        public function eliminarPlato($id,$estado)
+    {
+
+                          $data = array(
+                    'en_estado' => $estado,
+                 );
+         $this->tableGateway->update($data, array('in_id' => $id));
+         
+         //ya no se va borrar
+//            $delete=$this->tableGateway->getSql()->delete()->from('ta_plato_has_ta_local')
+//        ->where(array('ta_plato_in_id'=>$id));
+//            $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($delete);
+//            $statement->execute();
+//                    
+//        $this->tableGateway->delete(array('in_id' => $id));
+//
+//        $delete2=$this->tableGateway->getSql()->delete()->from('ta_comentario')
+//        ->where(array('ta_plato_in_id'=>$id));
+//        $statement2 = $this->tableGateway->getSql()->prepareStatementForSqlObject($delete2);
+//        $statement2->execute();
+    }
+    
+    /*
+     * update a un unico campo el destaque
+     */
+        public function destaquePlato($id,$destaque){
+
+                $data = array(
+                    'en_destaque' => $destaque,
+                 );
+         $this->tableGateway->update($data, array('in_id' => $id));
+         
+//                     var_dump($id);
+//            var_dump($destaque);exit;
+    }
+
     
          public function getPlato($id)
     {
         $id  = (int) $id;
         $rowset = $this->tableGateway->select(array('in_id' => $id));
         $row = $rowset->current();
+//        VAR_DUMP($row);EXIT;
         if (!$row) {
             throw new \Exception("Could not find row $id");
         }
         return $row;
     }
     
+    
+    public function cantComentxPlato(){
+      
+        
+//               $select=$this->tableGateway->getSql()->select()
+//               ->columns(array('va_nombre','in_id'))
+//             ->join('ta_comentario','ta_plato.in_id = ta_comentario.ta_plato_in_id',array('num_comenta' => new \Zend\Db\Sql\Expression('COUNT(ta_comentario.in_id)'),'ta_puntaje_in_id'))
+//                       //
+//                ->group(array('va_nombre','in_id')); 
+//            $selectString = $this->getSql()->getSqlStringForSqlObject($select);
+//            $adapter=$this->getAdapter();
+//            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//
+//       return $results->toArray();
+        $adapter=$this->tableGateway->getAdapter();
+        $primer=$this->tableGateway->getAdapter()
+                ->query("SELECT ta_plato.va_nombre,ta_plato.in_id,COUNT(ta_comentario.in_id) AS NumeroComentarios,ta_comentario.ta_puntaje_in_id FROM ta_plato
+LEFT JOIN  ta_comentario
+ON ta_plato.in_id = ta_comentario.ta_plato_in_id
+GROUP BY va_nombre,in_id
+order by ta_puntaje_in_id desc  ", $adapter::QUERY_MODE_EXECUTE);
+//        $data=$primer->execute();
+//        $aux=array();
+//        foreach($primer as $value){
+//            $aux[]=$value;
+//        }
+//        var_dump($aux);exit;
+       return $primer;//->toArray();//$data;// $aux;//select()->from('usuario')->query()->fetchAll();
+        
+    }
     
 }
 
