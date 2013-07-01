@@ -44,9 +44,11 @@ class ClientesController extends AbstractActionController {
 //            $form->setData($request->getPost());
             $datos=$this->getRequest()->getPost()->toArray();
 //            var_dump($datos);exit;
-            if (!$form->isValid()) {
+            $form->setData($datos);
+            var_dump($form->isValid($datos));
+            if ($form->isValid($datos)) {
 //                $album->exchangeArray($form->getData());
-
+               
                 $this->getTableClientes()->addCliente($datos); 
            
 //                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos'); 

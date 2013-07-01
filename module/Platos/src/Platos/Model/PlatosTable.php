@@ -103,7 +103,7 @@ class PlatosTable
             'Ta_puntaje_in_id' => $plato->Ta_puntaje_in_id,
             'Ta_usuario_in_id' => $plato->Ta_usuario_in_id,
         );
-  
+
         foreach($data as $key=>$value){
             if(empty($value)){
                 $data[$key]=1;
@@ -112,6 +112,22 @@ class PlatosTable
         $data['en_destaque']='si';
 //            print_r($data);exit;
         $id = (int) $plato->in_id;
+        
+        $adapter = $this->tableGateway->getAdapter();
+        $sql = new Sql($adapter);
+        $selecttot = $sql->select()
+            ->from('ta_plato')
+            ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre'=>'va_nombre'),'left')
+            ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
+            ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud','de_longitud'), 'left')
+            ->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
+            ->where(array('ta_plato.in_id'=>2)); 
+            $selectString = $sql->getSqlStringForSqlObject($selecttot);
+//            var_dump($selectString);exit;
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            $tiplatos=$results->toArray();
+        var_dump($tiplatos);exit;
+    
         if ($id == 0) {
             $this->tableGateway->insert($data);
             $idplato=$this->tableGateway->getLastInsertValue();
