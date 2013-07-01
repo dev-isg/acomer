@@ -41,7 +41,18 @@ class Cliente extends TableGateway{
      }
       public function addCliente($data=array())
         {
-           $this->insert($data);
+         
+           $cliente=array(
+                    'va_nombre_cliente'=>$data['va_nombre'],
+                    'va_email'=>$data['va_email'],
+                    
+                );
+          
+        $id = (int) $data['in_id'];
+            if ($id == 0) {
+//                 var_dump($cliente);exit;
+                $this->insert($cliente);
+            }
         }
 
     public function updateCliente($id, $data=array())

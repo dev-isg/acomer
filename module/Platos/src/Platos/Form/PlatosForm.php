@@ -177,8 +177,9 @@ class PlatosForm extends Form
             ->join(array('tr'=>'ta_restaurante'), 'tr.ta_tipo_comida_in_id = ttc.in_id', array(), 'left')
             ->join(array('tl'=>'ta_local'), 'tr.in_id = tl.ta_restaurante_in_id', array(), 'left')                 
             ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_local_in_id = tl.in_id', array(), 'left')
-            ->join(array('tpl'=>'ta_plato'), 'tpl.in_id = pl.ta_plato_in_id', array());
-        
+            ->join(array('tpl'=>'ta_plato'), 'tpl.in_id = pl.ta_plato_in_id', array(), 'left')
+            ->where(array('tr.in_id'=>3));
+   
             $selectString = $sql->getSqlStringForSqlObject($select);
 //            var_dump($selectString);exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);

@@ -7,8 +7,8 @@ use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
 use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
-use Usuario\Model\Usuario;          // <-- Add this import
-use Usuario\Form\UsuarioForm;       // <-- Add this import
+//use Usuario\Model\Usuario;          // <-- Add this import
+use Usuario\Form\ClienteForm;       // <-- Add this import
 use Usuario\Model\UsuarioTable;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Adapter\Adapter;
@@ -32,6 +32,29 @@ class ClientesController extends AbstractActionController {
         return new ViewModel(array(
                     'clientes' => $clientes,
                 ));
+    }
+    public function agregarclientesAction(){
+        $form = new ClienteForm();
+         $form->get('submit')->setValue('Agregar');
+        $request = $this->getRequest();
+        
+        if ($request->isPost()) {
+//            $album = new Album();
+//            $form->setInputFilter($album->getInputFilter());
+//            $form->setData($request->getPost());
+            $datos=$this->getRequest()->getPost()->toArray();
+//            var_dump($datos);exit;
+            if (!$form->isValid()) {
+//                $album->exchangeArray($form->getData());
+
+                $this->getTableClientes()->addCliente($datos); 
+           
+//                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos'); 
+            }
+        }
+        return array('form' => $form);
+        
+   
     }
 
     public function excelAction() {
