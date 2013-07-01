@@ -242,11 +242,12 @@ class PlatosTable
 //       return $results->toArray();
         $adapter=$this->tableGateway->getAdapter();
         $primer=$this->tableGateway->getAdapter()
-                ->query("SELECT ta_plato.va_nombre,ta_plato.in_id,COUNT(ta_comentario.in_id) AS NumeroComentarios,ta_comentario.ta_puntaje_in_id FROM ta_plato
+                ->query("SELECT ta_plato.va_nombre,ta_plato.in_id,COUNT(ta_comentario.in_id) AS NumeroComentarios,
+ta_comentario.ta_puntaje_in_id,ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS Promedio
+FROM ta_plato
 LEFT JOIN  ta_comentario
 ON ta_plato.in_id = ta_comentario.ta_plato_in_id
-GROUP BY va_nombre,in_id
-order by ta_puntaje_in_id desc  ", $adapter::QUERY_MODE_EXECUTE);
+GROUP BY va_nombre,in_id", $adapter::QUERY_MODE_EXECUTE);
 //        $data=$primer->execute();
 //        $aux=array();
 //        foreach($primer as $value){
