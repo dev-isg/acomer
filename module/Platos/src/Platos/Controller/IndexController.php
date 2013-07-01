@@ -69,7 +69,7 @@ class IndexController extends AbstractActionController
           // var_dump($this->getRequest()->getPost()->toArray());exit;
                        // var_dump($data);exit;
                         
-            if (!$form->isValid()) {
+            if ($form->isValid()) {
                 //obtengo data de img
                 $nonFile = $request->getPost()->toArray();
                 $File = $this->params()->fromFiles('va_imagen');

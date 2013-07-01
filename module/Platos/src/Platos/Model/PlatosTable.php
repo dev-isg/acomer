@@ -233,7 +233,7 @@ class PlatosTable
 LEFT JOIN  ta_comentario
 ON ta_plato.in_id = ta_comentario.ta_plato_in_id
 GROUP BY va_nombre,in_id
-order by in_id asc", $adapter::QUERY_MODE_EXECUTE);
+order by ta_puntaje_in_id desc  ", $adapter::QUERY_MODE_EXECUTE);
 //        $data=$primer->execute();
 //        $aux=array();
 //        foreach($primer as $value){
