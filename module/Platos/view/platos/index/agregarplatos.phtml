@@ -17,8 +17,8 @@ echo $this->form()->openTag($form);
 ?>
 <legend><?php echo $this->escapeHtml($title); ?></legend>
 <?php echo $this->formHidden($form->get('in_id'));?>
-<?php echo $this->formHidden($form->get('ta_usuario_in_id'));?>
-<?php echo $this->formHidden($form->get('ta_puntaje_in_id'));?>  
+<?php echo $this->formHidden($form->get('Ta_usuario_in_id'));?>
+<?php echo $this->formHidden($form->get('Ta_puntaje_in_id'));?>  
 <div class="row-fluid">
 <div class="control-group span6"><?php echo $this->formRow($form->get('va_nombre'));?></div>
 <div class="control-group span6"><?php echo $this->formRow($form->get('va_imagen'));?></div>

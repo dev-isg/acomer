@@ -147,7 +147,7 @@ class PlatosTable
 //                var_dump($platos);exit;
         $data = array(
 //            'in_id' => $plato->in_id,
-            'va_imagen' => $imagen['name'],//$plato->va_imagen,
+            'va_imagen' => $imagen['name']='hola',//$plato->va_imagen,
             'tx_descripcion' => $platos["tx_descripcion"],
             'va_nombre' => $platos["va_nombre"],
             'va_precio' => $platos["va_precio"],
@@ -158,6 +158,7 @@ class PlatosTable
             'Ta_usuario_in_id' => 1,//$plato->Ta_usuario_in_id,
         );
         $id=$platos["in_id"];
+//        var_dump($platos["in_id"]);exit;
         $this->tableGateway->update($data, array('in_id' => $id));
         
     }

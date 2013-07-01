@@ -129,13 +129,13 @@ class IndexController extends AbstractActionController
        }     
         return array('form' => $form);
     }
- public function editarrestauranteAction()
-     
+ public function editarrestauranteAction()   
     {   
+//     var_dump('hasta aka');
         $id = (int) $this->params()->fromRoute('in_id', 0);
         $va_nombre = $this->params()->fromRoute('va_nombre',0);
         //var_dump($id);exit;
-
+               
         if (!$id) {
            return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/restaurante/index/agregarrestaurante');  
@@ -147,6 +147,7 @@ class IndexController extends AbstractActionController
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/restaurante'); 
+             
         }
       
         $form  = new RestauranteForm();
@@ -162,10 +163,13 @@ class IndexController extends AbstractActionController
         }
         $form->get('Ta_tipo_comida_in_id')->setValueOptions($com);
         $form->get('va_modalidad')->setValueOptions($medi);
+
         $form->bind($restaurante);
+
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();
         $comida = $this->params()->fromPost('va_modalidad');
+        
         if ($request->isPost()) {
 
             $form->setInputFilter($restaurante->getInputFilter());
@@ -181,7 +185,7 @@ class IndexController extends AbstractActionController
                $File = $this->params()->fromFiles('va_imagen');
                
                 $adapter = new \Zend\File\Transfer\Adapter\Http();
-                $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
+                //$adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
                 
                //  $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
                   if ($adapter->receive($File['name'])) { //echo 'dddds';exit;

@@ -20,6 +20,8 @@ use Zend\Form\Element;
 use Zend\Validator\File\Size;
   
 
+use Zend\Db\Sql\Sql;
+
 
 
 class IndexController extends AbstractActionController
@@ -108,61 +110,148 @@ class IndexController extends AbstractActionController
    /*
     * editar platos
     */
-    public function editarplatosAction()
-     
+//    public function editarplatosAction()
+//     
+//    {   
+//        $id = (int) $this->params()->fromRoute('in_id', 38);//fromRoute('in_id', 0);
+//        $va_nombre = $this->params()->fromRoute('va_nombre',0);//fromRoute('va_nombre',0);
+////      
+//         
+//        if (!$id) {
+//           return $this->redirect()->toUrl($this->
+//            getRequest()->getBaseUrl().'/platos/index/agregarplatos');  
+//        }
+//        try {
+//
+//            $plato = $this->getPlatosTable()->getPlato($id);
+////            var_dump($plato);exit;
+//        }
+//        catch (\Exception $ex) {
+//
+//            return $this->redirect()->toUrl($this->
+//            getRequest()->getBaseUrl().'/platos'); 
+//        }
+//           $adpter=$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+//        $form  = new PlatosForm($adpter);
+//        $form->bind($plato);
+//        $form->get('submit')->setAttribute('value', 'MODIFICAR');
+//        $request = $this->getRequest();
+//        
+//        if ($request->isPost()) {
+//                           
+//            $form->setInputFilter($plato->getInputFilter());
+//            $nonFile = $request->getPost()->toArray();
+//            $File    = $this->params()->fromFiles('va_imagen');
+//            $data    = array_merge_recursive(
+//                        $this->getRequest()->getPost()->toArray(),          
+//                       $this->getRequest()->getFiles()->toArray()
+//                   ); 
+////            var_dump($data);exit;
+//            $form->setData($data); 
+////            var_dump($form->isValid());exit;
+//            if (true) {
+//                
+////                $nonFile = $request->getPost()->toArray();
+////               $File = $this->params()->fromFiles('va_imagen');
+//               
+//                $adapter = new \Zend\File\Transfer\Adapter\Http();
+////                $adapter->setDestination('C:\xampp\htdocs\acomer\public\imagenes');
+////                 echo 'hola';exit;
+//               //  $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
+////                  if ($adapter->receive($File['name'])) { //echo 'dddds';exit;
+//                        //$restaurante->exchangeArray($form->getData());
+//                     
+//                      $plato2=$request->getPost()->toArray();
+//                      $data2    = array_merge_recursive($plato2,array('in_id'=>$id));
+////                         $this->getPlatosTable()->guardarPlato($plato,$File);//,35
+//                       $this->getPlatosTable()->editarPlato($data2 ,$File,1);
+//                $this->redirect()->toUrl('/platos');
+////                    }
+//                
+//            }
+//        }
+// 
+//     return array(
+//            'in_id' => $id,
+//            'va_nombre' => $va_nombre,
+//            'form' => $form,
+//        );
+//        
+//    }
+//    
+    
+    
+    public function editarplatosAction()   
     {   
-        $id = (int) $this->params()->fromQuery('in_id', 38);//fromRoute('in_id', 0);
-        $va_nombre = $this->params()->fromQuery('va_nombre',0);//fromRoute('va_nombre',0);
-//      
-         
+//     var_dump('hasta aka');
+        $id = (int) $this->params()->fromRoute('in_id', 0);
+        $va_nombre = $this->params()->fromRoute('va_nombre',0);
+        //var_dump($id);exit;
+               
         if (!$id) {
            return $this->redirect()->toUrl($this->
-            getRequest()->getBaseUrl().'/platos/index/agregarplatos');  
+            getRequest()->getBaseUrl().'/restaurante/index/agregarrestaurante');  
         }
         try {
-
-            $plato = $this->getPlatosTable()->getPlato($id);
-//            var_dump($plato);exit;
+            $restaurante = $this->getPlatosTable()->getPlato($id);
+//            var_dump($restaurante);exit;
         }
         catch (\Exception $ex) {
-
             return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/platos'); 
+             
         }
-           $adpter=$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+      $adpter=$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $form  = new PlatosForm($adpter);
-        $form->bind($plato);
+/*
+        
+        $this->dbAdapter=$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+            ->from('ta_tipo_plato');
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            $tiplatos=$results;//->toArray();
+            
+        $com = array();
+        foreach($tiplatos as $y){
+            $com[$y['in_id']] = $y['va_nombre'];
+        }
+        $form->get('Ta_tipo_plato_in_id')->setValueOptions($com);*/
+
+
+        $form->bind($restaurante);
+
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();
+        $comida = $this->params()->fromPost('va_modalidad');
         
         if ($request->isPost()) {
-                           
-            $form->setInputFilter($plato->getInputFilter());
+
+            $form->setInputFilter($restaurante->getInputFilter());
             $nonFile = $request->getPost()->toArray();
             $File    = $this->params()->fromFiles('va_imagen');
             $data    = array_merge_recursive(
                         $this->getRequest()->getPost()->toArray(),          
                        $this->getRequest()->getFiles()->toArray()
                    ); 
-//            var_dump($data);exit;
             $form->setData($data); 
-            var_dump($form->isValid());exit;
-            if (true) {
-
-//                $nonFile = $request->getPost()->toArray();
-//               $File = $this->params()->fromFiles('va_imagen');
+//            var_dump($form->isValid());
+            if ($form->isValid()) {
+//                   ECHO 'HELLO';EXIT;
+                $nonFile = $request->getPost()->toArray();
+               $File = $this->params()->fromFiles('va_imagen');
                
                 $adapter = new \Zend\File\Transfer\Adapter\Http();
-                $adapter->setDestination('C:\xampp\htdocs\acomer\public\imagenes');
+                //$adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
                 
                //  $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
                   if ($adapter->receive($File['name'])) { //echo 'dddds';exit;
                         //$restaurante->exchangeArray($form->getData());
-                      $plato2=$request->getPost()->toArray();
-                      $data2    = array_merge_recursive($plato2,array('in_id'=>$id));
-                        // $this->getPlatosTable()->guardarPlato($plato2,$File,35);
-                       $this->getPlatosTable()->editarPlato($data2 ,$File,35);
-                $this->redirect()->toUrl('/platos');
+                        // $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
+               $this->getPlatosTable()->guardarPlato($restaurante,$File);
+                      $this->redirect()->toUrl('/platos');
                     }
                 
             }
@@ -175,7 +264,6 @@ class IndexController extends AbstractActionController
         );
         
     }
-    
     /*
      * Eliminar plato
      */

@@ -17,7 +17,7 @@ use Zend\Db\Adapter\AdapterInterface;
 class PlatosForm extends Form
 {
     protected $dbAdapter;
-    public function __construct(AdapterInterface $dbAdapter,$name = null) //
+     public function __construct(AdapterInterface $dbAdapter,$name = null)
     {
               // we want to ignore the name passed
         $this->setDbAdapter($dbAdapter);
@@ -35,19 +35,19 @@ class PlatosForm extends Form
         ));
               
         $this->add(array(
-            'name' => 'ta_usuario_in_id',
+            'name' => 'Ta_usuario_in_id',
             'type' => 'Hidden',
            'attributes' => array(               
-                'id'   => 'ta_usuario_in_id',         
+                'id'   => 'Ta_usuario_in_id',         
             ),
         ));
               
               
         $this->add(array(
-            'name' => 'ta_puntaje_in_id',
+            'name' => 'Ta_puntaje_in_id',
             'type' => 'Hidden',
            'attributes' => array(               
-                'id'   => 'ta_puntaje_in_id',         
+                'id'   => 'Ta_puntaje_in_id',         
             ),
         ));
        
@@ -110,23 +110,24 @@ class PlatosForm extends Form
             ),
         ));
           
+          //el problema NO DESCOMENTAR
 
-        $this->add(array(
-            'name' => 'en_destaque',
-            'type' => 'MultiCheckbox',
-           // 'label' => 'Modalidad de Pago?',
-             'attributes' => array(               
-                'class' => 'checkbox inline',
-                'id'   => 'en_destaque',
-                 'placeholder'=>'Ingrese su destaque'
-            ),
-            'options' => array(
-                     
-                     'value_options' => array(
-                         '0'=>'hola'
-                     ),
-             )
-        ));
+//        $this->add(array(
+//            'name' => 'en_destaque',
+//            'type' => 'MultiCheckbox',
+//           // 'label' => 'Modalidad de Pago?',
+//             'attributes' => array(               
+//                'class' => 'checkbox inline',
+//                'id'   => 'en_destaque',
+//                 'placeholder'=>'Ingrese su destaque'
+//            ),
+//            'options' => array(
+//                     
+//                     'value_options' => array(
+//                         '0'=>'hola'
+//                     ),
+//             )
+//        ));
           
                
         $this->add(array(
@@ -138,11 +139,13 @@ class PlatosForm extends Form
                 'id'   => 'Ta_tipo_plato_in_id'//'ta_tipo_plato'
             ),
            'options' => array('label' => 'Tipo de Plato : ',
-                     'value_options' => $this->tipoPlato(),
-//               array(
+                     'value_options' => 
+               $this->tipoPlato(),
+               //array(
 //                   '0' => 'selecccione :',
 //                   '1'=>'arroz con papa',
-//              ),
+              //),
+//               'empty_option'  => '--- Seleccionar ---'
              )
         ));
 
