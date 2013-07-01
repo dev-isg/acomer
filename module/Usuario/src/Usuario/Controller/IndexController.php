@@ -78,7 +78,7 @@ class IndexController extends AbstractActionController
     }
     
     
-                    public function editarusuarioAction()
+    public function editarusuarioAction()
      
     { $comidas =  $this->roles()->toArray();
         $com = array();
@@ -106,11 +106,13 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
         if ($request->isPost()) {           
             $datos =$this->request->getPost(); 
+            //var_dump($datos);exit;
             $pass1 = $datos['va_contrasenia'];
             $pass2 = $datos['va_contrasenia2'];
             $form->setInputFilter($usuario->getInputFilter());
             $form->setData($request->getPost());   
-            if ($form->isValid()) {
+            if (!$form->isValid()) {
+              /// echo 'ddd';exit;//
                  if($pass1==$pass2){
                 $this->getUsuarioTable()->guardarUsuario($usuario);
                 $this->redirect()->toUrl('/usuario');
