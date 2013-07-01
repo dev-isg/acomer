@@ -25,12 +25,9 @@ class IndexController extends AbstractActionController
     public $dbAdapter;
     public function indexAction()
     { 
-        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $adapter = $this->dbAdapter;
-        $u = new Album($adapter);
-        $array = array('hola'=>'LISTADO DE USUARIOS',
-                        'yea'=>$u->fetchAll());
-       return new ViewModel($array);
+       
+        return new ViewModel();
+    
     }
     
     public function rolesAction()
@@ -183,4 +180,8 @@ class IndexController extends AbstractActionController
             return new ViewModel($valores);
         }
     }
+    
+    
+    
+
 }

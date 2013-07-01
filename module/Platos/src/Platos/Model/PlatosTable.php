@@ -115,8 +115,21 @@ class PlatosTable
         if ($id == 0) {
             $this->tableGateway->insert($data);
             $idplato=$this->tableGateway->getLastInsertValue();
-           // echo $idrestaurant;
-           // var_dump($idplato);
+             require './vendor/SolrPhpClient/Apache/Solr/Service.php';
+                                $solr = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr');  
+                                           if ($solr->ping())
+                                        {// echo 'entro';exit;
+                                             $document = new \Apache_Solr_Document();
+                                             $document->id = $idplato;     
+                                             $document->name = $plato->va_nombre;
+                                             $document->tx_descripcion = $plato->tx_descripcion;
+                                             $document->va_precio = $plato->va_precio;
+                                             $document->en_estado = $plato->en_estado;
+                                             $document->Ta_tipo_plato_in_id = $plato->Ta_tipo_plato_in_id;
+                                             $document->Ta_puntaje_in_id = $plato->Ta_puntaje_in_id;
+                                             $document->Ta_usuario_in_id = $plato->Ta_usuario_in_id;
+                                             $solr->addDocument($document);
+                                        }
             $insert=$this->tableGateway->getSql()->insert()
             ->into('ta_plato_has_ta_local')
              ->values(array('Ta_plato_in_id'=>$idplato,'Ta_local_in_id'=>$idrestaurant));

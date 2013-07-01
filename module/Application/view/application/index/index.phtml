@@ -1,37 +1,69 @@
- 
 <?php
-$title = 'My album';
-$this->headTitle($title);
-echo $this->hola;
-?>
-<h1><?php //echo $this->escapeHtml($title); ?></h1>
+header('Content-Type: text/html; charset=utf-8');
+$limit = 10;
+$query = isset($_REQUEST['q']) ? $_REQUEST['q'] : false;
+$results = false;
+if ($query)
+{ 
+  require './vendor/SolrPhpClient/Apache/Solr/Service.php';
+  $solr = new Apache_Solr_Service('192.168.1.44', 8983, '/solr/');
+  if (get_magic_quotes_gpc() == 1)
+  {
+    $query = stripslashes($query);
+  }
+  try
+  {
+    $results = $solr->search($query, 0, $limit);
 
-<td><a href="/application/index/agregarusuario" title="ingrese usuaerio del sistema"><p>ingresar usuario</p></a></td>
-
-
-<table class="table">
-<tr><th>Id</th>
-    <th>Titulo</th>
-    <th>email</th>
-   <!-- <th>Artista</th>
-    <th>&nbsp;</th>-->
-</tr>
-<?php
-if(!empty($this->in_id))
-{
-    ?>
-    <p style="color: green;">El registro se elimino correctamente</p>
-    <?php
+  }
+  catch (Exception $e)
+  {
+  
+        echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");
+             
+  }
 }
+
 ?>
-<?php foreach($yea as $yea)  : ?>
-<tr>
-    <td><?php echo $yea['va_nombre' ];?></td>
-    <td><?php echo $yea['va_apellidos'];?></td>
-    <td>  <?php echo $yea['va_email'];?></td>
-    <!--<td><?php echo $yea['id_pais'];?></td>-->
-    <td><a href="<?php echo $this->basePath();?>/application/index/ver/<?php echo $yea['in_id'];?>" title="ver valores">ver</a></td>
-    <td><a href="<?php echo $this->basePath();?>/application/index/actualizarusuario/<?php echo $yea['in_id'];?>" title="ver valores">actualizar</a></td>
-    <td><a href="<?php echo $this->basePath();?>/application/index/del/<?php echo $yea['in_id'];?>" title="ver valores">eliminar</a></td>
-</tr>
-<?php endforeach; ?>
+
+    <form  accept-charset="utf-8" method="get">
+      <label for="q">BUSCAR:</label>
+      <input id="q" name="q" type="text" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
+      <input type="submit"/>
+    </form>
+<?php
+
+
+if ($results)
+{
+  $total = (int) $results->response->numFound;
+  $start = min(1, $total);
+  $end = min($limit, $total);
+?>
+    <div>Resultados <?php echo $start; ?> - <?php echo $end;?> de <?php echo $total; ?>:</div>  
+    <ol>
+    
+<?php
+ 
+    foreach ($results->response->docs as $doc)
+    {
+?> <li>
+          <table style="border: 1px solid black; text-align: left">
+           <tr><td>id: <?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?></td> </tr>
+           <tr><td>nombre plato: <?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></td></tr>
+           <tr><td>descripcion: <?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></td></tr>
+           <tr><td>precio: <?php echo htmlspecialchars($doc->va_precio, ENT_QUOTES, 'utf-8'); ?></td></tr>
+           </table>
+      </li>
+<?php
+    }
+?>
+       
+
+    </ol>
+<?php
+}  else 
+     {
+    echo 'no existen resultados para su busqueda';   
+     }
+?>
