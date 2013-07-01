@@ -172,16 +172,13 @@ class PlatosForm extends Form
         $adapter = $this->dbAdapter;
         $sql = new Sql($adapter);
         $select = $sql->select()
-           // ->from('ta_tipo_plato')
-            ->from('ta_plato')
-//            ->columns(array('in_id','va_nombre','va_precio','en_estado','en_destaque','Ta_puntaje_in_id'))
-            ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array(),'left')//, 'left'
-            ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
-            ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array(), 'left')
-            ->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array(), 'left')
-                    
-            ->join(array('ttc'=>'ta_tipo_comida'), 'ttc.in_id = tr.ta_tipo_comida_in_id', array(), 'left')
-            ->join(array('ttp'=>'ta_tipo_plato'), 'ttp.ta_tipo_comida_in_id = ttc.in_id', array('tp_va_nombre'=>'va_nombre','tp_in_id'=>'in_id'), 'left');
+            ->from('ta_tipo_plato')
+            ->join(array('ttc'=>'ta_tipo_comida'), 'ttc.in_id = ta_tipo_plato.ta_tipo_comida_in_id', array(), 'left')
+            ->join(array('tr'=>'ta_restaurante'), 'tr.ta_tipo_comida_in_id = ttc.in_id', array(), 'left')
+            ->join(array('tl'=>'ta_local'), 'tr.in_id = tl.ta_restaurante_in_id', array(), 'left')                 
+            ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_local_in_id = tl.in_id', array(), 'left')
+            ->join(array('tpl'=>'ta_plato'), 'tpl.in_id = pl.ta_plato_in_id', array());
+        
             $selectString = $sql->getSqlStringForSqlObject($select);
 //            var_dump($selectString);exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
@@ -189,14 +186,8 @@ class PlatosForm extends Form
             
         $auxtipo = array();
         foreach($tiplatos as $tipo){
-            if($tipo['tp_in_id']!=null || $tipo['tp_va_nombre']!=null){
-            $auxtipo[$tipo['tp_in_id']] = $tipo['tp_va_nombre'];
-            }
-
-        
+            $auxtipo[$tipo['in_id']] = $tipo['va_nombre'];      
         }
-  
-           // var_dump($auxtipo);exit;
             return $auxtipo;
             
      }
