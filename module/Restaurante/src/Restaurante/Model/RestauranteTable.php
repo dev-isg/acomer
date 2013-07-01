@@ -83,7 +83,7 @@ class RestauranteTable
                                 require './vendor/SolrPhpClient/Apache/Solr/Service.php';
                                 $solr = new \Apache_Solr_Service('localhost', 8983, '/solr');  
                                            if ($solr->ping())
-                                        { //echo 'entro';exit;
+                                        { echo 'entro';exit;
                                              $document = new \Apache_Solr_Document();
                                              $document->id = $idRestaurante;     
                                              $document->title = $restaurante->va_razon_social;
