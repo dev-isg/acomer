@@ -144,6 +144,7 @@ class PlatosTable
                                              $document->Ta_tipo_plato_in_id = $plato->Ta_tipo_plato_in_id;
                                              $document->Ta_puntaje_in_id = $plato->Ta_puntaje_in_id;
                                              $document->Ta_usuario_in_id = $plato->Ta_usuario_in_id;
+                                             $document->en_destaque = $plato->en_destaque;
                                              $solr->addDocument($document);
                                         }
             $insert=$this->tableGateway->getSql()->insert()

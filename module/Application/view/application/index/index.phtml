@@ -25,15 +25,12 @@ if ($query)
 }
 
 ?>
-
     <form  accept-charset="utf-8" method="get">
       <label for="q">BUSCAR:</label>
       <input id="q" name="q" type="text" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
       <input type="submit"/>
     </form>
 <?php
-
-
 if ($results)
 {
   $total = (int) $results->response->numFound;
@@ -53,6 +50,8 @@ if ($results)
            <tr><td>nombre plato: <?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></td></tr>
            <tr><td>descripcion: <?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></td></tr>
            <tr><td>precio: <?php echo htmlspecialchars($doc->va_precio, ENT_QUOTES, 'utf-8'); ?></td></tr>
+           <tr><td>Puntaje: <?php echo htmlspecialchars($doc->Ta_puntaje_in_id, ENT_QUOTES, 'utf-8'); ?></td></tr>
+           <tr><td>destaque: <?php echo htmlspecialchars($doc->en_destaque, ENT_QUOTES, 'utf-8'); ?></td></tr>
            </table>
       </li>
 <?php
