@@ -88,7 +88,7 @@ class PlatosTable
     
     */
     
-    public function guardarPlato(Platos $plato,$imagen,$idrestaurant=null){
+public function guardarPlato(Platos $plato,$imagen,$idrestaurant=null){
         
         
         $data = array(
@@ -117,47 +117,45 @@ class PlatosTable
             $this->tableGateway->insert($data);
             $idplato=$this->tableGateway->getLastInsertValue();
             
+            $insert=$this->tableGateway->getSql()->insert()
+            ->into('ta_plato_has_ta_local')
+             ->values(array('Ta_plato_in_id'=>$idplato,'Ta_local_in_id'=>$idrestaurant));
+            $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
+            $statement->execute();
+            
+            
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
         $selecttot = $sql->select()
             ->from('ta_plato')
             ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre'=>'va_nombre'),'left')
             ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
-            ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud','de_longitud'), 'left')
+            ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud','de_longitud','va_direccion'), 'left')
             ->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
             ->where(array('ta_plato.in_id'=>$idplato)); 
+   
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
-//            var_dump($selectString);exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-            $tiplatos=$results->toArray();
-        var_dump($tiplatos);exit;
-            
-            
-            
-            
-            
-            
-             require './vendor/SolrPhpClient/Apache/Solr/Service.php';
+            $plato=$results->toArray();
+           // print_r($plato);exit;
+            require './vendor/SolrPhpClient/Apache/Solr/Service.php';
                                 $solr = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr');  
                                            if ($solr->ping())
                                         {// echo 'entro';exit;
                                              $document = new \Apache_Solr_Document();
-                                             $document->id = $idplato;     
-                                             $document->name = $plato->va_nombre;
-                                             $document->tx_descripcion = $plato->tx_descripcion;
-                                             $document->va_precio = $plato->va_precio;
-                                             $document->en_estado = $plato->en_estado;
-                                             $document->Ta_tipo_plato_in_id = $plato->Ta_tipo_plato_in_id;
-                                             $document->Ta_puntaje_in_id = $plato->Ta_puntaje_in_id;
-                                             $document->Ta_usuario_in_id = $plato->Ta_usuario_in_id;
-                                             $document->en_destaque = $plato->en_destaque;
+                                             $document->id = $plato[0]['in_id'];     
+                                             $document->name = $plato[0]['va_nombre'];                                            
+                                             $document->tx_descripcion = $plato[0]['tx_descripcion'];
+                                             $document->va_precio = $plato[0]['va_precio'];
+                                             $document->en_estado = $plato[0]['en_estado'];
+                                             $document->plato_tipo = $plato[0]['tipo_plato_nombre'];
+                                              $document->va_direccion = $plato[0]['va_direccion']; 
+                                             $document->restaurante = $plato[0]['restaurant_nombre'];                                         
+                                             $document->en_destaque = $plato[0]['en_destaque'];
+                                             $document->latitud = $plato[0]['de_latitud'];                                         
+                                             $document->longitud = $plato[0]['de_longitud'];
                                              $solr->addDocument($document);
                                         }
-            $insert=$this->tableGateway->getSql()->insert()
-            ->into('ta_plato_has_ta_local')
-             ->values(array('Ta_plato_in_id'=>$idplato,'Ta_local_in_id'=>$idrestaurant));
-            $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
-            $statement->execute();
 
         } else {
             
