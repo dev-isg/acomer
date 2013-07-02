@@ -31,7 +31,12 @@ class IndexController extends AbstractActionController
         return $view;
     
     }
-    
+     public function verAction()
+    { 
+         $view = new ViewModel();
+        // $this->layout('layout/layout-dos');
+        return $view;
+    }
     public function rolesAction()
     { 
         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
@@ -42,12 +47,7 @@ class IndexController extends AbstractActionController
                         'yea'=>$u->rolAll($adapter)); 
        return new ViewModel($array);
     }
-     public function verAction()
-    { 
-         $view = new ViewModel();
-        $this->layout('layout/layout-dos');
-        return $view;
-    }
+    
     public function addAction()
     { 
         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');

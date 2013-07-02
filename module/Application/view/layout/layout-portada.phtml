@@ -56,19 +56,13 @@
                         }
 
                         ?>
-                        <form  accept-charset="utf-8" method="get" class="form-horizontal" id="search" autocomplete="off" >
+                    
+    
+             
+                        <form  accept-charset="utf-8" method ="post" class="form-horizontal" id="search" autocomplete="off" action='<?php echo $this->basePath(); ?>/application/index/ver'>
                               <input id="q" name="q" type="text" placeholder="Escribe el nombre del plato" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
-                          <!--  <input type="submit"/>-->
-                       <!-- 
-                            <?php
-                            if ($results)
-                            {
-                              $total = (int) $results->response->numFound;
-                              $start = min(1, $total);
-                              $end = min($limit, $total);
-                            ?> -->
-                               <!-- <div>Resultados <?php echo $start; ?> - <?php echo $end;?> de <?php echo $total; ?>:</div>  -->
-                              </form>             
+                         <input type="submit"/>
+                  </form>             
                                 <div class="final">
                                     <img src="/img/responsive.png" alt="" style="padding: 37px 10px;">
                                 </div>       
@@ -80,6 +74,7 @@
         <div class="sub">
             <span class="titulo-portada">Platos Recomendados </span>
         </div>
+
         <?php 
                 foreach ($results->response->docs as $doc)
                           {
@@ -122,13 +117,8 @@
                       <?php
                           }
                       ?>   
-                
-                      <?php
-                      }  else 
-                           {
-                         // echo 'no existen resultados para su busqueda';   
-                           }
-                      ?>                        
+               
+                                        
             <?php echo $this->content; ?>
                        <div class="masinfo">
                            <img src="/img/scroll.png" alt="">
