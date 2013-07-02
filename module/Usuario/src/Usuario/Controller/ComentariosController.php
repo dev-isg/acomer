@@ -12,9 +12,11 @@ use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
 use Usuario\Model\Cometarios;          // <-- Add this import
 use Usuario\Form\UsuarioForm;       // <-- Add this import
+use Usuario\Form\ClienteForm;  
 use Usuario\Model\CometariosTable; 
 use Zend\Db\Sql\Sql;
 use Zend\Db\Adapter\Adapter;
+
 
 class ComentariosController extends AbstractActionController
 {
@@ -36,6 +38,12 @@ class ComentariosController extends AbstractActionController
           'comentarios' => $comentarios,
             'puntaje' =>$this-> puntaje()
         );
+    }
+    
+    public function agregarcomentariosAction(){
+        $form=new \Usuario\Form\ComentariosForm();
+        return array('form'=>$form);
+        
     }
     
     public function getComentariosTable() {
