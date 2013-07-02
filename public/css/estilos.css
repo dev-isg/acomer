@@ -344,15 +344,16 @@ padding: 5px 0px;
 }
 .pre {
 display: inline-block;
-width: 22%;
+width: 23%;
 color: #ff8400;
 font-weight: bold;
-font-size: 1.1em;
+font-size: 0.9em;
 text-align: right;
 }
 .nom_res{
 text-align: center;
 margin: 0px;
+font-weight: bold;
 }
 .com{
     display: inline-block;

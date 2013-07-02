@@ -138,12 +138,13 @@ class PlatosTable
             ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
             ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud','de_longitud','va_direccion'), 'left')
             ->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
+            ->join(array('tu'=>'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito'=>'ch_distrito'), 'left')
             ->where(array('ta_plato.in_id'=>$idplato)); 
    
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $plato=$results->toArray();
-           // print_r($plato);exit;
+            //print_r($plato);exit;
             require './vendor/SolrPhpClient/Apache/Solr/Service.php';
                                 $solr = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr');  
                                            if ($solr->ping())
@@ -160,6 +161,8 @@ class PlatosTable
                                              $document->en_destaque = $plato[0]['en_destaque'];
                                              $document->latitud = $plato[0]['de_latitud'];                                         
                                              $document->longitud = $plato[0]['de_longitud'];
+                                             $document->distrito = $plato[0]['distrito'];
+                                             $document->va_imagen = $plato[0]['va_imagen'];
                                              $solr->addDocument($document);
                                         }
 
