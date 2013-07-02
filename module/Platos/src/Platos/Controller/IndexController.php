@@ -50,6 +50,7 @@ class IndexController extends AbstractActionController
     public function agregarplatosAction()
     {
         $local=(int) $this->params()->fromQuery('id', 35);
+      
         $adpter=$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $form = new PlatosForm($adpter);      
         $form->get('submit')->setValue('Add');
@@ -88,13 +89,13 @@ class IndexController extends AbstractActionController
                      $form->setMessages(array('imagen'=>$error ));
                 } else {
                     
-                    $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
+                    $adapter->setDestination('C:\xampp\htdocs\acomer\public\imagenes');
                      if ($adapter->receive($File['name'])) {
                         $plato->exchangeArray($form->getData());
                     }
-//                    var_dump('hola');exit;
+                  
                     $this->getPlatosTable()->guardarPlato($plato,$File,$local);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos'); 
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local); 
                 }
 //                //guardo en bd
 //                $this->getPlatosTable()->guardarPlato($plato);
@@ -105,7 +106,7 @@ class IndexController extends AbstractActionController
         }
         
         
-        return array('form' => $form);
+        return array('form' => $form,'id'=>$local);
         
     }
     

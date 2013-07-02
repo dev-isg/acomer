@@ -48,9 +48,18 @@ class IndexController extends AbstractActionController
         $sm = $this->getServiceLocator();
         $this->configTable = $sm->get('Platos\Model\PlatosTable'); // <-- HERE!
     }
+
     return $this->configTable;
 }
     
+
+     public function verAction()
+    { 
+         $view = new ViewModel();
+        // $this->layout('layout/layout-dos');
+        return $view;
+    }
+
     public function rolesAction()
     { 
         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
@@ -61,12 +70,7 @@ class IndexController extends AbstractActionController
                         'yea'=>$u->rolAll($adapter)); 
        return new ViewModel($array);
     }
-     public function verAction()
-    { 
-         $view = new ViewModel();
-        $this->layout('layout/layout-dos');
-        return $view;
-    }
+    
     public function addAction()
     { 
         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');

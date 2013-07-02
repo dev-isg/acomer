@@ -95,7 +95,7 @@ class PlatosTable
     public function guardarPlato(Platos $plato,$imagen,$idlocal=null){
 
 
-        
+   
         
         $data = array(
 //            'in_id' => $plato->in_id,
@@ -123,9 +123,11 @@ class PlatosTable
             $this->tableGateway->insert($data);
             $idplato=$this->tableGateway->getLastInsertValue();
             
+   
             $insert=$this->tableGateway->getSql()->insert()
             ->into('ta_plato_has_ta_local')
              ->values(array('Ta_plato_in_id'=>$idplato,'Ta_local_in_id'=>$idlocal));
+
             $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
             $statement->execute();
             
@@ -156,7 +158,7 @@ class PlatosTable
                                              $document->va_precio = $plato[0]['va_precio'];
                                              $document->en_estado = $plato[0]['en_estado'];
                                              $document->plato_tipo = $plato[0]['tipo_plato_nombre'];
-                                              $document->va_direccion = $plato[0]['va_direccion']; 
+                                             $document->va_direccion = $plato[0]['va_direccion']; 
                                              $document->restaurante = $plato[0]['restaurant_nombre'];                                         
                                              $document->en_destaque = $plato[0]['en_destaque'];
                                              $document->latitud = $plato[0]['de_latitud'];                                         
