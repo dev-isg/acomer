@@ -44,15 +44,9 @@ class IndexController extends AbstractActionController
     }
      public function verAction()
     { 
-        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $adapter = $this->dbAdapter;
-        
-        $id =(int)$this->params()->fromRoute('in_id',0); 
-       
-        $u = new Album($adapter);
-        $array = array('hola'=>'desde verrr',
-                        'yea'=>$u->getAlbum($id,$adapter));
-       return new ViewModel($array);
+         $view = new ViewModel();
+        $this->layout('layout/layout-dos');
+        return $view;
     }
     public function addAction()
     { 
