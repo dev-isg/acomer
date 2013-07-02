@@ -22,14 +22,17 @@ class PlatosTable
     /*
      * 2 maneras distina de hacer joins
      */
-    public function fetchAll(){
-
+    public function fetchAll($consulta=null){
+        
         $sqlSelect = $this->tableGateway->getSql()->select();
         $sqlSelect->columns(array('in_id','va_nombre','va_precio','en_estado','en_destaque','Ta_puntaje_in_id'));
         $sqlSelect->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_va_nombre'=>'va_nombre'),'left');//, 'left'
         $sqlSelect->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array('ta_local_in_id'), 'left');
          $sqlSelect->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array(), 'left');
          $sqlSelect->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurante_va_nombre'=>'va_nombre'), 'left');
+         if($consulta!=null){
+             $sqlSelect->where(array('pl.ta_local_in_id'=>$consulta));
+         }
 //             $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($sqlSelect);
 //             var_dump($selectString);exit;
           /*
@@ -88,7 +91,7 @@ class PlatosTable
     
     */
     
-    public function guardarPlato(Platos $plato,$imagen,$idrestaurant=null){
+    public function guardarPlato(Platos $plato,$imagen,$idlocal=null){
         
         
         $data = array(
@@ -138,7 +141,7 @@ class PlatosTable
 //                                        }
             $insert=$this->tableGateway->getSql()->insert()
             ->into('ta_plato_has_ta_local')
-             ->values(array('Ta_plato_in_id'=>$idplato,'Ta_local_in_id'=>$idrestaurant));
+             ->values(array('Ta_plato_in_id'=>$idplato,'Ta_local_in_id'=>$idlocal));
             $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
             $statement->execute();
             

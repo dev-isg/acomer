@@ -29,10 +29,13 @@ class IndexController extends AbstractActionController
     protected $platosTable;
 
     public function indexAction()
-    {
-        $lista=$this->getPlatosTable()->fetchAll();
+    {   
+        $local=(int) $this->params()->fromQuery('id');
+//        var_dump($restaurante);exit;
+        $lista=$this->getPlatosTable()->fetchAll($local);
         return new ViewModel(array(
-            'platos' => $lista
+            'platos' => $lista,
+            'idlocal'=>$local,
         ));
     }
 
@@ -46,7 +49,7 @@ class IndexController extends AbstractActionController
     
     public function agregarplatosAction()
     {
-        $restaurante=(int) $this->params()->fromQuery('id', 35);
+        $local=(int) $this->params()->fromQuery('id', 35);
         $adpter=$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $form = new PlatosForm($adpter);      
         $form->get('submit')->setValue('Add');
@@ -90,7 +93,7 @@ class IndexController extends AbstractActionController
                         $plato->exchangeArray($form->getData());
                     }
 //                    var_dump('hola');exit;
-                    $this->getPlatosTable()->guardarPlato($plato,$File,$restaurante);
+                    $this->getPlatosTable()->guardarPlato($plato,$File,$local);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos'); 
                 }
 //                //guardo en bd
