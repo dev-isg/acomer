@@ -9,6 +9,7 @@ use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Platform;
+use Usuario\Model\Comentarios;
 
 
 
@@ -37,6 +38,39 @@ class ComentariosTable
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
 
       return $results;
+    }
+    
+    public function agregarComentario($coment){
+        
+           $cliente=array(
+                    'va_nombre_cliente'=>$coment['va_nombre'],
+                    'va_email'=>$coment['va_email'],         
+                );
+           $insert = $this->tableGateway->getSql()->insert()->into('ta_cliente')
+                    ->values($cliente);
+            $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
+            $statement->execute();    
+//            $selectString2 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insert);
+//            $adapter=$this->tableGateway->getAdapter();
+//            $result = $adapter->query($selectString2, $adapter::QUERY_MODE_EXECUTE);
+            $idcliente=$this->tableGateway->getLastInsertValue();
+          
+            $comentario = array(
+            'tx_descripcion' => $coment->tx_descripcion,
+            'Ta_plato_in_id' => $coment->Ta_plato_in_id,
+            'Ta_cliente_in_id' => $idcliente,//$coment->Ta_cliente_in_id,
+            'Ta_puntaje_in_id' => $coment->Ta_puntaje_in_id,
+                );
+                    
+         $id = (int) $coment->in_id;
+            if ($id == 0) {            
+           $insertcoment= $this->tableGateway->getSql()->insert()->into('ta_comentario')
+                    ->values($comentario);
+            $statement2 = $this->tableGateway->getSql()->prepareStatementForSqlObject($insertcoment);
+            $statement2->execute();   
+
+             }
+        
     }
 
 

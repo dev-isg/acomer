@@ -12,9 +12,11 @@ use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
 use Usuario\Model\Cometarios;          // <-- Add this import
 use Usuario\Form\UsuarioForm;       // <-- Add this import
+use Usuario\Form\ClienteForm;  
 use Usuario\Model\CometariosTable; 
 use Zend\Db\Sql\Sql;
 use Zend\Db\Adapter\Adapter;
+
 
 class ComentariosController extends AbstractActionController
 {
@@ -36,6 +38,33 @@ class ComentariosController extends AbstractActionController
           'comentarios' => $comentarios,
             'puntaje' =>$this-> puntaje()
         );
+    }
+    
+    public function agregarcomentariosAction(){
+        $form=new \Usuario\Form\ComentariosForm();
+        
+             $form->get('submit')->setValue('Agregar');
+        $request = $this->getRequest();
+        
+//        if ($request->isPost()) {
+////            $album = new Album();
+////            $form->setInputFilter($album->getInputFilter());
+////            $form->setData($request->getPost());
+//            $datos=$this->getRequest()->getPost()->toArray();
+////            var_dump($datos);exit;
+//            $form->setData($datos);
+//            var_dump($form->isValid($datos));
+//            if ($form->isValid($datos)) {
+////                $album->exchangeArray($form->getData());
+//               
+//                $this->getComentariosTable()->addCliente($datos); 
+//           
+////                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos'); 
+//            }
+//        }
+        
+        return array('form'=>$form);
+        
     }
     
     public function getComentariosTable() {
