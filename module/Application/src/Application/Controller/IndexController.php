@@ -27,7 +27,7 @@ class IndexController extends AbstractActionController
     { 
        
         $view = new ViewModel();
-      //  $this->layout('layout/layout-portada');
+        $this->layout('layout/layout-portada');
         return $view;
     
     }
