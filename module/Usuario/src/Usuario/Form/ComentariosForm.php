@@ -24,6 +24,8 @@ class ComentariosForm extends Form
         $this->add(array(
             'name' => 'Ta_puntaje_in_id',
             'type' => 'Hidden',
+            'attributes' => array( 
+                'id'   => 'Ta_puntaje_in_id',)
         ));
         
         $this->add(array(
