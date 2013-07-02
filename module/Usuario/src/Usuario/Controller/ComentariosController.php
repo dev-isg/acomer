@@ -42,6 +42,27 @@ class ComentariosController extends AbstractActionController
     
     public function agregarcomentariosAction(){
         $form=new \Usuario\Form\ComentariosForm();
+        
+             $form->get('submit')->setValue('Agregar');
+        $request = $this->getRequest();
+        
+//        if ($request->isPost()) {
+////            $album = new Album();
+////            $form->setInputFilter($album->getInputFilter());
+////            $form->setData($request->getPost());
+//            $datos=$this->getRequest()->getPost()->toArray();
+////            var_dump($datos);exit;
+//            $form->setData($datos);
+//            var_dump($form->isValid($datos));
+//            if ($form->isValid($datos)) {
+////                $album->exchangeArray($form->getData());
+//               
+//                $this->getComentariosTable()->addCliente($datos); 
+//           
+////                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos'); 
+//            }
+//        }
+        
         return array('form'=>$form);
         
     }
