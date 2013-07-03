@@ -31,7 +31,8 @@
            <div class="pt">
                <p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>
                <p class="com"><?php echo $list->NumeroComentarios ?><i class="icon-comment"></i></p>
-           <p id="star" class="punt"></p>
+           <p id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>" class="punt"></p>
+           
            </div>
            </div>
 
@@ -86,7 +87,7 @@ endforeach; ?>
                     starOn : '/img/t1.png'                        
       });
    }
-     $("#plato_r").find(':input').each(function() {
+     $(".plato_r").find(':input').each(function() {
          var elemento= this;
          var e = $(this).attr("data-id");
          var ptaje;
