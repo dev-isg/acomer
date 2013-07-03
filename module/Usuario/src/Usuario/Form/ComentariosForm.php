@@ -41,7 +41,7 @@ class ComentariosForm extends Form
                 'label' => 'Nombre',          
             ),
             'attributes' => array(               
-                'class' => 'span10',
+                'class' => '',
                 'id'   => 'va_nombre',
                 'placeholder'=>'Ingrese su nombre'
             ),
@@ -55,7 +55,7 @@ class ComentariosForm extends Form
             'name' => 'va_email',
             'type' => 'Email',
             'attributes' => array(               
-                'class' => 'span10',
+                'class' => '',
                 'id'   => 'va_email',
                 'placeholder'=>'Ingrese su Correo'
             ),
@@ -77,7 +77,7 @@ class ComentariosForm extends Form
             'name' => 'tx_descripcion',
             'type' => 'Textarea',
             'attributes' => array(               
-                'class' => 'span11',
+                'class' => '',
                 'id'   => 'tx_descripcion',
                 'placeholder'=>'Ingrese descripcion',
                 'colls'=>40,
