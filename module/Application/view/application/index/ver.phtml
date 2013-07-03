@@ -1,6 +1,5 @@
- <?php
+                     <?php
                         header('Content-Type: text/html; charset=utf-8');
-                        
                         $limite = 9;    
                         $resultados = false;
                          $palabraBuscar = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
@@ -54,10 +53,16 @@
                         }
 
                         ?>
-                         <!--<form  accept-charset="utf-8" method="post" class="form-horizontal" id="search" autocomplete="on" >
-                              <input id="q" name="q" type="text" placeholder="Escribe el nombre del plato" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
-                          <!--  <input type="submit"/>
-                       <!-- 
+                         <form  accept-charset="utf-8" method="post" class="form-horizontal" id="search" autocomplete="on" action='<?php echo $this->basePath(); ?>/application/index/detalleubicacion'>
+                         <input id="q" name="q" type="text" placeholder="Escribe el nombre del plato" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
+                         <SELECT name="fq" id="fq" class="span2">
+                <OPTION value="">seleccione:</OPTION>
+                   <?php  foreach ($this->distritos as $distritos) : ?>
+                  <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
+                  <?php endforeach; ?>
+                 </SELECT>
+                               <input type="submit"/>
+                      
                             <?php
                             if ($results)
                             {
