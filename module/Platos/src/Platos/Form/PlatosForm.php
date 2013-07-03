@@ -181,7 +181,7 @@ class PlatosForm extends Form
             ->where(array('tr.in_id'=>3));
    
             $selectString = $sql->getSqlStringForSqlObject($select);
-//            var_dump($selectString);exit;
+            var_dump($selectString);exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $tiplatos=$results->toArray();
             
