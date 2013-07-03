@@ -318,7 +318,7 @@ class IndexController extends AbstractActionController
 //        $this->layout('layout/layout-portada');
         $id=$this->params()->fromQuery('id');
         $listarecomendacion=$this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();
-        VAR_DUMP($listarecomendacion);
+        //VAR_DUMP($listarecomendacion);
         
          $form=new \Usuario\Form\ComentariosForm();
          $form->get('submit')->setValue('Agregar');
