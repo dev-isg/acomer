@@ -237,7 +237,7 @@ margin-left: 323px;
 padding: 0em 0px 2.4em;
 }
 .masinfo {
-width: 668px;
+width: 700px;
 text-align: right;
 position: absolute;
 bottom: 40px;
@@ -253,7 +253,7 @@ margin-top: 10em;
 .subir {
 position: fixed;
 bottom: 39px;
-width: 668px;
+width: 700px;
 text-align: right;
 }
 .busquedad {
@@ -342,7 +342,7 @@ background: rgba(0, 0, 0, 0.68);
 color: white;
 position: fixed;
 bottom: 0px;
-width: 668px;
+width: 700px;
 height: 39px;
 z-index: 999;
 }

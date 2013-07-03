@@ -53,16 +53,15 @@
                         }
 
                         ?>
-                         <form  accept-charset="utf-8" method="post" class="form-horizontal" id="search" autocomplete="on" action='<?php echo $this->basePath(); ?>/application/index/detalleubicacion'>
-                         <input id="q" name="q" type="text" placeholder="Escribe el nombre del plato" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
-                         <SELECT name="fq" id="fq" class="span2">
-                <OPTION value="">seleccione:</OPTION>
-                   <?php  foreach ($this->distritos as $distritos) : ?>
-                  <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
-                  <?php endforeach; ?>
-                 </SELECT>
-                               <input type="submit"/>
-                      
+                         <form  accept-charset="utf-8" method="post" class="form-horizontal" id="bubi" autocomplete="on" action='<?php echo $this->basePath(); ?>/application/index/detalleubicacion'>
+                        <SELECT name="fq" id="fq" >
+                        <OPTION value=""></OPTION>
+                           <?php  foreach ($this->distritos as $distritos) : ?>
+                          <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
+                         <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>                        
+                        <?php endforeach; ?>
+                         </SELECT>
+                          <input type="submit"/>                      
                             <?php
                             if ($results)
                             {
@@ -74,24 +73,41 @@
                           <!--       <div>Resultados <?php echo $_REQUEST['q']; ?>:</div> 
                             -->
                          </form> 
-
+<div class="sub">
+            <span class="titulo-portada" style="padding-right: 58px;">Destacados <?php echo $_REQUEST['q']; ?> </span>
+        </div>
  <?php 
                 foreach ($results->response->docs as $doc)
                           {
-                      ?> <li>
-                        <table style="border: 1px solid red; text-align: left">
-                         <tr><td>id: <?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?></td> </tr>
-                         <tr><td>nombre plato: <?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                         <tr><td>descripcion: <?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                         <tr><td>precio: <?php echo 'S/ '.  htmlspecialchars($doc->va_precio, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                         <tr><td>direccion: <?php echo htmlspecialchars($doc->va_direccion, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                         <tr><td>restaurante: <?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                         <tr><td>tipo de plato: <?php echo htmlspecialchars($doc->plato_tipo, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                          <tr><td>destacado: <?php echo htmlspecialchars($doc->en_destaque, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                          <tr><td>estado: <?php echo htmlspecialchars($doc->en_estado, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                          <tr><td>distrito: <?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                         </table>
-                            </li>
+                      ?> 
+                          <div class="plato_r">
+                         <input type="hidden" value="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>">
+                       <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="">
+                           <div class="mosaic-block cover">
+                           <div class="mosaic-overlay"><span><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></span>
+                           <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                           </div>
+                           <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" target="_blank" class="mosaic-backdrop">
+                             <div class="details">
+                                 <h4><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></h4>
+                                 <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
+                                 <p style="font-size:0.9em;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
+                             </div>
+                         </a>
+                             </div>
+                      <div class="foo">
+           <p class="nom_res"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p>
+           <div class="pt">
+               <p class="pre"><?php echo 'S/ '.  htmlspecialchars($doc->va_precio, ENT_QUOTES, 'utf-8'); ?></p>
+               <p class="com"><i class="icon-comment"></i></p>
+           <p id="" class="punt"></p>
+           </div>
+           </div>
+
+           </div> 
+                     
+                     
+                        
                       <?php
                           }
                       ?>   
@@ -105,14 +121,14 @@
                             
                             
                             
-                            
-                            
-                            
-                             <?php 
+        <div class="sub">
+            <span class="titulo-portada" style="padding-right: 58px;">Resultados <?php echo $_REQUEST['q']; ?> </span>
+        </div>                    
+                                              
+                  <?php 
                 foreach ($resultados->response->docs as $doc)
                           {
-                      ?> <li>
-                        <table style="border: 1px solid blue; text-align: left">
+                      ?> 
                          <tr><td>id: <?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?></td> </tr>
                          <tr><td>nombre plato: <?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></td></tr>
                          <tr><td>descripcion: <?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></td></tr>
@@ -123,8 +139,7 @@
                           <tr><td>destacado: <?php echo htmlspecialchars($doc->en_destaque, ENT_QUOTES, 'utf-8'); ?></td></tr>
                           <tr><td>estado: <?php echo htmlspecialchars($doc->en_estado, ENT_QUOTES, 'utf-8'); ?></td></tr>
                           <tr><td>distrito: <?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                         </table>
-                            </li>
+                       
                       <?php
                           }
                       ?>   
