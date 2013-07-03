@@ -224,11 +224,13 @@ right: 2%;
         }
 
 .contenido-plato {
-background: url(../img/map.jpg) repeat fixed;
+/*background: url(../img/map.jpg) repeat fixed;*/
 height: 54%;
 margin-left: 323px;
 }
-
+.map-portada{
+  background: url(../img/mapa.jpg) repeat;
+}
 .guia {
 padding: 0em 0px 2.4em;
 }

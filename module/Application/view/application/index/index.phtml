@@ -1,3 +1,4 @@
+ <div class="map-portada">
  <div class="guia">
           <img src="/img/pasos.png" alt="" style="width: 100%;">
 </div>   
@@ -30,7 +31,7 @@
            <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8'); ?></p>
            <div class="pt">
                <p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>
-               <p class="com"><?php echo $list->NumeroComentarios ?><i class="icon-comment"></i></p>
+               <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
            <p id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>" class="punt"></p>
            
            </div>
@@ -77,6 +78,7 @@ endforeach; ?>
            </div>  
       
 <?php endforeach; ?>
+</div>
 <script>
   $(document).ready(function(){
       var puntaje = function(item,p){
