@@ -170,7 +170,7 @@ class PlatosForm extends Form
         {   
 
            $idpla=$this->getId();
-           var_dump($idpla);
+    
        $this->dbAdapter =$this->getDbAdapter();//getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $adapter = $this->dbAdapter;
         $sql = new Sql($adapter);
