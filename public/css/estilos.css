@@ -233,7 +233,7 @@ text-align: right;
 .mas-det {
 position: absolute;
 bottom: 6px;
-left: 129px;
+left: 114px;
 }
 .detalle-restaurante {
 width: 503px;
@@ -244,15 +244,22 @@ vertical-align: top;
     display: inline-block;
 width: 142px;
 vertical-align: top;
+position: relative;
 }
 .nombre_r {
 display: inline-block;
 color: #ff8400;
 font-weight: bold;
-font-size: 1.3em;
+font-size: 1em;
 width: 362px;
 margin: 0px;
 text-align: left !important;
+}
+.nom_plato {
+font-size: 1em;
+color: #ff8400;
+margin-left: 10px;
+margin-bottom: 0px;
 }
 .com-pla {
 text-align: right;
@@ -262,6 +269,7 @@ margin-right: 10px;
 margin-left: 14px;
 background: #f0f0f0;
 width: 650px;
+margin: 1em 1em;
 }
 
 .mosaic-block {
