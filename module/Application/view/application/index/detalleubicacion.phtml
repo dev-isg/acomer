@@ -4,7 +4,8 @@
                         $query = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
                         $consulta =array('fq'=> 'en_estado:activo AND distrito:'.$_REQUEST['fq'],
                                        'sort'=>'en_destaque desc',
-                            'wt'=>'json');
+                            'wt'=>'json',
+                            'fl' => 'id,latitud,longitud,restaurante,name');
                         
                       
                         $results = false;
@@ -60,14 +61,12 @@
                         <table style="border: 1px solid black; text-align: left">
                          <tr><td>id: <?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?></td> </tr>
                          <tr><td>nombre plato: <?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                         <tr><td>descripcion: <?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                         <tr><td>precio: <?php echo 'S/ '.  htmlspecialchars($doc->va_precio, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                         <tr><td>direccion: <?php echo htmlspecialchars($doc->va_direccion, ENT_QUOTES, 'utf-8'); ?></td></tr>
+     
+        
                          <tr><td>restaurante: <?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                         <tr><td>tipo de plato: <?php echo htmlspecialchars($doc->plato_tipo, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                          <tr><td>destacado: <?php echo htmlspecialchars($doc->en_destaque, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                          <tr><td>estado: <?php echo htmlspecialchars($doc->en_estado, ENT_QUOTES, 'utf-8'); ?></td></tr>
-                          <tr><td>distrito: <?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?></td></tr>
+                         <tr><td>restaurante: <?php echo htmlspecialchars($doc->latitud, ENT_QUOTES, 'utf-8'); ?></td></tr>
+                         <tr><td>restaurante: <?php echo htmlspecialchars($doc->longitud, ENT_QUOTES, 'utf-8'); ?></td></tr>
+
                          </table>
                             </li>
                       <?php
