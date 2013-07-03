@@ -17,14 +17,16 @@ use Zend\Db\Adapter\AdapterInterface;
 class PlatosForm extends Form
 {
     protected $dbAdapter;
-     public function __construct(AdapterInterface $dbAdapter,$name = null)
+    protected $idplato;
+     public function __construct(AdapterInterface $dbAdapter,$id)//$name = null,
     {
               // we want to ignore the name passed
         $this->setDbAdapter($dbAdapter);
-        
+        $this->setId($id);
         parent::__construct('platos222');
         $this->setAttribute('method', 'post');
         $this->setAttribute('endtype', 'multipart/form-data');
+        
         
        $this->add(array(
             'name' => 'in_id',
@@ -167,7 +169,8 @@ class PlatosForm extends Form
    public function tipoPlato()
         {   
 
-            
+           $idpla=$this->getId();
+    
        $this->dbAdapter =$this->getDbAdapter();//getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $adapter = $this->dbAdapter;
         $sql = new Sql($adapter);
@@ -178,10 +181,9 @@ class PlatosForm extends Form
             ->join(array('tl'=>'ta_local'), 'tr.in_id = tl.ta_restaurante_in_id', array(), 'left')                 
             ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_local_in_id = tl.in_id', array(), 'left')
             ->join(array('tpl'=>'ta_plato'), 'tpl.in_id = pl.ta_plato_in_id', array(), 'left')
-            ->where(array('tr.in_id'=>3));
-   
+            ->where(array('tl.in_id'=>$idpla));//->where(array('tr.in_id'=>$idpla));
+ 
             $selectString = $sql->getSqlStringForSqlObject($select);
-//            var_dump($selectString);exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $tiplatos=$results->toArray();
             
@@ -206,5 +208,15 @@ class PlatosForm extends Form
     public function getDbAdapter()
     {
         return $this->dbAdapter;
+    }
+    
+    public function setId($id){
+        $this->idplato=$id;
+        return $this;
+    }
+    
+        public function getId()
+    {
+        return $this->idplato;
     }
 }

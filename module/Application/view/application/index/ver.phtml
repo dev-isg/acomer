@@ -1,11 +1,37 @@
  <?php
                         header('Content-Type: text/html; charset=utf-8');
-                        $limit = 10;             
-                        $query = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
-                        //$fq =array('fq'=> 'distrito:miraflores');
                         
-                      //  $fq = 'fq=distrito:miraflores';
+                        $limite = 9;    
+                        $resultados = false;
+                         $palabraBuscar = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
+                          $fd = array (  
+                            'fq'=>'en_estado:activo'); 
+                        if ($palabraBuscar)
+                        { 
+                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
+                          $solar = new Apache_Solr_Service('192.168.1.44', 8983, '/solr/');
+                          if (get_magic_quotes_gpc() == 1)
+                          {
+                            $palabraBuscar = stripslashes($palabraBuscar);
+                          }
+                          try
+                          {
+                            $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
 
+                          }
+                          catch (Exception $e)
+                          {
+                          
+                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
+                          }
+                        }
+          
+                        $limit = 3;             
+                        $palabraBuscar = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
+                        $query = "($palabraBuscar) AND (en_destaque:si)";
+                        $fq = array (  
+                                   'sort'=>'random_' . uniqid() .' asc',
+                            'fq'=>'en_estado:activo');                                              
                         $results = false;
                         if ($query)
                         { 
@@ -17,21 +43,20 @@
                           }
                           try
                           {
-                            $results = $solr->search($query, 0, $limit);
+                            $results = $solr->search($query, 0, $limit, $fq  );
 
                           }
                           catch (Exception $e)
                           {
                           
-                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");
-                                     
+                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
                           }
                         }
 
                         ?>
-                        <form  accept-charset="utf-8" method="get" class="form-horizontal" id="search" autocomplete="on" >
+                         <!--<form  accept-charset="utf-8" method="post" class="form-horizontal" id="search" autocomplete="on" >
                               <input id="q" name="q" type="text" placeholder="Escribe el nombre del plato" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
-                          <!--  <input type="submit"/>-->
+                          <!--  <input type="submit"/>
                        <!-- 
                             <?php
                             if ($results)
@@ -40,15 +65,16 @@
                               $start = min(1, $total);
                               $end = min($limit, $total);
                             ?> -->
-                               <div>Resultados <?php echo $start; ?> - <?php echo $end;?> de <?php echo $total; ?>:</div> 
-                           
+                          <!--       <div>Resultados <?php echo $start; ?> - <?php echo $end;?> de <?php echo $total; ?>:</div> 
+                          <!--       <div>Resultados <?php echo $_REQUEST['q']; ?>:</div> 
+                            -->
                          </form> 
 
  <?php 
                 foreach ($results->response->docs as $doc)
                           {
                       ?> <li>
-                        <table style="border: 1px solid black; text-align: left">
+                        <table style="border: 1px solid red; text-align: left">
                          <tr><td>id: <?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?></td> </tr>
                          <tr><td>nombre plato: <?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></td></tr>
                          <tr><td>descripcion: <?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></td></tr>
@@ -71,3 +97,31 @@
                          // echo 'no existen resultados para su busqueda';   
                            }
                       ?>  
+                            
+                            
+                            
+                            
+                            
+                            
+                             <?php 
+                foreach ($resultados->response->docs as $doc)
+                          {
+                      ?> <li>
+                        <table style="border: 1px solid blue; text-align: left">
+                         <tr><td>id: <?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?></td> </tr>
+                         <tr><td>nombre plato: <?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></td></tr>
+                         <tr><td>descripcion: <?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></td></tr>
+                         <tr><td>precio: <?php echo 'S/ '.  htmlspecialchars($doc->va_precio, ENT_QUOTES, 'utf-8'); ?></td></tr>
+                         <tr><td>direccion: <?php echo htmlspecialchars($doc->va_direccion, ENT_QUOTES, 'utf-8'); ?></td></tr>
+                         <tr><td>restaurante: <?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></td></tr>
+                         <tr><td>tipo de plato: <?php echo htmlspecialchars($doc->plato_tipo, ENT_QUOTES, 'utf-8'); ?></td></tr>
+                          <tr><td>destacado: <?php echo htmlspecialchars($doc->en_destaque, ENT_QUOTES, 'utf-8'); ?></td></tr>
+                          <tr><td>estado: <?php echo htmlspecialchars($doc->en_estado, ENT_QUOTES, 'utf-8'); ?></td></tr>
+                          <tr><td>distrito: <?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?></td></tr>
+                         </table>
+                            </li>
+                      <?php
+                          }
+                      ?>   
+                
+                     

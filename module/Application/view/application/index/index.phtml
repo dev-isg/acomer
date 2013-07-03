@@ -1,15 +1,20 @@
+ <div class="map-portada">
  <div class="guia">
           <img src="/img/pasos.png" alt="" style="width: 100%;">
 </div>   
 <div class="sub">
-            <span class="titulo-portada">Platos Destacados </span>
+            <span class="titulo-portada" style="padding-right: 58px;">Platos Destacados </span>
         </div>
   <?php 
-  foreach ($this->lista  as $list) : ?>   
+  $count=0;
+  foreach ($this->lista  as $list) : 
+
+      ?>   
+   
         <div class="plato_r">
    
-                         <input type="hidden" value=" <?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>">
-                         <input type="hidden" value=" <?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8'); ?>">
+                         <input type="hidden" value="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>">
+                        <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>">
                            <div class="mosaic-block cover">
                            <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
                            <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
@@ -18,7 +23,7 @@
                              <div class="details">
                                  <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
                                  <p style="font-weight: bold;">Ingredientes</p>
-                                 <p style="font-size:0.9em;"><?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
+                                 <p style="font-size:0.9em;"> <?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
                              </div>
                          </a>
                              </div>
@@ -26,23 +31,29 @@
            <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8'); ?></p>
            <div class="pt">
                <p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>
-               <p class="com"><?php echo $list->NumeroComentarios ?><i class="icon-comment"></i></p>
-           <p id="star" class="punt"></p>
+               <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
+           <p id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>" class="punt"></p>
+           
            </div>
            </div>
 
            </div>  
       
-<?php endforeach; ?>
-        <div class="sub">
-            <span class="titulo-portada">Platos Recomendados </span>
+<?php 
+       if($count==2){
+           echo ('<div id="mostrar" style="margin-top:4em;"></div>');
+       }
+$count++;
+endforeach; ?>
+        <div class="sub" style="margin-top: 0px;">
+            <span class="titulo-portada" >Platos Recomendados </span>
         </div>
   <?php 
   foreach ($this->listaval  as $list) : ?>   
         <div class="plato_r">
    
                          <input type="hidden" value="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>">
-                       <input type="hidden" value="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>">
+                       <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>">
                            <div class="mosaic-block cover">
                            <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8');?></span>
                            <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
@@ -50,7 +61,7 @@
                            <a href="#" target="_blank" class="mosaic-backdrop">
                              <div class="details">
                                  <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
-                                 <p style="font-weight: bold;">Ingredientes</p>
+                                 <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
                                  <p style="font-size:0.9em;"><?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
                              </div>
                          </a>
@@ -59,11 +70,36 @@
            <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8');?></p>
            <div class="pt">
                <p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>
-               <p class="com"><?php echo $list->NumeroComentarios ?><i class="icon-comment"></i></p>
-           <p id="star" class="punt"></p>
+               <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
+           <p id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>" class="punt"></p>
            </div>
            </div>
 
            </div>  
       
 <?php endforeach; ?>
+</div>
+<script>
+  $(document).ready(function(){
+      var puntaje = function(item,p){
+     $(item).raty({ 
+                    readOnly: true,
+                    score: p, 
+                    starOff: '/img/t2.png',
+                    starOn : '/img/t1.png'                        
+      });
+   }
+     $(".plato_r").find(':input').each(function() {
+         var elemento= this;
+         var e = $(this).attr("data-id");
+         var ptaje;
+         var idptje;
+         if( elemento.name=="pun"){
+        idptje = e;
+         ptaje= elemento.value;
+        puntaje("#" + idptje ,ptaje); 
+         }
+        });
+
+  });
+</script>

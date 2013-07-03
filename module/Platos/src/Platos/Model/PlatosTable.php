@@ -116,6 +116,7 @@ class PlatosTable
             }
         }
         $data['en_destaque']='si';
+        $data['Ta_puntaje_in_id']=0;
 //            print_r($data);exit;
         $id = (int) $plato->in_id;
           
@@ -157,7 +158,7 @@ class PlatosTable
                                              $document->name = $plato[0]['va_nombre'];                                            
                                              $document->tx_descripcion = $plato[0]['tx_descripcion'];
                                              $document->va_precio = $plato[0]['va_precio'];
-                                             $document->en_estado = $plato[0]['en_estado'];
+                                             $document->en_estado = 'desactivo';
                                              $document->plato_tipo = $plato[0]['tipo_plato_nombre'];
                                              $document->va_direccion = $plato[0]['va_direccion']; 
                                              $document->restaurante = $plato[0]['restaurant_nombre'];                                         
@@ -310,7 +311,7 @@ LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`i
 LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id` 
 LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id` 
 LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
-where ta_plato.en_destaque='.$dest.' and ta_plato.en_estado=1
+where ta_plato.en_destaque='.$dest.' and ta_plato.en_estado=1 and tr.va_nombre is not null 
 GROUP BY va_nombre,in_id
 order by MAX(ta_comentario.ta_puntaje_in_id) DESC
 LIMIT '.$lim, $adapter::QUERY_MODE_EXECUTE);

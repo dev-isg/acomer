@@ -78,7 +78,7 @@ class IndexController extends AbstractActionController
      public function verAction()
     { 
          $view = new ViewModel();
-        // $this->layout('layout/layout-dos');
+         $this->layout('layout/layout-portada');
         return $view;
     }
 

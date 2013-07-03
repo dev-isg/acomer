@@ -2,10 +2,10 @@
                         header('Content-Type: text/html; charset=utf-8');
                         $limit = 9;             
                         $query = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
-                        $fq =array('fq'=> 'distrito:'.$_REQUEST['fq']);
+                        $consulta =array('fq'=> 'en_estado:activo AND distrito:'.$_REQUEST['fq'],
+                                       'sort'=>'en_destaque desc');
                         
-                      //  $fq = 'fq=distrito:miraflores';
-
+                      
                         $results = false;
                         if ($query)
                         { 
@@ -17,7 +17,7 @@
                           }
                           try
                           {
-                            $results = $solr->search($query, 0, $limit, $fq );
+                            $results = $solr->search($query, 0, $limit, $consulta );
 
                           }
                           catch (Exception $e)

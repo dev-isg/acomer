@@ -52,7 +52,7 @@ class IndexController extends AbstractActionController
         $local=(int) $this->params()->fromQuery('id', 35);
       
         $adpter=$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $form = new PlatosForm($adpter);      
+        $form = new PlatosForm($adpter,$local);      
         $form->get('submit')->setValue('Add');
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -89,7 +89,7 @@ class IndexController extends AbstractActionController
                      $form->setMessages(array('imagen'=>$error ));
                 } else {
                     
-                    $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
+                    $adapter->setDestination('C:\xampp\htdocs\acomer\public\imagenes');
                      if ($adapter->receive($File['name'])) {
                         $plato->exchangeArray($form->getData());
                     }
@@ -190,6 +190,7 @@ class IndexController extends AbstractActionController
 //     var_dump('hasta aka');
         $id = (int) $this->params()->fromRoute('in_id', 0);
         $va_nombre = $this->params()->fromRoute('va_nombre',0);
+        $idlocal=(int) $this->params()->fromRoute('id_pa', 0);
         //var_dump($id);exit;
                
         if (!$id) {
@@ -206,7 +207,7 @@ class IndexController extends AbstractActionController
              
         }
       $adpter=$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $form  = new PlatosForm($adpter);
+        $form  = new PlatosForm($adpter,$idlocal);
 /*
         
         $this->dbAdapter=$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
