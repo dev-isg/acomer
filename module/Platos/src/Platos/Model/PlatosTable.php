@@ -166,6 +166,8 @@ class PlatosTable
                                              $document->distrito = $plato[0]['distrito'];
                                              $document->va_imagen = $plato[0]['va_imagen'];
                                              $solr->addDocument($document);
+                                             $solr->commit();
+                                             $solr->optimize();
                                         }
 
         } else {
@@ -288,6 +290,14 @@ GROUP BY va_nombre,in_id", $adapter::QUERY_MODE_EXECUTE);
 //        var_dump($aux);exit;
        return $primer;//->toArray();//$data;// $aux;//select()->from('usuario')->query()->fetchAll();
         
+    }
+    
+     public function distritosPlato(){
+
+        $adapter=$this->tableGateway->getAdapter();
+        $primer=$this->tableGateway->getAdapter()
+                ->query("SELECT`ch_distrito` FROM ta_ubigeo WHERE ch_provincia ='lima'", $adapter::QUERY_MODE_EXECUTE);
+       return $primer;
     }
     
 }
