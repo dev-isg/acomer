@@ -22,6 +22,7 @@ class Platos implements InputFilterAwareInterface
     public $Ta_tipo_plato_in_id;
     public $Ta_puntaje_in_id;
     public $Ta_usuario_in_id;
+   
    //agregados de prueba, son campos de consulta join
     public $tipo_plato_va_nombre;
     public $restaurante_va_nombre;

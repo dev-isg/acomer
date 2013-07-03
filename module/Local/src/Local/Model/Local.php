@@ -18,7 +18,7 @@ class Local implements InputFilterAwareInterface
     public $ta_mapa_in_id;
     public $ta_ubigeo_in_id;
     public $ta_horario_in_id;
-    public $ta_dia_in_id;
+    public $va_dia;
     
     public $de_latitud;
     public $de_longitud;
@@ -43,7 +43,7 @@ class Local implements InputFilterAwareInterface
         $this->ta_mapa_in_id    = (!empty($data['ta_mapa_in_id'])) ? $data['ta_mapa_in_id'] : null;
         $this->ta_ubigeo_in_id     = (!empty($data['ta_ubigeo_in_id'])) ? $data['ta_ubigeo_in_id'] : null;
         $this->ta_horario_in_id    = (!empty($data['ta_horario_in_id'])) ? $data['ta_horario_in_id'] : null;
-        $this->ta_dia_in_id    = (!empty($data['ta_dia_in_id'])) ? $data['ta_dia_in_id'] : null;
+        $this->va_dia    = (!empty($data['va_dia'])) ? $data['va_dia'] : null;
         
         $this->de_latitud = (!empty($data['de_latitud'])) ? $data['de_latitud'] : null;
         $this->de_longitud = (!empty($data['de_longitud'])) ? $data['de_longitud'] : null;

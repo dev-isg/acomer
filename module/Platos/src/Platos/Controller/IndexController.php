@@ -27,6 +27,7 @@ use Zend\Db\Sql\Sql;
 class IndexController extends AbstractActionController
 {
     protected $platosTable;
+    protected $comentariosTable;
 
     public function indexAction()
     {   
@@ -316,10 +317,34 @@ class IndexController extends AbstractActionController
         $view->setTerminal(true);
 //        $this->layout('layout/layout-portada');
         $id=$this->params()->fromQuery('id');
-        $listarecomendacion=$this->getPlatosTable()->getPlatoxRestaurant($id);
+        $listarecomendacion=$this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();
+        VAR_DUMP($listarecomendacion);
         
-        $view->setVariables(array('lista' => $listarecomendacion));
+         $form=new \Usuario\Form\ComentariosForm();
+         $form->get('submit')->setValue('Agregar');
+        $request = $this->getRequest();
+        
+        if ($request->isPost()) {
+            $datos=$this->getRequest()->getPost()->toArray();
+            $form->setData($datos);
+            if ($form->isValid($datos)) {
+                $this->getComentariosTable()->agregarComentario($datos); 
+//                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos'); 
+            }
+        }
+        
+        
+        
+        
+        $view->setVariables(array('lista' => $listarecomendacion,'form'=>$form));
         return $view;
+    }
+        public function getComentariosTable() {
+        if (!$this->comentariosTable) {
+            $s = $this->getServiceLocator();
+            $this->comentariosTable = $s->get('Usuario\Model\ComentariosTable');
+        }
+        return $this->comentariosTable;
     }
     /*
      * para acceder a mi service manager
