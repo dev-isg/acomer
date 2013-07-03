@@ -233,7 +233,7 @@ margin-left: 323px;
 padding: 0em 0px 2.4em;
 }
 .masinfo {
-width: 67%;
+width: 700px;
 text-align: right;
 position: absolute;
 bottom: 40px;
@@ -249,7 +249,7 @@ margin-top: 10em;
 .subir {
 position: fixed;
 bottom: 39px;
-width: 67%;
+width: 700px;
 text-align: right;
 }
 .busquedad {
@@ -321,8 +321,8 @@ font-weight: bold;
 nav{
 display: inline-block !important;
 vertical-align: middle;
-width: 40%;
-margin-top: 1em;
+width: 37%;
+margin-top: 8px;
 }
 nav li{
     line-height: 20px;
@@ -338,7 +338,7 @@ background: rgba(0, 0, 0, 0.68);
 color: white;
 position: fixed;
 bottom: 0px;
-width: 71%;
+width: 700px;
 height: 39px;
 }
 footer{
