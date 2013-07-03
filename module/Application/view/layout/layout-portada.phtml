@@ -22,9 +22,9 @@
     <div class="contenido">
           <div class="contenido-busqueda" >
                
-          <h1 style="margin-top: 24%; text-align:center;"><img src="/img/logo.png" alt="logo" style="width: 93%;"></h1>
+          <h1 style="margin-top: 1.8em; text-align:center;"><img src="/img/logo.png" alt="logo" style="width: 93%;"></h1>
 
-                    <span class="logan" style="width: 23%;font-size: 3.1em;text-align: right;">-</span> <span class="logan" style="width: 54%;">..y hoy , ¿qué se te antoja?</span> <span class="logan" style="font-size: 3.1em;  text-align: right;">-</span>
+                    <span class="logan" style="width:3%;font-size: 3.1em;text-align: right;">-</span> <span class="logan" style="width: 54%;">..y hoy , ¿qué se te antoja?</span> <span class="logan" style="font-size: 3.1em;  text-align: right;">-</span>
 
                     <div class="fec"><img src="/img/flecha.png" alt=""></div>
                      
@@ -68,15 +68,15 @@
  <div class="contenido-plato">
         <div class="guia">
           <img src="/img/pasos.png" alt="" style="width: 100%;">
-        </div>
-
-
-                
+        </div>     
                                         
             <?php echo $this->content; ?>
                        <div class="masinfo">
                            <img src="/img/scroll.png" alt="">
                        </div>
+                      <div class="subir">
+                        <a href="#top"><img src="img/scroll-top.png" alt=""></a>
+                    </div>
                        <div class="arrow">
                           <img src="/img/flechamenu.png" alt="">
                       </div>
@@ -111,6 +111,28 @@
 
                   });
               }
+               $(".subir").hide(); //Esto hace que el div Inicialice Oculto
+                $(window).scroll(function () {
+                            if ($(this).scrollTop() > 100) { //Esto hace que el Div aparezca de despues de haber bajado 100px con el scroll
+                                $('.subir').fadeIn(); //Aparece con un efecto Fade
+                                $('#ver').fadeOut();
+
+                            } else {
+                                $('.subir').fadeOut(); // Desaparece con un efecto Fade
+                                 $('#ver').fadeIn();
+                            }
+                        });
+                        $('.subir a').click(function () {
+                            $('body,html').animate({
+                                scrollTop: 0
+                            }, 500); // Todo esto hace que se la pagina se desplace hasta el tope con una lentitud de 500 milisegundos
+                            return false;
+                        });
+                         $("#ver").click(function(){
+                var posicion_img = $("#mostrar").offset().top;
+                $("html, body").animate({scrollTop:posicion_img+"px"});
+            });
+               
 
 
             });

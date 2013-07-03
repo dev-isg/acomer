@@ -1,0 +1,174 @@
+
+<?php echo $this->doctype(); ?>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Lista del Sabor</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+         <script src="<?php echo $this->basePath()?>/js/lib/jquery-1.8.3.min.js"></script> 
+         <script src="<?php echo $this->basePath()?>/js/vendor/mosaic.js"></script> 
+          <script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.js"></script> 
+        <script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js"></script> 
+         <!--<script src="<?php echo $this->basePath()?>/js/main.js"></script> -->
+         
+        <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>                                
+                                   
+    </head>
+    <div class="contenido">
+          <div class="contenido-busqueda" >
+               
+          <h1 style="margin-top: 3.3em; text-align:center;"><img src="/img/logo.png" alt="logo" style="width: 100%;"></h1>
+
+                    <span class="logan" style="width: 23%;font-size: 3.1em;text-align: right;">-</span> <span class="logan" style="width: 54%;">..y hoy , ¿qué se te antoja?</span> <span class="logan" style="font-size: 3.1em;  text-align: right;">-</span>
+
+                    <div class="fec"><img src="/img/flecha.png" alt=""></div>
+                     
+                        <?php
+                        header('Content-Type: text/html; charset=utf-8');
+                        $limit = 10;
+                        $query = isset($_REQUEST['q']) ? $_REQUEST['q'] : false;
+
+                        $results = false;
+                        if ($query)
+                        { 
+                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
+                          $solr = new Apache_Solr_Service('192.168.1.44', 8983, '/solr/');
+                          if (get_magic_quotes_gpc() == 1)
+                          {
+                            $query = stripslashes($query);
+                          }
+                          try
+                          {
+                            $results = $solr->search($query, 0, $limit);
+
+                          }
+                          catch (Exception $e)
+                          {
+                          
+                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");
+                                     
+                          }
+                        }
+
+                        ?>
+                        <form  accept-charset="utf-8" method="get" class="form-horizontal" id="search" autocomplete="off" >
+                              <input id="q" name="q" type="text" placeholder="Escribe el nombre del plato" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
+                          <!--  <input type="submit"/>-->
+                       <!-- 
+                            <?php
+                            if ($results)
+                            {
+                              $total = (int) $results->response->numFound;
+                              $start = min(1, $total);
+                              $end = min($limit, $total);
+                            ?> -->
+                               <!-- <div>Resultados <?php echo $start; ?> - <?php echo $end;?> de <?php echo $total; ?>:</div>  -->
+                              </form>             
+                                <div class="final">
+                                    <img src="/img/responsive.png" alt="" style="padding: 37px 10px;">
+                                </div>       
+                  </div>
+ <div class="contenido-plato">
+        <div class="sub">
+            <span class="titulo-portada">Platos Recomendados </span>
+        </div>
+        <div class="sub">
+            <span class="titulo-portada">Platos Recomendados </span>
+        </div>
+
+        <?php 
+                foreach ($results->response->docs as $doc)
+                          {
+
+                      ?> 
+     
+                      <div class="plato_r">
+                       
+                          <input type="hidden" value=" <?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>">
+                            <div class="mosaic-block cover">
+                            <div class="mosaic-overlay"><span><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></span>
+                            <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                            </div>
+                            <a href="#" target="_blank" class="mosaic-backdrop">
+                              <div class="details">
+                                  <h4><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></h4>
+                                  <p style="font-weight: bold;">Ingredientes</p>
+                                  <p style="font-size:0.9em;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
+                              </div>
+                          </a>
+                              </div>
+                              <div class="foo">
+            <p class="nom_res"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p>
+            <div class="pt">
+                <p class="pre"><?php echo 'S/. '.  htmlspecialchars($doc->va_precio, ENT_QUOTES, 'utf-8'); ?></p>
+                <p class="com">7 <i class="icon-comment"></i></p>
+                
+            <p id="star" class="punt"></p>
+            </div>
+            </div>
+
+            </div>                     
+                                                
+              <!--            <?php echo htmlspecialchars($doc->va_direccion, ENT_QUOTES, 'utf-8'); ?>                         
+                         <?php echo htmlspecialchars($doc->plato_tipo, ENT_QUOTES, 'utf-8');?>
+                         <?php echo htmlspecialchars($doc->en_destaque, ENT_QUOTES, 'utf-8'); ?>
+                         <?php echo htmlspecialchars($doc->en_estado, ENT_QUOTES, 'utf-8'); ?> -->
+
+                    
+
+                      <?php
+                          }
+                      ?>   
+               
+                       <div class="masinfo">
+                           <img src="/img/scroll.png" alt="">
+                       </div>
+                       <div class="arrow">
+                          <img src="/img/flechamenu.png" alt="">
+                      </div>
+                      <div class="footer">
+                        <nav><ul>
+                            <li>Nosotros</li>
+                            <li>Ayuda</li>
+                            <li>Idiomas</li>
+                            </ul>
+                        </nav>
+                    <footer>
+                    Desarrollado por ISG - Innovations Systems Group  - Derechos Reservados
+                    </footer>
+                   </div>
+
+</div>
+</div>
+      <script>
+            $(document).ready(function(){
+
+            $('.cover').mosaic({
+                   animation    :    'slide',
+                   anchor_y    :    'top',        //Vertical anchor position
+                    hover_y        : '300px'
+                });
+              var puntaje = function(item,p){
+                 $(item).raty({
+                                 readOnly: true,
+                                  score: p,
+                                  starOff: '/img/t2.png',
+                                  starOn : '/img/t1.png'
+
+                  });
+              }
+
+
+            });
+        </script>
+
+
+    </body>
+</html>
+
