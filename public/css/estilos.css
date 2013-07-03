@@ -143,11 +143,13 @@ margin: 1px auto;
 }
 
 .contenido-busqueda {
-display: inline-block;
-width: 29%;
-height: 806px;
-vertical-align: top;
-background:url(../img/fondo.jpg) no-repeat ;
+background: url(../img/fondo.jpg) no-repeat;
+position: fixed;
+top: 0;
+width: 322px;
+height: 100%;
+text-align: center;
+z-index: 999;
 }
 
 .contenido-busqueda h2{
@@ -194,7 +196,7 @@ right: 2%;
     position:relative;
     overflow:hidden;
     width:100%;
-    height:192px;
+    height:170px;
     border-radius: 8px 8px 0px;
 }
 .mosaic-backdrop {
@@ -222,18 +224,19 @@ right: 2%;
         }
 
 .contenido-plato {
-display: inline-block;
-width: 70%;
-background:url(../img/map.jpg) repeat fixed;
-margin-left: -5px;
+background: url(../img/map.jpg) repeat fixed;
+height: 54%;
+margin-left: 323px;
 }
 
 .guia {
-padding: 1em 0px 2.5em;
+padding: 0em 0px 2.4em;
 }
 .masinfo {
-width: 99%;
+width: 67%;
 text-align: right;
+position: absolute;
+bottom: 40px;
 }
 #map.large{
   height:500px;
@@ -241,7 +244,7 @@ text-align: right;
 .final {
 width: 100%;
 text-align: center;
-margin-top: 12em;
+margin-top: 10em;
 }
 .busquedad {
 font-size: 1.2em;
@@ -298,7 +301,7 @@ padding: 1.5em 0px;
 .fec {
 width: 100%;
 text-align: center;
-margin-bottom: 18px;
+margin-bottom: 7px;
 margin-top: 3px;
 }
   .titulo-portada {
@@ -327,6 +330,10 @@ border-right: 1px solid
 .footer {
 background: rgba(0, 0, 0, 0.68);
 color: white;
+position: fixed;
+bottom: 0px;
+width: 71%;
+height: 39px;
 }
 footer{
     display: inline-block !important;
@@ -340,7 +347,6 @@ height: 185px;
 .pt {
 display: inline-block;
 width: 100%;
-padding: 5px 0px;
 }
 .pre {
 display: inline-block;
