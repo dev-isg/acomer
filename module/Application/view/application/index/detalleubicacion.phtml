@@ -1,8 +1,8 @@
  <?php
                         header('Content-Type: text/html; charset=utf-8');
-                        $limit = 10;             
+                        $limit = 9;             
                         $query = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
-                        //$fq =array('fq'=> 'distrito:miraflores');
+                        $fq =array('fq'=> 'distrito:miraflores');
                         
                       //  $fq = 'fq=distrito:miraflores';
 
@@ -17,7 +17,7 @@
                           }
                           try
                           {
-                            $results = $solr->search($query, 0, $limit);
+                            $results = $solr->search($query, 0, $limit, $fq );
 
                           }
                           catch (Exception $e)
@@ -30,8 +30,14 @@
 
                         ?>
                         <form  accept-charset="utf-8" method="get" class="form-horizontal" id="search" autocomplete="on" >
-                              <input id="q" name="q" type="text" placeholder="Escribe el nombre del plato" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
-                          <!--  <input type="submit"/>-->
+                              buscar plato:<input id="q" name="q" type="text" placeholder="Escribe el nombre del plato" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
+                   <!--   por distrito: <SELECT NAME="fq" SIZE="1" class="span12">
+   <OPTION VALUE="">seleccione:</OPTION>
+      <?php  foreach ($this->distritos as $distritos) : ?>
+     <OPTION size="10px" VALUE="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
+     <?php endforeach; ?>
+   </SELECT>-->
+<input type="submit"/>
                        <!-- 
                             <?php
                             if ($results)

@@ -42,16 +42,27 @@ class IndexController extends AbstractActionController
 //       
     
     }
-    
-    public function getConfigTable()
-{
-    if (!$this->configTable) {
-        $sm = $this->getServiceLocator();
-        $this->configTable = $sm->get('Platos\Model\PlatosTable'); // <-- HERE!
+    public function josAction()
+    {  
+        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+            ->from(array('f' => 'ta_ubigeo')) 
+            ->where(array('f.ch_provincia'=>'lima'));
+             $selectString = $sql->getSqlStringForSqlObject($select);
+          // echo $selectString;exit;
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            return $results;
     }
-
-    return $this->configTable;
-}
+   public function detalleubicacionAction()
+    { 
+         $view = new ViewModel();
+         $distritos=$this->josAction();
+        $view->setVariables(array('distritos' => $distritos));
+         return $view;
+    
+    }
     
 
      public function verAction()
@@ -202,6 +213,5 @@ class IndexController extends AbstractActionController
     }
     
     
-    
-
+   
 }
