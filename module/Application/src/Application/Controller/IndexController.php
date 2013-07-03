@@ -42,6 +42,16 @@ class IndexController extends AbstractActionController
 //       
     
     }
+    
+            public function getConfigTable()
+    {
+        if (!$this->configTable) {
+            $sm = $this->getServiceLocator();
+            $this->configTable = $sm->get('Platos\Model\PlatosTable');
+        }
+        return $this->configTable;
+    }
+    
     public function josAction()
     {  
         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
@@ -211,6 +221,7 @@ class IndexController extends AbstractActionController
             return new ViewModel($valores);
         }
     }
+    
     
     
    
