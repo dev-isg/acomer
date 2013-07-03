@@ -335,6 +335,27 @@ LIMIT '.$lim, $adapter::QUERY_MODE_EXECUTE);
         
     }
     
+     public function cantComentarios($dest=1,$lim){
+ 
+        $adapter=$this->tableGateway->getAdapter();
+        $primer=$this->tableGateway->getAdapter()
+                ->query('SELECT ta_plato.*,tr.va_nombre AS restaurant_nombre,COUNT(ta_comentario.in_id ) AS NumeroComentarios,
+                ta_comentario.ta_puntaje_in_id AS Puntaje,ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS Promedio
+                FROM ta_plato
+                LEFT JOIN  ta_comentario
+                ON ta_plato.in_id = ta_comentario.ta_plato_in_id
+                LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id` 
+                LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id` 
+                LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id` 
+                LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
+                where ta_plato.en_destaque='.$dest.' and ta_plato.en_estado=1 and tr.va_nombre is not null 
+                GROUP BY va_nombre,in_id
+                order by MAX(ta_comentario.ta_puntaje_in_id) DESC
+                LIMIT '.$lim, $adapter::QUERY_MODE_EXECUTE);
+       return $primer;
+        
+    }
+    
      public function distritosPlato(){
 
         $adapter=$this->tableGateway->getAdapter();

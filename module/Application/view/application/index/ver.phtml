@@ -89,7 +89,7 @@
                        <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                            <div class="mosaic-block cover">
                            <div class="mosaic-overlay"><span><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></span>
-                           <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                           <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="/img/mas.png" alt="" class="mas">
                            </div>
                            <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" target="_blank" class="mosaic-backdrop">
                              <div class="details">
@@ -101,11 +101,12 @@
                              </div>
                       <div class="foo">
            <p class="nom_res"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p>
-           <div class="pt">           
-               <p class="com"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?> <i class="icon-comment"></i></p>
-               <p id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" class="punt"></p>
-           <p id="" class="punt"></p>
-           </div>
+
+           <div class="pt">
+       
+           <p class="com"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?> <i class="icon-comment"></i></p>
+           <p id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" class="punt"></p>        
+           
            </div>
 
            </div> 
@@ -139,7 +140,7 @@
                          <div class="lateral" >
                           <img src="/img/mas.png" alt="" class="mas-det">
                           <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" target="_blank" >
-                               <img src="img/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="width: 144px;height: 120px;">
+                               <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="width: 144px;height: 120px;">
                           </a>
                           </div>
                           <div class="detalle-restaurante">
