@@ -54,14 +54,13 @@
 
                         ?>
                          <form  accept-charset="utf-8" method="post" class="form-horizontal" id="bubi" autocomplete="on" action='<?php echo $this->basePath(); ?>/application/index/detalleubicacion'>
-                       
+                        <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>  
                              <SELECT name="fq" id="fq" >
                         <OPTION value=""></OPTION>
                            <?php  foreach ($this->distritos as $distritos) : ?>
                           <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
                          <?php endforeach; ?>
-                         </SELECT>
-                              <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>                        
+                         </SELECT>                      
                        
                           <input type="submit"/>                      
 <!--                            <?php
@@ -77,6 +76,7 @@
 <div class="sub">
             <span class="titulo-portada" style="padding-right: 58px;">Destacados <?php echo $_REQUEST['q']; ?> </span>
         </div>
+        <div class="fondo-destacado">
  <?php 
                 foreach ($results->response->docs as $doc)
                           {
@@ -106,6 +106,7 @@
            </div>
 
            </div> 
+           </div>
                      
 
                       <?php
