@@ -2,7 +2,7 @@
                         header('Content-Type: text/html; charset=utf-8');
                         $limit = 9;             
                         $query = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
-                        $fq =array('fq'=> 'distrito:miraflores');
+                        $fq =array('fq'=> 'distrito:'.$_REQUEST['fq']);
                         
                       //  $fq = 'fq=distrito:miraflores';
 
@@ -31,13 +31,14 @@
                         ?>
                         <form  accept-charset="utf-8" method="get" class="form-horizontal" id="search" autocomplete="on" >
                               buscar plato:<input id="q" name="q" type="text" placeholder="Escribe el nombre del plato" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
-                   <!--   por distrito: <SELECT NAME="fq" SIZE="1" class="span12">
-   <OPTION VALUE="">seleccione:</OPTION>
-      <?php  foreach ($this->distritos as $distritos) : ?>
-     <OPTION size="10px" VALUE="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
-     <?php endforeach; ?>
-   </SELECT>-->
-<input type="submit"/>
+                  por distrito:
+                 <SELECT name="fq" id="fq" class="span2">
+                <OPTION value="">seleccione:</OPTION>
+                   <?php  foreach ($this->distritos as $distritos) : ?>
+                  <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
+                  <?php endforeach; ?>
+                 </SELECT>
+             <input type="submit"/>
                        <!-- 
                             <?php
                             if ($results)
@@ -47,6 +48,7 @@
                               $end = min($limit, $total);
                             ?> -->
                                <div>Resultados <?php echo $start; ?> - <?php echo $end;?> de <?php echo $total; ?>:</div> 
+                                <div>Resultados <?php echo $fq; ?>:</div> 
                            
                          </form> 
 
