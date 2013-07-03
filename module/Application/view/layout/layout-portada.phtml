@@ -68,56 +68,15 @@
  <div class="contenido-plato">
         <div class="guia">
           <img src="/img/pasos.png" alt="" style="width: 100%;">
-        </div>
-
-
-        <?php 
-                foreach ($results->response->docs as $doc)
-                          {
-
-                      ?> 
-     
-                      <div class="plato_r">
-                       
-                          <input type="hidden" value=" <?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>">
-                            <div class="mosaic-block cover">
-                            <div class="mosaic-overlay"><span><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></span>
-                            <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
-                            </div>
-                            <a href="#" target="_blank" class="mosaic-backdrop">
-                              <div class="details">
-                                  <h4><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></h4>
-                                  <p style="font-weight: bold;">Ingredientes</p>
-                                  <p style="font-size:0.9em;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
-                              </div>
-                          </a>
-                              </div>
-                              <div class="foo">
-            <p class="nom_res"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p>
-            <div class="pt">
-                <p class="pre"><?php echo 'S/. '.  htmlspecialchars($doc->va_precio, ENT_QUOTES, 'utf-8'); ?></p>
-                <p class="com">7 <i class="icon-comment"></i></p>
-            <p id="star" class="punt"></p>
-            </div>
-            </div>
-
-            </div>                     
-                                                
-              <!--            <?php echo htmlspecialchars($doc->va_direccion, ENT_QUOTES, 'utf-8'); ?>                         
-                         <?php echo htmlspecialchars($doc->plato_tipo, ENT_QUOTES, 'utf-8');?>
-                         <?php echo htmlspecialchars($doc->en_destaque, ENT_QUOTES, 'utf-8'); ?>
-                         <?php echo htmlspecialchars($doc->en_estado, ENT_QUOTES, 'utf-8'); ?> -->
-                    
-
-                      <?php
-                          }
-                      ?>   
-               
+        </div>     
                                         
             <?php echo $this->content; ?>
                        <div class="masinfo">
                            <img src="/img/scroll.png" alt="">
                        </div>
+                      <div class="subir">
+                        <a href="#top"><img src="img/scroll-top.png" alt=""></a>
+                    </div>
                        <div class="arrow">
                           <img src="/img/flechamenu.png" alt="">
                       </div>
@@ -152,6 +111,28 @@
 
                   });
               }
+               $(".subir").hide(); //Esto hace que el div Inicialice Oculto
+                $(window).scroll(function () {
+                            if ($(this).scrollTop() > 100) { //Esto hace que el Div aparezca de despues de haber bajado 100px con el scroll
+                                $('.subir').fadeIn(); //Aparece con un efecto Fade
+                                $('#ver').fadeOut();
+
+                            } else {
+                                $('.subir').fadeOut(); // Desaparece con un efecto Fade
+                                 $('#ver').fadeIn();
+                            }
+                        });
+                        $('.subir a').click(function () {
+                            $('body,html').animate({
+                                scrollTop: 0
+                            }, 500); // Todo esto hace que se la pagina se desplace hasta el tope con una lentitud de 500 milisegundos
+                            return false;
+                        });
+                         $("#ver").click(function(){
+                var posicion_img = $("#mostrar").offset().top;
+                $("html, body").animate({scrollTop:posicion_img+"px"});
+            });
+               
 
 
             });

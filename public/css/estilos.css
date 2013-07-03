@@ -246,6 +246,12 @@ width: 100%;
 text-align: center;
 margin-top: 10em;
 }
+.subir {
+position: fixed;
+bottom: 39px;
+width: 67%;
+text-align: right;
+}
 .busquedad {
 font-size: 1.2em;
 padding-right: 19PX;
@@ -350,11 +356,12 @@ width: 100%;
 }
 .pre {
 display: inline-block;
-width: 23%;
+width: 100%;
 color: #ff8400;
 font-weight: bold;
-font-size: 0.9em;
-text-align: right;
+font-size: 1.1em;
+text-align: center;
+margin: 0px
 }
 .nom_res{
 text-align: center;
