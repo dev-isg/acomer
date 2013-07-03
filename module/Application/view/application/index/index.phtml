@@ -51,7 +51,7 @@ endforeach; ?>
         <div class="plato_r">
    
                          <input type="hidden" value="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>">
-                       <input type="hidden" value="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>">
+                       <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>"value="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>">
                            <div class="mosaic-block cover">
                            <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8');?></span>
                            <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
@@ -68,11 +68,35 @@ endforeach; ?>
            <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8');?></p>
            <div class="pt">
                <p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>
-               <p class="com"><?php echo $list->NumeroComentarios ?><i class="icon-comment"></i></p>
-           <p id="star" class="punt"></p>
+               <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
+           <p id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>" class="punt"></p>
            </div>
            </div>
 
            </div>  
       
 <?php endforeach; ?>
+<script>
+  $(document).ready(function(){
+      var puntaje = function(item,p){
+     $(item).raty({ 
+                    readOnly: true,
+                    score: p, 
+                    starOff: '/img/t2.png',
+                    starOn : '/img/t1.png'                        
+      });
+   }
+     $("#plato_r").find(':input').each(function() {
+         var elemento= this;
+         var e = $(this).attr("data-id");
+         var ptaje;
+         var idptje;
+         if( elemento.name=="pun"){
+        idptje = e;
+         ptaje= elemento.value;
+        puntaje("#" + idptje ,ptaje); 
+         }
+        });
+
+  });
+</script>
