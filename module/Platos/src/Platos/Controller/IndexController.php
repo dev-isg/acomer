@@ -312,12 +312,14 @@ class IndexController extends AbstractActionController
     }
     
     public function verplatosAction(){
-             $id=$this->params()->fromQuery('id');
-            $listarecomendacion=$this->getPlatosTable()->getPlatoxRestaurant($id);
-            print_r($listarecomendacion);Exit;
-                return new ViewModel(array(
-            'lista' => $listarecomendacion
-        ));
+        $view = new ViewModel();
+        $view->setTerminal(true);
+//        $this->layout('layout/layout-portada');
+        $id=$this->params()->fromQuery('id');
+        $listarecomendacion=$this->getPlatosTable()->getPlatoxRestaurant($id);
+        
+        $view->setVariables(array('lista' => $listarecomendacion));
+        return $view;
     }
     /*
      * para acceder a mi service manager
