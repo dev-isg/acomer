@@ -12,8 +12,8 @@
    
         <div class="plato_r">
    
-                         <input type="hidden" value=" <?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>">
-                         <input type="hidden" value=" <?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8'); ?>">
+                         <input type="hidden" value="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>">
+                        <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>">
                            <div class="mosaic-block cover">
                            <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
                            <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
@@ -52,7 +52,7 @@ endforeach; ?>
         <div class="plato_r">
    
                          <input type="hidden" value="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>">
-                       <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>"value="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>">
+                       <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>">
                            <div class="mosaic-block cover">
                            <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8');?></span>
                            <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
