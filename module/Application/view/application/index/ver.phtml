@@ -64,8 +64,9 @@
                           <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
                          <?php endforeach; ?>
                          </SELECT>                      
-                       
-                          <input type="submit"/>                      
+                        <a href="#"> ver en mapa </a>
+                         <a href="#"> ver en listado </a>
+                      <!--     <input type="submit"/>     -->                  
 <!--                            <?php
                             if ($results)
                             {
@@ -107,9 +108,11 @@
            <p class="com"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?> <i class="icon-comment"></i></p>
            <p id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" class="punt"></p>        
            
-           </div>
+             </div>
 
-           </div> 
+             </div> 
+             </div>
+
            </div>
                      
 
@@ -126,7 +129,7 @@
                             
                             
                             
-        <div class="sub">
+        <div class="sub" style="margin-top: 2em;margin-bottom: 2em;">
             <span class="titulo-portada" style="padding-right: 29px;">Resultados <?php echo $_REQUEST['q']; ?> </span>
         </div>                    
                                               
