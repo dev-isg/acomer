@@ -167,6 +167,8 @@ class PlatosTable
                                              $document->longitud = $plato[0]['de_longitud'];
                                              $document->distrito = $plato[0]['distrito'];
                                              $document->va_imagen = $plato[0]['va_imagen'];
+                                             $document->comentarios = '0';
+                                             $document->puntuacion = '0';
                                              $solr->addDocument($document);
                                              $solr->commit();
                                              $solr->optimize();
@@ -273,22 +275,29 @@ class PlatosTable
             ->from('ta_plato')
             ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre'=>'va_nombre'),'left')
             ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
-            ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud','de_longitud','va_direccion'), 'left')
+            ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud','de_longitud','va_direccion','va_horario','va_dia'), 'left')
             ->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
             ->join(array('tu'=>'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('pais'=>'ch_pais','departamento'=>'ch_departamento','provincia'=>'ch_provincia','distrito'=>'ch_distrito'), 'left')
             ->where(array('ta_plato.in_id'=>$idplato)); 
    
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
-//            var_dump($selectString);Exit;
+            //var_dump($selectString);Exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
           
-            return $results->toArray();
+            return $results;//->toArray();
             
         }
     
     
-    public function cantComentxPlato($dest=1,$lim){
-      
+    public function cantComentxPlato($dest=1,$lim,$val){
+      if($val==1){
+          $res='is not null';//'is not null or ta_comentario.ta_puntaje_in_id!=0'; 
+          } else if ($val==2){
+              $res='is null';//'is null or ta_comentario.ta_puntaje_in_id!=0';
+              }
+              else if ($val==3){
+              $res='is null';//'is null or ta_comentario.ta_puntaje_in_id=0';    
+              }
         
 //               $select=$this->tableGateway->getSql()->select()
 //               ->columns(array('va_nombre','in_id'))
@@ -311,7 +320,7 @@ LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`i
 LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id` 
 LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id` 
 LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
-where ta_plato.en_destaque='.$dest.' and ta_plato.en_estado=1 and tr.va_nombre is not null 
+where ta_plato.en_destaque='.$dest.' and ta_plato.en_estado=1 and tr.va_nombre is not null and (ta_comentario.ta_puntaje_in_id '.$res.')
 GROUP BY va_nombre,in_id
 order by MAX(ta_comentario.ta_puntaje_in_id) DESC
 LIMIT '.$lim, $adapter::QUERY_MODE_EXECUTE);

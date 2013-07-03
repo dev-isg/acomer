@@ -95,11 +95,11 @@ class LocalForm extends Form
         ));
         
         $this->add(array(
-            'name' => 'ta_dia_in_id',
+            'name' => 'va_dia',
             'type' => 'Text',
             'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'ta_dia_in_id',
+                'id'   => 'va_dia',
                 'placeholder'=>'Ingrese el/los dia(s) de atencion'
             ),
             'options' => array(
