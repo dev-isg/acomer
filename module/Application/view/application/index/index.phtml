@@ -40,7 +40,7 @@
            </div>  
       
 <?php 
-       if($count==2){
+       if($count==1){
            echo ('<div id="mostrar" style="margin-top:4em;"></div>');
        }
 $count++;
@@ -52,7 +52,6 @@ endforeach; ?>
   <?php 
   foreach ($this->listaval  as $list) : ?>   
         <div class="plato_r">
-   
                          <input type="hidden" value="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>">
                        <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>">
                            <div class="mosaic-block cover">
@@ -60,6 +59,7 @@ endforeach; ?>
                            <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
                            </div>
                            <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>" target="_blank" class="mosaic-backdrop">
+
                              <div class="details">
                                  <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
                                  <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
@@ -95,6 +95,7 @@ endforeach; ?>
                            <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
                            </div>
                            <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>" target="_blank" class="mosaic-backdrop">
+
                              <div class="details">
                                  <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
                                  <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
