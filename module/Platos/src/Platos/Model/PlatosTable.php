@@ -157,7 +157,7 @@ class PlatosTable
                                              $document->name = $plato[0]['va_nombre'];                                            
                                              $document->tx_descripcion = $plato[0]['tx_descripcion'];
                                              $document->va_precio = $plato[0]['va_precio'];
-                                             $document->en_estado = $plato[0]['en_estado'];
+                                             $document->en_estado = 'desactivo';
                                              $document->plato_tipo = $plato[0]['tipo_plato_nombre'];
                                              $document->va_direccion = $plato[0]['va_direccion']; 
                                              $document->restaurante = $plato[0]['restaurant_nombre'];                                         
