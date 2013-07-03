@@ -116,6 +116,7 @@ class PlatosTable
             }
         }
         $data['en_destaque']='si';
+        $data['Ta_puntaje_in_id']=6;
 //            print_r($data);exit;
         $id = (int) $plato->in_id;
           
