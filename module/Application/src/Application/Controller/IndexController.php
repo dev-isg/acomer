@@ -68,6 +68,7 @@ class IndexController extends AbstractActionController
    public function detalleubicacionAction()
     { 
          $view = new ViewModel();
+          $this->layout('layout/layout-portada');
          $distritos=$this->josAction();
         $view->setVariables(array('distritos' => $distritos));
          return $view;
