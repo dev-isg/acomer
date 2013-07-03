@@ -1,7 +1,341 @@
-<?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Lista de platos</title>
+	<link rel="stylesheet" type="text/css" href="http://acomer.com:8080/css/bootstrap.min.css">
+	<script type="text/javascript" src="http://acomer.com:8080/js/lib/jquery-1.8.3.min.js"></script>
+	<style type="text/css">
+		body{
+			background: #ccc;
+		}
+		#wrapper {
+		    width: 1024px;
+		    height: 2000px;
+		    background-color:#aaa;
+		    margin:0 auto;
+		}
+		.sidebar{
+			width: 300px;
+			float: left;
+			height: 500px;
+		}
+		.content-fixed{
+			position: fixed;
+			top: 0;
+			background: red;
+			height: 500px;
+			width: 300px;
+		}
+		.content-left{
+			width: 724px;
+			float: left;
+		}
+		.descrip-product{
+			background: url(../../img/back-detalle.png) repeat;
+			width: 724px;
+			height: 100%;
+		}
+		.etiqueta-cat{
+			display: block;
+			width: 100%;
+			padding-top: 25px;
+			
+		}
+		.etiqueta{
+			background: url(../../img/etiqueta.png) no-repeat;
+			height: 45px;
+			width: 240px;
+		}
+		.etiqueta p{
+			font-weight: bold;
+			font-style: italic;
+			font-size: 18px;
+			font-family: arial;
+			color: white;
+			padding-top: 7px;
+			padding-left: 30px;
+		}
+		.etiqueta p span{
+			font-size: 15px;
+		}
+		.descrip-product .ficha-product{
+			margin-top: 5px;
+			width: 678px;
+			height: 272px;
+			background: #eaeaea;
+			padding: 5px;
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			-o-border-radius: 4px;
+			border-radius: 4px;
+			margin-left: 18px;
+		}
+		.ficha-product .ficha-img{
+			float: left;
+			width: 407px;
+		}
+		.ficha-product .ficha-desc{
+			float: left;
+			width: 251px;
+			padding: 10px;
+		}
+		.ficha-desc h2{
+			font-size: 18px;
+			font-family: arial;
+			color: #ff8400;
+			font-weight: bold;
+			margin: 0;
+			margin-top: 10px;
+			line-height: 18px;
+			border-bottom: 1px solid white;
+			padding-bottom: 3px;
+			margin-bottom: 7px;
+		}
+		.ficha-desc .puntuaciones{
+			width: 99px;
+			height: 15px;
+			display: block;
+			background: url(../../img/puntuacion.png) no-repeat;
+		}
+		.ficha-desc h3{
+			font-size: 14px;
+			font-family: arial;
+			color: #ff8400;
+			font-weight: bold;
+			line-height: 14px;
+			border-bottom: 1px solid white;
+			padding-bottom: 3px;
+			margin-top: 8px;
+		}
+		.ficha-desc p.desc{
+			color: #7b7b7b;
+			font-family: arial;
+			font-size: 12px;
+			line-height: 16px;
+		}
+		.ficha-desc p.costo{
+			font-size: 14px;
+			font-family: arial;
+			color: #ff8400;
+			font-weight: bold;
+			border-bottom: 1px solid white;
+			padding-bottom: 3px;
+			margin: 0;
+			line-height: 14px;
+		}
+		.ficha-desc p.precio{
+			font-size: 18px;
+			font-family: arial;
+			color: #ff8400;
+			font-weight: bold;
+			margin: 0;
+			line-height: 18px;
+			margin-top: 8px;
+		}
+		.content-coments{
+			display: block;
+			padding: 10px 18px;
+		}
+		.coments-all{
+			float: left;
+			width: 411px;
+			border-right: 1px solid #e5e5e5;
+		}
+		.content-info{
+			float: left;
+			width: 271px;
+		}
+		.coments-all .top-coment{
+			height: 49px;
+			border-bottom: 1px solid #e5e5e5;
+			margin-right: 10px;
+		}
+		.top-coment p{
+			width: 180px;
+			float: left;
+			color: #ff8400;
+			font-size: 14px;
+			font-family: arial;
+			background: url(../../img/coments.png) no-repeat 0px 5px;
+			padding-left: 20px;
+			margin-left: 15px;
+			margin-bottom: 0;
+			margin-top: 10px;
+		}
+		.top-coment a{
+			width: 128px;
+			float: right;
+			margin-right: 15px;
+			height: 21px;
+			font-size: 12px;
+			font-weight: bold;
+			font-family: arial;
+			padding: 6px 4px;
+		}
+		.comentarios-one{
+			display: block;
+		}
+		.comentarios-one ul{
+			list-style: none;
+			margin: 0;
+			margin-top: 15px;
+		}
+		.coment-li{
+			display: block;
+			border-bottom: 1px solid #e5e5e5;
+			overflow: hidden;
+			margin-right: 10px;
+		}
+		.coment-li .img-li{
+			width: 81px;
+			float: left;
+			margin-right: 8px;
+		}
+		.img-li-desc{
+			float: left;
+			width: 310px;
+		}
+		.img-li-desc .img-li-bottom p{
+			color: #7b7b7b;
+			font-size: 12px;
+			line-height: 15px;
+			font-family: arial;
+		}
+		.img-li-desc .img-li-top h4{
+			font-size: 14px;
+			color: #ff8400;
+			font-family: arial;
+			line-height: 16px;
+			margin: 0;
+			padding-bottom: 4px;
+			margin-bottom: 5px;
+		}
+		.img-li-top{
+			position: relative;
+		}
+		.img-li-desc .img-li-top h4{
+			border-bottom: 1px solid #e5e5e5;
+		}
+		.img-li-top .puntuaciones{
+			width: 99px;
+			height: 15px;
+			display: block;
+			background: url(../../img/puntuacion.png) no-repeat;
+			position: absolute;
+			right: 10px;
+			top: 0px;
+		}
+		.comentarios-one ul li{
+			margin-bottom: 18px;
+		}
+	</style>
+</head>
+<body>
+	<div id='wrapper'>
+	   <div class="sidebar">
+	   		<div class="content-fixed">
+	   			esto es sidebar
+	   		</div>
+	   </div>
+	   <div class="content-left">
+	   		<div class="descrip-product">
+	   			<div class="etiqueta-cat">
+	   				<div class="etiqueta">
+	   					<p>Destacados - <span>Ceviche</span></p>
+	   				</div>
+	   			</div>
+	   			<div class="ficha-product">
+	   				<div class="ficha-img">
+	   					<img src="/img/ceviche.jpg">
+	   				</div>
+	   				<div class="ficha-desc">
+	   					<h2>Don pedro</h2>
+	   					<div class="puntuaciones"></div>
+	   					<h3>Ceviche de coginova</h3>
+	   					<p class="desc">Agárrense que retomamos con un plato que está en el corazón de todos los peruanos y que se ha convertido en la carta de presentación más inmediata de nuestra gastronomía a los paladares extranjeros: el cebiche.</p>
+	   					<p class="costo">Costo</p>
+	   					<p class="precio">S/. 12.50</p>
+	   				</div>
+	   			</div>
+	   			<div class="content-coments">
+	   				<div class="coments-all">
+	   					<div class="top-coment">
+	   						<p>7 comentarios realizados</p>
+	   						<a href="#" class="btn btn-warning">Agregar comentario</a>
+	   					</div>
+	   					<div class="comentarios-one">
+	   						<ul>
+	   							<li>
+	   								<div class="coment-li">
+	   									<div class="img-li">
+	   										<img src="/img/foto-carnet.jpg">
+	   									</div>
+	   									<div class="img-li-desc">
+	   										<div class="img-li-top">
+	   											<h4>Angel ramires</h3>
+	   											<div class="puntuaciones"></div>
+	   										</div>
+	   										<div class="img-li-bottom">
+	   											<p>Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos. </p>
+	   										</div>
+	   									</div>
+	   								</div>
+	   							</li>
+	   							<li>
+	   								<div class="coment-li">
+	   									<div class="img-li">
+	   										<img src="/img/foto-carnet.jpg">
+	   									</div>
+	   									<div class="img-li-desc">
+	   										<div class="img-li-top">
+	   											<h4>Angel ramires</h3>
+	   											<div class="puntuaciones"></div>
+	   										</div>
+	   										<div class="img-li-bottom">
+	   											<p>Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos. </p>
+	   										</div>
+	   									</div>
+	   								</div>
+	   							</li>
+	   							<li>
+	   								<div class="coment-li">
+	   									<div class="img-li">
+	   										<img src="/img/foto-carnet.jpg">
+	   									</div>
+	   									<div class="img-li-desc">
+	   										<div class="img-li-top">
+	   											<h4>Angel ramires</h3>
+	   											<div class="puntuaciones"></div>
+	   										</div>
+	   										<div class="img-li-bottom">
+	   											<p>Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos. </p>
+	   										</div>
+	   									</div>
+	   								</div>
+	   							</li>
+	   						</ul>
+	   					</div>
+	   				</div>
+	   				<div class="content-info">
+ergerg
+	   				</div>
+	   			</div>
+	   			
+		   		<p>
+		   			Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estÃ¡ndar de las industrias desde el aÃ±o 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usÃ³ una galerÃ­a de textos y los mezclÃ³ de tal manera que logrÃ³ hacer un libro de textos especimen. No sÃ³lo sobreviviÃ³ 500 aÃ±os, sino que tambien ingresÃ³ como texto de relleno en documentos electrÃ³nicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creaciÃ³n de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y mÃ¡s recientemente con software de autoediciÃ³n, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
+		   		</p>
+		   		<p>
+		   			Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estÃ¡ndar de las industrias desde el aÃ±o 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usÃ³ una galerÃ­a de textos y los mezclÃ³ de tal manera que logrÃ³ hacer un libro de textos especimen. No sÃ³lo sobreviviÃ³ 500 aÃ±os, sino que tambien ingresÃ³ como texto de relleno en documentos electrÃ³nicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creaciÃ³n de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y mÃ¡s recientemente con software de autoediciÃ³n, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
+		   		</p>
+		   		<p>
+		   			Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estÃ¡ndar de las industrias desde el aÃ±o 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usÃ³ una galerÃ­a de textos y los mezclÃ³ de tal manera que logrÃ³ hacer un libro de textos especimen. No sÃ³lo sobreviviÃ³ 500 aÃ±os, sino que tambien ingresÃ³ como texto de relleno en documentos electrÃ³nicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creaciÃ³n de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y mÃ¡s recientemente con software de autoediciÃ³n, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
+		   		</p>
+	   		</div>
+	   </div>
+	</div>
+</body>
+</html>
