@@ -158,7 +158,7 @@ class PlatosTable
                                              $document->name = $plato[0]['va_nombre'];                                            
                                              $document->tx_descripcion = $plato[0]['tx_descripcion'];
                                              $document->va_precio = $plato[0]['va_precio'];
-                                             $document->en_estado = 'desactivo';
+                                             $document->en_estado = $plato[0]['en_estado'];
                                              $document->plato_tipo = $plato[0]['tipo_plato_nombre'];
                                              $document->va_direccion = $plato[0]['va_direccion']; 
                                              $document->restaurante = $plato[0]['restaurant_nombre'];                                         
@@ -167,6 +167,8 @@ class PlatosTable
                                              $document->longitud = $plato[0]['de_longitud'];
                                              $document->distrito = $plato[0]['distrito'];
                                              $document->va_imagen = $plato[0]['va_imagen'];
+                                             $document->comentarios = '0';
+                                             $document->puntuacion = '0';
                                              $solr->addDocument($document);
                                              $solr->commit();
                                              $solr->optimize();
