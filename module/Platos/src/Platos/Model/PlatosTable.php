@@ -287,8 +287,15 @@ class PlatosTable
         }
     
     
-    public function cantComentxPlato($dest=1,$lim){
-      
+    public function cantComentxPlato($dest=1,$lim,$val){
+      if($val==1){
+          $res='is not null';//'is not null or ta_comentario.ta_puntaje_in_id!=0'; 
+          } else if ($val==2){
+              $res='is null';//'is null or ta_comentario.ta_puntaje_in_id!=0';
+              }
+              else if ($val==3){
+              $res='is null';//'is null or ta_comentario.ta_puntaje_in_id=0';    
+              }
         
 //               $select=$this->tableGateway->getSql()->select()
 //               ->columns(array('va_nombre','in_id'))
@@ -311,7 +318,7 @@ LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`i
 LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id` 
 LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id` 
 LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
-where ta_plato.en_destaque='.$dest.' and ta_plato.en_estado=1 and tr.va_nombre is not null 
+where ta_plato.en_destaque='.$dest.' and ta_plato.en_estado=1 and tr.va_nombre is not null and (ta_comentario.ta_puntaje_in_id '.$res.')
 GROUP BY va_nombre,in_id
 order by MAX(ta_comentario.ta_puntaje_in_id) DESC
 LIMIT '.$lim, $adapter::QUERY_MODE_EXECUTE);
