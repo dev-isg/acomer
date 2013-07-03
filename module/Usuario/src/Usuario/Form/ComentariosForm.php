@@ -45,6 +45,9 @@ class ComentariosForm extends Form
                 'id'   => 'va_nombre',
                 'placeholder'=>'Ingrese su nombre'
             ),
+
+            
+
         
         ));
         

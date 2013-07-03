@@ -8,7 +8,7 @@ $this->headTitle($title);
 $form = $this->form;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
 $form->setAttributes(array(
-    'action' => $this->url.'/usuario/clientes/agregarcomentarios',
+    'action' => $this->url.'/usuario/comentarios/agregarcomentarios',
     'method' => 'post'
 ));
 $form->prepare();
@@ -34,9 +34,10 @@ $(document).ready(function(){
 
 
  $('#star').raty({
-					  target    : '#Ta_plato_in_id',
-					  targetType: 'number'
+					  target    : '#Ta_puntaje_in_id',
+					  targetType: 'number',
                       starOff: '/img/t2.png',
+                      targetKeep:true,
                       starOn : '/img/t1.png'
 
                 });

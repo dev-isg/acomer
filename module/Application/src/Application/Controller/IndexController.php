@@ -18,25 +18,48 @@ use Application\Model\Entity\Procesa;
 use Application\Model\Usuario;
 use Application\Model\Entity\Album;
 
+use Platos\Model\Platos;
+use Platos\Model\PlatosTable; 
 
 class IndexController extends AbstractActionController
 {
-    
+    protected $configTable;
     public $dbAdapter;
     public function indexAction()
     { 
        
         $view = new ViewModel();
         $this->layout('layout/layout-portada');
-        return $view;
+        $listarecomendacion=$this->getConfigTable()->cantComentxPlato();
+        
+        $view->setVariables(array('lista' => $listarecomendacion));
+         return $view;
+//                return new ViewModel(array(
+//            'lista' => $listarecomendacion
+//        ));
+                
+//       
     
     }
+    
+    public function getConfigTable()
+{
+    if (!$this->configTable) {
+        $sm = $this->getServiceLocator();
+        $this->configTable = $sm->get('Platos\Model\PlatosTable'); // <-- HERE!
+    }
+
+    return $this->configTable;
+}
+    
+
      public function verAction()
     { 
          $view = new ViewModel();
         // $this->layout('layout/layout-dos');
         return $view;
     }
+
     public function rolesAction()
     { 
         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');

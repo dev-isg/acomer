@@ -39,7 +39,9 @@ class ComentariosTable
 
       return $results;
     }
-    
+    /*
+     * agregar y registrar el comentario posiblemente se mueva
+     */
     public function agregarComentario($coment){
         
            $cliente=array(
@@ -49,20 +51,25 @@ class ComentariosTable
            $insert = $this->tableGateway->getSql()->insert()->into('ta_cliente')
                     ->values($cliente);
             $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
+            
             $statement->execute();    
 //            $selectString2 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insert);
 //            $adapter=$this->tableGateway->getAdapter();
 //            $result = $adapter->query($selectString2, $adapter::QUERY_MODE_EXECUTE);
-            $idcliente=$this->tableGateway->getLastInsertValue();
-          
+            $idcliente=$this->tableGateway->getAdapter()->getDriver()->getLastGeneratedValue();//$this->tableGateway->getLastInsertValue();
+//          var_dump($idcliente);Exit;
+
+//           date_default_timezone_set('UTC');
             $comentario = array(
-            'tx_descripcion' => $coment->tx_descripcion,
-            'Ta_plato_in_id' => $coment->Ta_plato_in_id,
+            'tx_descripcion' => $coment['tx_descripcion'],
+            'Ta_plato_in_id' => $coment['Ta_plato_in_id'],
             'Ta_cliente_in_id' => $idcliente,//$coment->Ta_cliente_in_id,
-            'Ta_puntaje_in_id' => $coment->Ta_puntaje_in_id,
+            'Ta_puntaje_in_id' => $coment['Ta_puntaje_in_id'],
+                'Ta_plato_in_id'=>35,
+                'da_fecha'=>date('c')//date('Y-m-dTH:i:s.uZ')//'2013-12-12'
                 );
-                    
-         $id = (int) $coment->in_id;
+           
+         $id = (int) $coment['in_id'];
             if ($id == 0) {            
            $insertcoment= $this->tableGateway->getSql()->insert()->into('ta_comentario')
                     ->values($comentario);

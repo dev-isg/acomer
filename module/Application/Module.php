@@ -36,6 +36,13 @@ class Module
     {
         return array(
             'factories' => array(
+//                        'Usuario\Model\Cliente'=>function($sm){
+//                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+//                    $table = new Cliente($dbAdapter);
+//                    return $table;
+//                    
+//                 },
+                         
                 'Application\Model\UsuarioTable' =>  function($sm) {
                     $tableGateway = $sm->get('UsuarioTableGateway');
                     $table = new UsuarioTable($tableGateway);
