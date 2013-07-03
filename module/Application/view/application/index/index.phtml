@@ -5,7 +5,11 @@
             <span class="titulo-portada">Platos Destacados </span>
         </div>
   <?php 
-  foreach ($this->lista  as $list) : ?>   
+  $count=0;
+  foreach ($this->lista  as $list) : 
+
+      ?>   
+   
         <div class="plato_r">
    
                          <input type="hidden" value=" <?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>">
@@ -33,7 +37,12 @@
 
            </div>  
       
-<?php endforeach; ?>
+<?php 
+       if($count==2){
+           echo ('<div id="mostrar" style="margin-top:2em;"></div>');
+       }
+$count++;
+endforeach; ?>
         <div class="sub">
             <span class="titulo-portada">Platos Recomendados </span>
         </div>
