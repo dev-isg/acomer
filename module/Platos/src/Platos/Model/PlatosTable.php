@@ -167,6 +167,8 @@ class PlatosTable
                                              $document->longitud = $plato[0]['de_longitud'];
                                              $document->distrito = $plato[0]['distrito'];
                                              $document->va_imagen = $plato[0]['va_imagen'];
+                                             $document->comentarios = '0';
+                                             $document->puntuacion = '0';
                                              $solr->addDocument($document);
                                              $solr->commit();
                                              $solr->optimize();
