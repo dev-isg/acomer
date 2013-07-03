@@ -3,7 +3,8 @@
                         $limit = 9;             
                         $query = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
                         $consulta =array('fq'=> 'en_estado:activo AND distrito:'.$_REQUEST['fq'],
-                                       'sort'=>'en_destaque desc');
+                                       'sort'=>'en_destaque desc',
+                            'wt'=>'json');
                         
                       
                         $results = false;
@@ -30,7 +31,7 @@
 
                         ?>
                         <form  accept-charset="utf-8" method="get" class="form-horizontal" id="search" autocomplete="on" >
-                              buscar plato:<input id="q" name="q" type="text" placeholder="Escribe el nombre del plato" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
+                              buscar plato:<input id="r" name="q" type="text" placeholder="Escribe el nombre del plato" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
                   por distrito:
                  <SELECT name="fq" id="fq" class="span2">
                 <OPTION value="">seleccione:</OPTION>
