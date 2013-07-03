@@ -359,7 +359,7 @@ display: inline-block;
 width: 100%;
 color: #ff8400;
 font-weight: bold;
-font-size: 1.1em;
+font-size: 1em;
 text-align: center;
 margin: 0px
 }
@@ -394,7 +394,7 @@ display: inline-block;
 box-shadow: 1px 1px 4px 1px ;
 width: 29%;
 font-weight:bold;
-margin: 1% 1% 1% 1%;
+margin: 1% 1% 7% 2.4%;
 border-radius: 10px;
 }
 .plato_r span{
