@@ -93,24 +93,31 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-#search input[type="text"] { background: url(../img/search-white.png) no-repeat 95% 50% #ff8500; border: 0 none; color: #fff;  padding: 12px 15px 13px 27px;
-border-radius:14px;
-width: 79%;
-font-weight: bold;
-font-size: 1em;
-text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
--webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
--moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
--webkit-transition: all 0.7s ease 0s;
--moz-transition: all 0.7s ease 0s;
--o-transition: all 0.7s ease 0s;
-transition: all 0.7s  }
+#search input[type="text"] { 
+  background: url(../img/search-white.png) no-repeat 95% 50% #ff8500; 
+  border: 0 none; color: #fff;  
+  padding: 12px 15px 13px 27px;
+  border-radius:14px;
+  width: 79%;
+  font-weight: bold;
+  font-size: 1em;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+  -webkit-transition: all 0.7s ease 0s;
+  -moz-transition: all 0.7s ease 0s;
+  -o-transition: all 0.7s ease 0s;
+  transition: all 0.7s; 
+  font-size: 16px;
+  font-weight: normal;
+}
 
 #search input[type="text"]:focus {  }
 #search {
-width: 100%;
-text-align: center;
+  width: 100%;
+  text-align: center;
+  margin-top: -13px;
 }
 
 .input-append input {
@@ -140,15 +147,15 @@ cursor: pointer;
   box-shadow: 0px 5px 20px #ccc;
 }
 .contenido{
-    max-width: 1024px;
-margin: 1px auto;
+  max-width: 1024px;
+  margin: 0px auto;
 }
 
 .contenido-busqueda {
 background: url(../img/fondo.jpg) no-repeat;
 position: fixed;
 top: 0;
-width: 322px;
+width: 300px;
 height: 100%;
 text-align: center;
 z-index: 999;
@@ -159,15 +166,28 @@ color: white;
 text-align: center;
 }
 .logan {
-display: inline-block;
-text-align: center;
-font-size: 1.6em;
-color: white;
-font-weight: bold;
-margin-top: -30px;
-line-height: 1em;
-vertical-align: middle;
-font-style: italic;
+  display: inline-block;
+  text-align: center;
+  font-size: 1.5em;
+  color: white;
+  font-weight: bold;
+  margin-top: -30px;
+  line-height: 1em;
+  vertical-align: middle;
+  font-style: italic;
+  line-height: 25px;
+}
+.logan-1 {
+  display: inline-block;
+  text-align: center;
+  font-size: 1.6em;
+  color: white;
+  font-weight: bold;
+  margin-top: -30px;
+  line-height: 1em;
+  vertical-align: middle;
+  font-style: italic;
+  font-weight: normal;
 }
 
 .arrow {
@@ -228,7 +248,7 @@ right: 2%;
 .contenido-plato {
 /*background: url(../img/map.jpg) repeat fixed;*/
 height: 54%;
-margin-left: 323px;
+margin-left: 300px;
 }
 .map-portada{
   background: url(../img/mapa.jpg) repeat;
@@ -311,7 +331,7 @@ padding: 1.5em 0px;
 .fec {
 width: 100%;
 text-align: center;
-margin-bottom: 14px;
+margin-bottom: 0px;
 margin-top: 3px;
 }
   .titulo-portada {
