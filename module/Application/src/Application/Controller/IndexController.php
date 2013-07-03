@@ -30,9 +30,10 @@ class IndexController extends AbstractActionController
        
         $view = new ViewModel();
         $this->layout('layout/layout-portada');
-        $listarecomendacion=$this->getConfigTable()->cantComentxPlato();
+        $listades=$this->getConfigTable()->cantComentxPlato(1,6);
+        $listaval=$this->getConfigTable()->cantComentxPlato(2,3);
         
-        $view->setVariables(array('lista' => $listarecomendacion));
+        $view->setVariables(array('lista' => $listades,'listaval'=>$listaval));
          return $view;
 //                return new ViewModel(array(
 //            'lista' => $listarecomendacion

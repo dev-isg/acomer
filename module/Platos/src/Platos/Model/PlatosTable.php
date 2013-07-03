@@ -144,6 +144,7 @@ class PlatosTable
             ->where(array('ta_plato.in_id'=>$idplato)); 
    
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
+//            var_dump($selectString);Exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $plato=$results->toArray();
             //print_r($plato);exit;
@@ -247,7 +248,9 @@ class PlatosTable
 //            var_dump($destaque);exit;
     }
 
-    
+    /*
+     * @return  un row de un plato
+     */
          public function getPlato($id)
     {
         $id  = (int) $id;
@@ -259,9 +262,31 @@ class PlatosTable
         }
         return $row;
     }
+    /*
+     *plato x restaurante 
+     */
+        public function getPlatoxRestaurant($idplato){
+                    $adapter = $this->tableGateway->getAdapter();
+        $sql = new Sql($adapter);
+        $selecttot = $sql->select()
+            ->from('ta_plato')
+            ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre'=>'va_nombre'),'left')
+            ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
+            ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud','de_longitud','va_direccion'), 'left')
+            ->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
+            ->join(array('tu'=>'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('pais'=>'ch_pais','departamento'=>'ch_departamento','provincia'=>'ch_provincia','distrito'=>'ch_distrito'), 'left')
+            ->where(array('ta_plato.in_id'=>$idplato)); 
+   
+            $selectString = $sql->getSqlStringForSqlObject($selecttot);
+//            var_dump($selectString);Exit;
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+          
+            return $results->toArray();
+            
+        }
     
     
-    public function cantComentxPlato(){
+    public function cantComentxPlato($dest=1,$lim){
       
         
 //               $select=$this->tableGateway->getSql()->select()
@@ -276,13 +301,21 @@ class PlatosTable
 //       return $results->toArray();
         $adapter=$this->tableGateway->getAdapter();
         $primer=$this->tableGateway->getAdapter()
-                ->query("SELECT ta_plato.va_nombre,ta_plato.in_id,COUNT(ta_comentario.in_id) AS NumeroComentarios,
-ta_comentario.ta_puntaje_in_id,ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS Promedio
+                ->query('SELECT ta_plato.*,tr.va_nombre AS restaurant_nombre,COUNT(ta_comentario.in_id ) AS NumeroComentarios,
+ta_comentario.ta_puntaje_in_id AS Puntaje,ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS Promedio
 FROM ta_plato
 LEFT JOIN  ta_comentario
 ON ta_plato.in_id = ta_comentario.ta_plato_in_id
-GROUP BY va_nombre,in_id", $adapter::QUERY_MODE_EXECUTE);
-//        $data=$primer->execute();
+LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id` 
+LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id` 
+LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id` 
+LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
+where ta_plato.en_destaque='.$dest.' and ta_plato.en_estado=1
+GROUP BY va_nombre,in_id
+order by MAX(ta_comentario.ta_puntaje_in_id) DESC
+LIMIT '.$lim, $adapter::QUERY_MODE_EXECUTE);
+        
+//        print_r($primer->toArray());Exit;
 //        $aux=array();
 //        foreach($primer as $value){
 //            $aux[]=$value;

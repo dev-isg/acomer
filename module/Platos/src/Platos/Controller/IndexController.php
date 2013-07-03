@@ -309,6 +309,15 @@ class IndexController extends AbstractActionController
         ));
 //        return array('lista'=>$listarecomendacion);
     }
+    
+    public function verplatosAction(){
+             $id=$this->params()->fromQuery('id');
+            $listarecomendacion=$this->getPlatosTable()->getPlatoxRestaurant($id);
+            print_r($listarecomendacion);Exit;
+                return new ViewModel(array(
+            'lista' => $listarecomendacion
+        ));
+    }
     /*
      * para acceder a mi service manager
      */
