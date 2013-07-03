@@ -30,8 +30,11 @@
                      
                         <?php
                         header('Content-Type: text/html; charset=utf-8');
-                        $limit = 10;
-                        $query = isset($_REQUEST['q']) ? $_REQUEST['q'] : false;
+                        $limit = 9;
+                        $query = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
+                        $fq = array (
+                                     'fq'=>'en_estado:activo',
+                                   'sort'=>'en_destaque desc');
 
                         $results = false;
                         if ($query)
@@ -44,7 +47,7 @@
                           }
                           try
                           {
-                            $results = $solr->search($query, 0, $limit);
+                            $results = $solr->search($query, 0, $limit, $fq  );
 
                           }
                           catch (Exception $e)
