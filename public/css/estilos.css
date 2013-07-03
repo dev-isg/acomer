@@ -223,6 +223,46 @@ position: absolute;
 top: 78%;
 right: 2%;
 }
+.detalle-nombre {
+display: inline-block;
+margin-top: 10px;
+margin-left: 10px;
+width: 96%;
+text-align: right;
+}
+.mas-det {
+position: absolute;
+bottom: 6px;
+left: 129px;
+}
+.detalle-restaurante {
+width: 503px;
+display: inline-block;
+vertical-align: top;
+}
+.lateral{
+    display: inline-block;
+width: 142px;
+vertical-align: top;
+}
+.nombre_r {
+display: inline-block;
+color: #ff8400;
+font-weight: bold;
+font-size: 1.3em;
+width: 362px;
+margin: 0px;
+text-align: left !important;
+}
+.com-pla {
+text-align: right;
+margin-right: 10px;
+}
+.plato_h {
+margin-left: 14px;
+background: #f0f0f0;
+width: 650px;
+}
 
 .mosaic-block {
     float:left;
