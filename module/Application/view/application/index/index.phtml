@@ -2,7 +2,7 @@
           <img src="/img/pasos.png" alt="" style="width: 100%;">
 </div>   
 <div class="sub">
-            <span class="titulo-portada">Platos Destacados </span>
+            <span class="titulo-portada" style="padding-right: 58px;">Platos Destacados </span>
         </div>
   <?php 
   $count=0;
@@ -39,12 +39,12 @@
       
 <?php 
        if($count==2){
-           echo ('<div id="mostrar" style="margin-top:2em;"></div>');
+           echo ('<div id="mostrar" style="margin-top:4em;"></div>');
        }
 $count++;
 endforeach; ?>
-        <div class="sub">
-            <span class="titulo-portada">Platos Recomendados </span>
+        <div class="sub" style="margin-top: 0px;">
+            <span class="titulo-portada" >Platos Recomendados </span>
         </div>
   <?php 
   foreach ($this->listaval  as $list) : ?>   
