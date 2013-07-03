@@ -31,7 +31,8 @@
                         $query = "($palabraBuscar) AND (en_destaque:si)";
                         $fq = array (  
                                    'sort'=>'random_' . uniqid() .' asc',
-                            'fq'=> 'en_estado:activo AND distrito:'.$_REQUEST['fq']);                                              
+                            'fq'=> 'en_estado:activo AND distrito:'.$_REQUEST['fq'],
+                            'wt'=>'json');                                              
                         $results = false;
                         if ($query)
                         { 
