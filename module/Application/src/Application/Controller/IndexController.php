@@ -30,9 +30,10 @@ class IndexController extends AbstractActionController
        
         $view = new ViewModel();
         $this->layout('layout/layout-portada');
-        $listarecomendacion=$this->getConfigTable()->cantComentxPlato();
+        $listades=$this->getConfigTable()->cantComentxPlato(1,6);
+        $listaval=$this->getConfigTable()->cantComentxPlato(2,3);
         
-        $view->setVariables(array('lista' => $listarecomendacion));
+        $view->setVariables(array('lista' => $listades,'listaval'=>$listaval));
          return $view;
 //                return new ViewModel(array(
 //            'lista' => $listarecomendacion
@@ -41,6 +42,16 @@ class IndexController extends AbstractActionController
 //       
     
     }
+    
+            public function getConfigTable()
+    {
+        if (!$this->configTable) {
+            $sm = $this->getServiceLocator();
+            $this->configTable = $sm->get('Platos\Model\PlatosTable');
+        }
+        return $this->configTable;
+    }
+    
     public function josAction()
     {  
         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
@@ -210,6 +221,7 @@ class IndexController extends AbstractActionController
             return new ViewModel($valores);
         }
     }
+    
     
     
    
