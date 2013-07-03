@@ -49,45 +49,134 @@
       </ul>
     </div>
 
-        <div class="sub" style="margin-top: 0px;">
-          <div class="content-etiqueta-home">
-            <p>Platos Recomendados</p>
-          </div>
-        </div>
+    <div class="sub" style="margin-top: 0px;">
+      <div class="content-etiqueta-home">
+        <p>Platos destacados</p>
+      </div>
+    </div>
+    <div class="recomendados-platos-uno">
+      <ul>
+        <li>
+          <div class="plato_r">
+              <input type="hidden" value="22">
+              <input type="hidden" name="pun" data-id="22" value="">
+               <div class="mosaic-block cover">
+               <div class="mosaic-overlay" style="display: block; left: 0px; top: 0px;"><span>arroz con paatoo</span>
+               <img src="/imagenes/bug_moderacion.png" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+               </div>
+               <a href="/platos/index/verplatos?id=22" target="_blank" class="mosaic-backdrop" style="display: inline;">
+                 <div class="details">
+                     <h4>arroz con paatoo</h4>
+                     <p style="font-weight: bold;">Ingredientes</p>
+                     <p style="font-size:0.9em;"> aaaaaadfdfdfdfdf </p>
+                 </div>
+             </a>
+                 </div>
+            <div class="foo">
+              <p class="nom_res">Restaurante don alberto</p>
+              <div class="pt">
+                <!--<p class="pre">S/. 200.00</p>-->
+                <p class="com">0 <i class="icon-comment"></i></p>
+                <p id="22" class="punt" title="Not rated yet!" style="width: 100px;"><img src="/img/t2.png" alt="1" title="Not rated yet!">&nbsp;<img src="/img/t2.png" alt="2" title="Not rated yet!">&nbsp;<img src="/img/t2.png" alt="3" title="Not rated yet!">&nbsp;<img src="/img/t2.png" alt="4" title="Not rated yet!">&nbsp;<img src="/img/t2.png" alt="5" title="Not rated yet!"><input type="hidden" name="score" readonly="readonly"></p>
+              </div>
+            </div>
+         </div>
+        </li>
+        <li>
+          <div class="plato_r">
+              <input type="hidden" value="22">
+              <input type="hidden" name="pun" data-id="22" value="">
+               <div class="mosaic-block cover">
+               <div class="mosaic-overlay" style="display: block; left: 0px; top: 0px;"><span>arroz con paatoo</span>
+               <img src="/imagenes/bug_moderacion.png" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+               </div>
+               <a href="/platos/index/verplatos?id=22" target="_blank" class="mosaic-backdrop" style="display: inline;">
+                 <div class="details">
+                     <h4>arroz con paatoo</h4>
+                     <p style="font-weight: bold;">Ingredientes</p>
+                     <p style="font-size:0.9em;"> aaaaaadfdfdfdfdf </p>
+                 </div>
+             </a>
+                 </div>
+            <div class="foo">
+              <p class="nom_res">Restaurante don alberto</p>
+              <div class="pt">
+                <!--<p class="pre">S/. 200.00</p>-->
+                <p class="com">0 <i class="icon-comment"></i></p>
+                <p id="22" class="punt" title="Not rated yet!" style="width: 100px;"><img src="/img/t2.png" alt="1" title="Not rated yet!">&nbsp;<img src="/img/t2.png" alt="2" title="Not rated yet!">&nbsp;<img src="/img/t2.png" alt="3" title="Not rated yet!">&nbsp;<img src="/img/t2.png" alt="4" title="Not rated yet!">&nbsp;<img src="/img/t2.png" alt="5" title="Not rated yet!"><input type="hidden" name="score" readonly="readonly"></p>
+              </div>
+            </div>
+         </div>
+        </li>
+        <li>
+            <div class="plato_r">
+                <input type="hidden" value="22">
+                <input type="hidden" name="pun" data-id="22" value="">
+                 <div class="mosaic-block cover">
+                 <div class="mosaic-overlay" style="display: block; left: 0px; top: 0px;"><span>arroz con paatoo</span>
+                 <img src="/imagenes/bug_moderacion.png" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                 </div>
+                 <a href="/platos/index/verplatos?id=22" target="_blank" class="mosaic-backdrop" style="display: inline;">
+                   <div class="details">
+                       <h4>arroz con paatoo</h4>
+                       <p style="font-weight: bold;">Ingredientes</p>
+                       <p style="font-size:0.9em;"> aaaaaadfdfdfdfdf </p>
+                   </div>
+               </a>
+                   </div>
+              <div class="foo">
+                <p class="nom_res">Restaurante don alberto</p>
+                <div class="pt">
+                  <!--<p class="pre">S/. 200.00</p>-->
+                  <p class="com">0 <i class="icon-comment"></i></p>
+                  <p id="22" class="punt" title="Not rated yet!" style="width: 100px;"><img src="/img/t2.png" alt="1" title="Not rated yet!">&nbsp;<img src="/img/t2.png" alt="2" title="Not rated yet!">&nbsp;<img src="/img/t2.png" alt="3" title="Not rated yet!">&nbsp;<img src="/img/t2.png" alt="4" title="Not rated yet!">&nbsp;<img src="/img/t2.png" alt="5" title="Not rated yet!"><input type="hidden" name="score" readonly="readonly"></p>
+                </div>
+              </div>
+           </div>
+          </li>
+      </ul>
+    </div>
 
-        <div class="recomendados-platos">
-          <ul>
-            <?php 
-              foreach ($this->listaval  as $list) : ?> 
-                  <li>
-                    <div class="plato_r">
-                        <input type="hidden" value="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>">
-                        <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>">
-                            <div class="mosaic-block cover">
-                              <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8');?></span>
-                               <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
-                               </div>
-                               <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>" target="_blank" class="mosaic-backdrop">
-                                 <div class="details">
-                                     <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
-                                     <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
-                                     <p style="font-size:0.9em;"><?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
-                                 </div>
-                                </a>
-                            </div>
-                      <div class="foo">
-                        <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8');?></p>
-                        <div class="pt">
-                           <p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>
-                           <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
-                        <p id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>" class="punt"></p>
+
+    <div class="sub" style="margin-top: 0px;">
+      <div class="content-etiqueta-home">
+        <p>Platos Recomendados</p>
+      </div>
+    </div>
+
+    <div class="recomendados-platos">
+      <ul>
+        <?php 
+          foreach ($this->listaval  as $list) : ?> 
+              <li>
+                <div class="plato_r">
+                    <input type="hidden" value="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>">
+                    <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>">
+                        <div class="mosaic-block cover">
+                          <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8');?></span>
+                           <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                           </div>
+                           <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>" target="_blank" class="mosaic-backdrop">
+                             <div class="details">
+                                 <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
+                                 <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
+                                 <p style="font-size:0.9em;"><?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
+                             </div>
+                            </a>
                         </div>
-                      </div>
+                  <div class="foo">
+                    <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8');?></p>
+                    <div class="pt">
+                       <p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>
+                       <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
+                    <p id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>" class="punt"></p>
                     </div>
-                  </li>     
-            <?php endforeach; ?>
-          </ul>
-        </div>
+                  </div>
+                </div>
+              </li>     
+        <?php endforeach; ?>
+      </ul>
+    </div>
 
 </div>
 <script>

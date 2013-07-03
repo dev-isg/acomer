@@ -273,6 +273,17 @@ width: 724px;
   float: left;
   margin-right: 10px;
 }
+.recomendados-platos-uno{
+  display: block;
+}
+.recomendados-platos-uno ul{
+  list-style: none;
+  overflow: hidden;
+}
+.recomendados-platos-uno ul li{
+  float: left;
+  margin-right: 10px;
+}
 .map-portada{
   background: url(../img/mapa.jpg) repeat;
 }
