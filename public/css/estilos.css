@@ -1095,6 +1095,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   margin: 0;
   line-height: 18px;
   margin-top: 8px;
+  text-align: left!important;
 }
 .content-coments{
   display: block;

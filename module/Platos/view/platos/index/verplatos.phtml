@@ -18,7 +18,7 @@
                   <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
    					<p class="desc"><?php echo $this->lista[0]['tx_descripcion'];?></p>
    					<p class="costo">Costo</p>
-   					<p class="precio"><?php echo $this->lista[0]['va_precio'];?></p>
+   					<p class="precio">S/.<?php echo $this->lista[0]['va_precio'];?></p>
    				</div>
    			</div>
    			<div class="content-coments">
@@ -132,7 +132,6 @@
                   <h4>Sucursales</h4>
                   <section class="list-suc">
                      <ul class="ul-suc">
-                    
                             <?php foreach($this->locales as $local) : ?>
                         <li class="li-suc"> 
                             <a href="#" class="" data-lat="<?php echo $local->de_latitud ?>" data-lng="<?php echo $local->de_longitud ?>">
@@ -150,11 +149,7 @@
                               </a>                                       
                           </li>
                           <?php endforeach; ?>
-                      
-                          
-             
-     
-                          
+
                       </ul>
                   </section>
 
@@ -184,6 +179,7 @@
 
                       });
 
+      $("#side").height($("#main").height());
 	});
 
    function initSucursales(){
