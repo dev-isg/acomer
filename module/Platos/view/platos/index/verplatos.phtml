@@ -14,7 +14,7 @@
    				</div>
    				<div class="ficha-desc">
                   <h2><?php echo $this->lista[0]['restaurant_nombre'];?></h2>
-   					<div class="puntuaciones c0"></div>
+   					<div class="puntuaciones c<?php echo $this->lista[0]['ta_puntaje_in_id'];?>"></div>
                   <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
    					<p class="desc"><?php echo $this->lista[0]['tx_descripcion'];?></p>
    					<p class="costo">Costo</p>
@@ -103,8 +103,8 @@
 	   									</div>
 	   									<div class="img-li-desc">
 	   										<div class="img-li-top">
-                                       <h4><?php echo $comt->va_nombre_cliente; ?></h3>
-	   											<div class="puntuaciones c0"></div>
+                                       <h4><?php echo $comt->va_nombre_cliente?></h3>
+	   											<div class="puntuaciones c<?php echo $comt->ta_puntaje_in_id;?>"></div>
 	   										</div>
 	   										<div class="img-li-bottom">
 	   											<p> <?php echo $comt->tx_descripcion?></p> 

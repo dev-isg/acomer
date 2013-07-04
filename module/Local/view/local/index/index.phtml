@@ -36,7 +36,7 @@
         ?>
         <tr id="<?php echo $this->escapeHtml($local->in_id); ?>">
             <td><?php echo $count++ ?></td>
-            <td><a href="/platos/index?id=<?php echo $local->in_id?>"> <?php echo $this->escapeHtml($local->va_nombre); ?> </a> </td>   
+            <td><a href="/platos/index?id=<?php echo $local->in_id?>&res=<?php echo $local->Ta_restaurante_in_id?>"> <?php echo $this->escapeHtml($local->va_nombre); ?> </a> </td>   
             <td><?php echo $this->escapeHtml($local->va_telefono); ?></td>
             <td><?php echo $this->escapeHtml($local->va_horario); ?></td>
 <!--            <td><?php echo $this->escapeHtml($local->va_rango_precio); ?></td>-->

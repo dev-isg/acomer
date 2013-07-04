@@ -50,8 +50,9 @@ class IndexController extends AbstractActionController
     
     public function agregarplatosAction()
     {
-        $local=(int) $this->params()->fromQuery('id', 35);
-      
+        $local=(int) $this->params()->fromQuery('id');
+     
+//        $restaurante=(int) $this->params()->fromQuery('res', 35);
         $adpter=$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $form = new PlatosForm($adpter,$local);      
         $form->get('submit')->setValue('Add');
@@ -90,7 +91,7 @@ class IndexController extends AbstractActionController
                      $form->setMessages(array('imagen'=>$error ));
                 } else {
                     
-                    $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
+                    $adapter->setDestination('C:\xampp\htdocs\acomer\public\imagenes');
                      if ($adapter->receive($File['name'])) {
                         $plato->exchangeArray($form->getData());
                     }
@@ -318,9 +319,10 @@ class IndexController extends AbstractActionController
         $this->layout('layout/layout-portada');
         $id=$this->params()->fromQuery('id');
         $listarecomendacion=$this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();
-        $listarecomentarios=$this->getPlatosTable()->getComentariosxPlatos($id);//->toArray();
-       
-//        exit;
+        $listarcomentarios=$this->getPlatosTable()->getComentariosxPlatos($id);//->toArray();
+        $servicios=$this->getPlatosTable()->getServicioxPlato($id);
+        $pagos=$this->getPlatosTable()->getPagoxPlato($id);
+//       var_dump($pagos->toArray());exit;
          $form=new \Usuario\Form\ComentariosForm();
          $form->get('submit')->setValue('Agregar');
         $request = $this->getRequest();
@@ -339,7 +341,9 @@ class IndexController extends AbstractActionController
         
         
         
-        $view->setVariables(array('lista' => $listarecomendacion,'comentarios'=>$listarecomentarios,'form'=>$form));
+        $view->setVariables(array('lista' => $listarecomendacion,'comentarios'=>$listarcomentarios,'form'=>$form,
+               'servicios'=>$servicios,
+               'pagos'=>$pagos));
         return $view;
     }
         public function getComentariosTable() {
