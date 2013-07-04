@@ -65,9 +65,8 @@
                   <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
                   <?php endforeach; ?>
                  </SELECT>
-             <button value="listar" type="submit" >POR LISTAR</button>                       
-             <button type="button" value="mapa" title="Exportar a Excel" onClick="location='<?php echo $this->basePath(); ?>/application/index/mapa/distrito?<?php echo $distritos['ch_distrito']; ?>/plato?<?php echo $_REQUEST['q']; ?>'">POR MAPA</button>
-       <a  href="<?php echo $this->basePath(); ?>/application/index/mapa?distrito=<?php echo $distritos['ch_distrito']; ?>&plato?<?php echo ($_REQUEST['q']); ?>" >MAPA </a>
+                 <button value="listar" type="submit" >POR LISTAR</button>                       
+                 <a  href="<?php echo $this->basePath(); ?>/application/index/mapa?distrito=<?php echo $_GET['fq']; ?>&plato=<?php echo ($_GET['q']); ?>" >POR MAPA </a>
                                            
                        <!-- 
                          /*   <?php

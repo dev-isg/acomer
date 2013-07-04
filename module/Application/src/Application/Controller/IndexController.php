@@ -90,15 +90,45 @@ class IndexController extends AbstractActionController
     }
     public function mapaAction()
     { 
-               $distrito=  $this->params()->fromQuery('distrito');
- 
-        // $distrito = $this->params()->fromFiles('distrito');
-         $plato = $this->params()->fromQuery('plato');
-         var_dump($distrito);
-          var_dump($plato);
-         exit;
-         $this->layout('layout/layout-portada');
-         
+        $distrito=  $this->params()->fromQuery('distrito');
+        $plato = $this->params()->fromQuery('plato');
+        $this->layout('layout/layout-portada'); 
+                        $resultados = false;
+                        $palabraBuscar = isset($plato) ? $plato : false ;
+                          $fd = array (  
+                            'fq'=> 'en_estado:activo AND distrito:'.$distrito,
+                              'sort'=>'en_destaque desc'); 
+                        if ($palabraBuscar)
+                        { 
+                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
+                          $solar = new Apache_Solr_Service('192.168.1.44', 8983, '/solr/');
+                          if (get_magic_quotes_gpc() == 1)
+                          {
+                            $palabraBuscar = stripslashes($palabraBuscar);
+                          }
+                          try
+                          {
+                            $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
+
+                          }
+                          catch (Exception $e)
+                          {
+                          
+                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
+                          }
+                        }
+          
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
           $view = new ViewModel();
          
          

@@ -63,8 +63,8 @@
                          <?php endforeach; ?>
                          </SELECT>                      
                        <button value="listar" type="submit" >POR LISTAR</button>                       
-                        <button type="button" value="mapa" title="Exportar a Excel" onClick="location='<?php echo $this->basePath(); ?>/application/index/mapa'">POR MAPA</button>
-                                   
+                       <a  href="<?php echo $this->basePath(); ?>/application/index/mapa?distrito=<?php echo $distritos['ch_distrito']; ?>&plato=<?php echo ($_REQUEST['q']); ?>" >POR MAPA </a>
+                              
 <!--                            <?php
                             if ($results)
                             {
