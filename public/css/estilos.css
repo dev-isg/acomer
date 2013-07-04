@@ -251,6 +251,23 @@ width: 503px;
 display: inline-block;
 vertical-align: top;
 }
+#fq {
+background: URL(../img/arrow.png) #cccccc no-repeat 298px 3px;
+width: 126px;
+font-size: 0.9em;
+border: 0 none;
+-moz-appearance: none;
+-webkit-appearance: none;
+appearance: none;
+padding: 0px 9px;
+border: 1px solid #ccc;
+}
+#q {
+margin-left: -6px;
+border: 0 none;
+padding: 6px;
+border-radius: 0px;
+}
 .lateral{
     display: inline-block;
 width: 142px;
