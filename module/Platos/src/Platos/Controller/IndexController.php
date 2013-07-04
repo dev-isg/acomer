@@ -343,7 +343,7 @@ class IndexController extends AbstractActionController
         $this->layout()->clase = 'Detalle';
         $view->setVariables(array('lista' => $listarecomendacion,'comentarios'=>$listarcomentarios,'form'=>$form,
                'servicios'=>$servicios,
-               'pagos'=>$pagos,'locales'=>$locales));
+               'pagos'=>$pagos,'locales'=>$locales,'cantidad'=>$this->getCount($listarcomentarios)));
         return $view;
     }
         public function getComentariosTable() {
@@ -363,6 +363,10 @@ class IndexController extends AbstractActionController
             $this->platosTable = $sm->get('Platos\Model\PlatosTable');
         }
         return $this->platosTable;
+    }
+    
+    public function getCount($val){
+        return $val->count();
     }
     
        

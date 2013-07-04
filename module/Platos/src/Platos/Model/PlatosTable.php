@@ -344,6 +344,7 @@ class PlatosTable
         $sql = new Sql($adapter);
         $selecttot = $sql->select()
             ->from('ta_plato')
+//            ->columns(array('num' => new \Zend\Db\Sql\Expression('COUNT(*)')))
 //            ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array(),'left')
 //            ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
 //            ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array(), 'left')
@@ -351,10 +352,11 @@ class PlatosTable
 //            ->join(array('tu'=>'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array(), 'left')
             ->join(array('tc'=>'ta_comentario'),'tc.ta_plato_in_id=ta_plato.in_id',array('tx_descripcion','ta_puntaje_in_id'),'left')
             ->join(array('tcli'=>'ta_cliente'),'tcli.in_id=tc.ta_cliente_in_id',array('va_nombre_cliente','va_email'),'left')
+
             ->where(array('ta_plato.in_id'=>$idplato)); 
    
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
-            //var_dump($selectString);Exit;
+//            var_dump($selectString);Exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
           
             return $results;
