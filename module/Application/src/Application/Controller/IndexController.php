@@ -95,21 +95,24 @@ class IndexController extends AbstractActionController
         $this->layout('layout/layout-portada'); 
                         $resultados = false;
                         $palabraBuscar = isset($plato) ? $plato : false ;
+                        //var_dump($palabraBuscar);exit;
                           $fd = array (  
                             'fq'=> 'en_estado:activo AND distrito:'.$distrito,
-                              'sort'=>'en_destaque desc'); 
+                              'sort'=>'en_destaque desc',
+                              'wt'=>'json'); 
                         if ($palabraBuscar)
                         { 
+                          //  echo 'yea';exit;
                           require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-                          $solar = new Apache_Solr_Service('192.168.1.44', 8983, '/solr/');
+                          $solar = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr/');
                           if (get_magic_quotes_gpc() == 1)
                           {
                             $palabraBuscar = stripslashes($palabraBuscar);
                           }
                           try
                           {
-                            $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
-
+                            $resultados = $solar->search($palabraBuscar, 0, $fd );
+ var_dump($resultados);exit;
                           }
                           catch (Exception $e)
                           {
@@ -118,23 +121,11 @@ class IndexController extends AbstractActionController
                           }
                         }
           
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+                        return $resultados;
+                       
+
           $view = new ViewModel();
-         
-         
-          $distritos=$this->josAction();
-//          $lista=$this->getConfigTable()->cantComentarios(2,3);
-          $view->setVariables(array('distritos' => $distritos ));
+          $view->setVariables(array('mapas' => $resultados ));
         return $view;
     }
 
