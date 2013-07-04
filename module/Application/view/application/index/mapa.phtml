@@ -1,58 +1,50 @@
 
- <?php 
-                foreach ($this->mapa as $doc)
-                          {
-          ?> 
-                          <div class="plato_r">
-                         <input type="hidden" value="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>">
-                       <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
-                           <div class="mosaic-block cover">
-                           <div class="mosaic-overlay"><span><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></span>
-                           <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="/img/mas.png" alt="" class="mas">
-                           </div>
-                           <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" target="_blank" class="mosaic-backdrop">
-                             <div class="details">
-                                 <h4><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></h4>
-                                 <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
-                                 <p style="font-size:0.9em;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
-                             </div>
-                         </a>
-                             </div>
-                      <div class="foo">
-           <p class="nom_res"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p>
 
-           <div class="pt">       
-           <p class="com"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?> <i class="icon-comment"></i></p>
-           <p id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" class="punt"></p>        
-                </div>
-
-             </div> 
-             </div>
-
-
-                      <?php
-                          }
-                      ?>   
-                
-      <div>
+<div id="sa"> <?php echo $this->json ?></div>
+<div id="sa"> <input id="ur" type="hidden" value='<?php echo $this->json ?>'/></div>
+  <div>
         <div id='map' style="height:400px;"></div>
       </div>
-         <script type="text/javascript">
-    var map;
-    $(document).ready(function(){
 
-      var mcOptions = { maxZoom: 14};
-      map = new GMaps({
-        el: '#map',
-        zoom: 12,
-         lat: -12.043333,
-         lng: -77.028333,
-        markerClusterer: function(map) {
-    return new MarkerClusterer(map,mcOptions);
-  }
+ <script type="text/javascript">
+   var map;
+   $(document).ready(function(){
 
-      });
+     var mcOptions = { maxZoom: 14};
+     map = new GMaps({
+       el: '#map',
+       zoom: 12,
+        lat: -12.043333,
+        lng: -77.028333,
+       markerClusterer: function(map) {
+   return new MarkerClusterer(map,mcOptions);
+ }
 
-       
-    });
-  </script>
+     });
+     var url = "";
+     console.log(url);
+     $.getJSON( url, function(data) {
+             $.each( data.response.docs, function(i, marker) {
+                 map.setCenter(marker.latitud,marker.longitud );
+                  console.log(marker);
+               map.addMarker({
+                   lat: marker.latitud,
+                   lng: marker.longitud,
+                   icon : {
+               size : new google.maps.Size(32, 37),
+               url : "/img/icomap.png"
+             },
+                   title: marker.restaurante ,
+                   infoWindow: {
+                           content: marker.name + '</br> <a href=' + 'index.html' +'>ver plato </a>'
+                         }
+
+                 });
+
+
+             });
+
+         });
+   });
+ </script>
+

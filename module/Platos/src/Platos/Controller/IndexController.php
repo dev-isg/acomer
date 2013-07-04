@@ -323,7 +323,7 @@ class IndexController extends AbstractActionController
         $servicios=$this->getPlatosTable()->getServicioxPlato($id);
         $locales=$this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos=$this->getPlatosTable()->getPagoxPlato($id);
-//       var_dump($locales->toArray());exit;
+//       var_dump($locales->toArray());
          $form=new \Usuario\Form\ComentariosForm();
          $form->get('submit')->setValue('Agregar');
         $request = $this->getRequest();
@@ -339,7 +339,7 @@ class IndexController extends AbstractActionController
             }
         }
         
-        
+    
         
         $this->layout()->clase = 'Detalle';
         $view->setVariables(array('lista' => $listarecomendacion,'comentarios'=>$listarcomentarios,'form'=>$form,

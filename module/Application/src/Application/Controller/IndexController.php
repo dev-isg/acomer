@@ -17,6 +17,7 @@ use Application\Form\Formularios;
 use Application\Model\Entity\Procesa;
 use Application\Model\Usuario;
 use Application\Model\Entity\Album;
+use Zend\Json\Json;
 
 use Platos\Model\Platos;
 use Platos\Model\PlatosTable; 
@@ -87,6 +88,7 @@ class IndexController extends AbstractActionController
          $view->setVariables(array('distritos' => $distritos , 'comentarios' => $lista));
         return $view;
     }
+    
     public function mapaAction()
     { 
         $distrito=  $this->params()->fromQuery('distrito');
@@ -95,19 +97,14 @@ class IndexController extends AbstractActionController
          header('Content-Type: text/html; charset=utf-8');
                         $resultados = false;
                         $palabraBuscar = isset($plato) ? $plato : false ;
-                        $list = 9;
-                        //var_dump($palabraBuscar);exit;
+                        $list = 1000;
                           $fd = array (  
                             'fq'=> 'en_estado:activo AND distrito:'.$distrito,
                               'sort'=>'en_destaque desc',
                               'fl'=>'latitud,longitud,restaurante,name,plato_tipo',
-                              'wt'=>'json'); 
-                         // var_dump($fd);exit;
-                     
-                            
+                              'wt'=>'json');      
                         if ($palabraBuscar)
                         { 
-                          //  echo 'yea';exit;
                           require './vendor/SolrPhpClient/Apache/Solr/Service.php';
                           $solar = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr/');
                           if (get_magic_quotes_gpc() == 1)
@@ -117,7 +114,6 @@ class IndexController extends AbstractActionController
                           try
                           {
                             $resultados = $solar->search($palabraBuscar, 0,$list, $fd );
-                         //  var_dump($resultados);exit;
                           }
                           catch (Exception $e)
                           {
@@ -125,15 +121,20 @@ class IndexController extends AbstractActionController
                                 echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
                           }
                         }
-                        var_dump($resultados);exsit;
-                        return $resultados;
-                       
-                       
-                                $this->layout()->clase = 'Search';
-                    $view = new ViewModel();
-                    $view->setVariables(array('mapas' => $resultados ));
 
-        return $view;
+                     
+                         $json = $resultados->getRawResponse(); 
+                         
+                    
+                         return  new ViewModel(array('mapa' => $resultados->response->docs ,'hola'=>'siempre nosotros','json'=>$json));
+                        $mapita = $this->jsonmapasaAction($json); 
+                        
+                   }
+    
+    public function jsonmapasaAction($s){
+   echo $s;
+        exit();
+
     }
 
     public function rolesAction()
