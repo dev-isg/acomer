@@ -123,7 +123,7 @@
    				</div>
    				<div class="content-info">
    					<div class="info-img">
-   						<img src="/public/img/<?php echo $this->lista[0]['va_imagen'];?>">
+   						<img src="/img/<?php echo $this->lista[0]['va_imagen'];?>">
    					</div>
                   <h4 class="ubi-map">Ubicación <span></span></h4>
                   <div id="mapCont" class="map" data-lat="<?php echo $this->lista[0]['de_latitud'];?>" data-lng="<?php echo $this->lista[0]['de_longitud'];?>"></div>
@@ -131,22 +131,7 @@
                   <section class="list-suc">
                      <ul class="ul-suc">
                     
-                        <li class="li-suc"> 
-                           <a href="#" class="" data-lat="-12.120178317480093" data-lng="-77.04086919101564">
-                               <header>                              
-                                   <h6 class="text-ellipsis">Miraflores</h6>
-                                   <span class="close-banch"></span>
-                               </header>
-                               <div class="descr">
-                                   <span class="house-icon"></span>
-                                   <ul>
-                                       <li class="text-ellipsis">Calle berlín 601</li>
-                                       <li class="phone"><span class="text-ellipsis">Miraflores</span><em class="text-ellipsis">243 2448</em></li>
-                                   </ul>
-                               </div>
-                           </a>                                       
-                        </li>
-                            <?php foreach($this->locales as $local) : ?>
+                     <?php foreach($this->locales as $local) : ?>
                         <li class="li-suc"> 
                             <a href="#" class="" data-lat="<?php echo $local->de_latitud ?>" data-lng="<?php echo $local->de_longitud ?>">
                                   <header>                              
@@ -163,11 +148,7 @@
                               </a>                                       
                           </li>
                           <?php endforeach; ?>
-                      
-                          
-             
-     
-                          
+
                       </ul>
                   </section>
 
@@ -189,6 +170,7 @@
 
       initSucursales();
 
+      $("#side").height($("#main").height());
 	});
 
    function initSucursales(){
