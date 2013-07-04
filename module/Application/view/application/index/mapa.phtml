@@ -34,4 +34,25 @@
                           }
                       ?>   
                 
-      
+      <div>
+        <div id='map' style="height:400px;"></div>
+      </div>
+         <script type="text/javascript">
+    var map;
+    $(document).ready(function(){
+
+      var mcOptions = { maxZoom: 14};
+      map = new GMaps({
+        el: '#map',
+        zoom: 12,
+         lat: -12.043333,
+         lng: -77.028333,
+        markerClusterer: function(map) {
+    return new MarkerClusterer(map,mcOptions);
+  }
+
+      });
+
+       
+    });
+  </script>
