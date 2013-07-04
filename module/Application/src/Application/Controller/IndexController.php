@@ -90,11 +90,50 @@ class IndexController extends AbstractActionController
     }
     public function mapaAction()
     { 
-         $view = new ViewModel();
-         $this->layout('layout/layout-portada');
-          $distritos=$this->josAction();
-//          $lista=$this->getConfigTable()->cantComentarios(2,3);
-          $view->setVariables(array('distritos' => $distritos ));
+        $distrito=  $this->params()->fromQuery('distrito');
+        $plato = $this->params()->fromQuery('plato');
+        $this->layout('layout/layout-portada'); 
+         header('Content-Type: text/html; charset=utf-8');
+                        $resultados = false;
+                        $palabraBuscar = isset($plato) ? $plato : false ;
+                        $list = 9;
+                        //var_dump($palabraBuscar);exit;
+                          $fd = array (  
+                            'fq'=> 'en_estado:activo AND distrito:'.$distrito,
+                              'sort'=>'en_destaque desc',
+                              'fl'=>'latitud,longitud,restaurante,name,plato_tipo',
+                              'wt'=>'json'); 
+                         // var_dump($fd);exit;
+                     
+                            
+                        if ($palabraBuscar)
+                        { 
+                          //  echo 'yea';exit;
+                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
+                          $solar = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr/');
+                          if (get_magic_quotes_gpc() == 1)
+                          {
+                            $palabraBuscar = stripslashes($palabraBuscar);
+                          }
+                          try
+                          {
+                            $resultados = $solar->search($palabraBuscar, 0,$list, $fd );
+                         //  var_dump($resultados);exit;
+                          }
+                          catch (Exception $e)
+                          {
+                          
+                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
+                          }
+                        }
+                        var_dump($resultados);exsit;
+                        return $resultados;
+                       
+                       
+
+                    $view = new ViewModel();
+                    $view->setVariables(array('mapas' => $resultados ));
+
         return $view;
     }
 

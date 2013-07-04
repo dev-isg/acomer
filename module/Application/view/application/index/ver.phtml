@@ -54,19 +54,21 @@
 
                         ?>
 
-                         <form  accept-charset="utf-8" method="post" class="form-horizontal" id="bubi" autocomplete="on" action='<?php echo $this->basePath(); ?>/application/index/detalleubicacion'>
-                        <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>  
+                        <form  accept-charset="utf-8" method="get" class="form-horizontal" id="bubi" autocomplete="on" action='<?php echo $this->basePath(); ?>/application/index/detalleubicacion'>
 
-                         <form  accept-charset="utf-8" method="get" class="form-horizontal" id="bubi" autocomplete="on" action='<?php echo $this->basePath(); ?>/application/index/detalleubicacion'>
                          <SELECT name="fq" id="fq" >
                         <OPTION value=""></OPTION>
                            <?php  foreach ($this->distritos as $distritos) : ?>
                           <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
                          <?php endforeach; ?>
-                         </SELECT>                      
-                       <button value="listar" type="submit" >POR LISTAR</button>                       
-                        <button type="button" value="mapa" title="Exportar a Excel" onClick="location='<?php echo $this->basePath(); ?>/application/index/mapa'">POR MAPA</button>
+
+                         </SELECT>  
+                            <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>
+                       <button class="verlistado" value="listar" type="submit" ></button>                       
+                       <a style="margin-left: 10px;text-decoration: underline;" href="<?php echo $this->basePath(); ?>/application/index/mapa?distrito=<?php echo $distritos['ch_distrito']; ?>&plato=<?php echo ($_REQUEST['q']); ?>" >Ver Mapa </a>
+
                                    
+
 <!--                            <?php
                             if ($results)
                             {
@@ -77,8 +79,8 @@
                    
                            
                          </form> 
-<div class="sub" style="margin-top: 10px;">
-            <span class="titulo-portada" style="padding-right: 45px;">Destacados <?php echo $_REQUEST['q']; ?> </span>
+<div class="sub" style="margin-top: 10px;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;">
+            <span  style="padding-left: 10px;color:white;font-weight: bold;">Destacados <?php echo $_REQUEST['q']; ?> </span>
         </div>
       <div class="contenido-bus">
  <?php 
@@ -126,8 +128,8 @@
                         </div>
                
                             
-        <div class="sub" style="margin-top: 2em;margin-bottom: 2em;">
-            <span class="titulo-portada" style="padding-right: 45px;">Resultados <?php echo $_REQUEST['q']; ?> </span>
+        <div class="sub" style="margin-top: 1em;margin-bottom: 2em;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;">
+            <span style="padding-left: 10px;color:white;font-weight: bold;">Resultados <?php echo $_REQUEST['q']; ?> </span>
         </div>                    
                                               
                   <?php 
