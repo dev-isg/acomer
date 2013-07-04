@@ -103,7 +103,7 @@ class IndexController extends AbstractActionController
                      }
                      $form->setMessages(array('imagen'=>$error ));
           } else {
-                $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
+                $adapter->setDestination('C:\xampp\htdocs\acomer\public\imagenes');
                //  $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
                   if ($adapter->receive($File['name'])) {
                         $restaurante->exchangeArray($form->getData());

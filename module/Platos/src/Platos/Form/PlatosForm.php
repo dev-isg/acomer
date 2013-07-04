@@ -168,9 +168,9 @@ class PlatosForm extends Form
     
    public function tipoPlato()
         {   
-
+           
            $idpla=$this->getId();
-    
+//     var_dump($idpla);
        $this->dbAdapter =$this->getDbAdapter();//getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $adapter = $this->dbAdapter;
         $sql = new Sql($adapter);
@@ -184,6 +184,7 @@ class PlatosForm extends Form
             ->where(array('tl.in_id'=>$idpla));//->where(array('tr.in_id'=>$idpla));
  
             $selectString = $sql->getSqlStringForSqlObject($select);
+//            var_dump($selectString);exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $tiplatos=$results->toArray();
             
