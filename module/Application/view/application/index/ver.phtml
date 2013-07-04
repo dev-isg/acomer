@@ -61,18 +61,14 @@
                            <?php  foreach ($this->distritos as $distritos) : ?>
                           <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
                          <?php endforeach; ?>
-<<<<<<< HEAD
-                         </SELECT>                      
-                       <button value="listar" type="submit" >POR LISTAR</button>                       
+
+                         </SELECT>  
+                            <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>
+                       <button class="verlistado" value="listar" type="submit" >POR LISTAR</button>                       
                        <a  href="<?php echo $this->basePath(); ?>/application/index/mapa?distrito=<?php echo $distritos['ch_distrito']; ?>&plato=<?php echo ($_REQUEST['q']); ?>" >POR MAPA </a>
-                              
-=======
-                         </SELECT>   
-                             <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>                    
-                       <button class="verlistado" type="submit" >POR LISTAR</button>                       
-                        <a onClick="location='<?php echo $this->basePath(); ?>/application/index/mapa'"> POR MAPA </a>
+
                                    
->>>>>>> 577aa1548145f12dcbd947cea556e6e56fa527c7
+
 <!--                            <?php
                             if ($results)
                             {
