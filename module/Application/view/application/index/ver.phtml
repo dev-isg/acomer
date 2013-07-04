@@ -54,10 +54,8 @@
 
                         ?>
 
-                         <form  accept-charset="utf-8" method="post" class="form-horizontal" id="bubi" autocomplete="on" action='<?php echo $this->basePath(); ?>/application/index/detalleubicacion'>
-                        <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>  
-
-                         <form  accept-charset="utf-8" method="get" class="form-horizontal" id="bubi" autocomplete="on" action='<?php echo $this->basePath(); ?>/application/index/detalleubicacion'>
+                        <form  accept-charset="utf-8" method="get" class="form-horizontal" id="bubi" autocomplete="on" action='<?php echo $this->basePath(); ?>/application/index/detalleubicacion'>
+                              <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>  
                          <SELECT name="fq" id="fq" >
                         <OPTION value=""></OPTION>
                            <?php  foreach ($this->distritos as $distritos) : ?>
