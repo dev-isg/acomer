@@ -34,7 +34,7 @@ class IndexController extends AbstractActionController
         $listadeseg=$this->getConfigTable()->cantComentxPlato(1,'3,3',1);
         $listaval=$this->getConfigTable()->cantComentxPlato(2,3,2);
         $listault=$this->getConfigTable()->cantComentxPlato(2,3,3);
-//        var_dump($listaval);
+        //var_dump($listaval);
 //        var_dump($listades->toArray());exit;
         $view->setVariables(array('lista' => $listades,'listaseg'=>$listadeseg,'listaval'=>$listaval,'listault'=>$listault));
          return $view;
