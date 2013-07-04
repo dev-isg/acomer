@@ -123,6 +123,10 @@ label.error {
 .ra{
   padding: 0 10px;
 }
+.checkbox.inline {
+overflow: auto;
+height: 79px;
+}
 
 /* ==========================================================================
    Helper classes
