@@ -90,8 +90,18 @@ class IndexController extends AbstractActionController
     }
     public function mapaAction()
     { 
-         $view = new ViewModel();
+               $distrito=  $this->params()->fromQuery('distrito');
+ 
+        // $distrito = $this->params()->fromFiles('distrito');
+         $plato = $this->params()->fromQuery('plato');
+         var_dump($distrito);
+          var_dump($plato);
+         exit;
          $this->layout('layout/layout-portada');
+         
+          $view = new ViewModel();
+         
+         
           $distritos=$this->josAction();
 //          $lista=$this->getConfigTable()->cantComentarios(2,3);
           $view->setVariables(array('distritos' => $distritos ));
