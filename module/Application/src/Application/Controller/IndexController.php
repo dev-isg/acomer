@@ -93,13 +93,19 @@ class IndexController extends AbstractActionController
         $distrito=  $this->params()->fromQuery('distrito');
         $plato = $this->params()->fromQuery('plato');
         $this->layout('layout/layout-portada'); 
+         header('Content-Type: text/html; charset=utf-8');
                         $resultados = false;
                         $palabraBuscar = isset($plato) ? $plato : false ;
+                        $list = 9;
                         //var_dump($palabraBuscar);exit;
                           $fd = array (  
                             'fq'=> 'en_estado:activo AND distrito:'.$distrito,
                               'sort'=>'en_destaque desc',
+                              'fl'=>'latitud,longitud,restaurante,name,plato_tipo',
                               'wt'=>'json'); 
+                         // var_dump($fd);exit;
+                     
+                            
                         if ($palabraBuscar)
                         { 
                           //  echo 'yea';exit;
@@ -111,8 +117,8 @@ class IndexController extends AbstractActionController
                           }
                           try
                           {
-                            $resultados = $solar->search($palabraBuscar, 0, $fd );
- var_dump($resultados);exit;
+                            $resultados = $solar->search($palabraBuscar, 0,$list, $fd );
+                         //  var_dump($resultados);exit;
                           }
                           catch (Exception $e)
                           {
@@ -120,12 +126,14 @@ class IndexController extends AbstractActionController
                                 echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
                           }
                         }
-          
+                        var_dump($resultados);exsit;
                         return $resultados;
                        
+                       
 
-          $view = new ViewModel();
-          $view->setVariables(array('mapas' => $resultados ));
+                    $view = new ViewModel();
+                    $view->setVariables(array('mapas' => $resultados ));
+
         return $view;
     }
 

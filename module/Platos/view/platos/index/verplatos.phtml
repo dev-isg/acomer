@@ -10,11 +10,9 @@
    					<img src="/img/ceviche.jpg">
    				</div>
    				<div class="ficha-desc">
-                                            <h2><?php echo $this->lista[0]['restaurant_nombre'];?></h2>
-   					
-   					<div class="puntuaciones"></div>
-                                            <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
-   					
+                  <h2><?php echo $this->lista[0]['restaurant_nombre'];?></h2>
+   					<div class="puntuaciones c<?php echo $this->lista[0]['ta_puntaje_in_id'];?>"></div>
+                  <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
    					<p class="desc"><?php echo $this->lista[0]['tx_descripcion'];?></p>
    					<p class="costo">Costo</p>
    					<p class="precio"><?php echo $this->lista[0]['va_precio'];?></p>
@@ -62,9 +60,8 @@
 						</div>
    					</div>
    					<div class="comentarios-one">
-                        
    						<ul>
-                                                     <?php  foreach ($this->comentarios  as $comt) : ?>
+                        <?php  foreach ($this->comentarios  as $comt) : ?>
 	   							<li>
 	   								<div class="coment-li">
 	   									<div class="img-li">
@@ -72,9 +69,8 @@
 	   									</div>
 	   									<div class="img-li-desc">
 	   										<div class="img-li-top">
-                                                                                            <h4><?php echo $comt->va_nombre_cliente?></h3>
-	  
-	   											<div class="puntuaciones"></div>
+                                       <h4><?php echo $comt->va_nombre_cliente?></h3>
+	   											<div class="puntuaciones c<?php echo $comt->ta_puntaje_in_id;?>"></div>
 	   										</div>
 	   										<div class="img-li-bottom">
 	   											<p> <?php echo $comt->tx_descripcion?></p> 

@@ -93,12 +93,45 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+html,
+body{
+  height: 100%;
+}
+
+form#search{
+  /*position: relative;*/
+}
+#search .btn-search-home{
+  background: url(../img/lupa-search.png) no-repeat;
+  border: 0;
+  display: block;
+  float: left;
+  height: 49px;
+  text-indent: -9999px;
+  width: 52px;
+  -webkit-box-shadow: 0 0 0;
+  -moz-box-shadow: 0 0 0;
+  -o-box-shadow: 0 0 0;
+  box-shadow: 0 0 0;
+  -webkit-border-radius: 0 14px 14px 0;
+  -moz-border-radius: 0 14px 14px 0;
+  -o-border-radius: 0 14px 14px 0;
+  border-radius: 0 14px 14px 0;
+  border-left: 1px solid #feab53;
+  border-bottom: 1px solid #d4e59c;
+}
+
 #search input[type="text"] { 
-  background: url(../img/search-white.png) no-repeat 95% 50% #ff8500; 
+  background: #ff8500; 
   border: 0 none; color: #fff;  
-  padding: 12px 15px 13px 27px;
-  border-radius:14px;
-  width: 79%;
+  padding: 13px 15px 11px 20px;
+  -webkit-border-radius: 14px 0 0 14px;
+  -moz-border-radius: 14px 0 0 14px;
+  -o-border-radius: 14px 0 0 14px;
+  border-radius: 14px 0 0 14px;
+  margin-left: 15px;
+  width: 185px;
+  float: left;
   font-weight: bold;
   font-size: 1em;
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
@@ -111,6 +144,8 @@ textarea {
   transition: all 0.7s; 
   font-size: 16px;
   font-weight: normal;
+  height: 24px;
+  border-bottom: 1px solid #d4e59c;
 }
 
 #search input[type="text"]:focus {  }
@@ -151,8 +186,16 @@ cursor: pointer;
   margin: 0 auto;
 }
 .contenido{
-  max-width: 1024px;
+  width: 1024px;
   margin: 0px auto;
+  height: 100%;
+}
+
+.content-sidebar{
+  width: 300px;
+  float: left;
+  height: 100%;
+
 }
 
 .contenido-busqueda {
@@ -219,8 +262,8 @@ margin-top: -14px;
   margin: 5px 11px;
   padding: 0px 5px;
   height: 145px;
- font-family: helvetica;
-border-bottom: 3px dotted rgba(58, 58, 58, 0.25);
+  font-family: helvetica;
+  border-bottom: 2px dotted #c1c1c1;
 }
 h4{ font-size: Helvetica !important;border-bottom: 3px dotted rgba(58, 58, 58, 0.25); font-size:1em !important;
 padding-bottom: 5px; color:#ff8402 !important;  }
@@ -260,7 +303,7 @@ display: inline-block;
 vertical-align: top;
 }
 #fq {
-background: URL(../img/arrow.png) #cccccc no-repeat 102px 7px;
+background: url(../img/arrow.png) #cccccc no-repeat 102px 7px;
 width: 126px;
 font-size: 0.9em;
 border: 0 none;
@@ -359,8 +402,24 @@ margin: 1em 1em;
 }
 .details h4{
   margin: 0;
-  padding-bottom: 0;
+  margin-bottom: 8px;
+  padding-bottom: 3px;
   font-size: 14px!important;
+  font-family: arial;
+  border-bottom: 2px dotted #c1c1c1;
+}
+.details .title-details{
+  color: #797979;
+  font-size: 12px;
+  font-family: arial;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+.details .desc-plato{
+  color: #797979;
+  font-size: 12px;
+  font-weight: normal;
+  font-family: arial;
 }
 .mosaic-backdrop {
         display:none;
@@ -391,10 +450,10 @@ margin: 1em 1em;
         }
 
 .contenido-plato {
-/*background: url(../img/map.jpg) repeat fixed;*/
-height: 54%;
-margin-left: 300px;
-width: 724px;
+  /*background: url(../img/map.jpg) repeat fixed;*/
+  height: 54%;
+  width: 724px;
+  float: left;
 }
 .recomendados-platos{
   display: block;
@@ -574,7 +633,7 @@ margin: 0px
   text-align: center;
   margin: 0px;
   font-size: 15px;
-  padding: 3px 0;
+  padding: 5px 0;
   font-family: arial;
 }
 .tercera-categ{
@@ -586,6 +645,7 @@ margin: 0px
     text-align: center;
     color: rgba(0, 0, 0, 0.77);
     font-size: 14px;
+    margin-bottom: 6px;
 }
 .img-info-plato{
 width: 250px;
@@ -614,9 +674,10 @@ display: inline-block;
   padding-left: 10px;
 }
 .punt{
-width: 120px !important;
-display: inline-block;
-text-align: right;
+  width: 120px !important;
+  display: inline-block;
+  text-align: right;
+  float: right;
 }
 .plato_r {
   text-align: center;
@@ -868,11 +929,54 @@ width: 49%;
   padding-bottom: 3px;
   margin-bottom: 7px;
 }
-.ficha-desc .puntuaciones{
-  width: 99px;
+.punt .puntuaciones{
+  width: 105px;
   height: 15px;
   display: block;
-  background: url(../../img/puntuacion.png) no-repeat;
+  background: url(../../img/icons.png) no-repeat;
+}
+.punt .puntuaciones.c0{
+  background-position: 0 -114px;
+}
+.punt .puntuaciones.c1{
+  background-position: 0 -1px;
+}
+.punt .puntuaciones.c2{
+  background-position: 0 -24px;
+}
+.punt .puntuaciones.c3{
+  background-position: 0 -46px;
+}
+.punt .puntuaciones.c4{
+  background-position: 0 -69px;
+}
+.punt .puntuaciones.c5{
+  background-position: 0 -91px;
+}
+
+.ficha-desc .puntuaciones{
+  width: 105px;
+  height: 15px;
+  display: block;
+  background: url(../../img/icons.png) no-repeat;
+}
+.ficha-desc .puntuaciones.c0{
+  background-position: 0 -114px;
+}
+.ficha-desc .puntuaciones.c1{
+  background-position: 0 -1px;
+}
+.ficha-desc .puntuaciones.c2{
+  background-position: 0 -24px;
+}
+.ficha-desc .puntuaciones.c3{
+  background-position: 0 -46px;
+}
+.ficha-desc .puntuaciones.c4{
+  background-position: 0 -69px;
+}
+.ficha-desc .puntuaciones.c5{
+  background-position: 0 -91px;
 }
 .ficha-desc h3{
   font-size: 14px;
@@ -996,13 +1100,31 @@ width: 49%;
   border-bottom: 1px solid #e5e5e5;
 }
 .img-li-top .puntuaciones{
-  width: 99px;
+  width: 105px;
   height: 15px;
   display: block;
-  background: url(../../img/puntuacion.png) no-repeat;
+  background: url(../../img/icons.png) no-repeat;
   position: absolute;
   right: 10px;
   top: 0px;
+}
+.img-li-top .puntuaciones.c0{
+  background-position: 0 -114px;
+}
+.img-li-top .puntuaciones.c1{
+  background-position: 0 -1px;
+}
+.img-li-top .puntuaciones.c2{
+  background-position: 0 -24px;
+}
+.img-li-top .puntuaciones.c3{
+  background-position: 0 -46px;
+}
+.img-li-top .puntuaciones.c4{
+  background-position: 0 -69px;
+}
+.img-li-top .puntuaciones.c5{
+  background-position: 0 -91px;
 }
 .comentarios-one ul li{
   margin-bottom: 18px;
