@@ -295,7 +295,7 @@ display: inline-block;
 vertical-align: top;
 }
 #fq {
-background: URL(../img/arrow.png) #cccccc no-repeat 102px 7px;
+background: url(../img/arrow.png) #cccccc no-repeat 102px 7px;
 width: 126px;
 font-size: 0.9em;
 border: 0 none;
