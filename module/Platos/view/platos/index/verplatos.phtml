@@ -173,6 +173,14 @@
 		});
 
       initSucursales();
+       $('#star').raty({
+                       target    : '#Ta_puntaje_in_id',
+                       targetType: 'number',
+                            starOff: '/img/t2.png',
+                            targetKeep:true,
+                            starOn : '/img/t1.png'
+
+                      });
 
 	});
 
@@ -318,17 +326,6 @@
       
       $(".list-suc .ul-suc li a").on('click',eventHandler);
 
-       $('#star').raty({
-                       target    : '#Ta_puntaje_in_id',
-                       targetType: 'number',
-                            starOff: '/img/t2.png',
-                            targetKeep:true,
-                            starOn : '/img/t1.png'
-
-                      });
-       })
-
-
-   }
+         }
 
 </script>
