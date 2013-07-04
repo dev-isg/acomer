@@ -38,7 +38,7 @@ class ComentariosForm extends Form
             'type' => 'Text',
           
             'options' => array(
-                'label' => 'Nombre',          
+                'label' => 'Nombre:',          
             ),
             'attributes' => array(               
                 'class' => '',
@@ -60,7 +60,7 @@ class ComentariosForm extends Form
                 'placeholder'=>'Ingrese su Correo'
             ),
             'options' => array(
-                'label' => 'Correo',
+                'label' => 'Correo:',
             ),
             'validators' => array( 
                 array( 
@@ -84,7 +84,7 @@ class ComentariosForm extends Form
                 'rows'=>4
             ),
             'options' => array(
-                'label' => 'Descripcion',
+                'label' => 'Descripcion:',
             ),
         ));
 

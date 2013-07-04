@@ -314,8 +314,8 @@ class IndexController extends AbstractActionController
     
     public function verplatosAction(){
         $view = new ViewModel();
-        $view->setTerminal(true);
-//        $this->layout('layout/layout-portada');
+//        $view->setTerminal(true);
+        $this->layout('layout/layout-portada');
         $id=$this->params()->fromQuery('id');
         $listarecomendacion=$this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();
         //VAR_DUMP($listarecomendacion);
