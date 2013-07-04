@@ -1004,21 +1004,28 @@ li.li-suc a.activo span.close-banch{
   float: right;
   color: #7b7b7b;
   font-size: 14px;
+  background: url(../img/phone.png) no-repeat 0 3px;
+  padding-left: 16px;
 }
 .phone span.text-ellipsis{
   float: left;
   color: #7b7b7b;
-  font-size: 14px; 
+  font-size: 14px;
+  background: url(../../img/city.png) no-repeat 0 2px;
+  padding-left: 18px;
 }
 li.li-suc a header{
   float: left;
 }
 .descr{
   float: left;
+  width: 100%;
 }
 .descr li.text-ellipsis{
   color: #7b7b7b;
   font-size: 14px;
+  background: url(../../img/ubicacion.png) no-repeat 0 2px;
+  padding-left: 18px;
 }
 ul.servicios-desc{
   list-style:none;
