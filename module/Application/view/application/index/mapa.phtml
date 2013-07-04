@@ -1,10 +1,26 @@
+  
 
+<form  accept-charset="utf-8" method="get" class="form-horizontal" id="bubi" autocomplete="on" >
+                             
+                 <SELECT name="fq" id="fq" class="span2">
+                <OPTION value="">seleccione:</OPTION>
+                   <?php  foreach ($this->distritos as $distritos) : ?>
+                  <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
+                  <?php endforeach; ?>
+                 </SELECT>
+               
+                <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>
+                 <button class="verlistado" value="listar" type="submit" ></button>                       
+                <a style="margin-left: 10px;text-decoration: underline;"  href="<?php echo $this->basePath(); ?>/application/index/mapa?distrito=<?php echo $_GET['fq']; ?>&plato=<?php echo ($_GET['q']); ?>" >POR MAPA </a>
+</form> 
+                <a href="#" class="map">aaaaaaaaaaa</a> 
+<input id="te" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>           
 
-<div id="sa"> <?php echo $this->json ?></div>
-<div id="sa"> <input id="ur" type="hidden" value='<?php echo $this->json ?>'/></div>
+<!--<div id="sa"> <?php echo $this->json ?></div>
+<div id="sa"> <input id="ur" type="hidden" value='<?php echo $this->json ?>'/></div>-->
   <div>
         <div id='map' style="height:400px;"></div>
-      </div>
+ </div>
 
  <script type="text/javascript">
    var map;
@@ -21,7 +37,10 @@
  }
 
      });
-     var url = "";
+     $(".map").on("click",function(){
+         var plato=$('#bubi #q').val();
+     var dis=$('#bubi #fq').val();
+     var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
      console.log(url);
      $.getJSON( url, function(data) {
              $.each( data.response.docs, function(i, marker) {
@@ -45,6 +64,8 @@
              });
 
          });
+     });
+     
    });
  </script>
 

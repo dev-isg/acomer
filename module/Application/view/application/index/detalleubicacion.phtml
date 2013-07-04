@@ -68,7 +68,7 @@
                
                 <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>
                  <button class="verlistado" value="listar" type="submit" ></button>                       
-                <a style="margin-left: 10px;text-decoration: underline;"  href="<?php echo $this->basePath(); ?>/application/index/mapa?distrito=<?php echo $_GET['fq']; ?>&plato=<?php echo ($_GET['q']); ?>" >POR MAPA </a>
+                <a style="margin-left: 10px;text-decoration: underline;"  href="#" class="map" >Ver Mapa </a>
                                            
                        <!-- 
                          /*   <?php
@@ -82,6 +82,7 @@
                                 <div>Resultados <?php echo $fq; ?>:</div> -->
                            
                         </form> 
+<div id="esconder">
 <div class="sub" style="margin-top: 10px;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;">
             <span  style="padding-left: 10px;color:white;font-weight: bold;">Destacados <?php echo $_REQUEST['q']; ?> </span>
         </div>
@@ -162,7 +163,7 @@
                       <?php
                           }
                       ?>   
-                
+          </div>      
 <script>
   $(document).ready(function(){
       var puntaje = function(item,p){
@@ -198,3 +199,58 @@
 
   });
 </script>
+
+
+  <div>
+        <div id='map' style="height:400px;"></div>
+ </div>
+
+ <script type="text/javascript">
+   var map;
+   $(document).ready(function(){
+
+     var mcOptions = { maxZoom: 14};
+     map = new GMaps({
+       el: '#map',
+       zoom: 12,
+        lat: -12.043333,
+        lng: -77.028333,
+       markerClusterer: function(map) {
+   return new MarkerClusterer(map,mcOptions);
+ }
+
+     });
+     $(".map").on("click",function(){
+         $('#map').css("display","block");
+          $('#esconder').css("display","none");
+
+         var plato=$('#bubi #q').val();
+     var dis=$('#bubi #fq').val();
+     var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
+     console.log(url);
+     $.getJSON( url, function(data) {
+             $.each( data.response.docs, function(i, marker) {
+                 map.setCenter(marker.latitud,marker.longitud );
+                  console.log(marker);
+               map.addMarker({
+                   lat: marker.latitud,
+                   lng: marker.longitud,
+                   icon : {
+               size : new google.maps.Size(32, 37),
+               url : "/img/icomap.png"
+             },
+                   title: marker.restaurante ,
+                   infoWindow: {
+                           content: marker.name + '</br> <a href=/platos/index/verplatos?id=' + marker.id +'>ver plato </a>'
+                         }
+
+                 });
+
+
+             });
+
+         });
+     });
+     
+   });
+ </script>

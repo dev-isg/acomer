@@ -91,7 +91,7 @@ class IndexController extends AbstractActionController
     
     public function mapaAction()
     { 
-        $distrito=  $this->params()->fromQuery('distrito');
+        $distrito = $this->params()->fromQuery('distrito');
         $plato = $this->params()->fromQuery('plato');
         $this->layout('layout/layout-portada'); 
          header('Content-Type: text/html; charset=utf-8');
@@ -121,21 +121,49 @@ class IndexController extends AbstractActionController
                                 echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
                           }
                         }
-
-                     
-                         $json = $resultados->getRawResponse(); 
-                         
-                    
-                         return  new ViewModel(array('mapa' => $resultados->response->docs ,'hola'=>'siempre nosotros','json'=>$json));
-                        $mapita = $this->jsonmapasaAction($json); 
+  $distritos=$this->josAction();
+                 
+                       return  new ViewModel(array('mapa' => $resultados->response->docs ,'distritos' => $distritos ,));
+                        //$mapita = $this->jsonmapasaAction($json); 
                         
                    }
     
-    public function jsonmapasaAction($s){
-   echo $s;
-        exit();
-
-    }
+    public function jsonmapasaAction()    { 
+        $distrito=  $this->params()->fromQuery('distrito');
+        $view  = new viewModel();
+        $view->setTerminal(true);
+        $plato = $this->params()->fromQuery('plato');
+                        $resultados = false;
+                        $palabraBuscar = isset($plato) ? $plato : false ;
+                        $list = 1000;
+                          $fd = array (  
+                            'fq'=> 'en_estado:activo AND distrito:'.$distrito,
+                              'sort'=>'en_destaque desc',
+                              'fl'=>'id,latitud,longitud,restaurante,name,plato_tipo',
+                              'wt'=>'json');      
+                        if ($palabraBuscar)
+                        { 
+                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
+                          $solar = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr/');
+                          if (get_magic_quotes_gpc() == 1)
+                          {
+                            $palabraBuscar = stripslashes($palabraBuscar);
+                          }
+                          try
+                          {
+                            $resultados = $solar->search($palabraBuscar, 0,$list, $fd );
+                          }
+                          catch (Exception $e)
+                          {
+                          
+                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
+                          }
+                        }
+                     
+                         echo $resultados->getRawResponse(); 
+                    exit;
+                        
+                   }
 
     public function rolesAction()
     { 
