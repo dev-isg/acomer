@@ -47,11 +47,16 @@
                      </div>
                      <div class="right-desc">
                         <h4>Medios de pago</h4>
+                         <ul class="servicios-desc">
+                            <?php foreach ($this->pagos as $pago):?>
+                           <li><?php echo $pago->nom_pago;?></li>
+                           <?php endforeach;?>
+                        </ul>
                         <h4>Servicio</h4>
                         <ul class="servicios-desc">
-                           <li>Acceso a discapasitados</li>
-                           <li>Estacionamiento</li>
-                           <li>Wi-fi</li>
+                            <?php foreach ($this->servicios as $serv):?>
+                           <li><?php echo $serv->nom_servicio;?></li>
+                           <?php endforeach;?>
                         </ul>
                      </div>
                   </div>
