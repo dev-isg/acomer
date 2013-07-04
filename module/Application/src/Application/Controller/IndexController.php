@@ -83,9 +83,18 @@ class IndexController extends AbstractActionController
     { 
          $view = new ViewModel();
          $this->layout('layout/layout-portada');
+         $distritos=$this->josAction();
+         $lista=$this->getConfigTable()->cantComentarios(2,3);
+         $view->setVariables(array('distritos' => $distritos , 'comentarios' => $lista));
+        return $view;
+    }
+    public function mapaAction()
+    { 
+         $view = new ViewModel();
+         $this->layout('layout/layout-portada');
           $distritos=$this->josAction();
-          $lista=$this->getConfigTable()->cantComentarios(2,3);
-          $view->setVariables(array('distritos' => $distritos , 'comentarios' => $lista));
+//          $lista=$this->getConfigTable()->cantComentarios(2,3);
+          $view->setVariables(array('distritos' => $distritos ));
         return $view;
     }
 
