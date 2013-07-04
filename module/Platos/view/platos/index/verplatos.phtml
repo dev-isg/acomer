@@ -10,7 +10,7 @@
    			</div>
    			<div class="ficha-product">
    				<div class="ficha-img">
-   					<img src="/img/ceviche.jpg">
+   					<img src="/imagenes/<?php echo $this->lista[0]['va_imagen'];?>">
    				</div>
    				<div class="ficha-desc">
                   <h2><?php echo $this->lista[0]['restaurant_nombre'];?></h2>
@@ -123,7 +123,7 @@
    				</div>
    				<div class="content-info">
    					<div class="info-img">
-   						<img src="/imagenes/<?php echo $this->lista[0]['va_imagen'];?>">
+   						<img src="/imagenes/<?php echo $this->lista[0]['restaurant_img'];?>">
    					</div>
                   <h4 class="ubi-map">Ubicación <span></span></h4>
                   <div id="mapCont" class="map" data-lat="<?php echo $this->lista[0]['de_latitud'];?>" data-lng="<?php echo $this->lista[0]['de_longitud'];?>"></div>
@@ -131,21 +131,6 @@
                   <section class="list-suc">
                      <ul class="ul-suc">
                     
-                        <li class="li-suc"> 
-                           <a href="#" class="" data-lat="-12.120178317480093" data-lng="-77.04086919101564">
-                               <header>                              
-                                   <h6 class="text-ellipsis">Miraflores</h6>
-                                   <span class="close-banch"></span>
-                               </header>
-                               <div class="descr">
-                                   <span class="house-icon"></span>
-                                   <ul>
-                                       <li class="text-ellipsis">Calle berlín 601</li>
-                                       <li class="phone"><span class="text-ellipsis">Miraflores</span><em class="text-ellipsis">243 2448</em></li>
-                                   </ul>
-                               </div>
-                           </a>                                       
-                        </li>
                             <?php foreach($this->locales as $local) : ?>
                         <li class="li-suc"> 
                             <a href="#" class="" data-lat="<?php echo $local->de_latitud ?>" data-lng="<?php echo $local->de_longitud ?>">
