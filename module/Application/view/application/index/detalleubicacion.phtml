@@ -56,8 +56,8 @@
 
                         ?>
 
-                    <form  accept-charset="utf-8" method="get" class="form-horizontal" id="bubi" autocomplete="on" action='<?php echo $this->basePath(); ?>/application/index/mapa'>
-                              <input id="r" name="q" type="text" placeholder="Escribe el nombre del plato" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
+                    <form  accept-charset="utf-8" method="get" class="form-horizontal" id="bubi" autocomplete="on" >
+                              <input id="r" name="q" type="text" placeholder="Escribe el nombre del plato" value=""/>
                   
                  <SELECT name="fq" id="fq" class="span2">
                 <OPTION value="">seleccione:</OPTION>
@@ -65,9 +65,9 @@
                   <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
                   <?php endforeach; ?>
                  </SELECT>
-             <button value="listar" type="submit" >POR LISTAR</button>                       
-             <button type="button" value="mapa" title="Exportar a Excel" onClick="location='<?php echo $this->basePath(); ?>/application/index/mapa'">POR MAPA</button>
-                       
+                 <button value="listar" type="submit" >POR LISTAR</button>                       
+                 <a  href="<?php echo $this->basePath(); ?>/application/index/mapa?distrito=<?php echo $_GET['fq']; ?>&plato=<?php echo ($_GET['q']); ?>" >POR MAPA </a>
+                                           
                        <!-- 
                          /*   <?php
                             if ($results)

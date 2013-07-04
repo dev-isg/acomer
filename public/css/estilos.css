@@ -268,7 +268,7 @@ top: 78%;
 right: 2%;
 }
 .contenido-bus {
-margin: 2.5em 1em;
+margin: 1em 1em;
 background: #f0f0f0;
 padding: 9px 2px 12px 20px;
 }
@@ -293,6 +293,29 @@ left: 114px;
 width: 503px;
 display: inline-block;
 vertical-align: top;
+}
+#fq {
+background: URL(../img/arrow.png) #cccccc no-repeat 102px 7px;
+width: 126px;
+font-size: 0.9em;
+border: 0 none;
+-moz-appearance: none;
+-webkit-appearance: none;
+appearance: none;
+padding: 0px 9px;
+border: 1px solid #ccc;
+}
+#q {
+margin-left: -6px;
+border: 0 none;
+padding: 6px;
+border-radius: 0px;
+}
+.verlistado {
+border: 0;
+background:url(../img/lupa2.png) no-repeat;
+padding: 15px 16px;
+margin-left: -4px;
 }
 .lateral{
     display: inline-block;
