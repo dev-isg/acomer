@@ -323,7 +323,7 @@ class IndexController extends AbstractActionController
         $servicios=$this->getPlatosTable()->getServicioxPlato($id);
         $locales=$this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos=$this->getPlatosTable()->getPagoxPlato($id);
-//       var_dump($locales->toArray());
+//       var_dump($listarecomendacion);
          $form=new \Usuario\Form\ComentariosForm();
          $form->get('submit')->setValue('Agregar');
         $request = $this->getRequest();
@@ -333,7 +333,6 @@ class IndexController extends AbstractActionController
             $datos['Ta_plato_in_id']=$id;
             $form->setData($datos);
             if ($form->isValid($datos)) {
-//                var_dump($datos);Exit;
                 $this->getComentariosTable()->agregarComentario($datos); 
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos/index/verplatos?id='.$id); 
             }
