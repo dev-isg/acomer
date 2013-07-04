@@ -68,7 +68,7 @@
 
             ?>
 
-            <form  accept-charset="utf-8" method ="post" class="form-horizontal" id="search" autocomplete="off" action='<?php echo $this->basePath(); ?>/application/index/ver'>
+            <form  accept-charset="utf-8" method ="post" class="form-horizontal" id="search" action='<?php echo $this->basePath(); ?>/application/index/ver'>
               <input id="q" name="q" type="text" placeholder="Escribe el nombre del plato" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
               <input type="submit" class="btn btn-search-home" value="Buscar"/>
             </form>             
@@ -87,9 +87,9 @@
                       <div class="subir">
                         <a href="#top"><img src="/img/scroll-top.png" alt=""></a>
                     </div>
-                       <div class="arrow">
+                      <!--  <div class="arrow">
                           <img src="/img/flechamenu.png" alt="">
-                      </div>
+                      </div> -->
                       <div class="footer">
                         <nav><ul>
                             <li>Nosotros</li>

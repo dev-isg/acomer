@@ -954,6 +954,27 @@ width: 49%;
   background-position: 0 -91px;
 }
 
+ul.servicios-desc{
+  list-style:none;
+  margin-left: 5px;
+}
+ul.servicios-desc li{
+  background: url(../img/guion.png) no-repeat 0px 10px;
+  color: #b6b6b6;
+  font-size: 14px;
+  font-family: arial;
+  padding-left: 10px;
+}
+
+.cont-accesorios{
+  height: 100%;
+  border-bottom: 1px solid #e5e5e5;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  padding-bottom: 10px;
+}
+
 .ficha-desc .puntuaciones{
   width: 105px;
   height: 15px;
@@ -1129,7 +1150,7 @@ width: 49%;
 .comentarios-one ul li{
   margin-bottom: 18px;
 }
-.content-info h4{
+.cont-accesorios h4{
   font-size: 16px;
   color: #ff8400;
   font-style: italic;
@@ -1140,13 +1161,30 @@ width: 49%;
   margin-top: 10px;
   margin-bottom: 8px;
 }
+.left-desc ul.ubi-lupa{
+  list-style: none;
+  display: block;
+  margin: 0;
+  margin-left: 2px;
+}
+.left-desc{
+  width: 190px;
+  padding: 0 10px 0 0;
+  float: left;
+  border-right: 1px dotted #ccc;
+}
+.right-desc{
+  margin-left: 10px;
+  width: 190px;
+  float: left;
+}
 .content-info ul.ubi-lupa{
   list-style: none;
   display: block;
   margin: 0;
   margin-left: 2px;
 }
-.content-info ul.ubi-lupa li .ubicancion{
+.cont-accesorios ul.ubi-lupa li .ubicancion{
   background: url(../../img/ubicacion.png) no-repeat 0 2px;
   padding-left: 20px;
   line-height: 16px;
