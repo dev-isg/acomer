@@ -65,7 +65,7 @@ class ComentariosTable
             'Ta_plato_in_id' => $coment['Ta_plato_in_id'],
             'Ta_cliente_in_id' => $idcliente,//$coment->Ta_cliente_in_id,
             'Ta_puntaje_in_id' => $coment['Ta_puntaje_in_id'],
-                'Ta_plato_in_id'=>35,
+                'Ta_plato_in_id'=>$coment['Ta_plato_in_id'],
                 'da_fecha'=>date('c')//date('Y-m-dTH:i:s.uZ')//'2013-12-12'
                 );
            

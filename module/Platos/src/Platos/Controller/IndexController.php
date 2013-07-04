@@ -314,17 +314,12 @@ class IndexController extends AbstractActionController
     
     public function verplatosAction(){
         $view = new ViewModel();
-        $view->setTerminal(true);
-//        $this->layout('layout/layout-portada');
+//        $view->setTerminal(true);
+        $this->layout('layout/layout-portada');
         $id=$this->params()->fromQuery('id');
         $listarecomendacion=$this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();
         $listarecomentarios=$this->getPlatosTable()->getComentariosxPlatos($id);//->toArray();
-//        VAR_DUMP($listarecomentarios);
-//        $arr=array();
-//        foreach ($listarecomentarios  as $key=>$value) {
-//            var_dump($listarecomentarios[$key]);
-//            
-//        }
+       
 //        exit;
          $form=new \Usuario\Form\ComentariosForm();
          $form->get('submit')->setValue('Agregar');
@@ -332,8 +327,10 @@ class IndexController extends AbstractActionController
         
         if ($request->isPost()) {
             $datos=$this->getRequest()->getPost()->toArray();
+            $datos['Ta_plato_in_id']=$id;
             $form->setData($datos);
             if ($form->isValid($datos)) {
+//                var_dump($datos);Exit;
                 $this->getComentariosTable()->agregarComentario($datos); 
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos/index/verplatos?id='.$id); 
             }
