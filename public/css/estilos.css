@@ -1275,6 +1275,16 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   margin: 0;
   margin-left: 2px;
 }
+.content-info .info-img{
+  width: 266px;
+  height: 157px;
+  overflow: hidden;
+}
+.ficha-product .ficha-img{
+  width: 407px;
+  height: 272px;
+  overflow: hidden;
+}
 .cont-accesorios ul.ubi-lupa li .ubicancion{
   background: url(../../img/ubicacion.png) no-repeat 0 2px;
   padding-left: 20px;
