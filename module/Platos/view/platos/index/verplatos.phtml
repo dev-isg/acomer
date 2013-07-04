@@ -10,7 +10,7 @@
    			</div>
    			<div class="ficha-product">
    				<div class="ficha-img">
-   					<img src="/img/ceviche.jpg">
+   					<img src="/imagenes/<?php echo $this->lista[0]['va_imagen'];?>">
    				</div>
    				<div class="ficha-desc">
                   <h2><?php echo $this->lista[0]['restaurant_nombre'];?></h2>
@@ -18,7 +18,7 @@
                   <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
    					<p class="desc"><?php echo $this->lista[0]['tx_descripcion'];?></p>
    					<p class="costo">Costo</p>
-   					<p class="precio"><?php echo $this->lista[0]['va_precio'];?></p>
+   					<p class="precio">S/.<?php echo $this->lista[0]['va_precio'];?></p>
    				</div>
    			</div>
    			<div class="content-coments">
@@ -123,15 +123,14 @@
    				</div>
    				<div class="content-info">
    					<div class="info-img">
-   						<img src="/img/<?php echo $this->lista[0]['va_imagen'];?>">
+   						<img src="/imagenes/<?php echo $this->lista[0]['restaurant_img'];?>">
    					</div>
                   <h4 class="ubi-map">Ubicación <span></span></h4>
                   <div id="mapCont" class="map" data-lat="<?php echo $this->lista[0]['de_latitud'];?>" data-lng="<?php echo $this->lista[0]['de_longitud'];?>"></div>
                   <h4>Sucursales</h4>
                   <section class="list-suc">
                      <ul class="ul-suc">
-                    
-                     <?php foreach($this->locales as $local) : ?>
+                            <?php foreach($this->locales as $local) : ?>
                         <li class="li-suc"> 
                             <a href="#" class="" data-lat="<?php echo $local->de_latitud ?>" data-lng="<?php echo $local->de_longitud ?>">
                                   <header>                              
