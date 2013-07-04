@@ -45,7 +45,20 @@ class ComentariosForm extends Form
                 'id'   => 'va_nombre',
                 'placeholder'=>'Ingrese su nombre'
             ),
-
+//           'validators' => array( 
+//                 array(
+//                     'name'    => 'StringLength',
+//                        'options' => array(
+//                            'encoding' => 'UTF-8',
+//                            'min'      => 6,
+//                            'max'      =>20 , 
+//                           'messages' => array( 
+//                           \Zend\Validator\StringLength::INVALID=>'stringLengthInvalid'
+//                
+//                        ) 
+//                            )
+//                        ) 
+//                    ),
             
 
         
