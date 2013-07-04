@@ -1,0 +1,45 @@
+{
+    "responseHeader": {
+        "status": 0,
+        "QTime": 2,
+        "params": {
+            "sort": "en_destaque desc",
+            "fl": "id,latitud,longitud,restaurante,name",
+            "start": "0",
+            "q": "ceviche",
+            "json.nl": "map",
+            "wt": "json",
+            "fq": "en_estado:activo AND distrito:MIRAFLORES",
+            "version": "1.2",
+            "rows": "9"
+        }
+    },
+    "response": {
+        "numFound": 3,
+        "start": 0,
+        "docs": [
+            {
+                "id": "119",
+                "name": "ceviche de bonito",
+                "restaurante": "Restaurante don alberto",
+                "latitud": -12.1179714,
+                "longitud": -77.01832179999997
+            },
+            {
+                "id": "122",
+                "name": "ceviche de pasta",
+                "restaurante": "Restaurante don alberto",
+                "latitud": -12.1179714,
+                "longitud": -77.01832179999997
+            },
+            {
+                "id": "125",
+                "name": "ceviche maju",
+                "restaurante": "restaurante don cucho",
+                "latitud": -12.1175,
+                "longitud": -77.0430556
+            }
+        ]
+    }
+}
+
