@@ -5,12 +5,12 @@
    		<div class="descrip-product">
    			<div class="etiqueta-cat">
    				<div class="etiqueta">
-   					<p>Destacados - <span>Ceviche</span></p>
+   					<p><span><?php echo $this->lista[0]['tipo_plato_nombre'];?></span></p>
    				</div>
    			</div>
    			<div class="ficha-product">
    				<div class="ficha-img">
-   					<img src="/img/ceviche.jpg">
+   					<img src="/imagenes/<?php echo $this->lista[0]['va_imagen'];?>">
    				</div>
    				<div class="ficha-desc">
                   <h2><?php echo $this->lista[0]['restaurant_nombre'];?></h2>
@@ -18,7 +18,7 @@
                   <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
    					<p class="desc"><?php echo $this->lista[0]['tx_descripcion'];?></p>
    					<p class="costo">Costo</p>
-   					<p class="precio"><?php echo $this->lista[0]['va_precio'];?></p>
+   					<p class="precio">S/.<?php echo $this->lista[0]['va_precio'];?></p>
    				</div>
    			</div>
    			<div class="content-coments">
@@ -29,11 +29,9 @@
                         <ul class="ubi-lupa">
                            <li>
                               <div class="ubicancion"><?php echo $this->lista[0]['va_direccion'];?>-<?php echo $this->lista[0]['distrito'];?></div>
-                              <!--<div class="ubicancion">Av. Javier Prado Este N° 1860. - San Borja</div>-->
+                       
                            </li>
-                           <!--<li>
-                              <div class="lupa"><a href="#">Ver mapa</a></div>
-                           </li>-->
+            
                         </ul>
                         <h4>Telefono</h4>
                         <ul class="servicios-desc">
@@ -47,19 +45,24 @@
                      </div>
                      <div class="right-desc">
                         <h4>Medios de pago</h4>
+                         <ul class="servicios-desc">
+                            <?php foreach ($this->pagos as $pago):?>
+                           <li><?php echo $pago->nom_pago;?></li>
+                           <?php endforeach;?>
+                        </ul>
                         <h4>Servicio</h4>
                         <ul class="servicios-desc">
-                           <li>Acceso a discapasitados</li>
-                           <li>Estacionamiento</li>
-                           <li>Wi-fi</li>
+                            <?php foreach ($this->servicios as $serv):?>
+                           <li><?php echo $serv->nom_servicio;?></li>
+                           <?php endforeach;?>
                         </ul>
                      </div>
                   </div>
    					<div class="top-coment">
-   						<p>7 comentarios realizados</p>
+   						<p><?php echo $this->cantidad;?> comentarios</p>
    						<a href="#" class="btn btn-warning agregar-coment-1">Agregar comentario</a>
    					</div>
-   					<div class="agregar-comentario-desc" style="display:none;height:376px;">
+   					<div class="agregar-comentario-desc" style="display:none;">
    						<?php
 							  $title = 'Agregar nuevo comentario';
 							  $this->headTitle($title);
@@ -95,7 +98,9 @@
    					</div>
    					<div class="comentarios-one">
    						<ul>
-                        <?php  foreach ($this->comentarios  as $comt) : ?>
+                        <?php  
+                        
+                        foreach ($this->comentarios  as $comt) : ?>
 	   							<li>
 	   								<div class="coment-li">
 	   									<div class="img-li">
@@ -112,16 +117,42 @@
 	   									</div>
 	   								</div>
 	   							</li>
-                           <?php endforeach;?>
+                           <?php 
+                          
+                           endforeach;?>
    						</ul>
    					</div>
    				</div>
    				<div class="content-info">
    					<div class="info-img">
-   						<img src="/img/default-img.jpg">
+   						<img src="/imagenes/<?php echo $this->lista[0]['restaurant_img'];?>">
    					</div>
-                  <h4>Ubicación</h4>
-                  <div id="map" class="map" data-lat="-12.0976539" data-lng=" -77.06020960000001"></div>
+                  <h4 class="ubi-map">Ubicación <span></span></h4>
+                  <div id="mapCont" class="map" data-lat="<?php echo $this->lista[0]['de_latitud'];?>" data-lng="<?php echo $this->lista[0]['de_longitud'];?>"></div>
+                  <h4>Sucursales</h4>
+                  <section class="list-suc">
+                     <ul class="ul-suc">
+                            <?php foreach($this->locales as $local) : ?>
+                        <li class="li-suc"> 
+                            <a href="#" class="" data-lat="<?php echo $local->de_latitud ?>" data-lng="<?php echo $local->de_longitud ?>">
+                                  <header>                              
+                                      <h6 class="text-ellipsis"><?php echo $local->distrito ?></h6>
+                                      <span class="close-banch"></span>
+                                  </header>
+                                  <div class="descr">
+                                      <span class="house-icon"></span>
+                                      <ul>
+                                          <li class="text-ellipsis"><?php echo $local->va_direccion ?></li>
+                                          <li class="phone"><span class="text-ellipsis">La Molina</span><em class="text-ellipsis"><?php echo $local->va_telefono ?></em></li>
+                                      </ul>
+                                  </div>
+                              </a>                                       
+                          </li>
+                          <?php endforeach; ?>
+
+                      </ul>
+                  </section>
+
    				</div>
    			</div>
    			
@@ -139,31 +170,38 @@
 		});
 
       initSucursales();
+       $('#star').raty({
+        target    : '#Ta_puntaje_in_id',
+        targetType: 'number',
+             starOff: '/img/t2.png',
+             targetKeep:true,
+             starOn : '/img/t1.png'
 
+       });
+
+      $("#side").height($("#main").height());
 	});
 
    function initSucursales(){
 
       var populateMap;
-      var mapDiv = document.getElementById('map');
+      var mapDiv = document.getElementById('mapCont');
       
-      var lat = $("#map").data("lat");
-      var lng = $("#map").data("lng");
+      var lat = $("#mapCont").data("lat");
+      var lng = $("#mapCont").data("lng");
       var markers = Array();
       
       // Defino Iconos
       var iconGray = new google.maps.MarkerImage(
-               'http://3802ae1a904469d2facd-00f3436faa63827c55a80b5230ed9a51.r85.cf1.rackcdn.com/gMarkers-4.png',
-               new google.maps.Size(24, 34), 
-               new google.maps.Point(0, 0), 
-               new google.maps.Point(24, 34) 
+               '/img/point.png',
+               new google.maps.Size(26, 32), 
+               new google.maps.Point(0, 0)
                );
 
       var iconRed = new google.maps.MarkerImage(
-               'http://3802ae1a904469d2facd-00f3436faa63827c55a80b5230ed9a51.r85.cf1.rackcdn.com/gMarkers-4.png',
-               new google.maps.Size(24, 34), 
-               new google.maps.Point(24, 0), 
-               new google.maps.Point(24, 34) 
+               '/img/point.png',
+               new google.maps.Size(26, 32), 
+               new google.maps.Point(0, 0)
                );
       
       
@@ -220,7 +258,7 @@
          }  
       }
       
-      $(".branch-widget .branch-nav li a").each(function(index){
+      $(".list-suc .ul-suc li a").each(function(index){
          var lat = $(this).data("lat");
          var lng = $(this).data("lng");
          var title = $(this).find("h6").text();
@@ -251,41 +289,41 @@
                if(index==(markers.length - 1)){
                   closeBranch();
                } else {
-                  $(".branch-widget .branch-nav li a").eq(index).trigger('click');
+                  $(".list-suc .ul-suc li a").eq(index).trigger('click');
                }
             }
       }
       
       function closeBranch(){
-            $(".widget.map-widget h2 span").html(""); 
+            $("h4.ubi-map span").html(""); 
             index = markers.length - 1;
             setActive(markers[index],null);
             $('.ubicancion').effect('highlight',{},1000); 
-            $(".branch-widget .branch-nav li a.activo").removeClass("activo");
+            $(".list-suc .ul-suc li a.activo").removeClass("activo");
       }
       
       
       function eventHandler(event){
          var lat = $(this).data("lat");
          var lng = $(this).data("lng");   
-         var index = $(".branch-widget .branch-nav li a").index(this);
+         var index = $(".list-suc .ul-suc li a").index(this);
          var title = $(this).find("h6").text();
          var $target = $(event.target);
-         $(".branch-widget .branch-nav li a.activo").removeClass("activo");
+         $(".list-suc .ul-suc li a.activo").removeClass("activo");
          if($target.is("span.close-banch")){
             // Mostrar Principal
             closeBranch();
          } else {
             // Mostrar sucursal  
             $(this).addClass("activo");
-            $(".widget.map-widget h2 span").html(" : "+title);
+            $("h4.ubi-map span").html(" : "+title);
             setActive(markers[index],null);
          }
          return false;  
       }
       
-      $(".branch-widget .branch-nav li a").on('click',eventHandler);
+      $(".list-suc .ul-suc li a").on('click',eventHandler);
 
-      }
+         }
 
 </script>

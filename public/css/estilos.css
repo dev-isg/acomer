@@ -901,6 +901,18 @@ width: 49%;
 }
 .form-envio-men form{
   margin-right: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.lista-Detalle .descrip-product{
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 50px;
+}
+.lista-Detalle .subir{
+  display: none!important;
+}
+.lista-Detalle .masinfo{
+  display: none!important;
 }
 .form-horizontal .control-group input[type="text"]{
   width: 380px;
@@ -913,6 +925,9 @@ width: 49%;
 }
 .form-horizontal .control-group{
   margin-bottom: 10px;
+}
+.form-horizontal #star{
+  width: 120px!important;
 }
 .ficha-product .ficha-desc{
   float: left;
@@ -954,10 +969,62 @@ width: 49%;
 .punt .puntuaciones.c5{
   background-position: 0 -91px;
 }
+.list-suc ul{
+  list-style: none;
+  margin: 0;
+}
 
+.list-suc ul li.li-suc{
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1px;
+  padding-top: 1px;
+}
+.list-suc ul li.li-suc a{
+  padding: 5px 10px 10px 10px;
+  display: block;
+  overflow: hidden;
+}
+.list-suc ul li.li-suc a.activo{
+  background: #eaeaea;
+}
+li.li-suc a h6{
+  color: #7b7b7b;
+  font-weight: bold;
+  margin: 0;
+  font-size: 15px;
+  width: 230px;
+  float: left;
+}
+li.li-suc a.activo span.close-banch{
+  background: url(../img/close.png) no-repeat;
+  height: 16px;
+  width: 16px;
+  float: right; 
+}
+.phone em{
+  float: right;
+  color: #7b7b7b;
+  font-size: 14px;
+}
+.phone span.text-ellipsis{
+  float: left;
+  color: #7b7b7b;
+  font-size: 14px; 
+}
+li.li-suc a header{
+  float: left;
+}
+.descr{
+  float: left;
+}
+.descr li.text-ellipsis{
+  color: #7b7b7b;
+  font-size: 14px;
+}
 ul.servicios-desc{
   list-style:none;
   margin-left: 5px;
+
 }
 ul.servicios-desc li{
   background: url(../img/guion.png) no-repeat 0px 10px;
@@ -965,6 +1032,16 @@ ul.servicios-desc li{
   font-size: 14px;
   font-family: arial;
   padding-left: 10px;
+}
+
+input:-moz-placeholder,textarea:-moz-placeholder{color:#fff;}
+input:-ms-input-placeholder,textarea:-ms-input-placeholder{color:#fff;}
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;}
+
+#mapCont{
+  display: block;
+  width: 266px;
+  height: 214px;
 }
 
 .cont-accesorios{
@@ -1034,6 +1111,7 @@ ul.servicios-desc li{
   margin: 0;
   line-height: 18px;
   margin-top: 8px;
+  text-align: left!important;
 }
 .content-coments{
   display: block;
@@ -1152,6 +1230,18 @@ ul.servicios-desc li{
   margin-bottom: 18px;
 }
 .cont-accesorios h4{
+  font-size: 16px;
+  color: #ff8400;
+  font-style: italic;
+  font-weight: bold;
+  padding-bottom: 3px;
+  border-bottom: 1px dashed #ccc;
+  margin:0;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.content-info h4{
   font-size: 16px;
   color: #ff8400;
   font-style: italic;

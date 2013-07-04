@@ -321,8 +321,9 @@ class IndexController extends AbstractActionController
         $listarecomendacion=$this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();
         $listarcomentarios=$this->getPlatosTable()->getComentariosxPlatos($id);//->toArray();
         $servicios=$this->getPlatosTable()->getServicioxPlato($id);
+        $locales=$this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos=$this->getPlatosTable()->getPagoxPlato($id);
-//       var_dump($pagos->toArray());exit;
+//         var_dump($listarecomendacion);
          $form=new \Usuario\Form\ComentariosForm();
          $form->get('submit')->setValue('Agregar');
         $request = $this->getRequest();
@@ -332,18 +333,17 @@ class IndexController extends AbstractActionController
             $datos['Ta_plato_in_id']=$id;
             $form->setData($datos);
             if ($form->isValid($datos)) {
-//                var_dump($datos);Exit;
                 $this->getComentariosTable()->agregarComentario($datos); 
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos/index/verplatos?id='.$id); 
             }
         }
         
+    
         
-        
-        
+        $this->layout()->clase = 'Detalle';
         $view->setVariables(array('lista' => $listarecomendacion,'comentarios'=>$listarcomentarios,'form'=>$form,
                'servicios'=>$servicios,
-               'pagos'=>$pagos));
+               'pagos'=>$pagos,'locales'=>$locales,'cantidad'=>$this->getCount($listarcomentarios)));
         return $view;
     }
         public function getComentariosTable() {
@@ -363,6 +363,10 @@ class IndexController extends AbstractActionController
             $this->platosTable = $sm->get('Platos\Model\PlatosTable');
         }
         return $this->platosTable;
+    }
+    
+    public function getCount($val){
+        return $val->count();
     }
     
        

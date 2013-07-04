@@ -36,13 +36,10 @@ class IndexController extends AbstractActionController
         $listaval=$this->getConfigTable()->cantComentxPlato(2,3,2);
         $listault=$this->getConfigTable()->cantComentxPlato(2,3,3);
         //var_dump($listaval);
-//        var_dump($listades->toArray());exit;
-        $view->setVariables(array('lista' => $listades,'listaseg'=>$listadeseg,'listaval'=>$listaval,'listault'=>$listault));
+        $this->layout()->clase = 'Home';
+        $view->setVariables(array('lista' => $listades,'listaseg'=>$listadeseg,'listaval'=>$listaval,'listault'=>$listault,'clase'=>'Home'));
          return $view;
-//                return new ViewModel(array(
-//            'lista' => $listarecomendacion
-//        ));
-                
+    
 //       
     
     }
@@ -74,6 +71,7 @@ class IndexController extends AbstractActionController
          $view = new ViewModel();
           $this->layout('layout/layout-portada');
          $distritos=$this->josAction();
+                 $this->layout()->clase = 'Search';
         $view->setVariables(array('distritos' => $distritos));
          return $view;
     
@@ -86,6 +84,7 @@ class IndexController extends AbstractActionController
          $this->layout('layout/layout-portada');
          $distritos=$this->josAction();
          $lista=$this->getConfigTable()->cantComentarios(2,3);
+                 $this->layout()->clase = 'Search';
          $view->setVariables(array('distritos' => $distritos , 'comentarios' => $lista));
         return $view;
     }
@@ -122,7 +121,12 @@ class IndexController extends AbstractActionController
                                 echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
                           }
                         }
+<<<<<<< HEAD
                          $resultados->getRawResponse();
+=======
+
+                     
+>>>>>>> cc699f09d036acccbe35d18e41a5b9cd2a22163b
                          $json = $resultados->getRawResponse(); 
                          $distritos=$this->josAction();
                     
@@ -131,6 +135,7 @@ class IndexController extends AbstractActionController
                         
                    }
     
+<<<<<<< HEAD
     public function jsonmapasaAction()    { 
         $distrito=  $this->params()->fromQuery('distrito');
         $view  = new viewModel();
@@ -167,6 +172,13 @@ class IndexController extends AbstractActionController
                     exit;
                         
                    }
+=======
+    public function jsonmapasaAction($s){
+   echo $s;
+        exit();
+
+    }
+>>>>>>> cc699f09d036acccbe35d18e41a5b9cd2a22163b
 
     public function rolesAction()
     { 
