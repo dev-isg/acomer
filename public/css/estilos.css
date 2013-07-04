@@ -224,11 +224,21 @@ position: absolute;
 top: 78%;
 right: 2%;
 }
+.contenido-bus {
+margin: 2.5em 1em;
+background: #f0f0f0;
+padding: 9px 2px 12px 20px;
+}
+#bubi {
+padding: 1em;
+text-align: center;
+background: #f0f0f0;
+}
 .detalle-nombre {
 display: inline-block;
 margin-top: 10px;
-margin-left: 10px;
-width: 96%;
+margin-left: -5px;
+width: 100%;
 text-align: right;
 }
 .mas-det {
@@ -269,7 +279,7 @@ margin-right: 10px;
 .plato_h {
 margin-left: 14px;
 background: #f0f0f0;
-width: 650px;
+width: 691px;
 margin: 1em 1em;
 }
 

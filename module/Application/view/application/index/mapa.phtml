@@ -1,10 +1,11 @@
-                     <?php
+ <?php
                         header('Content-Type: text/html; charset=utf-8');
                         $limite = 9;    
                         $resultados = false;
-                         $palabraBuscar = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
+                        $palabraBuscar = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
                           $fd = array (  
-                            'fq'=>'en_estado:activo'); 
+                            'fq'=> 'en_estado:activo AND distrito:'.$_REQUEST['fq'],
+                              'sort'=>'en_destaque desc'); 
                         if ($palabraBuscar)
                         { 
                           require './vendor/SolrPhpClient/Apache/Solr/Service.php';
@@ -30,7 +31,8 @@
                         $query = "($palabraBuscar) AND (en_destaque:si)";
                         $fq = array (  
                                    'sort'=>'random_' . uniqid() .' asc',
-                            'fq'=>'en_estado:activo');                                              
+                            'fq'=> 'en_estado:activo AND distrito:'.$_REQUEST['fq'],
+                            'wt'=>'json');                                              
                         $results = false;
                         if ($query)
                         { 
@@ -54,27 +56,28 @@
 
                         ?>
 
-                         <form  accept-charset="utf-8" method="post" class="form-horizontal" id="bubi" autocomplete="on" action='<?php echo $this->basePath(); ?>/application/index/detalleubicacion'>
-                        <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>  
-
-                         <form  accept-charset="utf-8" method="get" class="form-horizontal" id="bubi" autocomplete="on" action='<?php echo $this->basePath(); ?>/application/index/detalleubicacion'>
-                         <SELECT name="fq" id="fq" >
-                        <OPTION value=""></OPTION>
-                           <?php  foreach ($this->distritos as $distritos) : ?>
-                          <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
-                         <?php endforeach; ?>
-                         </SELECT>                      
-                       <button value="listar" type="submit" >POR LISTAR</button>                       
+                    <form  accept-charset="utf-8" method="get" class="form-horizontal" id="bubi" autocomplete="on" >
+                              <input id="r" name="q" type="text" placeholder="Escribe el nombre del plato" value="<?php echo htmlspecialchars($query, ENT_QUOTES, 'utf-8'); ?>"/>
+                  
+                 <SELECT name="fq" id="fq" class="span2">
+                <OPTION value="">seleccione:</OPTION>
+                   <?php  foreach ($this->distritos as $distritos) : ?>
+                  <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
+                  <?php endforeach; ?>
+                 </SELECT>
+             <button value="listar" type="submit" >POR LISTAR</button>                       
                         <button type="button" value="mapa" title="Exportar a Excel" onClick="location='<?php echo $this->basePath(); ?>/application/index/mapa'">POR MAPA</button>
-                                   
-<!--                            <?php
+                       
+                       <!-- 
+                         /*   <?php
                             if ($results)
                             {
                               $total = (int) $results->response->numFound;
                               $start = min(1, $total);
                               $end = min($limit, $total);
                             ?> -->
-                   
+                              <!-- <div>Resultados <?php echo $start; ?> - <?php echo $end;?> de <?php echo $total; ?>:</div> 
+                                <div>Resultados <?php echo $fq; ?>:</div> -->
                            
                          </form> 
 <div class="sub" style="margin-top: 10px;">
@@ -126,70 +129,4 @@
                         </div>
                
                             
-        <div class="sub" style="margin-top: 2em;margin-bottom: 2em;">
-            <span class="titulo-portada" style="padding-right: 45px;">Resultados <?php echo $_REQUEST['q']; ?> </span>
-        </div>                    
-                                              
-                  <?php 
-                foreach ($resultados->response->docs as $doc)
-                          {
-                      ?> 
-
-                       <div class="plato_h">
-                         <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
-                         <div class="lateral" >
-                          <img src="/img/mas.png" alt="" class="mas-det">
-                          <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" target="_blank" >
-                               <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="width: 144px;height: 120px;">
-                          </a>
-                          </div>
-                          <div class="detalle-restaurante">
-                          <div class="detalle-nombre"><p class="nombre_r"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p> <p id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" style="margin: 0px;width: 118px !important;display:inline-block;" ></p></div>
-                              <p class="nom_plato"><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></p>
-                              <p style="margin-left:10px;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></p>
-                              <p class="com-pla"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i> Comentarios</p>
-
-                          </div>
-
-                          </div>
-                         
-                       
-                      <?php
-                          }
-                      ?>   
-                
-<script>
-  $(document).ready(function(){
-      var puntaje = function(item,p){
-     $(item).raty({ 
-                    readOnly: true,
-                    score: p, 
-                    starOff: '/img/t2.png',
-                    starOn : '/img/t1.png'                        
-      });
-   }
-     $(".plato_r").find(':input').each(function() {
-         var elemento= this;
-         var e = $(this).attr("data-id");
-         var ptaje;
-         var idptje;
-         if( elemento.name=="pun"){
-        idptje = e;
-         ptaje= elemento.value;
-        puntaje("#" + idptje ,ptaje); 
-         }
-        });
-         $(".plato_h").find(':input').each(function() {
-         var elemento= this;
-         var e = $(this).attr("data-id");
-         var ptaje;
-         var idptje;
-         if( elemento.name=="pun"){
-        idptje = e;
-         ptaje= elemento.value;
-        puntaje("#" + idptje ,ptaje); 
-         }
-        });
-
-  });
-</script>
+      
