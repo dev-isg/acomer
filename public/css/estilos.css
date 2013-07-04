@@ -252,7 +252,7 @@ display: inline-block;
 vertical-align: top;
 }
 #fq {
-background: URL(../img/arrow.png) #cccccc no-repeat 298px 3px;
+background: URL(../img/arrow.png) #cccccc no-repeat 102px 7px;
 width: 126px;
 font-size: 0.9em;
 border: 0 none;
@@ -267,6 +267,11 @@ margin-left: -6px;
 border: 0 none;
 padding: 6px;
 border-radius: 0px;
+}
+.verlistado {
+border: 0;
+background:url(../img/lupa2.png) no-repeat;
+padding: 5px 0px;
 }
 .lateral{
     display: inline-block;
