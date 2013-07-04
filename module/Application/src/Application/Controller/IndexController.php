@@ -121,21 +121,13 @@ class IndexController extends AbstractActionController
                                 echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
                           }
                         }
-<<<<<<< HEAD
-                         $resultados->getRawResponse();
-=======
-
-                     
->>>>>>> cc699f09d036acccbe35d18e41a5b9cd2a22163b
-                         $json = $resultados->getRawResponse(); 
-                         $distritos=$this->josAction();
-                    
-                         return  new ViewModel(array('mapa' => $resultados->response->docs ,'hola'=>'siempre nosotros','json'=>$json,'distritos' => $distritos ,));
+  $distritos=$this->josAction();
+                 
+                       return  new ViewModel(array('mapa' => $resultados->response->docs ,'distritos' => $distritos ,));
                         //$mapita = $this->jsonmapasaAction($json); 
                         
                    }
     
-<<<<<<< HEAD
     public function jsonmapasaAction()    { 
         $distrito=  $this->params()->fromQuery('distrito');
         $view  = new viewModel();
@@ -172,13 +164,6 @@ class IndexController extends AbstractActionController
                     exit;
                         
                    }
-=======
-    public function jsonmapasaAction($s){
-   echo $s;
-        exit();
-
-    }
->>>>>>> cc699f09d036acccbe35d18e41a5b9cd2a22163b
 
     public function rolesAction()
     { 
