@@ -225,7 +225,7 @@ top: 78%;
 right: 2%;
 }
 .contenido-bus {
-margin: 2.5em 1em;
+margin: 1em 1em;
 background: #f0f0f0;
 padding: 9px 2px 12px 20px;
 }
@@ -271,7 +271,7 @@ border-radius: 0px;
 .verlistado {
 border: 0;
 background:url(../img/lupa2.png) no-repeat;
-padding: 10px 12px;
+padding: 15px 16px;
 margin-left: -4px;
 }
 .lateral{
