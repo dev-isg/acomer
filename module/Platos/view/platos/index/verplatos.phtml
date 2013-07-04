@@ -5,7 +5,7 @@
    		<div class="descrip-product">
    			<div class="etiqueta-cat">
    				<div class="etiqueta">
-   					<p>Destacados - <span>Ceviche</span></p>
+   					<p><span><?php echo $this->lista[0]['tipo_plato_nombre'];?></span></p>
    				</div>
    			</div>
    			<div class="ficha-product">
@@ -59,7 +59,7 @@
                      </div>
                   </div>
    					<div class="top-coment">
-   						<p>7 comentarios realizados</p>
+   						<p><?php echo $this->cantidad;?> comentarios</p>
    						<a href="#" class="btn btn-warning agregar-coment-1">Agregar comentario</a>
    					</div>
    					<div class="agregar-comentario-desc" style="display:none;height:376px;">
@@ -98,7 +98,9 @@
    					</div>
    					<div class="comentarios-one">
    						<ul>
-                        <?php  foreach ($this->comentarios  as $comt) : ?>
+                        <?php  
+                        
+                        foreach ($this->comentarios  as $comt) : ?>
 	   							<li>
 	   								<div class="coment-li">
 	   									<div class="img-li">
@@ -115,7 +117,9 @@
 	   									</div>
 	   								</div>
 	   							</li>
-                           <?php endforeach;?>
+                           <?php 
+                          
+                           endforeach;?>
    						</ul>
    					</div>
    				</div>
