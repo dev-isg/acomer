@@ -318,8 +318,8 @@ class IndexController extends AbstractActionController
         $this->layout('layout/layout-portada');
         $id=$this->params()->fromQuery('id');
         $listarecomendacion=$this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();
-        $listarecomentarios=$this->getPlatosTable()->getComentariosxPlatos($id);//->toArray();
-       
+        $listarcomentarios=$this->getPlatosTable()->getComentariosxPlatos($id);//->toArray();
+//       var_dump($listarecomendacion);
 //        exit;
          $form=new \Usuario\Form\ComentariosForm();
          $form->get('submit')->setValue('Agregar');
@@ -339,7 +339,7 @@ class IndexController extends AbstractActionController
         
         
         
-        $view->setVariables(array('lista' => $listarecomendacion,'comentarios'=>$listarecomentarios,'form'=>$form));
+        $view->setVariables(array('lista' => $listarecomendacion,'comentarios'=>$listarcomentarios,'form'=>$form));
         return $view;
     }
         public function getComentariosTable() {
