@@ -271,7 +271,8 @@ border-radius: 0px;
 .verlistado {
 border: 0;
 background:url(../img/lupa2.png) no-repeat;
-padding: 5px 0px;
+padding: 10px 12px;
+margin-left: -4px;
 }
 .lateral{
     display: inline-block;
