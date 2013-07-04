@@ -1,6 +1,82 @@
-<?php echo $this->hola;  ?>
- <?php  
-                foreach ($this->mapa as $doc)
+ <?php
+                        header('Content-Type: text/html; charset=utf-8');
+                        $limite = 9;    
+                        $resultados = false;
+                        $palabraBuscar = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
+                          $fd = array (  
+                            'fq'=> 'en_estado:activo AND distrito:'.$_REQUEST['fq'],
+                              'sort'=>'en_destaque desc',
+                              ); 
+                        if ($palabraBuscar)
+                        { 
+                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
+                          $solar = new Apache_Solr_Service('192.168.1.44', 8983, '/solr/');
+                          if (get_magic_quotes_gpc() == 1)
+                          {
+                            $palabraBuscar = stripslashes($palabraBuscar);
+                          }
+                          try
+                          {
+                            $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
+
+                          }
+                          catch (Exception $e)
+                          {
+                          
+                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
+                          }
+                        }
+          
+                        $limit = 3;             
+                        $palabraBuscar = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
+                        $query = "($palabraBuscar) AND (en_destaque:si)";
+                        $fq = array (  
+                                   'sort'=>'random_' . uniqid() .' asc',
+                            'fq'=> 'en_estado:activo AND distrito:'.$_REQUEST['fq'],
+                            'wt'=>'json');                                              
+                        $results = false;
+                        if ($query)
+                        { 
+                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
+                          $solr = new Apache_Solr_Service('192.168.1.44', 8983, '/solr/');
+                          if (get_magic_quotes_gpc() == 1)
+                          {
+                            $query = stripslashes($query);
+                          }
+                          try
+                          {
+                            $results = $solr->search($query, 0, $limit, $fq  );
+
+                          }
+                          catch (Exception $e)
+                          {
+                          
+                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
+                          }
+                        }
+
+                        ?>
+
+     <form  accept-charset="utf-8" method="get" class="form-horizontal" id="bubi" autocomplete="on" >
+                             
+                 <SELECT name="fq" id="fq" class="span2">
+                <OPTION value="">seleccione:</OPTION>
+                   <?php  foreach ($this->distritos as $distritos) : ?>
+                  <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
+                  <?php endforeach; ?>
+                 </SELECT>
+               
+                <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>
+                 <button class="verlistado" value="listar" type="submit" ></button>                       
+                <a style="margin-left: 10px;text-decoration: underline;"  href="<?php echo $this->basePath(); ?>/application/index/mapa?distrito=<?php echo $_GET['fq']; ?>&plato=<?php echo ($_GET['q']); ?>" >POR MAPA </a>
+                   
+
+<?php    
+echo $this->hola;
+          ?> 
+<?php    
+   require './vendor/SolrPhpClient/Apache/Solr/Service.php';                     
+ foreach ($this->mapa->response->docs as $doc)
                           {
           ?> 
                           <div class="plato_r">
@@ -28,12 +104,27 @@
 
              </div> 
              </div>
-
-
                       <?php
                           }
-                      ?>   
-                
-      <div>
+             ?>  <div>
         <div id='map' style="height:400px;"></div>
       </div>
+ <script type="text/javascript">
+   var map;
+   $(document).ready(function(){
+
+     var mcOptions = { maxZoom: 14};
+     map = new GMaps({
+       el: '#map',
+       zoom: 12,
+        lat: -12.043333,
+        lng: -77.028333,
+       markerClusterer: function(map) {
+   return new MarkerClusterer(map,mcOptions);
+ }
+
+     });
+
+     
+   });
+ </script>
