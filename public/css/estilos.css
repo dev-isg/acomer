@@ -900,6 +900,18 @@ width: 49%;
 }
 .form-envio-men form{
   margin-right: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.lista-Detalle .descrip-product{
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 50px;
+}
+.lista-Detalle .subir{
+  display: none!important;
+}
+.lista-Detalle .masinfo{
+  display: none!important;
 }
 .form-horizontal .control-group input[type="text"]{
   width: 380px;
@@ -912,6 +924,9 @@ width: 49%;
 }
 .form-horizontal .control-group{
   margin-bottom: 10px;
+}
+.form-horizontal #star{
+  width: 120px!important;
 }
 .ficha-product .ficha-desc{
   float: left;
@@ -1214,6 +1229,18 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   margin-bottom: 18px;
 }
 .cont-accesorios h4{
+  font-size: 16px;
+  color: #ff8400;
+  font-style: italic;
+  font-weight: bold;
+  padding-bottom: 3px;
+  border-bottom: 1px dashed #ccc;
+  margin:0;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.content-info h4{
   font-size: 16px;
   color: #ff8400;
   font-style: italic;
