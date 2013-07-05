@@ -18,7 +18,8 @@ class Solicita extends Form
             'name' => 'nombre_complet',
             'type' => 'Text',
             'options' => array(
-                'label' => 'nombre',
+
+            // 'label' => 'nombre',
             ),
         ));
 
@@ -27,30 +28,41 @@ class Solicita extends Form
             'name' => 'email',
             'type' => 'Email',
             'options' => array(
-                'label' => 'correo',
+
+                // 'label' => 'correo',
             ),
         ));
         $this->add(array(
             'name' => 'nombre_plato',
             'type' => 'Text',
             'options' => array(
-                'label' => 'nombre',
+
+//                'label' => 'nombre de plato',
             ),
         ));
         
            $this->add(array(
             'name' => 'descripcion',
-            'type' => 'Text',
+            'type' => 'Textarea',
+            'attributes' => array(               
+                'class' => 'span11',
+                'colls'=>40,
+                'rows'=>4
+            ),
             'options' => array(
-                'label' => 'descripcion',
+
+//                'label' => 'descripcion',
+
             ),
         ));
-        
+
          $this->add(array(
             'name' => 'nombre_restaurant',
             'type' => 'Text',
             'options' => array(
-                'label' => 'nombre restaurante',   
+
+//                'label' => 'nombre restaurante',   
+
             ),
         ));
                 
@@ -59,7 +71,8 @@ class Solicita extends Form
             'name' => 'telefono',
             'type' => 'Text',
             'options' => array(
-                'label' => 'Telefono',   
+
+//                'label' => 'Telefono',   
             ),
         ));
         $this->add(array(
@@ -68,6 +81,7 @@ class Solicita extends Form
             'attributes' => array(
                 'value' => 'Enviar',
                 'id' => 'submitbutton',
+                'class' => 'btn btn-primary'
             ),
         ));
     }

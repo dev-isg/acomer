@@ -19,6 +19,8 @@ use Application\Model\Entity\Procesa;
 use Application\Model\Usuario;
 use Application\Model\Entity\Album;
 use Zend\Json\Json;
+use Zend\Mail\Message;
+use Zend\Mail\Transport\Sendmail as SendmailTransport;
 
 use Platos\Model\Platos;
 use Platos\Model\PlatosTable; 
@@ -332,6 +334,42 @@ class IndexController extends AbstractActionController
         $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Solicita';
         $form=new Solicita("form");
+        $request=$this->getRequest();
+        if($request->isPost()){
+        $nombre = $this->params()->fromPost('nombre_complet', 0);
+        $email = $this->params()->fromPost('email',0);
+        $plato = $this->params()->fromPost('nombre_plato',0);
+        $descripcion = $this->params()->fromPost('descripcion',0);
+        $nombre_restaurant = $this->params()->fromPost('nombre_restaurant',0);
+        $telefono = $this->params()->fromPost('telefono',0);
+        //var_dump($nombre);Exit;
+        $bodyHtml='<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+                                               <head>
+                                               <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+                                               </head>
+                                               <body>
+                                                    <div style="color: #7D7D7D"><br />
+                                                     Nombre <strong style="color:#133088; font-weight: bold;">'.utf8_decode($nombre).'</strong><br />
+                                                     Email <strong style="color:#133088; font-weight: bold;">'.utf8_decode($email).'</strong><br />
+                                                     Plato <strong style="color:#133088; font-weight: bold;">'.utf8_decode($plato).'</strong><br />
+                                                     Descripcion <strong style="color:#133088; font-weight: bold;">'.utf8_decode($descripcion).'</strong><br />
+                                                     Restaurante <strong style="color:#133088; font-weight: bold;">'.utf8_decode($nombre_restaurant).'</strong><br />
+                                                     Telefono <strong style="color:#133088; font-weight: bold;">'.utf8_decode($telefono).'</strong><br />
+                                              
+                                                     </div>
+                                               </body>
+                                               </html>';
+        
+        $message = new Message();
+        $message->addTo('informes@innovationssystems.com', $nombre)
+        ->setFrom('no-reply@listadelsabor.pe)', 'listadelsabor.com')
+        ->setSubject('Moderacion de comentario de listadelsabor.com')
+        ->setBody($bodyHtml);
+        $transport = new SendmailTransport();
+        $transport->send($message);
+        $this->redirect()->toUrl('/application/index/solicita');
+        }
+        
         $view->setVariables(array('form' => $form));
          return $view;
         
