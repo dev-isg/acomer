@@ -103,7 +103,7 @@ class PlatosTable
             'en_destaque' => $plato->en_destaque,
             'en_estado' => $plato->en_estado,
             'Ta_tipo_plato_in_id' => $plato->Ta_tipo_plato_in_id,
-            'Ta_puntaje_in_id' => $plato->Ta_puntaje_in_id,
+            'Ta_puntaje_in_id' => (!empty($plato->Ta_puntaje_in_id))?$plato->Ta_puntaje_in_id:0,
             'Ta_usuario_in_id' => $plato->Ta_usuario_in_id,
         );
 
@@ -113,7 +113,7 @@ class PlatosTable
             }
         }
         $data['en_destaque']='si';
-        $data['Ta_puntaje_in_id']=0;
+//        $data['Ta_puntaje_in_id']=0;
 //         $data['cantidad']=0;
 //            print_r($data);exit;
         $id = (int) $plato->in_id;
