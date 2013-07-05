@@ -620,7 +620,9 @@ footer p{
   color: #a5a5a5;
   margin-top: 2px;
 }
-
+label.error {
+    color: red;
+    }
 .img-plato{
 width: 100%;
 height: 185px;
@@ -1122,6 +1124,9 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   line-height: 20px;
 }
 .lista-Solicita .masinfo{
+  display: none;
+}
+.lista-Nosotros .masinfo{
   display: none;
 }
 .contenido-static p{
