@@ -578,14 +578,34 @@ nav ul{
 nav li{
   line-height: 20px;
   display: inline-block;
-  width: 31%;
   text-align: center;
   font-weight: normal;
   font-size: 13px;
   border-left: 1px solid;
+  padding-left: 15px;
+}
+nav li a{
+  color: white;
+}
+nav li a:hover{
+  color: white;
+  text-decoration: underline;
 }
 nav li:first-child{
-  border-left: 0px solid;  
+  border-left: 0px solid;
+  padding-left: 0;
+  padding-right: 10px;
+}
+.solicitar-publicacion{
+  display: block;
+  text-align: center;
+}
+.solicitar-publicacion a{
+  color: white;
+  font-size: 14px;
+}
+.solicitar-publicacion a:hover{
+  color: white;
 }
 .footer {
   background: rgba(64, 64, 63, 0.95);
@@ -610,7 +630,7 @@ width: 100%;
 height: 185px;
 }
 .subir-home{
-  margin-top: -10px;
+  margin-top: 10px!important;
 }
 .pt {
 display: inline-block;
@@ -658,7 +678,7 @@ display: inline-block;
   background: url(../img/etiqueta-home.png) no-repeat;
 }
 .primer-home{
-  margin-bottom: 60px;
+  margin-bottom: 10px;
 }
 .content-etiqueta-home p{
   color: white;
@@ -938,7 +958,7 @@ width: 49%;
   line-height: 18px;
   border-bottom: 1px solid white;
   padding-bottom: 3px;
-  margin-bottom: 7px;
+  margin-bottom: 10px;
 }
 .punt .puntuaciones{
   width: 105px;
@@ -1087,7 +1107,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   line-height: 14px;
   border-bottom: 1px solid white;
   padding-bottom: 3px;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 .ficha-desc p.desc{
   color: #7b7b7b;
