@@ -174,15 +174,10 @@ cursor: pointer;
 
 #map{
   display: block;
-  width: 95%;
-<<<<<<< HEAD
-  
+  width: 100%;  
   margin: 0 auto;
-  
-=======
   height: 350px;
   margin: 0 auto;  
->>>>>>> 2faa8cfe63261e404f374e79b26546519cf301e0
   -moz-box-shadow: 0px 5px 20px #ccc;
   -webkit-box-shadow: 0px 5px 20px #ccc;
   box-shadow: 0px 5px 20px #ccc;
@@ -282,6 +277,7 @@ padding: 9px 2px 12px 20px;
 padding: 1em;
 text-align: center;
 background: #f0f0f0;
+margin-bottom: 0px;
 }
 .detalle-nombre {
 display: inline-block;
@@ -337,6 +333,9 @@ font-size: 1em;
 width: 364px;
 margin: 0px;
 text-align: left !important;
+height: 22px;
+overflow: hidden;
+vertical-align: top;
 }
 .nom_plato {
 font-size: 1em;
@@ -549,16 +548,13 @@ margin: 0px;
 padding: 1.5em 0px;
 }
 
-#search{
-
-}
 .fec {
 width: 100%;
 text-align: center;
 margin-bottom: 0px;
 margin-top: 3px;
 }
-  .titulo-portada {
+.titulo-portada {
 background: url(../img/titulo.png);
 padding: 26px 27px 27px 7px;
 color: white;
@@ -631,6 +627,8 @@ margin: 0px
   font-size: 15px;
   padding: 5px 0;
   font-family: arial;
+  height: 22px;
+  overflow: hidden;
 }
 .tercera-categ{
   padding-bottom: 50px;
@@ -672,8 +670,7 @@ display: inline-block;
 .punt{
   width: 120px !important;
   display: inline-block;
-  text-align: right;
-  float: right;
+  text-align: right;  
 }
 .plato_r {
   text-align: center;

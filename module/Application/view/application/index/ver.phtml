@@ -169,7 +169,7 @@
  <script type="text/javascript">
    var map;
    $(document).ready(function(){
-
+$('#mapa-buscador').css("display","none");
          var puntaje = function(item,p){
      $(item).raty({ 
                     readOnly: true,
@@ -216,7 +216,7 @@
        });
        
      $('#esconder').css("display","none");
-
+$('#mapa-buscador').css("display","block");
      var plato=$('#bubi #q').val();
      var dis=$('#bubi #fq').val();
 
