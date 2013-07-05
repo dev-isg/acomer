@@ -229,7 +229,7 @@
 
      var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
      console.log(url);
-     if ( ($('#bubi #q').val() != "") && () ){
+     if ( ($('#bubi #q').val() != "") && ($('#bubi #fq').val()!="") ){
      $.getJSON( url, function(data) {
              $.each( data.response.docs, function(i, marker) {
                  map.setCenter(marker.latitud,marker.longitud );
