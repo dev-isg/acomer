@@ -16,7 +16,7 @@
    					<img src="/imagenes/<?php echo $this->lista[0]['va_imagen'];?>">
    				</div>
    				<div class="ficha-desc">
-                  <h2><?php echo $this->lista[0]['restaurant_nombre'];?></h2>
+                  <h2><?php echo $this->lista[0]['restaurant_nombre'];?></h2>  
    					<div class="puntuaciones c<?php echo $this->lista[0]['Ta_puntaje_in_id'];?>"></div>
                   <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
    					<p class="desc"><?php echo $this->lista[0]['tx_descripcion'];?></p>
@@ -62,7 +62,7 @@
                      </div>
                   </div>
    					<div class="top-coment">
-   						<p><?php echo $this->cantidad;?> comentarios</p>
+   						<p><?php echo $this->lista[0]['num'];//$this->cantidad;?> comentarios</p>
    						<a href="#" class="btn btn-warning agregar-coment-1">Agregar comentario</a>
    					</div>
    					<div class="agregar-comentario-desc" style="display:none;">
@@ -101,9 +101,13 @@
    					</div>
    					<div class="comentarios-one">
    						<ul>
-                        <?php  
+ 
+                        <?php                  
                         
-                                                foreach ($this->comentarios  as $comt) : ?>
+                                                foreach ($this->comentarios  as $comt) : 
+                                                    if($comt->num!=0){
+                                                    ?>
+                                                    
 	   							<li>
 	   								<div class="coment-li">
 	   									<div class="img-li">
@@ -121,7 +125,7 @@
 	   								</div>
 	   							</li>
                            <?php 
-                          
+                                                    }
                            endforeach;?>
    						</ul>
    					</div>
