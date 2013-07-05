@@ -43,6 +43,9 @@ class IndexController extends AbstractActionController
         $view->setVariables(array('lista' => $listades,'listaseg'=>$listadeseg,'listaval'=>$listaval,'listault'=>$listault,'clase'=>'Home'));
          return $view;
     
+         
+         
+         
 //       
     
     }
