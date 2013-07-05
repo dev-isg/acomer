@@ -1,11 +1,13 @@
 <?php
 
-
 $title = 'Solicitar';
 $this->headTitle($title);
 ?>
 
-<div class="span8">
+<div class="content-left">
+	<div class="descrip-product">
+		<div class="contenido-static">
+			<h2>Solicitar publicación</h2>
 
 <?php
 $form = $this->form;
@@ -13,23 +15,77 @@ $form = $this->form;
 
 $form->setAttributes(array(
     'action' => $this->url.'/application/index/solicita',
-    'method' => 'post'
+    'method' => 'post',
+    'class' => 'form-horizontal'
 ));
 $form->prepare();
 
 
 echo $this->form()->openTag($form);
-?><legend><?php echo $this->escapeHtml($title); ?></legend>
-<?php
 echo $this->formHidden($form->get('in_id'));
 
 ?>
-<div class="control-group "><?php echo $this->formRow($form->get('nombre_complet'));?></div><?php
-?><div class="control-group "><?php echo $this->formRow($form->get('email'));?></div ><?php
-?><div class="control-group "><?php echo $this->formRow($form->get('nombre_plato'));?></div><?php
-?><div class="control-group "><?php echo $this->formRow($form->get('descripcion'));?></div><?php
-?><div class="control-group "><?php echo $this->formRow($form->get('nombre_restaurant'));?></div><?php
-?><div class="control-group "><?php echo $this->formRow($form->get('telefono'));?></div><?php
-?><div class="control-group "><?php echo $this->formSubmit($form->get('submit'));?></div><?php
-echo $this->form()->closeTag(); ?>
+
+
+			<?php
+			$form = $this->form;
+			//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
+
+			$form->setAttributes(array(
+			    'action' => $this->url.'/usuario/index/agregarusuario',
+			    'method' => 'post'
+			    
+			));
+			$form->prepare();
+
+			echo $this->form()->openTag($form);
+			echo $this->formHidden($form->get('in_id'));
+
+			?>
+
+			<div class="control-group">
+			    <label class="control-label" for="inputName">Nombre: </label>
+			    <div class="controls">
+			      <?php echo $this->formRow($form->get('nombre_complet'));?>
+			    </div>
+			  </div>
+			  <div class="control-group">
+			    <label class="control-label" for="inputEmail">Email:</label>
+			    <div class="controls">
+			      <?php echo $this->formRow($form->get('email'));?>
+			    </div>
+			  </div>
+			  <div class="control-group">
+			    <label class="control-label" for="inpuNombre">Nombre del plato:</label>
+			    <div class="controls">
+			      <?php echo $this->formRow($form->get('nombre_plato'));?>
+			    </div>
+			  </div>
+			  <div class="control-group">
+			    <label class="control-label" for="inputEmail">Descripción:</label>
+			    <div class="controls">
+			      <?php echo $this->formRow($form->get('descripcion'));?>
+			    </div>
+			  </div>
+			  <div class="control-group">
+			    <label class="control-label" for="inputEmail">Nombre del restaurante:</label>
+			    <div class="controls">
+			      <?php echo $this->formRow($form->get('nombre_restaurant'));?>
+			    </div>
+			  </div>
+			  <div class="control-group">
+			    <label class="control-label" for="inputEmail">Teléfono:</label>
+			    <div class="controls">
+			      <?php echo $this->formRow($form->get('telefono'));?>
+			    </div>
+			  </div>
+			  <div class="control-group">
+			    <div class="controls">
+			      <?php echo $this->formSubmit($form->get('submit'));?>
+			    </div>
+			  </div>
+
+		</div>
+	</div>
+	
 </div>
