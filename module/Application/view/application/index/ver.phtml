@@ -75,7 +75,7 @@
                          </SELECT>  
                             <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>
                        <button class="verlistado" value="listar" type="submit" ></button>                       
-                        <a style="margin-left: 10px;" class="disabled" id="buscarmap" >Ver Mapa </a>
+                        <a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a>
 
 <!--                            <?php
                             if ($results )
@@ -184,6 +184,7 @@
       if(($(this).val() != "") &&  ($('#bubi #fq').val() != "" )){
       $('#buscarmap').removeClass("disabled").addClass('map');
       $('#buscarmap').attr("href","#");
+      $('#buscarmap' ).removeAttr('disabled');
       }   }).keyup();
 
   var puntaje = function(item,p){

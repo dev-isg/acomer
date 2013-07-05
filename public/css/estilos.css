@@ -1408,6 +1408,13 @@ ul.time .hour{
   color: red;
 }
 
+form#application{
+  margin-top: 30px;
+} 
+form#application .control-group .btn-solicito{
+  width: 120px;
+  height: 35px;
+}
 .control-group span.red{
   color: red;
   font-size: 15px;

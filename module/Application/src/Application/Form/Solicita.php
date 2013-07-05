@@ -81,7 +81,7 @@ class Solicita extends Form
             'attributes' => array(
                 'value' => 'Enviar',
                 'id' => 'submitbutton',
-                'class' => 'btn btn-primary'
+                'class' => 'btn btn-primary btn-solicito'
             ),
         ));
     }
