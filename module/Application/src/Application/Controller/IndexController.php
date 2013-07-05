@@ -318,6 +318,26 @@ class IndexController extends AbstractActionController
         }
     }
     
+    public function nosotrosAction(){
+        $view = new ViewModel();
+        $this->layout('layout/layout-portada');
+        $this->layout()->clase = 'Home';
+//        $view->setVariables(array());
+//         return $view;
+        
+    }
+        public function solicitaAction(){
+                    $view = new ViewModel();
+        $this->layout('layout/layout-portada');
+        $this->layout()->clase = 'Home';
+        
+    }
+        public function terminosAction(){
+                $view = new ViewModel();
+        $this->layout('layout/layout-portada');
+        $this->layout()->clase = 'Home';
+    }
+    
     
     
    
