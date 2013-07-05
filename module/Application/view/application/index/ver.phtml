@@ -76,8 +76,13 @@
                        <button class="verlistado" value="listar" type="submit" ></button>                       
                         <a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a>
 
+<<<<<<< HEAD
+                         <!--    <?php
+                            if ($results)
+=======
 <!--                            <?php
                             if ($results )
+>>>>>>> 2e8aa1ae38463841ec78f2ad2f7cfa46695f19c8
                             {
                               $total = (int) $results->response->numFound;
                               $start = min(1, $total);
@@ -178,12 +183,13 @@
  <script type="text/javascript">
    var map;
    $(document).ready(function(){
-
+$('#buscarmap').hide();
  $('#bubi #q').keyup(function () {
       if(($(this).val() != "") &&  ($('#bubi #fq').val() != "" )){
       $('#buscarmap').removeClass("disabled").addClass('map');
       $('#buscarmap').attr("href","#");
       $('#buscarmap' ).removeAttr('disabled');
+       $('#p').fadeIn();
       }   }).keyup();
 
   var puntaje = function(item,p){
