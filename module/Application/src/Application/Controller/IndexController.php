@@ -102,9 +102,9 @@ class IndexController extends AbstractActionController
          $view = new ViewModel();
          $this->layout('layout/layout-portada');
          $distritos=$this->josAction();
-         $lista=$this->getConfigTable()->cantComentarios(2,3);
-                 $this->layout()->clase = 'Search';
-         $view->setVariables(array('distritos' => $distritos , 'comentarios' => $lista));
+        // $lista=$this->getConfigTable()->cantComentarios(2,3);
+                // $this->layout()->clase = 'Search';
+         $view->setVariables(array('distritos' => $distritos ));
         return $view;
     }
     
