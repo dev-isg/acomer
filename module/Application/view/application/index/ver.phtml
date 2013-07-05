@@ -21,8 +21,7 @@
                           catch (Exception $e)
                           {
                           
-                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
-                          }
+                                echo("<div>ingrese algun valor</div>");  }
                         }
           
                         $limit = 3;             
@@ -48,7 +47,7 @@
                           catch (Exception $e)
                           {
                           
-                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>ingrese algun valor</pre></body></html>");          
+                                   echo("<div>ingrese algun valor</div>");       
                           }
                         }
 
@@ -58,18 +57,32 @@
 
                          <SELECT name="fq" id="fq" >
                         <OPTION value=""></OPTION>
-                           <?php  foreach ($this->distritos as $distritos) : ?>
-                        
-                          <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
-                         <?php endforeach; ?>
+                           <?php  foreach ($this->distritos as $distritos) : 
+                               if($distritos['ch_distrito']=='LIMA')
+                                   {
+                                   ?>
+                       
+                         <option selected value="LIMA">LIMA</option> 
+                             <?php
+                         
+                               }else
+                               
+                         { ?> <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
+                          <?php }?>
+                          <?php endforeach; ?>
 
                          </SELECT>  
                             <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>
                        <button class="verlistado" value="listar" type="submit" ></button>                       
-                        <a style="margin-left: 10px;" class="disabled" id="buscarmap" >Ver Mapa </a>
+                        <a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a>
 
-<!--                            <?php
+<<<<<<< HEAD
+                         <!--    <?php
                             if ($results)
+=======
+<!--                            <?php
+                            if ($results )
+>>>>>>> 2e8aa1ae38463841ec78f2ad2f7cfa46695f19c8
                             {
                               $total = (int) $results->response->numFound;
                               $start = min(1, $total);
@@ -170,11 +183,13 @@
  <script type="text/javascript">
    var map;
    $(document).ready(function(){
-
+$('#buscarmap').hide();
  $('#bubi #q').keyup(function () {
       if(($(this).val() != "") &&  ($('#bubi #fq').val() != "" )){
       $('#buscarmap').removeClass("disabled").addClass('map');
       $('#buscarmap').attr("href","#");
+      $('#buscarmap' ).removeAttr('disabled');
+       $('#p').fadeIn();
       }   }).keyup();
 
   var puntaje = function(item,p){

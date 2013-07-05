@@ -23,8 +23,7 @@
                           catch (Exception $e)
                           {
                           
-                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>ingrese algun valor</pre></body></html>");          
-                          }
+                                echo("<div>ingrese algun valor</div>");  }
                         }
           
                         $limit = 3;             
@@ -51,7 +50,7 @@
                           catch (Exception $e)
                           {
                           
-                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>ingrese algun valor</pre></body></html>");          
+                                    echo("<div>ingrese algun valor</div>");         
                           }
                         }
 
@@ -59,12 +58,23 @@
 
                     <form  accept-charset="utf-8" method="get" class="form-horizontal" id="bubi" autocomplete="on" >
                              
-                 <SELECT name="fq" id="fq" class="span2">
-                <OPTION value="">seleccione:</OPTION>
-                   <?php  foreach ($this->distritos as $distritos) : ?>
-                  <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
-                  <?php endforeach; ?>
-                 </SELECT>
+                 <SELECT name="fq" id="fq" >
+                        <OPTION value=""></OPTION>
+                           <?php  foreach ($this->distritos as $distritos) : 
+                               if($distritos['ch_distrito']=='LIMA')
+                                   {
+                                   ?>
+                       
+                         <option selected value="LIMA">LIMA</option> 
+                             <?php
+                         
+                               }else
+                               
+                         { ?> <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
+                          <?php }?>
+                          <?php endforeach; ?>
+
+                         </SELECT>
                
                 <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>
                  <button class="verlistado" value="listar" type="submit" ></button>                       
