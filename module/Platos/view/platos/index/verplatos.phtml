@@ -1,371 +1,370 @@
-<link rel="stylesheet" href="<?php echo $this->basePath()?>/css/jquery-ui.css">
-<script src="<?php echo $this->basePath()?>/js/jquery-ui.js"></script>
+<link rel="stylesheet" href="<?php echo $this->basePath() ?>/css/jquery-ui.css">
+<script src="<?php echo $this->basePath() ?>/js/jquery-ui.js"></script>
 
-   <div class="content-left">
-   		<div class="descrip-product">
-   			<div class="etiqueta-cat">
-   				<div class="etiqueta">
-   					<p><span><?php echo $this->lista[0]['tipo_plato_nombre'];?></span></p>
-   				</div>
-               <div class="return">
-                  <a href="#">Regresar</a>
-               </div>
-   			</div>
-   			<div class="ficha-product">
-   				<div class="ficha-img">
-   					<img src="/imagenes/<?php echo $this->lista[0]['va_imagen'];?>">
-   				</div>
-   				<div class="ficha-desc">
-                  <h2><?php echo $this->lista[0]['restaurant_nombre'];?></h2>  
-   					<div class="puntuaciones c<?php echo $this->lista[0]['Ta_puntaje_in_id'];?>"></div>
-                  <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
-   					<p class="desc"><?php echo $this->lista[0]['tx_descripcion'];?></p>
-   					<p class="costo">Costo</p>
-   					<p class="precio">S/.<?php echo $this->lista[0]['va_precio'];?></p>
-   				</div>
-   			</div>
-   			<div class="content-coments">
-   				<div class="coments-all">
-                  <div class="cont-accesorios">
-                     <div class="left-desc">
+<div class="content-left">
+    <div class="descrip-product">
+        <div class="etiqueta-cat">
+            <div class="etiqueta">
+                <p><span><?php echo $this->lista[0]['tipo_plato_nombre']; ?></span></p>
+            </div>
+            <div class="return">
+                <a href="#">Regresar</a>
+            </div>
+        </div>
+        <div class="ficha-product">
+            <div class="ficha-img">
+                <img src="/imagenes/<?php echo $this->lista[0]['va_imagen']; ?>">
+            </div>
+            <div class="ficha-desc">
+                <h2><?php echo $this->lista[0]['restaurant_nombre']; ?></h2>  
+                <div class="puntuaciones c<?php echo $this->lista[0]['Ta_puntaje_in_id']; ?>"></div>
+                <h3><?php echo $this->lista[0]['va_nombre']; ?></h3>
+                <p class="desc"><?php echo $this->lista[0]['tx_descripcion']; ?></p>
+                <p class="costo">Costo</p>
+                <p class="precio">S/.<?php echo $this->lista[0]['va_precio']; ?></p>
+            </div>
+        </div>
+        <div class="content-coments">
+            <div class="coments-all">
+                <div class="cont-accesorios">
+                    <div class="left-desc">
                         <h4>Dirección</h4>
                         <ul class="ubi-lupa">
-                           <li>
-                              <div class="ubicancion"><?php echo $this->lista[0]['va_direccion'];?>-<?php echo $this->lista[0]['distrito'];?></div>
-                       
-                           </li>
-            
+                            <li>
+                                <div class="ubicancion"><?php echo $this->lista[0]['va_direccion']; ?>-<?php echo $this->lista[0]['distrito']; ?></div>
+
+                            </li>
+
                         </ul>
                         <h4>Telefono</h4>
                         <ul class="servicios-desc">
-                           <li>965-85687</li>
+                            <li>965-85687</li>
                         </ul>
                         <h4>Atención</h4>
                         <ul class="time">
-                           <li><span class="day"><?php echo $this->lista[0]['va_dia'];?></span></li>
-                           <li><span class="hour"><?php echo $this->lista[0]['va_horario'];?></span></li>
+                            <li><span class="day"><?php echo $this->lista[0]['va_dia']; ?></span></li>
+                            <li><span class="hour"><?php echo $this->lista[0]['va_horario']; ?></span></li>
                         </ul>
-                     </div>
-                     <div class="right-desc">
+                    </div>
+                    <div class="right-desc">
                         <h4>Medios de pago</h4>
-                         <ul class="servicios-desc">
-                            <?php foreach ($this->pagos as $pago):?>
-                           <li><?php echo $pago->nom_pago;?></li>
-                           <?php endforeach;?>
+                        <ul class="servicios-desc">
+                            <?php foreach ($this->pagos as $pago): ?>
+                                <li><?php echo $pago->nom_pago; ?></li>
+                            <?php endforeach; ?>
                         </ul>
                         <h4>Servicio</h4>
                         <ul class="servicios-desc">
-                            <?php foreach ($this->servicios as $serv):?>
-                           <li><?php echo $serv->nom_servicio;?></li>
-                           <?php endforeach;?>
+                            <?php foreach ($this->servicios as $serv): ?>
+                                <li><?php echo $serv->nom_servicio; ?></li>
+                            <?php endforeach; ?>
                         </ul>
-                     </div>
-                  </div>
-   					<div class="top-coment">
-   						<p><?php echo $this->lista[0]['num'];//$this->cantidad;?> comentarios</p>
-   						<a href="#" class="btn btn-warning agregar-coment-1">Agregar comentario</a>
-   					</div>
-   					<div class="agregar-comentario-desc" style="display:none;">
-   						<?php
-							  $title = 'Agregar nuevo comentario';
-							  $this->headTitle($title);
-							?>
-							<div class="form-envio-men">
-   							<?php
-   							$form = $this->form;
-   							//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
-   							$form->setAttributes(array(
-   							    'action' => $this->url.'/platos/index/verplatos?id='.$this->lista[0]['in_id'],//'/usuario/comentarios/agregarcomentarios',
-   							    'method' => 'post',
-   							    'class' => 'form-horizontal'
-   							));
-   							$form->prepare();
+                    </div>
+                </div>
+                <div class="top-coment">
+                    <p><?php echo $this->lista[0]['num']; //$this->cantidad; ?> comentarios</p>
+                    <a href="#" class="btn btn-warning agregar-coment-1">Agregar comentario</a>
+                </div>
+                <div class="agregar-comentario-desc" style="display:none;">
+                    <?php
+                    $title = 'Agregar nuevo comentario';
+                    $this->headTitle($title);
+                    ?>
+                    <div class="form-envio-men">
+                        <?php
+                        $form = $this->form;
+                        //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
+                        $form->setAttributes(array(
+                            'action' => $this->url . '/platos/index/verplatos?id=' . $this->lista[0]['in_id'], //'/usuario/comentarios/agregarcomentarios',
+                            'method' => 'post',
+                            'class' => 'form-horizontal'
+                        ));
+                        $form->prepare();
 
 
-   							echo $this->form()->openTag($form);
-   							?><legend><?php echo $this->escapeHtml($title); ?></legend>
-   							<?php
-   							echo $this->formHidden($form->get('in_id'));   
-   							echo $this->formHidden($form->get('Ta_puntaje_in_id'));
-   							echo $this->formHidden($form->get('Ta_plato_in_id'));
-   							?>
-   							<div class="control-group"><?php echo $this->formRow($form->get('va_nombre'));?></div>
-   							<div class="control-group"><?php echo $this->formRow($form->get('va_email'));?></div>
-   							<div class="control-group"><p id="star"></p> </div>
-   							<div class="control-group"><?php echo $this->formRow($form->get('tx_descripcion'));?></div>
-   							<div class="control-group"><?php echo $this->formSubmit($form->get('submit'));?></div>
+                        echo $this->form()->openTag($form);
+                        ?><legend><?php echo $this->escapeHtml($title); ?></legend>
+                        <?php
+                        echo $this->formHidden($form->get('in_id'));
+                        echo $this->formHidden($form->get('Ta_puntaje_in_id'));
+                        echo $this->formHidden($form->get('Ta_plato_in_id'));
+                        ?>
+                        <div class="control-group"><?php echo $this->formRow($form->get('va_nombre')); ?></div>
+                        <div class="control-group"><?php echo $this->formRow($form->get('va_email')); ?></div>
+                        <div class="control-group"><p id="star"></p> </div>
+                        <div class="control-group"><?php echo $this->formRow($form->get('tx_descripcion')); ?></div>
+                        <div class="control-group"><?php echo $this->formSubmit($form->get('submit')); ?></div>
 
 
-   							 <?php echo $this->form()->closeTag(); ?>
-   						</div>
-   					</div>
-   					<div class="comentarios-one">
-   						<ul>
- 
-                        <?php //                  var_dump($this->lista[0]['Ta_puntaje_in_id']);exit;
-                                            if($this->lista[0]['Ta_puntaje_in_id']!=0){
-                                                foreach ($this->comentarios  as $comt) : 
-                                                    
-                                                    ?>
-                                                    
-	   							<li>
-	   								<div class="coment-li">
-	   									<div class="img-li">
-	   										<img src="/img/foto-carnet.jpg">
-	   									</div>
-	   									<div class="img-li-desc">
-	   										<div class="img-li-top">
-                                                                            <h4><?php echo $comt->va_nombre_cliente?></h3>
-	   											<div class="puntuaciones c<?php echo $comt->ta_puntaje_in_id;?>"></div>
-	   										</div>
-	   										<div class="img-li-bottom">
-	   											<p> <?php echo $comt->tx_descripcion?></p> 
-	   										</div>
-	   									</div>
-	   								</div>
-	   							</li>
-                           <?php 
-                                                    
-                           endforeach;
-                                            }?>
-   						</ul>
-   					</div>
-   				</div>
-   				<div class="content-info">
-   					<div class="info-img">
-   						<img src="/imagenes/<?php echo $this->lista[0]['restaurant_img'];?>">
-   					</div>
-                  <h4 class="ubi-map">Ubicación <span></span></h4>
-                  <div id="mapCont" class="map" data-lat="<?php echo $this->lista[0]['de_latitud'];?>" data-lng="<?php echo $this->lista[0]['de_longitud'];?>"></div>
-                  <h4>Sucursales</h4>
-                  <section class="list-suc">
-                     <ul class="ul-suc">
-                            <?php foreach($this->locales as $local) : ?>
-                        <li class="li-suc"> 
-                            <a href="#" class="" data-lat="<?php echo $local->de_latitud ?>" data-lng="<?php echo $local->de_longitud ?>">
-                                  <header>                              
-                                      <h6 class="text-ellipsis"><?php echo $local->distrito ?></h6>
-                                      <span class="close-banch"></span>
-                                  </header>
-                                  <div class="descr">
-                                      <span class="house-icon"></span>
-                                      <ul>
-                                          <li class="text-ellipsis"><?php echo $local->va_direccion ?></li>
-                                          <li class="phone"><span class="text-ellipsis">La Molina</span><em class="text-ellipsis"><?php echo $local->va_telefono ?></em></li>
-                                      </ul>
-                                  </div>
-                              </a>                                       
-                          </li>
-                          <?php endforeach; ?>
+                        <?php echo $this->form()->closeTag(); ?>
+                    </div>
+                </div>
+                <div class="comentarios-one">
+                    <ul>
 
-                      </ul>
-                  </section>
+                        <?php
+                        if ($this->lista[0]['Ta_puntaje_in_id'] != 0) {
+                            foreach ($this->comentarios as $comt) :
+                                ?>
 
-   				</div>
-   			</div>
-   			
-   		</div>
-   </div>
+                                <li>
+                                    <div class="coment-li">
+                                        <div class="img-li">
+                                            <img src="/img/foto-carnet.jpg">
+                                        </div>
+                                        <div class="img-li-desc">
+                                            <div class="img-li-top">
+                                                <h4><?php echo $comt->va_nombre_cliente ?></h3>
+                                                    <div class="puntuaciones c<?php echo $comt->ta_puntaje_in_id; ?>"></div>
+                                            </div>
+                                            <div class="img-li-bottom">
+                                                <p> <?php echo $comt->tx_descripcion ?></p> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <?php
+                            endforeach;
+                        }
+                        ?>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-info">
+                <div class="info-img">
+                    <img src="/imagenes/<?php echo $this->lista[0]['restaurant_img']; ?>">
+                </div>
+                <h4 class="ubi-map">Ubicación <span></span></h4>
+                <div id="mapCont" class="map" data-lat="<?php echo $this->lista[0]['de_latitud']; ?>" data-lng="<?php echo $this->lista[0]['de_longitud']; ?>"></div>
+                <h4>Sucursales</h4>
+                <section class="list-suc">
+                    <ul class="ul-suc">
+                        <?php foreach ($this->locales as $local) : ?>
+                            <li class="li-suc"> 
+                                <a href="#" class="" data-lat="<?php echo $local->de_latitud ?>" data-lng="<?php echo $local->de_longitud ?>">
+                                    <header>                              
+                                        <h6 class="text-ellipsis"><?php echo $local->distrito ?></h6>
+                                        <span class="close-banch"></span>
+                                    </header>
+                                    <div class="descr">
+                                        <span class="house-icon"></span>
+                                        <ul>
+                                            <li class="text-ellipsis"><?php echo $local->va_direccion ?></li>
+                                            <li class="phone"><span class="text-ellipsis">La Molina</span><em class="text-ellipsis"><?php echo $local->va_telefono ?></em></li>
+                                        </ul>
+                                    </div>
+                                </a>                                       
+                            </li>
+                        <?php endforeach; ?>
+
+                    </ul>
+                </section>
+
+            </div>
+        </div>
+
+    </div>
+</div>
 <script type="text/javascript">
-	$(document).ready(function(){
-		$(".agregar-coment-1").click(function(e){
-			e.preventDefault();
-			if ($(".agregar-comentario-desc").is(":hidden")) {
-		      $(".agregar-comentario-desc").show("slow");
-		    } else {
-		      $(".agregar-comentario-desc").slideUp();
-		    }
-		});
+    $(document).ready(function(){
+        $(".agregar-coment-1").click(function(e){
+            e.preventDefault();
+            if ($(".agregar-comentario-desc").is(":hidden")) {
+                $(".agregar-comentario-desc").show("slow");
+            } else {
+                $(".agregar-comentario-desc").slideUp();
+            }
+        });
 
-      initSucursales();
-       $('#star').raty({
-        target    : '#Ta_puntaje_in_id',
-        targetType: 'number',
-             starOff: '/img/t2.png',
-             targetKeep:true,
-             starOn : '/img/t1.png'
+        initSucursales();
+        $('#star').raty({
+            target    : '#Ta_puntaje_in_id',
+            targetType: 'number',
+            starOff: '/img/t2.png',
+            targetKeep:true,
+            starOn : '/img/t1.png'
 
-       });
+        });
 
-      $("#side").height($("#main").height());
-	});
+        $("#side").height($("#main").height());
+    });
 
-   $('#comentarios').validate({
-      rules: {
-        va_nombre: {
-            required: true
-        },
-        va_email: {
-              required: true,
-              email : true           
-        },
-         tx_descripcion:{
+    $('#comentarios').validate({
+        rules: {
+            va_nombre: {
+                required: true
+            },
+            va_email: {
+                required: true,
+                email : true           
+            },
+            tx_descripcion:{
                 required : true                       
             }            
-      },
-      messages:{
+        },
+        messages:{
             va_nombre: {
                 required:"Por favor ingresar el nombre del plato"
             },
             tx_descripcion:{
                 required:"Por favor ingresar una comentario"
-                           },                
+            },                
             va_email :{
-              required : "Por favor ingresar un email"                
+                required : "Por favor ingresar un email"                
             }
         },
-      highlight: function(element) {
-        $(element).closest('.control-group').removeClass('success').addClass('error');
-      },
-      success: function(element) {
-        element
-        .addClass('valid')
-        .closest('.control-group').removeClass('error').addClass('success');
-      }
+        highlight: function(element) {
+            $(element).closest('.control-group').removeClass('success').addClass('error');
+        },
+        success: function(element) {
+            element
+            .addClass('valid')
+            .closest('.control-group').removeClass('error').addClass('success');
+        }
     });
 
-   function initSucursales(){
+    function initSucursales(){
 
-      var populateMap;
-      var mapDiv = document.getElementById('mapCont');
+        var populateMap;
+        var mapDiv = document.getElementById('mapCont');
       
-      var lat = $("#mapCont").data("lat");
-      var lng = $("#mapCont").data("lng");
-      var markers = Array();
+        var lat = $("#mapCont").data("lat");
+        var lng = $("#mapCont").data("lng");
+        var markers = Array();
       
-      // Defino Iconos
-      var iconGray = new google.maps.MarkerImage(
-               '/img/point.png',
-               new google.maps.Size(26, 32), 
-               new google.maps.Point(0, 0)
-               );
+        // Defino Iconos
+        var iconGray = new google.maps.MarkerImage(
+        '/img/point.png',
+        new google.maps.Size(26, 32), 
+        new google.maps.Point(0, 0)
+    );
 
-      var iconRed = new google.maps.MarkerImage(
-               '/img/point.png',
-               new google.maps.Size(26, 32), 
-               new google.maps.Point(0, 0)
-               );
+        var iconRed = new google.maps.MarkerImage(
+        '/img/point.png',
+        new google.maps.Size(26, 32), 
+        new google.maps.Point(0, 0)
+    );
       
       
-      var latlng = new google.maps.LatLng(lat, lng);
+        var latlng = new google.maps.LatLng(lat, lng);
       
-      var options = {
-         center   : latlng,
-         zoom: 17,
-         mapTypeId: google.maps.MapTypeId.ROADMAP,
-         backgroundColor: '#ffffff',
-         disableDefaultUI: true,
-         navigationControl: true,
-         navigationControlOptions:{
-            position : google.maps.ControlPosition.TOP_RIGHT,
-            style    : google.maps.NavigationControlStyle.SMALL
-         }
-      };
+        var options = {
+            center   : latlng,
+            zoom: 17,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            backgroundColor: '#ffffff',
+            disableDefaultUI: true,
+            navigationControl: true,
+            navigationControlOptions:{
+                position : google.maps.ControlPosition.TOP_RIGHT,
+                style    : google.maps.NavigationControlStyle.SMALL
+            }
+        };
       
-      var map = new google.maps.Map(mapDiv, options);
-      var lugares = Array();
+        var map = new google.maps.Map(mapDiv, options);
+        var lugares = Array();
 
       
       
-      function createMarker(lugar, icono){
+        function createMarker(lugar, icono){
                   
-         place=new google.maps.LatLng(lugar.lat,lugar.lng);
+            place=new google.maps.LatLng(lugar.lat,lugar.lng);
 
-         var marker = new google.maps.Marker({
-            icon: icono,
-            position: place,
-            map: map,
-            title: lugar.title,           
-            zIndex: 100          
-         });
-         i = lugar.index;
-         (function(i, marker) {
-            google.maps.event.addListener(marker, 'click', function() {
-                  setActive(marker,i);
+            var marker = new google.maps.Marker({
+                icon: icono,
+                position: place,
+                map: map,
+                title: lugar.title,           
+                zIndex: 100          
             });
-         })(i, marker);
-         return marker;
-      }
+            i = lugar.index;
+            (function(i, marker) {
+                google.maps.event.addListener(marker, 'click', function() {
+                    setActive(marker,i);
+                });
+            })(i, marker);
+            return marker;
+        }
          
-      function populateMap(lugares){
-         var infowindow;
-         // Agregar todos los puntos al mapa
-         for (var i = 0; i < lugares.length; i++) {
-            // agregando un punto
-            if(lugares[i].lat) {
-               var marker = createMarker(lugares[i],iconGray);
-               markers[i]=marker;
+        function populateMap(lugares){
+            var infowindow;
+            // Agregar todos los puntos al mapa
+            for (var i = 0; i < lugares.length; i++) {
+                // agregando un punto
+                if(lugares[i].lat) {
+                    var marker = createMarker(lugares[i],iconGray);
+                    markers[i]=marker;
 
-            }
-         }  
-      }
+                }
+            }  
+        }
       
-      $(".list-suc .ul-suc li a").each(function(index){
-         var lat = $(this).data("lat");
-         var lng = $(this).data("lng");
-         var title = $(this).find("h6").text();
-         lugares[index] = new Object();
-         lugares[index].lat = lat;
-         lugares[index].lng = lng;
-         lugares[index].title = title;
-         lugares[index].index = index;
-      });      
+        $(".list-suc .ul-suc li a").each(function(index){
+            var lat = $(this).data("lat");
+            var lng = $(this).data("lng");
+            var title = $(this).find("h6").text();
+            lugares[index] = new Object();
+            lugares[index].lat = lat;
+            lugares[index].lng = lng;
+            lugares[index].title = title;
+            lugares[index].index = index;
+        });      
       
-      populateMap(lugares);
-      var principal = {'lat':lat,'lng':lng,'index':markers.length};
+        populateMap(lugares);
+        var principal = {'lat':lat,'lng':lng,'index':markers.length};
       
-      markers.push(createMarker(principal,iconRed));
+        markers.push(createMarker(principal,iconRed));
       
-      function clearMarkers(){
-         $(markers).each(function(){
-            this.setIcon(iconGray);
-         });
-      }
+        function clearMarkers(){
+            $(markers).each(function(){
+                this.setIcon(iconGray);
+            });
+        }
       
-      function setActive(marker,index){
+        function setActive(marker,index){
             if(index==null){
-               clearMarkers();
-               marker.setIcon(iconRed);
-               map.panTo(marker.getPosition());
+                clearMarkers();
+                marker.setIcon(iconRed);
+                map.panTo(marker.getPosition());
             } else {
-               if(index==(markers.length - 1)){
-                  closeBranch();
-               } else {
-                  $(".list-suc .ul-suc li a").eq(index).trigger('click');
-               }
+                if(index==(markers.length - 1)){
+                    closeBranch();
+                } else {
+                    $(".list-suc .ul-suc li a").eq(index).trigger('click');
+                }
             }
-      }
+        }
       
-      function closeBranch(){
+        function closeBranch(){
             $("h4.ubi-map span").html(""); 
             index = markers.length - 1;
             setActive(markers[index],null);
             $('.ubicancion').effect('highlight',{},1000); 
             $(".list-suc .ul-suc li a.activo").removeClass("activo");
-      }
+        }
       
       
-      function eventHandler(event){
-         var lat = $(this).data("lat");
-         var lng = $(this).data("lng");   
-         var index = $(".list-suc .ul-suc li a").index(this);
-         var title = $(this).find("h6").text();
-         var $target = $(event.target);
-         $(".list-suc .ul-suc li a.activo").removeClass("activo");
-         if($target.is("span.close-banch")){
-            // Mostrar Principal
-            closeBranch();
-         } else {
-            // Mostrar sucursal  
-            $(this).addClass("activo");
-            $("h4.ubi-map span").html(" : "+title);
-            setActive(markers[index],null);
-         }
-         return false;  
-      }
+        function eventHandler(event){
+            var lat = $(this).data("lat");
+            var lng = $(this).data("lng");   
+            var index = $(".list-suc .ul-suc li a").index(this);
+            var title = $(this).find("h6").text();
+            var $target = $(event.target);
+            $(".list-suc .ul-suc li a.activo").removeClass("activo");
+            if($target.is("span.close-banch")){
+                // Mostrar Principal
+                closeBranch();
+            } else {
+                // Mostrar sucursal  
+                $(this).addClass("activo");
+                $("h4.ubi-map span").html(" : "+title);
+                setActive(markers[index],null);
+            }
+            return false;  
+        }
       
-      $(".list-suc .ul-suc li a").on('click',eventHandler);
+        $(".list-suc .ul-suc li a").on('click',eventHandler);
 
-         }
+    }
 
 </script>
