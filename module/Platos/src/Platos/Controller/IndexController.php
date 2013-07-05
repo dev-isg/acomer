@@ -91,7 +91,7 @@ class IndexController extends AbstractActionController
                      $form->setMessages(array('imagen'=>$error ));
                 } else {
                     
-                    $adapter->setDestination('C:\xampp\htdocs\acomer\public\imagenes');
+                   $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
                      if ($adapter->receive($File['name'])) {
                         $plato->exchangeArray($form->getData());
                     }
@@ -251,7 +251,7 @@ class IndexController extends AbstractActionController
                $File = $this->params()->fromFiles('va_imagen');
                
                 $adapter = new \Zend\File\Transfer\Adapter\Http();
-                //$adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
+                $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
                 
                //  $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
                   if ($adapter->receive($File['name'])) { //echo 'dddds';exit;
