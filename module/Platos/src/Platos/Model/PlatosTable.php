@@ -121,19 +121,14 @@ class PlatosTable
         if ($id == 0) {
             $this->tableGateway->insert($data);
             $idplato=$this->tableGateway->getLastInsertValue();
-            
-   
             $insert=$this->tableGateway->getSql()->insert()
             ->into('ta_plato_has_ta_local')
              ->values(array('Ta_plato_in_id'=>$idplato,'Ta_local_in_id'=>$idlocal));
-
             $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
-            $statement->execute();
-            
-            
-        $adapter = $this->tableGateway->getAdapter();
-        $sql = new Sql($adapter);
-        $selecttot = $sql->select()
+            $statement->execute();         
+            $adapter = $this->tableGateway->getAdapter();
+            $sql = new Sql($adapter);
+            $selecttot = $sql->select()
             ->from('ta_plato')
             ->join(array('c'=>'ta_comentario'),'c.ta_plato_in_id=ta_plato.in_id',array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(*)')),'left')
             ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre'=>'va_nombre'),'left')
@@ -145,12 +140,10 @@ class PlatosTable
             $selectString = $sql->getSqlStringForSqlObject($selecttot);            
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);                      
             $plato=$results->toArray();
-           //$dd=$plato[0]['en_destaque'];
-         //  var_dump($plato);Exit;
             require './vendor/SolrPhpClient/Apache/Solr/Service.php';
                                 $solr = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr');  
                                            if ($solr->ping())
-                                        {// echo 'entro';exit;
+                                        {
                                              $document = new \Apache_Solr_Document();
                                              $document->id = $plato[0]['in_id'];     
                                              $document->name = $plato[0]['va_nombre'];                                            
@@ -165,7 +158,7 @@ class PlatosTable
                                              $document->longitud = $plato[0]['de_longitud'];
                                              $document->distrito = $plato[0]['distrito'];
                                              $document->va_imagen = $plato[0]['va_imagen'];
-                                             $document->comentarios =$plato[0]['cantidad'];
+                                             $document->comentarios ='0';
                                              $document->puntuacion = $plato[0]['Ta_puntaje_in_id'];
                                              $solr->addDocument($document);
                                              $solr->commit();
@@ -175,17 +168,24 @@ class PlatosTable
         } else {
             
             if ($this->getPlato($id)) {
-//                var_dump($data);
-//                echo '<br>';
-//                var_dump($id);exit;
                 $this->tableGateway->update($data, array('in_id' => $id));
- 
+                $this->cromSolr($id);
+                                    
+            } else {
+                throw new \Exception('No existe el id');
+            }
+        }
+        
+    }
+    
+   public function cromSolr($id)        
+   {
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
         $selecttot = $sql->select()
             ->from('ta_plato')
-              ->join(array('c'=>'ta_comentario'),'c.ta_plato_in_id=ta_plato.in_id',array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(*)')),'left')
-           ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre'=>'va_nombre'),'left')
+            ->join(array('c'=>'ta_comentario'),'c.ta_plato_in_id=ta_plato.in_id',array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(*)')),'left')
+            ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre'=>'va_nombre'),'left')
             ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
             ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud','de_longitud','va_direccion'), 'left')
             ->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
@@ -193,13 +193,11 @@ class PlatosTable
             ->where(array('ta_plato.in_id'=>$id));   
             $selectString = $sql->getSqlStringForSqlObject($selecttot);            
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);                      
-            $plato=$results->toArray();
-           var_dump($plato);exit;
-                             
-   require './vendor/SolrPhpClient/Apache/Solr/Service.php';
+            $plato=$results->toArray(); 
+            require './vendor/SolrPhpClient/Apache/Solr/Service.php';
                                 $solr = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr');  
                                            if ($solr->ping())
-                                        {// echo 'entro';exit;
+                                        {
                                              $solr->deleteByQuery('id:'.$id);
                                              $document = new \Apache_Solr_Document();
                                              $document->id = $id;     
@@ -220,16 +218,9 @@ class PlatosTable
                                              $solr->addDocument($document);
                                              $solr->commit();
                                              $solr->optimize();
-                                        }             
-
-                
-            } else {
-                throw new \Exception('No existe el id');
-            }
-        }
-        
-    }
-    
+             }
+      }
+  
     public function editarPlato($platos,$imagen,$idrestaurant=null){
         
 //                var_dump($platos);exit;
@@ -248,6 +239,7 @@ class PlatosTable
         $id=$platos["in_id"];
 //        var_dump($platos["in_id"]);exit;
         $this->tableGateway->update($data, array('in_id' => $id));
+        $this->cromSolr($id);
         
     }
     
@@ -259,6 +251,7 @@ class PlatosTable
                     'en_estado' => $estado,
                  );
          $this->tableGateway->update($data, array('in_id' => $id));
+         $this->cromSolr($id);
          
          //ya no se va borrar
 //            $delete=$this->tableGateway->getSql()->delete()->from('ta_plato_has_ta_local')
@@ -283,6 +276,7 @@ class PlatosTable
                     'en_destaque' => $destaque,
                  );
          $this->tableGateway->update($data, array('in_id' => $id));
+         $this->cromSolr($id);
          
 //                     var_dump($id);
 //            var_dump($destaque);exit;
@@ -437,17 +431,17 @@ class PlatosTable
               }
         $adapter=$this->tableGateway->getAdapter();
         $primer=$this->tableGateway->getAdapter()
-                ->query('SELECT ta_plato.*,tr.va_nombre AS restaurant_nombre,COUNT(ta_comentario.in_id ) AS NumeroComentarios
-                FROM ta_plato
-                LEFT JOIN  ta_comentario
-                ON ta_plato.in_id = ta_comentario.ta_plato_in_id
-                LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id` 
-                LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id` 
-                LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id` 
-                LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
-                where ta_plato.en_destaque='.$destaque.' and ta_plato.en_estado=1 and tr.va_nombre is not null and (ta_comentario.ta_puntaje_in_id '.$puntaje.')
-                ORDER BY ta_puntaje_in_id desc
-                LIMIT '.$lim, $adapter::QUERY_MODE_EXECUTE);
+                ->query('SELECT ta_plato.*,tr.va_nombre AS restaurant_nombre ,COUNT(ta_comentario.in_id ) AS NumeroComentarios
+FROM ta_plato
+LEFT JOIN  ta_comentario ON ta_plato.in_id = ta_comentario.ta_plato_in_id
+LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id` 
+LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id` 
+LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id` 
+LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
+where ta_plato.en_destaque='.$destaque.' and ta_plato.en_estado='.$estado.'  and tr.va_nombre is not null  and ta_plato.ta_puntaje_in_id '.$puntaje.'
+GROUP BY in_id 
+ORDER BY ta_puntaje_in_id desc
+LIMIT '.$lim, $adapter::QUERY_MODE_EXECUTE);
   
 
         

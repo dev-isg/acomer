@@ -10,6 +10,7 @@ use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Platform;
 use Usuario\Model\Comentarios;
+use Platos\Model\PlatosTable;
 
 
 
@@ -100,10 +101,54 @@ class ComentariosTable
                         ->where(array('ta_plato.in_id'=>$coment['Ta_plato_in_id']));//$prom[0]['in_id']
                 $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
                 $statementup->execute();
+              //  $platos = new \Platos\Model\PlatosTable();
+                $this->cromSolr($coment['Ta_plato_in_id']);
+                
                 
     }
 
-
+public function cromSolr($id)        
+   {
+        $adapter = $this->tableGateway->getAdapter();
+        $sql = new Sql($adapter);
+        $selecttot = $sql->select()
+            ->from('ta_plato')
+            ->join(array('c'=>'ta_comentario'),'c.ta_plato_in_id=ta_plato.in_id',array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(*)')),'left')
+            ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre'=>'va_nombre'),'left')
+            ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
+            ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud','de_longitud','va_direccion'), 'left')
+            ->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
+            ->join(array('tu'=>'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito'=>'ch_distrito'), 'left')
+            ->where(array('ta_plato.in_id'=>$id));   
+            $selectString = $sql->getSqlStringForSqlObject($selecttot);            
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);                      
+            $plato=$results->toArray(); 
+            require './vendor/SolrPhpClient/Apache/Solr/Service.php';
+                                $solr = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr');  
+                                           if ($solr->ping())
+                                        {
+                                             $solr->deleteByQuery('id:'.$id);
+                                             $document = new \Apache_Solr_Document();
+                                             $document->id = $id;     
+                                             $document->name = $plato[0]['va_nombre'];                                            
+                                             $document->tx_descripcion = $plato[0]['tx_descripcion'];
+                                             $document->va_precio = $plato[0]['va_precio'];
+                                             $document->en_estado = $plato[0]['en_estado'];
+                                             $document->plato_tipo = $plato[0]['tipo_plato_nombre'];
+                                             $document->va_direccion = $plato[0]['va_direccion']; 
+                                             $document->restaurante = $plato[0]['restaurant_nombre'];                                         
+                                             $document->en_destaque = $plato[0]['en_destaque'];
+                                             $document->latitud = $plato[0]['de_latitud'];                                         
+                                             $document->longitud = $plato[0]['de_longitud'];
+                                             $document->distrito = $plato[0]['distrito'];
+                                             $document->va_imagen = $plato[0]['va_imagen'];
+                                             $document->comentarios =$plato[0]['cantidad'];
+                                             $document->puntuacion = $plato[0]['Ta_puntaje_in_id'];
+                                             $solr->addDocument($document);
+                                             $solr->commit();
+                                             $solr->optimize();
+             }
+      }
      public function estadoComentario($id,$estado){
                 $data = array(
                     'en_estado' => $estado,
