@@ -94,19 +94,33 @@ $('#submitbutton').click(function(){
 function submitForm(){ 
 	var validator = $("#application").validate({ 
 	rules: {
-		nombre_complet: "required", 
-		email: "required", 
+		nombre_complet: {
+			required: true
+		}, 
+		email: {
+			required: true,
+			email: true
+		}, 
 		nombre_plato: "required",
 		nombre_restaurant: "required", 
-		telefono: "required"
+		telefono: {
+			required: true,
+			number: true
+		}
 	}, 
 	errorElement: "em", 
 	messages: { 
 		name: "Ingrese su nombre completo", 
-		email: "Ingrese su correo electrónico", 
+		email: {
+			required: "Ingrese su correo electrónico",
+			email: "Ingrese un correo valido"
+		}, 
 		nombre_plato: "Ingrese el nombre del plato", 
 		nombre_restaurant: "Ingrese el nombre del restaurante", 
-		telefono: "Ingrese su teléfono" 
+		telefono: {
+			required: "Ingrese su teléfono",
+			number: "Ingrese solo numeros"
+		}
 	} 
 	}); 
 	if(validator.form()){ // validation perform 
