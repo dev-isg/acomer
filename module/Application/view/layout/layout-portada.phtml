@@ -77,7 +77,11 @@
             </form>             
             <div class="final">
                 <img src="/img/responsive.png" alt="" style="padding: 37px 10px;">
-            </div>       
+            </div>
+
+            <div class="solicitar-publicacion">
+              <a href="/application/index/solicita" class="btn btn-primary">Solicite su publicación</a>
+            </div>      
           </div><!--Fin del sidebar-->
       </div>
 
@@ -85,7 +89,7 @@
                          
             <?php echo $this->content; ?>
                        <div class="masinfo">
-                           <a href="#" id="ver"><img src="/img/scroll.png" alt=""></a>
+                           <a href="#cate-home" id="ver"><img src="/img/scroll.png" alt=""></a>
                        </div>
                       <div class="subir">
                         <a href="#top"><img src="/img/scroll-top.png" alt=""></a>
@@ -94,11 +98,15 @@
                           <img src="/img/flechamenu.png" alt="">
                       </div> -->
                       <div class="footer">
-                        <nav><ul>
-                            <li>Nosotros</li>
-                            <li>Ayuda</li>
-                            <li>Idiomas</li>
-                            </ul>
+                        <nav>
+                          <ul>
+                            <li>
+                              <a href="/application/index/nosotros">Nosotros</a>
+                            </li>
+                            <li>
+                              <a href="/application/index/terminos">Terminos y condiciones</a>
+                            </li>
+                          </ul>
                         </nav>
                     <footer>
                       <p>
@@ -128,27 +136,44 @@
               }
                $(".subir").hide(); //Esto hace que el div Inicialice Oculto
                 $(window).scroll(function () {
-                            if ($(this).scrollTop() > 100) { //Esto hace que el Div aparezca de despues de haber bajado 100px con el scroll
-                                $('.subir').fadeIn(); //Aparece con un efecto Fade
-                                $('#ver').fadeOut();
+                    if ($(this).scrollTop() > 100) { //Esto hace que el Div aparezca de despues de haber bajado 100px con el scroll
+                        $('.subir').fadeIn(); //Aparece con un efecto Fade
+                        $('#ver').fadeOut();
 
-                            } else {
-                                $('.subir').fadeOut(); // Desaparece con un efecto Fade
-                                 $('#ver').fadeIn();
-                            }
-                        });
-                        $('.subir a').click(function () {
-                            $('body,html').animate({
-                                scrollTop: 0
-                            }, 500); // Todo esto hace que se la pagina se desplace hasta el tope con una lentitud de 500 milisegundos
-                            return false;
-                        });
-                         $("#ver").click(function(){
-                            var posicion_img = $("#cate-home").offset().top;
-                            $("html, body").animate({scrollTop:posicion_img+"px"});
-                        });
-               
+                    } else {
+                        $('.subir').fadeOut(); // Desaparece con un efecto Fade
+                         $('#ver').fadeIn();
+                    }
+                });
+                $('.subir a').click(function () {
+                    $('body,html').animate({
+                        scrollTop: 0
+                    }, 500); // Todo esto hace que se la pagina se desplace hasta el tope con una lentitud de 500 milisegundos
+                    return false;
+                });
+                 /*$("#ver").click(function(e){
+                    e.preventDefault();
+                    var posicion_img = $(".primer-home").offset().top;
+                    $("html, body").animate({scrollTop:posicion_img+"px"});
+                });*/
+                
+                $('#ver').on("click", function(e) {
+                  e.preventDefault();
+                  var nextElement = $(this).attr('href');
+                  switch(nextElement) {
+                    case "#cate-home":
+                      offset = $(nextElement).offset().top - 20;
+                      break;
+                    default:
+                      offset = $(nextElement).offset().top;
+                      break;
+                  }
 
+                  $('html, body').animate({
+                    scrollTop: offset
+                  }, 'slow');
+
+                });
 
             });
         </script>

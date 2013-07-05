@@ -3,12 +3,12 @@
     <img src="/img/globos.png" alt="">
 </div>
 
-    <div class="sub subir-home">
+    <div class="sub subir-home" id="subir-home">
       <div class="content-etiqueta-home">
         <p>Platos destacados</p>
       </div>
     </div>
-    <div class="recomendados-platos primer-home">
+    <div class="recomendados-platos primer-home" style="padding-bottom: 90px;">
       <ul>
          <?php  foreach ($this->lista  as $list) : ?>
           <li>
@@ -33,7 +33,7 @@
                       <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
                       <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
                       <div class="punt">
-                        <div class="puntuaciones c0"></div>
+                        <div class="puntuaciones c<?php echo $list->Ta_puntaje_in_id;?>"></div>
                       </div>
                     </div>
                   </div>
@@ -45,7 +45,7 @@
      
      <!--Destaques segunda fila -->
      
-    <div class="sub" id="cate-home" style="padding-top: 30px;">
+    <div class="sub" id="cate-home">
       <div class="content-etiqueta-home">
         <p>Platos destacados</p>
       </div>
@@ -75,7 +75,7 @@
                       <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
                       <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
                       <div class="punt">
-                        <div class="puntuaciones c0"></div>
+                        <div class="puntuaciones c<?php echo $list->Ta_puntaje_in_id;?>"></div>
                       </div>
                     </div>
                   </div>
@@ -118,7 +118,7 @@
                              <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
                              <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
                               <div class="punt">
-                                <div class="puntuaciones c0"></div>
+                                <div class="puntuaciones c<?php echo $list->Ta_puntaje_in_id;?>"></div>
                               </div>
                          </div>
                     </div>
