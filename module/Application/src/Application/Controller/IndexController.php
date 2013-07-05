@@ -33,8 +33,8 @@ class IndexController extends AbstractActionController
         $this->layout('layout/layout-portada');
         $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
         $listadeseg=$this->getConfigTable()->cantComentxPlato(1,'3,3',1);
-        $listaval=$this->getConfigTable()->cantComentxPlato(2,3,2);
-        $listault=$this->getConfigTable()->cantComentxPlato(2,3,3);
+        $listaval=$this->getConfigTable()->cantComentxPlato(2,3,1);
+        $listault=$this->getConfigTable()->cantComentxPlato(2,3,2);
         //var_dump($listaval);
         $this->layout()->clase = 'Home';
         $view->setVariables(array('lista' => $listades,'listaseg'=>$listadeseg,'listaval'=>$listaval,'listault'=>$listault,'clase'=>'Home'));

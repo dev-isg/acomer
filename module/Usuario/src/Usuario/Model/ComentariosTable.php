@@ -77,7 +77,7 @@ class ComentariosTable
             $statement2 = $this->tableGateway->getSql()->prepareStatementForSqlObject($insertcoment);
             $statement2->execute();  
             
-            $idcomentario=$this->tableGateway->getAdapter()->getDriver()->getLastGeneratedValue();
+//            $idcomentario=$this->tableGateway->getAdapter()->getDriver()->getLastGeneratedValue();
              }
              
 //             $select=$this->tableGateway->getSql()->select()->from('ta_comentario')
@@ -101,13 +101,6 @@ class ComentariosTable
                 $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
                 $statementup->execute();
                 
-//                 $adapter3=$this->tableGateway->getAdapter();
-//        $promtot=$this->tableGateway->getAdapter()
-//                ->query('SELECT ta_comentario.*, COUNT(ta_comentario.in_id ) AS NumeroComentarios,
-//ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS TotPuntaje
-//FROM ta_comentario
-//where ta_comentario.in_id='.$idcomentario, $adapter3::QUERY_MODE_EXECUTE);
-        
     }
 
 
