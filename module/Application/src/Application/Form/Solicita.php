@@ -43,14 +43,19 @@ class Solicita extends Form
         
            $this->add(array(
             'name' => 'descripcion',
-            'type' => 'Text',
+            'type' => 'Textarea',
+            'attributes' => array(               
+                'class' => 'span11',
+                'colls'=>40,
+                'rows'=>4
+            ),
             'options' => array(
 
 //                'label' => 'descripcion',
 
             ),
         ));
-        
+
          $this->add(array(
             'name' => 'nombre_restaurant',
             'type' => 'Text',
