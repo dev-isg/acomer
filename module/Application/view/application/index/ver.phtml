@@ -161,7 +161,7 @@
        </div>         
 
   <div id="mapa-buscador">
-        <div id='map' style="height:800px;"></div>
+<!--        <div id='map' style="height:800px;"></div>-->
  </div>
 
 
@@ -169,7 +169,7 @@
  <script type="text/javascript">
    var map;
    $(document).ready(function(){
-//$('#mapa-buscador').css("display","none");
+
          var puntaje = function(item,p){
      $(item).raty({ 
                     readOnly: true,
@@ -203,6 +203,7 @@
        
 
        $(".map").on("click",function(){
+             $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
          var map;
            var mcOptions = { maxZoom: 12};
              map = new GMaps({

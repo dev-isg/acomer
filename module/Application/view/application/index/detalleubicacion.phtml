@@ -165,7 +165,7 @@
                       ?>   
           </div>      
  <div id="mapa-buscador">
-        <div id='map' style="height:800px;"></div>
+<!--        <div id='map' style="height:800px;"></div>-->
  </div>
 
 
@@ -205,8 +205,10 @@
          }
         });
        
-
+   
        $(".map").on("click",function(){
+       
+            $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
          var map;
            var mcOptions = { maxZoom: 12};
              map = new GMaps({
