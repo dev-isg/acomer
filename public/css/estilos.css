@@ -1149,8 +1149,11 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
 .lista-Nosotros .masinfo{
   display: none;
 }
+.lista-Terminos .masinfo{
+  display: none;
+}
 .contenido-static p{
-  color: #b6b6b6;
+  color: #7b7b7b;
   font-size: 14px;
 }
 .bold-info strong{
@@ -1160,7 +1163,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   margin-left: 35px;
 }
 .contenido-static ol li{
-  color: #b6b6b6;
+  color: #7b7b7b;
   font-size: 14px;
   margin-bottom: 5px;
 }
@@ -1408,6 +1411,13 @@ ul.time .hour{
   color: red;
 }
 
+form#application{
+  margin-top: 30px;
+} 
+form#application .control-group .btn-solicito{
+  width: 120px;
+  height: 35px;
+}
 .control-group span.red{
   color: red;
   font-size: 15px;
