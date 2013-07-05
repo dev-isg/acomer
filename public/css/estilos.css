@@ -476,9 +476,10 @@ margin: 1em 1em;
 .map-portada{
   background: url(../img/mapa.jpg) repeat;
 }
-.guia {
-
+.map {
+text-decoration: underline;
 }
+.disabled { color:gray !important; }
 .masinfo {
 width: 700px;
 text-align: right;
@@ -1068,7 +1069,7 @@ ul.servicios-desc{
 }
 ul.servicios-desc li{
   background: url(../img/guion.png) no-repeat 0px 10px;
-  color: #b6b6b6;
+  color: #7b7b7b;
   font-size: 14px;
   font-family: arial;
   padding-left: 10px;
@@ -1366,7 +1367,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   background: url(../../img/ubicacion.png) no-repeat 0 2px;
   padding-left: 20px;
   line-height: 16px;
-  color: #b6b6b6;
+  color: #7b7b7b;
   font-size: 14px;
 }
 .content-info ul.ubi-lupa li{
@@ -1394,15 +1395,31 @@ ul.time .day{
 
 }
 ul.time .hour{
-  color: #b6b6b6;
+  color: #7b7b7b;
   font-size: 14px;
   font-family: arial;
 
 }
 
+.controls em.error{
+  display: block;
+  font-size: 12px;
+  margin-top: 3px;
+  color: red;
+}
 
+.control-group span.red{
+  color: red;
+  font-size: 15px;
+}
 
+.contenido-static .form-horizontal .control-label{
+  width: 180px;
+}
 
+.contenido-static .form-horizontal .controls{
+  margin-left: 200px;
+}
 
 
 /* ==========================================================================

@@ -8,25 +8,20 @@ $this->headTitle($title);
 	<div class="descrip-product">
 		<div class="contenido-static">
 			<h2>Solicitar publicación</h2>
+			<?php
+			$form = $this->form;
+			//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
 
-<?php
-$form = $this->form;
-//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
+			$form->setAttributes(array(
+			    'action' => $this->url.'/application/index/solicita',
+			    'method' => 'post',
+			    'class' => 'form-horizontal'
+			));
+			$form->prepare();
 
-$form->setAttributes(array(
-    'action' => $this->url.'/application/index/solicita',
-    'method' => 'post',
-    'class' => 'form-horizontal'
-));
-$form->prepare();
-
-
-echo $this->form()->openTag($form);
-echo $this->formHidden($form->get('in_id'));
-
-?>
-
-
+			echo $this->form()->openTag($form);
+			echo $this->formHidden($form->get('in_id'));
+			?>
 			<?php
 			$form = $this->form;
 			//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
@@ -44,19 +39,19 @@ echo $this->formHidden($form->get('in_id'));
 			?>
 
 			<div class="control-group">
-			    <label class="control-label" for="inputName">Nombre: </label>
+			    <label class="control-label" for="inputName">Nombre<span class="red">*</span>:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($form->get('nombre_complet'));?>
 			    </div>
 			  </div>
 			  <div class="control-group">
-			    <label class="control-label" for="inputEmail">Email:</label>
+			    <label class="control-label" for="inputEmail">Email<span class="red">*</span>:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($form->get('email'));?>
 			    </div>
 			  </div>
 			  <div class="control-group">
-			    <label class="control-label" for="inpuNombre">Nombre del plato:</label>
+			    <label class="control-label" for="inpuNombre">Nombre del plato<span class="red">*</span>:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($form->get('nombre_plato'));?>
 			    </div>
@@ -68,13 +63,13 @@ echo $this->formHidden($form->get('in_id'));
 			    </div>
 			  </div>
 			  <div class="control-group">
-			    <label class="control-label" for="inputEmail">Nombre del restaurante:</label>
+			    <label class="control-label" for="inputEmail">Nombre del restaurante<span class="red">*</span>:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($form->get('nombre_restaurant'));?>
 			    </div>
 			  </div>
 			  <div class="control-group">
-			    <label class="control-label" for="inputEmail">Teléfono:</label>
+			    <label class="control-label" for="inputEmail">Teléfono<span class="red">*</span>:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($form->get('telefono'));?>
 			    </div>
@@ -89,3 +84,35 @@ echo $this->formHidden($form->get('in_id'));
 	</div>
 	
 </div>
+
+<script type="text/javascript">
+
+$('#submitbutton').click(function(){
+	submitForm();
+});
+
+function submitForm(){ 
+	var validator = $("#application").validate({ 
+	rules: {
+		nombre_complet: "required", 
+		email: "required", 
+		nombre_plato: "required",
+		nombre_restaurant: "required", 
+		telefono: "required"
+	}, 
+	errorElement: "em", 
+	messages: { 
+		name: "Ingrese su nombre completo", 
+		email: "Ingrese su correo electrónico", 
+		nombre_plato: "Ingrese el nombre del plato", 
+		nombre_restaurant: "Ingrese el nombre del restaurante", 
+		telefono: "Ingrese su teléfono" 
+	} 
+	}); 
+	if(validator.form()){ // validation perform 
+		$('form#application').attr({action: 'mycontroller'});	 
+		$('form#application').submit(); 
+	} 
+}
+
+</script>
