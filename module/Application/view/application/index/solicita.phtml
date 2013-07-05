@@ -4,32 +4,35 @@
 $title = 'Solicitar';
 $this->headTitle($title);
 ?>
+<div class="content-left">
+	<div class="descrip-product">
+		<?php
+		$form = $this->form;
+		//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
 
-<div class="span8">
-
-<?php
-$form = $this->form;
-//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
-
-$form->setAttributes(array(
-    'action' => $this->url.'/usuario/index/agregarusuario',
-    'method' => 'post'
-));
-$form->prepare();
+		$form->setAttributes(array(
+		    'action' => $this->url.'/usuario/index/agregarusuario',
+		    'method' => 'post'
+		));
+		$form->prepare();
 
 
-echo $this->form()->openTag($form);
-?><legend><?php echo $this->escapeHtml($title); ?></legend>
-<?php
-echo $this->formHidden($form->get('in_id'));
+		echo $this->form()->openTag($form);
+		?><legend><?php echo $this->escapeHtml($title); ?></legend>
+		<?php
+		echo $this->formHidden($form->get('in_id'));
 
-?>
-<div class="control-group span5 "><?php echo $this->formRow($form->get('nombre_complet'));?></div><?php
-?><div class="control-group span5"><?php echo $this->formRow($form->get('email'));?></div ><?php
-?><div class="control-group span5"><?php echo $this->formRow($form->get('nombre_plato'));?></div><?php
-?><div class="control-group span5"><?php echo $this->formRow($form->get('descripcion'));?></div><?php
-?><div class="control-group span5"><?php echo $this->formRow($form->get('nombre_restaurant'));?></div><?php
-?><div class="control-group span5"><?php echo $this->formRow($form->get('telefono'));?></div><?php
-?><div class="control-group span12"><?php echo $this->formSubmit($form->get('submit'));?></div><?php
-echo $this->form()->closeTag(); ?>
+		?>
+		<div class="control-group span5 "><?php echo $this->formRow($form->get('nombre_complet'));?></div><?php
+		?><div class="control-group span5"><?php echo $this->formRow($form->get('email'));?></div ><?php
+		?><div class="control-group span5"><?php echo $this->formRow($form->get('nombre_plato'));?></div><?php
+		?><div class="control-group span5"><?php echo $this->formRow($form->get('descripcion'));?></div><?php
+		?><div class="control-group span5"><?php echo $this->formRow($form->get('nombre_restaurant'));?></div><?php
+		?><div class="control-group span5"><?php echo $this->formRow($form->get('telefono'));?></div><?php
+		?><div class="control-group span12"><?php echo $this->formSubmit($form->get('submit'));?></div><?php
+		echo $this->form()->closeTag(); ?>
+	</div>
+	
 </div>
+
+
