@@ -91,7 +91,7 @@ class IndexController extends AbstractActionController
                      $form->setMessages(array('imagen'=>$error ));
                 } else {
                     
-                    $adapter->setDestination('C:\xampp\htdocs\acomer\public\imagenes');
+                   $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
                      if ($adapter->receive($File['name'])) {
                         $plato->exchangeArray($form->getData());
                     }
@@ -191,9 +191,9 @@ class IndexController extends AbstractActionController
     {   
 //     var_dump('hasta aka');
         $id = (int) $this->params()->fromRoute('in_id', 0);
-        $va_nombre = $this->params()->fromRoute('va_nombre',0);
+        $va_nombre = 'prueba';//$this->params()->fromRoute('va_nombre',0);
         $idlocal=(int) $this->params()->fromRoute('id_pa', 0);
-        //var_dump($id);exit;
+//          var_dump($id);exit;
                
         if (!$id) {
            return $this->redirect()->toUrl($this->
@@ -251,14 +251,15 @@ class IndexController extends AbstractActionController
                $File = $this->params()->fromFiles('va_imagen');
                
                 $adapter = new \Zend\File\Transfer\Adapter\Http();
-                //$adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
+                $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
                 
                //  $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
                   if ($adapter->receive($File['name'])) { //echo 'dddds';exit;
                         //$restaurante->exchangeArray($form->getData());
                         // $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
                $this->getPlatosTable()->guardarPlato($restaurante,$File);
-                      $this->redirect()->toUrl('/platos');
+             
+                      $this->redirect()->toUrl('/platos/index?id='.$idlocal);
                     }
                 
             }
@@ -268,6 +269,7 @@ class IndexController extends AbstractActionController
             'in_id' => $id,
             'va_nombre' => $va_nombre,
             'form' => $form,
+         'idlocal'=>$idlocal
         );
         
     }
