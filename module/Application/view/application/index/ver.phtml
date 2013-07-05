@@ -66,8 +66,6 @@
                             <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>
                        <button class="verlistado" value="listar" type="submit" ></button>                       
                         <a style="margin-left: 10px;text-decoration: underline;"  href="#" class="map" >Ver Mapa </a>
-                     
-                                   
 
 <!--                            <?php
                             if ($results)
@@ -215,8 +213,9 @@
  }
 
      });
+     $("#map").hide();
      $(".map").on("click",function(){
-         $('#map').css("display","block");
+          $('#map').fadeIn();
           $('#esconder').css("display","none");
 
          var plato=$('#bubi #q').val();
