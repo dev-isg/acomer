@@ -65,7 +65,7 @@
                          </SELECT>  
                             <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>
                        <button class="verlistado" value="listar" type="submit" ></button>                       
-                        <a style="margin-left: 10px;text-decoration: underline;"  href="#" class="map" >Ver Mapa </a>
+                        <a style="margin-left: 10px;" class="disabled" id="buscarmap" >Ver Mapa </a>
 
 <!--                            <?php
                             if ($results)
@@ -170,7 +170,13 @@
    var map;
    $(document).ready(function(){
 
-         var puntaje = function(item,p){
+ $('#bubi #q').keyup(function () {
+      if(($(this).val() != "") &&  ($('#bubi #fq').val() != "" )){
+      $('#buscarmap').removeClass("disabled").addClass('map');
+      $('#buscarmap').attr("href","#");
+      }   }).keyup();
+
+  var puntaje = function(item,p){
      $(item).raty({ 
                     readOnly: true,
                     score: p, 
@@ -203,7 +209,7 @@
        
 
        $(".map").on("click",function(){
-             $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
+        $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
          var map;
            var mcOptions = { maxZoom: 12};
              map = new GMaps({
@@ -217,12 +223,13 @@
        });
        
      $('#esconder').css("display","none");
-$('#mapa-buscador').css("display","block");
+    
      var plato=$('#bubi #q').val();
      var dis=$('#bubi #fq').val();
 
      var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
      console.log(url);
+     if ( ($('#bubi #q').val() != "") && () ){
      $.getJSON( url, function(data) {
              $.each( data.response.docs, function(i, marker) {
                  map.setCenter(marker.latitud,marker.longitud );
@@ -245,6 +252,7 @@ $('#mapa-buscador').css("display","block");
              });
 
          });
+   }
         
      });
      
