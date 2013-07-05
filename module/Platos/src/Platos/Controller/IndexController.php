@@ -34,6 +34,12 @@ class IndexController extends AbstractActionController
         $local=(int) $this->params()->fromQuery('id');
 //        var_dump($restaurante);exit;
         $lista=$this->getPlatosTable()->fetchAll($local);
+//                    $array=array();
+//             foreach($lista as $result){
+//                 $array[]=$result;
+//             }
+//            var_dump($array);exit;
+    
         return new ViewModel(array(
             'platos' => $lista,
             'idlocal'=>$local,
@@ -368,7 +374,11 @@ class IndexController extends AbstractActionController
     }
     
     public function getCount($val){
-        return $val->count();
+       
+//        $aux=$val->toArray();
+//        var_dump($aux[0]['num']);Exit;
+        
+        return $aux[0]['num'];//$val->count();//
     }
     
        
