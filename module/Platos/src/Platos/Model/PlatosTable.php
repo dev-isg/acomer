@@ -144,6 +144,7 @@ class PlatosTable
                                 $solr = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr');  
                                            if ($solr->ping())
                                         {
+                                             // $solr->deleteByQuery('*:*');
                                              $document = new \Apache_Solr_Document();
                                              $document->id = $plato[0]['in_id'];     
                                              $document->name = $plato[0]['va_nombre'];                                            
