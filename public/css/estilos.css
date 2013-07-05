@@ -476,9 +476,10 @@ margin: 1em 1em;
 .map-portada{
   background: url(../img/mapa.jpg) repeat;
 }
-.guia {
-
+.map {
+text-decoration: underline;
 }
+.disabled { color:gray !important; }
 .masinfo {
 width: 700px;
 text-align: right;
