@@ -175,9 +175,14 @@ cursor: pointer;
 #map{
   display: block;
   width: 95%;
-  height: 350px;
+<<<<<<< HEAD
+  
   margin: 0 auto;
-  display:none;
+  
+=======
+  height: 350px;
+  margin: 0 auto;  
+>>>>>>> 2faa8cfe63261e404f374e79b26546519cf301e0
   -moz-box-shadow: 0px 5px 20px #ccc;
   -webkit-box-shadow: 0px 5px 20px #ccc;
   box-shadow: 0px 5px 20px #ccc;
@@ -358,8 +363,6 @@ margin: 1em 1em;
   line-height:80px;
   opacity:0.8;
   background:#4477aa;
-  border:solid 3px #336699;
-  border-radius:4px;
   box-shadow:2px 2px 10px #333;
   text-shadow:1px 1px 1px #666;
   padding:0 4px;
