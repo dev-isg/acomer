@@ -58,7 +58,8 @@ class ComentariosTable
 //            $result = $adapter->query($selectString2, $adapter::QUERY_MODE_EXECUTE);
             $idcliente=$this->tableGateway->getAdapter()->getDriver()->getLastGeneratedValue();//$this->tableGateway->getLastInsertValue();
 //          var_dump($idcliente);Exit;
-
+            
+            
 //           date_default_timezone_set('UTC');
             $comentario = array(
             'tx_descripcion' => $coment['tx_descripcion'],
@@ -74,9 +75,38 @@ class ComentariosTable
            $insertcoment= $this->tableGateway->getSql()->insert()->into('ta_comentario')
                     ->values($comentario);
             $statement2 = $this->tableGateway->getSql()->prepareStatementForSqlObject($insertcoment);
-            $statement2->execute();   
-
+            $statement2->execute();  
+            
+            $idcomentario=$this->tableGateway->getAdapter()->getDriver()->getLastGeneratedValue();
              }
+             
+//             $select=$this->tableGateway->getSql()->select()->from('ta_comentario')
+//                     ->columns('in_id')->;
+//            $statementcom = $this->tableGateway->getSql()->prepareStatementForSqlObject($select);  
+//            $resul=$statementcom->execute();
+            
+                    $adapter2=$this->tableGateway->getAdapter();
+        $promselect=$this->tableGateway->getAdapter()
+                ->query('SELECT ta_comentario.*,SUM(ta_puntaje_in_id)AS SumaPuntaje ,COUNT(ta_comentario.in_id ) AS NumeroComentarios,
+                    ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS TotPuntaje
+                    FROM ta_comentario
+                    where ta_comentario.ta_plato_in_id='.$coment['Ta_plato_in_id'], $adapter2::QUERY_MODE_EXECUTE);
+                        $prom=$promselect->toArray();
+//        var_dump($coment['Ta_plato_in_id']);exit;
+
+             
+              $update = $this->tableGateway->getSql()->update()->table('ta_plato')
+                        ->set(array('Ta_puntaje_in_id'=>$prom[0]['TotPuntaje']))
+                        ->where(array('ta_plato.in_id'=>$coment['Ta_plato_in_id']));//$prom[0]['in_id']
+                $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
+                $statementup->execute();
+                
+//                 $adapter3=$this->tableGateway->getAdapter();
+//        $promtot=$this->tableGateway->getAdapter()
+//                ->query('SELECT ta_comentario.*, COUNT(ta_comentario.in_id ) AS NumeroComentarios,
+//ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS TotPuntaje
+//FROM ta_comentario
+//where ta_comentario.in_id='.$idcomentario, $adapter3::QUERY_MODE_EXECUTE);
         
     }
 
