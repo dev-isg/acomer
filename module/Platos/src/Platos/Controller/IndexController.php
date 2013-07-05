@@ -97,7 +97,8 @@ class IndexController extends AbstractActionController
                      $form->setMessages(array('imagen'=>$error ));
                 } else {
                     
-                   $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
+                  // $adapter->setDestination('C:\xampp\htdocs\acomer\public\imagenes');
+                     $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
                      if ($adapter->receive($File['name'])) {
                         $plato->exchangeArray($form->getData());
                     }
@@ -346,7 +347,7 @@ class IndexController extends AbstractActionController
             }
         }
         
-    
+//    var_dump($listarcomentarios);Exit;
         
         $this->layout()->clase = 'Detalle';
         $view->setVariables(array('lista' => $listarecomendacion,'comentarios'=>$listarcomentarios,'form'=>$form,
@@ -376,9 +377,9 @@ class IndexController extends AbstractActionController
     public function getCount($val){
        
 //        $aux=$val->toArray();
-//        var_dump($aux[0]['num']);Exit;
+        //var_dump($aux[0]['num']);Exit;
         
-        return $aux[0]['num'];//$val->count();//
+        return $val->count();//$aux[0]['num'];//
     }
     
        

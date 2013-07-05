@@ -48,7 +48,7 @@
                           catch (Exception $e)
                           {
                           
-                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
+                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>ingrese algun valor</pre></body></html>");          
                           }
                         }
 
@@ -59,6 +59,7 @@
                          <SELECT name="fq" id="fq" >
                         <OPTION value=""></OPTION>
                            <?php  foreach ($this->distritos as $distritos) : ?>
+                        
                           <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
                          <?php endforeach; ?>
 
