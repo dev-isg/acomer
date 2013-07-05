@@ -93,10 +93,7 @@ class PlatosTable
     
 
     public function guardarPlato(Platos $plato,$imagen,$idlocal=null){
-
-
    
-        
         $data = array(
 //            'in_id' => $plato->in_id,
             'va_imagen' => $imagen['name'],//$plato->va_imagen,
@@ -197,13 +194,13 @@ class PlatosTable
             $selectString = $sql->getSqlStringForSqlObject($selecttot);            
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);                      
             $plato=$results->toArray();
-            var_dump($plato);exit;
+           var_dump($plato);exit;
                              
    require './vendor/SolrPhpClient/Apache/Solr/Service.php';
                                 $solr = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr');  
                                            if ($solr->ping())
                                         {// echo 'entro';exit;
-                                             $solr->deleteByQuery('id'.$id);
+                                             $solr->deleteByQuery('id:'.$id);
                                              $document = new \Apache_Solr_Document();
                                              $document->id = $id;     
                                              $document->name = $plato[0]['va_nombre'];                                            
