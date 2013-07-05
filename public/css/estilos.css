@@ -446,7 +446,7 @@ margin: 1em 1em;
 
 .contenido-plato {
   /*background: url(../img/map.jpg) repeat fixed;*/
-  height: 54%;
+  height: 100%;
   width: 724px;
   float: left;
 }
@@ -868,18 +868,36 @@ width: 49%;
   background: url(../../img/back-detalle.png) repeat;
   width: 724px;
   height: 100%;
+  float: left;
 }
 .etiqueta-cat{
   display: block;
   width: 100%;
   padding-top: 35px;
-  
+  float: left;
 }
 .etiqueta{
   background: url(../../img/etiqueta.png) no-repeat;
   height: 45px;
   width: 240px;
+  position: relative;
+  float: left;
 }
+.return{
+  float: right;
+  width: 100px;
+  padding-top: 20px;
+}
+.return a{
+  background: url(../img/regresar.png) no-repeat 0 3px;
+  color: #ff8400;
+  font-size: 13px;
+  font-weight: bold;
+  font-style: italic;
+  font-family: arial;
+  padding-left: 22px;
+}
+
 .etiqueta p{
   font-weight: bold;
   font-style: italic;
@@ -903,6 +921,7 @@ width: 49%;
   -o-border-radius: 4px;
   border-radius: 4px;
   margin-left: 18px;
+  float: left;
 }
 .ficha-product .ficha-img{
   float: left;
@@ -1174,6 +1193,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   display: block;
   padding: 10px 18px;
   overflow: hidden;
+  float: left;
 }
 .coments-all{
   float: left;
