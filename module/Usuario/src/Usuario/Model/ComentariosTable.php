@@ -87,13 +87,13 @@ class ComentariosTable
             
                     $adapter2=$this->tableGateway->getAdapter();
         $promselect=$this->tableGateway->getAdapter()
-                ->query('SELECT ta_comentario.*, COUNT(ta_comentario.in_id ) AS NumeroComentarios,
+                ->query('SELECT ta_comentario.*,SUM(ta_puntaje_in_id)AS SumaPuntaje ,COUNT(ta_comentario.in_id ) AS NumeroComentarios,
                     ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS TotPuntaje
                     FROM ta_comentario
-                    where ta_comentario.in_id='.$idcomentario, $adapter2::QUERY_MODE_EXECUTE);
+                    where ta_comentario.ta_plato_in_id='.$coment['Ta_plato_in_id'], $adapter2::QUERY_MODE_EXECUTE);
                         $prom=$promselect->toArray();
 //        var_dump($coment['Ta_plato_in_id']);exit;
-        
+
              
               $update = $this->tableGateway->getSql()->update()->table('ta_plato')
                         ->set(array('Ta_puntaje_in_id'=>$prom[0]['TotPuntaje']))
