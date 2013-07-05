@@ -44,6 +44,19 @@ class IndexController extends AbstractActionController
     
     }
     
+    
+         public function joincomenatariosAction()
+    { 
+             
+         $id  = $this->params()->fromQuery('id');
+         $lista=$this->getConfigTable()->cantComentxPlato(2,3,2);
+         $valor =Json::encode($lista);
+         echo $valor;
+         exit();
+
+    }
+    
+    
             public function getConfigTable()
     {
         if (!$this->configTable) {

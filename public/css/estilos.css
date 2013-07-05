@@ -175,7 +175,7 @@ cursor: pointer;
 #map{
   display: block;
   width: 95%;
-  height: 350px;
+  
   margin: 0 auto;
   
   -moz-box-shadow: 0px 5px 20px #ccc;

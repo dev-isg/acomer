@@ -213,14 +213,14 @@
  }
 
      });
-     $("#map").hide();
+     
      $(".map").on("click",function(){
-          $('#map').fadeIn();
+         $('#map').css("display","block");
           $('#esconder').css("display","none");
 
          var plato=$('#bubi #q').val();
      var dis=$('#bubi #fq').val();
-     var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
+     var url = "http://192.168.1.44:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
      console.log(url);
      $.getJSON( url, function(data) {
              $.each( data.response.docs, function(i, marker) {
