@@ -30,8 +30,38 @@ class solicitaForm extends Form
                 'label' => 'correo',
             ),
         ));
-
+        $this->add(array(
+            'name' => 'nombre_plato',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'nombre',
+            ),
+        ));
         
+           $this->add(array(
+            'name' => 'descripcion',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'descripcion',
+            ),
+        ));
+        
+         $this->add(array(
+            'name' => 'nombre_restaurant',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'nombre restaurante',   
+            ),
+        ));
+                
+                                
+           $this->add(array(
+            'name' => 'telefono',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Telefono',   
+            ),
+        ));
         $this->add(array(
             'name' => 'submit',
             'type' => 'Submit',
