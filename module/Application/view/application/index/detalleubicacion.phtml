@@ -164,9 +164,17 @@
                           }
                       ?>   
           </div>      
-<script>
-  $(document).ready(function(){
-      var puntaje = function(item,p){
+ <div id="mapa-buscador">
+        <div id='map' style="height:800px;"></div>
+ </div>
+
+
+
+ <script type="text/javascript">
+   var map;
+   $(document).ready(function(){
+
+         var puntaje = function(item,p){
      $(item).raty({ 
                     readOnly: true,
                     score: p, 
@@ -196,36 +204,26 @@
         puntaje("#" + idptje ,ptaje); 
          }
         });
+       
 
-  });
-</script>
+       $(".map").on("click",function(){
+         var map;
+           var mcOptions = { maxZoom: 12};
+             map = new GMaps({
+               el: '#map',
+               zoom: 14,
+                lat: -12.043333,
+                lng: -77.028333,
+               markerClusterer: function(map) {
+           return new MarkerClusterer(map,mcOptions);
+         }
+       });
+       
+     $('#esconder').css("display","none");
 
-
-  <div>
-        <div id='map' style="height:400px;"></div>
- </div>
-
- <script type="text/javascript">
-   var map;
-   $(document).ready(function(){
-
-     var mcOptions = { maxZoom: 14};
-     map = new GMaps({
-       el: '#map',
-       zoom: 12,
-        lat: -12.043333,
-        lng: -77.028333,
-       markerClusterer: function(map) {
-   return new MarkerClusterer(map,mcOptions);
- }
-
-     });
-     $(".map").on("click",function(){
-         $('#map').css("display","block");
-          $('#esconder').css("display","none");
-
-         var plato=$('#bubi #q').val();
+     var plato=$('#bubi #q').val();
      var dis=$('#bubi #fq').val();
+
      var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
      console.log(url);
      $.getJSON( url, function(data) {
