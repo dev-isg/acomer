@@ -16,7 +16,7 @@
    					<img src="/imagenes/<?php echo $this->lista[0]['va_imagen'];?>">
    				</div>
    				<div class="ficha-desc">
-                  <h2><?php echo $this->lista[0]['restaurant_nombre'];?></h2>
+                  <h2><?php echo $this->lista[0]['restaurant_nombre'];?></h2>  
    					<div class="puntuaciones c<?php echo $this->lista[0]['Ta_puntaje_in_id'];?>"></div>
                   <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
    					<p class="desc"><?php echo $this->lista[0]['tx_descripcion'];?></p>
@@ -62,7 +62,7 @@
                      </div>
                   </div>
    					<div class="top-coment">
-   						<p><?php echo $this->cantidad;?> comentarios</p>
+   						<p><?php echo $this->lista[0]['num'];//$this->cantidad;?> comentarios</p>
    						<a href="#" class="btn btn-warning agregar-coment-1">Agregar comentario</a>
    					</div>
    					<div class="agregar-comentario-desc" style="display:none;">
@@ -101,9 +101,13 @@
    					</div>
    					<div class="comentarios-one">
    						<ul>
-                        <?php  
-                        
-                        foreach ($this->comentarios  as $comt) : ?>
+ 
+                        <?php //                  var_dump($this->lista[0]['Ta_puntaje_in_id']);exit;
+                                            if($this->lista[0]['Ta_puntaje_in_id']!=0){
+                                                foreach ($this->comentarios  as $comt) : 
+                                                    
+                                                    ?>
+                                                    
 	   							<li>
 	   								<div class="coment-li">
 	   									<div class="img-li">
@@ -111,7 +115,7 @@
 	   									</div>
 	   									<div class="img-li-desc">
 	   										<div class="img-li-top">
-                                       <h4><?php echo $comt->va_nombre_cliente?></h3>
+                                                                            <h4><?php echo $comt->va_nombre_cliente?></h3>
 	   											<div class="puntuaciones c<?php echo $comt->ta_puntaje_in_id;?>"></div>
 	   										</div>
 	   										<div class="img-li-bottom">
@@ -121,8 +125,9 @@
 	   								</div>
 	   							</li>
                            <?php 
-                          
-                           endforeach;?>
+                                                    
+                           endforeach;
+                                            }?>
    						</ul>
    					</div>
    				</div>

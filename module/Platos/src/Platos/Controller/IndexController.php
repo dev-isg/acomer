@@ -34,6 +34,12 @@ class IndexController extends AbstractActionController
         $local=(int) $this->params()->fromQuery('id');
 //        var_dump($restaurante);exit;
         $lista=$this->getPlatosTable()->fetchAll($local);
+//                    $array=array();
+//             foreach($lista as $result){
+//                 $array[]=$result;
+//             }
+//            var_dump($array);exit;
+    
         return new ViewModel(array(
             'platos' => $lista,
             'idlocal'=>$local,
@@ -91,7 +97,8 @@ class IndexController extends AbstractActionController
                      $form->setMessages(array('imagen'=>$error ));
                 } else {
                     
-                   $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
+                  // $adapter->setDestination('C:\xampp\htdocs\acomer\public\imagenes');
+                     $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
                      if ($adapter->receive($File['name'])) {
                         $plato->exchangeArray($form->getData());
                     }
@@ -340,7 +347,7 @@ class IndexController extends AbstractActionController
             }
         }
         
-    
+//    var_dump($listarcomentarios);Exit;
         
         $this->layout()->clase = 'Detalle';
         $view->setVariables(array('lista' => $listarecomendacion,'comentarios'=>$listarcomentarios,'form'=>$form,
@@ -368,7 +375,11 @@ class IndexController extends AbstractActionController
     }
     
     public function getCount($val){
-        return $val->count();
+       
+//        $aux=$val->toArray();
+        //var_dump($aux[0]['num']);Exit;
+        
+        return $val->count();//$aux[0]['num'];//
     }
     
        
