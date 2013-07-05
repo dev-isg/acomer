@@ -161,7 +161,7 @@
        </div>         
 
   <div id="mapa-buscador">
-        <div id='map' style="height:800px;"></div>
+<!--        <div id='map' style="height:800px;"></div>-->
  </div>
 
 
@@ -203,6 +203,7 @@
        
 
        $(".map").on("click",function(){
+             $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
          var map;
            var mcOptions = { maxZoom: 12};
              map = new GMaps({
@@ -216,7 +217,7 @@
        });
        
      $('#esconder').css("display","none");
-
+$('#mapa-buscador').css("display","block");
      var plato=$('#bubi #q').val();
      var dis=$('#bubi #fq').val();
 
@@ -244,6 +245,7 @@
              });
 
          });
+        
      });
      
    });
