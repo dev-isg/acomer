@@ -86,7 +86,7 @@ class ComentariosController extends AbstractActionController
             
     {
         $va_email = $this->params()->fromRoute('va_nombre_cliente', 0);
-        $va_nombre_cliente = $this->params()->fromRoute('va_email',0);
+        $va_nombre_cliente = $this->params()->fromRoute('email',0);
         $bodyHtml='<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
                                                <head>
                                                <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
