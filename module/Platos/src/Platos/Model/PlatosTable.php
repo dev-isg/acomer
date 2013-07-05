@@ -378,7 +378,7 @@ class PlatosTable
         $sql = new Sql($adapter);
         $selecttot = $sql->select()
             ->from('ta_plato')
-            ->columns(array('*','num' => new \Zend\Db\Sql\Expression('COUNT(tc.in_id)')))
+//            ->columns(array('*','num' => new \Zend\Db\Sql\Expression('COUNT(tc.in_id)')))
 //            ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array(),'left')
 //            ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
 //            ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array(), 'left')
@@ -388,7 +388,7 @@ class PlatosTable
             ->join(array('tcli'=>'ta_cliente'),'tcli.in_id=tc.ta_cliente_in_id',array('va_nombre_cliente','va_email'),'left')
 
             ->where(array('ta_plato.in_id'=>$idplato));
-            $selecttot->group('ta_plato.in_id');
+//            $selecttot->group('ta_plato.in_id');
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
 //            var_dump($selectString);Exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);

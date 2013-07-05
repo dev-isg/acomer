@@ -102,10 +102,10 @@
    					<div class="comentarios-one">
    						<ul>
  
-                        <?php                  
-                        
+                        <?php //                  var_dump($this->lista[0]['Ta_puntaje_in_id']);exit;
+                                            if($this->lista[0]['Ta_puntaje_in_id']!=0){
                                                 foreach ($this->comentarios  as $comt) : 
-                                                    if($comt->num!=0){
+                                                    
                                                     ?>
                                                     
 	   							<li>
@@ -125,8 +125,9 @@
 	   								</div>
 	   							</li>
                            <?php 
-                                                    }
-                           endforeach;?>
+                                                    
+                           endforeach;
+                                            }?>
    						</ul>
    					</div>
    				</div>
