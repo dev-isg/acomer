@@ -3,7 +3,7 @@ namespace Application\Form;
 
 use Zend\Form\Form;
 
-class solicitaForm extends Form
+class Solicita extends Form
 {
     public function __construct($name = null)
     {
@@ -11,11 +11,11 @@ class solicitaForm extends Form
         parent::__construct('application');
         $this->setAttribute('method', 'post');
         $this->add(array(
-            'name' => 'id',
+            'name' => 'in_id',
             'type' => 'Hidden',
         ));
         $this->add(array(
-            'name' => 'nombre',
+            'name' => 'nombre_complet',
             'type' => 'Text',
             'options' => array(
                 'label' => 'nombre',
@@ -66,7 +66,7 @@ class solicitaForm extends Form
             'name' => 'submit',
             'type' => 'Submit',
             'attributes' => array(
-                'value' => 'Go',
+                'value' => 'Enviar',
                 'id' => 'submitbutton',
             ),
         ));

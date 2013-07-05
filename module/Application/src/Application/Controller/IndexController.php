@@ -14,6 +14,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql;
 use Application\Form\Formularios;
+use Application\Form\Solicita;
 use Application\Model\Entity\Procesa;
 use Application\Model\Usuario;
 use Application\Model\Entity\Album;
@@ -321,7 +322,7 @@ class IndexController extends AbstractActionController
     public function nosotrosAction(){
         $view = new ViewModel();
         $this->layout('layout/layout-portada');
-        $this->layout()->clase = 'Home';
+        $this->layout()->clase = 'Nosotros';
 //        $view->setVariables(array());
 //         return $view;
         
@@ -329,13 +330,16 @@ class IndexController extends AbstractActionController
         public function solicitaAction(){
                     $view = new ViewModel();
         $this->layout('layout/layout-portada');
-        $this->layout()->clase = 'Home';
+        $this->layout()->clase = 'Solicita';
+        $form=new Solicita("form");
+        $view->setVariables(array('form' => $form));
+         return $view;
         
     }
         public function terminosAction(){
                 $view = new ViewModel();
         $this->layout('layout/layout-portada');
-        $this->layout()->clase = 'Home';
+        $this->layout()->clase = 'Terminos';
     }
     
     
