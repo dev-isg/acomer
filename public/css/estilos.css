@@ -177,6 +177,7 @@ cursor: pointer;
   width: 95%;
   height: 350px;
   margin: 0 auto;
+  display:none;
   -moz-box-shadow: 0px 5px 20px #ccc;
   -webkit-box-shadow: 0px 5px 20px #ccc;
   box-shadow: 0px 5px 20px #ccc;
@@ -243,15 +244,7 @@ text-align: center;
   font-style: italic;
   font-weight: normal;
 }
-#map{
-  display: block;
-  width: 95%;
-  height: 350px;
-  margin: 0 auto;
-  -moz-box-shadow: 0px 5px 20px #ccc;
-  -webkit-box-shadow: 0px 5px 20px #ccc;
-  box-shadow: 0px 5px 20px #ccc;
-}
+
 .arrow {
 width: 100%;
 text-align: center;
@@ -322,7 +315,7 @@ border-radius: 0px;
 .verlistado {
 border: 0;
 background:url(../img/lupa2.png) no-repeat;
-padding: 15px 16px;
+padding: 19px 16px;
 margin-left: -4px;
 }
 .lateral{
@@ -1004,21 +997,28 @@ li.li-suc a.activo span.close-banch{
   float: right;
   color: #7b7b7b;
   font-size: 14px;
+  background: url(../img/phone.png) no-repeat 0 3px;
+  padding-left: 16px;
 }
 .phone span.text-ellipsis{
   float: left;
   color: #7b7b7b;
-  font-size: 14px; 
+  font-size: 14px;
+  background: url(../../img/city.png) no-repeat 0 2px;
+  padding-left: 18px;
 }
 li.li-suc a header{
   float: left;
 }
 .descr{
   float: left;
+  width: 100%;
 }
 .descr li.text-ellipsis{
   color: #7b7b7b;
   font-size: 14px;
+  background: url(../../img/ubicacion.png) no-repeat 0 2px;
+  padding-left: 18px;
 }
 ul.servicios-desc{
   list-style:none;

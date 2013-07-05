@@ -103,7 +103,7 @@ class IndexController extends AbstractActionController
                      }
                      $form->setMessages(array('imagen'=>$error ));
           } else {
-                $adapter->setDestination('C:\xampp\htdocs\acomer\public\imagenes');
+                $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
                //  $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
                   if ($adapter->receive($File['name'])) {
                         $restaurante->exchangeArray($form->getData());
@@ -172,9 +172,9 @@ class IndexController extends AbstractActionController
                $File = $this->params()->fromFiles('va_imagen');
                
                 $adapter = new \Zend\File\Transfer\Adapter\Http();
-                //$adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
+                $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
                 
-               //  $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
+                $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
                   if ($adapter->receive($File['name'])) { //echo 'dddds';exit;
                         //$restaurante->exchangeArray($form->getData());
                          $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
