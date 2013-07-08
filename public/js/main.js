@@ -422,7 +422,7 @@ $(".eli-lo").on("click",function(){
   type: "POST",
   data: {id: id, estado:es}  
   });
-.location.reload();
+location.reload();
  
  
 });
