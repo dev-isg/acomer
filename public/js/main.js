@@ -238,7 +238,6 @@ $(elemento).validate({
 }
 validar('#usuario');
 
-   $('#address').val("");
     $('#va_direccion').keyup(function () {
      var value = $(this).val();
     $('#address').val("");
@@ -272,6 +271,11 @@ $.getJSON('/local/index/jsondepartamento',function(data){
                 $('#provincia').append( "<option value=" + val.in_idprov + " >" + val.ch_provincia + " </option>");                                
                       });  
      });
+      var value = $("#va_direccion").val();   
+     var d = $("#distrito option:selected").text();
+     var p = $("#provincia option:selected").text();
+     var pa = $("#pais option:selected").text();
+     $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
 });
 
   $("#provincia").change(function(evento){
@@ -289,6 +293,11 @@ $.getJSON('/local/index/jsondepartamento',function(data){
            
           });  
      });
+      var value = $("#va_direccion").val();   
+     var d = $("#distrito option:selected").text();
+     var p = $("#provincia option:selected").text();
+     var pa = $("#pais option:selected").text();
+     $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
 });
 
 //mapa
@@ -298,7 +307,7 @@ var map;
 function load_map() {
     var myLatlng = new google.maps.LatLng(-12.055345316962327, -77.04518530000001);
     var myOptions = {
-        zoom: 12,
+        zoom: 15,
         center: myLatlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
