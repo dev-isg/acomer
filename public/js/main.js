@@ -590,7 +590,7 @@ $('.check_rest').mousedown(function() {
   var request = $.ajax({
   url: "/platos/index/eliminar?id="+user "&estado=" + est,
   type: "POST",
-  data: {id: user} 
+  data: {id: user, estado=est} 
   });
 });
 
