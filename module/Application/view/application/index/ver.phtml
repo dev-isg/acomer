@@ -24,8 +24,10 @@ echo $this->form()->closeTag(); ?>
 
 
                     
-
-
+<div id="esconder">
+<div class="sub" style="margin-top: 10px;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;">
+            <span  style="padding-left: 10px;color:white;font-weight: bold;">Destacados <?php echo $_REQUEST['q']; ?> </span>
+        </div>
       <div class="contenido-bus">
  <?php 
                 foreach ($this->hola as $doc)
