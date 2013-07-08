@@ -62,16 +62,13 @@
                         <OPTION value=""></OPTION>
                            <?php  foreach ($this->distritos as $distritos) : 
                                if($distritos['ch_distrito']=='LIMA')
-                                   {
-                                   ?>
-                       
+                          {?>                      
                          <option selected value="LIMA">LIMA</option> 
-                             <?php
-                         
-                               }else
-                               
-                         { ?> <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
-                          <?php }?>
+                          <?php                        
+                          }    else                               
+                          {?> <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
+                          <?php                         
+                          }?>
                           <?php endforeach; ?>
 
                          </SELECT>
