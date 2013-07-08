@@ -71,7 +71,7 @@ echo $this->formHidden($form->get('h_distrito'));
   </div>
 </div>
 <div class="row-fluid">
-<div class="control-group span12" id="mostrar_map"><div id='map_canvas' style="display:block;height:200px;width:100%;"></div> </div></div>
+<div class="control-group span12" id="mostrar_map" style="display:block;"><div id='map_canvas' style="display:block;height:200px;width:800px;"></div> </div></div>
 <div class="row-fluid">
 <div class="control-group span12"><?php echo $this->formSubmit($form->get('submit'));?></div></div>
 <div class="control-group span5 "><?php echo $this->formRow($form->get('de_latitud'));?></div>
@@ -129,7 +129,7 @@ echo $this->formHidden($form->get('h_distrito'));
                   $("#distrito" +" option[value=" +dis +"]").attr("selected","selected");
           });  
      });
-
+$("#address").val("");
      var value = $("#va_direccion").val();   
      var d = $("#distrito option:selected").text();
      var p = $("#provincia option:selected").text();
