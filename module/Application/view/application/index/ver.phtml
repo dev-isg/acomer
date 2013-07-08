@@ -166,7 +166,18 @@ $('#buscarmap').hide();
        $("#buscarmap").on("click",function(){
         $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
          var map;
-           var mcOptions = { maxZoom: 12};
+          
+       
+     $('#esconder').css("display","none");
+    
+     var plato=$('#bubi #q').val();
+     var dis=$('#bubi #fq').val();
+
+     var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
+     console.log(url);
+   
+     var prueba=$.getJSON( url, function(data) {
+       var mcOptions = { maxZoom: 12};
              map = new GMaps({
                el: '#map',
                zoom: 14,
@@ -176,16 +187,6 @@ $('#buscarmap').hide();
            return new MarkerClusterer(map,mcOptions);
          }
        });
-       
-     $('#esconder').css("display","none");
-    
-     var plato=$('#bubi #q').val();
-     var dis=$('#bubi #fq').val();
-
-     var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
-     console.log(url);
-     if ( ($('#bubi #q').val() != "") && ($('#bubi #fq').val()!="") ){
-     var prueba=$.getJSON( url, function(data) {
              $.each( data.response.docs, function(i, marker) {
                  map.setCenter(marker.latitud,marker.longitud );
                   console.log(marker);
@@ -212,11 +213,9 @@ $('#buscarmap').hide();
          $("#mapa-buscador").hide();
          $("#contenido-plato").append('<p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti.</p><p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p>');
     });
-   }else {
-    alert("error");
-   }
+ 
         
-     });
-     
+    
+  
    });
  </script>
