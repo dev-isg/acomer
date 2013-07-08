@@ -16,6 +16,7 @@ use Zend\Json\Json;
 use Platos\Model\Platos;
 use Platos\Model\PlatosTable; 
 use Platos\Form\PlatosForm; 
+use Application\Form\Formularios; 
 use Zend\Form\Element;
 use Zend\Validator\File\Size;
   
@@ -327,6 +328,8 @@ class IndexController extends AbstractActionController
 //        $view->setTerminal(true);
         $this->layout('layout/layout-portada');
         $id=$this->params()->fromQuery('id');
+        $plato=$this->params()->fromQuery('q');
+       // var_dump($plato);exit;
         $listarecomendacion=$this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();
         $listarcomentarios=$this->getPlatosTable()->getComentariosxPlatos($id);//->toArray();
         $servicios=$this->getPlatosTable()->getServicioxPlato($id);
@@ -349,12 +352,40 @@ class IndexController extends AbstractActionController
         
 //    var_dump($listarcomentarios);Exit;
         
+        
+        $formu = new Formularios();
+        $comidas =  $this->joinAction()->toArray();
+        $com = array();
+        foreach($comidas as $y){
+            $com[$y['ch_distrito']] = $y['ch_distrito'];
+        }
+        $formu->get('distrito')->setValueOptions($com);
+        $formu->get('q')->setValue($plato);
+        $formu->get('submit')->setValue('');
         $this->layout()->clase = 'Detalle';
-        $view->setVariables(array('lista' => $listarecomendacion,'comentarios'=>$listarcomentarios,'form'=>$form,
+        $view->setVariables(array('lista' => $listarecomendacion,'comentarios'=>$listarcomentarios,'form'=>$form,'formu'=>$formu,
                'servicios'=>$servicios,
                'pagos'=>$pagos,'locales'=>$locales,'cantidad'=>$this->getCount($listarcomentarios)));
         return $view;
     }
+    
+        public function joinAction()
+    {  
+        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+       $select = $sql->select();
+        $select->from('ta_ubigeo');
+        $select->where(array('ch_provincia' => 'LIMA'));
+           $selectString = $sql->getSqlStringForSqlObject($select);
+          $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            //var_dump($results);exit;
+            return $results;
+            
+      }
+    
+    
+    
         public function getComentariosTable() {
         if (!$this->comentariosTable) {
             $s = $this->getServiceLocator();

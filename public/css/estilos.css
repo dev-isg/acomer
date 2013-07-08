@@ -198,7 +198,27 @@ cursor: pointer;
   height: 100%;
 
 }
-
+.mensaje{
+font-size: 18px;
+color: #ff8400;
+font-style: italic;
+font-weight: bold;
+padding-bottom: 3px;
+margin: 0;
+margin-top: 10px;
+margin-bottom: 8px;
+line-height: 20px;
+padding-left: 2em;
+}
+.mensaje2{
+font-size: 18px;
+padding-bottom: 3px;
+margin: 0;
+margin-top: 10px;
+margin-bottom: 8px;
+line-height: 20px;
+padding-left: 2em;
+}
 .contenido-busqueda {
   position: fixed;
   top: 0;
@@ -316,8 +336,9 @@ border-radius: 0px;
 .verlistado {
 border: 0;
 background:url(../img/lupa2.png) no-repeat;
-padding: 19px 16px;
+padding: 8px 16px;
 margin-left: -4px;
+line-height: 16px;
 }
 .lateral{
     display: inline-block;

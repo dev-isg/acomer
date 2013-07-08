@@ -1,111 +1,48 @@
- <?php
-                        header('Content-Type: text/html; charset=utf-8');
-                        $limite = 9;    
-                        $resultados = false;
-                        $palabraBuscar = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
-                          $fd = array (  
-                            'fq'=> 'en_estado:activo AND distrito:'.$_REQUEST['fq'],
-                              'sort'=>'en_destaque desc',
-                              ); 
-                        if ($palabraBuscar)
-                        { 
-                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-                          $solar = new Apache_Solr_Service('192.168.1.44', 8983, '/solr/');
-                          if (get_magic_quotes_gpc() == 1)
-                          {
-                            $palabraBuscar = stripslashes($palabraBuscar);
-                          }
-                          try
-                          {
-                            $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
 
-                          }
-                          catch (Exception $e)
-                          {
-                          
-                                echo("<div>ingrese algun valor</div>");  }
-                        }
-          
-                        $limit = 3;             
-                        $palabraBuscar = isset($_REQUEST['q']) ? $_REQUEST['q'] : false ;
-                        $query = "($palabraBuscar) AND (en_destaque:si)";
-                        $fq = array (  
-                                   'sort'=>'random_' . uniqid() .' asc',
-                            'fq'=> 'en_estado:activo AND distrito:'.$_REQUEST['fq'],
-                            'wt'=>'json');                                              
-                        $results = false;
-                        if ($query)
-                        { 
-                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-                          $solr = new Apache_Solr_Service('192.168.1.44', 8983, '/solr/');
-                          if (get_magic_quotes_gpc() == 1)
-                          {
-                            $query = stripslashes($query);
-                          }
-                          try
-                          {
-                            $results = $solr->search($query, 0, $limit, $fq  );
+<?php
+$form = $this->form;
+//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
 
-                          }
-                          catch (Exception $e)
-                          {
-                          
-                                    echo("<div>ingrese algun valor</div>");         
-                          }
-                        }
+$form->setAttributes(array(
+    'action' => $this->url.'/application/index/detalleubicacion',
+    'method' => 'get'
+));
+$form->prepare();
 
-                        ?>
+echo $this->form()->openTag($form);
+?>
+<?php
+echo $this->formHidden($form->get('in_id'));
+?><?php echo $this->formRow($form->get('distrito'));?><?php
+?><?php echo $this->formRow($form->get('q'));?><?php
 
-                    <form  accept-charset="utf-8" method="get" class="form-horizontal" id="bubi" autocomplete="on" >
-                             
-                 <SELECT name="fq" id="fq" >
-                        <OPTION value=""></OPTION>
-                           <?php  foreach ($this->distritos as $distritos) : 
-                               if($distritos['ch_distrito']=='LIMA')
-                          {?>                      
-                         <option selected value="LIMA">LIMA</option> 
-                          <?php                        
-                          }    else                               
-                          {?> <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
-                          <?php                         
-                          }?>
-                          <?php endforeach; ?>
 
-                         </SELECT>
-               
-                <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>
-                 <button class="verlistado" value="listar" type="submit" ></button>                       
-                <a style="margin-left: 10px;text-decoration: underline;"  href="#" class="map" >Ver Mapa </a>
-                                           
-                       <!-- 
-                         /*   <?php
-                            if ($results)
-                            {
-                              $total = (int) $results->response->numFound;
-                              $start = min(1, $total);
-                              $end = min($limit, $total);
-                            ?> -->
-                              <!-- <div>Resultados <?php echo $start; ?> - <?php echo $end;?> de <?php echo $total; ?>:</div> 
-                                <div>Resultados <?php echo $fq; ?>:</div> -->
-                           
-                        </form> 
+?><?php echo $this->formSubmit($form->get('submit'));?><?php
+?><a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a><?php
+echo $this->form()->closeTag(); ?>
+
+<?php
+ if($this->hola and $this->holas ){
+?>
+
 <div id="esconder">
 <div class="sub" style="margin-top: 10px;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;">
             <span  style="padding-left: 10px;color:white;font-weight: bold;">Destacados <?php echo $_REQUEST['q']; ?> </span>
         </div>
+    <?php  $this->error; ?>
       <div class="contenido-bus">
- <?php 
-                foreach ($results->response->docs as $doc)
+          
+      <?php     foreach ($this->hola as $doc)
                           {
-          ?> 
+            ?> 
                           <div class="plato_r">
                          <input type="hidden" value="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>">
-                       <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
+                          <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                            <div class="mosaic-block cover">
                            <div class="mosaic-overlay"><span><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></span>
                            <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="/img/mas.png" alt="" class="mas">
                            </div>
-                           <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" target="_blank" class="mosaic-backdrop">
+                           <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>&q=<?php echo $_REQUEST['q']; ?>"  class="mosaic-backdrop">
                              <div class="details">
                                  <h4><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></h4>
                                  <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
@@ -126,25 +63,20 @@
 
 
                       <?php
-                          }
-                      ?>   
+                          } 
+                          
+                        ?>   
                 
-                      <?php
-                      }  else 
-                           {
-                         // echo 'no existen resultados para su busqueda';   
-                           }
-                      ?>  
+                  
                             
                         </div>
                
                             
         <div class="sub" style="margin-top: 1em;margin-bottom: 2em;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;">
             <span style="padding-left: 10px;color:white;font-weight: bold;">Resultados <?php echo $_REQUEST['q']; ?> </span>
-        </div>                    
-                                              
-                  <?php 
-                foreach ($resultados->response->docs as $doc)
+        </div>    <?php   
+       
+                  foreach ($this->holas as $doc)
                           {
                       ?> 
 
@@ -152,7 +84,7 @@
                          <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                          <div class="lateral" >
                           <img src="/img/mas.png" alt="" class="mas-det">
-                          <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" target="_blank" >
+                          <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"  >
                                <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="width: 144px;height: 120px;">
                           </a>
                           </div>
@@ -170,18 +102,33 @@
                       <?php
                           }
                       ?>   
-          </div>      
- <div id="mapa-buscador">
+       </div>         
+
+  <div id="mapa-buscador">
 <!--        <div id='map' style="height:800px;"></div>-->
  </div>
 
-
+                     <?php
+                          }  else 
+                              {
+                              ?><div id='error'>       <p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti."</p><p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p> <div><?php
+                              
+                              }                    
+                       ?> 
 
  <script type="text/javascript">
    var map;
    $(document).ready(function(){
+$('#buscarmap').hide();
+ $('#bubi #q').keyup(function () {
+      if(($(this).val() != "") &&  ($('#bubi #fq').val() != "" )){
+      $('#buscarmap').removeClass("disabled").addClass('map');
+      $('#buscarmap').attr("href","#");
+      $('#buscarmap' ).removeAttr('disabled');
+       $('#buscarmap').fadeIn();
+      }   }).keyup();
 
-         var puntaje = function(item,p){
+  var puntaje = function(item,p){
      $(item).raty({ 
                     readOnly: true,
                     score: p, 
@@ -212,10 +159,9 @@
          }
         });
        
-   
-       $(".map").on("click",function(){
-       
-            $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
+
+       $("#buscarmap").on("click",function(){
+        $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
          var map;
            var mcOptions = { maxZoom: 12};
              map = new GMaps({
@@ -229,12 +175,13 @@
        });
        
      $('#esconder').css("display","none");
-$('#mapa-buscador').css("display","block");
+    
      var plato=$('#bubi #q').val();
      var dis=$('#bubi #fq').val();
 
      var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
      console.log(url);
+     if ( ($('#bubi #q').val() != "") && ($('#bubi #fq').val()!="") ){
      $.getJSON( url, function(data) {
              $.each( data.response.docs, function(i, marker) {
                  map.setCenter(marker.latitud,marker.longitud );
@@ -248,7 +195,7 @@ $('#mapa-buscador').css("display","block");
              },
                    title: marker.restaurante ,
                    infoWindow: {
-                           content: marker.name + '</br> <a href=/platos/index/verplatos?id=' + marker.id +'>ver plato </a>'
+                           content: marker.name + '</br> <a href=/platos/index/verplatos?id=' + marker.id +'&q=' + plato +'>ver plato </a>'
                          }
 
                  });
@@ -257,6 +204,14 @@ $('#mapa-buscador').css("display","block");
              });
 
          });
+   }else{
+ $("#mapa-buscador").hide();
+ w
+alert("debe ingresar el plato");
+
+
+ }
+        
      });
      
    });
