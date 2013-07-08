@@ -141,7 +141,7 @@ class PlatosTable
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);                      
             $plato=$results->toArray();
             require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-                                $solr = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr');  
+                                $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr');  
                                            if ($solr->ping())
                                         {
                                             //  $solr->deleteByQuery('*:*');
@@ -196,7 +196,7 @@ class PlatosTable
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);                      
             $plato=$results->toArray(); 
             require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-                                $solr = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr');  
+                                $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr');  
                                            if ($solr->ping())
                                         {
                                              $solr->deleteByQuery('id:'.$id);

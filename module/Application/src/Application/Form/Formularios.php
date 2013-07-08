@@ -14,134 +14,110 @@ use Zend\Form\Factory;
 use  Application\Controller\IndexController;
 
 
+
 class Formularios extends Form
 {
     public function __construct($name = null)
-     {
-        parent::__construct($name);
+    {
+        // we want to ignore the name passed
+        parent::__construct('bubi');
+        $this->setAttribute('method', 'post');
+     
         
+       $this->add(array(
+            'name' => 'in_id',
+            'type' => 'Hidden',
+        ));
         $this->add(array(
-            'name' => 'nombre',
-            'options' => array(
-                'label' => 'Nombre Completo',
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'class' => 'input'
+            'name' => 'q',
+            'type' => 'Text',
+         
+            'attributes' => array(               
+                
+                'id'   => 'q',
+                'placeholder'=>'Ingrese su nombre'
             ),
         ));
-        
-         $factory = new Factory();
-         
-         $apellido = $factory->createElement(array(
-            'type' => 'Zend\Form\Element\Text',
-            'name' => 'apellido',
+        $this->add(array(
+            'name' => 'va_apellidos',
+            'type' => 'Text',
+              'attributes' => array(               
+                'class' => 'span10',
+                'id'   => 'va_apellidos',
+                'placeholder'=>'Ingrese su Apellido'
+            ),
             'options' => array(
-                'label' => 'apellido',
+                'label' => 'Apellidos',
             ),
-            'attributes' => array(
-                
-                'class' => 'input'
+        ));
+        $this->add(array(
+            'name' => 'va_email',
+            'type' => 'Email',
+            'attributes' => array(               
+                'class' => 'span10',
+                'id'   => 'va_email',
+                'placeholder'=>'Ingrese su Correo'
             ),
-                ));
-
-        $this->add($apellido);
-        $email = $factory->createElement(array(
-            'type' => 'Zend\Form\Element\Email',
-            'name' => 'email',
             'options' => array(
                 'label' => 'Correo',
             ),
-            'attributes' => array(
-                
-                'class' => 'input'
-            ),
-                ));
-
-        $this->add($email);
-        //botón enviar
-       // $this->add(new Element\Csrf('security'));
-        $this->add(array(
-            'name' => 'send',
-            'attributes' => array(
-                'type' => 'submit',
-                'value' => 'Enviar',
-                'title' => 'Enviar'
-            ),
         ));
         
-        //campo de tipo password
-         $this->add(array(
-            'name' => 'pass',
+       // $echo = new IndexController();
+       //$echo->rolesAction();
+        $this->add(array(
+            'name' => 'distrito',
+            'type' => 'Select',
+             'attributes' => array(               
+              
+                'id'   => 'fq'
+            ),
+           'options' => array(
+                   
+                  'value_options' => array(
+                          '' => 'selecccione :',
+                                               
+                     ),
+             )
+        ));
+        
+        
+  
+     
+        $this->add(array(
+            'name' => 'va_contrasenia',
+            'type' => 'Password',
+             'attributes' => array(               
+                'class' => 'span10',
+                'id'   => 'va_contrasenia',
+                 'placeholder'=>'Ingrese su Password'
+            ),
             'options' => array(
                 'label' => 'Password',
             ),
-            'attributes' => array(
-                'type' => 'password',
-                'class' => 'mama'
+        ));
+        $this->add(array(
+            'name' => 'va_contrasenia2',
+            'type' => 'password',
+             'attributes' => array(               
+                'class' => 'span10',
+                'id'   => 'va_contrasenia2',
+                 'placeholder'=>'Repita su Password'
+            ),
+            'options' => array(
+                'label' => 'Repita su Password',
             ),
         ));
-        // File Input
-        $file = new Element\File('image-file');
-        $file->setLabel('Suba su foto')
-             ->setAttribute('id', 'image-file');
-        $this->add($file);
-        //radio button
-        $radio = new Element\Radio('genero');
-         $radio->setLabel('Cuál es tu género ?');
-         
-         $this->add($radio);
-    //select
-    $select = new Element\Select('lenguaje');
-     $select->setLabel('Cuál en tu lengua materna?');
-     $select->setAttribute('multiple', true);
-    //$select->setEmptyOption('Seleccione...');
-    $this->add($select);
+        
 
-    
-    
-      $pais = $factory->createElement(array(
-            'type' => 'Zend\Form\Element\Text',
-            'name' => 'rol',
-            'options' => array(
-                'label' => 'rol',
-            ),
+        $this->add(array(
+            'name' => 'submit',
+            'type' => 'Submit',
             'attributes' => array(
-                
-                'class' => 'input'
+                'value' => 'Go',
+                'class' => 'verlistado',
+                'id' => 'submitbutton',
             ),
-                ));
-
-        $this->add($pais);
-        
-        
-    
-      /* $pais = new Element\Select('rol');
-       $pais->setLabel('Cuál es tu rol?');
-       $pais->setEmptyOption('Seleccione...');
-       $pais->setValueOptions(array(
-      'european' => array(
-         'options' => array(
-            '1' => 'administrador',
-            '2' => 'editor',
-         ),
-      ),
-
-     ));
-     $this->add($pais);*/
-        //campo oculto
-        $oculto = new Element\Hidden('oculto');
-        $this->add($oculto);
-     // checkbox
-        $condiciones = new Element\Checkbox('condiciones');
-        $condiciones->setLabel('Acepto Las Condiciones');
-        $this->add($condiciones);
-     //multicheckbox
-        $preferencias = new Element\MultiCheckbox('preferencias');
-        $preferencias->setLabel('Indique sus preferencias');
-        $this->add($preferencias);
-     
-     }
+        ));
+    }
 }
-
-?>
