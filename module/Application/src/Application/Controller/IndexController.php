@@ -101,6 +101,13 @@ class IndexController extends AbstractActionController
                             'fq'=> 'en_estado:activo AND distrito:'.$distrito,
                               'sort'=>'en_destaque desc',
                               ); 
+                          
+                        if($palabraBuscar == '')    
+                        {
+//                              echo 'eee';
+                             $this->redirect()->toUrl('/application/index/ver?q='.$palabra);
+//                              
+                          }   
                         if ($palabraBuscar)
                         { 
                           require './vendor/SolrPhpClient/Apache/Solr/Service.php';
@@ -118,8 +125,15 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                echo("<div>ingrese algun valor</div>");  }
+                                echo("<div>ingrese algun valor</div>"); 
+                           }
+                                
                         }
+                          if($resultados=='')
+                                  { 
+                                 $error ='nohay datos';   
+                                      
+                                  }
           
                         $limit = 3;             
                         $palabraBuscar = isset($palabra) ? $palabra : false ;
@@ -161,7 +175,7 @@ class IndexController extends AbstractActionController
         $form->get('q')->setValue($palabra);
          $form->get('distrito')->setValueOptions($com);
          $form->get('submit')->setValue('');
-         $view->setVariables( array('hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form));
+         $view->setVariables( array('hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'error'=>$error));
        return $view;
       }
     
@@ -179,16 +193,8 @@ class IndexController extends AbstractActionController
                             'fq'=>'en_estado:activo');
                           if($palabraBuscar== '')
                           {
-           
-                              
-                             $view->setVariables( array('mama'=>'Lamentamos no haber encontrado lo que estabas buscando pero tenemos
-//                                        muchas mas opciones para ti.También tenemos una opción para que nos escribas si deseas registrar
-//                                        un nuevo plato.'));
-//                               
-////                               $view->setVariables( array('mama'=>'Lamentamos no haber encontrado lo que estabas buscando pero tenemos
-////                                        muchas mas opciones para ti.También tenemos una opción para que nos escribas si deseas registrar
-////                                        un nuevo plato.'));
-   $this->redirect()->toUrl('/application');
+
+                   $this->redirect()->toUrl('/application');
                           }
                         if ($palabraBuscar)
                         { 
@@ -209,9 +215,7 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                               echo("<div id='resultados'>Lamentamos no haber encontrado lo que estabas buscando pero tenemos
-                                        muchas mas opciones para ti.También tenemos una opción para que nos escribas si deseas registrar
-                                        un nuevo plato. </div>");  }
+                             }
                         }
           
                         $limit = 3;             
