@@ -194,7 +194,9 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                echo("<div>ingrese algun valor</div>");  }
+                               echo("<div id='resultados'>Lamentamos no haber encontrado lo que estabas buscando pero tenemos
+                                        muchas mas opciones para ti.También tenemos una opción para que nos escribas si deseas registrar
+                                        un nuevo plato. </div>");  }
                         }
           
                         $limit = 3;             
@@ -220,7 +222,9 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                   echo("<div>ingrese algun valor</div>");       
+                                  echo("<div id='resultados'>Lamentamos no haber encontrado lo que estabas buscando pero tenemos
+                                        muchas mas opciones para ti.También tenemos una opción para que nos escribas si deseas registrar
+                                        un nuevo plato. </div>");       
                           }
           }
           //var_dump($results->response->docs);exit;
@@ -233,7 +237,7 @@ class IndexController extends AbstractActionController
         $form->get('distrito')->setValueOptions($com);
         //$form->get('q')->setValue($texto);
         $form->get('submit')->setValue('');
-        $view->setVariables( array('hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form));
+        $view->setVariables( array('hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'nombre'=>$texto));
      
     
         // $distritos=$this->josAction();
@@ -272,8 +276,9 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
-                          }
+                                echo("<div id='resultados'>Lamentamos no haber encontrado lo que estabas buscando pero tenemos
+                                        muchas mas opciones para ti.También tenemos una opción para que nos escribas si deseas registrar
+                                        un nuevo plato. </div>");  }
                         }
   $distritos=$this->josAction();
                  
@@ -298,7 +303,7 @@ class IndexController extends AbstractActionController
                         if ($palabraBuscar)
                         { 
                           require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-                          $solar = new \Apache_Solr_Service('192.168.1.44', 8983, '/solr/');
+                          $solar = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
                           if (get_magic_quotes_gpc() == 1)
                           {
                             $palabraBuscar = stripslashes($palabraBuscar);
@@ -310,7 +315,9 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                echo("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");          
+                                echo("<div id='resultados'>Lamentamos no haber encontrado lo que estabas buscando pero tenemos
+                                        muchas mas opciones para ti.También tenemos una opción para que nos escribas si deseas registrar
+                                        un nuevo plato. </div>");          
                           }
                         }
                      
