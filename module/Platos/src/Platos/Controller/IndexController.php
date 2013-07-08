@@ -330,13 +330,14 @@ class IndexController extends AbstractActionController {
         $request = $this->getRequest();
 
         $cookie = new \Zend\Http\Cookies();
+        $cookie->id=0;
 //        $cookie->addCookie('id');
 //        $cookie = $this->getResponse()->getCookie();
        
         if ($request->isPost()) {
-            
+            var_dump($cookie->id);
 //            $form->setInputFilter($inputFilter);
-         if (isset()) { //  if (empty($cookie->id) || $cookie->id == null) {
+         if ($cookie->id==0) { //  if (empty($cookie->id) || $cookie->id == null) {
 
                 $datos = $this->getRequest()->getPost()->toArray();
 //                $filter->filter($datos['tx_descripcion']);
@@ -347,9 +348,9 @@ class IndexController extends AbstractActionController {
                 if ($form->isValid()) {
 //                    var_dump($form->getData());
                     $this->getComentariosTable()->agregarComentario($form->getData());
-//                    $cookie->id = $id;
+                    $cookie->id = $id;
                     
-                    var_dump($cookie->id);Exit;
+                    var_dump($cookie->id);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/platos/index/verplatos?id=' . $id);
                 }
 //               var_dump($form->getValue('tx_descripcion'));exit;

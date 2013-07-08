@@ -98,7 +98,7 @@ class IndexController extends AbstractActionController
                         $resultados = false;
                         $palabraBuscar = isset($palabra) ? $palabra : false ;
                           $fd = array (  
-                            'fq'=> 'en_estado:activo AND distrito:'.$distrito,
+                            'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
                               'sort'=>'en_destaque desc',
                               ); 
                           
@@ -129,18 +129,13 @@ class IndexController extends AbstractActionController
                            }
                                 
                         }
-                          if($resultados=='')
-                                  { 
-                                 $error ='nohay datos';   
-                                      
-                                  }
           
                         $limit = 3;             
                         $palabraBuscar = isset($palabra) ? $palabra : false ;
                         $query = "($palabraBuscar) AND (en_destaque:si)";
                         $fq = array (  
                                    'sort'=>'random_' . uniqid() .' asc',
-                            'fq'=> 'en_estado:activo AND distrito:'.$distrito,
+                            'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
                             'wt'=>'json');                                              
                         $results = false;
                         if ($query)
@@ -190,7 +185,7 @@ class IndexController extends AbstractActionController
                         $resultados = false;
                         $palabraBuscar = isset($texto) ? $texto : false ;
                           $fd = array (  
-                            'fq'=>'en_estado:activo');
+                            'fq'=>'en_estado:activo AND restaurant_estado:activo');
                           if($palabraBuscar== '')
                           {
 
@@ -223,7 +218,7 @@ class IndexController extends AbstractActionController
                         $query = "($palabraBuscar) AND (en_destaque:si)";
                         $fq = array (  
                                    'sort'=>'random_' . uniqid() .' asc',
-                            'fq'=>'en_estado:activo');                                              
+                            'fq'=>'en_estado:activo AND restaurant_estado:activo');                                           
                         $results = false;
                         if ($query)
                         { 
@@ -241,9 +236,7 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                  echo("<div id='resultados'>Lamentamos no haber encontrado lo que estabas buscando pero tenemos
-                                        muchas mas opciones para ti.También tenemos una opción para que nos escribas si deseas registrar
-                                        un nuevo plato. </div>");       
+                                   echo("<div>ingrese algun valor</div>");       
                           }
           }
           //var_dump($results->response->docs);exit;
@@ -276,7 +269,7 @@ class IndexController extends AbstractActionController
                         $palabraBuscar = isset($plato) ? $plato : false ;
                         $list = 1000;
                           $fd = array (  
-                            'fq'=> 'en_estado:activo AND distrito:'.$distrito,
+                            'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
                               'sort'=>'en_destaque desc',
                               'fl'=>'latitud,longitud,restaurante,name,plato_tipo',
                               'wt'=>'json');      
@@ -295,9 +288,7 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                echo("<div id='resultados'>Lamentamos no haber encontrado lo que estabas buscando pero tenemos
-                                        muchas mas opciones para ti.También tenemos una opción para que nos escribas si deseas registrar
-                                        un nuevo plato. </div>");  }
+                                 echo("<div>ingrese algun valor</div>");   }
                         }
   $distritos=$this->josAction();
                  
@@ -315,9 +306,9 @@ class IndexController extends AbstractActionController
                         $palabraBuscar = isset($plato) ? $plato : false ;
                         $list = 1000;
                           $fd = array (  
-                            'fq'=> 'en_estado:activo AND distrito:'.$distrito,
+                            'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
                               'sort'=>'en_destaque desc',
-                              'fl'=>'id,latitud,longitud,restaurante,name,plato_tipo',
+                              'fl'=>'id,latitud,longitud,restaurante_estado,restaurante,name,plato_tipo',
                               'wt'=>'json');      
                         if ($palabraBuscar)
                         { 
@@ -334,10 +325,16 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                echo("<div id='resultados'>Lamentamos no haber encontrado lo que estabas buscando pero tenemos
-                                        muchas mas opciones para ti.También tenemos una opción para que nos escribas si deseas registrar
-                                        un nuevo plato. </div>");          
+                                 die("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");
+          
                           }
+                          if($resultados == '')
+                              
+                          {
+                             echo 'error en busqueda' ;exit;
+                          }
+                          else  {echo $resultados->getRawResponse(); 
+                    exit;}                        
                         }
                      
                          echo $resultados->getRawResponse(); 
