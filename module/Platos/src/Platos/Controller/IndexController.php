@@ -330,9 +330,16 @@ class IndexController extends AbstractActionController {
         $request = $this->getRequest();
 
         $cookie = new \Zend\Http\Cookies();
-        $cookie->id=0;
-//        $cookie->addCookie('id');
 //        $cookie = $this->getResponse()->getCookie();
+        $cookie->id=0;
+        var_dump($cookie);
+        if(!$cookie->id){
+             var_dump('vacio');exit;
+        }else{var_dump('lleno');exit;}
+       
+        
+        
+
        
         if ($request->isPost()) {
             var_dump($cookie->id);
