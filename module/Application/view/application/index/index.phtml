@@ -12,34 +12,32 @@
       <ul>
          <?php  foreach ($this->lista  as $list) : ?>
           <li>
-               <div class="plato_r">
-                    <input type="hidden" value="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>">
-                    <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>">
-                     <div class="mosaic-block cover">
-                     <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
-                     <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
-                     </div>
-                     <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>" class="mosaic-backdrop">
-                       <div class="details">
-                           <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
-                           <p class="title-details" style="font-weight: bold;">Ingredientes</p>
-                           <p class="desc-plato" style="font-size:0.9em;"> <?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
-                       </div>
-                   </a>
-                       </div>
-                  <div class="foo">
-                    <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8'); ?></p>
-                    <div class="pt">
-                      <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
-                      <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
-                      <div class="punt">
-                        <div class="puntuaciones c<?php echo $list->Ta_puntaje_in_id;?>"></div>
-                      </div>
-                    </div>
+            <div class="plato_r">
+              <div class="mosaic-block cover">
+                <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
+                <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                </div>
+                <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>" class="mosaic-backdrop">
+                <div class="details">
+                  <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
+                  <p class="title-details" style="font-weight: bold;">Ingredientes</p>
+                  <p class="desc-plato" style="font-size:0.9em;"> <?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
+                </div>
+               </a>
+              </div>
+              <div class="foo">
+                <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8'); ?></p>
+                <div class="pt">
+                  <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
+                  <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
+                  <div class="punt">
+                    <div class="puntuaciones c<?php echo $list->Ta_puntaje_in_id;?>"></div>
                   </div>
-               </div>
-              </li>
-          <?php endforeach; ?>   
+                </div>
+              </div>
+            </div>
+          </li>
+        <?php endforeach; ?>   
       </ul>
     </div>
      
@@ -47,40 +45,38 @@
      
     <div class="sub" id="cate-home">
       <div class="content-etiqueta-home">
-        <p>Platos destacados</p>
+        <p>Más platos destacados</p>
       </div>
     </div>
     <div class="recomendados-platos">
       <ul>       
          <?php  foreach ($this->listaseg  as $list) : ?>
           <li>
-               <div class="plato_r">
-                    <input type="hidden" value="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>">
-                    <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>">
-                     <div class="mosaic-block cover">
-                     <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
-                     <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
-                     </div>
-                     <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>" class="mosaic-backdrop">
-                       <div class="details">
-                           <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
-                           <p style="font-weight: bold;">Ingredientes</p>
-                           <p style="font-size:0.9em;"> <?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
-                       </div>
-                   </a>
-                       </div>
-                  <div class="foo">
-                    <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8'); ?></p>
-                    <div class="pt">
-                      <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
-                      <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
-                      <div class="punt">
-                        <div class="puntuaciones c<?php echo $list->Ta_puntaje_in_id;?>"></div>
-                      </div>
-                    </div>
+            <div class="plato_r">
+                <div class="mosaic-block cover">
+                 <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
+                 <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                 </div>
+                 <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>" class="mosaic-backdrop">
+                   <div class="details">
+                       <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
+                       <p style="font-weight: bold;">Ingredientes</p>
+                       <p style="font-size:0.9em;"> <?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
+                   </div>
+               </a>
+              </div>
+              <div class="foo">
+                <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8'); ?></p>
+                <div class="pt">
+                  <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
+                  <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
+                  <div class="punt">
+                    <div class="puntuaciones c<?php echo $list->Ta_puntaje_in_id;?>"></div>
                   </div>
-               </div>
-              </li>
+                </div>
+              </div>
+           </div>
+          </li>
           <?php endforeach; ?>   
       </ul>
     </div>
@@ -96,33 +92,30 @@
          <?php foreach ($this->listaval  as $list) : ?> 
               <li>
                 <div class="plato_r">
-                    <input type="hidden" value="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>">
-                    <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>">
-                        <div class="mosaic-block cover">
-                          <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8');?></span>
+                  <div class="mosaic-block cover">
+                    <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8');?></span>
+                     <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                     </div>
+                     <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>" class="mosaic-backdrop">
 
-                           <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
-                           </div>
-                           <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>" class="mosaic-backdrop">
-
-                             <div class="details">
-                                 <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
-                                 <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
-                                 <p style="font-size:0.9em;"><?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
-                             </div>
-                         </a>
-                             </div>
-                      <div class="foo">
-                         <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8');?></p>
-                         <div class="pt">
-                             <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
-                             <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
-                              <div class="punt">
-                                <div class="puntuaciones c<?php echo $list->Ta_puntaje_in_id;?>"></div>
-                              </div>
-                         </div>
-                    </div>
-                  </div>  
+                       <div class="details">
+                           <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
+                           <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
+                           <p style="font-size:0.9em;"><?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
+                       </div>
+                   </a>
+                  </div>
+                  <div class="foo">
+                     <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8');?></p>
+                     <div class="pt">
+                        <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
+                        <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
+                        <div class="punt">
+                          <div class="puntuaciones c<?php echo $list->Ta_puntaje_in_id;?>"></div>
+                        </div>
+                     </div>
+                  </div>
+                </div>  
               </li>
     <?php endforeach; ?>      
       </ul>
@@ -140,27 +133,27 @@
   foreach ($this->listault  as $list) : ?>   
         <li>
         <div class="plato_r">
-               <input type="hidden" value="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>">
-               <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($list->Puntaje, ENT_QUOTES, 'utf-8');?>">
-                   <div class="mosaic-block cover">
-                   <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8');?></span>
-                   <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
-                   </div>
-                   <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>" class="mosaic-backdrop">
+          <div class="mosaic-block cover">
+           <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8');?></span>
+           <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+           </div>
+           <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>" class="mosaic-backdrop">
 
-                     <div class="details">
-                         <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
-                         <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
-                         <p style="font-size:0.9em;"><?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
-                     </div>
-                    </a>
-                </div>
+             <div class="details">
+                 <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
+                 <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
+                 <p style="font-size:0.9em;"><?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
+             </div>
+            </a>
+          </div>
           <div class="foo">
             <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8');?></p>
             <div class="pt">
-               <p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>
-               <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
-            <p id="<?php echo htmlspecialchars($list->in_id, ENT_QUOTES, 'utf-8');?>" class="punt"></p>
+              <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
+              <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
+              <div class="punt">
+                <div class="puntuaciones c<?php echo $list->Ta_puntaje_in_id;?>"></div>
+              </div>
             </div>
           </div>
         </div>
