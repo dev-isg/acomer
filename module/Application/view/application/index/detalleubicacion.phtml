@@ -179,7 +179,7 @@ $('#buscarmap').hide();
      var plato=$('#bubi #q').val();
      var dis=$('#bubi #fq').val();
 
-     var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
+     var url = "http://192.168.1.38:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
      console.log(url);
      if ( ($('#bubi #q').val() != "") && ($('#bubi #fq').val()!="") ){
      $.getJSON( url, function(data) {
