@@ -459,8 +459,7 @@ $('.check-plato').mousedown(function() {
     }); 
 $('.check_rest').mousedown(function() {
     var id = $(this).attr('data-id');
-    console.log(id);
-    console.log()
+    console.log(id); 
     var est;
         if (!$(this).is(':checked')) {
           if (confirm("Desea Activar al Restaurante ?") ){
@@ -475,6 +474,7 @@ $('.check_rest').mousedown(function() {
             $("#la" + id).removeClass().addClass("label label-success");
             $("#la" + id).html("");
             $("#la" + id).html("activo");
+            location.reload();
                  };
         }else{
           var est="desactivo";
@@ -486,7 +486,8 @@ $('.check_rest').mousedown(function() {
           $("#" + id).removeClass("success");
           $("#la" + id).removeClass().addClass("label label-important");
           $("#la" + id).html("");
-            $("#la" + id).html("desactivo");
+          $("#la" + id).html("desactivo");
+          location.reload();
               }
     }); 
 
