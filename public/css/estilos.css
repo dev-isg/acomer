@@ -130,7 +130,7 @@ form#search{
   -o-border-radius: 14px 0 0 14px;
   border-radius: 14px 0 0 14px;
   margin-left: 15px;
-  width: 185px;
+  width: 145px;
   float: left;
   font-weight: bold;
   font-size: 1em;
@@ -138,10 +138,10 @@ form#search{
   -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
   -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
-  -webkit-transition: all 0.7s ease 0s;
+  /*-webkit-transition: all 0.7s ease 0s;
   -moz-transition: all 0.7s ease 0s;
   -o-transition: all 0.7s ease 0s;
-  transition: all 0.7s; 
+  transition: all 0.7s;*/
   font-size: 16px;
   font-weight: normal;
   height: 24px;
@@ -187,13 +187,13 @@ cursor: pointer;
   margin: 0 auto;
 }
 .contenido{
-  width: 1024px;
+  width: 990px;
   margin: 0px auto;
   height: 100%;
 }
 
 .content-sidebar{
-  width: 300px;
+  width: 266px;
   float: left;
   height: 100%;
 
@@ -222,7 +222,7 @@ padding-left: 2em;
 .contenido-busqueda {
   position: fixed;
   top: 0;
-  width: 300px;
+  width: 266px;
   height: 100%;
   text-align: center;
   z-index: 999;
@@ -243,7 +243,7 @@ text-align: center;
 .logan {
   display: inline-block;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.2em;
   color: white;
   font-weight: bold;
   margin-top: -30px;
@@ -502,7 +502,7 @@ text-decoration: underline;
 }
 .disabled { color:gray !important; }
 .masinfo {
-width: 700px;
+width: 724px;
 text-align: right;
 position: absolute;
 bottom: 40px;
@@ -513,17 +513,17 @@ bottom: 40px;
 .final {
 width: 100%;
 text-align: center;
-margin-top: 10em;
+margin-top: 20%;
 }
 .subir {
 position: fixed;
 bottom: 39px;
-width: 700px;
+width: 724px;
 text-align: right;
 }
 .busquedad {
 font-size: 1.2em;
-padding-right: 19PX;
+padding-right: 19px;
 text-align: left;
 font-family: georgia;
 display: inline-block;
@@ -650,20 +650,20 @@ width: 100%;
 height: 185px;
 }
 .subir-home{
-  margin-top: 10px!important;
+  margin-top: -30px!important;
 }
 .pt {
-display: inline-block;
-width: 100%;
+  display: inline-block;
+  width: 100%;
 }
 .pre {
-display: inline-block;
-width: 100%;
-color: #ff8400;
-font-weight: bold;
-font-size: 1em;
-text-align: center;
-margin: 0px
+  display: inline-block;
+  width: 100%;
+  color: #ff8400;
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+  margin: 0px
 }
 .nom_res{
   text-align: center;
@@ -694,10 +694,22 @@ display: inline-block;
   display: block;
   margin-top: -10px;
 }
+a.title-home-listado{
+  text-align: center;
+  padding-bottom: 15px;
+  display: block;
+}
+a.title-home-listado h1 img{
+  width: 100%;
+}
+.content-sidebar-ho{
+  display: block;
+  margin-top: 40%;
+}
 .sub .content-etiqueta-home{
-  width: 180px;
+  width: 220px;
   height: 45px;
-  background: url(../img/etiqueta-home.png) no-repeat;
+  background: url(../img/etiqueta.png) no-repeat;
 }
 .primer-home{
   margin-bottom: 10px;
@@ -718,7 +730,6 @@ display: inline-block;
 }
 .plato_r {
   text-align: center;
-  display: inline-block;
   /*-webkit-box-shadow: 1px 1px 4px 1px rgba(1, 1, 1, 0.5);
   box-shadow: 1px 1px 4px 1px ;*/
   width: 215px;
@@ -1451,7 +1462,12 @@ form#application .control-group .btn-solicito{
 .contenido-static .form-horizontal .controls{
   margin-left: 200px;
 }
-
+.map-portada .guia img{
+  width: 680px;
+}
+.map-portada .guia{
+  margin-top:  -50px;
+}
 
 /* ==========================================================================
    Helper classes
@@ -1641,4 +1657,358 @@ form#application .control-group .btn-solicito{
     h3 {
         page-break-after: avoid;
     }
+}
+
+
+/*Activando responsive web desing*/
+@media (min-width: 1200px) {
+  .map-portada .guia{
+    margin-top:  0px;
+  }
+  .content-sidebar{
+    width: 300px;
+  }
+  .contenido-busqueda{
+    width: 300px;
+  }
+  .contenido{
+    width: 1024px;
+  }
+  .final{
+    margin-top: 40%;
+  }
+  a.title-home-listado h1 img{
+    width: 307px;
+  }
+  .logan{
+    font-size: 1.5em;
+  }
+  #search input[type="text"]{
+    width: 185px;
+  }
+  .map-portada .guia img{
+    width: 680px;
+  }
+  .subir-home{
+    margin-top: 10px!important;
+  }
+}
+@media (max-width: 990px) {
+  .content-sidebar{
+    width: 25%;
+  }
+  .contenido-busqueda{
+    width: 25%;
+  }
+  .contenido-plato{
+    width: 75%;
+  }
+  .contenido{
+    width: 100%;
+  }
+  .footer{
+    width: 75%;
+  }
+  .masinfo{
+    width: 75%;
+  }
+  .subir{
+    width: 75%;
+  }
+  .map-portada .guia img{
+    width: 100%;
+  }
+  #search input[type="text"]{
+    margin-left: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+    padding: 6px 0px;
+    font-size: 14px;
+    width: 80%;
+  }
+  #search .btn-search-home {
+    background: #CE450A url(../img/lupa-search.png) no-repeat 100%;
+    height: 100%;
+    width: 20%;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+    padding: 8px 0;
+  }
+  .masinfo{
+    display: none!important;
+  }
+  .subir{
+    display: none!important;
+  }
+}
+/*@media (min-width: 980px) {
+  .content-sidebar{
+    width: 25%;
+  }
+  .contenido-busqueda{
+    width: 25%;
+  }
+  .contenido-plato{
+    width: 75%;
+  }
+  .contenido{
+    width: 100%;
+  }
+  .footer{
+    width: 75%;
+  }
+  .masinfo{
+    width: 75%;
+  }
+  .subir{
+    width: 75%;
+  }
+  .map-portada .guia img{
+    width: 100%;
+  }
+}*/
+@media (min-width: 768px) and (max-width: 979px) {
+  .content-sidebar{
+    width: 25%;
+  }
+  .contenido-busqueda{
+    width: 25%;
+  }
+  .contenido-plato{
+    width: 75%;
+  }
+  .contenido{
+    width: 100%;
+  }
+  .footer{
+    width: 75%;
+  }
+  .masinfo{
+    width: 75%;
+  }
+  .subir{
+    width: 75%;
+  }
+  .map-portada .guia img{
+    width: 100%;
+  }
+  .recomendados-platos ul{
+    margin-left: 15px;
+  }
+  .recomendados-platos ul li{
+    width: 31.5%;
+  }
+  .plato_r{
+    width: 100%;
+  }
+  
+  .fec img{
+    width: 100%;
+  }
+  .logan{
+    font-size: 1em;
+  }
+  #search input[type="text"]{
+    margin-left: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+    padding: 6px 0px;
+    font-size: 14px;
+    width: 80%;
+  }
+  #search .btn-search-home {
+    background: #CE450A url(../img/lupa-search.png) no-repeat 100%;
+    height: 100%;
+    width: 20%;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+    padding: 8px 0;
+  }
+  .final{
+    margin-top: 40%;
+  }
+  a.title-home-listado{
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 767px) {
+  body{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .content-sidebar{
+    width: 35%;
+  }
+  .contenido-busqueda{
+    width: 35%;
+  }
+  .contenido-plato{
+    width: 65%;
+  }
+  .contenido{
+    width: 100%;
+  }
+  .recomendados-platos ul li{
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  .recomendados-platos.primer-home ul{
+    margin-left: 10px;
+    padding-right: 10px; 
+  }
+  .plato_r{
+    width: 100%;
+  }
+  .subir-home{
+    margin-top: -10px;
+  }
+  .map-portada .guia{
+    margin-top: -30px;
+  }
+  .recomendados-platos ul{
+    margin-left: 10px;
+    padding-right: 10px;
+  }
+  .recomendados-platos.primer-home{
+    padding-bottom: 10px!important;
+  }
+  .footer{
+    width: 65%;
+    height: 50px;
+  }
+  .footer nav{
+    width: 100%;
+  }
+  .footer nav ul{
+    margin: 0;
+    text-align: center;
+  }
+  .footer footer{
+    width: 100%;
+  }
+  .footer footer p{
+    text-align: center;
+  }
+  .logan{
+    font-size: 1em;
+    line-height: 20px;
+  }
+}
+@media (max-width: 480px) {
+  body{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .content-sidebar{
+    width: 100%;
+    height: auto;
+  }
+  .contenido-busqueda{
+    width: 100%;
+  }
+  .content-sidebar-ho{
+    margin-top: 0;
+  }
+  .logan-1{
+    display: none;
+  }
+  .logan{
+    display: none;
+  }
+  .fec{
+    display: none;
+  }
+  .contenido-plato{
+    width: 100%;
+  }
+  .contenido-busqueda{
+    position: static;
+    height: auto;
+  }
+  .title-home-listado h1{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .final{
+    display: none;
+  }
+  a.title-home-listado{
+    padding-bottom: 0;
+  }
+  #search{
+    margin-top:-55px;
+    float: left;
+  }
+  .solicitar-publicacion{
+    padding-bottom: 15px;
+  }
+  .map-portada .guia{
+    margin-top: 0;
+  }
+  .recomendados-platos ul li{
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .plato_r{
+    width: 100%;
+  }
+  .recomendados-platos.primer-home ul{
+    margin-left: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .recomendados-platos.primer-home{
+    padding-bottom: 10px!important;
+  }
+  .mosaic-overlay{
+    height: 193px;
+  }
+  .mosaic-block{
+    height: 193px;
+  }
+  .recomendados-platos ul{
+    margin-left: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .footer{
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+  .tercera-categ{
+    padding-bottom: 10px;
+  }
+  .footer nav{
+    text-align: center;
+    width: 100%;
+  }
+  .footer nav ul{
+    margin: 0;
+  }
+  .footer footer{
+    width: 100%;
+  }
+  .footer footer p{
+    text-align: center;
+  }
+  .subir-home{
+    margin-top: 0!important;
+  }
+}
+@media (max-width: 320px) {
+  .mosaic-overlay{
+    height: 163px;
+  }
+  .mosaic-block{
+    height: 163px;
+  }
 }

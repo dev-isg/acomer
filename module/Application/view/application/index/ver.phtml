@@ -162,28 +162,31 @@ $('#buscarmap').hide();
          }
         });
        
-         var plato=$('#bubi #q').val();
+         
+        $("#buscarmap").on("click",function(){
+        var plato=$('#bubi #q').val();
          var dis=$('#bubi #fq').val();
          var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
-       $("#buscarmap").on("click",function(){
         $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
+        $('#esconder').css("display","none");
          var map;      
          $('#esconder').css("display","none");       
         console.log(url);     
+
      if ( ($('#bubi #q').val() != "") && ($('#bubi #fq').val()!="") ){
      $("#mapa-buscador").fadeIn();
      var prueba=$.getJSON( url, function(data) {
              console.log(data.response.numFound);
     if (data.response.numFound >= 1) {
-       var mcOptions = { maxZoom: 12};
+       //var mcOptions = { maxZoom: 12};
              map = new GMaps({
                el: '#map',
-               zoom: 14,
+               zoom: 15,
                 lat: -12.043333,
-                lng: -77.028333,
-               markerClusterer: function(map) {
-           return new MarkerClusterer(map,mcOptions);
-         }
+                lng: -77.028333
+//               markerClusterer: function(map) {
+//           return new MarkerClusterer(map,mcOptions);
+//         }
        });
         $.each( data.response.docs, function(i, marker) {
                  map.setCenter(marker.latitud,marker.longitud );
