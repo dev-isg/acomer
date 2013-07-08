@@ -420,9 +420,9 @@ $(".eli-lo").on("click",function(){
   var request = $.ajax({
   url: "/platos/index/eliminar?id="+id + "&estado=" + es,
   type: "POST",
-  data: {id: id, estado:est}  
+  data: {id: id, estado:es}  
   });
-  
+
  
  
 });
