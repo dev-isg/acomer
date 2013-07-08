@@ -415,9 +415,11 @@ $(".eli-com").on("click",function(){
 
 $(".eli-lo").on("click",function(){
   var id = $(this).attr('data-id');
+  var es=$(this).attr('data-name');
   $('#eli-plato').modal('show');
-  console.log(id);
+  console.log(id , es);
   $('#verplato').attr({'data-id':id});
+  $('#verplato').attr({'data-name':es});
   $('#verplato').html("Estas seguro de eliminar el plato ?");
 });
 
@@ -581,11 +583,12 @@ $('.check_rest').mousedown(function() {
 });
   $("#delete-plato").on("click",function(){
   var user=$("#verplato").attr("data-id");
-  // $("#" + user).closest('tr').remove();
+  var est=$("#verplato").attr("data-name");
+   $("#" + user).closest('tr').remove();
   $('#eli-plato').modal('hide');
   console.log(user);
   var request = $.ajax({
-  url: "/platos/index/eliminar?id="+user,
+  url: "/platos/index/eliminar?id="+user "&estado=" + est,
   type: "POST",
   data: {id: user} 
   });
