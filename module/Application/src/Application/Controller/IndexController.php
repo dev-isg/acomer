@@ -176,7 +176,20 @@ class IndexController extends AbstractActionController
                         $resultados = false;
                         $palabraBuscar = isset($texto) ? $texto : false ;
                           $fd = array (  
-                            'fq'=>'en_estado:activo'); 
+                            'fq'=>'en_estado:activo');
+                          if($palabraBuscar== '')
+                          {
+           
+                              
+                             $view->setVariables( array('mama'=>'Lamentamos no haber encontrado lo que estabas buscando pero tenemos
+//                                        muchas mas opciones para ti.También tenemos una opción para que nos escribas si deseas registrar
+//                                        un nuevo plato.'));
+//                               
+////                               $view->setVariables( array('mama'=>'Lamentamos no haber encontrado lo que estabas buscando pero tenemos
+////                                        muchas mas opciones para ti.También tenemos una opción para que nos escribas si deseas registrar
+////                                        un nuevo plato.'));
+   $this->redirect()->toUrl('/application');
+                          }
                         if ($palabraBuscar)
                         { 
                           require './vendor/SolrPhpClient/Apache/Solr/Service.php';
@@ -187,6 +200,8 @@ class IndexController extends AbstractActionController
                           }
                           try
                           {
+                              
+     
                             $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
                           //  var_dump($resultados);exit;
 

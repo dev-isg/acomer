@@ -1,4 +1,4 @@
-
+<?php  $this->images;?>
 <?php
 $form = $this->form;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
@@ -40,7 +40,7 @@ echo $this->form()->closeTag(); ?>
                            <div class="mosaic-overlay"><span><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></span>
                            <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="/img/mas.png" alt="" class="mas">
                            </div>
-                           <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" target="_blank" class="mosaic-backdrop">
+                           <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>&q=<?php echo $this->nombre; ?>" target="_blank" class="mosaic-backdrop">
                              <div class="details">
                                  <h4><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></h4>
                                  <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
@@ -187,7 +187,7 @@ $('#buscarmap').hide();
              },
                    title: marker.restaurante ,
                    infoWindow: {
-                           content: marker.name + '</br> <a href=/platos/index/verplatos?id=' + marker.id +'>ver plato </a>'
+                           content: marker.name + '</br> <a href=/platos/index/verplatos?id=' + marker.id +'&q=' + plato +'>ver plato </a>'
                          }
 
                  });
