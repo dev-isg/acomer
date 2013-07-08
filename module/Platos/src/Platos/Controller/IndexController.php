@@ -18,6 +18,8 @@ use Platos\Model\PlatosTable;
 use Platos\Form\PlatosForm; 
 use Zend\Form\Element;
 use Zend\Validator\File\Size;
+use Zend\Http\Header\Cookie;
+use Zend\Http\Header;
   
 
 use Zend\Db\Sql\Sql;
@@ -303,7 +305,7 @@ class IndexController extends AbstractActionController
         $id = $this->params()->fromQuery('id');
         $estado = $this->params()->fromQuery('estado');
         $this->getPlatosTable()->destaquePlato((int) $id, $estado);
-
+        exit();
     }
     /*
      * 
@@ -336,17 +338,27 @@ class IndexController extends AbstractActionController
          $form=new \Usuario\Form\ComentariosForm();
          $form->get('submit')->setValue('Agregar');
         $request = $this->getRequest();
-        
+        //$cookie = new \Zend\Http\Cookies();
+        $cookie= $this->getResponse()->getCookie();
+//       var_dump($cookie->id);
+//        var_dump($cookie->id);
         if ($request->isPost()) {
-            $datos=$this->getRequest()->getPost()->toArray();
-            $datos['Ta_plato_in_id']=$id;
-            $form->setData($datos);
-            if ($form->isValid($datos)) {
-                $this->getComentariosTable()->agregarComentario($datos); 
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos/index/verplatos?id='.$id); 
-            }
+            if(empty($cookie->id) ){
+                $datos=$this->getRequest()->getPost()->toArray();
+                $datos['Ta_plato_in_id']=$id;
+                $form->setData($datos);
+                    if ($form->isValid($datos)) {
+                        $this->getComentariosTable()->agregarComentario($datos); 
+                        $cookie->id=$id;
+                  
+        //                $this->getResponse()->getHeaders()->get('Set-Cookie')->id = $coment['Ta_plato_in_id']; 
+                        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos/index/verplatos?id='.$id);
+
+                    }
         }
-        
+        var_dump($cookie->id);Exit;
+      }
+      
 //    var_dump($listarcomentarios);Exit;
         
         $this->layout()->clase = 'Detalle';

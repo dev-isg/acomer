@@ -387,7 +387,8 @@ class PlatosTable
             ->join(array('tc'=>'ta_comentario'),'tc.ta_plato_in_id=ta_plato.in_id',array('tx_descripcion','ta_puntaje_in_id'),'left')
             ->join(array('tcli'=>'ta_cliente'),'tcli.in_id=tc.ta_cliente_in_id',array('va_nombre_cliente','va_email'),'left')
 
-            ->where(array('ta_plato.in_id'=>$idplato));
+            ->where(array('ta_plato.in_id'=>$idplato))
+            ->order('tc.in_id DESC');
 //            $selecttot->group('ta_plato.in_id');
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
 //            var_dump($selectString);Exit;
