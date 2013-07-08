@@ -166,6 +166,7 @@ $('#buscarmap').hide();
        $("#buscarmap").on("click",function(){
         $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
          var map;
+       
           
        
      $('#esconder').css("display","none");
@@ -175,7 +176,9 @@ $('#buscarmap').hide();
 
      var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
      console.log(url);
-   
+     
+     if ( ($('#bubi #q').val() != "") && ($('#bubi #fq').val()!="") ){
+     $("#mapa-buscador").fadeIn();
      var prueba=$.getJSON( url, function(data) {
        var mcOptions = { maxZoom: 12};
              map = new GMaps({
@@ -208,14 +211,23 @@ $('#buscarmap').hide();
              });
 
          });
+     
      prueba.fail(function( jqxhr, textStatus, error ) {
       var err = textStatus + ', ' + error;
-         $("#mapa-buscador").hide();
-         $("#contenido-plato").append('<p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti.</p><p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p>');
+      console.log(err); 
+      $("#mapa-buscador").hide();
+         $(".contenido-plato").append('<p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti.</p><p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p>');
     });
+ }else{
+ $("#mapa-buscador").hide();
+alert("debe ingresar el plato");
+
+
+ }
  
         
     
   
    });
+    });
  </script>

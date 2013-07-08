@@ -117,7 +117,7 @@ public function cromSolr($id)
             ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre'=>'va_nombre'),'left')
             ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
             ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud','de_longitud','va_direccion'), 'left')
-            ->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
+            ->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre'=>'va_nombre','restaurant_estado'=>'en_estado'), 'left')
             ->join(array('tu'=>'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito'=>'ch_distrito'), 'left')
             ->where(array('ta_plato.in_id'=>$id));   
             $selectString = $sql->getSqlStringForSqlObject($selecttot);            
@@ -143,6 +143,7 @@ public function cromSolr($id)
                                              $document->distrito = $plato[0]['distrito'];
                                              $document->va_imagen = $plato[0]['va_imagen'];
                                              $document->comentarios =$plato[0]['cantidad'];
+                                             $document->restaurant_estado =$plato[0]['restaurant_estado'];
                                              $document->puntuacion = $plato[0]['Ta_puntaje_in_id'];
                                              $solr->addDocument($document);
                                              $solr->commit();
