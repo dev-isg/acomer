@@ -291,12 +291,12 @@ class IndexController extends AbstractActionController
         $id = $this->params()->fromQuery('id');
         $estado = $this->params()->fromQuery('estado');
 
-        $this->getPlatosTable()->estadoPlato((int) $id, $estado);
-        $this->redirect()->toUrl('/platos/index');
+//        $this->getPlatosTable()->estadoPlato((int) $id, $estado);
+//        $this->redirect()->toUrl('/platos/index');
         
 //        $id = $this->params()->fromPost('id');
-//        $this->getPlatosTable()->eliminarPlato((int) $id);
-//        $this->redirect()->toUrl('/platos/index');
+        $this->getPlatosTable()->eliminarPlato((int) $id,$estado);
+        $this->redirect()->toUrl('/platos/index');
     }
     /*
      * cambiar el destaque del plato
