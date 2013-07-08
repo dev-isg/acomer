@@ -588,7 +588,7 @@ $('.check_rest').mousedown(function() {
   $('#eli-plato').modal('hide');
   console.log(user);
   var request = $.ajax({
-  url: "/platos/index/eliminar?id="+user "&estado=" + est,
+  url: "/platos/index/eliminar?id="+user + "&estado=" + est,
   type: "POST",
   data: {id: user, estado:est} 
   });
