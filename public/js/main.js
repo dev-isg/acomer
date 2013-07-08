@@ -316,6 +316,12 @@ function load_map() {
  
 $('#search').on('click', function() {
   load_map();
+  $("#address").val("");
+     var value = $("#va_direccion").val();   
+     var d = $("#distrito option:selected").text();
+     var p = $("#provincia option:selected").text();
+     var pa = $("#pais option:selected").text();
+  $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
   $('#mostrar_map').css("display","block");
   $('#map_canvas').css("display","block");
     var address = $('#address').val();
