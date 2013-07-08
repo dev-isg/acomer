@@ -129,11 +129,6 @@ class IndexController extends AbstractActionController
                            }
                                 
                         }
-                          if($resultados=='')
-                                  { 
-                                 $error ='nohay datos';   
-                                      
-                                  }
           
                         $limit = 3;             
                         $palabraBuscar = isset($palabra) ? $palabra : false ;
@@ -241,9 +236,7 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                  echo("<div id='resultados'>Lamentamos no haber encontrado lo que estabas buscando pero tenemos
-                                        muchas mas opciones para ti.También tenemos una opción para que nos escribas si deseas registrar
-                                        un nuevo plato. </div>");       
+                                   echo("<div>ingrese algun valor</div>");       
                           }
           }
           //var_dump($results->response->docs);exit;
@@ -295,9 +288,7 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                echo("<div id='resultados'>Lamentamos no haber encontrado lo que estabas buscando pero tenemos
-                                        muchas mas opciones para ti.También tenemos una opción para que nos escribas si deseas registrar
-                                        un nuevo plato. </div>");  }
+                                 echo("<div>ingrese algun valor</div>");   }
                         }
   $distritos=$this->josAction();
                  
@@ -334,9 +325,7 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                echo("<div id='resultados'>Lamentamos no haber encontrado lo que estabas buscando pero tenemos
-                                        muchas mas opciones para ti.También tenemos una opción para que nos escribas si deseas registrar
-                                        un nuevo plato. </div>");          
+                                 echo("<div>ingrese algun valor</div>");          
                           }
                         }
                      
