@@ -165,7 +165,7 @@ echo $this->form()->closeTag(); ?>
         $("#buscarmap").on("click",function(){
         var plato=$('#bubi #q').val();
          var dis=$('#bubi #fq').val();
-         var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
+         var url = "http://192.168.1.38:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
         $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
         $('#esconder').css("display","none");
          var map;      
