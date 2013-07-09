@@ -401,7 +401,7 @@ $(".eli-lo").on("click",function(){
   type: "POST",
   data: {id: id, estado:es}  
   });
-  if es=="activo"{
+  if (es=="activo"){
     $(this).attr('data-name',"activo");
     $(this).html("");
     $(this).html("activo");
