@@ -88,7 +88,7 @@ echo $this->form()->closeTag(); ?>
                          <div class="lateral" >
                           <img src="/img/mas.png" alt="" class="mas-det">
                           <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>&q=<?php echo $_REQUEST['q']; ?>"  >
-                               <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="width: 144px;height: 120px;">
+                               <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="width: 144px;height: 120px;border:0;">
                           </a>
                           </div>
                           <div class="detalle-restaurante">
@@ -169,7 +169,7 @@ echo $this->form()->closeTag(); ?>
   <script type="text/javascript">
    var map;
    $(document).ready(function(){
-$('#buscarmap').hide();
+//$('#buscarmap').hide();
  $('#bubi #q').keyup(function () {
       if(($(this).val() != "") &&  ($('#bubi #fq').val() != "" )){
       $('#buscarmap').removeClass("disabled").addClass('map');

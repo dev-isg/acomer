@@ -322,11 +322,12 @@ background: url(../img/arrow.png) #cccccc no-repeat 102px 7px;
 width: 126px;
 font-size: 0.8em;
 border: 0 none;
--moz-appearance: none;
+-moz-appearance: none !important;
 -webkit-appearance: none;
 appearance: none;
-padding: 0px 9px;
+padding: 4px 9px 4px 5px;
 border: 1px solid #ccc;
+line-height: 10px !important;
 }
 #q {
 margin-left: -6px;
@@ -342,7 +343,7 @@ margin-left: -4px;
 line-height: 16px;
 }
 .lateral{
-    display: inline-block;
+display: inline-block;
 width: 142px;
 vertical-align: top;
 position: relative;
@@ -500,6 +501,7 @@ margin: 1em 1em;
 }
 .map {
 text-decoration: underline;
+display: none;
 }
 .disabled { color:gray !important; }
 .masinfo {
