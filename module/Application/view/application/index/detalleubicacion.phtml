@@ -110,10 +110,55 @@ echo $this->form()->closeTag(); ?>
 
                      <?php
                           }  else 
-                              {
-                              ?><div id='error'>       <p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti."</p><p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p> <div><?php
+                             {
+                              ?>
+<div id='error'>       <p class="mensaje">
+"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti."
+</p>
+<p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p> <div>
+
+    <div class="sub subir-home" id="subir-home">
+      <div class="content-etiqueta-home">
+        <p>Platos destacados</p>
+      </div>
+    </div>
+    <div id ="error"><?php $this->mama;?></div>
+    <div class="recomendados-platos primer-home" style="padding-bottom: 90px;">
+      <ul>
+         <?php  foreach ($this->lista  as $list) : ?>
+          <li>
+            <div class="plato_r">
+              <div class="mosaic-block cover">
+                <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
+                <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                </div>
+                <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>" class="mosaic-backdrop">
+                <div class="details">
+                  <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
+                  <p class="title-details" style="font-weight: bold;">Ingredientes</p>
+                  <p class="desc-plato" style="font-size:0.9em;"> <?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
+                </div>
+               </a>
+              </div>
+              <div class="foo">
+                <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8'); ?></p>
+                <div class="pt">
+                  <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
+                  <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
+                  <div class="punt">
+                    <div class="puntuaciones c<?php echo $list->Ta_puntaje_in_id;?>"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        <?php endforeach; ?>   
+      </ul>
+    </div>
+
+<?php
                               
-                              }                    
+                              }                   
                        ?> 
 
   <script type="text/javascript">
