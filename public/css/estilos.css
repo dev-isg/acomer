@@ -1490,6 +1490,9 @@ form#application .control-group .btn-solicito{
   background-color: #e76700;
   *background-color: #003bb3;
 }
+.agregar-comentario-desc{
+  width: 403px;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
@@ -2118,6 +2121,32 @@ form#application .control-group .btn-solicito{
   }
   .fec img{
     width: 100%;
+  }
+  #fq{
+    width: 60%;
+    background: url(../img/arrow.png) #cccccc no-repeat 100% 7px;
+  }
+  #q{
+    width: 57%;
+    margin-left: 0;
+  }
+  .verlistado{
+    margin-left: 0;
+    width: 60%!important;
+    color: #FFFFFF;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #e76700;
+    *background-color: #e76700;
+    background-image: -moz-linear-gradient(top, #E76700, #e76700);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#E76700), to(#e76700));
+    background-image: -webkit-linear-gradient(top, #E76700, #e76700);
+    background-image: -o-linear-gradient(top, #E76700, #e76700);
+    background-image: linear-gradient(to bottom, #E76700, #e76700);
+    background-repeat: repeat-x;
+    border-color: #e76700;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E76700', endColorstr='#e76700', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
   }
 }
 @media (max-width: 480px) {
