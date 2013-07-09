@@ -397,10 +397,12 @@ class PlatosTable
 //            $selecttot->group('ta_plato.in_id');
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
 //            var_dump($selectString);Exit;
+
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-           
-          $results->buffer();
-          $results->next();
+            
+             $results->buffer();
+//             $results->next();
+
             return $results;
         }
     
