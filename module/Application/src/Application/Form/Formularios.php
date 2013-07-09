@@ -35,7 +35,7 @@ class Formularios extends Form
             'attributes' => array(               
                 
                 'id'   => 'q',
-                'placeholder'=>'Ingrese su nombre'
+                
             ),
         ));
         $this->add(array(
