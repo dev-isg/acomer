@@ -1059,7 +1059,7 @@ li.li-suc a h6{
   font-weight: bold;
   margin: 0;
   font-size: 15px;
-  width: 230px;
+  width: 225px;
   float: left;
 }
 li.li-suc a.activo span.close-banch{
@@ -1239,7 +1239,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
 }
 .content-info{
   float: left;
-  width: 266px;
+  width: 263px;
   margin-left: 10px;
 }
 .coments-all .top-coment{

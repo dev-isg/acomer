@@ -70,7 +70,7 @@ class ComentariosForm extends Form
             'attributes' => array(               
                 'class' => '',
                 'id'   => 'va_email',
-                'placeholder'=>'Ingrese su Correo'
+                'placeholder'=>'Ingrese su correo'
             ),
             'options' => array(
                 'label' => 'Correo:',
@@ -86,19 +86,19 @@ class ComentariosForm extends Form
                 ) 
             )         
         ));
-                          $this->add(array(
+            $this->add(array(
             'name' => 'tx_descripcion',
             'type' => 'Textarea',
             'attributes' => array(               
                 'class' => '',
                 'id'   => 'tx_descripcion',
-                'placeholder'=>'Ingrese descripcion',
+                'placeholder'=>'Ingrese descripción',
                 'colls'=>40,
                 'rows'=>4
             ),
             'options' => array(
-                'label' => 'Descripcion:',
-            ),
+                'label' => 'Descripción:',
+            )
         ));
 
         
