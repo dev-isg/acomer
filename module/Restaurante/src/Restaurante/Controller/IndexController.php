@@ -380,7 +380,7 @@ class IndexController extends AbstractActionController
               $estado = $this->params()->fromQuery('estado');
               $this->getRestauranteTable()->estadoRestaurante((int) $id, $estado);
               $this->redirect()->toUrl('/restaurante/index');
-    }    
+         }    
     
     public function jsoncomidaAction() {
 
