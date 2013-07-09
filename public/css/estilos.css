@@ -499,8 +499,7 @@ margin: 1em 1em;
 .map-portada{
   background: url(../img/mapa.jpg) repeat;
 }
-.map {
-text-decoration: underline;
+#buscarmap{
 display: none;
 }
 .disabled { color:gray !important; }

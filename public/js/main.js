@@ -367,42 +367,6 @@ function geocodeResult(results, status) {
     }
 }
 
-  //carga imagen
-// $('#para').click(function(){
-//       var btn_firma = $('#addImage'), interval;    
-//       new AjaxUpload('#addImage', {
-//         action: 'includes/uploadFile.php',onSubmit : function(file , ext){
-//           if (! (ext && /^(jpg|png)$/.test(ext))){
-//             alert('Sólo se permiten Imagenes .jpg o .png');
-//             return false;
-//           } else {
-//             $('#loaderAjax').show();
-//             btn_firma.text('Espere por favor');
-//             this.disable();
-//           }
-//         },
-//         onComplete: function(file, response){
-     
-//           btn_firma.text('Cambiar Imagen');          
-//           respuesta = $.parseJSON(response);
-//           if(respuesta.respuesta == 'done'){
-//             $('#fotografia').removeAttr('scr');
-//             $('#fotografia').attr('src','img/' + respuesta.fileName);
-//             $('#loaderAjax').show();
-//           }
-//           else{
-//             alert(respuesta.mensaje);
-//           }
-            
-//           $('#loaderAjax').hide();  
-//           this.enable();  
-//         }
-//     });
-// });
-
-
-//
-
 $(".eli").on("click",function(){
 	var id = $(this).attr('data-id');
 	var nom =$(this).attr('name');
@@ -429,7 +393,7 @@ $(".eli-com").on("click",function(){
 });
 
 $(".eli-lo").on("click",function(){
-  var id = $(this).attr('data-id');
+  var id = $(this).attr('id');
   var es=$(this).attr('data-name');
   console.log(id , es);
   var request = $.ajax({
@@ -437,7 +401,16 @@ $(".eli-lo").on("click",function(){
   type: "POST",
   data: {id: id, estado:es}  
   });
-location.reload();
+  if es=="activo"{
+    $(this).attr('data-name',"activo");
+    $(this).html("");
+    $(this).html("activo");
+  }else{
+    $(this).attr('data-name',"desactivo");
+    $(this).html("");
+    $(this).html("desactivo");
+  }
+
  
  
 });
