@@ -160,7 +160,7 @@ echo $this->form()->closeTag(); ?>
                         }
                         ?>
                     </ul>
-                    <?php (count($this->comentarios)> 0)?$this->paginationControl($this->comentarios, 'Sliding', 'platos/index/paginador.phtml'):""; ?>
+                    <?php echo (count($this->comentarios)> 0)?$this->paginationControl($this->comentarios, 'Sliding', 'platos/index/paginador.phtml'):""; ?>
                 </div>
             </div>
             <div class="content-info">

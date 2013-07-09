@@ -397,7 +397,9 @@ class PlatosTable
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
 //            var_dump($selectString);Exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-          
+           
+          $results->buffer();
+          $results->next();
             return $results;
         }
     

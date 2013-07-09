@@ -1,8 +1,9 @@
+<?php var_dump($this->lista[0]['in_id']);exit;?>
 <?php if ($this->pageCount): ?>
 <div class="paginationControl">
 <!-- Previous page link -->
 <?php if (isset($this->previous)): ?>
-  <a href='/platos/index?id=<?php echo $this->lista[0]['in_id'];?>&page=<?php echo $this->previous?>'>
+  <a href='/platos/index/verplatos?id=<?php echo $this->lista[0]['in_id'];?>&page=<?php echo $this->previous?>'>
       
     < Previous
   </a> |
@@ -13,7 +14,7 @@
 <!-- Numbered page links -->
 <?php foreach ($this->pagesInRange as $page): ?>
   <?php if ($page != $this->current): ?>
-    <a href='/platos/index?id=<?php echo $this->lista[0]['in_id'];?>&page=<?php echo $page; ?>'>
+    <a href='/platos/index/verplatos?id=<?php echo $this->lista[0]['in_id'];?>&page=<?php echo $page; ?>'>
         
     </a> |
   <?php else: ?>
@@ -23,7 +24,7 @@
 
 <!-- Next page link -->
 <?php if (isset($this->next)): ?>
-  <a href=href='/platos/index?id=<?php echo $this->lista[0]['in_id'];?>&page=<?php echo $this->next?>'>
+  <a href='/platos/index/verplatos?id=<?php echo $this->lista[0]['in_id'];?>&page=<?php echo $this->next?>'>
     Next >
   </a>
 <?php else: ?>
