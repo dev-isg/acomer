@@ -1469,7 +1469,27 @@ form#application .control-group .btn-solicito{
 .map-portada .guia{
   margin-top:  -50px;
 }
-
+.btn-soli{
+  color: #FFFFFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #e76700;
+  *background-color: #e76700;
+  background-image: -moz-linear-gradient(top, #E76700, #e76700);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#E76700), to(#e76700));
+  background-image: -webkit-linear-gradient(top, #E76700, #e76700);
+  background-image: -o-linear-gradient(top, #E76700, #e76700);
+  background-image: linear-gradient(to bottom, #E76700, #e76700);
+  background-repeat: repeat-x;
+  border-color: #e76700;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E76700', endColorstr='#e76700', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+.btn-soli:hover, .btn-soli:focus, .btn-soli:active, .btn-soli.active, .btn-soli.disabled, .btn-soli[disabled] {
+  color: #FFFFFF;
+  background-color: #e76700;
+  *background-color: #003bb3;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
@@ -1773,6 +1793,9 @@ form#application .control-group .btn-solicito{
   }
 }*/
 @media (min-width: 768px) and (max-width: 979px) {
+  .recomendados-platos.primer-home{
+    padding-bottom: 30px!important;
+  }
   .content-sidebar{
     width: 25%;
   }
@@ -1999,8 +2022,8 @@ form#application .control-group .btn-solicito{
     width: 100%;
   }
   .descrip-product .ficha-product{
-    margin-left: 0px;
-    width: 96.9%;
+    margin-left: 10px;
+    width: 94.2%;
     height: auto;
   }
   .ficha-img{
@@ -2017,14 +2040,17 @@ form#application .control-group .btn-solicito{
   }
   .content-coments{
     padding-left: 10px;
-    padding-right: 10px;
-    width: 93.7%;
+    padding-right: 0px;
+    width: 96.2%;
   }
   .cont-accesorios h4{
 
   }
   .right-desc h4{
     margin-top: 0;
+  }
+  .coment-li{
+    margin-right: 0;
   }
   .coments-all{
     width: 100%;
@@ -2036,7 +2062,7 @@ form#application .control-group .btn-solicito{
   }
   .right-desc{
     margin-left: 0;
-    width: 96%;
+    width: 100%;
   }
   .top-coment p{
     margin-left: 0;
@@ -2090,6 +2116,9 @@ form#application .control-group .btn-solicito{
   .cont-accesorios{
     margin-right: 0;
   }
+  .fec img{
+    width: 100%;
+  }
 }
 @media (max-width: 480px) {
   body{
@@ -2133,7 +2162,7 @@ form#application .control-group .btn-solicito{
     padding-bottom: 0;
   }
   #search{
-    margin-top:-55px;
+    margin-top:-35px;
     float: left;
   }
   .solicitar-publicacion{
@@ -2207,8 +2236,8 @@ form#application .control-group .btn-solicito{
     -moz-border-radius: 14px 0 0 14px;
     -o-border-radius: 14px 0 0 14px;
     border-radius: 14px 0 0 14px;
-    margin-left: 15px;
-    width: 145px;
+    margin-left: 5%;
+    width: 67%;
     float: left;
     font-weight: bold;
     font-size: 1em;
@@ -2240,6 +2269,10 @@ form#application .control-group .btn-solicito{
     border-left: 1px solid #feab53;
     border-bottom: 1px solid #d4e59c;
   }
+  #search{
+    z-index: 1000;
+    position: relative;
+  }
 }
 @media (max-width: 320px) {
   .mosaic-overlay{
@@ -2257,8 +2290,8 @@ form#application .control-group .btn-solicito{
     -moz-border-radius: 14px 0 0 14px;
     -o-border-radius: 14px 0 0 14px;
     border-radius: 14px 0 0 14px;
-    margin-left: 15px;
-    width: 145px;
+    margin-left: 5%;
+    width: 63%;
     float: left;
     font-weight: bold;
     font-size: 1em;
