@@ -404,11 +404,11 @@ $(".eli-lo").on("click",function(){
   if (es=="activo"){
     $(this).attr('data-name',"activo");
     $(this).html("");
-    $(this).html("activo");
+    $(this).append("<i class='icon-trash icon-white'></i>Desactivo");
   }else{
     $(this).attr('data-name',"desactivo");
     $(this).html("");
-    $(this).html("desactivo");
+    $(this).append("<i class='icon-trash icon-white'></i>activo");
   }
 
  
