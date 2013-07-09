@@ -35,7 +35,7 @@ echo $this->form()->closeTag(); ?>
                 foreach ($this->hola as $doc)
                           {
           ?> 
-                          <div class="plato_r">
+                          <div class="plato_r" style="display:display: inline-block;">
                          <input type="hidden" value="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>">
                        <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                            <div class="mosaic-block cover">
@@ -80,7 +80,7 @@ echo $this->form()->closeTag(); ?>
                           {
                       ?> 
 
-                       <div class="plato_h" style="display:display: inline-block;">
+                       <div class="plato_h" >
                          <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                          <div class="lateral" >
                           <img src="/img/mas.png" alt="" class="mas-det">
