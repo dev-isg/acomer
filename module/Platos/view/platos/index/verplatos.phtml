@@ -23,6 +23,7 @@
       ?><?php echo $this->formSubmit($formu->get('submit'));?><?php
       ?><a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a><?php
       echo $this->form()->closeTag(); ?>
+      <div class="esconder">
    		<div class="descrip-product">
    			<div class="etiqueta-cat">
    				<div class="etiqueta">
@@ -194,7 +195,7 @@
 
     </div>
 </div>
-
+</div>
 <script type="text/javascript">
     $(document).ready(function(){
         $(".agregar-coment-1").click(function(e){
@@ -264,10 +265,12 @@
         var plato=$('#bubi #q').val();
          var dis=$('#bubi #fq').val();
          var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
+            $("#mapa-buscador").remove();
+        $(".mensaje").remove();
+        $(".mensaje2").remove();
         $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
-        $('#esconder').css("display","none");
-         var map;      
-         $('#esconder').css("display","none");       
+        $('#esconder').css("display","none");    
+               
         console.log(url);
            if ( ($('#bubi #q').val() != "") && ($('#bubi #fq').val()!="") ){
              $("#mapa-buscador").fadeIn();
