@@ -71,7 +71,7 @@ echo $this->form()->closeTag(); ?>
                         </div>
                
                             
-        <div class="sub" style="margin-top: 1em;margin-bottom: 2em;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;">
+        <div class="sub" style="margin-top: 1em;margin-bottom: 2em;background: url(/img/img-resultados.png) no-repeat;width: 41%;padding: 0.9em 0px;height: 23px;">
             <span style="padding-left: 10px;color:white;font-weight: bold;">Resultados <?php echo $_REQUEST['q']; ?> </span>
         </div>                    
                                               
@@ -80,7 +80,7 @@ echo $this->form()->closeTag(); ?>
                           {
                       ?> 
 
-                       <div class="plato_h">
+                       <div class="plato_h" style="display:display: inline-block;">
                          <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                          <div class="lateral" >
                           <img src="/img/mas.png" alt="" class="mas-det">
@@ -122,14 +122,6 @@ echo $this->form()->closeTag(); ?>
  <script type="text/javascript">
    var map;
    $(document).ready(function(){
-$('#buscarmap').hide();
- $('#bubi #q').keyup(function () {
-      if(($(this).val() != "") &&  ($('#bubi #fq').val() != "" )){
-      $('#buscarmap').removeClass("disabled").addClass('map');
-      $('#buscarmap').attr("href","#");
-      $('#buscarmap' ).removeAttr('disabled');
-       $('#buscarmap').fadeIn();
-      }   }).keyup();
 
   var puntaje = function(item,p){
      $(item).raty({ 
@@ -161,7 +153,14 @@ $('#buscarmap').hide();
         puntaje("#" + idptje ,ptaje); 
          }
         });
-       
+       $('#buscarmap').hide();
+       $('#bubi #q').keyup(function () {
+      if(($(this).val() != "") &&  ($('#bubi #fq').val() != "" )){
+      $('#buscarmap').removeClass("disabled").addClass('map');
+      $('#buscarmap').attr("href","#");
+      $('#buscarmap' ).removeAttr('disabled');
+       $('#buscarmap').fadeIn();
+      }   }).keyup();
          
         $("#buscarmap").on("click",function(){
         var plato=$('#bubi #q').val();
@@ -171,23 +170,22 @@ $('#buscarmap').hide();
         $('#esconder').css("display","none");
          var map;      
          $('#esconder').css("display","none");       
-        console.log(url);     
-
-     if ( ($('#bubi #q').val() != "") && ($('#bubi #fq').val()!="") ){
-     $("#mapa-buscador").fadeIn();
-     var prueba=$.getJSON( url, function(data) {
-             console.log(data.response.numFound);
-    if (data.response.numFound >= 1) {
-       //var mcOptions = { maxZoom: 12};
-             map = new GMaps({
-               el: '#map',
-               zoom: 15,
-                lat: -12.043333,
-                lng: -77.028333
-//               markerClusterer: function(map) {
-//           return new MarkerClusterer(map,mcOptions);
-//         }
-       });
+        console.log(url);
+           if ( ($('#bubi #q').val() != "") && ($('#bubi #fq').val()!="") ){
+             $("#mapa-buscador").fadeIn();
+             var prueba=$.getJSON( url, function(data) {
+                     console.log(data.response.numFound);
+            if (data.response.numFound >= 1) {
+               //var mcOptions = { maxZoom: 12};
+                     map = new GMaps({
+                       el: '#map',
+                       zoom: 15,
+                        lat: -12.043333,
+                        lng: -77.028333
+        //               markerClusterer: function(map) {
+        //           return new MarkerClusterer(map,mcOptions);
+        //         }
+           });
         $.each( data.response.docs, function(i, marker) {
                  map.setCenter(marker.latitud,marker.longitud );
                   console.log(marker);
@@ -219,13 +217,12 @@ $('#buscarmap').hide();
       console.log(err); 
       $("#mapa-buscador").hide();
         $(".mensaje").remove();
-           $(".mensaje2").remove();
+        $(".mensaje2").remove();
       $(".contenido-plato").append('<p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti.</p><p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p>');
     });
  }else{
  $("#mapa-buscador").hide();
 alert("debe ingresar el plato");
-
  }
  
         
