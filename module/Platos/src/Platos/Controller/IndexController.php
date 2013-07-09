@@ -100,10 +100,6 @@ class IndexController extends AbstractActionController {
                     $this->getPlatosTable()->guardarPlato($plato, $File, $local);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/platos?id=' . $local);
                 }
-//                //guardo en bd
-//                $this->getPlatosTable()->guardarPlato($plato);
-                // Redirect to list of albums
-                // return $this->redirect()->toRoute('album');
             }
         }
 
@@ -314,66 +310,35 @@ class IndexController extends AbstractActionController {
 
     public function verplatosAction() {
         $view = new ViewModel();
-//        $view->setTerminal(true);
         $this->layout('layout/layout-portada');
         $id = $this->params()->fromQuery('id');
         $plato = $this->params()->fromQuery('q');
-        // var_dump($plato);exit;
         $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();
-        $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id); //->toArray();
+
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
-//         var_dump($listarecomendacion); exit; 
         $form = new \Usuario\Form\ComentariosForm();
         $form->get('submit')->setValue('Agregar');
         $request = $this->getRequest();
 
-        $cookie = new \Zend\Http\Cookies();
-//        $cookie = $this->getResponse()->getCookie();
-        $cookie->id=0;
-        var_dump($cookie);
-        if(!$cookie->id){
-             var_dump('vacio');exit;
-        }else{var_dump('lleno');exit;}
-       
-        
-        
-
-       
         if ($request->isPost()) {
-            var_dump($cookie->id);
-//            $form->setInputFilter($inputFilter);
-         if ($cookie->id==0) { //  if (empty($cookie->id) || $cookie->id == null) {
-
+            if (!isset($_COOKIE['id' . $id])) {
                 $datos = $this->getRequest()->getPost()->toArray();
-//                $filter->filter($datos['tx_descripcion']);
                 $datos['Ta_plato_in_id'] = $id;
                 $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
                 $form->setData($datos);
-//                $form->getValue('tx_descripcion');
                 if ($form->isValid()) {
-//                    var_dump($form->getData());
                     $this->getComentariosTable()->agregarComentario($form->getData());
-                    $cookie->id = $id;
-                    
-                    var_dump($cookie->id);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/platos/index/verplatos?id=' . $id);
+                    setcookie('id' . $id, 1);
+//                    $form->clearAttributes();
+                    $form->setData(array('va_nombre' => '', 'va_email' => '', 'tx_descripcion' => '')); 
                 }
-//               var_dump($form->getValue('tx_descripcion'));exit;
-//                    if ($form->isValid($datos)) {
-//                        $this->getComentariosTable()->agregarComentario($datos); 
-//                        $cookie->id=$id;
-//                  
-//        //                $this->getResponse()->getHeaders()->get('Set-Cookie')->id = $coment['Ta_plato_in_id']; 
-//                        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos/index/verplatos?id='.$id);
-//                    }
-            } else {
-                var_dump('SALIOOOO');
-                exit;
-            }
-            // var_dump($cookie->id);Exit;
-        }
+            } 
+        } 
+//        else {
+//          $form->setData(array('va_nombre' => '', 'email' => '', 'tx_descripcion' => ''));  
+//        }
 
 //    var_dump($listarcomentarios);Exit;
 
@@ -388,7 +353,14 @@ class IndexController extends AbstractActionController {
         $formu->get('q')->setValue($plato);
         $formu->get('submit')->setValue('');
         $this->layout()->clase = 'Detalle';
-        $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $listarcomentarios, 'form' => $form, 'formu' => $formu,
+        
+         $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
+         
+         $paginator = new \Zend\Paginator\Paginator($listarcomentarios);
+         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+         $paginator->setItemCountPerPage(10);
+                
+        $view->setVariables(array('lista' => $paginator, 'comentarios' => $listarcomentarios, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios)));
         return $view;
