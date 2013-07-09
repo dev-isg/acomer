@@ -1,12 +1,9 @@
-
-
-
-
 <link rel="stylesheet" href="<?php echo $this->basePath()?>/css/jquery-ui.css">
 <script src="<?php echo $this->basePath()?>/js/jquery-ui.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>        
 <script src="<?php echo $this->basePath()?>/js/vendor/gmaps.js"></script>
-<script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.js"></script>    
+<script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.js"></script>
+<script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js"></script>     
 
    <div class="content-left">
       <?php
@@ -122,7 +119,7 @@
                         <div class="control-group"><?php echo $this->formRow($form->get('va_nombre')); ?></div>
                         <div class="control-group"><?php echo $this->formRow($form->get('va_email')); ?></div>
                         <div class="control-group">
-                          <label>Puntua tu plato:</label>
+                          <label>Valora tu plato:</label>
                           <p id="star"></p> 
                         </div>
                         <div class="control-group"><?php echo $this->formRow($form->get('tx_descripcion'));?></div>

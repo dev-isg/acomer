@@ -55,7 +55,10 @@ echo $this->form()->closeTag(); ?>
 
            <div class="pt">       
            <p class="com"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?> <i class="icon-comment"></i></p>
-           <p id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" class="punt"></p>        
+            <div class="punt">
+                    <div class="puntuaciones c<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"></div>
+                  </div>
+                 
                 </div>
 
              </div> 
@@ -79,7 +82,6 @@ echo $this->form()->closeTag(); ?>
                 foreach ($this->holas as $doc)
                           {
                       ?> 
-
                        <div class="plato_h" >
                          <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                          <div class="lateral" >
@@ -87,9 +89,11 @@ echo $this->form()->closeTag(); ?>
                           <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>&q=<?php echo $this->nombre; ?>"  >
                                <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="width: 144px;height: 120px;">
                           </a>
-                          </div>
+                          </div> 
                           <div class="detalle-restaurante">
-                          <div class="detalle-nombre"><p class="nombre_r"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p> <p id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" style="margin: 0px;width: 118px !important;display:inline-block;" ></p></div>
+                          <div class="detalle-nombre"><p class="nombre_r"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p> <div class="punt">
+                    <div class="puntuaciones c<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" style="margin: 0px;width: 118px !important;display:inline-block;"></div>
+                  </div>  </div>
                               <p class="nom_plato"><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></p>
                               <p style="margin-left:10px;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></p>
                               <p class="com-pla"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i> Comentarios</p>
@@ -165,36 +169,6 @@ echo $this->form()->closeTag(); ?>
    var map;
    $(document).ready(function(){
 
-  var puntaje = function(item,p){
-     $(item).raty({ 
-                    readOnly: true,
-                    score: p, 
-                    starOff: '/img/t2.png',
-                    starOn : '/img/t1.png'                        
-      });
-   }
-     $(".plato_r").find(':input').each(function() {
-         var elemento= this;
-         var e = $(this).attr("data-id");
-         var ptaje;
-         var idptje;
-         if( elemento.name=="pun"){
-        idptje = e;
-         ptaje= elemento.value;
-        puntaje("#" + idptje ,ptaje); 
-         }
-        });
-         $(".plato_h").find(':input').each(function() {
-         var elemento= this;
-         var e = $(this).attr("data-id");
-         var ptaje;
-         var idptje;
-         if( elemento.name=="pun"){
-        idptje = e;
-         ptaje= elemento.value;
-        puntaje("#" + idptje ,ptaje); 
-         }
-        });
        $('#buscarmap').hide();
        $('#bubi #q').keyup(function () {
       if(($(this).val() != "") &&  ($('#bubi #fq').val() != "" )){
