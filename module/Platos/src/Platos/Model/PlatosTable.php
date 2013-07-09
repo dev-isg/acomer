@@ -7,6 +7,8 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Select;
 use Platos\Model\Platos;
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
+
 
 class PlatosTable {
 
@@ -179,6 +181,7 @@ class PlatosTable {
             }
           }else{
               $this->flashMessenger()->addMessage('Thank you for your comment!');
+             
 //              echo ('<script>alert("supero los platos permitidos")</script>');
           }
         } else {
