@@ -247,10 +247,43 @@ echo $this->form()->closeTag(); ?>
                  });
              });
       }else{
-            $("#mapa-buscador").hide();
-           $(".mensaje").remove();
-           $(".mensaje2").remove();
+      $("#mapa-buscador").hide();
+      $(".mensaje").remove();
+      $(".mensaje2").remove();
       $(".contenido-plato").append('<p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti.</p><p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p>');
+      $(".contenido-plato").append('<div class="recomendados-platos primer-home" style="padding-bottom: 90px;"></div>');
+       $(".recomendados-platos ").append ('<ul><li></li></ul>');
+       $.getJSON('http://192.168.1.38:8080/application/index/jsondesta',function(data){    
+       $.each(data,function(i,val){
+          $('li').append('
+              <div class="plato_r">
+              <div class="mosaic-block cover">
+               <div class="mosaic-overlay"><span>' + val.va_nombre+'</span>
+                <img src="/imagenes/'+ val.va_imagen+'" class="img-plato"><img src="/img/mas.png" alt="" class="mas">
+                </div>
+                 <a href="/platos/index/verplatos?id='+val.in_id +'" class="mosaic-backdrop">
+                <div class="details">
+                <h4>'+ val.va_nombre +'</h4>
+                <p class="title-details" style="font-weight: bold;">Ingredientes</p>
+                <p class="desc-plato" style="font-size:0.9em;">'+ val.tx_descripcion+'</p>
+                  </div>
+               </a>
+              </div>
+               <div class="foo">
+                <p class="nom_res">'+restaurant_nombre+'</p>
+                <div class="pt">
+                  <p class="com">' val.NumeroComentarios' <i class="icon-comment"></i></p>
+                  <div class="punt">
+                    <div class="puntuaciones c'+val.Ta_puntaje_in_id+'"></div>
+                  </div>
+                   </div>
+              </div>
+            </div>
+            ');         
+       });          
+   
+      });
+      
       }
 
          });
