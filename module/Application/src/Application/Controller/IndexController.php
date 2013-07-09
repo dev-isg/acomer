@@ -50,6 +50,14 @@ class IndexController extends AbstractActionController
     
     }
     
+     public function jsondestaAction()
+    { 
+         $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
+         $valor =Json::encode($listades);
+         echo $valor;
+         exit();
+
+    }
     
          public function joincomenatariosAction()
     { 
@@ -162,6 +170,7 @@ class IndexController extends AbstractActionController
            
          }
         $form = new Formularios();
+        $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
         $comidas =  $this->joinAction()->toArray();
         $com = array();
         foreach($comidas as $y){
@@ -170,7 +179,7 @@ class IndexController extends AbstractActionController
         $form->get('q')->setValue($palabra);
          $form->get('distrito')->setValueOptions($com);
          $form->get('submit')->setValue('Buscar');
-         $view->setVariables( array('hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'error'=>$error));
+         $view->setVariables( array('lista' => $listades,'hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'error'=>$error));
        return $view;
       }
     
@@ -241,6 +250,7 @@ class IndexController extends AbstractActionController
           }
           //var_dump($results->response->docs);exit;
         $form = new Formularios();
+        $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
         $comidas =  $this->joinAction()->toArray();
         $com = array();
         foreach($comidas as $y){
@@ -249,7 +259,7 @@ class IndexController extends AbstractActionController
         $form->get('distrito')->setValueOptions($com);
         //$form->get('q')->setValue($texto);
         $form->get('submit')->setValue('Buscar');
-        $view->setVariables( array('hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'nombre'=>$texto));
+        $view->setVariables( array('lista' => $listades,'hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'nombre'=>$texto));
      
     
         // $distritos=$this->josAction();

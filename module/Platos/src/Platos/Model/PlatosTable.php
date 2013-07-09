@@ -34,6 +34,7 @@ class PlatosTable
          if($consulta!=null){
              $sqlSelect->where(array('pl.ta_local_in_id'=>$consulta));
          }
+           $sqlSelect->group('ta_plato.in_id')->order('ta_plato.in_id desc');
 //             $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($sqlSelect);
 //             var_dump($selectString);exit;
           /*
@@ -397,7 +398,9 @@ class PlatosTable
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
 //            var_dump($selectString);Exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-          
+           
+          $results->buffer();
+          $results->next();
             return $results;
         }
     
