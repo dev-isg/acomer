@@ -44,7 +44,7 @@ class ComentariosTable
      * agregar y registrar el comentario posiblemente se mueva
      */
     public function agregarComentario($coment){
-        
+         
            $cliente=array(
                     'va_nombre_cliente'=>$coment['va_nombre'],
                     'va_email'=>$coment['va_email'],         
@@ -77,15 +77,9 @@ class ComentariosTable
                     ->values($comentario);
             $statement2 = $this->tableGateway->getSql()->prepareStatementForSqlObject($insertcoment);
             $statement2->execute();  
-            
-//            $idcomentario=$this->tableGateway->getAdapter()->getDriver()->getLastGeneratedValue();
+//                $cookie->id=$coment['Ta_plato_in_id'];
              }
              
-//             $select=$this->tableGateway->getSql()->select()->from('ta_comentario')
-//                     ->columns('in_id')->;
-//            $statementcom = $this->tableGateway->getSql()->prepareStatementForSqlObject($select);  
-//            $resul=$statementcom->execute();
-            
                     $adapter2=$this->tableGateway->getAdapter();
         $promselect=$this->tableGateway->getAdapter()
                 ->query('SELECT ta_comentario.*,SUM(ta_puntaje_in_id)AS SumaPuntaje ,COUNT(ta_comentario.in_id ) AS NumeroComentarios,

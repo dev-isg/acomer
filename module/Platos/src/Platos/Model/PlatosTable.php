@@ -30,6 +30,7 @@ class PlatosTable
         $sqlSelect->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array('ta_local_in_id'), 'left');
          $sqlSelect->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array(), 'left');
          $sqlSelect->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurante_va_nombre'=>'va_nombre'), 'left');
+         $sqlSelect->join(array('c'=>'ta_comentario'),'c.ta_plato_in_id=ta_plato.in_id',array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(c.in_id)')),'left');
          if($consulta!=null){
              $sqlSelect->where(array('pl.ta_local_in_id'=>$consulta));
          }
@@ -253,6 +254,7 @@ class PlatosTable
                           $data = array(
                     'en_estado' => $estado,
                  );
+//                          var_dump($data);exit;
          $this->tableGateway->update($data, array('in_id' => $id));
          $this->cromSolr($id);
          
@@ -389,7 +391,8 @@ class PlatosTable
             ->join(array('tc'=>'ta_comentario'),'tc.ta_plato_in_id=ta_plato.in_id',array('tx_descripcion','ta_puntaje_in_id'),'left')
             ->join(array('tcli'=>'ta_cliente'),'tcli.in_id=tc.ta_cliente_in_id',array('va_nombre_cliente','va_email'),'left')
 
-            ->where(array('ta_plato.in_id'=>$idplato));
+            ->where(array('ta_plato.in_id'=>$idplato))
+            ->order('tc.in_id DESC');
 //            $selecttot->group('ta_plato.in_id');
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
 //            var_dump($selectString);Exit;
