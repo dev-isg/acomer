@@ -82,6 +82,7 @@ class IndexController extends AbstractActionController
           //  var_dump($nombre);exit;  
            $form->setInputFilter($restaurante->getInputFilter());
            $nonFile = $request->getPost()->toArray();
+           $nonFile['va_nombre'];
            $File    = $this->params()->fromFiles('va_imagen');
            $data    = array_merge_recursive(
                         $this->getRequest()->getPost()->toArray(),          

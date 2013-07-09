@@ -238,7 +238,6 @@ $(elemento).validate({
 }
 validar('#usuario');
 
-   $('#address').val("");
     $('#va_direccion').keyup(function () {
      var value = $(this).val();
     $('#address').val("");
@@ -272,6 +271,11 @@ $.getJSON('/local/index/jsondepartamento',function(data){
                 $('#provincia').append( "<option value=" + val.in_idprov + " >" + val.ch_provincia + " </option>");                                
                       });  
      });
+      var value = $("#va_direccion").val();   
+     var d = $("#distrito option:selected").text();
+     var p = $("#provincia option:selected").text();
+     var pa = $("#pais option:selected").text();
+     $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
 });
 
   $("#provincia").change(function(evento){
@@ -289,6 +293,11 @@ $.getJSON('/local/index/jsondepartamento',function(data){
            
           });  
      });
+      var value = $("#va_direccion").val();   
+     var d = $("#distrito option:selected").text();
+     var p = $("#provincia option:selected").text();
+     var pa = $("#pais option:selected").text();
+     $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
 });
 
 //mapa
@@ -298,7 +307,7 @@ var map;
 function load_map() {
     var myLatlng = new google.maps.LatLng(-12.055345316962327, -77.04518530000001);
     var myOptions = {
-        zoom: 12,
+        zoom: 15,
         center: myLatlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -307,6 +316,12 @@ function load_map() {
  
 $('#search').on('click', function() {
   load_map();
+  $("#address").val("");
+     var value = $("#va_direccion").val();   
+     var d = $("#distrito option:selected").text();
+     var p = $("#provincia option:selected").text();
+     var pa = $("#pais option:selected").text();
+  $("#address").val(value + ", " + d  + " , " + p + " , " + pa);
   $('#mostrar_map').css("display","block");
   $('#map_canvas').css("display","block");
     var address = $('#address').val();
@@ -459,8 +474,7 @@ $('.check-plato').mousedown(function() {
     }); 
 $('.check_rest').mousedown(function() {
     var id = $(this).attr('data-id');
-    console.log(id);
-    console.log()
+    console.log(id); 
     var est;
         if (!$(this).is(':checked')) {
           if (confirm("Desea Activar al Restaurante ?") ){
@@ -475,6 +489,7 @@ $('.check_rest').mousedown(function() {
             $("#la" + id).removeClass().addClass("label label-success");
             $("#la" + id).html("");
             $("#la" + id).html("activo");
+            location.reload();
                  };
         }else{
           var est="desactivo";
@@ -486,7 +501,8 @@ $('.check_rest').mousedown(function() {
           $("#" + id).removeClass("success");
           $("#la" + id).removeClass().addClass("label label-important");
           $("#la" + id).html("");
-            $("#la" + id).html("desactivo");
+          $("#la" + id).html("desactivo");
+          location.reload();
               }
     }); 
 

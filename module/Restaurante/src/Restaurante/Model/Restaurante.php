@@ -79,109 +79,109 @@ class Restaurante implements InputFilterAwareInterface
                     ),
                 ),
             )));
-//            $inputFilter->add($factory->createInput(array(
-//                'name'     => 'va_razon_social',
-//                'required' => true,
-//                'filters'  => array(
-//                    array('name' => 'StripTags'),
-//                    array('name' => 'StringTrim'),
-//                ),
-//                'validators' => array(
-//                    array(
-//                        'name'    => 'StringLength',
-//                        'options' => array(
-//                            'encoding' => 'UTF-8',
-//                            'min'      => 3,
-//                            'max'      => 100,
-//                        ),
-//                    ),
-//                ),
-//            )));
-//$inputFilter->add($factory->createInput(array(
-//                'name'     => 'va_web',
-//                'required' => false,
-//                'filters'  => array(
-//                    array('name' => 'StripTags'),
-//                    array('name' => 'StringTrim'),
-//                ),
-//                'validators' => array(
-//                    array(
-//                        'name'    => 'StringLength',
-//                        'options' => array(
-//                            'encoding' => 'UTF-8',
-//                            'min'      => 10,
-//                            'max'      => 100,
-//                        ),
-//                    ),
-//                ),
-//            )));
-//             $inputFilter->add(
-//                $factory->createInput(array(
-//                    'name'     => 'va_imagen',
-//                    'required' => false,
-//                     'validators' => array(
-//                    array(
-//                        'name'    => 'filemimetype',
-//                        'options' =>  array('mimeType' => 'image/png,image/x-png,image/jpg,image/gif,image/jpeg'),
-//                    ),
-//                    array(
-//                        'name'    => 'filesize',
-//                        'options' =>  array('max' => 204800),
-//                    ),
-//                ),
-//                ))
-//            );
-//             $inputFilter->add($factory->createInput(array(
-//                'name'     => 'va_ruc',
-//                'required' => true,
-//                'filters'  => array(
-//                    array('name' => 'StripTags'),
-//                    array('name' => 'StringTrim'),
-//                ),
-//                'validators' => array(
-//                    array(
-//                        'name'    => 'StringLength',
-//                        'options' => array(
-//                            'encoding' => 'UTF-8',
-//                            'min'      => 11,
-//                            'max'      => 11,
-//                        ),
-//                    ),
-//                ),
-//            )));
-//            $inputFilter->add($factory->createInput(array(
-//                'name'     => 'Ta_tipo_comida_in_id',
-//                'required' => false,
-//                'filters'  => array(
-//                    array('name' => 'StripTags'),
-//                    array('name' => 'StringTrim'),
-//                ),
-//                'validators' => array(
-//                    array(
-//                        'name'    => 'StringLength',
-//
-//                    ),
-//                ),
-//            )));
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_razon_social',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 3,
+                            'max'      => 100,
+                        ),
+                    ),
+                ),
+            )));
+$inputFilter->add($factory->createInput(array(
+                'name'     => 'va_web',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 10,
+                            'max'      => 100,
+                        ),
+                    ),
+                ),
+            )));
+             $inputFilter->add(
+                $factory->createInput(array(
+                    'name'     => 'va_imagen',
+                    'required' => false,
+                     'validators' => array(
+                    array(
+                        'name'    => 'filemimetype',
+                        'options' =>  array('mimeType' => 'image/png,image/x-png,image/jpg,image/gif,image/jpeg'),
+                    ),
+                    array(
+                        'name'    => 'filesize',
+                        'options' =>  array('max' => 204800),
+                    ),
+                ),
+                ))
+            );
+             $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_ruc',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 11,
+                            'max'      => 11,
+                        ),
+                    ),
+                ),
+            )));
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'Ta_tipo_comida_in_id',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+
+                    ),
+                ),
+            )));
    
-//    $inputFilter->add($factory->createInput(array(
-//                'name'     => 'va_modalidad',
-//                'required' => false,
-//                'filters'  => array(
-//                    array('name' => 'StripTags'),
-//                    array('name' => 'StringTrim'),
-//                ),
-//                'validators' => array(
-//                    array(
-//                        'name'    => 'StringLength',
-//                        'options' => array(
-//                            'encoding' => 'UTF-8',
-//                            'min'      => 10,
-//                            'max'      => 12,
-//                        ),
-//                    ),
-//                ),
-//            )));
+    $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_modalidad',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 10,
+                            'max'      => 12,
+                        ),
+                    ),
+                ),
+            )));
     
             $this->inputFilter = $inputFilter;
         }

@@ -84,7 +84,7 @@ echo $this->form()->closeTag(); ?>
                          <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                          <div class="lateral" >
                           <img src="/img/mas.png" alt="" class="mas-det">
-                          <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"  >
+                          <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>&q=<?php echo $this->nombre; ?>"  >
                                <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="width: 144px;height: 120px;">
                           </a>
                           </div>
@@ -162,28 +162,31 @@ $('#buscarmap').hide();
          }
         });
        
-         var plato=$('#bubi #q').val();
+         
+        $("#buscarmap").on("click",function(){
+        var plato=$('#bubi #q').val();
          var dis=$('#bubi #fq').val();
          var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
-       $("#buscarmap").on("click",function(){
         $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
+        $('#esconder').css("display","none");
          var map;      
          $('#esconder').css("display","none");       
         console.log(url);     
+
      if ( ($('#bubi #q').val() != "") && ($('#bubi #fq').val()!="") ){
      $("#mapa-buscador").fadeIn();
      var prueba=$.getJSON( url, function(data) {
              console.log(data.response.numFound);
     if (data.response.numFound >= 1) {
-       var mcOptions = { maxZoom: 12};
+       //var mcOptions = { maxZoom: 12};
              map = new GMaps({
                el: '#map',
-               zoom: 14,
+               zoom: 15,
                 lat: -12.043333,
-                lng: -77.028333,
-               markerClusterer: function(map) {
-           return new MarkerClusterer(map,mcOptions);
-         }
+                lng: -77.028333
+//               markerClusterer: function(map) {
+//           return new MarkerClusterer(map,mcOptions);
+//         }
        });
         $.each( data.response.docs, function(i, marker) {
                  map.setCenter(marker.latitud,marker.longitud );
@@ -203,7 +206,7 @@ $('#buscarmap').hide();
                  });
              });
       }else{
-          $("#mapa-buscador").hide();
+            $("#mapa-buscador").hide();
            $(".mensaje").remove();
            $(".mensaje2").remove();
       $(".contenido-plato").append('<p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti.</p><p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p>');
