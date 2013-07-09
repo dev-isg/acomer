@@ -480,7 +480,7 @@ $('.check_rest').mousedown(function() {
           if (confirm("Desea Activar al Restaurante ?") ){
             var est="activo";
             var request = $.ajax({
-            url: "restaurante/index/cambiaestado?id="+id + "&estado=" + est,
+            url: "/restaurante/index/cambiaestado?id="+id + "&estado=" + est,
             type: "get",
             data: {id: id , estado:est}
                    });
@@ -494,7 +494,7 @@ $('.check_rest').mousedown(function() {
         }else{
           var est="desactivo";
             var request = $.ajax({
-            url: "restaurante/index/cambiaestado?id="+id + "&estado=" + est,
+            url: "/restaurante/index/cambiaestado?id="+id + "&estado=" + est,
             type: "get",
             data: {id: id , estado:est}
                    });
