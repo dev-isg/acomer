@@ -172,7 +172,7 @@ class PlatosTable {
                 $document->va_imagen = $plato[0]['va_imagen'];
                 $document->restaurant_estado = $plato[0]['restaurant_estado'];
                 $document->comentarios = '0';
-                $document->puntuacion = $plato[0]['Ta_puntaje_in_id'];
+                $document->puntuacion = '0';
                 $solr->addDocument($document);
                 $solr->commit();
                 $solr->optimize();
