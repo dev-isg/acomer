@@ -109,7 +109,6 @@
                         ));
                         $form->prepare();
 
-
                         echo $this->form()->openTag($form);
                         ?><legend><?php echo $this->escapeHtml($title); ?></legend>
                         <?php
@@ -119,11 +118,12 @@
                         ?>
                         <div class="control-group"><?php echo $this->formRow($form->get('va_nombre')); ?></div>
                         <div class="control-group"><?php echo $this->formRow($form->get('va_email')); ?></div>
-                        <div class="control-group"><p id="star"></p> </div>
+                        <div class="control-group">
+                          <label>Puntua tu plato:</label>
+                          <p id="star"></p> 
+                        </div>
                         <div class="control-group"><?php echo $this->formRow($form->get('tx_descripcion'));?></div>
                         <div class="control-group"><?php echo $this->formSubmit($form->get('submit')); ?></div>
-
-
                         <?php echo $this->form()->closeTag(); ?>
                     </div>
                 </div>

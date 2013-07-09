@@ -1493,6 +1493,10 @@ form#application .control-group .btn-solicito{
 .agregar-comentario-desc{
   width: 403px;
 }
+.verlistado{
+    line-height: 22px;
+    text-indent: -9999px;
+  }
 /* ==========================================================================
    Helper classes
    ========================================================================== */
@@ -1716,6 +1720,10 @@ form#application .control-group .btn-solicito{
   .subir-home{
     margin-top: 10px!important;
   }
+  .verlistado{
+    line-height: 22px;
+    text-indent: -9999px;
+  }
 }
 @media (max-width: 990px) {
   .content-sidebar{
@@ -1767,6 +1775,10 @@ form#application .control-group .btn-solicito{
   }
   .subir{
     display: none!important;
+  }
+  .verlistado{
+    line-height: 22px;
+    text-indent: -9999px;
   }
 }
 /*@media (min-width: 980px) {
@@ -1953,8 +1965,15 @@ form#application .control-group .btn-solicito{
   .coment-li .img-li{
     width: 23.9%;
   }
+  .verlistado{
+    line-height: 22px;
+    text-indent: -9999px;
+  }
 }
 @media (max-width: 767px) {
+  .verlistado{
+    text-indent: 0;
+  }
   body{
     padding-left: 0;
     padding-right: 0;
