@@ -50,6 +50,14 @@ class IndexController extends AbstractActionController
     
     }
     
+     public function jsondestaAction()
+    { 
+         $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
+         $valor =Json::encode($listades);
+         echo $valor;
+         exit();
+
+    }
     
          public function joincomenatariosAction()
     { 

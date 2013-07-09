@@ -130,7 +130,7 @@ echo $this->form()->closeTag(); ?>
             <div class="plato_r">
               <div class="mosaic-block cover">
                 <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
-                <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="/img/mas.png" alt="" class="mas">
                 </div>
                 <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>" class="mosaic-backdrop">
                 <div class="details">
@@ -209,7 +209,7 @@ $('#buscarmap').hide();
         var plato=$('#bubi #q').val();
          var dis=$('#bubi #fq').val();
          var url = "http://192.168.1.38:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
-        $("#mapa-buscador").remove();
+         $("#map").remove();
         $(".mensaje").remove();
         $(".mensaje2").remove();
         $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
