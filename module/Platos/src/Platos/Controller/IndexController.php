@@ -359,10 +359,10 @@ class IndexController extends AbstractActionController {
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
          $paginator->setItemCountPerPage(10);
-                
+              
         $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,
-            'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios)));
+            'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id));
         return $view;
     }
 

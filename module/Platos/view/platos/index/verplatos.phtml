@@ -1,4 +1,4 @@
-<?php
+<?php   
 $formu = $this->formu;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
 
@@ -160,7 +160,7 @@ echo $this->form()->closeTag(); ?>
                         }
                         ?>
                     </ul>
-                    <?php echo (count($this->comentarios)> 0)?$this->paginationControl($this->comentarios, 'Sliding', 'platos/index/paginador.phtml'):""; ?>
+                    <?php echo (count($this->comentarios)> 0)?$this->paginationControl($this->comentarios, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>$this->variable)):""; ?>
                 </div>
             </div>
             <div class="content-info">
