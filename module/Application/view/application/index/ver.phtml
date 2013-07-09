@@ -24,8 +24,8 @@ echo $this->form()->closeTag(); ?>
 <?php
  if($this->hola and $this->holas ){
 ?>
-
-                    
+<script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>        
+<script src="<?php echo $this->basePath()?>/js/vendor/gmaps.js"></script>                    
 <div id="esconder">
 <div class="sub" style="margin-top: 10px;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;">
 <span  style="padding-left: 10px;color:white;font-weight: bold;">Destacados <?php echo $this->nombre; ?> </span>
