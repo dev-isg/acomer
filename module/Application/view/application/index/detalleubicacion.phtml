@@ -24,7 +24,8 @@ echo $this->form()->closeTag(); ?>
 <?php
  if($this->hola and $this->holas ){
 ?>
-
+<script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>        
+<script src="<?php echo $this->basePath()?>/js/vendor/gmaps.js"></script>  
 <div id="esconder">
 <div class="sub" style="margin-top: 10px;background: url(/img/img-resultados.png) no-repeat;width: 41%;padding: 0.9em 0px;height: 23px;">
             <span  style="padding-left: 10px;color:white;font-weight: bold;">Destacados <?php echo $_REQUEST['q']; ?> </span>
@@ -210,6 +211,7 @@ $('#buscarmap').hide();
          var dis=$('#bubi #fq').val();
          var url = "http://192.168.1.38:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
          $("#map").remove();
+         $("#subir-home").remove();
         $(".mensaje").remove();
         $(".mensaje2").remove();
         $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
@@ -253,7 +255,21 @@ $('#buscarmap').hide();
           $("#mapa-buscador").hide();
            $(".mensaje").remove();
            $(".mensaje2").remove();
+           $("#subir-home").remove();
       $(".contenido-plato").append('<p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti.</p><p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p>');
+        $(".contenido-plato").append('<div class="recomendados-platos primer-home" id="subir-home" style="padding-bottom: 90px;"></div>');
+       $("#subir-home").append ('<div class="sub" style="margin-top: 10px;margin-bottom: 15px;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;"><span  style="padding-left: 10px;color:white;font-weight: bold;">Platos Destacados</span></div>');       
+       $("#subir-home").append ('<ul id="listajson"></ul>');
+       $.getJSON('http://192.168.1.38:8080/application/index/jsondesta',function(data){    
+       $.each(data,function(i,val){
+          $('#listajson').append('<li><div class="plato_r"><div class="mosaic-block cover2"><div class="mosaic-overlay"><span>' + val.va_nombre + '</span><img src="/imagenes/'+ val.va_imagen+'" class="img-plato"><img src="/img/mas.png" alt="" class="mas"></div><a href="/platos/index/verplatos?id='+val.in_id +'" class="mosaic-backdrop"><div class="details"><h4>'+ val.va_nombre +'</h4><p class="title-details" style="font-weight: bold;">Ingredientes</p><p class="desc-plato" style="font-size:0.9em;">'+ val.tx_descripcion+'</p></div></a></div><div class="foo"><p class="nom_res">'+val.restaurant_nombre+'</p><div class="pt"><p class="com">'+ val.NumeroComentarios+' <i class="icon-comment"></i></p><div class="punt"><div class="puntuaciones c'+val.Ta_puntaje_in_id+'"></div></div></div></div></div></li>');
+      });          
+    $('.cover2').mosaic({
+                   animation    :    'slide',
+                   anchor_y    :    'top',        //Vertical anchor position
+                    hover_y        : '300px'
+                });
+      });
       }
 
          });
