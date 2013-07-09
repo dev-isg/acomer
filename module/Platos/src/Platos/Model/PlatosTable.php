@@ -397,10 +397,12 @@ class PlatosTable
 //            $selecttot->group('ta_plato.in_id');
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
 //            var_dump($selectString);Exit;
+
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-           
-          $results->buffer();
-          $results->next();
+            
+             $results->buffer();
+//             $results->next();
+
             return $results;
         }
     
@@ -437,8 +439,10 @@ class PlatosTable
     public function cantComentxPlato($destaque=1,$lim,$val,$estado=1){
       if($val==1){
           $puntaje='!=0';//'is not null or ta_comentario.ta_puntaje_in_id!=0'; 
+          $order='ta_puntaje_in_id';
           } else if ($val==2){
               $puntaje='=0';//'is null or ta_comentario.ta_puntaje_in_id!=0';
+              $order='in_id'; 
               }
         $adapter=$this->tableGateway->getAdapter();
         $primer=$this->tableGateway->getAdapter()
@@ -451,10 +455,9 @@ LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
 LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
 where ta_plato.en_destaque='.$destaque.' and ta_plato.en_estado='.$estado.'  and tr.va_nombre is not null  and ta_plato.ta_puntaje_in_id '.$puntaje.'
 GROUP BY in_id 
-ORDER BY ta_puntaje_in_id desc
+ORDER BY '.$order.' desc
 LIMIT '.$lim, $adapter::QUERY_MODE_EXECUTE);
-  
-
+ 
         
 //        print_r($primer->toArray());Exit;
 //        $aux=array();
