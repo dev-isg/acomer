@@ -221,8 +221,7 @@ echo $this->form()->closeTag(); ?>
         });
 
         $("#side").height($("#main").height());
-    });
-
+    
     $('#comentarios').validate({
         rules: {
             va_nombre: {
@@ -255,7 +254,81 @@ echo $this->form()->closeTag(); ?>
             .addClass('valid')
             .closest('.control-group').removeClass('error').addClass('success');
         }
+        });
+        $('#buscarmap').hide();
+       $('#bubi #q').keyup(function () {
+      if(($(this).val() != "") &&  ($('#bubi #fq').val() != "" )){
+      $('#buscarmap').removeClass("disabled").addClass('map');
+      $('#buscarmap').attr("href","#");
+      $('#buscarmap' ).removeAttr('disabled');
+       $('#buscarmap').fadeIn();
+      }   }).keyup();
+         
+        $("#buscarmap").on("click",function(){
+        var plato=$('#bubi #q').val();
+         var dis=$('#bubi #fq').val();
+         var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
+        $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
+        $('#esconder').css("display","none");
+         var map;      
+         $('#esconder').css("display","none");       
+        console.log(url);
+           if ( ($('#bubi #q').val() != "") && ($('#bubi #fq').val()!="") ){
+             $("#mapa-buscador").fadeIn();
+             var prueba=$.getJSON( url, function(data) {
+                     console.log(data.response.numFound);
+            if (data.response.numFound >= 1) {
+               //var mcOptions = { maxZoom: 12};
+                     map = new GMaps({
+                       el: '#map',
+                       zoom: 15,
+                        lat: -12.043333,
+                        lng: -77.028333
+        //               markerClusterer: function(map) {
+        //           return new MarkerClusterer(map,mcOptions);
+        //         }
+           });
+        $.each( data.response.docs, function(i, marker) {
+                 map.setCenter(marker.latitud,marker.longitud );
+                  console.log(marker);
+               map.addMarker({
+                   lat: marker.latitud,
+                   lng: marker.longitud,
+                   icon : {
+               size : new google.maps.Size(32, 37),
+               url : "/img/icomap.png"
+             },
+                   title: marker.restaurante ,
+                   infoWindow: {
+                           content: marker.name + '</br> <a href=/platos/index/verplatos?id=' + marker.id +'&q=' + plato +'>ver plato </a>'
+                         }
+
+                 });
+             });
+      }else{
+            $("#mapa-buscador").hide();
+           $(".mensaje").remove();
+           $(".mensaje2").remove();
+      $(".contenido-plato").append('<p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti.</p><p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p>');
+      }
+
+         });
+     
+     prueba.fail(function( jqxhr, textStatus, error ) {
+      var err = textStatus + ', ' + error;
+      console.log(err); 
+      $("#mapa-buscador").hide();
+        $(".mensaje").remove();
+        $(".mensaje2").remove();
+      $(".contenido-plato").append('<p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti.</p><p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p>');
     });
+ }else{
+ $("#mapa-buscador").hide();
+alert("debe ingresar el plato");
+ } 
+   });
+
+});
 
     function initSucursales(){
 
