@@ -122,14 +122,6 @@ echo $this->form()->closeTag(); ?>
  <script type="text/javascript">
    var map;
    $(document).ready(function(){
-$('#buscarmap').hide();
- $('#bubi #q').keyup(function () {
-      if(($(this).val() != "") &&  ($('#bubi #fq').val() != "" )){
-      $('#buscarmap').removeClass("disabled").addClass('map');
-      $('#buscarmap').attr("href","#");
-      $('#buscarmap' ).removeAttr('disabled');
-       $('#buscarmap').fadeIn();
-      }   }).keyup();
 
   var puntaje = function(item,p){
      $(item).raty({ 
@@ -161,7 +153,14 @@ $('#buscarmap').hide();
         puntaje("#" + idptje ,ptaje); 
          }
         });
-       
+       $('#buscarmap').hide();
+       $('#bubi #q').keyup(function () {
+      if(($(this).val() != "") &&  ($('#bubi #fq').val() != "" )){
+      $('#buscarmap').removeClass("disabled").addClass('map');
+      $('#buscarmap').attr("href","#");
+      $('#buscarmap' ).removeAttr('disabled');
+       $('#buscarmap').fadeIn();
+      }   }).keyup();
          
         $("#buscarmap").on("click",function(){
         var plato=$('#bubi #q').val();
@@ -171,23 +170,22 @@ $('#buscarmap').hide();
         $('#esconder').css("display","none");
          var map;      
          $('#esconder').css("display","none");       
-        console.log(url);     
-
-     if ( ($('#bubi #q').val() != "") && ($('#bubi #fq').val()!="") ){
-     $("#mapa-buscador").fadeIn();
-     var prueba=$.getJSON( url, function(data) {
-             console.log(data.response.numFound);
-    if (data.response.numFound >= 1) {
-       //var mcOptions = { maxZoom: 12};
-             map = new GMaps({
-               el: '#map',
-               zoom: 15,
-                lat: -12.043333,
-                lng: -77.028333
-//               markerClusterer: function(map) {
-//           return new MarkerClusterer(map,mcOptions);
-//         }
-       });
+        console.log(url);
+           if ( ($('#bubi #q').val() != "") && ($('#bubi #fq').val()!="") ){
+             $("#mapa-buscador").fadeIn();
+             var prueba=$.getJSON( url, function(data) {
+                     console.log(data.response.numFound);
+            if (data.response.numFound >= 1) {
+               //var mcOptions = { maxZoom: 12};
+                     map = new GMaps({
+                       el: '#map',
+                       zoom: 15,
+                        lat: -12.043333,
+                        lng: -77.028333
+        //               markerClusterer: function(map) {
+        //           return new MarkerClusterer(map,mcOptions);
+        //         }
+           });
         $.each( data.response.docs, function(i, marker) {
                  map.setCenter(marker.latitud,marker.longitud );
                   console.log(marker);
@@ -219,13 +217,12 @@ $('#buscarmap').hide();
       console.log(err); 
       $("#mapa-buscador").hide();
         $(".mensaje").remove();
-           $(".mensaje2").remove();
+        $(".mensaje2").remove();
       $(".contenido-plato").append('<p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti.</p><p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p>');
     });
  }else{
  $("#mapa-buscador").hide();
 alert("debe ingresar el plato");
-
  }
  
         
