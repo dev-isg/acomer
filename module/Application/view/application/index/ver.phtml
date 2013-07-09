@@ -82,7 +82,6 @@ echo $this->form()->closeTag(); ?>
                 foreach ($this->holas as $doc)
                           {
                       ?> 
-
                        <div class="plato_h" >
                          <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                          <div class="lateral" >
@@ -90,7 +89,7 @@ echo $this->form()->closeTag(); ?>
                           <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>&q=<?php echo $this->nombre; ?>"  >
                                <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="width: 144px;height: 120px;">
                           </a>
-                          </div>
+                          </div> 
                           <div class="detalle-restaurante">
                           <div class="detalle-nombre"><p class="nombre_r"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p> <div class="punt">
                     <div class="puntuaciones c<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>" style="margin: 0px;width: 118px !important;display:inline-block;"></div>
