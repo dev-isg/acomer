@@ -92,7 +92,7 @@ class ComentariosForm extends Form
         //'filters' => array( new \Platos\filter\Specialchart()),
         $descripcion = new \Zend\Form\Element\Textarea('tx_descripcion',
                 array(
-                    'label' => 'Descripcion:',
+                    'label' => 'Descripción:',
                     'filters' => array( 'name' =>  '\Platos\filter\Specialchart'),
                     array('attributes' => array(
                             'class' => '',

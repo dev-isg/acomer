@@ -74,12 +74,12 @@ class PlatosForm extends Form
             'attributes' => array(               
                 'class' => 'span11',
                 'id'   => 'tx_descripcion',
-                'placeholder'=>'Ingrese descripcion',
+                'placeholder'=>'Ingrese descripción',
                 'colls'=>40,
                 'rows'=>4
             ),
             'options' => array(
-                'label' => 'Descripcion',
+                'label' => 'Descripción',
             ),
         ));
            
@@ -161,8 +161,6 @@ class PlatosForm extends Form
             ),
         ));
 
-        
-        
     }
     
     
