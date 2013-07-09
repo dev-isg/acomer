@@ -178,7 +178,7 @@ class IndexController extends AbstractActionController
         }
         $form->get('q')->setValue($palabra);
          $form->get('distrito')->setValueOptions($com);
-         $form->get('submit')->setValue('');
+         $form->get('submit')->setValue('Buscar');
          $view->setVariables( array('lista' => $listades,'hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'error'=>$error));
        return $view;
       }
@@ -258,7 +258,7 @@ class IndexController extends AbstractActionController
         }
         $form->get('distrito')->setValueOptions($com);
         //$form->get('q')->setValue($texto);
-        $form->get('submit')->setValue('');
+        $form->get('submit')->setValue('Buscar');
         $view->setVariables( array('lista' => $listades,'hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'nombre'=>$texto));
      
     
