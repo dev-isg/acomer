@@ -97,21 +97,83 @@ class IndexController extends AbstractActionController
                      }
                      $form->setMessages(array('imagen'=>$error ));
                 } else {
-                    
-                  // $adapter->setDestination('C:\xampp\htdocs\acomer\public\imagenes');
-                     $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
-                     if ($adapter->receive($File['name'])) {
-                        $plato->exchangeArray($form->getData());
-                    }
-                  
+                               $anchura = 407;
+              $altura = 272; 
+              $imf =$File['name'];
+              $info =  pathinfo($File['name']);
+              $tamanio = getimagesize($File['tmp_name']);
+              $ancho =$tamanio[0]; 
+              $alto =$tamanio[1]; 
+              if($ancho>$alto)
+              {
+                  $altura =(int)($alto*$anchura/$ancho); 
+                  if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg')      
+                  {   $nom = $nonFile['va_nombre'];
+                      $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
+                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
+                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       imagejpeg($nuevaimagen,$copia);
+                      $this->getPlatosTable()->guardarPlato($plato,$File,$local);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);   
+                  }
+                  if($info['extension']=='png')      
+                  {   $nom = $nonFile['va_nombre'];
+                      $viejaimagen=  imagecreatefrompng($File['tmp_name']);
+                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
+                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       imagepng($nuevaimagen,$copia);
+                      $this->getPlatosTable()->guardarPlato($plato,$File,$local);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);   
+                  }
+                  if($info['extension']=='gif')      
+                  {   $nom = $nonFile['va_nombre'];
+                      $viejaimagen=  imagecreatefromgif($File['tmp_name']);
+                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
+                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       imagegif($nuevaimagen,$copia);
                     $this->getPlatosTable()->guardarPlato($plato,$File,$local);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local); 
+                  }
+               }
+                   if($ancho<$alto)
+              {
+                  $anchura =(int)($ancho*$altura/$alto); 
+                  if($info['extension']=='jpg'or $info['extension']=='JPG'or $info['extension']=='jpeg')      
+                  {   $nom = $nonFile['va_nombre'];
+                      $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
+                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
+                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       imagejpeg($nuevaimagen,$copia);
+                     $this->getPlatosTable()->guardarPlato($plato,$File,$local);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local); 
+                  }
+                   if($info['extension']=='png')      
+                  {   $nom = $nonFile['va_nombre'];
+                      $viejaimagen=  imagecreatefrompng($File['tmp_name']);
+                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
+                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       imagepng($nuevaimagen,$copia);
+                     $this->getPlatosTable()->guardarPlato($plato,$File,$local);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local); 
+                  }
+                  if($info['extension']=='gif')      
+                  {   $nom = $nonFile['va_nombre'];
+                      $viejaimagen=  imagecreatefromgif($File['tmp_name']);
+                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
+                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       imagegif($nuevaimagen,$copia);
+                      $this->getPlatosTable()->guardarPlato($plato,$File,$local);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);   
+                  }
+               }
                 }
-//                //guardo en bd
-//                $this->getPlatosTable()->guardarPlato($plato);
 
-                // Redirect to list of albums
-               // return $this->redirect()->toRoute('album');
             }
         }
         
@@ -119,81 +181,7 @@ class IndexController extends AbstractActionController
         return array('form' => $form,'id'=>$local);
         
     }
-    
-    
-   /*
-    * editar platos
-    */
-//    public function editarplatosAction()
-//     
-//    {   
-//        $id = (int) $this->params()->fromRoute('in_id', 38);//fromRoute('in_id', 0);
-//        $va_nombre = $this->params()->fromRoute('va_nombre',0);//fromRoute('va_nombre',0);
-////      
-//         
-//        if (!$id) {
-//           return $this->redirect()->toUrl($this->
-//            getRequest()->getBaseUrl().'/platos/index/agregarplatos');  
-//        }
-//        try {
-//
-//            $plato = $this->getPlatosTable()->getPlato($id);
-////            var_dump($plato);exit;
-//        }
-//        catch (\Exception $ex) {
-//
-//            return $this->redirect()->toUrl($this->
-//            getRequest()->getBaseUrl().'/platos'); 
-//        }
-//           $adpter=$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-//        $form  = new PlatosForm($adpter);
-//        $form->bind($plato);
-//        $form->get('submit')->setAttribute('value', 'MODIFICAR');
-//        $request = $this->getRequest();
-//        
-//        if ($request->isPost()) {
-//                           
-//            $form->setInputFilter($plato->getInputFilter());
-//            $nonFile = $request->getPost()->toArray();
-//            $File    = $this->params()->fromFiles('va_imagen');
-//            $data    = array_merge_recursive(
-//                        $this->getRequest()->getPost()->toArray(),          
-//                       $this->getRequest()->getFiles()->toArray()
-//                   ); 
-////            var_dump($data);exit;
-//            $form->setData($data); 
-////            var_dump($form->isValid());exit;
-//            if (true) {
-//                
-////                $nonFile = $request->getPost()->toArray();
-////               $File = $this->params()->fromFiles('va_imagen');
-//               
-//                $adapter = new \Zend\File\Transfer\Adapter\Http();
-////                $adapter->setDestination('C:\xampp\htdocs\acomer\public\imagenes');
-////                 echo 'hola';exit;
-//               //  $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
-////                  if ($adapter->receive($File['name'])) { //echo 'dddds';exit;
-//                        //$restaurante->exchangeArray($form->getData());
-//                     
-//                      $plato2=$request->getPost()->toArray();
-//                      $data2    = array_merge_recursive($plato2,array('in_id'=>$id));
-////                         $this->getPlatosTable()->guardarPlato($plato,$File);//,35
-//                       $this->getPlatosTable()->editarPlato($data2 ,$File,1);
-//                $this->redirect()->toUrl('/platos');
-////                    }
-//                
-//            }
-//        }
-// 
-//     return array(
-//            'in_id' => $id,
-//            'va_nombre' => $va_nombre,
-//            'form' => $form,
-//        );
-//        
-//    }
-//    
-    
+
     
     public function editarplatosAction()   
     {   

@@ -96,7 +96,7 @@ class PlatosTable
    
         $data = array(
 //            'in_id' => $plato->in_id,
-            'va_imagen' => $imagen['name'],//$plato->va_imagen,
+            'va_imagen' => $plato->va_nombre.'-'.$imagen['name'],//$plato->va_imagen,
             'tx_descripcion' => $plato->tx_descripcion,
             'va_nombre' => $plato->va_nombre,
             'va_precio' => $plato->va_precio,
