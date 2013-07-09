@@ -476,7 +476,7 @@ class IndexController extends AbstractActionController {
         }
         $formu->get('distrito')->setValueOptions($com);
         $formu->get('q')->setValue($plato);
-        $formu->get('submit')->setValue('');
+        $formu->get('submit')->setValue('Buscar');
         $this->layout()->clase = 'Detalle';
         
          $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
