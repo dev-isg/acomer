@@ -166,7 +166,10 @@ class RestauranteTable
                 $data = array(
                     'en_estado' => $estado,
                  );
+                // var_dump($estado);exit;
          $this->tableGateway->update($data, array('in_id' => $id));
+         
+         
 
     }
     

@@ -237,15 +237,81 @@ class IndexController extends AbstractActionController
                 $nonFile = $request->getPost()->toArray();
                $File = $this->params()->fromFiles('va_imagen');
                
-                $adapter = new \Zend\File\Transfer\Adapter\Http();
-                $adapter->setDestination('C:\source\zf2\acomer\public\imagenes');
-                
-                $adapter->setDestination(dirname(__DIR__).'/public/imagenes');
-                  if ($adapter->receive($File['name'])) { //echo 'dddds';exit;
-                        //$restaurante->exchangeArray($form->getData());
-                         $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
-                $this->redirect()->toUrl('/restaurante');
-                    }
+             $anchura = 240;
+              $altura = 143; 
+              $imf =$File['name'];
+              $info =  pathinfo($File['name']);
+              $tamanio = getimagesize($File['tmp_name']);
+              $ancho =$tamanio[0]; 
+              $alto =$tamanio[1]; 
+              if($ancho>$alto)
+              {
+                  $altura =(int)($alto*$anchura/$ancho); 
+                  if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg')      
+                  {   $nom = $nonFile['va_nombre'];
+                      $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
+                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
+                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       imagejpeg($nuevaimagen,$copia);
+                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
+                  }
+                  if($info['extension']=='png')      
+                  {   $nom = $nonFile['va_nombre'];
+                      $viejaimagen=  imagecreatefrompng($File['tmp_name']);
+                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
+                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       imagepng($nuevaimagen,$copia);
+                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
+                  }
+                  if($info['extension']=='gif')      
+                  {   $nom = $nonFile['va_nombre'];
+                      $viejaimagen=  imagecreatefromgif($File['tmp_name']);
+                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
+                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       imagegif($nuevaimagen,$copia);
+                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
+                  }
+               }
+                   if($ancho<$alto)
+              {
+                  $anchura =(int)($ancho*$altura/$alto); 
+                  if($info['extension']=='jpg'or $info['extension']=='JPG'or $info['extension']=='jpeg')      
+                  {   $nom = $nonFile['va_nombre'];
+                      $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
+                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
+                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       imagejpeg($nuevaimagen,$copia);
+                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
+                  }
+                   if($info['extension']=='png')      
+                  {   $nom = $nonFile['va_nombre'];
+                      $viejaimagen=  imagecreatefrompng($File['tmp_name']);
+                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
+                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       imagepng($nuevaimagen,$copia);
+                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
+                  }
+                  if($info['extension']=='gif')      
+                  {   $nom = $nonFile['va_nombre'];
+                      $viejaimagen=  imagecreatefromgif($File['tmp_name']);
+                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
+                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       imagegif($nuevaimagen,$copia);
+                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
+                  }
+               }
                 
             }
         }

@@ -35,7 +35,7 @@ echo $this->form()->closeTag(); ?>
                 foreach ($this->hola as $doc)
                           {
           ?> 
-                          <div class="plato_r">
+                          <div class="plato_r" style="display:display: inline-block;">
                          <input type="hidden" value="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>">
                        <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                            <div class="mosaic-block cover">
@@ -71,7 +71,7 @@ echo $this->form()->closeTag(); ?>
                         </div>
                
                             
-        <div class="sub" style="margin-top: 1em;margin-bottom: 2em;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;">
+        <div class="sub" style="margin-top: 1em;margin-bottom: 2em;background: url(/img/img-resultados.png) no-repeat;width: 41%;padding: 0.9em 0px;height: 23px;">
             <span style="padding-left: 10px;color:white;font-weight: bold;">Resultados <?php echo $_REQUEST['q']; ?> </span>
         </div>                    
                                               
@@ -80,7 +80,7 @@ echo $this->form()->closeTag(); ?>
                           {
                       ?> 
 
-                       <div class="plato_h">
+                       <div class="plato_h" >
                          <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                          <div class="lateral" >
                           <img src="/img/mas.png" alt="" class="mas-det">
@@ -165,11 +165,12 @@ echo $this->form()->closeTag(); ?>
         $("#buscarmap").on("click",function(){
         var plato=$('#bubi #q').val();
          var dis=$('#bubi #fq').val();
-         var url = "http://zf2.pe:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
+         var url = "http://192.168.1.38:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
+       $("#mapa-buscador").remove();
+        $(".mensaje").remove();
+        $(".mensaje2").remove();
         $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
-        $('#esconder').css("display","none");
-         var map;      
-         $('#esconder').css("display","none");       
+        $('#esconder').css("display","none");  
         console.log(url);
            if ( ($('#bubi #q').val() != "") && ($('#bubi #fq').val()!="") ){
              $("#mapa-buscador").fadeIn();
