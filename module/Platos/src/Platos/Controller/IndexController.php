@@ -91,6 +91,7 @@ class IndexController extends AbstractActionController {
                     $form->setMessages(array('imagen' => $error));
                 } else {
 
+
                                $anchura = 407;
               $altura = 272; 
               $imf =$File['name'];
@@ -166,6 +167,7 @@ class IndexController extends AbstractActionController {
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);   
                   }
                }
+
                 }
 
 
@@ -479,13 +481,13 @@ class IndexController extends AbstractActionController {
         
          $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
          
-//         $paginator = new \Zend\Paginator\Paginator($listarcomentarios);
-//         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-//         $paginator->setItemCountPerPage(10);
-                
-        $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $listarcomentarios, 'form' => $form, 'formu' => $formu,
+         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
+         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+         $paginator->setItemCountPerPage(10);
+              
+        $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,
-            'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios)));
+            'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id));
         return $view;
     }
 
