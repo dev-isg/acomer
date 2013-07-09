@@ -455,11 +455,13 @@ class IndexController extends AbstractActionController {
                     $form->setData(array('va_nombre' => '', 'va_email' => '', 'tx_descripcion' => '')); 
                     $this->redirect()->toUrl('/platos/index/verplatos?id='.$id);
                 }
-            } 
+            }
         } 
 //        else {
 //          $form->setData(array('va_nombre' => '', 'email' => '', 'tx_descripcion' => ''));  
-//        }
+////        }else{
+//                echo '<script>alert("solo puedes comentar una vez")</script>';
+//            } 
 
 //    var_dump($listarcomentarios);Exit;
 
@@ -479,7 +481,7 @@ class IndexController extends AbstractActionController {
 
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(10);
+         $paginator->setItemCountPerPage(5);
               
         $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,

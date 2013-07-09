@@ -25,7 +25,7 @@
             <th>Nombre</th>
              <th>Tipo de plato</th>
             <th>Precio</th>   
-            <th>Estado</th>       
+           <!--  <th>Estado</th>   -->     
             <th>Restaurante</th>
             <th>Comentarios</th>
             <th>Puntaje</th>
@@ -47,10 +47,8 @@
                 <?php } ?>
             <td><?php echo $this->escapeHtml($plato->va_nombre); ?></td>
             <td><?php echo $this->escapeHtml($plato->tipo_plato_va_nombre); ?></td> 
-            <td><?php echo $this->escapeHtml($plato->va_precio); ?></td>
-            
-            <td><?php echo $this->escapeHtml($plato->en_estado); ?></td>
-                      
+            <td><?php echo $this->escapeHtml($plato->va_precio); ?></td>            
+           <!--  <td><?php echo $this->escapeHtml($plato->en_estado); ?></td> -->                      
             <td><?php echo $this->escapeHtml($plato->restaurante_va_nombre); ?></td> 
             <td><?php echo $this->escapeHtml($plato->cantidad); ?></td>
             <td><input type="hidden" name="pplato" data-id="<?php echo $this->escapeHtml($plato->in_id); ?>"  value="<?php echo $this->escapeHtml($plato->Ta_puntaje_in_id); ?>"><p id="<?php echo $this->escapeHtml($plato->in_id); ?>"></p> </td>
@@ -59,7 +57,7 @@
             <?php if($plato->en_estado=='activo'){ ?>
             <a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" data-name="desactivo" href="#" class='eli-lo btn btn-danger'><i class='icon-trash icon-white'></i>Desactivar</a></td>
             <?php }else{ ?>
-            <a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" data-name="activo" href="#" class='eli-lo btn btn-primary'><i class='icon-trash icon-white'></i>Activar</a></td>
+            <a id="<?php echo $this->escapeHtml($plato->in_id); ?>" data-name="activo" href="#" class='eli-lo btn btn-primary'><i class='icon-trash icon-white'></i>Activar</a></td>
             <?php } ?>
              </tr>
 
@@ -67,8 +65,7 @@
     
 </table>
 </div>
-<!-- <div class="span4">
-  
+<!-- <div class="span4">  
     <div class="modal small hide fade" id="eli-plato" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>

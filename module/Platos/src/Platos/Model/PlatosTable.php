@@ -115,12 +115,23 @@ class PlatosTable {
 //         $data['cantidad']=0;
 //            print_r($data);exit;
         $id = (int) $plato->in_id;
-
+        
+           $adapterc = $this->tableGateway->getAdapter();
+           $sql = new Sql($adapterc);
+           $cantidad = $sql->select()->from('ta_plato_has_ta_local')
+                        ->columns(array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(*)')))
+                       ->where(array('ta_local_in_id'=>$idlocal));
+            $selectStringC = $sql->getSqlStringForSqlObject($cantidad);
+            $results = $adapterc->query($selectStringC, $adapterc::QUERY_MODE_EXECUTE);
+            $cant=$results->toArray();
+//            var_dump($cant[0]['cantidad']);exit;
         if ($id == 0) {
+
+
 //            var_dump($this->tableGateway->select(array())->count('*'));Exit;
-//            if($this->tableGateway->select()->count()<5)
+            if($cant[0]['cantidad']<5){
             $this->tableGateway->insert($data);
-//            var_dump($this->tableGateway->select(array(''=>))->count());Exit;
+//            var_dump($this->tableGateway->getSql()->select()->from('ta_plato_has_ta_local')->where(array('ta_local_in_id'=>$idlocal))->count());Exit;
             $idplato = $this->tableGateway->getLastInsertValue();
             $insert = $this->tableGateway->getSql()->insert()
                     ->into('ta_plato_has_ta_local')
@@ -166,6 +177,7 @@ class PlatosTable {
                 $solr->commit();
                 $solr->optimize();
             }
+          }
         } else {
 
             if ($this->getPlato($id)) {
@@ -437,7 +449,7 @@ class PlatosTable {
                 ->query('SELECT ta_plato.*,tr.va_nombre AS restaurant_nombre ,COUNT(ta_comentario.in_id ) AS NumeroComentarios
                 FROM ta_plato
                 LEFT JOIN  ta_comentario ON ta_plato.in_id = ta_comentario.ta_plato_in_id
-                LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id` 
+                LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id`
                 LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id` 
                 LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id` 
                 LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
