@@ -180,9 +180,7 @@ class PlatosTable {
                 $solr->optimize();
             }
           }else{
-              $this->flashMessenger()->addMessage('Thank you for your comment!');
-             
-//              echo ('<script>alert("supero los platos permitidos")</script>');
+              echo ('<script>confirm("supero los platos permitidos")</script>');
           }
         } else {
 

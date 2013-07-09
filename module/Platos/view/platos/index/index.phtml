@@ -55,7 +55,7 @@
              <td><a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" href="<?php echo $this->basePath();?>/platos/index/editarplatos/<?php echo $this->idlocal?>/<?php echo $plato->in_id;?>" class='modificar btn btn-success'><i class='icon-edit icon-white'></i>Editar </a>
 <!--                 <td><a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" href="<?php echo $this->basePath();?>/platos/index/editarplatos?in_id=<?php echo $plato->in_id;?>&va_nombre=<?php echo $plato->va_nombre;?>" class='modificar btn btn-success'><i class='icon-edit icon-white'></i>Editar </a>-->
             <?php if($plato->en_estado=='activo'){ ?>
-            <a data-id="<?php echo $this->escapeHtml($plato->in_id); ?>" data-name="desactivo" href="#" class='eli-lo btn btn-danger'><i class='icon-trash icon-white'></i>Desactivar</a></td>
+            <a id="<?php echo $this->escapeHtml($plato->in_id); ?>" data-name="desactivo" href="#" class='eli-lo btn btn-danger'><i class='icon-trash icon-white'></i>Desactivar</a></td>
             <?php }else{ ?>
             <a id="<?php echo $this->escapeHtml($plato->in_id); ?>" data-name="activo" href="#" class='eli-lo btn btn-primary'><i class='icon-trash icon-white'></i>Activar</a></td>
             <?php } ?>
