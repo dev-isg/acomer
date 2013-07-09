@@ -1059,7 +1059,7 @@ li.li-suc a h6{
   font-weight: bold;
   margin: 0;
   font-size: 15px;
-  width: 230px;
+  width: 225px;
   float: left;
 }
 li.li-suc a.activo span.close-banch{
@@ -1239,7 +1239,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
 }
 .content-info{
   float: left;
-  width: 266px;
+  width: 263px;
   margin-left: 10px;
 }
 .coments-all .top-coment{
@@ -2195,6 +2195,51 @@ form#application .control-group .btn-solicito{
   .info-img img{
     width: 100%;
   }
+  .footer{
+    float: left;
+  }
+  #search input[type="text"] {
+    background: #ff8500;
+    border: 0 none;
+    color: #fff;
+    padding: 13px 15px 11px 20px;
+    -webkit-border-radius: 14px 0 0 14px;
+    -moz-border-radius: 14px 0 0 14px;
+    -o-border-radius: 14px 0 0 14px;
+    border-radius: 14px 0 0 14px;
+    margin-left: 15px;
+    width: 145px;
+    float: left;
+    font-weight: bold;
+    font-size: 1em;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+    font-size: 16px;
+    font-weight: normal;
+    height: 24px;
+    border-bottom: 1px solid #d4e59c;
+  }
+  #search .btn-search-home {
+    background: url(../img/lupa-search.png) no-repeat;
+    border: 0;
+    display: block;
+    float: left;
+    height: 49px;
+    text-indent: -9999px;
+    width: 52px;
+    -webkit-box-shadow: 0 0 0;
+    -moz-box-shadow: 0 0 0;
+    -o-box-shadow: 0 0 0;
+    box-shadow: 0 0 0;
+    -webkit-border-radius: 0 14px 14px 0;
+    -moz-border-radius: 0 14px 14px 0;
+    -o-border-radius: 0 14px 14px 0;
+    border-radius: 0 14px 14px 0;
+    border-left: 1px solid #feab53;
+    border-bottom: 1px solid #d4e59c;
+  }
 }
 @media (max-width: 320px) {
   .mosaic-overlay{
@@ -2202,5 +2247,47 @@ form#application .control-group .btn-solicito{
   }
   .mosaic-block{
     height: 163px;
+  }
+  #search input[type="text"] {
+    background: #ff8500;
+    border: 0 none;
+    color: #fff;
+    padding: 13px 15px 11px 20px;
+    -webkit-border-radius: 14px 0 0 14px;
+    -moz-border-radius: 14px 0 0 14px;
+    -o-border-radius: 14px 0 0 14px;
+    border-radius: 14px 0 0 14px;
+    margin-left: 15px;
+    width: 145px;
+    float: left;
+    font-weight: bold;
+    font-size: 1em;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+    font-size: 16px;
+    font-weight: normal;
+    height: 24px;
+    border-bottom: 1px solid #d4e59c;
+  }
+  #search .btn-search-home {
+    background: url(../img/lupa-search.png) no-repeat;
+    border: 0;
+    display: block;
+    float: left;
+    height: 49px;
+    text-indent: -9999px;
+    width: 52px;
+    -webkit-box-shadow: 0 0 0;
+    -moz-box-shadow: 0 0 0;
+    -o-box-shadow: 0 0 0;
+    box-shadow: 0 0 0;
+    -webkit-border-radius: 0 14px 14px 0;
+    -moz-border-radius: 0 14px 14px 0;
+    -o-border-radius: 0 14px 14px 0;
+    border-radius: 0 14px 14px 0;
+    border-left: 1px solid #feab53;
+    border-bottom: 1px solid #d4e59c;
   }
 }

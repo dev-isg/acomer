@@ -71,7 +71,7 @@ class ComentariosForm extends Form
             'attributes' => array(               
                 'class' => '',
                 'id'   => 'va_email',
-                'placeholder'=>'Ingrese su Correo'
+                'placeholder'=>'Ingrese su correo'
             ),
             'options' => array(
                 'label' => 'Correo:',
@@ -88,19 +88,20 @@ class ComentariosForm extends Form
                 ) 
             )         
         ));
-                //'filters' => array( new \Platos\filter\Specialchart()),
-                $descripcion = new \Zend\Form\Element\Textarea('tx_descripcion',
-                        array(
-                            'label' => 'Descripcion:',
-                            'filters' => array( 'name' =>  '\Platos\filter\Specialchart'),
-                            array('attributes' => array(
-                                    'class' => '',
-                                    'id' => 'tx_descripcion',
-                                    'placeholder' => 'Ingrese descripcion',
-                                    'colls' => 40,
-                                    'rows' => 4
-                                ),
-                        )));
+
+        //'filters' => array( new \Platos\filter\Specialchart()),
+        $descripcion = new \Zend\Form\Element\Textarea('tx_descripcion',
+                array(
+                    'label' => 'Descripcion:',
+                    'filters' => array( 'name' =>  '\Platos\filter\Specialchart'),
+                    array('attributes' => array(
+                            'class' => '',
+                            'id' => 'tx_descripcion',
+                            'placeholder' => 'Ingrese descripción',
+                            'colls' => 40,
+                            'rows' => 4
+                        ),
+                )));
         
         $this->add($descripcion);
                 $this->add(array(
