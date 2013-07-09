@@ -167,14 +167,9 @@ class IndexController extends AbstractActionController {
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);   
                   }
                }
-
                 }
-
-
             }
         }
-
-
         return array('form' => $form, 'id' => $local);
     }
 
@@ -458,6 +453,7 @@ class IndexController extends AbstractActionController {
                     setcookie('id' . $id, 1);
 //                    $form->clearAttributes();
                     $form->setData(array('va_nombre' => '', 'va_email' => '', 'tx_descripcion' => '')); 
+                    $this->redirect()->toUrl('/platos/index/verplatos?id='.$id);
                 }
             } 
         } 
