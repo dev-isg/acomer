@@ -480,7 +480,7 @@ class IndexController extends AbstractActionController {
         $this->layout()->clase = 'Detalle';
         
          $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
-         
+
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
          $paginator->setItemCountPerPage(10);
