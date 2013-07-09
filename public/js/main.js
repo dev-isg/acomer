@@ -489,7 +489,7 @@ $('.check_rest').mousedown(function() {
             $("#la" + id).removeClass().addClass("label label-success");
             $("#la" + id).html("");
             $("#la" + id).html("activo");
-            location.reload();
+              $("#" + id).closest('tr').remove();
                  };
         }else{
           var est="desactivo";
@@ -502,7 +502,7 @@ $('.check_rest').mousedown(function() {
           $("#la" + id).removeClass().addClass("label label-important");
           $("#la" + id).html("");
           $("#la" + id).html("desactivo");
-          location.reload();
+          $("#" + id).closest('tr').remove();
               }
     }); 
 
