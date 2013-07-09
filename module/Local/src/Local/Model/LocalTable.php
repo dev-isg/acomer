@@ -27,7 +27,7 @@ class LocalTable
         return $resultSet; 
     }
     
-    public function listar($consulta = null){//,$id
+    public function listar($id,$consulta = null){//,$id
 //            $rowset = $this->tableGateway->select(function (Select $select) {           
 //            $select->join(array('r'=>'ta_restaurante'),'ta_restaurante_in_id=r.in_id')
 //                   ->join(array('u'=>'ta_ubigeo'),'ta_ubigeo_in_id=u.in_id',array('ch_pais','ch_departamento','ch_provincia','ch_distrito'))    
@@ -36,9 +36,10 @@ class LocalTable
               $select = $this->tableGateway->getSql()->select()
              ->join(array('r'=>'ta_restaurante'),'ta_restaurante_in_id=r.in_id',array('va_nombre'))
              ->join(array('u'=>'ta_ubigeo'),'ta_ubigeo_in_id=u.in_id',array('ch_pais','ch_departamento','ch_provincia','ch_distrito'))
-              ->where('(r.in_id LIKE "%'.$consulta.'%") OR (r.va_nombre LIKE "%'.$consulta.'%") OR (u.ch_distrito LIKE "%'.$consulta.'%")');//OR (ta_restaurante_in_id LIKE "%'.$consulta.'%") OR (ta_ubigeo_in_id LIKE "%'.$consulta.'%")
+              ->where('(r.in_id LIKE "%'.$id.'%") AND ((r.va_nombre LIKE "%'.$consulta.'%") OR (u.ch_distrito LIKE "%'.$consulta.'%"))');//OR (ta_restaurante_in_id LIKE "%'.$consulta.'%") OR (ta_ubigeo_in_id LIKE "%'.$consulta.'%")
               //->where(array('r.in_id'=>$id));//('ta_restaurante_in_id='.'1');//r.in_id
               $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($select);
+//              var_dump($selectString);exit;
             $adapter=$this->tableGateway->getAdapter();
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
  
