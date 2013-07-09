@@ -205,7 +205,7 @@ font-style: italic;
 font-weight: bold;
 padding-bottom: 3px;
 margin: 0;
-margin-top: 10px;
+margin-top: 7em;
 margin-bottom: 8px;
 line-height: 20px;
 padding-left: 2em;
@@ -1234,7 +1234,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
 }
 .coments-all{
   float: left;
-  width: 411px;
+  width: 60%;
   border-right: 1px solid #e5e5e5;
 }
 .content-info{
@@ -1839,6 +1839,94 @@ form#application .control-group .btn-solicito{
   a.title-home-listado{
     margin-bottom: 10px;
   }
+
+  /*Detalle sdel plato*/
+  .content-left{
+    width: 100%;
+  }
+  .descrip-product{
+    width: 100%;
+  }
+  .descrip-product .ficha-product{
+    margin-left: 10px;
+    width: 95.5%;
+    height: auto;
+  }
+  .ficha-product .ficha-img{
+    width: 60.8%;
+    height: auto;
+  }
+  .ficha-product .ficha-desc{
+    width: 35.5%;
+    height: auto;
+  }
+  .content-coments{
+    padding-left: 10px;
+    padding-right: 0;
+  }
+  .coments-all{
+    width: 60%;
+  }
+  .content-info {
+    width: 37%;
+  }
+  .left-desc{
+    width: 46.8%;
+  }
+  .right-desc{
+    width: 46.8%;
+  }
+  .top-coment{
+    height: auto!important;
+    float: left;
+    width: 100%;
+  }
+  .top-coment p{
+    width: 42%;
+  }
+  .top-coment a{
+    width: 38%;
+    margin-bottom: 10px;
+  }
+  .comentarios-one{
+    width: 100%;
+    float: left;
+  }
+  .agregar-comentario-desc{
+    float: left;
+    width: 100%;
+  }
+  .form-horizontal .control-group input[type="text"]{
+    width: 96%;
+  }
+  .form-horizontal .control-group textarea{
+    width: 96%;
+  }
+  .form-horizontal .control-group input[type="email"]{
+    width: 96%;
+  }
+  .img-li-top .puntuaciones{
+    right: 0;
+  }
+  .img-li-desc{
+    width: 73.6%;
+  }
+  .content-info .info-img{
+    width: 100%;
+  }
+  #mapCont{
+    width: 100%;
+  }
+  li.li-suc a header{
+    width: 100%;
+  }
+  .content-info h4{
+    font-size: 14px!important;
+    line-height: 20px;
+  }
+  .coment-li .img-li{
+    width: 23.9%;
+  }
 }
 @media (max-width: 767px) {
   body{
@@ -1901,6 +1989,106 @@ form#application .control-group .btn-solicito{
   .logan{
     font-size: 1em;
     line-height: 20px;
+  }
+
+  /*Detalles de producto*/
+  .content-left{
+    width: 100%;
+  }
+  .descrip-product{
+    width: 100%;
+  }
+  .descrip-product .ficha-product{
+    margin-left: 0px;
+    width: 96.9%;
+    height: auto;
+  }
+  .ficha-img{
+    width: 100%!important;
+  }
+  .ficha-img img{
+    width: 100%;
+  }
+  .ficha-product .ficha-img{
+    height: auto;
+  }
+  .ficha-product .ficha-desc{
+    width: 95%;
+  }
+  .content-coments{
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 93.7%;
+  }
+  .cont-accesorios h4{
+
+  }
+  .right-desc h4{
+    margin-top: 0;
+  }
+  .coments-all{
+    width: 100%;
+  }
+  .left-desc{
+    border: 0;
+    width: 100%;
+    padding-right: 0px;
+  }
+  .right-desc{
+    margin-left: 0;
+    width: 96%;
+  }
+  .top-coment p{
+    margin-left: 0;
+    width: 35%;
+  }
+  .form-horizontal .control-group input[type="text"]{
+    width: 92%;
+  }
+  .form-horizontal .control-group textarea{
+    width: 92%;
+  }
+  .form-horizontal .control-group input[type="email"]{
+    width: 92%;
+  }
+  .coment-li .img-li{
+    width: 20%;
+  }
+  .coment-li .img-li img{
+    width: 100%;
+  }
+  .img-li-desc{
+    width: 77%;
+  }
+  .img-li-top .puntuaciones{
+    right: 0;
+  }
+  .img-li-desc .img-li-top h4{
+    font-size: 13px!important;
+  }
+  .coments-all{
+    border: 0;
+  }
+  .cont-accesorios{
+    margin-left: 0;
+  }
+  .content-info{
+    margin-left: 0;
+  }
+  .content-info{
+    width: 100%;
+  }
+  .coments-all .top-coment{
+    margin-right: 0;
+  }
+  .content-info .info-img{
+    width: 100%;
+  }
+  #mapCont{
+    width: 100%;
+  }
+  .cont-accesorios{
+    margin-right: 0;
   }
 }
 @media (max-width: 480px) {
@@ -2003,6 +2191,9 @@ form#application .control-group .btn-solicito{
   }
   .subir-home{
     margin-top: 0!important;
+  }
+  .info-img img{
+    width: 100%;
   }
 }
 @media (max-width: 320px) {

@@ -54,7 +54,7 @@
     <?php $count = 1;
     foreach ($this->restaurante  as $usuario) :// foreach ($this->paginator as $usuario) :
         ?>
-        <tr>
+        <tr id="<?php echo $this->escapeHtml($usuario->in_id); ?>">
             <td><?php echo $count++ ?></td>
     <?php if ($usuario->en_estado == 'activo') { ?>
                 <td><input data-id="<?php echo $this->escapeHtml($usuario->in_id); ?>" type="checkbox" class="check_rest" checked="checked"> </td>

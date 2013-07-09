@@ -356,11 +356,11 @@ class IndexController extends AbstractActionController {
         
          $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
          
-         $paginator = new \Zend\Paginator\Paginator($listarcomentarios);
-         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(10);
+//         $paginator = new \Zend\Paginator\Paginator($listarcomentarios);
+//         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+//         $paginator->setItemCountPerPage(10);
                 
-        $view->setVariables(array('lista' => $paginator, 'comentarios' => $listarcomentarios, 'form' => $form, 'formu' => $formu,
+        $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $listarcomentarios, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios)));
         return $view;

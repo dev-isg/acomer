@@ -480,7 +480,7 @@ $('.check_rest').mousedown(function() {
           if (confirm("Desea Activar al Restaurante ?") ){
             var est="activo";
             var request = $.ajax({
-            url: "restaurante/index/cambiaestado?id="+id + "&estado=" + est,
+            url: "/restaurante/index/cambiaestado?id="+id + "&estado=" + est,
             type: "get",
             data: {id: id , estado:est}
                    });
@@ -489,12 +489,12 @@ $('.check_rest').mousedown(function() {
             $("#la" + id).removeClass().addClass("label label-success");
             $("#la" + id).html("");
             $("#la" + id).html("activo");
-            location.reload();
+              $("#" + id).closest('tr').remove();
                  };
         }else{
           var est="desactivo";
             var request = $.ajax({
-            url: "restaurante/index/cambiaestado?id="+id + "&estado=" + est,
+            url: "/restaurante/index/cambiaestado?id="+id + "&estado=" + est,
             type: "get",
             data: {id: id , estado:est}
                    });
@@ -502,7 +502,7 @@ $('.check_rest').mousedown(function() {
           $("#la" + id).removeClass().addClass("label label-important");
           $("#la" + id).html("");
           $("#la" + id).html("desactivo");
-          location.reload();
+          $("#" + id).closest('tr').remove();
               }
     }); 
 
