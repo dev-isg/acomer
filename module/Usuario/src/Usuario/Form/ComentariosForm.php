@@ -3,8 +3,9 @@
 namespace Usuario\Form;
 
 use Zend\Form\Form;
+use Platos\filter\Specialchart;
 use Usuario\Controller\IndexController;
-
+use Zend\InputFilter\InputFilterProviderInterface;
 
 class ComentariosForm extends Form
 {
@@ -75,6 +76,7 @@ class ComentariosForm extends Form
             'options' => array(
                 'label' => 'Correo:',
             ),
+
             'validators' => array( 
                 array( 
                     'name' => 'EmailAddress', 
@@ -86,22 +88,22 @@ class ComentariosForm extends Form
                 ) 
             )         
         ));
-            $this->add(array(
-            'name' => 'tx_descripcion',
-            'type' => 'Textarea',
-            'attributes' => array(               
-                'class' => '',
-                'id'   => 'tx_descripcion',
-                'placeholder'=>'Ingrese descripción',
-                'colls'=>40,
-                'rows'=>4
-            ),
-            'options' => array(
-                'label' => 'Descripción:',
-            )
-        ));
 
+        //'filters' => array( new \Platos\filter\Specialchart()),
+        $descripcion = new \Zend\Form\Element\Textarea('tx_descripcion',
+                array(
+                    'label' => 'Descripcion:',
+                    'filters' => array( 'name' =>  '\Platos\filter\Specialchart'),
+                    array('attributes' => array(
+                            'class' => '',
+                            'id' => 'tx_descripcion',
+                            'placeholder' => 'Ingrese descripción',
+                            'colls' => 40,
+                            'rows' => 4
+                        ),
+                )));
         
+        $this->add($descripcion);
                 $this->add(array(
             'name' => 'submit',
             'type' => 'Submit',
