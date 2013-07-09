@@ -406,13 +406,13 @@ $(".eli-lo").on("click",function(){
     $(this).html("");
     $(this).removeClass('btn btn-primary');
     $(this).addClass('btn btn-danger');
-    $(this).append("<i class='icon-trash icon-white'></i> Activar");
+    $(this).append("<i class='icon-trash icon-white'></i> Desactivar");
   }else{
     $(this).attr('data-name','activo');
     $(this).html("");    
     $(this).removeClass('btn btn-danger');
     $(this).addClass('btn btn-primary');
-    $(this).append("<i class='icon-trash icon-white'></i>Desactivar");
+    $(this).append("<i class='icon-trash icon-white'></i>Activar");
   }
 
  
