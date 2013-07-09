@@ -30,7 +30,7 @@
       <div class="content-sidebar">
         <div class="contenido-busqueda">
           <div class="content-sidebar-ho">
-          <a href="<?php echo $this->basePath(); ?>/" title="Listado del Sabor">
+          <a class="title-home-listado" href="<?php echo $this->basePath(); ?>/" title="Listado del Sabor">
             <h1>
               <img src="/img/logo.png" alt="logo">
             </h1>
@@ -39,9 +39,6 @@
           <span class="logan" style="width: 54%;">..y hoy, qué se te antoja?</span> 
           <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
           <div class="fec"><img src="/img/flecha-1.png" alt=""></div>
-    
-
-
             <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action='<?php echo $this->basePath(); ?>/application/index/ver'>
               <input id="q" name="q" type="text" placeholder="Escribe el nombre del plato" />
               <input type="submit"  class="btn btn-search-home" value="Buscar"/>
