@@ -311,21 +311,30 @@ background: #f0f0f0;
 margin-bottom: 0px;
 }
 .detalle-nombre {
-display: inline-block;
-margin-top: 12px;
-margin-left: -5px;
-width: 100%;
-text-align: right;
+  margin-top: 8px;
+  margin-left: -5px;
+  width: 100%;
+  text-align: right;
+  position: relative;
+}
+.detalle-nombre .punt{
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 .mas-det {
-position: absolute;
-bottom: 6px;
-left: 114px;
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
 }
 .detalle-restaurante {
-width: 503px;
-display: inline-block;
-vertical-align: top;
+  width: 503px;
+  display: inline-block;
+  vertical-align: top;
+}
+.detalle-restaurante p{
+  color: #7b7b7b;
+  font-size: 12px;
 }
 #fq {
 background: url(../img/arrow.png) #cccccc no-repeat 102px 7px;
@@ -353,31 +362,34 @@ margin-left: -4px;
 line-height: 16px;
 }
 .lateral{
-display: inline-block;
-width: 142px;
-vertical-align: top;
-position: relative;
-box-shadow: 0px 1px 6px;
+  display: inline-block;
+  width: 142px;
+  vertical-align: top;
+  position: relative;
+  box-shadow: 0px 1px 6px;
 }
-.nombre_r {
-display: inline-block;
-color: #ff8400;
-font-weight: bold;
-font-size: 18.12px;
-width: 364px;
-margin: 0px;
-margin-bottom: 10px;
-text-align: left !important;
-height: 22px;
-overflow: hidden;
-vertical-align: top;
+.lateral a img{
+  width: 145px;
+  height: 112px;
 }
-.nom_plato {
-font-size: 14px;
-color: #ff8400;
-margin-left: 10px;
-margin-bottom: 5px;
-border-bottom: 2px solid #fff;
+p.nombre_r {
+  color: #ff8400;
+  font-weight: bold;
+  font-size: 18.12px;
+  padding-left: 10px;
+  margin: 0px;
+  margin-bottom: 10px;
+  text-align: left !important;
+  height: 22px;
+  overflow: hidden;
+  vertical-align: top;
+}
+p.nom_plato {
+  font-size: 14px;
+  color: #ff8400;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #fff;
 }
 .com-pla {
 text-align: right;
@@ -390,6 +402,7 @@ margin-right: 10px;
   margin: 1em 1em;
   border-bottom: 2px solid #fff;
   float: left;
+  padding: 10px;
 }
 #esconder .sub{
   margin-top: 10px;
@@ -400,7 +413,9 @@ margin-right: 10px;
   float: left;
 }
 #esconder {
-background: url(../../img/back-detalle.png) repeat;
+  background: url(../../img/back-detalle.png) repeat;
+  float: left;
+  width: 100%;
 }
 
 .overlay{
@@ -2054,6 +2069,27 @@ form#application .control-group .btn-solicito{
   }
   #esconder .mosaic-block{
     height: 143px;
+  }
+  .plato_h{
+    margin: 0.5em;
+    width: 95.5%;
+    padding: 7px;
+  }
+  .lateral{
+    width: 23.5%;
+  }
+  .lateral a img{
+    width: 100%;
+    height: 100px;
+  }
+  .detalle-restaurante{
+    width: 75.6%;
+  }
+  .detalle-nombre{
+    margin-left: 0;
+  }
+  p.nombre_r{
+    font-size: 17px;
   }
 }
 @media (max-width: 767px) {
