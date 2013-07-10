@@ -2015,6 +2015,9 @@ form#application .control-group .btn-solicito{
   .footer footer p{
     text-align: center;
   }
+  .contenido-bus{
+    margin: 0.5em 0.5em;
+  }
 }
 @media (max-width: 767px) {
   .contenido-static .form-horizontal .control-label{
