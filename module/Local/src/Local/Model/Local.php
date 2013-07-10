@@ -57,12 +57,11 @@ class Local implements InputFilterAwareInterface
 //        $this->servicio=(!empty($data['servicio'])) ? $data['servicio'] : null;
     }
     
-        public function setInputFilter(InputFilterInterface $inputFilter)
+    public function setInputFilter(InputFilterInterface $inputFilter)
     {
         throw new \Exception("Not used");
     }
-    
-        public function getArrayCopy()
+    public function getArrayCopy()
     {
         return get_object_vars($this);
     }

@@ -112,7 +112,7 @@ class IndexController extends AbstractActionController
                 $this->getLocalTable()->guardarLocal($local, $servicio);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/local/index/index/'.$idretau);
             } else {
-                
+                echo var_dump($request->getPost());exit;
                 $local->exchangeArray($form->getData());
                 $this->getLocalTable()->guardarLocal($local, $servicio);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/local/index/index/'.$idretau);
