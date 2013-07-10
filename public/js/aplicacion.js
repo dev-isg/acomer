@@ -161,7 +161,9 @@ $(document).ready(function(){
             }
         });
 //comentarios validacion
-   $('#comentarios').validate({
+
+var validar=function(elemento){
+   $(elemento).validate({
         rules: {
             va_nombre: {
                 required: true
