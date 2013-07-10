@@ -2,21 +2,17 @@
 <?php
 $form = $this->form;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
-
 $form->setAttributes(array(
     'action' => $this->url.'/application/index/detalleubicacion',
     'method' => 'get'
 ));
 $form->prepare();
-
 echo $this->form()->openTag($form);
 ?>
 <?php
 echo $this->formHidden($form->get('in_id'));
 ?><?php echo $this->formRow($form->get('distrito'));?><?php
 ?><?php echo $this->formRow($form->get('q'));?><?php
-
-
 ?><?php echo $this->formSubmit($form->get('submit'));?><?php
 ?><a class="ver_mapa" style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a><?php
 echo $this->form()->closeTag(); ?>
@@ -167,103 +163,3 @@ echo $this->form()->closeTag(); ?>
                               }
                       ?> 
 
- <script type="text/javascript">
-   var map;
-   $(document).ready(function(){
-
-       //$('#buscarmap').hide();
-       $('#bubi #q').keyup(function () {
-      if(($(this).val() != "") &&  ($('#bubi #fq').val() != "" )){
-      $('#buscarmap').removeClass("disabled").addClass('map');
-      $('#buscarmap').attr("href","#");
-      $('#buscarmap' ).removeAttr('disabled');
-       $('#buscarmap').fadeIn();
-      }   }).keyup();
-         
-        $("#buscarmap").on("click",function(){
-        var plato=$('#bubi #q').val();
-         var dis=$('#bubi #fq').val();
-         var url = "http://192.168.1.38:8080/application/index/jsonmapasa?distrito=" + dis+ "&plato=" + plato;
-        $("#map").remove();
-        $("#subir-home").remove();
-        $(".mensaje").remove();
-        $(".mensaje2").remove();
-        $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
-        $('#esconder').css("display","none");  
-        console.log(url);
-           if ( ($('#bubi #q').val() != "") && ($('#bubi #fq').val()!="") ){
-             $("#mapa-buscador").fadeIn();
-             var prueba=$.getJSON( url, function(data) {
-                     console.log(data.response.numFound);
-            if (data.response.numFound >= 1) {
-               //var mcOptions = { maxZoom: 12};
-                     map = new GMaps({
-                       el: '#map',
-                       zoom: 15,
-                        lat: -12.043333,
-                        lng: -77.028333
-        //               markerClusterer: function(map) {
-        //           return new MarkerClusterer(map,mcOptions);
-        //         }
-           });
-        $.each( data.response.docs, function(i, marker) {
-                 map.setCenter(marker.latitud,marker.longitud );
-                  console.log(marker);
-               map.addMarker({
-                   lat: marker.latitud,
-                   lng: marker.longitud,
-                   icon : {
-               size : new google.maps.Size(32, 37),
-               url : "/img/icomap.png"
-             },
-                   title: marker.restaurante ,
-                   infoWindow: {
-                           content: marker.name + '</br> <a href=/platos/index/verplatos?id=' + marker.id +'&q=' + plato +'>ver plato </a>'
-                         }
-
-                 });
-             });
-      }else{
-      $("#mapa-buscador").hide();
-      $("#subir-home").remove();
-      $(".mensaje").remove();
-      $(".mensaje2").remove();
-      $(".contenido-plato").append('<p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti.</p><p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p>');
-      $(".contenido-plato").append('<div class="recomendados-platos primer-home" id="subir-home" style="padding-bottom: 90px;"></div>');
-       $("#subir-home").append ('<div class="sub" style="margin-top: 10px;margin-bottom: 15px;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;"><span  style="padding-left: 10px;color:white;font-weight: bold;">Platos Destacados</span></div>');       
-       $("#subir-home").append ('<ul id="listajson"></ul>');
-       $.getJSON('http://192.168.1.38:8080/application/index/jsondesta',function(data){    
-       $.each(data,function(i,val){
-          $('#listajson').append('<li><div class="plato_r"><div class="mosaic-block cover2"><div class="mosaic-overlay"><span>' + val.va_nombre + '</span><img src="/imagenes/'+ val.va_imagen+'" class="img-plato"><img src="/img/mas.png" alt="" class="mas"></div><a href="/platos/index/verplatos?id='+val.in_id +'" class="mosaic-backdrop"><div class="details"><h4>'+ val.va_nombre +'</h4><p class="title-details" style="font-weight: bold;">Ingredientes</p><p class="desc-plato" style="font-size:0.9em;">'+ val.tx_descripcion+'</p></div></a></div><div class="foo"><p class="nom_res">'+val.restaurant_nombre+'</p><div class="pt"><p class="com">'+ val.NumeroComentarios+' <i class="icon-comment"></i></p><div class="punt"><div class="puntuaciones c'+val.Ta_puntaje_in_id+'"></div></div></div></div></div></li>');
-      });          
-    $('.cover2').mosaic({
-                   animation    :    'slide',
-                   anchor_y    :    'top',        //Vertical anchor position
-                    hover_y        : '300px'
-                });
-      });
-     
-      }
-      
-
-         });
-     
-     prueba.fail(function( jqxhr, textStatus, error ) {
-      var err = textStatus + ', ' + error;
-      console.log(err); 
-      $("#mapa-buscador").hide();
-        $(".mensaje").remove();
-        $(".mensaje2").remove();
-      $(".contenido-plato").append('<p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti.</p><p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p>');
-    });
- }else{
- $("#mapa-buscador").hide();
-alert("debe ingresar el plato");
- }
- 
-        
-    
-  
-   });
-    });
- </script>

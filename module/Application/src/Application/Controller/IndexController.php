@@ -179,9 +179,10 @@ class IndexController extends AbstractActionController
             $com[$y['ch_distrito']] = $y['ch_distrito'];
         }
         $form->get('q')->setValue($palabra);
+         $form->get('distrito')->setValue($distrito);
          $form->get('distrito')->setValueOptions($com);
          $form->get('submit')->setValue('Buscar');
-         $view->setVariables( array('lista' => $listades,'hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'error'=>$error));
+         $view->setVariables( array('mapita'=>$distrito,'lista' => $listades,'hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'error'=>$error));
        return $view;
       }
     

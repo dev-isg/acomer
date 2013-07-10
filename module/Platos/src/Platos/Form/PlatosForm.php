@@ -23,7 +23,7 @@ class PlatosForm extends Form
               // we want to ignore the name passed
         $this->setDbAdapter($dbAdapter);
         $this->setId($id);
-        parent::__construct('platos222');
+        parent::__construct('platos');
         $this->setAttribute('method', 'post');
         $this->setAttribute('endtype', 'multipart/form-data');
         

@@ -81,8 +81,10 @@ echo $this->formHidden($form->get('h_distrito'));
 
 <script>
 	$(document).ready(function(){
-    
-         
+     var value = $("#va_direccion").val();   
+     var d = $("#distrito option:selected").text();
+     var p = $("#provincia option:selected").text();
+     var pa = $("#pais option:selected").text();         
  		  var id_r = $('h5').text();
       var id =$("#id").val();      
       var url3="/local/index/jsonservicios?id=" + id;
