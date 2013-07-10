@@ -96,7 +96,7 @@ class PlatosTable {
 
         $data = array(
 //            'in_id' => $plato->in_id,
-            'va_imagen' => $plato->va_nombre . '-' . $imagen['name'], //$plato->va_imagen,
+            'va_imagen' => $imagen, //$plato->va_imagen,
             'tx_descripcion' => $plato->tx_descripcion,
             'va_nombre' => $plato->va_nombre,
             'va_precio' => $plato->va_precio,
@@ -200,6 +200,7 @@ class PlatosTable {
         $sql = new Sql($adapter);
         $selecttot = $sql->select()
                 ->from('ta_plato')
+
                 ->join(array('c' => 'ta_comentario'), 'c.ta_plato_in_id=ta_plato.in_id', array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(c.in_d)')), 'left')
                 ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
                 ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
@@ -207,9 +208,19 @@ class PlatosTable {
                 ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado'), 'left')
                 ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito'), 'left')
                 ->where(array('ta_plato.in_id' => $id));
+
+//              ->join(array('c' => 'ta_comentario'), 'c.ta_plato_in_id=ta_plato.in_id', array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(*)')), 'left')
+//                    ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
+//                    ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
+//                    ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud', 'de_longitud', 'va_direccion'), 'left')
+//                    ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado'), 'left')
+//                    ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito'), 'left')
+//                    ->where(array('ta_plato.in_id' => $id));
+
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
+      //  var_dump($plato[0]['distrito']);exit;
         require './vendor/SolrPhpClient/Apache/Solr/Service.php';
         $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr');
         if ($solr->ping()) {
