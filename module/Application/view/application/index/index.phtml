@@ -23,7 +23,12 @@
                 <div class="details">
                   <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
                   <p class="title-details" style="font-weight: bold;">Ingredientes</p>
-                  <p class="desc-plato" style="font-size:0.9em;"> <?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
+                  <p class="desc-plato" style="font-size:0.9em;"> <?php 
+                        if(strlen($list->tx_descripcion)>100){
+                         $str=trim(substr($list->tx_descripcion, 0, 100));
+                          $str.='...';
+                         }else {$str=$list->tx_descripcion;}       
+                  echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
                 </div>
                </a>
               </div>
@@ -63,7 +68,12 @@
                    <div class="details">
                        <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
                        <p style="font-weight: bold;">Ingredientes</p>
-                       <p style="font-size:0.9em;"> <?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
+                       <p style="font-size:0.9em;"> <?php 
+                                    if(strlen($list->tx_descripcion)>100){
+                                    $str=trim(substr($list->tx_descripcion, 0, 100));
+                                     $str.='...';
+                                    }else {$str=$list->tx_descripcion;} 
+                       echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
                    </div>
                </a>
               </div>
@@ -103,7 +113,12 @@
                        <div class="details">
                            <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
                            <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
-                           <p style="font-size:0.9em;"><?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
+                           <p style="font-size:0.9em;"><?php 
+                                   if(strlen($list->tx_descripcion)>100){
+                                    $str=trim(substr($list->tx_descripcion, 0, 100));
+                                     $str.='...';
+                                    }else {$str=$list->tx_descripcion;} 
+                         echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
                        </div>
                    </a>
                   </div>
@@ -144,7 +159,12 @@
              <div class="details">
                  <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
                  <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
-                 <p style="font-size:0.9em;"><?php echo htmlspecialchars($list->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
+                 <p style="font-size:0.9em;"><?php 
+                   if(strlen($list->tx_descripcion)>100){
+                    $str=trim(substr($list->tx_descripcion, 0, 100));
+                     $str.='...';
+                    }else {$str=$list->tx_descripcion;}                  
+                 echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
              </div>
             </a>
           </div>
