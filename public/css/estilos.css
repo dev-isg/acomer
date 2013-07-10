@@ -312,7 +312,7 @@ margin-bottom: 0px;
 }
 .detalle-nombre {
   margin-top: 8px;
-  margin-left: -5px;
+  margin-left: 0px;
   width: 100%;
   text-align: right;
   position: relative;
@@ -328,7 +328,7 @@ margin-bottom: 0px;
   right: 2px;
 }
 .detalle-restaurante {
-  width: 503px;
+  width: 520px;
   display: inline-block;
   vertical-align: top;
 }
@@ -363,7 +363,7 @@ line-height: 16px;
 }
 .lateral{
   display: inline-block;
-  width: 142px;
+  width: 145px;
   vertical-align: top;
   position: relative;
   box-shadow: 0px 1px 6px;
@@ -398,7 +398,7 @@ margin-right: 10px;
 .plato_h {
   margin-left: 14px;
   background: #f0f0f0;
-  width: 691px;
+  width: 671px;
   margin: 1em 1em;
   border-bottom: 2px solid #fff;
   float: left;
@@ -416,6 +416,7 @@ margin-right: 10px;
   background: url(../../img/back-detalle.png) repeat;
   float: left;
   width: 100%;
+  padding-bottom: 50px;
 }
 
 .overlay{
@@ -1567,6 +1568,9 @@ form#application .control-group .btn-solicito{
 .contenido-bus ul li:first-child{
   margin-left: 0;
 }
+.ver_mapa{
+  display: inline;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
@@ -2063,6 +2067,7 @@ form#application .control-group .btn-solicito{
     margin: 0.5em 0.5em;
     padding: 10px;
     height: auto;
+    width: 95%;
   }
   .contenido-bus ul li{
     width: 32.1%;
@@ -2093,6 +2098,9 @@ form#application .control-group .btn-solicito{
   }
 }
 @media (max-width: 767px) {
+  .ver_mapa{
+    display: block!important;
+  }
   .contenido-static .form-horizontal .control-label{
     width: 100%;
     text-align: left;
@@ -2306,6 +2314,7 @@ form#application .control-group .btn-solicito{
     margin: 0;
     padding: 10px 10px;
     height: auto;
+    width: 93.6%;
   }
   #esconder .sub{
     margin-bottom: 20px;
@@ -2315,8 +2324,44 @@ form#application .control-group .btn-solicito{
     width: 100%;
     margin-bottom: 7px;
   }
+  .plato_h{
+    margin: 0;
+    width: 93.6%;
+    margin-bottom: 10px;
+  }
+  .lateral{
+    width: 30%;
+  }
+  .lateral a img{
+    width: 100%;
+    height: auto;
+  }
+  .detalle-restaurante{
+    width: 68%;
+  }
+  .detalle-nombre .punt{
+    position: static;
+    display: block;
+    padding-left: 5px;
+  }
 }
 @media (max-width: 480px) {
+  .contenido-bus{
+    width: 93.6%;
+  }
+  .plato_h{
+    width: 100%;
+    padding: 0;
+  }
+  .lateral{
+    display: block;
+    margin:0 auto;
+    margin-top: 10px;
+    width: 40%;
+  }
+  .detalle-restaurante{
+    width: 100%;
+  }
   body{
     padding-left: 0;
     padding-right: 0;
