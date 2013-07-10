@@ -44,22 +44,29 @@ class IndexController extends AbstractActionController
        $filtrar = $this->params()->fromPost('submit');
         $id = (int) $this->params()->fromRoute('in_id', 0);
 
-       if(!empty($id)){
-       if(isset($filtrar)){
-           $consulta=$this->params()->fromPost('texto');
-               $lista =  $this->getLocalTable()->listar($consulta);         
-           }else{
-               $lista =  $this->getLocalTable()->listar($id);//$id
-           }
-       }else{
-           if(isset($filtrar)){
-           $consulta=$this->params()->fromPost('texto');
-               $lista =  $this->getLocalTable()->listar($consulta);         
-           }else{
-               $lista =  $this->getLocalTable()->listar();//$id
-           }
-           
-       }
+//       if(!empty($id)){
+//       if(isset($filtrar)){
+//           $consulta=$this->params()->fromPost('texto');
+//               $lista =  $this->getLocalTable()->listar($consulta);         
+//           }else{
+//               $lista =  $this->getLocalTable()->listar($id);//$id
+//           }
+//       }else{
+//           if(isset($filtrar)){
+//           $consulta=$this->params()->fromPost('texto');
+//               $lista =  $this->getLocalTable()->listar($consulta);         
+//           }else{
+//               $lista =  $this->getLocalTable()->listar();//$id
+//           }
+//           
+//       }
+       
+       $lista =  $this->getLocalTable()->listar($id);
+       $request = $this->getRequest();
+        if ($request->isPost()) {
+             $consulta=$this->params()->fromPost('texto');
+            $lista =  $this->getLocalTable()->listar($id,$consulta);    
+        }
 //       $lista =  $this->getLocalTable()->listar();
 //      var_dump($lista);exit;
         return new ViewModel(array(

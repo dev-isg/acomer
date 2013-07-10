@@ -7,6 +7,8 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Select;
 use Platos\Model\Platos;
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
+
 
 class PlatosTable {
 
@@ -20,7 +22,7 @@ class PlatosTable {
      * 2 maneras distina de hacer joins
      */
 
-    public function fetchAll($consulta = null) {
+    public function fetchAll($consulta = null,$consulta2 = null) {
 
         $sqlSelect = $this->tableGateway->getSql()->select();
         $sqlSelect->columns(array('in_id', 'va_nombre', 'va_precio', 'en_estado', 'en_destaque', 'Ta_puntaje_in_id'));
@@ -30,7 +32,7 @@ class PlatosTable {
         $sqlSelect->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurante_va_nombre' => 'va_nombre'), 'left');
         $sqlSelect->join(array('c' => 'ta_comentario'), 'c.ta_plato_in_id=ta_plato.in_id', array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(c.in_id)')), 'left');
         if ($consulta != null) {
-            $sqlSelect->where(array('pl.ta_local_in_id' => $consulta));
+            $sqlSelect->where(array('pl.ta_local_in_id'=>$consulta))->where->and->like('ta_plato.va_nombre', '%'.$consulta2.'%');//where(array('pl.ta_local_in_id' => $consulta));
         }
         $sqlSelect->group('ta_plato.in_id')->order('ta_plato.in_id desc');
 //             $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($sqlSelect);
@@ -178,6 +180,9 @@ class PlatosTable {
                 $solr->optimize();
             }
           }
+//          else{
+//              echo ('<script>confirm("supero los platos permitidos")</script>');
+//          }
         } else {
 
             if ($this->getPlato($id)) {

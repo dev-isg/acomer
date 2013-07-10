@@ -38,6 +38,12 @@ class IndexController extends AbstractActionController {
 //                 $array[]=$result;
 //             }
 //            var_dump($array);exit;
+                $request = $this->getRequest();
+        if ($request->isPost()) {
+            $consulta=$this->params()->fromPost('texto');
+            $lista = $this->getPlatosTable()->fetchAll($local,$consulta);
+            
+        }
 
         return new ViewModel(array(
                     'platos' => $lista,
@@ -314,7 +320,7 @@ class IndexController extends AbstractActionController {
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       $copia = "C:/xampp/htdocs/acomer/public/imagenes/$nom-$imf";
                        imagejpeg($nuevaimagen,$copia);
                    $this->getPlatosTable()->guardarPlato($restaurante,$File);
                       $this->redirect()->toUrl('/platos/index?id='.$idlocal);  
@@ -324,7 +330,7 @@ class IndexController extends AbstractActionController {
                       $viejaimagen=  imagecreatefrompng($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       $copia = "C:/xampp/htdocs/acomer/public/imagenes/$nom-$imf";
                        imagepng($nuevaimagen,$copia);
                  $this->getPlatosTable()->guardarPlato($restaurante,$File);
                       $this->redirect()->toUrl('/platos/index?id='.$idlocal);     
@@ -334,7 +340,7 @@ class IndexController extends AbstractActionController {
                       $viejaimagen=  imagecreatefromgif($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       $copia = "C:/xampp/htdocs/acomer/public/imagenes/$nom-$imf";
                        imagegif($nuevaimagen,$copia);
                  $this->getPlatosTable()->guardarPlato($restaurante,$File);
                       $this->redirect()->toUrl('/platos/index?id='.$idlocal);  
@@ -348,7 +354,7 @@ class IndexController extends AbstractActionController {
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       $copia = "C:/xampp/htdocs/acomer/public/imagenes/$nom-$imf";
                        imagejpeg($nuevaimagen,$copia);
                     $this->getPlatosTable()->guardarPlato($restaurante,$File);
                       $this->redirect()->toUrl('/platos/index?id='.$idlocal);  
@@ -358,7 +364,7 @@ class IndexController extends AbstractActionController {
                       $viejaimagen=  imagecreatefrompng($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       $copia = "C:/xampp/htdocs/acomer/public/imagenes/$nom-$imf";
                        imagepng($nuevaimagen,$copia);
                     $this->getPlatosTable()->guardarPlato($restaurante,$File);
                       $this->redirect()->toUrl('/platos/index?id='.$idlocal);  
@@ -368,7 +374,7 @@ class IndexController extends AbstractActionController {
                       $viejaimagen=  imagecreatefromgif($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$nom-$imf";
+                       $copia = "C:/xampp/htdocs/acomer/public/imagenes/$nom-$imf";
                        imagegif($nuevaimagen,$copia);
                        $this->getPlatosTable()->guardarPlato($restaurante,$File);
                       $this->redirect()->toUrl('/platos/index?id='.$idlocal);  
@@ -434,7 +440,7 @@ class IndexController extends AbstractActionController {
         $id = $this->params()->fromQuery('id');
         $plato = $this->params()->fromQuery('q');
         $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();
-
+       
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
