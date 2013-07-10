@@ -81,18 +81,8 @@
         </tr>
 
 <?php endforeach; ?>
-<!--        <div style="clear: both;">
-<?php (count($this->paginator)> 0)?$this->paginationControl($this->paginator, 'Sliding', 'usuario/index/paginador.phtml'):""; ?>
-</div>-->
-<!--  ------------------------PAGINADOR------------------------------------------------>
-  
-
-
-<!-- -------------------------fin---------------------------------------->
-
-
 </table>
-
+     <?php echo (count($this->restaurante)> 0)?$this->paginationControl($this->restaurante, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/restaurante?')):""; ?>
 </div>
 
 

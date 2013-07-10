@@ -45,6 +45,7 @@ class RestauranteTable
         
         $selectString = $sql->getSqlStringForSqlObject($select);
         $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        $resultSet->buffer();
         return $resultSet;
     }
      public function getRestaurante($id)
@@ -158,6 +159,7 @@ class RestauranteTable
          if (!$rowset) {
             throw new \Exception("No hay data");
         }
+        $rowset->buffer();
         return $rowset;
     }
 

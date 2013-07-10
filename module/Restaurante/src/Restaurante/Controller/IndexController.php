@@ -30,8 +30,13 @@ class IndexController extends AbstractActionController
         else {
             $lista = $this->getRestauranteTable()->fetchAll();
         }
+        
+            $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
+         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+         $paginator->setItemCountPerPage(10);
+         
         return array(
-          'restaurante' => $lista,
+          'restaurante' => $paginator,//$lista,
             'comida' => $this->comidas()
         );
   

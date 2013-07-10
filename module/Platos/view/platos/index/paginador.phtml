@@ -2,7 +2,7 @@
 <div class="paginationControl pagination">
 <!-- Previous page link -->
 <?php if (isset($this->previous)): ?>
-  <a href='/platos/index/verplatos?id=<?php echo $this->variable;?>&page=<?php echo $this->previous?>'>
+  <a href='<?php echo $this->variable;?>page=<?php echo $this->previous?>'>
       
     « 
   </a> |
@@ -13,7 +13,7 @@
 <!-- Numbered page links -->
 <?php foreach ($this->pagesInRange as $page): ?>
   <?php if ($page != $this->current): ?>
-    <a href='/platos/index/verplatos?id=<?php echo $this->variable;?>&page=<?php echo $page; ?>'>
+    <a href='<?php echo $this->variable;?>page=<?php echo $page; ?>'>
         <?php echo $page; ?>
     </a> |
   <?php else: ?>
@@ -23,7 +23,7 @@
 
 <!-- Next page link -->
 <?php if (isset($this->next)): ?>
-  <a href='/platos/index/verplatos?id=<?php echo $this->variable;?>&page=<?php echo $this->next?>'>
+  <a href='<?php echo $this->variable;?>page=<?php echo $this->next?>'>
     »
   </a>
 <?php else: ?>
