@@ -196,6 +196,7 @@ var validar=function(elemento){
             .closest('.control-group').removeClass('error').addClass('success');
         }
         });
+}
        
 
             $('.cover').mosaic({
