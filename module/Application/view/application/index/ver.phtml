@@ -2,21 +2,17 @@
 <?php
 $form = $this->form;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
-
 $form->setAttributes(array(
     'action' => $this->url.'/application/index/detalleubicacion',
     'method' => 'get'
 ));
 $form->prepare();
-
 echo $this->form()->openTag($form);
 ?>
 <?php
 echo $this->formHidden($form->get('in_id'));
 ?><?php echo $this->formRow($form->get('distrito'));?><?php
 ?><?php echo $this->formRow($form->get('q'));?><?php
-
-
 ?><?php echo $this->formSubmit($form->get('submit'));?><?php
 ?><a class="ver_mapa" style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a><?php
 echo $this->form()->closeTag(); ?>
