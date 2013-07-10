@@ -136,34 +136,7 @@ class IndexController extends AbstractActionController
                        $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
                   }
-                  if($info['extension']=='png')      
-                  {  $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefrompng($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
-                       imagepng($nuevaimagen,$copia);
-                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
-                  }
-                  if($info['extension']=='gif')      
-                  {   $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefromgif($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
-                       imagegif($nuevaimagen,$copia);
-                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
-                  }
+
                }
                    if($ancho<$alto)
               {require './vendor/Classes/Filter/Alnum.php';
@@ -182,34 +155,7 @@ class IndexController extends AbstractActionController
                        $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
                   }
-                   if($info['extension']=='png')      
-                  {   $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefrompng($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
-                       imagepng($nuevaimagen,$copia);
-                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
-                  }
-                  if($info['extension']=='gif')      
-                  {  $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefromgif($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
-                       imagegif($nuevaimagen,$copia);
-                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
-                  }
+
                }
             }       
           }
@@ -277,90 +223,43 @@ class IndexController extends AbstractActionController
               $tamanio = getimagesize($File['tmp_name']);
               $ancho =$tamanio[0]; 
               $alto =$tamanio[1]; 
+              $valor  = uniqid();
               if($ancho>$alto)
               {//echo 'ddd';exit;
                   require './vendor/Classes/Filter/Alnum.php';
                   $altura =(int)($alto*$anchura/$ancho); 
                   if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg')      
-                  {  $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom);                 
-                      $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$filtered-$imf2";
-                       imagejpeg($nuevaimagen,$copia);
-                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
-                  }
-                  if($info['extension']=='png')      
-                  {  $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom);  
-                      $viejaimagen=  imagecreatefrompng($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$filtered-$imf2";
-                       imagepng($nuevaimagen,$copia);
-                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
-                  }
-                  if($info['extension']=='gif')      
                   {   $nom = $nonFile['va_nombre']; 
                   $imf2 =  $valor.'.'.$info['extension'];
                   $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                      $viejaimagen=  imagecreatefromgif($File['tmp_name']);
+                  $filtered = $filter->filter($nom);
+                  $name = $filtered.'-'.$imf2;
+                  //var_dump($name);exit;
+                      $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$filtered-$imf2";
-                       imagegif($nuevaimagen,$copia);
-                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
+                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
+                       imagejpeg($nuevaimagen,$copia);
+                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
                   }
+
                }
                    if($ancho<$alto)
               {require './vendor/Classes/Filter/Alnum.php';
                   $anchura =(int)($ancho*$altura/$alto); 
                   if($info['extension']=='jpg'or $info['extension']=='JPG'or $info['extension']=='jpeg')      
-                  { $nom = $nonFile['va_nombre']; 
+                  {  $nom = $nonFile['va_nombre']; 
                   $imf2 =  $valor.'.'.$info['extension'];
                   $filter   = new \Filter_Alnum();
                   $filtered = $filter->filter($nom); 
+                   $name = $filtered.'-'.$imf2;
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$filtered-$imf2";
+                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
                        imagejpeg($nuevaimagen,$copia);
-                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
-                  }
-                   if($info['extension']=='png')      
-                  {  $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                      $viejaimagen=  imagecreatefrompng($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$filtered-$imf2";
-                       imagepng($nuevaimagen,$copia);
-                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
-                  }
-                  if($info['extension']=='gif')      
-                  {  $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                      $viejaimagen=  imagecreatefromgif($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$filtered-$imf2";
-                       imagegif($nuevaimagen,$copia);
-                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$File);
+                       $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
                   }
                }
@@ -466,18 +365,18 @@ class IndexController extends AbstractActionController
             $selecttot = $sql->select()
                 ->from('ta_plato')
                 ->join(array('c' => 'ta_comentario'), 'c.ta_plato_in_id=ta_plato.in_id', array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(*)')), 'left')
-                ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
-                ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
-                ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud', 'de_longitud', 'va_direccion'), 'left')
-                ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado'), 'left')
-                ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito'), 'left')
-                ->where(array('ta_plato.in_id' =>$id));
+                    ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
+                    ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
+                    ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud', 'de_longitud', 'va_direccion'), 'left')
+                    ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado'), 'left')
+                    ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito'), 'left')
+                    ->where(array('ta_plato.in_id' => $id));
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
         require './vendor/SolrPhpClient/Apache/Solr/Service.php';
         $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr');
-        if ($solr->ping()) {
+        if ($solr->ping()){
             $solr->deleteByQuery('id:' . $id);
             $document = new \Apache_Solr_Document();
             $document->id = $id;
