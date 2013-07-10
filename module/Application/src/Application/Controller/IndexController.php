@@ -187,9 +187,9 @@ class IndexController extends AbstractActionController
       }
     
          
-     public function verAction()
-             
-    {   $view = new ViewModel();
+     public function verAction()             
+        {   
+         $view = new ViewModel();
         $this->layout('layout/layout-portada');
          $texto = $this->params()->fromQuery('q');
 
@@ -213,8 +213,6 @@ class IndexController extends AbstractActionController
                           }
                           try
                           {
-                              
-     
                             $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
                           //  var_dump($resultados);exit;
 
@@ -301,14 +299,13 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                 echo("<div>ingrese algun valor</div>");   }
+                          echo("<div>ingrese algun valor</div>");   }
                         }
-  $distritos=$this->josAction();
-                 
-                       return  new ViewModel(array('mapa' => $resultados->response->docs ,'distritos' => $distritos ,));
-                        //$mapita = $this->jsonmapasaAction($json); 
+          $distritos=$this->josAction();
+       return  new ViewModel(array('mapa' => $resultados->response->docs ,'distritos' => $distritos ,));
+        //$mapita = $this->jsonmapasaAction($json);
                         
-                   }
+    }
     
     public function jsonmapasaAction()    { 
         $distrito=  $this->params()->fromQuery('distrito');

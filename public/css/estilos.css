@@ -2072,6 +2072,8 @@ form#application .control-group .btn-solicito{
   }
   .contenido-bus{
     margin: 0.5em 0.5em;
+<<<<<<< HEAD
+=======
     padding: 10px;
     height: auto;
     width: 95%;
@@ -2102,6 +2104,7 @@ form#application .control-group .btn-solicito{
   }
   p.nombre_r{
     font-size: 17px;
+>>>>>>> f47169b95761c7ace69df0fd1faa9a30f03fd2f6
   }
 }
 @media (max-width: 767px) {
