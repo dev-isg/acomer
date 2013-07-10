@@ -956,6 +956,8 @@ width: 49%;
 .content-left{
   width: 724px;
   float: left;
+  display: block;
+  height: 100%;
 }
 .descrip-product{
   background: url(../../img/back-detalle.png) repeat;
