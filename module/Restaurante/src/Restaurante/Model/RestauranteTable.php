@@ -41,9 +41,10 @@ class RestauranteTable
         $select = $sql->select()
                 ->from(array('f' => 'ta_restaurante'))
                 ->join(array('b' => 'ta_tipo_comida'), 'f.Ta_tipo_comida_in_id=b.in_id', array('va_nombre_tipo'))//,array('va_nombre_rol'))
-                ->where(array('f.Ta_tipo_comida_in_id=b.in_id','f.en_estado=1'));    
+              ->where(array('f.Ta_tipo_comida_in_id=b.in_id'));//,'f.en_estado=1'));    
         
         $selectString = $sql->getSqlStringForSqlObject($select);
+    
         $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $resultSet->buffer();
         return $resultSet;
