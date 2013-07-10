@@ -38,47 +38,49 @@ $this->headTitle($title);
 
 			?>
 
+			<h3>Sobre ti:</h3>
 			<div class="control-group">
 			    <label class="control-label" for="inputName">Nombre<span class="red">*</span>:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($form->get('nombre_complet'));?>
 			    </div>
-			  </div>
-			  <div class="control-group">
+			</div>
+			<div class="control-group">
 			    <label class="control-label" for="inputEmail">Email<span class="red">*</span>:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($form->get('email'));?>
 			    </div>
-			  </div>
-			  <div class="control-group">
+			</div>
+			<h3>Sobre el restaurante:</h3>
+			<div class="control-group">
 			    <label class="control-label" for="inpuNombre">Nombre del plato<span class="red">*</span>:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($form->get('nombre_plato'));?>
 			    </div>
-			  </div>
-			  <div class="control-group">
+			</div>
+			<div class="control-group">
 			    <label class="control-label" for="inputEmail">Descripción:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($form->get('descripcion'));?>
 			    </div>
-			  </div>
-			  <div class="control-group">
+			</div>
+			<div class="control-group">
 			    <label class="control-label" for="inputEmail">Nombre del restaurante<span class="red">*</span>:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($form->get('nombre_restaurant'));?>
 			    </div>
-			  </div>
-			  <div class="control-group">
+			</div>
+			<div class="control-group">
 			    <label class="control-label" for="inputEmail">Teléfono<span class="red">*</span>:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($form->get('telefono'));?>
 			    </div>
-			  </div>
-			  <div class="control-group">
+			</div>
+			<div class="control-group">
 			    <div class="controls">
 			      <?php echo $this->formSubmit($form->get('submit'));?>
 			    </div>
-			  </div>
+			</div>
 
 		</div>
 	</div>
