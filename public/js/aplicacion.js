@@ -227,7 +227,7 @@ $(document).ready(function(){
                //var mcOptions = { maxZoom: 12};
                      map = new GMaps({
                        el: '#map',
-                       zoom: 15,
+                       zoom: 13,
                         lat: -12.043333,
                         lng: -77.028333
         //               markerClusterer: function(map) {
