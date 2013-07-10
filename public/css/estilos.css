@@ -236,7 +236,15 @@ padding-left: 2em;
   background: linear-gradient(to bottom, #c3e64d 0%,#96be0d 34%,#688408 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c3e64d', endColorstr='#688408',GradientType=0 ); /* IE6-9 */
 }
-
+.form-horizontal h3{
+  line-height: 20px;
+  font-size: 18px;
+  color: #ff8400;
+  font-weight: normal;
+}
+.control-group label{
+  color: #7b7b7b;
+}
 .contenido-busqueda h2{
 color: white;
 text-align: center;
@@ -2009,8 +2017,18 @@ form#application .control-group .btn-solicito{
   }
 }
 @media (max-width: 767px) {
+  .contenido-static .form-horizontal .control-label{
+    width: 100%;
+    text-align: left;
+  }
+  .contenido-static .form-horizontal .controls{
+    margin-left: 0;
+  }
   .coments-all-fin{
     margin-top: 20px;
+  }
+  .contenido-static .form-horizontal{
+    margin-bottom: 50px;
   }
   .verlistado{
     text-indent: 0;
