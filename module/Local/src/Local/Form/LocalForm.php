@@ -121,23 +121,23 @@ class LocalForm extends Form
         ));
             
                 
-        $this->add(array(
-            'name' => 'Ta_tipo_comida_in_id',
-            'type' => 'Select',
-             'attributes' => array(               
-                'class' => 'span10',
-                'id'   => 'Ta_tipo_comida_in_id'
-            ),
-           'options' => array(
-                     'label' => 'Especialidad',
-                     'value_options' => array(
-                          '' => 'selecccione :',
-                             '1' => 'Criolla',
-                             '2' => 'Marina',                   
-                     ),
-                
-             )
-        ));
+//        $this->add(array(
+//            'name' => 'Ta_tipo_comida_in_id',
+//            'type' => 'Select',
+//             'attributes' => array(               
+//                'class' => 'span10',
+//                'id'   => 'Ta_tipo_comida_in_id'
+//            ),
+//           'options' => array(
+//                     'label' => 'Especialidad',
+//                     'value_options' => array(
+//                          '' => 'selecccione :',
+//                             '1' => 'Criolla',
+//                             '2' => 'Marina',                   
+//                     ),
+//                
+//             )
+//        ));
         
             $this->add(array(
             'name' => 'distrito',
