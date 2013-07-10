@@ -68,7 +68,7 @@ class PlatosTable {
             'va_nombre' => $plato->va_nombre,
             'va_precio' => $plato->va_precio,
             'en_destaque' => $plato->en_destaque,
-            'en_estado' => (!empty($plato->en_estado)) ? $plato->en_estado : 1, //$plato->en_estado,
+            'en_estado' => (!empty($plato->en_estado)) ? $plato->en_estado : 2, //$plato->en_estado,
             'Ta_tipo_plato_in_id' => $plato->Ta_tipo_plato_in_id,
             'Ta_puntaje_in_id' => (!empty($plato->Ta_puntaje_in_id)) ? $plato->Ta_puntaje_in_id : 0,
             //'Ta_usuario_in_id' => (!empty($plato->Ta_usuario_in_id)) ? $plato->Ta_usuario_in_id : 1//$plato->Ta_usuario_in_id,

@@ -39,6 +39,7 @@ class IndexController extends AbstractActionController {
 //             }
 //            var_dump($array);exit;
                 $request = $this->getRequest();
+               
         if ($request->isPost()) {
             $consulta=$this->params()->fromPost('texto');
             $lista = $this->getPlatosTable()->fetchAll($local,$consulta);
