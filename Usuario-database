@@ -1,6 +1,0 @@
-CREATE TABLE usuario (
-  id int(11) NOT NULL auto_increment,
-  nombre varchar(100) NOT NULL,
-  direccion varchar(100) NOT NULL,
-  PRIMARY KEY (id)
-);
