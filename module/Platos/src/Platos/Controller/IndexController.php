@@ -283,12 +283,24 @@ class IndexController extends AbstractActionController {
 //    }
 //    
 
-
+   public function platicos($id)
+        {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+            $adapter = $this->dbAdapter;
+            $sql = new Sql($adapter);
+            $select = $sql->select()
+                ->from('ta_plato')
+            ->where(array('in_id' => $id));
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            return $results;       
+     }
     public function editarplatosAction()   
     {   
 //     var_dump('hasta aka');
         $id = (int) $this->params()->fromRoute('in_id', 0);
-        $va_nombre = 'prueba';//$this->params()->fromRoute('va_nombre',0);
+        $platicos =  $this->platicos($id)->toArray();
+       $comeya =$platicos[0]['va_imagen'];
+       $va_nombre = 'prueba';//$this->params()->fromRoute('va_nombre',0);
         $idlocal=(int) $this->params()->fromRoute('id_pa', 0);
 //          var_dump($id);exit;
                
@@ -307,7 +319,7 @@ class IndexController extends AbstractActionController {
         }
       $adpter=$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $form  = new PlatosForm($adpter,$idlocal);
-
+        $form->get('va_imagen')->setValue($comeya);
         $form->bind($restaurante);
 
         $form->get('submit')->setAttribute('value', 'MODIFICAR');

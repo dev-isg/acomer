@@ -1571,6 +1571,13 @@ form#application .control-group .btn-solicito{
 .ver_mapa{
   display: inline;
 }
+#mapa-buscador{
+  width: 100%;
+}
+#error{
+
+
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */

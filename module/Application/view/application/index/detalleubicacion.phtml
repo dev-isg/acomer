@@ -119,11 +119,11 @@ echo $this->form()->closeTag(); ?>
                           }  else 
                              {
                               ?>
-<div id='error'>       <p class="mensaje">
-"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti."
-</p>
-<p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p> <div>
-
+<div class="descrip-product">
+  <div id="error">       
+    <p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti."</p>
+    <p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p> 
+  </div>
     <div class="sub subir-home" id="subir-home">
       <div class="content-etiqueta-home">
         <p>Platos destacados</p>
@@ -162,6 +162,8 @@ echo $this->form()->closeTag(); ?>
         <?php endforeach; ?>   
       </ul>
     </div>
+</div>                     
+  
 
 <?php
                               
