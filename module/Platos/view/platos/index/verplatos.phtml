@@ -3,7 +3,8 @@
 <!-- <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>    -->     
 <script src="<?php echo $this->basePath()?>/js/vendor/gmaps.js"></script>
 <script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.js"></script>
-<script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js"></script>     
+<script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js"></script>
+<script src="<?php echo $this->basePath()?>/js/jquery-ias.js"></script>
 
    <div class="content-left">
       <?php
@@ -217,6 +218,14 @@
                 $(".agregar-comentario-desc").slideUp();
             }
         });
+
+        /*jQuery.ias({
+          container   : ".comentarios-one ul",
+          item    : ".comentarios-one ul li",
+          pagination  : ".paginationControl",
+          next    : ".paginationControl a",
+          loader  : "/img/loader.gif"
+        });*/
 
         initSucursales();
         $('#star').raty({
