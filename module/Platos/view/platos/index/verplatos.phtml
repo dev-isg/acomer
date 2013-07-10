@@ -176,8 +176,8 @@
                                       <div class="img-li-desc">
                                           <div class="img-li-top">
                                               <h4><?php  
-                                              if(strlen($comt->va_nombre_cliente)>20){
-                                              $str=trim(substr($comt->va_nombre_cliente, 0, 20));
+                                              if(strlen($comt->va_nombre_cliente)>15){
+                                              $str=trim(substr($comt->va_nombre_cliente, 0, 15));
                                               $str.='...';
                                               }else {$str=$comt->va_nombre_cliente;} 
                                               echo $str;
@@ -195,7 +195,7 @@
                       }
                       ?>
                   </ul>
-                  <?php echo (count($this->comentarios)> 0)?$this->paginationControl($this->comentarios, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>$this->variable)):""; ?>
+                  <?php echo (count($this->comentarios)> 0)?$this->paginationControl($this->comentarios, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/platos/index/verplatos?id='.$this->variable.'&')):""; ?>
               </div>
               <!--Fin de comentarios-->
             </div>

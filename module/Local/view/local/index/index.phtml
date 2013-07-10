@@ -45,13 +45,14 @@
            <td><?php echo $this->escapeHtml($local->ch_provincia); ?></td> -->
             <td><?php echo $this->escapeHtml($local->ch_distrito); ?></td>
             
-             <td><a data-id="<?php echo $this->escapeHtml($local->in_id); ?>" href="/local/index/editarlocal?id=<?php echo $local->in_id;?>" class='modificar btn btn-success'><i class='icon-edit icon-white'></i>Editar </a>
+             <td><a data-id="<?php echo $this->escapeHtml($local->in_id); ?>" href="/local/index/editarlocal/<?php echo $this->in_id;?>?id=<?php echo $local->in_id;?>" class='modificar btn btn-success'><i class='icon-edit icon-white'></i>Editar </a>
             <a data-id="<?php echo $this->escapeHtml($local->in_id); ?>" href="#" class='eli-lo btn btn-danger'><i class='icon-trash icon-white'></i>Eliminar</a> </td>
         </tr>
 
 <?php endforeach; ?>
     
 </table>
+     <?php echo (count($this->locales)> 0)?$this->paginationControl($this->locales, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/local/index/index/'.$this->in_id.'?')):""; ?>
 </div>
 <div class="span4">
   
