@@ -10,16 +10,59 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <script src="<?php echo $this->basePath()?>/js/lib/jquery-1.8.3.min.js"></script> 
+        <script src="<?php echo $this->basePath()?>/js/vendor/mosaic.js"></script>                
+        <script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js"></script> 
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
         <script src="<?php echo $this->basePath()?>/js/vendor/mosaic.js"></script>             
          <!--<script src="<?php echo $this->basePath()?>/js/main.js"></script> -->
          
         <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>                                
-                                   
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+
+        <script type="text/javascript">
+          function initialize() {
+            var centerLng = new google.maps.LatLng(-12.111858,-77.016091);
+            var styles = [
+              {
+                stylers: [
+                  { hue: "#00ffe6" },
+                  { saturation: -20 }
+                ]
+              },{
+                featureType: "road",
+                elementType: "geometry",
+                stylers: [
+                  { lightness: 100 },
+                  { visibility: "simplified" }
+                ]
+              },{
+                featureType: "road",
+                elementType: "labels",
+                stylers: [
+                  { visibility: "off" }
+                ]
+              }
+            ];
+            var myOptions = {
+              zoom: 14,
+              center: centerLng,
+              scrollwheel: false,
+              navigationControl: false,
+              mapTypeControl: false,
+              scaleControl: false,
+              draggable: false,
+              streetViewControl: false,
+              styles: styles,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map_canvas"),
+                myOptions);
+          }
+        </script>
     </head>
 
-
-  <body class="lista-<?php echo $this->clase; ?>">
+  <body class="lista-<?php echo $this->clase; ?>" onload="initialize()">
+    <div id="map_canvas" style="position: fixed!important; top: 0; bottom: 0; left: 0; right: 0; z-index: 0;"></div>
     <div class="contenido">
       <div class="content-sidebar">
         <div class="contenido-busqueda">
@@ -48,36 +91,34 @@
           </div><!--Fin del sidebar-->
       </div>
 
-        <div class="contenido-plato">
-                         
-            <?php echo $this->content; ?>
-                       <div class="masinfo">
-                           <a href="#cate-home" id="ver"><img src="/img/scroll.png" alt=""></a>
-                       </div>
-                      <div class="subir">
-                        <a href="#top"><img src="/img/scroll-top.png" alt=""></a>
-                    </div>
-                      <!--  <div class="arrow">
-                          <img src="/img/flechamenu.png" alt="">
-                      </div> -->
-                      <div class="footer">
-                        <nav>
-                          <ul>
-                            <li>
-                              <a href="/application/index/nosotros">Nosotros</a>
-                            </li>
-                            <li>
-                              <a href="/application/index/terminos">Términos y condiciones</a>
-                            </li>
-                          </ul>
-                        </nav>
-                    <footer>
-                      <p>
-                        Desarrollado por ISG - Innovations Systems Group  - Derechos Reservados
-                      </p>
-                    </footer>
-                   </div>
-
+      <div class="contenido-plato">         
+        <?php echo $this->content; ?>
+        <div class="masinfo">
+          <a href="#cate-home" id="ver"><img src="/img/scroll.png" alt=""></a>
+        </div>
+        <div class="subir">
+          <a href="#top"><img src="/img/scroll-top.png" alt=""></a>
+        </div>
+        <!--  <div class="arrow">
+            <img src="/img/flechamenu.png" alt="">
+        </div> -->
+        <div class="footer">
+          <nav>
+            <ul>
+              <li>
+                <a href="/application/index/nosotros">Nosotros</a>
+              </li>
+              <li>
+                <a href="/application/index/terminos">Términos y condiciones</a>
+              </li>
+            </ul>
+          </nav>
+      <footer>
+        <p>
+          Desarrollado por ISG - Innovations Systems Group  - Derechos Reservados
+        </p>
+      </footer>
+     </div>
 </div>
 </div>
       <script>

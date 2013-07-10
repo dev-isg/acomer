@@ -187,6 +187,7 @@ cursor: pointer;
   margin: 0 auto;
 }
 .contenido{
+
   width: 990px;
   margin: 0px auto;
   height: 100%;
@@ -472,6 +473,7 @@ margin: 1em 1em;
   height: 100%;
   width: 724px;
   float: left;
+  position: relative;
 }
 .recomendados-platos{
   display: block;
@@ -497,7 +499,7 @@ margin: 1em 1em;
   margin-right: 10px;
 }
 .map-portada{
-  background: url(../img/mapa.jpg) repeat;
+  /*background: url(../img/mapa.jpg) repeat;*/
 }
 #buscarmap{
 display: none;
@@ -755,6 +757,16 @@ a.title-home-listado h1 img{
   font-size: 14px;
   padding: 3px 0px;
   background: rgba(12, 12, 12, 0.44);
+  border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -o-border-radius: 5px 5px 0 0;
+}
+.mosaic-overlay img{
+   border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -o-border-radius: 5px 5px 0 0;
 }
 .plato_r h1 {
 text-align: center;
@@ -792,7 +804,8 @@ font-family: georgia;
     border-radius: 0 0 5px 5px;
     float: left;
     width: 100%;
-    }
+
+}
 .com_r {
 display: inline-block;
 }
@@ -1243,7 +1256,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   border-right: 1px solid #e5e5e5;
 }
 .content-info{
-  float: left;
+  float: right;
   width: 263px;
   margin-left: 10px;
 }
@@ -1868,7 +1881,7 @@ form#application .control-group .btn-solicito{
     width: 80%;
   }
   #search .btn-search-home {
-    background: #CE450A url(../img/lupa-search.png) no-repeat 100%;
+    background: #CE450A url(../img/lupa-search.png) no-repeat 50%;
     height: 100%;
     width: 20%;
     -webkit-border-radius: 0;
@@ -1996,6 +2009,9 @@ form#application .control-group .btn-solicito{
   }
 }
 @media (max-width: 767px) {
+  .coments-all-fin{
+    margin-top: 20px;
+  }
   .verlistado{
     text-indent: 0;
   }
@@ -2201,6 +2217,7 @@ form#application .control-group .btn-solicito{
   .content-sidebar{
     width: 100%;
     height: auto;
+    position: relative;
   }
   .contenido-busqueda{
     width: 100%;
