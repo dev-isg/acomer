@@ -179,9 +179,10 @@ class PlatosTable {
                 $solr->commit();
                 $solr->optimize();
             }
-          }else{
-              echo ('<script>confirm("supero los platos permitidos")</script>');
           }
+//          else{
+//              echo ('<script>confirm("supero los platos permitidos")</script>');
+//          }
         } else {
 
             if ($this->getPlato($id)) {
