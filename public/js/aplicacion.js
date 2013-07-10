@@ -197,6 +197,7 @@ var validar=function(elemento){
         }
         });
 }
+validar('#comentarios');
        
 
             $('.cover').mosaic({
