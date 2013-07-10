@@ -10,7 +10,7 @@ $form = $this->form;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
 
 $form->setAttributes(array(
-    'action' => $this->url.'/local/index/editarlocal?id='.$this->id,
+    'action' => $this->url.'/local/index/editarlocal/'.$this->id_re.'?id='.$this->id,
     'method' => 'post',
     'in_id'   =>$this->id,
 ));
@@ -149,7 +149,7 @@ echo $this->formHidden($form->get('h_distrito'));
             }
           }
               });   
-    
+    console.log($("#de_latitud").val(),$("#de_longitud").val());
 
 
 	})

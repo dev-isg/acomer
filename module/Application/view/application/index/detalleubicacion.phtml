@@ -18,7 +18,7 @@ echo $this->formHidden($form->get('in_id'));
 
 
 ?><?php echo $this->formSubmit($form->get('submit'));?><?php
-?><a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a><?php
+?><a class="ver_mapa" style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a><?php
 echo $this->form()->closeTag(); ?>
 
 <?php
@@ -27,75 +27,88 @@ echo $this->form()->closeTag(); ?>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>   -->      
 <script src="<?php echo $this->basePath()?>/js/vendor/gmaps.js"></script> 
 <div id="esconder">
-    <div class="sub" style="margin-top: 10px;background: url(/img/img-resultados.png) no-repeat;width: 41%;padding: 0.9em 0px;height: 23px;">
-      <span  style="padding-left: 10px;color:white;font-weight: bold;">Destacados <?php echo $_REQUEST['q']; ?> </span>
-        </div>
-        <?php  $this->error; ?>
-          <div class="contenido-bus">
-          
-          <?php  foreach ($this->hola as $doc)
-              {
-            ?> 
-            <div class="plato_r" style="display:inline-block;">
-              <input type="hidden" value="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>">
-              <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
-              <div class="mosaic-block cover">
-                <div class="mosaic-overlay"><span><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></span>
-                  <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="/img/mas.png" alt="" class="mas">
-                </div>
-                <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>&q=<?php echo $_REQUEST['q']; ?>"  class="mosaic-backdrop">
-                  <div class="details">
-                    <h4><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></h4>
-                    <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
-                    <p style="font-size:0.9em;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
-                  </div>
-                </a>
-              </div>
-              <div class="foo">
-                  <p class="nom_res"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p>
-                  <div class="pt">       
-                    <p class="com"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?> <i class="icon-comment"></i></p>
-                    <div class="punt">
-                      <div class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>"></div>
-                    </div>     
-                </div>
-              </div> 
-            </div>
-            <?php } ?>   
-          </div>
-                   
-          <div class="sub" style="margin-top: 1em;margin-bottom: 2em;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;">
-              <span style="padding-left: 10px;color:white;font-weight: bold;">Resultados <?php echo $_REQUEST['q']; ?> </span>
-          </div>    
-          <?php   
-            foreach ($this->holas as $doc)
-                {
-            ?> 
+  <div class="sub">
+    <span  style="padding-left: 10px;color:white;font-weight: bold;">Destacados <?php echo $_REQUEST['q']; ?> </span>
+  </div>
+    <?php  $this->error; ?>
+      <div class="contenido-bus">
+          <ul>
 
-            <div class="plato_h">
-              <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
-              <div class="lateral" >
-                <img src="/img/mas.png" alt="" class="mas-det">
-                <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>&q=<?php echo $_REQUEST['q']; ?>"  >
-                  <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="width: 144px;height: 120px;border:0;">
-                </a>
-              </div>
-              <div class="detalle-restaurante">
-                <div class="detalle-nombre"><p class="nombre_r"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p>
-                  <div class="punt">
-                    <div class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>" style="margin: 0px;width: 118px !important;display:inline-block;"></div>
-                  </div> 
+      <?php     foreach ($this->hola as $doc)
+                          {
+            ?> 
+            <li>
+                          <div class="plato_r" style="display:inline-block;">
+                         <input type="hidden" value="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>">
+                          <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
+                           <div class="mosaic-block cover">
+                           <div class="mosaic-overlay"><span><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></span>
+                           <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="/img/mas.png" alt="" class="mas">
+                           </div>
+                           <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>&q=<?php echo $_REQUEST['q']; ?>"  class="mosaic-backdrop">
+                             <div class="details">
+                                 <h4><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></h4>
+                                 <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
+                                 <p style="font-size:0.9em;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?> </p>
+                             </div>
+                         </a>
+                             </div>
+                      <div class="foo">
+           <p class="nom_res"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p>
+
+           <div class="pt">       
+           <p class="com"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?> <i class="icon-comment"></i></p>
+              <div class="punt">
+                    <div class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>"></div>
+                  </div>     
                 </div>
-                <p class="nom_plato"><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></p>
-                <p style="margin-left:10px;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></p>
-                <p class="com-pla"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i> Comentarios</p>
-              </div>
-            </div>
+
+             </div> 
+             </div>
+
+             </li>
+                      <?php
+                          } 
+                          
+                        ?>   
+                </ul>
+                  
+                            
+                        </div>
                
-             
-            <?php
-                }
-            ?>   
+                            
+        <div class="sub">
+            <span style="padding-left: 10px;color:white;font-weight: bold;">Resultados <?php echo $_REQUEST['q']; ?> </span>
+        </div>    <?php   
+       
+                  foreach ($this->holas as $doc)
+                          {
+                      ?> 
+
+                       <div class="plato_h">
+                         <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
+                         <div class="lateral" >
+                          <img src="/img/mas.png" alt="" class="mas-det">
+                          <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>&q=<?php echo $_REQUEST['q']; ?>"  >
+                               <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="border:0;">
+                          </a>
+                          </div>
+                          <div class="detalle-restaurante">
+                          <div class="detalle-nombre"><p class="nombre_r"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p><div class="punt">
+                    <div class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>" style="margin: 0px;width: 118px !important;display:inline-block;"></div>
+                  </div> </div>
+                              <p class="nom_plato"><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></p>
+                              <p style="margin-left:10px;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></p>
+                              <p class="com-pla"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i> Comentarios</p>
+
+                          </div>
+
+                          </div>
+                         
+                       
+                      <?php
+                          }
+                      ?>   
        </div>         
 
   <div id="mapa-buscador">
@@ -106,11 +119,11 @@ echo $this->form()->closeTag(); ?>
                           }  else 
                              {
                               ?>
-<div id='error'>       <p class="mensaje">
-"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti."
-</p>
-<p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p> <div>
-
+<div class="descrip-product">
+  <div id="error">       
+    <p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti."</p>
+    <p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p> 
+  </div>
     <div class="sub subir-home" id="subir-home">
       <div class="content-etiqueta-home">
         <p>Platos destacados</p>
@@ -149,6 +162,8 @@ echo $this->form()->closeTag(); ?>
         <?php endforeach; ?>   
       </ul>
     </div>
+</div>                     
+  
 
 <?php
                               

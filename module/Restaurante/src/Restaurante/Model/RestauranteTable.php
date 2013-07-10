@@ -45,6 +45,7 @@ class RestauranteTable
         
         $selectString = $sql->getSqlStringForSqlObject($select);
         $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        $resultSet->buffer();
         return $resultSet;
     }
      public function getRestaurante($id)
@@ -73,7 +74,7 @@ class RestauranteTable
            'va_nombre'         => $restaurante->va_nombre,
            'va_razon_social'   => $restaurante->va_razon_social,
            'va_web'            => $restaurante->va_web,
-           'va_imagen'         => $restaurante->va_nombre.'-'.$imagen['name'],
+           'va_imagen'         => $imagen,
            'va_ruc'            => $restaurante->va_ruc,
            'Ta_tipo_comida_in_id'  => $restaurante->Ta_tipo_comida_in_id );
         $id = (int)$restaurante->in_id;
@@ -158,6 +159,7 @@ class RestauranteTable
          if (!$rowset) {
             throw new \Exception("No hay data");
         }
+        $rowset->buffer();
         return $rowset;
     }
 

@@ -7,6 +7,8 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Select;
 use Platos\Model\Platos;
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
+
 
 class PlatosTable {
 
@@ -20,7 +22,7 @@ class PlatosTable {
      * 2 maneras distina de hacer joins
      */
 
-    public function fetchAll($consulta = null) {
+    public function fetchAll($consulta = null,$consulta2 = null) {
 
         $sqlSelect = $this->tableGateway->getSql()->select();
         $sqlSelect->columns(array('in_id', 'va_nombre', 'va_precio', 'en_estado', 'en_destaque', 'Ta_puntaje_in_id'));
@@ -30,7 +32,7 @@ class PlatosTable {
         $sqlSelect->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurante_va_nombre' => 'va_nombre'), 'left');
         $sqlSelect->join(array('c' => 'ta_comentario'), 'c.ta_plato_in_id=ta_plato.in_id', array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(c.in_id)')), 'left');
         if ($consulta != null) {
-            $sqlSelect->where(array('pl.ta_local_in_id' => $consulta));
+            $sqlSelect->where(array('pl.ta_local_in_id'=>$consulta))->where->and->like('ta_plato.va_nombre', '%'.$consulta2.'%');//where(array('pl.ta_local_in_id' => $consulta));
         }
         $sqlSelect->group('ta_plato.in_id')->order('ta_plato.in_id desc');
 //             $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($sqlSelect);
@@ -94,7 +96,7 @@ class PlatosTable {
 
         $data = array(
 //            'in_id' => $plato->in_id,
-            'va_imagen' => $plato->va_nombre . '-' . $imagen['name'], //$plato->va_imagen,
+            'va_imagen' => $imagen, //$plato->va_imagen,
             'tx_descripcion' => $plato->tx_descripcion,
             'va_nombre' => $plato->va_nombre,
             'va_precio' => $plato->va_precio,
@@ -178,6 +180,9 @@ class PlatosTable {
                 $solr->optimize();
             }
           }
+//          else{
+//              echo ('<script>confirm("supero los platos permitidos")</script>');
+//          }
         } else {
 
             if ($this->getPlato($id)) {
@@ -194,16 +199,17 @@ class PlatosTable {
         $sql = new Sql($adapter);
         $selecttot = $sql->select()
                 ->from('ta_plato')
-                ->join(array('c' => 'ta_comentario'), 'c.ta_plato_in_id=ta_plato.in_id', array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(*)')), 'left')
-                ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
-                ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
-                ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud', 'de_longitud', 'va_direccion'), 'left')
-                ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado'), 'left')
-                ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito'), 'left')
-                ->where(array('ta_plato.in_id' => $id));
+              ->join(array('c' => 'ta_comentario'), 'c.ta_plato_in_id=ta_plato.in_id', array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(*)')), 'left')
+                    ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
+                    ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
+                    ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud', 'de_longitud', 'va_direccion'), 'left')
+                    ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado'), 'left')
+                    ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito'), 'left')
+                    ->where(array('ta_plato.in_id' => $id));
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
+      //  var_dump($plato[0]['distrito']);exit;
         require './vendor/SolrPhpClient/Apache/Solr/Service.php';
         $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr');
         if ($solr->ping()) {

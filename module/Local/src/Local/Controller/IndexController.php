@@ -44,30 +44,39 @@ class IndexController extends AbstractActionController
        $filtrar = $this->params()->fromPost('submit');
         $id = (int) $this->params()->fromRoute('in_id', 0);
 
-       if(!empty($id)){
-       if(isset($filtrar)){
-           $consulta=$this->params()->fromPost('texto');
-               $lista =  $this->getLocalTable()->listar($consulta);         
-           }else{
-               $lista =  $this->getLocalTable()->listar($id);//$id
-           }
-       }else{
-           if(isset($filtrar)){
-           $consulta=$this->params()->fromPost('texto');
-               $lista =  $this->getLocalTable()->listar($consulta);         
-           }else{
-               $lista =  $this->getLocalTable()->listar();//$id
-           }
-           
-       }
+//       if(!empty($id)){
+//       if(isset($filtrar)){
+//           $consulta=$this->params()->fromPost('texto');
+//               $lista =  $this->getLocalTable()->listar($consulta);         
+//           }else{
+//               $lista =  $this->getLocalTable()->listar($id);//$id
+//           }
+//       }else{
+//           if(isset($filtrar)){
+//           $consulta=$this->params()->fromPost('texto');
+//               $lista =  $this->getLocalTable()->listar($consulta);         
+//           }else{
+//               $lista =  $this->getLocalTable()->listar();//$id
+//           }
+//           
+//       }
+       
+       $lista =  $this->getLocalTable()->listar($id);
+       $request = $this->getRequest();
+        if ($request->isPost()) {
+             $consulta=$this->params()->fromPost('texto');
+            $lista =  $this->getLocalTable()->listar($id,$consulta);    
+        }
 //       $lista =  $this->getLocalTable()->listar();
 //      var_dump($lista);exit;
+        
+         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
+         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+         $paginator->setItemCountPerPage(10);
         return new ViewModel(array(
-                    'locales' => $lista,
+                    'locales' =>$paginator,// $lista,
                 'in_id'=>$id
                 ));
-       //var_dump($this->getLocaTable()->fetchAll());exit;
-       // return array();
     }
 
     
@@ -119,7 +128,8 @@ class IndexController extends AbstractActionController
     public function editarlocalAction() {
 
         $id = (int) $this->params()->fromQuery('id', 0);
-
+        $idrest=(int) $this->params()->fromRoute('in_id', 0);
+      
         if (!$id) {
             return $this->redirect()->toUrl($this->
                                     getRequest()->getBaseUrl() . '/local/index/agregarlocal');
@@ -186,7 +196,7 @@ class IndexController extends AbstractActionController
 //             var_dump($aux);exit;
               $this->getLocalTable()->editarLocal($aux,$id);
              return $this->redirect()->toUrl($this->
-                                        getRequest()->getBaseUrl() . '/local/index/index');
+                                        getRequest()->getBaseUrl() . '/local/index/index/'.$idrest);
 //            var_dump($aux);exit;
             
 //           $form->setInputFilter($local->getInputFilter());
@@ -210,6 +220,7 @@ class IndexController extends AbstractActionController
         return array(
             'id' => $id,
             'form' => $form,
+            'id_re'=>$idrest,
         );
     }
     
