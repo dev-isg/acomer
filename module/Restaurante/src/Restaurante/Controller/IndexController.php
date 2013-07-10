@@ -320,7 +320,18 @@ class IndexController extends AbstractActionController
             
      }
      
+   public function getPlatosTable() {
+        if (!$this->platosTable) {
+            $sm = $this->getServiceLocator();
+            $this->platosTable = $sm->get('Platos\Model\PlatosTable');
+        }
+        return $this->platosTable;
+    }
+    
 
+       public function cambiaestadoLocalRestauranteAction($id, $estado){
+        $this->getPlatosTable()->eliminarPlato($id, $estado);
+       }
         public function cambiaestadoAction() 
         {
             $id = $this->params()->fromQuery('id');
@@ -339,6 +350,7 @@ class IndexController extends AbstractActionController
             foreach ($plato as $result) 
             {
             $this->estadoRestauranteSolarAction($result['plato']);
+            $this->cambiaestadoLocalRestauranteAction($result['plato'],$estado);
             }
             $this->redirect()->toUrl('/restaurante/index');
          }    
@@ -364,7 +376,7 @@ class IndexController extends AbstractActionController
             $sql = new Sql($adapter);
             $selecttot = $sql->select()
                 ->from('ta_plato')
-                ->join(array('c' => 'ta_comentario'), 'c.ta_plato_in_id=ta_plato.in_id', array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(*)')), 'left')
+                ->join(array('c' => 'ta_comentario'), 'c.ta_plato_in_id=ta_plato.in_id', array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(c.in_id)')), 'left')
                     ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
                     ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
                     ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud', 'de_longitud', 'va_direccion'), 'left')
