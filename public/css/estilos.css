@@ -356,6 +356,7 @@ display: inline-block;
 width: 142px;
 vertical-align: top;
 position: relative;
+box-shadow: 0px 1px 6px;
 }
 .nombre_r {
 display: inline-block;
@@ -374,7 +375,8 @@ vertical-align: top;
 font-size: 14px;
 color: #ff8400;
 margin-left: 10px;
-margin-bottom: 0px;
+margin-bottom: 5px;
+border-bottom: 2px solid #fff;
 }
 .com-pla {
 text-align: right;
@@ -385,7 +387,7 @@ margin-left: 14px;
 background: #f0f0f0;
 width: 691px;
 margin: 1em 1em;
-border-bottom: 2px solid #fff;
+
 }
 #esconder {
 background: url(../../img/back-detalle.png) repeat;
