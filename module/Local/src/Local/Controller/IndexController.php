@@ -103,19 +103,20 @@ class IndexController extends AbstractActionController
             
             $servicio = $this->params()->fromPost('servicio', 0);
             $local = new Local();
+            
             $form->setInputFilter($local->getInputFilter());
             $form->setData($request->getPost());
-
+//            var_dump($form->isValid());exit;
             if ($form->isValid()) {
                 
                 $local->exchangeArray($form->getData());
                 $this->getLocalTable()->guardarLocal($local, $servicio);
                 return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/local/index/index/'.$idretau);
             } else {
-                echo var_dump($request->getPost());exit;
-                $local->exchangeArray($form->getData());
-                $this->getLocalTable()->guardarLocal($local, $servicio);
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/local/index/index/'.$idretau);
+                // var_dump($request->getPost());exit;
+//                $local->exchangeArray($form->getData());
+//                $this->getLocalTable()->guardarLocal($local, $servicio);
+//                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/local/index/index/'.$idretau);
             }
         }
 
@@ -138,11 +139,9 @@ class IndexController extends AbstractActionController
         try {
            
             $local = $this->getLocalTable()->getLocal($id); //->toArray();
-           
-           // echo get_class($local);exit;
-           //print_r(get_class_methods($local));exit;
+
         } catch (\Exception $ex) {
-             //echo 'mal';exit;
+
             return $this->redirect()->toUrl($this->
                                     getRequest()->getBaseUrl() . '/local');
         }
@@ -158,9 +157,6 @@ class IndexController extends AbstractActionController
         $form->get('servicio')->setValueOptions($array);
 
         $form->get('pais')->setValue($local['in_idpais']);
-//        $form->get('departamento')->setValueOptions(array($local['in_iddep']));//setValue($local['in_iddep']);
-//        $form->get('provincia')->setValueOptions(array($local['in_idprov']));
-//        $form->get('distrito')->setValueOptions(array($local['in_iddis']));
 
         $hiddenpais = new Element\Hidden('h_pais');
         $hiddenpais->setValue($local['in_idpais']);
@@ -193,12 +189,10 @@ class IndexController extends AbstractActionController
             
             
             $aux=$this->getRequest()->getPost()->toArray();
-//             var_dump($aux);exit;
               $this->getLocalTable()->editarLocal($aux,$id);
              return $this->redirect()->toUrl($this->
                                         getRequest()->getBaseUrl() . '/local/index/index/'.$idrest);
-//            var_dump($aux);exit;
-            
+
 //           $form->setInputFilter($local->getInputFilter());
 //            $form->setData($request->getPost());
 //
