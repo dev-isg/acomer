@@ -236,7 +236,7 @@ class Apache_Solr_Service
 	 * @param string $port
 	 * @param string $path
 	 */
-	public function __construct($host = 'localhost', $port = 8983, $path = '/solr/')
+	public function __construct($host = '192.168.1.38', $port = 8983, $path = '/solr/')
 	{
 		$this->setHost($host);
 		$this->setPort($port);
