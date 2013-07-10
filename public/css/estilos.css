@@ -357,6 +357,7 @@ display: inline-block;
 width: 142px;
 vertical-align: top;
 position: relative;
+box-shadow: 0px 1px 6px;
 }
 .nombre_r {
 display: inline-block;
@@ -375,7 +376,8 @@ vertical-align: top;
 font-size: 14px;
 color: #ff8400;
 margin-left: 10px;
-margin-bottom: 0px;
+margin-bottom: 5px;
+border-bottom: 2px solid #fff;
 }
 .com-pla {
 text-align: right;
@@ -2266,8 +2268,16 @@ form#application .control-group .btn-solicito{
   }
   .contenido-bus{
     margin: 0;
-    padding: 0;
+    padding: 10px 10px;
     height: auto;
+  }
+  #esconder .sub{
+    margin-bottom: 20px;
+  }
+  .contenido-bus ul li{
+    margin-left: 0;
+    width: 100%;
+    margin-bottom: 7px;
   }
 }
 @media (max-width: 480px) {
