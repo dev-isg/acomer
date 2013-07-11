@@ -1,4 +1,4 @@
-/*
+#/*
  * HTML5 Boilerplate
  *
  * What follows is the result of much research on cross-browser styling.
@@ -353,7 +353,10 @@ margin-left: -6px;
 border: 0 none;
 padding: 6px;
 border-radius: 0px;
+border-top: 1px solid rgba(0, 0, 0, 0.25);
+border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
+
 .verlistado {
 border: 0;
 background:url(../img/lupa2.png) no-repeat;
@@ -372,6 +375,11 @@ line-height: 16px;
   width: 145px;
   height: 112px;
 }
+.img-mapa{
+  width: 100px;
+  height: 100px;
+}
+
 p.nombre_r {
   color: #ff8400;
   font-weight: bold;
