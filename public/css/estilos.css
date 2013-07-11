@@ -962,6 +962,9 @@ width: 49%;
   height: 500px;
   width: 300px;
 }
+.lista-Nosotros .contenido-plato{
+  height: 100%;
+}
 .content-left{
   width: 724px;
   float: left;
@@ -1537,7 +1540,7 @@ form#application .control-group .btn-solicito{
   width: 680px;
 }
 .map-portada .guia{
-  margin-top:  -50px;
+  margin-top:  -60px;
 }
 .btn-soli{
   color: #FFFFFF;
@@ -1615,7 +1618,7 @@ form#application .control-group .btn-solicito{
 }
 
 .lista-Home .descrip-product{
-  margin-top: -30px;
+  margin-top: -35px;
 }
 .lista-Home .subir-home{
   margin-top: 0px!important;
@@ -1814,8 +1817,11 @@ form#application .control-group .btn-solicito{
 
 /*Activando responsive web desing*/
 @media (min-width: 1200px) {
-  .map-portada .guia{
-    margin-top:  0px;
+  .lista-Home .descrip-product{
+    margin-top: -26px;
+  }
+  .map-portada .guia {
+    margin-top: -32px;
   }
   .content-sidebar{
     width: 300px;

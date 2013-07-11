@@ -191,7 +191,7 @@ class IndexController extends AbstractActionController
         {   
          $view = new ViewModel();
         $this->layout('layout/layout-portada');
-         $texto = $this->params()->fromQuery('q');
+        $texto = $this->params()->fromQuery('q');
          
 
                         $limite = 9;    
@@ -199,10 +199,10 @@ class IndexController extends AbstractActionController
                         $palabraBuscar = isset($texto) ? $texto : false ;
                           $fd = array (  
                             'fq'=>'en_estado:activo AND restaurant_estado:activo');
-                          if($palabraBuscar== '')
+                          if($palabraBuscar== '' )
                           {
 
-                   $this->redirect()->toUrl('/application');
+                          $this->redirect()->toUrl('/application');
                           }
                         if ($palabraBuscar)
                         { 
@@ -220,7 +220,7 @@ class IndexController extends AbstractActionController
                           }
                           catch (Exception $e)
                           {
-                              echo 'entro';exit;
+                             
                           $this->redirect()->toUrl('/application');
                           }
                         }
