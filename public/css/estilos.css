@@ -375,14 +375,14 @@ line-height: 16px;
   height: 112px;
 }
 .img-mapa{
- width: 90px;
+ width: 97px;
 height: 97px;
 float: left;
 }
 .restaurante-map {
 color: #ff8400;
 font-weight: bold;
-padding-left: 1em;
+padding-left: 7em;
 margin: 0px;
 margin-top: 5px;
 font-size: 15px;
@@ -390,13 +390,14 @@ font-size: 15px;
 .plato-map {
 font-size: 13px;
 color: #ff8400;
-padding-left: 1em;
+padding-left: 8em;
 margin: 0;
 }
 .txt-map{
-  padding-left: 1em;
+  padding-left: 0.5em;
   font-size: 13px;
   height: 18px;
+  width: 236px;
 overflow: hidden;
 margin: 0;
 }

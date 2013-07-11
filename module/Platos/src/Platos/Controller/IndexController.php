@@ -502,11 +502,9 @@ class IndexController extends AbstractActionController {
         $view = new ViewModel();
         $this->layout('layout/layout-portada');
         $datos =$this->request->getQuery(); 
+        $id = $datos['id']; 
         $distrito = $datos['distrito']; 
-        var_dump($distrito);exit;
-        $id = $this->params()->fromQuery('id');
-        $plato = $this->params()->fromQuery('q');
-        
+        $plato = $datos['q'];       
         $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();   
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
