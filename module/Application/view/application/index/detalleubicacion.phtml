@@ -22,7 +22,7 @@ echo $this->formHidden($form->get('in_id'));
 echo $this->form()->closeTag(); ?>
 
 <?php
- if($this->hola and $this->holas ){
+ if($this->hola or $this->holas ){
 ?>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>   -->      
 <script src="<?php echo $this->basePath()?>/js/vendor/gmaps.js"></script> 
