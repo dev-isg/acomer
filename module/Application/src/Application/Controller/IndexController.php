@@ -179,13 +179,13 @@ class IndexController extends AbstractActionController
         $comidas =  $this->joinAction()->toArray();
         $com = array();
         foreach($comidas as $y){
-            $com[$y['ch_distrito']] = $y['ch_distrito'];
+             $com[$y['va_distrito']] = $y['va_distrito'];
         }
         $form->get('q')->setValue($palabra);
          $form->get('distrito')->setValue($distrito);
          $form->get('distrito')->setValueOptions($com);
          $form->get('submit')->setValue('Buscar');
-         $view->setVariables( array('plato'=>$palabra,'lista' => $listades,'hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'error'=>$error));
+         $view->setVariables( array('distrito'=>$distrito,'plato'=>$palabra,'lista' => $listades,'hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'error'=>$error));
        return $view;
       }
     
@@ -261,9 +261,11 @@ class IndexController extends AbstractActionController
         $comidas =  $this->joinAction()->toArray();
         $com = array();
         foreach($comidas as $y){
-            $com[$y['ch_distrito']] = $y['ch_distrito'];
+            $com[$y['va_distrito']] = $y['va_distrito'];
         }
-        $form->get('distrito')->setValue('Seleccione');
+    
+     //   $form->get('distrito')->setValue($comidas[1]['ch_distrito']);
+        //$form->get('distrito')->setValue($comidas[15]['ch_distrito']);
         $form->get('distrito')->setValueOptions($com);
         $form->get('q')->setValue($texto);
         $form->get('submit')->setValue('Buscar');
@@ -277,46 +279,7 @@ class IndexController extends AbstractActionController
         return $view;
     }
     
-    public function mapaAction()
-    { 
-        $distrito = $this->params()->fromQuery('distrito');
-        $texto = $this->params()->fromQuery('plato');
-       $filter   = new \Zend\I18n\Filter\Alnum();
-       $plato = $filter->filter($texto);
-        
-        
-        $this->layout('layout/layout-portada'); 
-         header('Content-Type: text/html; charset=utf-8');
-                        $resultados = false;
-                        $palabraBuscar = isset($plato) ? $plato : false ;
-                        $list = 1000;
-                          $fd = array (  
-                            'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
-                              'sort'=>'en_destaque desc',
-                              'fl'=>'latitud,longitud,restaurante,name,plato_tipo',
-                              'wt'=>'json');      
-                        if ($palabraBuscar)
-                        { 
-                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-                          $solar = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
-                          if (get_magic_quotes_gpc() == 1)
-                          {
-                            $palabraBuscar = stripslashes($palabraBuscar);
-                          }
-                          try
-                          {
-                            $resultados = $solar->search($palabraBuscar, 0,$list, $fd );
-                          }
-                          catch (Exception $e)
-                          {
-                          
-                          echo("<div>ingrese algun valor</div>");   }
-                        }
-          $distritos=$this->josAction();
-       return  new ViewModel(array('mapa' => $resultados->response->docs ,'distritos' => $distritos ,));
-        //$mapita = $this->jsonmapasaAction($json);
-                        
-    }
+   
     
     public function jsonmapasaAction()    { 
         $distrito=  $this->params()->fromQuery('distrito');
@@ -331,7 +294,7 @@ class IndexController extends AbstractActionController
                           $fd = array (  
                             'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
                               'sort'=>'en_destaque desc',
-                              'fl'=>'id,latitud,longitud,va_imagen,restaurante_estado,restaurante,name,plato_tipo',
+                              'fl'=>'id,latitud,longitud,tx_descripcion,va_imagen,restaurante_estado,restaurante,name,plato_tipo',
                               'wt'=>'json');      
                         if ($palabraBuscar)
                         { 
@@ -383,9 +346,10 @@ class IndexController extends AbstractActionController
         $adapter = $this->dbAdapter;
         $sql = new Sql($adapter);
        $select = $sql->select();
-        $select->from('ta_ubigeo');
-        $select->where(array('ch_provincia' => 'LIMA'));
+        $select->from('ta_distrito');
+       // $select->where(array('ch_provincia' => 'LIMA'));
            $selectString = $sql->getSqlStringForSqlObject($select);
+            //var_dump($selectString);exit;
           $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             //var_dump($results);exit;
             return $results;
