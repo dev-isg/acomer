@@ -1673,6 +1673,26 @@ form#application .control-group .btn-solicito{
   margin-top: 0px!important;
   padding-top: 20px;
 }
+.ups-crap{
+  height: auto;
+  line-height: 0px;
+  position: relative;
+}
+.ups-dev{
+  background: none;
+  border: 0;
+  color: white;
+  font-size: 13px;
+  padding: 0;
+  line-height: 15px;
+  cursor: pointer;
+}
+.caret{
+  position: absolute;
+  right: -13px;
+  bottom: 6px;
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */

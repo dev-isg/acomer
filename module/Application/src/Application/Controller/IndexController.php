@@ -103,10 +103,14 @@ class IndexController extends AbstractActionController
           if ($request->isGet()) {
            $datos =$this->request->getQuery();   
            $texto = $datos['q']; 
-              $filter   = new \Zend\I18n\Filter\Alnum(true);
-              $palabra = $filter->filter($texto);       
-           $distrito = $datos['distrito'];    
-            $limite = 9;    
+           $filter   = new \Zend\I18n\Filter\Alnum(true);
+           $palabra = $filter->filter($texto);       
+           $distrito = $datos['distrito'];  
+             
+           
+           if($distrito != 'seleccione todos')
+           {
+                       $limite = 9;    
                         $resultados = false;
                         $palabraBuscar = isset($palabra) ? $palabra : false ;
                           $fd = array (  
@@ -162,17 +166,75 @@ class IndexController extends AbstractActionController
                           try
                           {
                             $results = $solr->search($query, 0, $limit, $fq  );
-                             //var_dump($results);exit;
+                          }
+                          catch (Exception $e)
+                          {
+                                    echo("<div>ingrese algun valor</div>");         
+                          }
+                        }
+         
+                        
+                        
+                 }       
+                 else 
+                 {
+                    $limite = 9;    
+                        $resultados = false;
+                        $palabraBuscar = isset($palabra) ? $palabra : false ;
+                          $fd = array (  
+                            'fq'=>'en_estado:activo AND restaurant_estado:activo');
+
+                        if ($palabraBuscar)
+                        { 
+                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
+                         $solar = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+                          if (get_magic_quotes_gpc() == 1)
+                          {
+                            $palabraBuscar = stripslashes($palabraBuscar);
+                          }
+                          try
+                          {
+                            $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
+                          //var_dump($resultados);exit;
+
+                          }
+                          catch (Exception $e)
+                          {
+                             
+                          $this->redirect()->toUrl('/application');
+                          }
+                        }
+          
+                        $limit = 3;             
+                        $palabraBuscar = isset($palabra) ? $palabra : false ;
+                        $query = "($palabraBuscar) AND (en_destaque:si)";
+                        $fq = array (  
+                                   'sort'=>'random_' . uniqid() .' asc',
+                            'fq'=>'en_estado:activo AND restaurant_estado:activo');                                           
+                        $results = false;
+                        if ($query)
+                        { 
+   
+                        $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+                          if (get_magic_quotes_gpc() == 1)
+                          {
+                            $query = stripslashes($query);
+                          }
+                          try
+                          {
+                            $results = $solr->search($query, 0, $limit, $fq  );
 
                           }
                           catch (Exception $e)
                           {
                           
-                                    echo("<div>ingrese algun valor</div>");         
+                                   $this->redirect()->toUrl('/application');       
                           }
-                        }
-           
-           
+                         }
+                     
+                 }       
+                        
+                        
          }
         $form = new Formularios();
         $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
@@ -192,7 +254,7 @@ class IndexController extends AbstractActionController
          
      public function verAction()             
         {   
-         $view = new ViewModel();
+        $view = new ViewModel();
         $this->layout('layout/layout-portada');
         $filtered = $this->params()->fromQuery('q');
               $filter   = new \Zend\I18n\Filter\Alnum(true);
@@ -254,7 +316,7 @@ class IndexController extends AbstractActionController
                           
                                    $this->redirect()->toUrl('/application');       
                           }
-          }
+                         }
           //var_dump($results->response->docs);exit;
         $form = new Formularios();
         $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
@@ -265,7 +327,7 @@ class IndexController extends AbstractActionController
         }
     
      //   $form->get('distrito')->setValue($comidas[1]['ch_distrito']);
-        //$form->get('distrito')->setValue($comidas[15]['ch_distrito']);
+        //$form->get('distrito')->setValue($comidas[1]['va_distrito']);
         $form->get('distrito')->setValueOptions($com);
         $form->get('q')->setValue($texto);
         $form->get('submit')->setValue('Buscar');
@@ -287,7 +349,11 @@ class IndexController extends AbstractActionController
         $view->setTerminal(true);
         $texto = $this->params()->fromQuery('plato');
         $filter   = new \Zend\I18n\Filter\Alnum(true);
-                  $plato = $filter->filter($texto);
+        $plato = $filter->filter($texto);
+        
+        
+             if($distrito != 'seleccione todos')
+           {
                         $resultados = false;
                         $palabraBuscar = isset($plato) ? $plato : false ;
                         $list = 1000;
@@ -322,6 +388,67 @@ class IndexController extends AbstractActionController
                           else  {echo $resultados->getRawResponse(); 
                     exit;}                        
                         }
+                        
+                        
+                        } 
+                        
+                 
+                        else {
+   $limite = 1000;    
+                        $resultados = false;
+                        $palabraBuscar = isset($plato) ? $plato : false ;
+                          $fd = array (  
+                            'fq'=>'en_estado:activo AND restaurant_estado:activo');
+                
+                        if ($palabraBuscar)
+                        { 
+                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
+                         $solar = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+                          if (get_magic_quotes_gpc() == 1)
+                          {
+                            $palabraBuscar = stripslashes($palabraBuscar);
+                          }
+                          try
+                          {
+                            $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
+                          //var_dump($resultados);exit;
+
+                          }
+                          catch (Exception $e)
+                          {
+                             
+                          $this->redirect()->toUrl('/application');
+                          }
+                        }
+          
+                        $limit = 3;             
+                        $palabraBuscar = isset($plato) ? $plato : false ;
+                        $query = "($palabraBuscar) AND (en_destaque:si)";
+                        $fq = array (  
+                                   'sort'=>'random_' . uniqid() .' asc',
+                            'fq'=>'en_estado:activo AND restaurant_estado:activo');                                           
+                        $results = false;
+                        if ($query)
+                        { 
+   
+                        $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+                          if (get_magic_quotes_gpc() == 1)
+                          {
+                            $query = stripslashes($query);
+                          }
+                          try
+                          {
+                            $results = $solr->search($query, 0, $limit, $fq  );
+
+                          }
+                          catch (Exception $e)
+                          {
+                          
+                                   $this->redirect()->toUrl('/application');       
+                          }
+                         }
+                        }
+    
                      
                          echo $resultados->getRawResponse(); 
                     exit;
