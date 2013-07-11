@@ -16,6 +16,8 @@ class PlatosTable {
 
     public function __construct(TableGateway $tableGateway) {
         $this->tableGateway = $tableGateway;
+        $options = new \Zend\Config\Config ( include APPLICATION_PATH . '/config/autoload/global.php' );
+        $this->_solr = new \Apache_Solr_Service ( $options->solr->host, $options->solr->port, $options->solr->folder );
     }
 
     /*
@@ -125,7 +127,7 @@ class PlatosTable {
             $plato = $results->toArray();
           //  var_dump($plato);exit;
             require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-            $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr');
+            $solr = &$this->_solr;//new \Apache_Solr_Service('192.168.1.38', 8983, '/solr');
             if ($solr->ping()) {
                 $document = new \Apache_Solr_Document();
                 $document->id = $plato[0]['in_id'];
@@ -181,7 +183,7 @@ class PlatosTable {
         $plato = $results->toArray();
       //  var_dump($plato[0]['distrito']);exit;
         require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-        $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr');
+        $solr = &$this->_solr; //new \Apache_Solr_Service('192.168.1.38', 8983, '/solr');
         if ($solr->ping()) {
             $solr->deleteByQuery('id:' . $id);
             $document = new \Apache_Solr_Document();

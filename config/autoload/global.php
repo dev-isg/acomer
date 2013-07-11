@@ -30,10 +30,13 @@ return array (
 		'solr' => array (
 				'host' => '192.168.1.38',
 				'port' => '8983',
-				'folder' => '/solr/' 
+				'folder' => '/solr' 
 		),
-		'server' => array (
-				'static' => '',
-				'dynamic' => '' 
-		) 
+		'host' => array (
+				'static' => '/',
+				'images' => '/imagenes/'
+		),
+		'upload' => array(
+			'images' => APPLICATION_PATH . '/public/imagenes'
+		)
 );
