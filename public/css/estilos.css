@@ -441,6 +441,7 @@ margin-right: 10px;
   float: left;
   width: 100%;
   padding-bottom: 50px;
+  height: 100%;
 }
 
 .overlay{
@@ -539,6 +540,9 @@ margin-right: 10px;
   width: 724px;
   float: left;
   position: relative;
+}
+.lista-Detalle .contenido-plato{
+  height: auto;
 }
 .recomendados-platos{
   display: block;
@@ -659,11 +663,21 @@ font-weight: bold;
 nav{
   display: inline-block !important;
   vertical-align: middle;
-  width: 42%;
+  width: 100%;
   margin-top: 3px;
+  text-align: center;
 }
 nav ul{
   margin-bottom: 0;
+}
+.footer nav ul{
+  margin-left: 0;
+}
+.footer footer{
+  width: 100%;
+}
+.footer footer p{
+    text-align: center;
 }
 nav li{
   line-height: 20px;
@@ -673,6 +687,7 @@ nav li{
   font-size: 13px;
   border-left: 1px solid;
   padding-left: 15px;
+  padding-right: 10px;
 }
 nav li a{
   color: white;
@@ -684,7 +699,6 @@ nav li a:hover{
 nav li:first-child{
   border-left: 0px solid;
   padding-left: 0;
-  padding-right: 10px;
 }
 .solicitar-publicacion{
   display: block;
@@ -703,9 +717,10 @@ nav li:first-child{
   position: fixed;
   bottom: 0px;
   width: 724px;
-  height: 30px;
+  height: 50px;
   z-index: 999;
 }
+
 footer{
     display: inline-block !important;
 }
@@ -794,6 +809,12 @@ a.title-home-listado h1 img{
   font-weight: bold;
   padding-top: 5px;
   padding-left: 10px;
+}
+.lista-Terminos .contenido-plato{
+  height: 100%;
+}
+.lista-Solicita .contenido-plato{
+  height: 100%;
 }
 .punt{
   width: 120px !important;
@@ -976,6 +997,9 @@ width: 49%;
   background: red;
   height: 500px;
   width: 300px;
+}
+.lista-Nosotros .contenido-plato{
+  height: 100%;
 }
 .content-left{
   width: 724px;
@@ -1552,7 +1576,7 @@ form#application .control-group .btn-solicito{
   width: 680px;
 }
 .map-portada .guia{
-  margin-top:  -50px;
+  margin-top:  -60px;
 }
 .btn-soli{
   color: #FFFFFF;
@@ -1627,6 +1651,14 @@ form#application .control-group .btn-solicito{
 }
 .paginationControl{
   font-size: 13px;
+}
+
+.lista-Home .descrip-product{
+  margin-top: -35px;
+}
+.lista-Home .subir-home{
+  margin-top: 0px!important;
+  padding-top: 20px;
 }
 /* ==========================================================================
    Helper classes
@@ -1821,8 +1853,11 @@ form#application .control-group .btn-solicito{
 
 /*Activando responsive web desing*/
 @media (min-width: 1200px) {
-  .map-portada .guia{
-    margin-top:  0px;
+  .lista-Home .descrip-product{
+    margin-top: -26px;
+  }
+  .map-portada .guia {
+    margin-top: -32px;
   }
   .content-sidebar{
     width: 300px;
@@ -1854,6 +1889,9 @@ form#application .control-group .btn-solicito{
   .verlistado{
     line-height: 22px;
     text-indent: -9999px;
+  }
+  .recomendados-platos.primer-home{
+    padding-bottom: 30px!important;
   }
 }
 @media (max-width: 990px) {
@@ -2152,6 +2190,9 @@ form#application .control-group .btn-solicito{
   }
   p.nombre_r{
     font-size: 17px;
+  }
+  .mosaic-overlay{
+    height: 145px;
   }
 }
 @media (max-width: 767px) {

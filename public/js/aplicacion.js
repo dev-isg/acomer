@@ -246,7 +246,7 @@ $(document).ready(function(){
              },
                    title: marker.restaurante ,
                    infoWindow: {
-                           content: marker.name + '</br> <a href=/platos/index/verplatos?id=' + marker.id +'&q=' + plato +'>ver plato </a>'
+                           content: marker.name + '</br> <a href=/platos/index/verplatos?id=' + marker.id +'&q=' + plato +'&distrito=' + dis+'>ver plato </a>'
                          }
 
                  });

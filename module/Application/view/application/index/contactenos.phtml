@@ -1,20 +1,19 @@
 <?php
 
-$title = 'Solicitar';
+$title = 'Contactar';
 $this->headTitle($title);
 ?>
 <script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.js"></script>
 <div class="content-left">
 	<div class="descrip-product">
 		<div class="contenido-static">
-			<h2>Solicite registrar un plato</h2>
-			<p>Si conoces un plato que te agrada, el lugar donde lo venden y no lo encontraste en <a href="/" title="Lista del sabor" atl="listadelsabor">listadelsabor.com</a>, por favor llena el siguiente formulario y nos estaremos comunicando contigo para registrarlo.</p>
+			<h2>Contactenos</h2>
 			<?php
 			$form = $this->form;
 			//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
 
 			$form->setAttributes(array(
-			    'action' => $this->url.'/application/index/solicita',
+			    'action' => $this->url.'/application/index/contactenos',
 			    'method' => 'post',
 			    'class' => 'form-horizontal'
 			));
@@ -38,12 +37,10 @@ $this->headTitle($title);
 			echo $this->formHidden($form->get('in_id'));
 
 			?>
-
-			<h3>Sobre ti:</h3>
 			<div class="control-group">
 			    <label class="control-label" for="inputName">Nombre<span class="red">*</span>:</label>
 			    <div class="controls">
-			      <?php echo $this->formRow($form->get('nombre_complet'));?>
+			      <?php echo $this->formRow($form->get('nombre'));?>
 			    </div>
 			</div>
 			<div class="control-group">
@@ -52,29 +49,16 @@ $this->headTitle($title);
 			      <?php echo $this->formRow($form->get('email'));?>
 			    </div>
 			</div>
-			<h3>Sobre el restaurante:</h3>
 			<div class="control-group">
-			    <label class="control-label" for="inpuNombre">Nombre del plato<span class="red">*</span>:</label>
+			    <label class="control-label" for="inpuNombre">Asunto<span class="red">*</span>:</label>
 			    <div class="controls">
-			      <?php echo $this->formRow($form->get('nombre_plato'));?>
+			      <?php echo $this->formRow($form->get('asunto'));?>
 			    </div>
 			</div>
 			<div class="control-group">
-			    <label class="control-label" for="inputEmail">Descripción:</label>
+			    <label class="control-label" for="inputEmail">Mensaje<span class="red">*</span>:</label>
 			    <div class="controls">
-			      <?php echo $this->formRow($form->get('descripcion'));?>
-			    </div>
-			</div>
-			<div class="control-group">
-			    <label class="control-label" for="inputEmail">Nombre del restaurante<span class="red">*</span>:</label>
-			    <div class="controls">
-			      <?php echo $this->formRow($form->get('nombre_restaurant'));?>
-			    </div>
-			</div>
-			<div class="control-group">
-			    <label class="control-label" for="inputEmail">Teléfono<span class="red">*</span>:</label>
-			    <div class="controls">
-			      <?php echo $this->formRow($form->get('telefono'));?>
+			      <?php echo $this->formRow($form->get('mensaje'));?>
 			    </div>
 			</div>
 			<div class="control-group">
@@ -97,14 +81,14 @@ $('#submitbutton').click(function(){
 function submitForm(){ 
 	var validator = $("#application").validate({ 
 	rules: {
-		nombre_complet: {
+		nombre: {
 			required: true
 		}, 
 		email: {
 			required: true,
 			email: true
 		}, 
-		nombre_plato: "required",
+		asunto: "required",
 		nombre_restaurant: "required", 
 		telefono: {
 			required: true,
