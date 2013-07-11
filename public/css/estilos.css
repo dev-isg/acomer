@@ -1601,7 +1601,9 @@ form#application .control-group .btn-solicito{
 .ias_trigger a:active {
   border-color: #ccc;
 }
-
+.paginationControl{
+  font-size: 13px;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
