@@ -439,7 +439,7 @@ margin-right: 10px;
   float: left;
   padding: 10px;
 }
-#esconder .sub{
+#esconder .sub ,#esconder2 .sub  {
   margin-top: 10px;
   background: url(/img/img-resultados.png) no-repeat;
   width: 100%;
