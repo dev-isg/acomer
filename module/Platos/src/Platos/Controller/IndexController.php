@@ -501,9 +501,12 @@ class IndexController extends AbstractActionController {
     public function verplatosAction() {
         $view = new ViewModel();
         $this->layout('layout/layout-portada');
+        $datos =$this->request->getQuery(); 
+        $distrito = $datos['distrito']; 
+        var_dump($distrito);exit;
         $id = $this->params()->fromQuery('id');
         $plato = $this->params()->fromQuery('q');
-        $distrito= $this->params()->fromQuery('distrito');
+        
         $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();   
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);

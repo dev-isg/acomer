@@ -2468,6 +2468,9 @@ form#application .control-group .btn-solicito{
   }
 }
 @media (max-width: 480px) {
+  .lista-Terminos .contenido-plato{
+    height: auto;
+  }
   .contenido-bus{
     width: 93.6%;
   }
