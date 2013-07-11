@@ -503,7 +503,7 @@ class IndexController extends AbstractActionController {
         $this->layout('layout/layout-portada');
         $id = $this->params()->fromQuery('id');
         $plato = $this->params()->fromQuery('q');
-        //$distrito= $this->params()->fromQuery('distrito');
+        $distrito= $this->params()->fromQuery('distrito');
         $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();
        
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
@@ -543,7 +543,7 @@ class IndexController extends AbstractActionController {
         foreach ($comidas as $y) {
             $com[$y['ch_distrito']] = $y['ch_distrito'];
         }
-      //  $formu->get('distrito')->setValue($com);
+        $formu->get('distrito')->setValue($distrito);
         $formu->get('distrito')->setValueOptions($com);
         $formu->get('q')->setValue($plato);
         $formu->get('submit')->setValue('Buscar');
