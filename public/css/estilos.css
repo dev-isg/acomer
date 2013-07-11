@@ -417,6 +417,7 @@ margin-right: 10px;
   float: left;
   width: 100%;
   padding-bottom: 50px;
+  height: 100%;
 }
 
 .overlay{
@@ -511,7 +512,7 @@ margin-right: 10px;
 
 .contenido-plato {
   /*background: url(../img/map.jpg) repeat fixed;*/
-  height: 100%;
+  height: auto;
   width: 724px;
   float: left;
   position: relative;
@@ -1604,6 +1605,14 @@ form#application .control-group .btn-solicito{
 .paginationControl{
   font-size: 13px;
 }
+
+.lista-Home .descrip-product{
+  margin-top: -30px;
+}
+.lista-Home .subir-home{
+  margin-top: 0px!important;
+  padding-top: 20px;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
@@ -1830,6 +1839,9 @@ form#application .control-group .btn-solicito{
   .verlistado{
     line-height: 22px;
     text-indent: -9999px;
+  }
+  .recomendados-platos.primer-home{
+    padding-bottom: 30px!important;
   }
 }
 @media (max-width: 990px) {
@@ -2128,6 +2140,9 @@ form#application .control-group .btn-solicito{
   }
   p.nombre_r{
     font-size: 17px;
+  }
+  .mosaic-overlay{
+    height: 145px;
   }
 }
 @media (max-width: 767px) {

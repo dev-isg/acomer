@@ -21,7 +21,7 @@ use Application\Model\Entity\Album;
 use Zend\Json\Json;
 use Zend\Mail\Message;
 use Zend\Mail\Transport\Sendmail as SendmailTransport;
-
+use Zend\I18n\Filter\Alnum;
 use Platos\Model\Platos;
 use Platos\Model\PlatosTable; 
 require './vendor/SolrPhpClient/Apache/Solr/Service.php';
@@ -192,6 +192,7 @@ class IndexController extends AbstractActionController
          $view = new ViewModel();
         $this->layout('layout/layout-portada');
          $texto = $this->params()->fromQuery('q');
+         
 
                         $limite = 9;    
                         $resultados = false;
@@ -214,13 +215,14 @@ class IndexController extends AbstractActionController
                           try
                           {
                             $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
-                          //  var_dump($resultados);exit;
+                          //var_dump($resultados);exit;
 
                           }
                           catch (Exception $e)
                           {
-                          
-                             }
+                              echo 'entro';exit;
+                          $this->redirect()->toUrl('/application');
+                          }
                         }
           
                         $limit = 3;             
@@ -246,7 +248,7 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                   echo("<div>ingrese algun valor</div>");       
+                                   $this->redirect()->toUrl('/application');       
                           }
           }
           //var_dump($results->response->docs);exit;
@@ -258,7 +260,7 @@ class IndexController extends AbstractActionController
             $com[$y['ch_distrito']] = $y['ch_distrito'];
         }
         $form->get('distrito')->setValueOptions($com);
-        //$form->get('q')->setValue($texto);
+        $form->get('q')->setValue($texto);
         $form->get('submit')->setValue('Buscar');
         $view->setVariables( array('lista' => $listades,'hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'nombre'=>$texto));
      
@@ -318,7 +320,7 @@ class IndexController extends AbstractActionController
                           $fd = array (  
                             'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
                               'sort'=>'en_destaque desc',
-                              'fl'=>'id,latitud,longitud,restaurante_estado,restaurante,name,plato_tipo',
+                              'fl'=>'id,latitud,longitud,va_imagen,restaurante_estado,restaurante,name,plato_tipo',
                               'wt'=>'json');      
                         if ($palabraBuscar)
                         { 
