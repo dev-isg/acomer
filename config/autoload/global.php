@@ -33,8 +33,8 @@ return array (
 				'folder' => '/solr' 
 		),
 		'host' => array (
-				'static' => '/',
-				'images' => '/imagenes/'
+				'static' => '',
+				'images' => 'http://192.168.1.38:8080/imagenes'
 		),
 		'upload' => array(
 			'images' => APPLICATION_PATH . '/public/imagenes'

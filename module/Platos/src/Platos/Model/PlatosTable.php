@@ -9,6 +9,7 @@ use Zend\Db\Sql\Select;
 use Platos\Model\Platos;
 use Zend\Mvc\Controller\Plugin\FlashMessenger;
 
+require_once APPLICATION_PATH . '/vendor/SolrPhpClient/Apache/Solr/Service.php';
 
 class PlatosTable {
 

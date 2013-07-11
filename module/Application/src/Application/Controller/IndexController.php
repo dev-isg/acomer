@@ -24,7 +24,7 @@ use Zend\Mail\Transport\Sendmail as SendmailTransport;
 use Platos\Model\Platos;
 use Platos\Model\PlatosTable;
 
-include './vendor/SolrPhpClient/Apache/Solr/Service.php';
+require_once APPLICATION_PATH . '/vendor/SolrPhpClient/Apache/Solr/Service.php';
 class IndexController extends AbstractActionController
 {
     protected $configTable;

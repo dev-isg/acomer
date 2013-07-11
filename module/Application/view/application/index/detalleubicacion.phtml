@@ -43,7 +43,7 @@ echo $this->form()->closeTag(); ?>
                           <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                            <div class="mosaic-block cover">
                            <div class="mosaic-overlay"><span><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></span>
-                           <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="/img/mas.png" alt="" class="mas">
+                           <img src="<?php echo $this->host('images') . '/' .  htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="/img/mas.png" alt="" class="mas">
                            </div>
                            <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>&q=<?php echo $_REQUEST['q']; ?>"  class="mosaic-backdrop">
                              <div class="details">
@@ -90,7 +90,7 @@ echo $this->form()->closeTag(); ?>
                          <div class="lateral" >
                           <img src="/img/mas.png" alt="" class="mas-det">
                           <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>&q=<?php echo $_REQUEST['q']; ?>"  >
-                               <img src="/imagenes/<?php echo htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="border:0;">
+                               <img src="<?php echo $this->host('images') . '/' .  htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="border:0;">
                           </a>
                           </div>
                           <div class="detalle-restaurante">
@@ -137,7 +137,7 @@ echo $this->form()->closeTag(); ?>
             <div class="plato_r">
               <div class="mosaic-block cover">
                 <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
-                <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="/img/mas.png" alt="" class="mas">
+                <img src="<?php echo $this->host('images') . '/' .  htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="/img/mas.png" alt="" class="mas">
                 </div>
                 <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>" class="mosaic-backdrop">
                 <div class="details">
