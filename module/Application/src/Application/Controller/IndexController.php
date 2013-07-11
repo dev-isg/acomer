@@ -100,8 +100,10 @@ class IndexController extends AbstractActionController
           $this->layout('layout/layout-portada');
           $request = $this->getRequest();
           if ($request->isGet()) {
-           $datos =$this->request->getQuery();         
-           $palabra = $datos['q'];            
+           $datos =$this->request->getQuery();   
+           $texto = $datos['q']; 
+              $filter   = new \Zend\I18n\Filter\Alnum(true);
+              $palabra = $filter->filter($texto);       
            $distrito = $datos['distrito'];    
             $limite = 9;    
                         $resultados = false;
@@ -182,7 +184,7 @@ class IndexController extends AbstractActionController
          $form->get('distrito')->setValue($distrito);
          $form->get('distrito')->setValueOptions($com);
          $form->get('submit')->setValue('Buscar');
-         $view->setVariables( array('mapita'=>$distrito,'lista' => $listades,'hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'error'=>$error));
+         $view->setVariables( array('plato'=>$palabra,'lista' => $listades,'hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'error'=>$error));
        return $view;
       }
     
@@ -191,15 +193,16 @@ class IndexController extends AbstractActionController
         {   
          $view = new ViewModel();
         $this->layout('layout/layout-portada');
-        $texto = $this->params()->fromQuery('q');
-         
-
+        $filtered = $this->params()->fromQuery('q');
+              $filter   = new \Zend\I18n\Filter\Alnum(true);
+                  $texto = $filter->filter($filtered);
+                //  var_dump($texto);exit;
                         $limite = 9;    
                         $resultados = false;
                         $palabraBuscar = isset($texto) ? $texto : false ;
                           $fd = array (  
                             'fq'=>'en_estado:activo AND restaurant_estado:activo');
-                          if($palabraBuscar== '' )
+                          if($palabraBuscar=='')
                           {
 
                           $this->redirect()->toUrl('/application');
@@ -259,6 +262,7 @@ class IndexController extends AbstractActionController
         foreach($comidas as $y){
             $com[$y['ch_distrito']] = $y['ch_distrito'];
         }
+        $form->get('distrito')->setValue('Seleccione');
         $form->get('distrito')->setValueOptions($com);
         $form->get('q')->setValue($texto);
         $form->get('submit')->setValue('Buscar');
@@ -275,7 +279,11 @@ class IndexController extends AbstractActionController
     public function mapaAction()
     { 
         $distrito = $this->params()->fromQuery('distrito');
-        $plato = $this->params()->fromQuery('plato');
+        $texto = $this->params()->fromQuery('plato');
+       $filter   = new \Zend\I18n\Filter\Alnum();
+       $plato = $filter->filter($texto);
+        
+        
         $this->layout('layout/layout-portada'); 
          header('Content-Type: text/html; charset=utf-8');
                         $resultados = false;
@@ -313,7 +321,9 @@ class IndexController extends AbstractActionController
         $distrito=  $this->params()->fromQuery('distrito');
         $view  = new viewModel();
         $view->setTerminal(true);
-        $plato = $this->params()->fromQuery('plato');
+        $texto = $this->params()->fromQuery('plato');
+        $filter   = new \Zend\I18n\Filter\Alnum(true);
+                  $plato = $filter->filter($texto);
                         $resultados = false;
                         $palabraBuscar = isset($plato) ? $plato : false ;
                         $list = 1000;

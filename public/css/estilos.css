@@ -791,6 +791,12 @@ a.title-home-listado h1 img{
   padding-top: 5px;
   padding-left: 10px;
 }
+.lista-Terminos .contenido-plato{
+  height: 100%;
+}
+.lista-Solicita .contenido-plato{
+  height: 100%;
+}
 .punt{
   width: 120px !important;
   display: inline-block;
