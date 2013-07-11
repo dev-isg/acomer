@@ -376,8 +376,19 @@ line-height: 16px;
   height: 112px;
 }
 .img-mapa{
-  width: 100px;
-  height: 100px;
+ width: 80px;
+height: 75px;
+float: left;
+}
+.restaurante-map {
+color: #ff8400;
+font-weight: bold;
+padding-left: 5.5em;
+margin: 0px;
+}
+.a-map{
+  padding-left: 10px;
+font-size: 13px;
 }
 
 p.nombre_r {
