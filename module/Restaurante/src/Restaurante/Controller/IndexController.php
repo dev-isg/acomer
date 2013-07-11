@@ -30,12 +30,14 @@ class IndexController extends AbstractActionController
         $datos = $this->params()->fromPost('texto');
         $comida = $this->params()->fromPost('comida');
         $estado = $this->params()->fromPost('estado');
-         if (isset($filtrar)) {
+          $lista = $this->getRestauranteTable()->fetchAll();
+       $request = $this->getRequest();
+         if ($request->isPost()) {
             $lista = $this->getRestauranteTable()->buscarRestaurante($datos,$comida,$estado);
         }
-        else {
-            $lista = $this->getRestauranteTable()->fetchAll();
-        }
+       
+          
+     
         
             $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
