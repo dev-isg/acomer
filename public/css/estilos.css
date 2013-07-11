@@ -238,7 +238,7 @@ padding-left: 2em;
 }
 .form-horizontal h3{
   line-height: 20px;
-  font-size: 18px;
+  font-size: 17px;
   color: #ff8400;
   font-weight: normal;
 }
@@ -1868,7 +1868,7 @@ form#application .control-group .btn-solicito{
     width: 80%;
   }
   #search .btn-search-home {
-    background: #CE450A url(../img/lupa-search.png) no-repeat 100%;
+    background: #CE450A url(../img/lupa-search.png) no-repeat 50%;
     height: 100%;
     width: 20%;
     -webkit-border-radius: 0;
