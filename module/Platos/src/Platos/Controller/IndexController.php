@@ -504,8 +504,7 @@ class IndexController extends AbstractActionController {
         $id = $this->params()->fromQuery('id');
         $plato = $this->params()->fromQuery('q');
         $distrito= $this->params()->fromQuery('distrito');
-        $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();
-       
+        $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();   
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
