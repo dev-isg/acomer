@@ -15,6 +15,7 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql;
 use Application\Form\Formularios;
 use Application\Form\Solicita;
+use Application\Form\Contactenos;
 use Application\Model\Entity\Procesa;
 use Application\Model\Usuario;
 use Application\Model\Entity\Album;
@@ -557,6 +558,49 @@ class IndexController extends AbstractActionController
         
         $view->setVariables(array('form' => $form));
          return $view;
+        
+    }
+    
+    public function contactenosAction(){
+        
+             $view = new ViewModel();
+        $this->layout('layout/layout-portada');
+        $this->layout()->clase = 'Solicita';
+        $form=new Contactenos("form");
+        $request=$this->getRequest();
+        if($request->isPost()){
+        $nombre = $this->params()->fromPost('nombre', 0);
+        $email = $this->params()->fromPost('email',0);
+        $asunto = $this->params()->fromPost('asunto',0);
+        $mensaje = $this->params()->fromPost('mensaje',0);
+        $bodyHtml='<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+                                               <head>
+                                               <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+                                               </head>
+                                               <body>
+                                                    <div style="color: #7D7D7D"><br />
+                                                     Nombre <strong style="color:#133088; font-weight: bold;">'.utf8_decode($nombre).'</strong><br />
+                                                     Email <strong style="color:#133088; font-weight: bold;">'.utf8_decode($email).'</strong><br />
+                                                     Asunto <strong style="color:#133088; font-weight: bold;">'.utf8_decode($asunto).'</strong><br />
+                                                     Mensaje <strong style="color:#133088; font-weight: bold;">'.utf8_decode($mensaje).'</strong><br />
+                                              
+                                                     </div>
+                                               </body>
+                                               </html>';
+        
+        $message = new Message();
+        $message->addTo('innovations.systems.group@gmail.com', $nombre)
+        ->setFrom('no-reply@listadelsabor.pe)', 'listadelsabor.com')
+        ->setSubject('Moderacion de comentario de listadelsabor.com')
+        ->setBody($bodyHtml);
+        $transport = new SendmailTransport();
+        $transport->send($message);
+        $this->redirect()->toUrl('/application/index/contactenos');
+        }
+        
+        $view->setVariables(array('form' => $form));
+         return $view;
+        
         
     }
         public function terminosAction(){
