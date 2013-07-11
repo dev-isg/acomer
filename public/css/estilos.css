@@ -351,7 +351,7 @@ line-height: 10px !important;
 #q {
 margin-left: -6px;
 border: 0 none;
-padding: 6px;
+padding: 4px;
 border-radius: 0px;
 border-top: 1px solid rgba(0, 0, 0, 0.25);
 border-bottom: 1px solid rgba(0, 0, 0, 0.25);
@@ -385,6 +385,11 @@ color: #ff8400;
 font-weight: bold;
 padding-left: 5.5em;
 margin: 0px;
+}
+.plato-map {
+font-size: 14px;
+color: #ff8400;
+padding-left: 6.3em;
 }
 .a-map{
   padding-left: 10px;
