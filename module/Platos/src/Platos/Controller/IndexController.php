@@ -505,9 +505,11 @@ class IndexController extends AbstractActionController {
     public function verplatosAction() {
         $view = new ViewModel();
         $this->layout('layout/layout-portada');
-        $id = $this->params()->fromQuery('id');
-        $plato = $this->params()->fromQuery('q');
-        $distrito= $this->params()->fromQuery('distrito');
+        $datos =$this->request->getQuery(); 
+        $id = $datos['id']; 
+        $distrito = $datos['distrito']; 
+        $plato = $datos['q'];      
+     
         $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();   
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
@@ -531,20 +533,11 @@ class IndexController extends AbstractActionController {
                 }
             }
         } 
-//        else {
-//          $form->setData(array('va_nombre' => '', 'email' => '', 'tx_descripcion' => ''));  
-////        }else{
-//                echo '<script>alert("solo puedes comentar una vez")</script>';
-//            } 
-
-//    var_dump($listarcomentarios);Exit;
-
-
-        $formu = new Formularios();
+     $formu = new Formularios();
         $comidas = $this->joinAction()->toArray();
         $com = array();
         foreach ($comidas as $y) {
-            $com[$y['ch_distrito']] = $y['ch_distrito'];
+             $com[$y['va_distrito']] = $y['va_distrito'];
         }
         $formu->get('distrito')->setValue($distrito);
         $formu->get('distrito')->setValueOptions($com);
@@ -569,8 +562,8 @@ class IndexController extends AbstractActionController {
         $adapter = $this->dbAdapter;
         $sql = new Sql($adapter);
         $select = $sql->select();
-        $select->from('ta_ubigeo');
-        $select->where(array('ch_provincia' => 'LIMA'));
+        $select->from('ta_distrito');
+       
         $selectString = $sql->getSqlStringForSqlObject($select);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         //var_dump($results);exit;

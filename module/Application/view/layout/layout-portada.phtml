@@ -64,7 +64,7 @@
         <div class="contenido-busqueda">
           <div class="content-sidebar-ho">
           <a class="title-home-listado" href="<?php echo $this->basePath(); ?>/" title="Listado del Sabor">
-            <h1>
+              <h1>
               <img src="/img/logo.png" alt="logo">
             </h1>
           </a>
@@ -96,9 +96,11 @@
         <!--  <div class="arrow">
             <img src="/img/flechamenu.png" alt="">
         </div> -->
-        <div class="footer">
-          <nav>
-            <ul>
+        
+      </div>
+    <div class="footer">
+          <nav class="fo">
+            <ul class="fa">
               <li>
                 <a href="/application/index/nosotros">Nosotros</a>
               </li>
@@ -109,7 +111,14 @@
                 <a href="/application/index/contactenos">Contáctenos</a>
               </li>
               <li>
-                <a href="#">Más buscados</a>
+                <div class="ups-crap btn-group dropup">
+                  <button class="ups-dev dropdown-toggle" data-toggle="dropdown">Más buscados<span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="<?php echo $this->basePath(); ?>/application/index/ver?q=ceviche">Ceviche</a></li>
+                    <li><a href="<?php echo $this->basePath(); ?>/application/index/ver?q=lomo saltado">Lomo saltado</a></li>
+                    <li><a href="<?php echo $this->basePath(); ?>/application/index/ver?q=arroz con pollo">Arroz con pollo</a></li>
+                  </ul>
+                </div><!-- /btn-group -->
               </li>
             </ul>
           </nav>
@@ -118,11 +127,11 @@
           Desarrollado por ISG - Innovations Systems Group  - Derechos Reservados
         </p>
       </footer>
-     </div>
-</div>
+    </div>
 </div>
      
-        <script src="<?php echo $this->basePath()?>/js/vendor/mosaic.js"></script>            
-         <script src="<?php echo $this->basePath()?>/js/aplicacion.min.js"></script>
+      <script src="<?php echo $this->basePath()?>/js/vendor/mosaic.js"></script>            
+      <script src="<?php echo $this->basePath()?>/js/aplicacion.min.js"></script>
+      <script type="text/javascript" src="<?php echo $this->basePath()?>/js/bootstrap-dropdown.js"></script>
     </body>
 </html>

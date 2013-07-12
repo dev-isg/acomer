@@ -1,4 +1,4 @@
-#/*
+/*
  * HTML5 Boilerplate
  *
  * What follows is the result of much research on cross-browser styling.
@@ -176,8 +176,7 @@ cursor: pointer;
   display: block;
   width: 100%;  
   margin: 0 auto;
-  height: 350px;
-  margin: 0 auto;  
+  height: 350px; 
   -moz-box-shadow: 0px 5px 20px #ccc;
   -webkit-box-shadow: 0px 5px 20px #ccc;
   box-shadow: 0px 5px 20px #ccc;
@@ -391,28 +390,39 @@ font-size: 15px;
 .plato-map {
 font-size: 13px;
 color: #ff8400;
-padding-left: 8em;
+padding-left: 8.2em;
 margin: 0;
 }
 .txt-map{
-  padding-left: 0.5em;
+  padding-left: 0.7em;
   font-size: 13px;
-  height: 18px;
-  width: 236px;
+  height: 35px;  
 overflow: hidden;
 margin: 0;
 }
 .a-map{
-  padding-left: 10px;
+padding-left: 10px;
 font-size: 13px;
 font-style: italic;
 }
 
-p.nombre_r {
+p.nombre_r  {
   color: #ff8400;
   font-weight: bold;
   font-size: 18.12px;
-  padding-left: 10px;
+  padding-left: 4px;
+  margin: 0px;
+  margin-bottom: 4px;
+  text-align: left !important;
+  height: 22px;
+  overflow: hidden;
+  vertical-align: top;
+}
+p.nombre_r a {
+  color: #ff8400;
+  font-weight: bold;
+  font-size: 18.12px;
+  padding-left: 4px;
   margin: 0px;
   margin-bottom: 10px;
   text-align: left !important;
@@ -440,7 +450,7 @@ margin-right: 10px;
   float: left;
   padding: 10px;
 }
-#esconder .sub{
+#esconder .sub ,#esconder2 .sub  {
   margin-top: 10px;
   background: url(/img/img-resultados.png) no-repeat;
   width: 100%;
@@ -453,7 +463,15 @@ margin-right: 10px;
   float: left;
   width: 100%;
   padding-bottom: 50px;
-  height: 100%;
+  height: auto;
+}
+#esconder2{
+  background: url(../../img/back-detalle.png) repeat;
+  float: left;
+  width: 100%;
+  padding-bottom: 50px;
+  height: auto;
+  min-height: 100%;
 }
 
 .overlay{
@@ -489,13 +507,13 @@ margin-right: 10px;
   border-bottom:16px solid #336699;
 }
 .mosaic-block {
-    float:left;
-    position:relative;
-    overflow:hidden;
-    width:100%;
-    height:163px;
-    border-radius: 5px 5px 0px 0px;
-    background: white;
+  float:left;
+  position:relative;
+  overflow:hidden;
+  width:100%;
+  height:163px;
+  border-radius: 5px 5px 0px 0px;
+  background: white;
 }
 .details h4{
   margin: 0;
@@ -519,42 +537,44 @@ margin-right: 10px;
   font-family: arial;
 }
 .mosaic-backdrop {
-        display:none;
-        top:0;
-        height:100%;
-        width:100%;
-        background:#fff ;
-        border-radius: 10px;
-    }
+  display:none;
+  top:0;
+  height:100%;
+  width:100%;
+  background:#fff ;
+  border-radius: 10px;
+}
 .mosaic-overlay {
-        display:none;
-        z-index:5;
-        position:absolute;
-        width:100%;
-        height:163px;
-        background:#fff ;
-        -webkit-border-radius: 5px 5px 0 0;
-        -moz-border-radius: 5px 5px 0 0;
-        -o-border-radius: 5px 5px 0 0;
-        border-radius: 5px 5px 0 0;
-        overflow: hidden;
-    }
-    .fade .mosaic-overlay {
-            opacity:0;
-            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=00)";
-            filter:alpha(opacity=00);
-            background:url(../img/bg-black.png);
-        }
+  display:none;
+  z-index:5;
+  position:absolute;
+  width:100%;
+  height:163px;
+  background:#fff ;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -o-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+}
+.fade .mosaic-overlay {
+  opacity:0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=00)";
+  filter:alpha(opacity=00);
+  background:url(../img/bg-black.png);
+}
 
 .contenido-plato {
   /*background: url(../img/map.jpg) repeat fixed;*/
-  height: 100%;
   width: 724px;
   float: left;
   position: relative;
+  padding-bottom: 0px;
+  height: 100%;
 }
 .lista-Detalle .contenido-plato{
   height: auto;
+  min-height: 100%;
 }
 .recomendados-platos{
   display: block;
@@ -596,9 +616,9 @@ bottom: 40px;
   height:500px;
 }
 .final {
-width: 100%;
-text-align: center;
-margin-top: 20%;
+  width: 100%;
+  text-align: center;
+  margin-top: 20%;
 }
 .final img{
   width: 66px;
@@ -712,6 +732,20 @@ nav li:first-child{
   border-left: 0px solid;
   padding-left: 0;
 }
+
+ul.dropdown-menu li{
+  float: none;
+  display: block;
+  padding-right: 0;
+  padding-left: 0;
+  text-align: left;
+}
+.dropdown-menu>li>a:hover, 
+.dropdown-menu>li>a:focus, 
+.dropdown-submenu:hover>a, 
+.dropdown-submenu:focus>a{
+  background: #40403F;
+}
 .solicitar-publicacion{
   display: block;
   text-align: center;
@@ -724,11 +758,11 @@ nav li:first-child{
   color: white;
 }
 .footer {
-  background: rgba(64, 64, 63, 0.95);
+  background: rgba(64, 64, 63, 1);
   color: white;
   position: fixed;
   bottom: 0px;
-  width: 724px;
+  width: 1024px;
   height: 50px;
   z-index: 999;
 }
@@ -1022,8 +1056,9 @@ width: 49%;
 .descrip-product{
   background: url(../../img/back-detalle.png) repeat;
   width: 724px;
-  height: 100%;
+  height: auto;
   float: left;
+  min-height: 100%;
 }
 .etiqueta-cat{
   display: block;
@@ -1672,6 +1707,26 @@ form#application .control-group .btn-solicito{
   margin-top: 0px!important;
   padding-top: 20px;
 }
+.ups-crap{
+  height: auto;
+  line-height: 0px;
+  position: relative;
+}
+.ups-dev{
+  background: none;
+  border: 0;
+  color: white;
+  font-size: 13px;
+  padding: 0;
+  line-height: 15px;
+  cursor: pointer;
+}
+.caret{
+  position: absolute;
+  right: -10px;
+  bottom: 6px;
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
@@ -1881,7 +1936,7 @@ form#application .control-group .btn-solicito{
     width: 1024px;
   }
   .final{
-    margin-top: 40%;
+    margin-top: 25%;
   }
   a.title-home-listado h1 img{
     width: 307px;
@@ -1920,7 +1975,7 @@ form#application .control-group .btn-solicito{
     width: 100%;
   }
   .footer{
-    width: 75%;
+    width: 100%;
   }
   .masinfo{
     width: 75%;
@@ -2006,7 +2061,7 @@ form#application .control-group .btn-solicito{
     width: 100%;
   }
   .footer{
-    width: 75%;
+    width: 100%;
   }
   .masinfo{
     width: 75%;
@@ -2071,14 +2126,17 @@ form#application .control-group .btn-solicito{
     margin-left: 10px;
     width: 95.5%;
     height: auto;
+    min-height: 100%;
   }
   .ficha-product .ficha-img{
     width: 60.8%;
     height: auto;
+    min-height: 100%;
   }
   .ficha-product .ficha-desc{
     width: 35.5%;
     height: auto;
+    min-height: 100%;
   }
   .content-coments{
     padding-left: 10px;
@@ -2100,6 +2158,7 @@ form#application .control-group .btn-solicito{
     height: auto!important;
     float: left;
     width: 100%;
+    min-height: 100%;
   }
   .top-coment p{
     width: 42%;
@@ -2175,11 +2234,15 @@ form#application .control-group .btn-solicito{
     padding: 10px;
     height: auto;
     width: 95%;
+    min-height: 100%;
   }
   .contenido-bus ul li{
     width: 32.1%;
   }
   #esconder .mosaic-block{
+    height: 143px;
+  }
+  #esconder2 .mosaic-block{
     height: 143px;
   }
   .plato_h{
@@ -2264,12 +2327,15 @@ form#application .control-group .btn-solicito{
     margin-left: 10px;
     padding-right: 10px;
   }
+  .contenido-static{
+    padding-bottom: 85px;
+  }
   .recomendados-platos.primer-home{
     padding-bottom: 10px!important;
   }
   .footer{
-    width: 65%;
-    height: 50px;
+    width: 100%;
+    height: auto;
   }
   .footer nav{
     width: 100%;
@@ -2300,6 +2366,7 @@ form#application .control-group .btn-solicito{
     margin-left: 10px;
     width: 94.2%;
     height: auto;
+    min-height: 100%;
   }
   .ficha-img{
     width: 100%!important;
@@ -2309,6 +2376,7 @@ form#application .control-group .btn-solicito{
   }
   .ficha-product .ficha-img{
     height: auto;
+    min-height: 100%;
   }
   .ficha-product .ficha-desc{
     width: 95%;
@@ -2425,8 +2493,12 @@ form#application .control-group .btn-solicito{
     padding: 10px 10px;
     height: auto;
     width: 93.6%;
+    min-height: 100%;
   }
   #esconder .sub{
+    margin-bottom: 20px;
+  }
+  #esconder2 .sub{
     margin-bottom: 20px;
   }
   .contenido-bus ul li{
@@ -2456,6 +2528,12 @@ form#application .control-group .btn-solicito{
   }
 }
 @media (max-width: 480px) {
+  .contenido-plato{
+    height: auto!important;
+  }
+  .lista-Terminos .contenido-plato{
+    height: auto;
+  }
   .contenido-bus{
     width: 93.6%;
   }
@@ -2502,6 +2580,7 @@ form#application .control-group .btn-solicito{
   .contenido-busqueda{
     position: static;
     height: auto;
+    min-height: 100%;
   }
   .title-home-listado h1{
     margin-top: 0;
@@ -2550,9 +2629,10 @@ form#application .control-group .btn-solicito{
     padding-right: 10px;
   }
   .footer{
-    position: static;
+    position: relative;
     width: 100%;
     height: auto;
+    float: left;
   }
   .tercera-categ{
     padding-bottom: 10px;

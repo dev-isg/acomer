@@ -89,11 +89,8 @@ function submitForm(){
 			email: true
 		}, 
 		asunto: "required",
-		nombre_restaurant: "required", 
-		telefono: {
-			required: true,
-			number: true
-		}
+		mensaje: "required"
+		
 	}, 
 	errorElement: "em", 
 	messages: { 
@@ -102,12 +99,8 @@ function submitForm(){
 			required: "Ingrese su correo electrónico",
 			email: "Ingrese un correo valido"
 		}, 
-		nombre_plato: "Ingrese el nombre del plato", 
-		nombre_restaurant: "Ingrese el nombre del restaurante", 
-		telefono: {
-			required: "Ingrese su teléfono",
-			number: "Ingrese solo numeros"
-		}
+		asunto: "Ingrese el asunto", 
+		mensaje: "Ingrese el mensaje"
 	} 
 	}); 
 	if(validator.form()){ // validation perform 
