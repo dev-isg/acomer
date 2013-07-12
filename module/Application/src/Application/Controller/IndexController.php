@@ -105,9 +105,7 @@ class IndexController extends AbstractActionController
            $texto = $datos['q']; 
            $filter   = new \Zend\I18n\Filter\Alnum(true);
            $palabra = $filter->filter($texto);       
-           $distrito = $datos['distrito'];  
-             
-           
+           $distrito = $datos['distrito'];   
            if($distrito != 'seleccione todos')
            {
                        $limite = 9;    
@@ -360,7 +358,7 @@ class IndexController extends AbstractActionController
                           $fd = array (  
                             'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
                               'sort'=>'en_destaque desc',
-                              'fl'=>'id,latitud,longitud,tx_descripcion,va_imagen,restaurante_estado,restaurante,name,plato_tipo',
+                              'fl'=>'id,latitud,longitud,tx_descripcion,va_imagen,restaurante_estado,restaurante,name,plato_tipo,distrito',
                               'wt'=>'json');      
                         if ($palabraBuscar)
                         { 
