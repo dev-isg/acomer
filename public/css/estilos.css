@@ -2536,6 +2536,18 @@ form#application .control-group .btn-solicito{
   }
 }
 @media (max-width: 480px) {
+  #fq{
+    width: 80%;
+  }
+  #q{
+    width: 78%;
+  }
+  .verlistado{
+    width: 80%!important;
+  }
+  #buscarmap{
+    margin-left: 0px!important;
+  }
   .contenido-plato{
     height: auto!important;
   }
