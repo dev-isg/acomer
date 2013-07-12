@@ -384,7 +384,7 @@ color: #ff8400;
 font-weight: bold;
 padding-left: 7em;
 margin: 0px;
-margin-top: 7px;
+margin-top: 5px;
 font-size: 15px;
 }
 .plato-map {
@@ -396,7 +396,7 @@ margin: 0;
 .txt-map{
   padding-left: 0.7em;
   font-size: 13px;
-  height: 32px;  
+  height: 35px;  
 overflow: hidden;
 margin: 0;
 }
@@ -422,7 +422,7 @@ p.nombre_r a {
   color: #ff8400;
   font-weight: bold;
   font-size: 18.12px;
-  padding-left: 10px;
+  padding-left: 4px;
   margin: 0px;
   margin-bottom: 10px;
   text-align: left !important;
