@@ -41,6 +41,33 @@ return array(
                     ),
                 ),
             ),
+        'ver' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/plato',
+                    'defaults' => array(
+                        'controller' => 'Platos\Controller\Index',
+                        'action' => 'verplatos'
+                    )
+                ),
+                            'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/[:controller[/:action[/:in_id]]]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'in_id'         => '[0-9]*',
+                            ),
+                            'defaults' => array(
+                            ),
+                        ),
+                    ),
+                    
+                ),
+            ),
         ),
     ),
     'view_manager' => array(

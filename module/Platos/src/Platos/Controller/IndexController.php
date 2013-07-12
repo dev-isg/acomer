@@ -249,7 +249,7 @@ class IndexController extends AbstractActionController {
         $form  = new PlatosForm($adpter,$idlocal);
         $form->get('va_imagen')->setValue($comeya);
         $form->bind($restaurante);
-//        var_dump($restaurante);
+
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();
         $comida = $this->params()->fromPost('va_modalidad');
@@ -376,7 +376,7 @@ class IndexController extends AbstractActionController {
     public function verplatosAction() {
         $view = new ViewModel();
 
-        $this->layout('layout/layout-portada');
+//        $this->layout('layout/layout-portada');
         $datos =$this->request->getQuery(); 
         $id = $datos['id']; 
         $distrito = $datos['distrito']; 
@@ -402,7 +402,7 @@ class IndexController extends AbstractActionController {
                     setcookie('id' . $id, 1);
 //                    $form->clearAttributes();
                     $form->setData(array('va_nombre' => '', 'va_email' => '', 'tx_descripcion' => '')); 
-                    $this->redirect()->toUrl('/platos/index/verplatos?id='.$id);
+                    $this->redirect()->toUrl('/plato?id='.$id);
                 }
             }
         } 
