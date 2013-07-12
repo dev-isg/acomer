@@ -396,8 +396,7 @@ margin: 0;
 .txt-map{
   padding-left: 0.5em;
   font-size: 13px;
-  height: 18px;
-  width: 134px;
+  height: 18px;  
 overflow: hidden;
 margin: 0;
 }
@@ -718,6 +717,20 @@ nav li a:hover{
 nav li:first-child{
   border-left: 0px solid;
   padding-left: 0;
+}
+
+ul.dropdown-menu li{
+  float: none;
+  display: block;
+  padding-right: 0;
+  padding-left: 0;
+  text-align: left;
+}
+.dropdown-menu>li>a:hover, 
+.dropdown-menu>li>a:focus, 
+.dropdown-submenu:hover>a, 
+.dropdown-submenu:focus>a{
+  background: #40403F;
 }
 .solicitar-publicacion{
   display: block;

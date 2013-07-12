@@ -281,7 +281,7 @@ class IndexController extends AbstractActionController
                           try
                           {
                             $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
-                          //var_dump($resultados);exit;
+                         
 
                           }
                           catch (Exception $e)
@@ -293,10 +293,10 @@ class IndexController extends AbstractActionController
           
                         $limit = 3;             
                         $palabraBuscar = isset($texto) ? $texto : false ;
-                        $query = "($palabraBuscar) AND (en_destaque:si)";
+                        $query = "($palabraBuscar)";
                         $fq = array (  
                                    'sort'=>'random_' . uniqid() .' asc',
-                            'fq'=>'en_estado:activo AND restaurant_estado:activo');                                           
+                            'fq'=>'en_estado:activo AND restaurant_estado:activo AND en_destaque:si');                                           
                         $results = false;
                         if ($query)
                         { 
@@ -309,7 +309,7 @@ class IndexController extends AbstractActionController
                           try
                           {
                             $results = $solr->search($query, 0, $limit, $fq  );
-
+//var_dump($results);exit;
                           }
                           catch (Exception $e)
                           {
