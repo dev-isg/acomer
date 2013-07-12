@@ -49,7 +49,28 @@ return array(
                             ),
                         ),
                     ),
+                    
                 ),
+            ),
+            'busqueda' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/buscar',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'ver'
+                    )
+                )
+            ),
+            'busqueda-distrito' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/buscar-distrito',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'detalleubicacion'
+                    )
+                )
             ),
         ),
     ),
