@@ -384,19 +384,19 @@ color: #ff8400;
 font-weight: bold;
 padding-left: 7em;
 margin: 0px;
-margin-top: 5px;
+margin-top: 7px;
 font-size: 15px;
 }
 .plato-map {
 font-size: 13px;
 color: #ff8400;
-padding-left: 8em;
+padding-left: 8.2em;
 margin: 0;
 }
 .txt-map{
-  padding-left: 0.5em;
+  padding-left: 0.7em;
   font-size: 13px;
-  height: 18px;  
+  height: 32px;  
 overflow: hidden;
 margin: 0;
 }
@@ -406,7 +406,19 @@ font-size: 13px;
 font-style: italic;
 }
 
-p.nombre_r ,p.nombre_r a {
+p.nombre_r  {
+  color: #ff8400;
+  font-weight: bold;
+  font-size: 18.12px;
+  padding-left: 4px;
+  margin: 0px;
+  margin-bottom: 4px;
+  text-align: left !important;
+  height: 22px;
+  overflow: hidden;
+  vertical-align: top;
+}
+p.nombre_r a {
   color: #ff8400;
   font-weight: bold;
   font-size: 18.12px;
