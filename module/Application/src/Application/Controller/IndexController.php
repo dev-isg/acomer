@@ -24,13 +24,21 @@ use Zend\Mail\Message;
 use Zend\Mail\Transport\Sendmail as SendmailTransport;
 use Zend\I18n\Filter\Alnum;
 use Platos\Model\Platos;
-use Platos\Model\PlatosTable; 
-require './vendor/SolrPhpClient/Apache/Solr/Service.php';
+use Platos\Model\PlatosTable;
 
+require_once APPLICATION_PATH . '/vendor/SolrPhpClient/Apache/Solr/Service.php';
 class IndexController extends AbstractActionController
 {
     protected $configTable;
     public $dbAdapter;
+   
+    public function __construct()
+    {
+		$options = new \Zend\Config\Config ( include APPLICATION_PATH . '/config/autoload/global.php' );
+		$this->_solr = new \Apache_Solr_Service ( $options->solr->host, $options->solr->port, $options->solr->folder );
+    }
+    
+    
     public function indexAction()
     { 
       
@@ -119,8 +127,7 @@ class IndexController extends AbstractActionController
                             'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
                               'sort'=>'en_destaque desc',
                               ); 
-                        //  require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-                           $solar = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+						$solar = &$this->_solr;
                         if($palabraBuscar == '')    
                         {
 //                              echo 'eee';
@@ -159,8 +166,8 @@ class IndexController extends AbstractActionController
                         $results = false;
                         if ($query)
                         { 
-                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-                         $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+//                          $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+                         $solr = &$this->_solr;
                           if (get_magic_quotes_gpc() == 1)
                           {
                             $query = stripslashes($query);
@@ -276,9 +283,8 @@ class IndexController extends AbstractActionController
                           }
                         if ($palabraBuscar)
                         { 
-                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-                         $solar = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
-                          if (get_magic_quotes_gpc() == 1)
+                         $solar = &$this->_solr; 
+                         if (get_magic_quotes_gpc() == 1)
                           {
                             $palabraBuscar = stripslashes($palabraBuscar);
                           }
@@ -305,8 +311,9 @@ class IndexController extends AbstractActionController
                         if ($query)
                         { 
    
-                        $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
-                          if (get_magic_quotes_gpc() == 1)
+//                         $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+                        $solr = &$this->_solr;
+                        if (get_magic_quotes_gpc() == 1)
                           {
                             $query = stripslashes($query);
                           }
@@ -346,7 +353,7 @@ class IndexController extends AbstractActionController
     }
     
 
-   
+
     
     public function jsonmapasaAction()    { 
         $distrito=  $this->params()->fromQuery('distrito');
@@ -370,8 +377,7 @@ class IndexController extends AbstractActionController
                               'wt'=>'json');      
                         if ($palabraBuscar)
                         { 
-                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-                         $solar = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+                          $solar = &$this->_solr; 
                           if (get_magic_quotes_gpc() == 1)
                           {
                             $palabraBuscar = stripslashes($palabraBuscar);

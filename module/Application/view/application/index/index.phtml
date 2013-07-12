@@ -20,7 +20,7 @@
             <div class="plato_r">
               <div class="mosaic-block cover">
                 <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
-                <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
                 </div>
                  <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>&q=<?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?>&distrito=<?php echo $list->Distrito;?>" class="mosaic-backdrop">
             <div class="details">
@@ -65,7 +65,7 @@
             <div class="plato_r">
                 <div class="mosaic-block cover">
                  <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
-                 <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                 <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
                  </div>
                 <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>&q=<?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?>&distrito=<?php echo $list->Distrito;?>" class="mosaic-backdrop">
              <div class="details">
@@ -109,7 +109,7 @@
                 <div class="plato_r">
                   <div class="mosaic-block cover">
                     <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8');?></span>
-                     <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                     <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
                      </div>
                       <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>&q=<?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?>&distrito=<?php echo $list->Distrito;?>" class="mosaic-backdrop">
                
@@ -155,7 +155,7 @@
         <div class="plato_r">
           <div class="mosaic-block cover">
            <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8');?></span>
-           <img src="/imagenes/<?php echo htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+           <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
            </div>
             <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>&q=<?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?>&distrito=<?php echo $list->Distrito;?>" class="mosaic-backdrop">
                

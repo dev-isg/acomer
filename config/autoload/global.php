@@ -11,6 +11,7 @@
  * file.
  */
 
+
 return array(
     // ...AGREGASTE PARA LA CONEXION GLOBAL
         'db' => array(
@@ -58,4 +59,5 @@ return array(
         ),
 
      ),
+
 );

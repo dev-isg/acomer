@@ -104,10 +104,18 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+
 //            'module_layouts' => array(
 //      'Application' => array(
 //          'index' => 'layout/layout-portada2',
 ////          'edit'    => 'layout/albumEdit',
 //        )
 //     ),
+
+    'view_helpers' => array(
+        'invokables' => array(
+            'host' => 'Application\View\Helper\Host'
+        )
+    )
+
 );

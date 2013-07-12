@@ -20,7 +20,11 @@ class IndexController extends AbstractActionController
 {
   protected $restauranteTable;
   public $dbAdapter;
-    
+    protected $_options;
+    public function __construct()
+    {
+    	$this->_options = new \Zend\Config\Config ( include APPLICATION_PATH . '/config/autoload/global.php' );
+    }
      public function indexAction() {
         
          
@@ -135,7 +139,7 @@ class IndexController extends AbstractActionController
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
+                       $copia = $this->_options->upload->images . '/' . $name;
                        imagejpeg($nuevaimagen,$copia);
                        $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
@@ -154,7 +158,7 @@ class IndexController extends AbstractActionController
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
+                       $copia = $this->_options->upload->images . '/' . $name;
                        imagejpeg($nuevaimagen,$copia);
                        $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
@@ -242,7 +246,7 @@ class IndexController extends AbstractActionController
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
+                       $copia = $this->_options->upload->images . '/' . $name;
                        imagejpeg($nuevaimagen,$copia);
                        $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
@@ -261,7 +265,7 @@ class IndexController extends AbstractActionController
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
+                       $copia = $this->_options->upload->images . '/' . $name;
                        imagejpeg($nuevaimagen,$copia);
                        $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
