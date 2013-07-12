@@ -336,8 +336,8 @@ margin-bottom: 0px;
   font-size: 12px;
 }
 #fq {
-background: url(../img/arrow.png) #cccccc no-repeat 102px 7px;
-width: 126px;
+background: url(../img/arrow.png) #cccccc no-repeat 115px 7px;
+width: 139px;
 font-size: 0.8em;
 border: 0 none;
 -moz-appearance: none !important;
@@ -348,12 +348,12 @@ border: 1px solid #ccc;
 line-height: 10px !important;
 }
 #q {
-margin-left: -6px;
-border: 0 none;
-padding: 4px;
-border-radius: 0px;
-border-top: 1px solid rgba(0, 0, 0, 0.25);
-border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  margin-left: -6px;
+  border: 0 none;
+  padding: 4px;
+  border-radius: 0px;
+  border-top: 1px solid rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 .verlistado {
@@ -2271,6 +2271,14 @@ form#application .control-group .btn-solicito{
   }
 }
 @media (max-width: 767px) {
+  .verlistado{
+    display: block;
+    margin: 0 auto!important;
+    margin-bottom: 10px!important;
+  }
+  #q{
+    border: 1px solid rgba(0, 0, 0, 0.25);    
+  }
   .ver_mapa{
     display: block!important;
   }
