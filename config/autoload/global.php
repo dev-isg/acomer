@@ -38,7 +38,7 @@ return array(
           'terminos'=>'layout/layout-portada',
           'nosotros'=>'layout/layout-portada',
           'solicita'=>'layout/layout-portada',
-            'ver'=>'layout/layout-portada',
+          'ver'=>'layout/layout-portada',
         ),
       'Local' => array(
           'index' => 'layout/layout-administrador',

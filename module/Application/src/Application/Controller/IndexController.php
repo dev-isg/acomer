@@ -265,7 +265,7 @@ class IndexController extends AbstractActionController
         {   
 
         $view = new ViewModel();
-        $this->layout('layout/layout-portada');
+
         $filtered = $this->params()->fromQuery('q');
               $filter   = new \Zend\I18n\Filter\Alnum(true);
                   $texto = $filter->filter($filtered);
