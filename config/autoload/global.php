@@ -43,11 +43,16 @@ return array(
 
         ),
       'Platos' => array(
-          'index' => 'layout/layout22',
-          'verplatos'=>'layout/layout-administrador'
+          'index' => 'layout/layout-administrador',
+          'verplatos'=>'layout/layout-portada'
         ),
       'Usuario' => array(
           'index' => 'layout/layout-portada',
+          'comentarios'=>'layout/layout-administrador'
+          
+        ),
+       'Restaurante' => array(
+          'index' => 'layout/layout-administrador',
 //          'comentarios'=>'layout/layout-administrador'
           
         ),

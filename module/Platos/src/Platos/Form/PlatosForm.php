@@ -52,6 +52,14 @@ class PlatosForm extends Form
                 'id'   => 'Ta_puntaje_in_id',         
             ),
         ));
+        
+                $this->add(array(
+            'name' => 'en_estado',
+            'type' => 'Hidden',
+           'attributes' => array(               
+                'id'   => 'en_estado',         
+            ),
+        ));
        
   
         $this->add(array(

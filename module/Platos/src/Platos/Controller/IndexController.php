@@ -313,7 +313,7 @@ class IndexController extends AbstractActionController {
         }
         try {
             $restaurante = $this->getPlatosTable()->getPlato($id);
-//            var_dump($restaurante);exit;
+            
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
@@ -324,7 +324,7 @@ class IndexController extends AbstractActionController {
         $form  = new PlatosForm($adpter,$idlocal);
         $form->get('va_imagen')->setValue($comeya);
         $form->bind($restaurante);
-
+//        var_dump($restaurante);
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();
         $comida = $this->params()->fromPost('va_modalidad');
@@ -369,37 +369,11 @@ class IndexController extends AbstractActionController {
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
                        $copia = "C:/source/zf2/acomer/public/imagenes/$name";
                        imagejpeg($nuevaimagen,$copia);
+//                        var_dump($restaurante);exit;
                     $this->getPlatosTable()->guardarPlato($restaurante,$name);
                     $this->redirect()->toUrl('/platos/index?id='.$idlocal);    
                   }
-                  if($info['extension']=='png')      
-                  {  $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefrompng($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
-                       imagepng($nuevaimagen,$copia);
-                      $this->getPlatosTable()->guardarPlato($restaurante,$name);
-                    $this->redirect()->toUrl('/platos/index?id='.$idlocal);   
-                  }
-                  if($info['extension']=='gif')      
-                  {   $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefromgif($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
-                       imagegif($nuevaimagen,$copia);
-                    $this->getPlatosTable()->guardarPlato($restaurante,$name);
-                    $this->redirect()->toUrl('/platos/index?id='.$idlocal);    
-                  }
+               
                }
                    if($ancho<$alto)
               {require './vendor/Classes/Filter/Alnum.php';
@@ -415,37 +389,11 @@ class IndexController extends AbstractActionController {
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
                        $copia = "C:/source/zf2/acomer/public/imagenes/$name";
                        imagejpeg($nuevaimagen,$copia);
+                       var_dump($restaurante);exit;
                        $this->getPlatosTable()->guardarPlato($restaurante,$name);
                     $this->redirect()->toUrl('/platos/index?id='.$idlocal);    
                   }
-                   if($info['extension']=='png')      
-                  {   $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefrompng($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
-                       imagepng($nuevaimagen,$copia);
-                    $this->getPlatosTable()->guardarPlato($restaurante,$name);
-                    $this->redirect()->toUrl('/platos/index?id='.$idlocal);    
-                  }
-                  if($info['extension']=='gif')      
-                  {  $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefromgif($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
-                       imagegif($nuevaimagen,$copia);
-                      $this->getPlatosTable()->guardarPlato($restaurante,$name);
-                    $this->redirect()->toUrl('/platos/index?id='.$idlocal);   
-                  }
+                  
                }
                 
             }
