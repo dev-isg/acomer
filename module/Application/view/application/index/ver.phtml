@@ -99,7 +99,7 @@ echo $this->form()->closeTag(); ?>
                           </a>
                           </div> 
                           <div class="detalle-restaurante">
-                          <div class="detalle-nombre"><p class="nombre_r"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p> <div class="punt">
+                          <div class="detalle-nombre"><p class="nombre_r"><a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>&q=<?php echo $this->nombre; ?>&distrito=<?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?>"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></a></p> <div class="punt">
                     <div class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>" style="margin: 0px;width: 118px !important;display:inline-block;"></div>
                   </div>  </div>
                               <p class="nom_plato"><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></p>
