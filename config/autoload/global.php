@@ -61,7 +61,7 @@ return array(
           'verplatos'=>'layout/layout-portada'
         ),
       'Usuario' => array(
-          'index' => 'layout/layout-portada',
+          'index' => 'layout/layout-administrador',
           'comentarios'=>'layout/layout-administrador'
           
         ),
