@@ -693,11 +693,11 @@ font-weight: bold;
 
 
 nav{
-  display: inline-block !important;
+  float: left;
   vertical-align: middle;
-  width: 100%;
+  width: 45%;
   margin-top: 3px;
-  text-align: center;
+  margin-left: 10px;
 }
 nav ul{
   margin-bottom: 0;
@@ -706,10 +706,12 @@ nav ul{
   margin-left: 0;
 }
 .footer footer{
-  width: 100%;
+  width: 50%;
 }
 .footer footer p{
-    text-align: center;
+  text-align: right;
+  margin-right: 45px;
+  padding-top: 5px;
 }
 nav li{
   line-height: 20px;
@@ -768,7 +770,7 @@ ul.dropdown-menu li{
 }
 
 footer{
-    display: inline-block !important;
+  float: right;
 }
 footer p{
   font-size: 11px;
@@ -1920,6 +1922,9 @@ form#application .control-group .btn-solicito{
 
 /*Activando responsive web desing*/
 @media (min-width: 1200px) {
+  .footer footer p{
+    margin-right: 10px;
+  }
   .lista-Home .descrip-product{
     margin-top: -26px;
   }
