@@ -35,7 +35,7 @@ class IndexController extends AbstractActionController
     public function __construct()
     {
 		$options = new \Zend\Config\Config ( include APPLICATION_PATH . '/config/autoload/global.php' );
-//		$this->_solr = new \Apache_Solr_Service ( $options->solr->host, $options->solr->port, $options->solr->folder );
+		$this->_solr = new \Apache_Solr_Service ( $options->solr->host, $options->solr->port, $options->solr->folder );
     }
     
     
@@ -262,14 +262,13 @@ class IndexController extends AbstractActionController
     
          
      public function verAction()             
-        {   
-
+        {  // echo 'dddd';exit;
         $view = new ViewModel();
-
+       $this->layout('layout/layout-portada');
         $filtered = $this->params()->fromQuery('q');
               $filter   = new \Zend\I18n\Filter\Alnum(true);
                   $texto = $filter->filter($filtered);
-                //  var_dump($texto);exit;
+                // var_dump($texto);exit;
 
                         $limite = 9;    
                         $resultados = false;
@@ -291,7 +290,7 @@ class IndexController extends AbstractActionController
                           try
                           {
                             $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
-                         
+                          //  var_dump($resultados);exit;
 
                           }
                           catch (Exception $e)
@@ -667,7 +666,7 @@ class IndexController extends AbstractActionController
     public function contactenosAction(){
         
              $view = new ViewModel();
-        $this->layout('layout/layout-portada');
+//        $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Solicita';
         $form=new Contactenos("form");
         $request=$this->getRequest();

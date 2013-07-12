@@ -2276,6 +2276,12 @@ form#application .control-group .btn-solicito{
   }
 }
 @media (max-width: 767px) {
+  .content-sidebar-ho{
+    margin-top: 25px;
+  }
+  .lista-Home .descrip-product{
+    margin-top: -30px;
+  }
   .verlistado{
     display: block;
     margin: 0 auto!important;

@@ -67,6 +67,7 @@ return array(
                     )
                 )
             ),
+
             'busqueda-distrito' => array(
                 'type' => 'Literal',
                 'options' => array(

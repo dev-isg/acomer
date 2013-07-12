@@ -78,7 +78,10 @@
                         header('Content-Type: text/html; charset=utf-8');
                         $limite = 9;    
                         $resultados = false;
-                        $palabraBuscar = isset($_REQUEST['q']) ? $_REQUEST['q'] : false;
+                        
+                         $filter   = new \Zend\I18n\Filter\Alnum(true);
+                  $texto = $filter->filter($_REQUEST['q']);
+                        $palabraBuscar = isset($texto) ? $texto : false;
                           $fd = array (  
                             'fq'=>'en_estado:activo AND restaurant_estado:activo');
                          
