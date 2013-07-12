@@ -118,7 +118,7 @@ class IndexController extends AbstractActionController
            $filter   = new \Zend\I18n\Filter\Alnum(true);
            $palabra = $filter->filter($texto);       
            $distrito = $datos['distrito'];   
-           if($distrito != 'seleccione todos')
+           if($distrito != 'todos los distritos')
            {
                        $limite = 9;    
                         $resultados = false;
@@ -296,7 +296,7 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                              
-                          $this->redirect()->toUrl('/application');
+                         $this->redirect()->toUrl('/');
                           }
                         }
           
@@ -324,7 +324,7 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                   $this->redirect()->toUrl('/application');       
+                                   $this->redirect()->toUrl('/');     
                           }
                          }
           //var_dump($results->response->docs);exit;
@@ -363,7 +363,7 @@ class IndexController extends AbstractActionController
         $plato = $filter->filter($texto);
         
         
-             if($distrito != 'seleccione todos')
+             if($distrito != 'todos los distritos')
            {
 
                         $resultados = false;
@@ -428,7 +428,7 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                              
-                          $this->redirect()->toUrl('/application');
+                         $this->redirect()->toUrl('/');
                           }
                         }
           
@@ -455,7 +455,7 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                   $this->redirect()->toUrl('/application');       
+                                 $this->redirect()->toUrl('/');      
                           }
                          }
                         }
