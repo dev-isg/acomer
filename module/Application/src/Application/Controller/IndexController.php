@@ -109,15 +109,17 @@ class IndexController extends AbstractActionController
    public function detalleubicacionAction()
     { 
           $view = new ViewModel();
-//          $this->layout('layout/layout-portada');
+
           
           $request = $this->getRequest();
           if ($request->isGet()) {
            $datos =$this->request->getQuery();   
-           $texto = $datos['q']; 
+           $texto = $datos['q'];    
            $filter   = new \Zend\I18n\Filter\Alnum(true);
            $palabra = $filter->filter($texto);       
-           $distrito = $datos['distrito'];   
+           $distrito = $datos['distrito'];  
+            if($texto == '')    
+              {$this->redirect()->toUrl('/');}
            if($distrito != 'todos los distritos')
            {
                        $limite = 9;    
@@ -128,12 +130,7 @@ class IndexController extends AbstractActionController
                               'sort'=>'en_destaque desc',
                               ); 
 						$solar = &$this->_solr;
-                        if($palabraBuscar == '')    
-                        {
-//                              echo 'eee';
-                             $this->redirect()->toUrl('/');
-//                              
-                          }   
+                        
                         if ($palabraBuscar)
                         { 
           //                require './vendor/SolrPhpClient/Apache/Solr/Service.php';
