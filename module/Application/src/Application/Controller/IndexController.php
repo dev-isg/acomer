@@ -32,14 +32,17 @@ class IndexController extends AbstractActionController
     public $dbAdapter;
     public function indexAction()
     { 
+      
        
         $view = new ViewModel();
-        $this->layout('layout/layout-portada');
+       
+//        $this->layout('layout/layout-portada2');
+        
         $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
         $listadeseg=$this->getConfigTable()->cantComentxPlato(1,'3,3',1);
         $listaval=$this->getConfigTable()->cantComentxPlato(2,3,1);
         $listault=$this->getConfigTable()->cantComentxPlato(2,3,2);
-        //var_dump($listaval);
+//        var_dump($listaval->toArray());exit;
         $this->layout()->clase = 'Home';
         $view->setVariables(array('lista' => $listades,'listaseg'=>$listadeseg,'listaval'=>$listaval,'listault'=>$listault,'clase'=>'Home'));
          return $view;
@@ -97,7 +100,8 @@ class IndexController extends AbstractActionController
    public function detalleubicacionAction()
     { 
           $view = new ViewModel();
-          $this->layout('layout/layout-portada');
+//          $this->layout('layout/layout-portada');
+          
           $request = $this->getRequest();
           if ($request->isGet()) {
            $datos =$this->request->getQuery();         
@@ -190,7 +194,7 @@ class IndexController extends AbstractActionController
      public function verAction()             
         {   
          $view = new ViewModel();
-        $this->layout('layout/layout-portada');
+//        $this->layout('layout/layout-portada');
          $texto = $this->params()->fromQuery('q');
 
                         $limite = 9;    
@@ -274,7 +278,7 @@ class IndexController extends AbstractActionController
     { 
         $distrito = $this->params()->fromQuery('distrito');
         $plato = $this->params()->fromQuery('plato');
-        $this->layout('layout/layout-portada'); 
+//        $this->layout('layout/layout-portada'); 
          header('Content-Type: text/html; charset=utf-8');
                         $resultados = false;
                         $palabraBuscar = isset($plato) ? $plato : false ;
@@ -496,7 +500,7 @@ class IndexController extends AbstractActionController
     
     public function nosotrosAction(){
         $view = new ViewModel();
-        $this->layout('layout/layout-portada');
+//        $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Nosotros';
 //        $view->setVariables(array());
 //         return $view;
@@ -504,7 +508,7 @@ class IndexController extends AbstractActionController
     }
         public function solicitaAction(){
                     $view = new ViewModel();
-        $this->layout('layout/layout-portada');
+//        $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Solicita';
         $form=new Solicita("form");
         $request=$this->getRequest();
@@ -549,7 +553,7 @@ class IndexController extends AbstractActionController
     }
         public function terminosAction(){
                 $view = new ViewModel();
-        $this->layout('layout/layout-portada');
+//        $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Terminos';
     }
     

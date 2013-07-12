@@ -48,4 +48,10 @@ return array(
             'Platos' => __DIR__ . '/../view',
         ),
     ),
+//     'module_layouts' => array(
+//      'platos' => array(
+//          'index' => 'layout/layout-portada2',
+//          //'edit'    => 'layout/albumEdit',
+//        )
+//     ),
 );

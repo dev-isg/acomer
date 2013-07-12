@@ -37,6 +37,7 @@ class IndexController extends AbstractActionController
     
     public function indexAction()
     {
+//        $this->layout('layout/layout22');
         //$this->dbAdapter=$this->getServiceLocator()->get('Zend\Db\Adapter');
         //$u=new Ubigeo($this->dbAdapter);
        // var_dump($u->getUbigeo());exit;

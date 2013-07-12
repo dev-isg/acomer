@@ -30,6 +30,8 @@ class IndexController extends AbstractActionController {
     protected $comentariosTable;
 
     public function indexAction() {
+        $basePath = $this->getRequest()->getBasePath();
+//             var_dump($basePath);exit;
         $local = (int) $this->params()->fromQuery('id');
 //        var_dump($restaurante);exit;
         $lista = $this->getPlatosTable()->fetchAll($local);
@@ -67,6 +69,7 @@ class IndexController extends AbstractActionController {
         $form->get('submit')->setValue('Add');
         $request = $this->getRequest();
         if ($request->isPost()) {
+       
             $plato = new Platos();
             $form->setInputFilter($plato->getInputFilter());
 //            $form->setData($request->getPost());
@@ -500,7 +503,8 @@ class IndexController extends AbstractActionController {
 
     public function verplatosAction() {
         $view = new ViewModel();
-        $this->layout('layout/layout-portada');
+//        $this->layout('layout/layout-portada2');
+//        $view->setTerminal(true);
         $id = $this->params()->fromQuery('id');
         $plato = $this->params()->fromQuery('q');
         $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();

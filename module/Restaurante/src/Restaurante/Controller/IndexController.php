@@ -22,6 +22,8 @@ class IndexController extends AbstractActionController
   public $dbAdapter;
     
      public function indexAction() {
+        
+         
         $filtrar = $this->params()->fromPost('submit'); 
         $datos = $this->params()->fromPost('texto');
         $comida = $this->params()->fromPost('comida');
@@ -38,7 +40,7 @@ class IndexController extends AbstractActionController
             $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
          $paginator->setItemCountPerPage(10);
-         
+          $this->layout('layout/layout-portada');
         return array(
           'restaurante' => $paginator,//$lista,
             'comida' => $this->comidas()

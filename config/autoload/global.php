@@ -30,4 +30,27 @@ return array(
                     => 'Zend\Db\Adapter\AdapterServiceFactory',
         ),
     ),
+    'module_layouts' => array(
+//      'Application' =>  array('layout/layout-portada'),
+        'Application' => array(
+          'index' => 'layout/layout-portada',
+          'terminos'=>'layout/layout-portada',
+          'nosotros'=>'layout/layout-portada',
+          'solicita'=>'layout/layout-portada',
+        ),
+      'Local' => array(
+          'index' => 'layout/layout-administrador',
+
+        ),
+      'Platos' => array(
+          'index' => 'layout/layout22',
+          'verplatos'=>'layout/layout-administrador'
+        ),
+      'Usuario' => array(
+          'index' => 'layout/layout-portada',
+//          'comentarios'=>'layout/layout-administrador'
+          
+        ),
+
+     ),
 );
