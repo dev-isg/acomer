@@ -52,7 +52,7 @@ echo $this->form()->closeTag(); ?>
                  <a href="/platos/index/verplatos?id=<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>&q=<?php echo $_REQUEST['q']; ?>&distrito=<?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?>"  class="mosaic-backdrop">
                     <div class="details">
                        <h4><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></h4>
-                      <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
+                      <p style="font-weight: bold;font-size: 0.9em;">Descripción</p>
                                  <p style="font-size:0.9em;"><?php 
                                     if(strlen($doc->tx_descripcion)>100){
                                      $str=trim(substr($doc->tx_descripcion, 0, 100));
