@@ -11,34 +11,27 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Zend\Db\Adapter\Adapter;
+// use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql;
 use Application\Form\Formularios;
 use Application\Form\Solicita;
 use Application\Form\Contactenos;
-use Application\Model\Entity\Procesa;
-use Application\Model\Usuario;
+// use Application\Model\Entity\Procesa;
+// use Application\Model\Usuario;
 use Application\Model\Entity\Album;
 use Zend\Json\Json;
 use Zend\Mail\Message;
 use Zend\Mail\Transport\Sendmail as SendmailTransport;
-use Zend\I18n\Filter\Alnum;
-use Platos\Model\Platos;
-use Platos\Model\PlatosTable;
+// use Zend\I18n\Filter\Alnum;
+// use Platos\Model\Platos;
+// use Platos\Model\PlatosTable;
+// use Classes\Solr;
 
-require_once APPLICATION_PATH . '/vendor/SolrPhpClient/Apache/Solr/Service.php';
 class IndexController extends AbstractActionController
 {
     protected $configTable;
     public $dbAdapter;
-   
-    public function __construct()
-    {
-		$options = new \Zend\Config\Config ( include APPLICATION_PATH . '/config/autoload/global.php' );
-		$this->_solr = new \Apache_Solr_Service ( $options->solr->host, $options->solr->port, $options->solr->folder );
-    }
-    
-    
+
     public function indexAction()
     { 
       
@@ -127,7 +120,7 @@ class IndexController extends AbstractActionController
                             'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
                               'sort'=>'en_destaque desc',
                               ); 
-						$solar = &$this->_solr;
+						$solar = \Classes\Solr::getInstance()->getSolr();
                         if($palabraBuscar == '')    
                         {
 //                              echo 'eee';
@@ -136,8 +129,7 @@ class IndexController extends AbstractActionController
                           }   
                         if ($palabraBuscar)
                         { 
-          //                require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-//                          $solar = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+                            $solar = \Classes\Solr::getInstance()->getSolr();
                           if (get_magic_quotes_gpc() == 1)
                           {
                             $palabraBuscar = stripslashes($palabraBuscar);
@@ -166,8 +158,7 @@ class IndexController extends AbstractActionController
                         $results = false;
                         if ($query)
                         { 
-//                          $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
-                         $solr = &$this->_solr;
+                         $solr = \Classes\Solr::getInstance()->getSolr();
                           if (get_magic_quotes_gpc() == 1)
                           {
                             $query = stripslashes($query);
@@ -195,8 +186,7 @@ class IndexController extends AbstractActionController
 
                         if ($palabraBuscar)
                         { 
-                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-                         $solar = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+                         $solar = \Classes\Solr::getInstance()->getSolr();
                           if (get_magic_quotes_gpc() == 1)
                           {
                             $palabraBuscar = stripslashes($palabraBuscar);
@@ -224,7 +214,7 @@ class IndexController extends AbstractActionController
                         if ($query)
                         { 
    
-                        $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+                            $solr = \Classes\Solr::getInstance()->getSolr();
                           if (get_magic_quotes_gpc() == 1)
                           {
                             $query = stripslashes($query);
@@ -282,7 +272,7 @@ class IndexController extends AbstractActionController
                           }
                         if ($palabraBuscar)
                         { 
-                         $solar = &$this->_solr; 
+                         $solar = \Classes\Solr::getInstance()->getSolr();
                          if (get_magic_quotes_gpc() == 1)
                           {
                             $palabraBuscar = stripslashes($palabraBuscar);
@@ -310,8 +300,7 @@ class IndexController extends AbstractActionController
                         if ($query)
                         { 
    
-//                         $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
-                        $solr = &$this->_solr;
+                        $solr = \Classes\Solr::getInstance()->getSolr();
                         if (get_magic_quotes_gpc() == 1)
                           {
                             $query = stripslashes($query);
@@ -376,7 +365,7 @@ class IndexController extends AbstractActionController
                               'wt'=>'json');      
                         if ($palabraBuscar)
                         { 
-                          $solar = &$this->_solr; 
+                          $solar = \Classes\Solr::getInstance()->getSolr();
                           if (get_magic_quotes_gpc() == 1)
                           {
                             $palabraBuscar = stripslashes($palabraBuscar);
@@ -413,8 +402,7 @@ class IndexController extends AbstractActionController
                 
                         if ($palabraBuscar)
                         { 
-                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-                         $solar = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+                            $solar = \Classes\Solr::getInstance()->getSolr();
                           if (get_magic_quotes_gpc() == 1)
                           {
                             $palabraBuscar = stripslashes($palabraBuscar);
@@ -441,8 +429,7 @@ class IndexController extends AbstractActionController
                         $results = false;
                         if ($query)
                         { 
-   
-                        $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+                            $solr = \Classes\Solr::getInstance()->getSolr();
                           if (get_magic_quotes_gpc() == 1)
                           {
                             $query = stripslashes($query);
