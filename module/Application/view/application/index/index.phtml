@@ -25,7 +25,7 @@
                  <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>&q=<?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?>&distrito=<?php echo $list->Distrito;?>" class="mosaic-backdrop">
             <div class="details">
                   <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
-                  <p class="title-details" style="font-weight: bold;">Ingredientes</p>
+                  <p class="title-details" style="font-weight: bold;">Descripción</p>
                   <p class="desc-plato" style="font-size:0.9em;"> <?php 
                         if(strlen($list->tx_descripcion)>100){
                          $str=trim(substr($list->tx_descripcion, 0, 100));
@@ -70,7 +70,7 @@
                 <a href="/platos/index/verplatos?id=<?php echo $list->in_id;?>&q=<?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?>&distrito=<?php echo $list->Distrito;?>" class="mosaic-backdrop">
              <div class="details">
                        <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
-                       <p style="font-weight: bold;">Ingredientes</p>
+                       <p style="font-weight: bold;">Descripción</p>
                        <p style="font-size:0.9em;"> <?php 
                                     if(strlen($list->tx_descripcion)>100){
                                     $str=trim(substr($list->tx_descripcion, 0, 100));
@@ -115,7 +115,7 @@
                
                        <div class="details">
                            <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
-                           <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
+                           <p style="font-weight: bold;font-size: 0.9em;">Descripción</p>
                            <p style="font-size:0.9em;"><?php 
                                    if(strlen($list->tx_descripcion)>100){
                                     $str=trim(substr($list->tx_descripcion, 0, 100));
@@ -161,7 +161,7 @@
                
              <div class="details">
                  <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
-                 <p style="font-weight: bold;font-size: 0.9em;">Ingredientes</p>
+                 <p style="font-weight: bold;font-size: 0.9em;">Descripción</p>
                  <p style="font-size:0.9em;"><?php 
                    if(strlen($list->tx_descripcion)>100){
                     $str=trim(substr($list->tx_descripcion, 0, 100));
