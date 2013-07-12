@@ -5,7 +5,9 @@
       //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
 
       $formu->setAttributes(array(
+
           'action' => $this->url.'/buscar-por-distrito',
+
           'method' => 'get'
       ));
       $formu->prepare();
@@ -130,7 +132,7 @@
                       $form = $this->form;
                       //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
                       $form->setAttributes(array(
-                          'action' => $this->url . '/platos/index/verplatos?id=' . $this->lista[0]['in_id'], //'/usuario/comentarios/agregarcomentarios',
+                          'action' => $this->url . '/plato?id=' . $this->lista[0]['in_id'], //'/usuario/comentarios/agregarcomentarios',
                           'method' => 'post',
                           'class' => 'form-horizontal'
                       ));
