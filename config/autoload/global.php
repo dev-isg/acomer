@@ -25,6 +25,18 @@ return array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         ),
     ),
+     'solr' => array (
+                               'host' => '192.168.1.38',
+                               'port' => '8983',
+                               'folder' => '/solr' 
+               ),
+               'host' => array (
+                               'static' => '',
+                               'images' => 'http://192.168.1.38:8080/imagenes'
+               ),
+               'upload' => array(
+                       'images' => APPLICATION_PATH . '/public/imagenes'
+               ),
     'service_manager' => array(
         'factories' => array(
             'Zend\Db\Adapter\Adapter'
