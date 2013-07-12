@@ -70,7 +70,7 @@ return array(
             'busqueda-distrito' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route' => '/buscar-distrito',
+                    'route' => '/buscar-por-distrito',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
                         'action' => 'detalleubicacion'
