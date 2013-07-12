@@ -278,7 +278,7 @@ class IndexController extends AbstractActionController {
               $alto =$tamanio[1]; 
               $valor  = uniqid();
               if($ancho>$alto)
-              {//echo 'ddd';exit;
+              { //echo 'ddd';exit;
                   require './vendor/Classes/Filter/Alnum.php';
                   $altura =(int)($alto*$anchura/$ancho); 
                   if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg')      
@@ -313,7 +313,7 @@ class IndexController extends AbstractActionController {
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
                        $copia = $this->_options->upload->images . '/' .$name;
                        imagejpeg($nuevaimagen,$copia);
-//                       var_dump($restaurante);exit;
+
                        $this->getPlatosTable()->guardarPlato($restaurante,$name);
                     $this->redirect()->toUrl('/platos/index?id='.$idlocal);    
                   }

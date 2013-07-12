@@ -37,24 +37,24 @@ class Module
 
             });
             
-           $e->getApplication()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) {
-            $controller      = $e->getTarget();
-//            var_dump($controller);Exit;
-            $controllerClass = get_class($controller);
-            $moduleNamespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
-            $config          = $e->getApplication()->getServiceManager()->get('config');
-
-            $routeMatch = $e->getRouteMatch();
-//            $controllerName = strtolower($routeMatch->getParam('controller', 'not-found'));
-            $actionName = strtolower($routeMatch->getParam('action', 'not-found')); // get the action name
-//            var_dump($config['module_layouts'][$moduleNamespace][$actionName]);exit;
-            if (isset($config['module_layouts'][$moduleNamespace][$actionName])) {
-                $controller->layout($config['module_layouts'][$moduleNamespace][$actionName]);
-            }elseif(isset($config['module_layouts'][$moduleNamespace]['default'])) {
-                $controller->layout($config['module_layouts'][$moduleNamespace]['default']);
-            }
-
-        }, 100);
+//           $e->getApplication()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) {
+//            $controller      = $e->getTarget();
+////            var_dump($controller);Exit;
+//            $controllerClass = get_class($controller);
+//            $moduleNamespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
+//            $config          = $e->getApplication()->getServiceManager()->get('config');
+//
+//            $routeMatch = $e->getRouteMatch();
+////            $controllerName = strtolower($routeMatch->getParam('controller', 'not-found'));
+//            $actionName = strtolower($routeMatch->getParam('action', 'not-found')); // get the action name
+////            var_dump($config['module_layouts'][$moduleNamespace][$actionName]);exit;
+//            if (isset($config['module_layouts'][$moduleNamespace][$actionName])) {
+//                $controller->layout($config['module_layouts'][$moduleNamespace][$actionName]);
+//            }elseif(isset($config['module_layouts'][$moduleNamespace]['default'])) {
+//                $controller->layout($config['module_layouts'][$moduleNamespace]['default']);
+//            }
+//
+//        }, 100);
     }
 
     public function getConfig()
