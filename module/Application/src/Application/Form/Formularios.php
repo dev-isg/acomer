@@ -68,21 +68,15 @@ class Formularios extends Form
         $this->add(array(
             'name' => 'distrito',
             'type' => 'Select',
-             'attributes' => array(               
-              
-                'id'   => 'fq'
+             'attributes'=> array( 
+                'id' => 'fq'
             ),
            'options' => array(
-                   
-                  'value_options' => array(
-                          '' => 'selecccione :',
-                                               
-                     ),
+                'value_options' => array(
+                '' => 'selecccione :',                
+                ),
              )
         ));
-        
-        
-  
      
         $this->add(array(
             'name' => 'va_contrasenia',

@@ -105,9 +105,7 @@ class IndexController extends AbstractActionController
            $texto = $datos['q']; 
            $filter   = new \Zend\I18n\Filter\Alnum(true);
            $palabra = $filter->filter($texto);       
-           $distrito = $datos['distrito'];  
-             
-           
+           $distrito = $datos['distrito'];   
            if($distrito != 'seleccione todos')
            {
                        $limite = 9;    
