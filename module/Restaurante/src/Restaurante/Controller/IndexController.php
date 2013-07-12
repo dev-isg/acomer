@@ -44,7 +44,7 @@ class IndexController extends AbstractActionController
             $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
          $paginator->setItemCountPerPage(10);
-          $this->layout('layout/layout-portada');
+//          $this->layout('layout/layout-portada');
         return array(
           'restaurante' => $paginator,//$lista,
             'comida' => $this->comidas()

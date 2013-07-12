@@ -18,7 +18,7 @@ class PlatosTable {
     public function __construct(TableGateway $tableGateway) {
         $this->tableGateway = $tableGateway;
         $options = new \Zend\Config\Config ( include APPLICATION_PATH . '/config/autoload/global.php' );
-        $this->_solr = new \Apache_Solr_Service ( $options->solr->host, $options->solr->port, $options->solr->folder );
+//        $this->_solr = new \Apache_Solr_Service ( $options->solr->host, $options->solr->port, $options->solr->folder );
     }
 
     /*
