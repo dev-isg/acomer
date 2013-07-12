@@ -258,7 +258,6 @@ $.getJSON('/local/index/jsondepartamento',function(data){
     }
 });
 });
-
   $("#departamento").change(function(evento){
    var dep=parseInt($(this).val());
    var url="/local/index/jsonprovincia?iddepa=" + dep;

@@ -206,12 +206,6 @@
 <script src="<?php echo $this->basePath()?>/js/vendor/gmaps.js"></script>
 <script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.js"></script>
 <script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js"></script>
-<script type="text/javascript">
+<script src="<?php echo $this->basePath()?>/js/verplatos.min.js"></script>
 
-$(document).ready(function(){initSucursales();$("#star").raty({target:"#Ta_puntaje_in_id",targetType:"number",starOff:"/img/t2.png",targetKeep:true,starOn:"/img/t1.png"});
-$("#side").height($("#main").height());var a=function(b){$(b).validate({rules:{va_nombre:{required:true},va_email:{required:true,email:true},tx_descripcion:{required:true}},messages:{va_nombre:{required:"Por favor ingresar el nombre del plato"},tx_descripcion:{required:"Por favor ingresar una comentario"},va_email:{required:"Por favor ingresar un email"}},highlight:function(c){$(c).closest(".control-group").removeClass("success").addClass("error");
-},success:function(c){c.addClass("valid").closest(".control-group").removeClass("error").addClass("success");}});};a("#comentarios");});  
-
-
-</script>
 		
