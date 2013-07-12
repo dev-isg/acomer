@@ -101,6 +101,9 @@ body{
 form#search{
   /*position: relative;*/
 }
+#map_canvas{
+  position: fixed!important;
+}
 #search .btn-search-home{
   background: url(../img/lupa-search.png) no-repeat;
   border: 0;

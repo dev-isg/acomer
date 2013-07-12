@@ -78,6 +78,58 @@ return array(
                     )
                 )
             ),
+            
+            
+            'jsonmapasa' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/jsonmapasa',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'jsonmapasa'
+                    )
+                )
+            ),
+            'jsondesta' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/jsondesta',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'jsondesta'
+                    )
+                )
+            ),
+              'nosotros' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/nosotros',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'nosotros'
+                    )
+                )
+            ),
+                'terminos' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/terminos',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'terminos'
+                    )
+                )
+            ),
+                  'contactenos' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/contactenos',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'contactenos'
+                    )
+                )
+            ),
         ),
     ),
     'service_manager' => array(

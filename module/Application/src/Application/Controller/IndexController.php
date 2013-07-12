@@ -131,7 +131,7 @@ class IndexController extends AbstractActionController
                         if($palabraBuscar == '')    
                         {
 //                              echo 'eee';
-                             $this->redirect()->toUrl('/application/index/ver?q='.$palabra);
+                             $this->redirect()->toUrl('/');
 //                              
                           }   
                         if ($palabraBuscar)
@@ -278,7 +278,7 @@ class IndexController extends AbstractActionController
                           if($palabraBuscar=='')
                           {
 
-                          $this->redirect()->toUrl('/application');
+                          $this->redirect()->toUrl('/');
                           }
                         if ($palabraBuscar)
                         { 
@@ -665,8 +665,8 @@ class IndexController extends AbstractActionController
     
     public function contactenosAction(){
         
-             $view = new ViewModel();
-//        $this->layout('layout/layout-portada');
+        $view = new ViewModel();
+        $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Solicita';
         $form=new Contactenos("form");
         $request=$this->getRequest();
