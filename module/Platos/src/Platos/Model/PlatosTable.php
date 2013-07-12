@@ -18,7 +18,7 @@ class PlatosTable {
     public function __construct(TableGateway $tableGateway) {
         $this->tableGateway = $tableGateway;
         $options = new \Zend\Config\Config ( include APPLICATION_PATH . '/config/autoload/global.php' );
-        $this->_solr = new \Apache_Solr_Service ( $options->solr->host, $options->solr->port, $options->solr->folder );
+//        $this->_solr = new \Apache_Solr_Service ( $options->solr->host, $options->solr->port, $options->solr->folder );
     }
 
     /*
@@ -63,7 +63,7 @@ class PlatosTable {
 
     
     public function guardarPlato(Platos $plato, $imagen, $idlocal = null) {
-
+//        var_dump($plato->en_estado);Exit;
         $data = array(
 //            'in_id' => $plato->in_id,
             'va_imagen' => $imagen, //$plato->va_imagen,
@@ -278,7 +278,6 @@ class PlatosTable {
         $id = (int) $id;
         $rowset = $this->tableGateway->select(array('in_id' => $id));
         $row = $rowset->current();
-//        VAR_DUMP($row);EXIT;
         if (!$row) {
             throw new \Exception("Could not find row $id");
         }
