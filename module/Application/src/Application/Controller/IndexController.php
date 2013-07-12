@@ -207,10 +207,10 @@ class IndexController extends AbstractActionController
           
                         $limit = 3;             
                         $palabraBuscar = isset($palabra) ? $palabra : false ;
-                        $query = "($palabraBuscar) AND (en_destaque:si)";
+                        $query = "($palabraBuscar)";
                         $fq = array (  
                                    'sort'=>'random_' . uniqid() .' asc',
-                            'fq'=>'en_estado:activo AND restaurant_estado:activo');                                           
+                            'fq'=>'en_estado:activo AND restaurant_estado:activo  AND en_destaque:si');                                           
                         $results = false;
                         if ($query)
                         { 
