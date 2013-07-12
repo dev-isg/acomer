@@ -41,14 +41,17 @@ class IndexController extends AbstractActionController
     
     public function indexAction()
     { 
+      
        
         $view = new ViewModel();
-        $this->layout('layout/layout-portada');
+       
+//        $this->layout('layout/layout-portada2');
+        
         $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
         $listadeseg=$this->getConfigTable()->cantComentxPlato(1,'3,3',1);
         $listaval=$this->getConfigTable()->cantComentxPlato(2,3,1);
         $listault=$this->getConfigTable()->cantComentxPlato(2,3,2);
-        //var_dump($listaval);
+//        var_dump($listaval->toArray());exit;
         $this->layout()->clase = 'Home';
         $view->setVariables(array('lista' => $listades,'listaseg'=>$listadeseg,'listaval'=>$listaval,'listault'=>$listault,'clase'=>'Home'));
          return $view;
@@ -106,7 +109,8 @@ class IndexController extends AbstractActionController
    public function detalleubicacionAction()
     { 
           $view = new ViewModel();
-          $this->layout('layout/layout-portada');
+//          $this->layout('layout/layout-portada');
+          
           $request = $this->getRequest();
           if ($request->isGet()) {
            $datos =$this->request->getQuery();   
@@ -259,12 +263,14 @@ class IndexController extends AbstractActionController
          
      public function verAction()             
         {   
+
         $view = new ViewModel();
         $this->layout('layout/layout-portada');
         $filtered = $this->params()->fromQuery('q');
               $filter   = new \Zend\I18n\Filter\Alnum(true);
                   $texto = $filter->filter($filtered);
                 //  var_dump($texto);exit;
+
                         $limite = 9;    
                         $resultados = false;
                         $palabraBuscar = isset($texto) ? $texto : false ;
@@ -346,46 +352,8 @@ class IndexController extends AbstractActionController
         return $view;
     }
     
-    public function mapaAction()
-    { 
-        $distrito = $this->params()->fromQuery('distrito');
-        $texto = $this->params()->fromQuery('plato');
-       $filter   = new \Zend\I18n\Filter\Alnum();
-       $plato = $filter->filter($texto);
-        
-        
-        $this->layout('layout/layout-portada'); 
-         header('Content-Type: text/html; charset=utf-8');
-                        $resultados = false;
-                        $palabraBuscar = isset($plato) ? $plato : false ;
-                        $list = 1000;
-                          $fd = array (  
-                            'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
-                              'sort'=>'en_destaque desc',
-                              'fl'=>'latitud,longitud,restaurante,name,plato_tipo',
-                              'wt'=>'json');      
-                        if ($palabraBuscar)
-                        { 
-//                           $solar = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
-                          $solar = &$this->_solr; 
-                          if (get_magic_quotes_gpc() == 1)
-                          {
-                            $palabraBuscar = stripslashes($palabraBuscar);
-                          }
-                          try
-                          {
-                            $resultados = $solar->search($palabraBuscar, 0,$list, $fd );
-                          }
-                          catch (Exception $e)
-                          {
-                          
-                          echo("<div>ingrese algun valor</div>");   }
-                        }
-          $distritos=$this->josAction();
-       return  new ViewModel(array('mapa' => $resultados->response->docs ,'distritos' => $distritos ,));
-        //$mapita = $this->jsonmapasaAction($json);
-                        
-    }
+
+
     
     public function jsonmapasaAction()    { 
         $distrito=  $this->params()->fromQuery('distrito');
@@ -398,6 +366,7 @@ class IndexController extends AbstractActionController
         
              if($distrito != 'seleccione todos')
            {
+
                         $resultados = false;
                         $palabraBuscar = isset($plato) ? $plato : false ;
                         $list = 1000;
@@ -643,7 +612,7 @@ class IndexController extends AbstractActionController
     
     public function nosotrosAction(){
         $view = new ViewModel();
-        $this->layout('layout/layout-portada');
+//        $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Nosotros';
 //        $view->setVariables(array());
 //         return $view;
@@ -651,7 +620,7 @@ class IndexController extends AbstractActionController
     }
         public function solicitaAction(){
                     $view = new ViewModel();
-        $this->layout('layout/layout-portada');
+//        $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Solicita';
         $form=new Solicita("form");
         $request=$this->getRequest();
@@ -739,7 +708,7 @@ class IndexController extends AbstractActionController
     }
         public function terminosAction(){
                 $view = new ViewModel();
-        $this->layout('layout/layout-portada');
+//        $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Terminos';
     }
     

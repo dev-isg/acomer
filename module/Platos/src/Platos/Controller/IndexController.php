@@ -34,6 +34,8 @@ class IndexController extends AbstractActionController {
 		$this->_options = new \Zend\Config\Config ( include APPLICATION_PATH . '/config/autoload/global.php' );
 	}
     public function indexAction() {
+        $basePath = $this->getRequest()->getBasePath();
+//             var_dump($basePath);exit;
         $local = (int) $this->params()->fromQuery('id');
 //        var_dump($restaurante);exit;
         $lista = $this->getPlatosTable()->fetchAll($local);
@@ -71,6 +73,7 @@ class IndexController extends AbstractActionController {
         $form->get('submit')->setValue('Add');
         $request = $this->getRequest();
         if ($request->isPost()) {
+       
             $plato = new Platos();
             $form->setInputFilter($plato->getInputFilter());
 //            $form->setData($request->getPost());
@@ -314,7 +317,7 @@ class IndexController extends AbstractActionController {
         }
         try {
             $restaurante = $this->getPlatosTable()->getPlato($id);
-//            var_dump($restaurante);exit;
+            
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
@@ -325,7 +328,7 @@ class IndexController extends AbstractActionController {
         $form  = new PlatosForm($adpter,$idlocal);
         $form->get('va_imagen')->setValue($comeya);
         $form->bind($restaurante);
-
+//        var_dump($restaurante);
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();
         $comida = $this->params()->fromPost('va_modalidad');
@@ -370,37 +373,11 @@ class IndexController extends AbstractActionController {
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
                        $copia = $this->_options->upload->images . '/' .$name;
                        imagejpeg($nuevaimagen,$copia);
+//                        var_dump($restaurante);exit;
                     $this->getPlatosTable()->guardarPlato($restaurante,$name);
                     $this->redirect()->toUrl('/platos/index?id='.$idlocal);    
                   }
-                  if($info['extension']=='png')      
-                  {  $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefrompng($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = $this->_options->upload->images . '/' .$name;
-                       imagepng($nuevaimagen,$copia);
-                      $this->getPlatosTable()->guardarPlato($restaurante,$name);
-                    $this->redirect()->toUrl('/platos/index?id='.$idlocal);   
-                  }
-                  if($info['extension']=='gif')      
-                  {   $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefromgif($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = $this->_options->upload->images . '/' .$name;
-                       imagegif($nuevaimagen,$copia);
-                    $this->getPlatosTable()->guardarPlato($restaurante,$name);
-                    $this->redirect()->toUrl('/platos/index?id='.$idlocal);    
-                  }
+
                }
                    if($ancho<$alto)
               {require './vendor/Classes/Filter/Alnum.php';
@@ -416,37 +393,11 @@ class IndexController extends AbstractActionController {
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
                        $copia = $this->_options->upload->images . '/' .$name;
                        imagejpeg($nuevaimagen,$copia);
+                       var_dump($restaurante);exit;
                        $this->getPlatosTable()->guardarPlato($restaurante,$name);
                     $this->redirect()->toUrl('/platos/index?id='.$idlocal);    
                   }
-                   if($info['extension']=='png')      
-                  {   $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefrompng($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = $this->_options->upload->images . '/' .$name;
-                       imagepng($nuevaimagen,$copia);
-                    $this->getPlatosTable()->guardarPlato($restaurante,$name);
-                    $this->redirect()->toUrl('/platos/index?id='.$idlocal);    
-                  }
-                  if($info['extension']=='gif')      
-                  {  $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefromgif($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = $this->_options->upload->images . '/' .$name;
-                       imagegif($nuevaimagen,$copia);
-                      $this->getPlatosTable()->guardarPlato($restaurante,$name);
-                    $this->redirect()->toUrl('/platos/index?id='.$idlocal);   
-                  }
+
                }
                 
             }
@@ -504,6 +455,7 @@ class IndexController extends AbstractActionController {
 
     public function verplatosAction() {
         $view = new ViewModel();
+
         $this->layout('layout/layout-portada');
         $datos =$this->request->getQuery(); 
         $id = $datos['id']; 
@@ -511,6 +463,7 @@ class IndexController extends AbstractActionController {
         $plato = $datos['q'];      
      
         $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();   
+
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);

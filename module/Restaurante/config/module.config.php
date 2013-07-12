@@ -48,6 +48,17 @@ return array(
         ),
     ),
     'view_manager' => array(
+                'display_not_found_reason' => true,
+        'display_exceptions'       => true,
+        'doctype'                  => 'HTML5',
+        'not_found_template'       => 'error/404',
+        'exception_template'       => 'error/index',
+         'template_map' => array(
+//            'layout/layout-portada'           => __DIR__ . '/../view/layout/layout-portada.phtml',
+            'restaurante/index/index' => __DIR__ . '/../view/restaurante/index/index.phtml',
+            'error/404'               => __DIR__ . '/../view/error/404.phtml',
+            'error/index'             => __DIR__ . '/../view/error/index.phtml',
+        ),
         'template_path_stack' => array(
             'restaurante' => __DIR__ . '/../view',
         ),
