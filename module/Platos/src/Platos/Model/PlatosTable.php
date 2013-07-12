@@ -416,6 +416,9 @@ class PlatosTable {
         } else if ($val == 2) {
             $puntaje = '=0'; //'is null or ta_comentario.ta_puntaje_in_id!=0';
             $order = 'in_id';
+        }else if($val == 3) {
+            $puntaje = '!=0'; //'is null or ta_comentario.ta_puntaje_in_id!=0';
+            $order = 'in_id';
         }
         $adapter = $this->tableGateway->getAdapter();
         $primer = $this->tableGateway->getAdapter()

@@ -42,7 +42,7 @@ class IndexController extends AbstractActionController
         
         $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
         $listadeseg=$this->getConfigTable()->cantComentxPlato(1,'3,3',1);
-        $listaval=$this->getConfigTable()->cantComentxPlato(2,3,1);
+        $listaval=$this->getConfigTable()->cantComentxPlato(2,3,3);
         $listault=$this->getConfigTable()->cantComentxPlato(2,3,2);
 //        var_dump($listaval->toArray());exit;
         $this->layout()->clase = 'Home';
@@ -102,16 +102,18 @@ class IndexController extends AbstractActionController
    public function detalleubicacionAction()
     { 
           $view = new ViewModel();
-//          $this->layout('layout/layout-portada');
+
           
           $request = $this->getRequest();
           if ($request->isGet()) {
            $datos =$this->request->getQuery();   
-           $texto = $datos['q']; 
+           $texto = $datos['q'];    
            $filter   = new \Zend\I18n\Filter\Alnum(true);
            $palabra = $filter->filter($texto);       
-           $distrito = $datos['distrito'];   
-           if($distrito != 'seleccione todos')
+           $distrito = $datos['distrito'];  
+            if($texto == '')    
+              {$this->redirect()->toUrl('/');}
+           if($distrito != 'todos los distritos')
            {
                        $limite = 9;    
                         $resultados = false;
@@ -120,14 +122,9 @@ class IndexController extends AbstractActionController
                             'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
                               'sort'=>'en_destaque desc',
                               ); 
+
 						$solar = \Classes\Solr::getInstance()->getSolr();
-                        if($palabraBuscar == '')    
-                        {
-//                              echo 'eee';
-                             $this->redirect()->toUrl('/');
-//                              
-                          }   
-                        if ($palabraBuscar)
+                       if ($palabraBuscar)
                         { 
                             $solar = \Classes\Solr::getInstance()->getSolr();
                           if (get_magic_quotes_gpc() == 1)
@@ -286,7 +283,7 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                              
-                          $this->redirect()->toUrl('/application');
+                         $this->redirect()->toUrl('/');
                           }
                         }
           
@@ -313,7 +310,7 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                   $this->redirect()->toUrl('/application');       
+                                   $this->redirect()->toUrl('/');     
                           }
                          }
           //var_dump($results->response->docs);exit;
@@ -352,7 +349,7 @@ class IndexController extends AbstractActionController
         $plato = $filter->filter($texto);
         
         
-             if($distrito != 'seleccione todos')
+             if($distrito != 'todos los distritos')
            {
 
                         $resultados = false;
@@ -416,7 +413,7 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                              
-                          $this->redirect()->toUrl('/application');
+                         $this->redirect()->toUrl('/');
                           }
                         }
           
@@ -442,7 +439,7 @@ class IndexController extends AbstractActionController
                           catch (Exception $e)
                           {
                           
-                                   $this->redirect()->toUrl('/application');       
+                                 $this->redirect()->toUrl('/');      
                           }
                          }
                         }

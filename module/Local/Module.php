@@ -77,6 +77,8 @@ class Module implements AutoloaderProviderInterface
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        
+        
 //        
 //       $eventManager->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) {
 //        $controller = $e->getTarget();
@@ -92,7 +94,11 @@ class Module implements AutoloaderProviderInterface
 //                $controller->layout($config['module_layouts'][$moduleNamespace]);
 //            }
 //        }, 100);
-        
+                      $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function($e) {
+             $result = $e->getResult();
+             $result->setTerminal(TRUE);
+
+            });
                 $e->getApplication()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) {
             $controller      = $e->getTarget();
             $controllerClass = get_class($controller);
