@@ -401,12 +401,12 @@ overflow: hidden;
 margin: 0;
 }
 .a-map{
-  padding-left: 10px;
+padding-left: 10px;
 font-size: 13px;
 font-style: italic;
 }
 
-p.nombre_r {
+p.nombre_r ,p.nombre_r a {
   color: #ff8400;
   font-weight: bold;
   font-size: 18.12px;
