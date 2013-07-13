@@ -1,9 +1,8 @@
 <?php
 namespace Classes;
 
-if (! class_exists('Apache_Solr_Service', false)) {
-    include_once APPLICATION_PATH . '/vendor/SolrPhpClient/Apache/Solr/Service.php';
-}
+include_once APPLICATION_PATH . '/vendor/SolrPhpClient/Apache/Solr/Service.php';
+
 
 /**
  *
