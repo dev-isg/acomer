@@ -724,10 +724,10 @@ nav ul{
 .footer nav ul{
   margin-left: 0;
 }
-.footer footer{
+.footer .footer-ie8{
   width: 50%;
 }
-.footer footer p{
+.footer .footer-ie8 p{
   text-align: right;
   margin-right: 45px;
   padding-top: 5px;
@@ -810,7 +810,7 @@ ul.dropdown-menu{
   color: white;
 }
 .footer {
-  background: rgba(64, 64, 63, 1);
+  background: #40403f;
   color: white;
   position: fixed;
   bottom: 0px;
@@ -819,20 +819,22 @@ ul.dropdown-menu{
   z-index: 999;
 }
 
-footer{
+.footer-ie8{
   float: right;
 }
-footer p{
+.footer p{
   font-size: 11px;
   color: #a5a5a5;
   margin-top: 2px;
 }
+
+
 label.error {
-    color: red;
-    }
+  color: red;
+}
 .img-plato{
-width: 100%;
-height: 163px;
+  width: 100%;
+  height: 163px;
 }
 .subir-home{
   margin-top: -30px!important;

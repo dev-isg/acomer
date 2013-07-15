@@ -2,7 +2,7 @@
 namespace Application\View\Helper;
 
 use \Zend\View\Helper;
-use Zend\Form\View\Helper\AbstractHelper;
+use \Zend\Form\View\Helper\AbstractHelper;
 
 class Host extends AbstractHelper
 {

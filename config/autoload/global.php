@@ -28,18 +28,16 @@ return array(
         'folder' => '/solr'
     ),
     'host' => array(
+
        'base' => 'http://192.168.1.38:8080',
        'static' => 'http://192.168.1.38:8080',
        'images' => 'http://192.168.1.38:8080/imagenes'
    ),
+
     'upload' => array(
         'images' => APPLICATION_PATH . '/public/imagenes'
     ),
-     'solr' => array (
-                               'host' => '192.168.1.38',
-                               'port' => '8983',
-                               'folder' => '/solr' 
-               ),
+
             
                'host' => array (
                                'static' => '',

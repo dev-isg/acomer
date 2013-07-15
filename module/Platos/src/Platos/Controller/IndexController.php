@@ -374,11 +374,13 @@ class IndexController extends AbstractActionController {
     }
 
     public function verplatosAction() {
+       // echo 'hola mundo'; exit;
         $view = new ViewModel();
-
 //        $this->layout('layout/layout-portada');
         $datos =$this->request->getQuery(); 
-        $id = $datos['id']; 
+        $nombre = explode('-', $datos['nombre']);
+        var_dump($nombre);exit;
+        $id = array_pop($nombre);
         $distrito = $datos['distrito']; 
         $plato = $datos['q'];      
      
@@ -408,13 +410,13 @@ class IndexController extends AbstractActionController {
         } 
      $formu = new Formularios();
         $comidas = $this->joinAction()->toArray();
-        $com = array();
-        foreach ($comidas as $y) {
-             $com[$y['va_distrito']] = $y['va_distrito'];
-        }
-        $formu->get('distrito')->setValue($distrito);
+//         $com = array();
+//         foreach ($comidas as $y) {
+//              $com[$y['va_distrito']] = $y['va_distrito'];
+//         }
+        $formu->get('distrito')->setValue($_COOKIE['distrito']/*$distrito*/);
         $formu->get('distrito')->setValueOptions($com);
-        $formu->get('q')->setValue($plato);
+        $formu->get('q')->setValue($_COOKIE['q']/*$plato*/);
         $formu->get('submit')->setValue('Buscar');
         $this->layout()->clase = 'Detalle';
         
