@@ -127,7 +127,7 @@ form#search{
 #search input[type="text"] { 
   background: #ff8500; 
   border: 0 none; color: #fff;  
-  padding: 13px 15px 11px 20px;
+  padding: 13px 15px 11px 15px;
   -webkit-border-radius: 14px 0 0 14px;
   -moz-border-radius: 14px 0 0 14px;
   -o-border-radius: 14px 0 0 14px;
@@ -363,6 +363,7 @@ line-height: 10px !important;
 border: 0;
 background:url(../img/lupa2.png) no-repeat;
 padding: 8px 16px;
+padding-top: 10px;
 margin-left: -4px;
 line-height: 16px;
 }
@@ -1959,7 +1960,7 @@ form#application .control-group .btn-solicito{
     font-size: 1.5em;
   }
   #search input[type="text"]{
-    width: 185px;
+    width: 192px;
   }
   .map-portada .guia img{
     width: 680px;

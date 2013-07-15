@@ -77,6 +77,10 @@ require_once(dirname(__FILE__) . '/Response.php');
  * @todo Investigate using other HTTP clients other than file_get_contents built-in handler. Could provide performance
  * improvements when dealing with multiple requests by using HTTP's keep alive functionality
  */
+
+if (class_exists('Apache_Solr_Service') != true) {
+    
+
 class Apache_Solr_Service
 {
 	/**
@@ -972,4 +976,5 @@ class Apache_Solr_Service
 			throw new Exception("Unsupported method '$method', please use the Apache_Solr_Service::METHOD_* constants");
 		}
 	}
+}
 }
