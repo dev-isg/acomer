@@ -752,12 +752,17 @@ ul.dropdown-menu li{
   padding-right: 0;
   padding-left: 0;
   text-align: left;
+  border-left: 0;
 }
 .dropdown-menu>li>a:hover, 
 .dropdown-menu>li>a:focus, 
 .dropdown-submenu:hover>a, 
 .dropdown-submenu:focus>a{
   background: #40403F;
+}
+
+ul.dropdown-menu{
+  background-color: #40403F;
 }
 .solicitar-publicacion{
   display: block;
