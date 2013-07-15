@@ -959,6 +959,9 @@ a.title-home-listado h1 img{
   -webkit-border-radius: 5px 5px 0 0;
   -moz-border-radius: 5px 5px 0 0;
   -o-border-radius: 5px 5px 0 0;
+   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#515151', endColorstr='#515151');
+   -ms-filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#515151', endColorstr='#515151');
+}
 }
 .mosaic-overlay img{
    border-radius: 5px 5px 0 0;
