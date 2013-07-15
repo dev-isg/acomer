@@ -324,6 +324,11 @@ class IndexController extends AbstractActionController
     
      //   $form->get('distrito')->setValue($comidas[1]['ch_distrito']);
         //$form->get('distrito')->setValue($comidas[1]['va_distrito']);
+        
+        //Registro de valores en cookie
+        setcookie('distrito', $com);
+        setcookie('q', $texto);
+        
         $form->get('distrito')->setValueOptions($com);
         $form->get('q')->setValue($texto);
         $form->get('submit')->setValue('Buscar');
