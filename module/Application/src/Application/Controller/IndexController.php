@@ -295,11 +295,7 @@ class IndexController extends AbstractActionController
         $filtered = $this->params()->fromQuery('q');
               $filter   = new \Zend\I18n\Filter\Alnum(true);
                   $texto = $filter->filter($filtered);
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> ca05335255130b4113aa2256ef37433dc791374c
 
                         $limite = 10;    
 
