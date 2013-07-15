@@ -243,21 +243,25 @@ class IndexController extends AbstractActionController
          $form->get('distrito')->setValue($distrito);
          $form->get('distrito')->setValueOptions($com);
          $form->get('submit')->setValue('Buscar');
-         $view->setVariables( array('distrito'=>$distrito,'plato'=>$palabra,'lista' => $listades,'hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'error'=>$error));
+         
+           $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
+         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+         $paginator->setItemCountPerPage(10);
+         
+         $view->setVariables( array('distrito'=>$distrito,'plato'=>$palabra,'lista' => $listades,'hola'=>$results->response->docs,'holas'=>$paginator,'form' => $form));//,'error'=>$error
        return $view;
       }
     
          
      public function verAction()             
-        {  // echo 'dddd';exit;
+        {  
         $view = new ViewModel();
        $this->layout('layout/layout-portada');
         $filtered = $this->params()->fromQuery('q');
               $filter   = new \Zend\I18n\Filter\Alnum(true);
                   $texto = $filter->filter($filtered);
-                // var_dump($texto);exit;
 
-                        $limite = 9;    
+                        $limite = 100;    
                         $resultados = false;
                         $palabraBuscar = isset($texto) ? $texto : false ;
                           $fd = array (  
@@ -327,7 +331,14 @@ class IndexController extends AbstractActionController
         $form->get('distrito')->setValueOptions($com);
         $form->get('q')->setValue($texto);
         $form->get('submit')->setValue('Buscar');
-        $view->setVariables( array('lista' => $listades,'hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'nombre'=>$texto));
+        
+        
+         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
+         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+         $paginator->setItemCountPerPage(10);
+         
+         
+        $view->setVariables( array('lista' => $listades,'hola'=>$results->response->docs,'holas'=>$paginator,'form' => $form,'nombre'=>$texto));
      
     
         // $distritos=$this->josAction();

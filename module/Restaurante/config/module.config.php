@@ -54,13 +54,20 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
          'template_map' => array(
-//            'layout/layout-administrador'           => __DIR__ . '/../view/layout/layout-administrador.phtml',
-            'restaurante/index/index' => __DIR__ . '/../view/restaurante/index/index.phtml',
+            'layout/layout-administrador'           => __DIR__ . '/../view/layout/layout-administrador.phtml',
+//            'layout/layout-error'           => __DIR__ . '/../view/layout/layout-error.phtml',
+             'restaurante/index/index' => __DIR__ . '/../view/restaurante/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ),
         'template_path_stack' => array(
-            'restaurante' => __DIR__ . '/../view',
+            'Restaurante' => __DIR__ . '/../view',
         ),
     ),
+    
+        'module_layouts' => array(
+        'Restaurante' => array(
+            'index' => 'layout/layout-administrador'
+                )     
+    )
 );

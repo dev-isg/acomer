@@ -12,14 +12,18 @@ namespace Application;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-
+use Zend\ModuleManager\Feature\BootstrapListenerInterface;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
 
 use Application\Model\Usuario;
 use Application\Model\UsuarioTable;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
-class Module
+class Module 
+//implements
+//    AutoloaderProviderInterface,
+//    ConfigProviderInterface
 {
     public function onBootstrap(MvcEvent $e)
     {
@@ -39,26 +43,38 @@ class Module
 //             $result->setTemplate('layout/layout-error.phtml');
 //          
 //            });
-            
-           $e->getApplication()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) {
+//        $eventManager->attach('dispatch', array($this,'onDispatchError'), 100);  
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this,'onDispatchError'), 100); 
+
+             $e->getApplication()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) {
             $controller      = $e->getTarget();
-//            var_dump($controller);Exit;
             $controllerClass = get_class($controller);
             $moduleNamespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
             $config          = $e->getApplication()->getServiceManager()->get('config');
-
             $routeMatch = $e->getRouteMatch();
-//            $controllerName = strtolower($routeMatch->getParam('controller', 'not-found'));
             $actionName = strtolower($routeMatch->getParam('action', 'not-found')); // get the action name
-//            var_dump($config['module_layouts'][$moduleNamespace][$actionName]);exit;
-            if (isset($config['module_layouts'][$moduleNamespace][$actionName])) {
-                $controller->layout($config['module_layouts'][$moduleNamespace][$actionName]);
-            }/*elseif(isset($config['module_layouts'][$moduleNamespace]['default'])) {
-                $controller->layout($config['module_layouts'][$moduleNamespace]['default']);
-            }*/
-
+                    if (isset($config['module_layouts'][$moduleNamespace][$actionName])) {
+                    $controller->layout($config['module_layouts'][$moduleNamespace][$actionName]);
+                }elseif(isset($config['module_layouts'][$moduleNamespace]['default'])) {
+                    $controller->layout($config['module_layouts'][$moduleNamespace]['default']);
+                }
         }, 100);
     }
+
+    function onDispatchError(MvcEvent $e) {
+  $vm = $e->getViewModel();
+  $vm->setTemplate('layout/layout-error');
+
+//      $sm  = $e->getApplication()->getServiceManager();
+//        $controller = $e->getRouteMatch()->getParam('controller');
+//        if (0 !== strpos($controller, __NAMESPACE__, 0)) {
+//            //if not this module
+//            return;
+//        }
+//        //if this module 
+//    $exceptionstrategy = $sm->get('ViewManager')->getExceptionStrategy();
+//    $exceptionstrategy->setExceptionTemplate('layout/layout-error');
+}
 
     public function getConfig()
     {

@@ -37,6 +37,11 @@ class IndexController extends AbstractActionController
     
     public function indexAction()
     {
+        
+        $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/usuario/index/login');
+        }
 //        $this->layout('layout/layout22');
         //$this->dbAdapter=$this->getServiceLocator()->get('Zend\Db\Adapter');
         //$u=new Ubigeo($this->dbAdapter);
