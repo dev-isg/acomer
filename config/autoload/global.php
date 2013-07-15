@@ -31,7 +31,7 @@ return array(
                                'folder' => '/solr' 
                ),
                'host' => array (
-                               'static' => '',
+                               'static' => 'http://192.168.1.38:8080',
                                'images' => 'http://192.168.1.38:8080/imagenes'
                ),
                'upload' => array(

@@ -88,8 +88,8 @@
      $(item).raty({ 
                      readOnly: true,
                       score: p, 
-                      starOff: '/img/t2.png',
-                      starOn : '/img/t1.png'                         
+                      starOff: '<?php echo $this->host('static')?>/img/t2.png',
+                      starOn : '<?php echo $this->host('static')?>/img/t1.png'                         
       });
    }
      $("#tabla-platos").find(':input').each(function() {
