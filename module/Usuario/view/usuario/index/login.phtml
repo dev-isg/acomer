@@ -1,0 +1,19 @@
+<?php
+$title = 'Login';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+$form = $this->form;
+//$form->setAttribute('action', $this->url('user', array('action' => 'login')));
+$form->setAttributes(array(
+    'action' => $this->url.'/usuario/index/login',
+    'method' => 'post'
+));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('va_nombre'));
+echo $this->formRow($form->get('va_contrasenia'));
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
