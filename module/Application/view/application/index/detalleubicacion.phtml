@@ -12,7 +12,9 @@ $form->prepare();
 echo $this->form()->openTag($form);
 ?>
 <?php
+
 //echo $this->formHidden($form->get('in_id'));
+
 ?><?php echo $this->formRow($form->get('distrito'));?><?php
 ?><?php echo $this->formRow($form->get('q'));?><?php
 
@@ -81,7 +83,8 @@ echo $this->form()->closeTag(); ?>
                     } 
                     
                   ?>   
-          </ul>                   
+          </ul>     
+
       </div>
 
   </div>
@@ -119,7 +122,9 @@ echo $this->form()->closeTag(); ?>
                  
                 <?php
                     }
-                ?>   
+                ?>  
+        <div id="pagina"><?php echo (count($this->holas)> 0)?$this->paginationControl($this->holas, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar-por-distrito?distrito='.$this->distrito.'&q='.$this->plato.'&submit=Buscar'.'&')):""; ?> </div>
+                   
        </div>         
 
       <div id="mapa-buscador">

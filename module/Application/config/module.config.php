@@ -193,24 +193,28 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
-//            'layout/layout-portada'           => __DIR__ . '/../view/layout/layout-portada.phtml',
+            'layout/layout-portada'           => __DIR__ . '/../view/layout/layout-portada.phtml',
+            'layout/layout-error'           => __DIR__ . '/../view/layout/layout-error.phtml',
 //             'layout/layout-portada'  => __DIR__ . '/../view/error/404.phtml',
             // 'layout/layout-dos'  => __DIR__ . '/../view/layout/layout-dos.phtml',
-           // 'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
+            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ),
         'template_path_stack' => array(
-            __DIR__ . '/../view',
+            'application'=>__DIR__ . '/../view',
         ),
     ),
-
-//            'module_layouts' => array(
-//      'Application' => array(
-//          'index' => 'layout/layout-portada2',
-////          'edit'    => 'layout/albumEdit',
-//        )
-//     ),
+    'module_layouts' => array(
+        'Application' => array(
+            'index' => 'layout/layout-portada',
+            'terminos' => 'layout/layout-portada',
+            'nosotros' => 'layout/layout-portada',
+            'solicita' => 'layout/layout-portada',
+            'ver' => 'layout/layout-portada',
+            'detalleubicacion' => 'layout/layout-portada'
+        ),
+        ),
 
     'view_helpers' => array(
         'invokables' => array(

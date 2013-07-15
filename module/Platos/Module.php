@@ -76,12 +76,13 @@ class Module implements AutoloaderProviderInterface
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
         
-                      $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function($e) {
-             $result = $e->getResult();
-             $result->setTerminal(TRUE);
+//                      $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function($e) {
+//             $result = $e->getResult();
+//             $result->setTerminal(TRUE);
+//             $result->setTemplate('layout/layout-error.phtml');
 
-            });
-           
+//            });
+                 $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this,'onDispatchError'), 100); 
         
                         $e->getApplication()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) {
             $controller      = $e->getTarget();
@@ -99,5 +100,10 @@ class Module implements AutoloaderProviderInterface
             }
 
         }, 100);
+    }
+    
+    function onDispatchError(MvcEvent $e) {
+        $vm = $e->getViewModel();
+        $vm->setTemplate('layout/layout-error');
     }
 }

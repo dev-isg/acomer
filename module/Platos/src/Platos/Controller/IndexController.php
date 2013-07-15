@@ -34,6 +34,12 @@ class IndexController extends AbstractActionController {
 		$this->_options = new \Zend\Config\Config ( include APPLICATION_PATH . '/config/autoload/global.php' );
 	}
     public function indexAction() {
+        
+                        $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
+        
         $basePath = $this->getRequest()->getBasePath();
 //             var_dump($basePath);exit;
         $local = (int) $this->params()->fromQuery('id');

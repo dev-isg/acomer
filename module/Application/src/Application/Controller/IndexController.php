@@ -249,7 +249,12 @@ class IndexController extends AbstractActionController
          $form->get('distrito')->setValue($distrito);
          $form->get('distrito')->setValueOptions($com);
          $form->get('submit')->setValue('Buscar');
-         $view->setVariables( array('distrito'=>$distrito,'plato'=>$palabra,'lista' => $listades,'hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'error'=>$error));
+         
+           $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
+         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+         $paginator->setItemCountPerPage(10);
+         
+         $view->setVariables( array('distrito'=>$distrito,'plato'=>$palabra,'lista' => $listades,'hola'=>$results->response->docs,'holas'=>$paginator,'form' => $form));//,'error'=>$error
        return $view;
       }
     
@@ -283,16 +288,21 @@ class IndexController extends AbstractActionController
         $headTitleHelper->append($siteName);
     }
      public function verAction()             
-        {  // echo 'dddd';exit;
+        {  
         $view = new ViewModel();
        $this->layout('layout/layout-portada');
        $this->layout()->clase = 'buscar';
         $filtered = $this->params()->fromQuery('q');
               $filter   = new \Zend\I18n\Filter\Alnum(true);
                   $texto = $filter->filter($filtered);
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> ca05335255130b4113aa2256ef37433dc791374c
 
                         $limite = 10;    
+
                         $resultados = false;
                         $palabraBuscar = isset($texto) ? $texto : false ;
                           $fd = array (  
@@ -367,7 +377,22 @@ class IndexController extends AbstractActionController
         $form->get('distrito')->setValueOptions($com);
         $form->get('q')->setValue($texto);
         $form->get('submit')->setValue('Buscar');
-        $view->setVariables( array('lista' => $listades,'hola'=>$results->response->docs,'holas'=>$resultados->response->docs,'form' => $form,'nombre'=>$texto));
+
+        
+        
+         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
+         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+         $paginator->setItemCountPerPage(10);
+         
+         
+        $view->setVariables( array('lista' => $listades,'hola'=>$results->response->docs,'holas'=>$paginator,'form' => $form,'nombre'=>$texto));
+     
+    
+        // $distritos=$this->josAction();
+        // $lista=$this->getConfigTable()->cantComentarios(2,3);
+                // $this->layout()->clase = 'Search';
+         //$view->setVariables(array('distritos' => $distritos ));
+
         return $view;
     }
     
