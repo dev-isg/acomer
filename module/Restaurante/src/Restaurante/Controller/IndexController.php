@@ -394,8 +394,7 @@ class IndexController extends AbstractActionController
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
-        require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-        $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr');
+       $solr = \Classes\Solr::getInstance()->getSolr();
         if ($solr->ping()){
             $solr->deleteByQuery('id:' . $id);
             $document = new \Apache_Solr_Document();
