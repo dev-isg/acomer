@@ -391,6 +391,9 @@ margin: 0px;
 margin-top: 5px;
 font-size: 15px;
 }
+restaurante-map a{
+  color: #ff8400 !important;
+}
 .plato-map {
 font-size: 13px;
 color: #ff8400;
