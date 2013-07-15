@@ -804,6 +804,9 @@ height: 163px;
 .lista-buscar #esconder {
   padding-bottom: 0!important;
 }
+.lista-buscar-distrito #esconder{
+  padding-bottom: 0;
+}
 .pt {
   display: inline-block;
   width: 100%;

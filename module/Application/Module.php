@@ -33,8 +33,10 @@ class Module
 //    });
               $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function($e) {
              $result = $e->getResult();
-             $result->setTerminal(TRUE);
-
+//             $result->setTerminal(TRUE);
+//             $result->setLayout('layout/layout-portada.phtml');
+             $result->setTemplate('layout/layout-error.phtml');
+          
             });
             
 //           $e->getApplication()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) {

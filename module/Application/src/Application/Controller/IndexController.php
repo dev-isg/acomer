@@ -103,6 +103,7 @@ class IndexController extends AbstractActionController
     { 
           $view = new ViewModel();   
           $request = $this->getRequest();
+          $this->layout()->clase = 'buscar-distrito';
           if ($request->isGet()) {
            $datos =$this->request->getQuery();   
            $texto = $datos['q'];    
