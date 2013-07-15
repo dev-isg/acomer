@@ -376,10 +376,11 @@ class IndexController extends AbstractActionController {
     public function verplatosAction() {
        // echo 'hola mundo'; exit;
         $view = new ViewModel();
-//        $this->layout('layout/layout-portada');
-        $datos =$this->request->getQuery(); 
+       $this->layout('layout/layout-portada');
+        $datos =$this->request->fromRoute(); 
+       var_dump($datos);exit;
         $nombre = explode('-', $datos['nombre']);
-        var_dump($nombre);exit;
+      
         $id = array_pop($nombre);
         $distrito = $datos['distrito']; 
         $plato = $datos['q'];      

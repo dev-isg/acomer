@@ -108,7 +108,8 @@ class IndexController extends AbstractActionController
           $request = $this->getRequest();
           $this->layout()->clase = 'buscar-distrito';
           if ($request->isGet()) {
-           $datos =$this->request->getQuery();   
+           $datos =$this->request->getQuery(); 
+         //  var_dump($datos);exit;
            $texto = $datos['q'];    
            $filter   = new \Zend\I18n\Filter\Alnum(true);
            $palabra = $filter->filter($texto);       
@@ -157,6 +158,7 @@ class IndexController extends AbstractActionController
                             'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
                             'wt'=>'json');                                              
                         $results = false;
+                        
                         if ($query)
                         { 
                          $solr = \Classes\Solr::getInstance()->getSolr();
@@ -288,7 +290,7 @@ class IndexController extends AbstractActionController
         $filtered = $this->params()->fromQuery('q');
               $filter   = new \Zend\I18n\Filter\Alnum(true);
                   $texto = $filter->filter($filtered);
-                // var_dump($texto);exit;
+                
 
                         $limite = 10;    
                         $resultados = false;
