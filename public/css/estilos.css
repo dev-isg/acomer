@@ -606,14 +606,17 @@ margin-right: 10px;
   /*background: url(../img/mapa.jpg) repeat;*/
 }
 #buscarmap{
-display: none;
+  display: none;
 }
 .disabled { color:gray !important; }
 .masinfo {
-width: 724px;
-text-align: right;
-position: absolute;
-bottom: 40px;
+  width: 724px;
+  text-align: right;
+  position: absolute;
+  bottom: 40px;
+}
+.masinfo a img{
+  width: 28px;
 }
 #map.large{
   height:500px;
@@ -627,17 +630,20 @@ bottom: 40px;
   width: 66px;
 }
 .subir {
-position: fixed;
-bottom: 39px;
-width: 724px;
-text-align: right;
+  position: fixed;
+  bottom: 39px;
+  width: 724px;
+  text-align: right;
+}
+.subir a img{
+  width: 28px;
 }
 .busquedad {
-font-size: 1.2em;
-padding-right: 19px;
-text-align: left;
-font-family: georgia;
-display: inline-block;
+  font-size: 1.2em;
+  padding-right: 19px;
+  text-align: left;
+  font-family: georgia;
+  display: inline-block;
 }
 .overlay{
   display:block;
@@ -675,23 +681,23 @@ display: inline-block;
 }
 
 #form-buscar{
-width: 100%;
-text-align: center;
-margin: 0px;
-padding: 1.5em 0px;
+  width: 100%;
+  text-align: center;
+  margin: 0px;
+  padding: 1.5em 0px;
 }
 
 .fec {
-width: 100%;
-text-align: center;
-margin-bottom: 0px;
-margin-top: 3px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0px;
+  margin-top: 3px;
 }
 .titulo-portada {
-background: url(../img/titulo.png);
-padding: 26px 27px 27px 7px;
-color: white;
-font-weight: bold;
+  background: url(../img/titulo.png);
+  padding: 26px 27px 27px 7px;
+  color: white;
+  font-weight: bold;
 }
 
 
@@ -824,9 +830,9 @@ height: 163px;
     margin-bottom: 6px;
 }
 .img-info-plato{
-width: 250px;
-height: 221px;
-display: inline-block;
+  width: 250px;
+  height: 221px;
+  display: inline-block;
 }
 .sub {
   display: block;
@@ -2550,6 +2556,15 @@ form#application .control-group .btn-solicito{
   }
 }
 @media (max-width: 480px) {
+  .img-plato{
+    height: 100%;
+  }
+  nav{
+    margin-left: 0;
+  }
+  .footer footer p{
+    margin-right: 0;
+  }
   #fq{
     width: 80%;
   }

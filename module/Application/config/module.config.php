@@ -130,6 +130,16 @@ return array(
                     )
                 )
             ),
+                    'solicita' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/solicita',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'solicita'
+                    )
+                )
+            ),
         ),
     ),
     'service_manager' => array(

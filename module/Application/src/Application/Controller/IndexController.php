@@ -108,9 +108,7 @@ class IndexController extends AbstractActionController
     }
    public function detalleubicacionAction()
     { 
-          $view = new ViewModel();
-
-          
+          $view = new ViewModel();   
           $request = $this->getRequest();
           if ($request->isGet()) {
            $datos =$this->request->getQuery();   
@@ -118,16 +116,18 @@ class IndexController extends AbstractActionController
            $filter   = new \Zend\I18n\Filter\Alnum(true);
            $palabra = $filter->filter($texto);       
            $distrito = $datos['distrito'];  
-            if($texto == '')    
+              if($texto == '')    
+              {$this->redirect()->toUrl('/');}
+              if($palabra == '')    
               {$this->redirect()->toUrl('/');}
            if($distrito != 'todos los distritos')
            {
-                       $limite = 9;    
+                       $limite = 10;    
                         $resultados = false;
                         $palabraBuscar = isset($palabra) ? $palabra : false ;
                           $fd = array (  
                             'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
-                              'sort'=>'en_destaque desc',
+                              'sort'=>'en_destaque desc ',
                               ); 
 						$solar = &$this->_solr;
                         
@@ -267,11 +267,12 @@ class IndexController extends AbstractActionController
                   $texto = $filter->filter($filtered);
                 // var_dump($texto);exit;
 
-                        $limite = 9;    
+                        $limite = 10;    
                         $resultados = false;
                         $palabraBuscar = isset($texto) ? $texto : false ;
                           $fd = array (  
-                            'fq'=>'en_estado:activo AND restaurant_estado:activo');
+                            'fq'=>'en_estado:activo AND restaurant_estado:activo',
+                              );
                           if($palabraBuscar=='')
                           {
 
@@ -356,9 +357,10 @@ class IndexController extends AbstractActionController
         $view  = new viewModel();
         $view->setTerminal(true);
         $texto = $this->params()->fromQuery('plato');
+      //  var_dump($texto);exit;
         $filter   = new \Zend\I18n\Filter\Alnum(true);
         $plato = $filter->filter($texto);
-        
+     
         
              if($distrito != 'todos los distritos')
            {
