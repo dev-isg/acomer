@@ -34,6 +34,7 @@ class Module
               $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function($e) {
              $result = $e->getResult();
              $result->setTerminal(TRUE);
+             $result->setTemplate('layout/layout');
 
             });
             

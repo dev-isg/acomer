@@ -101,6 +101,7 @@ class Module implements AutoloaderProviderInterface
                       $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function($e) {
              $result = $e->getResult();
              $result->setTerminal(TRUE);
+             
 
             });
     }
