@@ -83,10 +83,10 @@ class Module implements AutoloaderProviderInterface
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
         
-                      $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function($e) {
-             $result = $e->getResult();
-             $result->setTerminal(TRUE);
-
-            });
+//                      $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function($e) {
+//             $result = $e->getResult();
+//             $result->setTerminal(TRUE);
+//
+//            });
     }
 }
