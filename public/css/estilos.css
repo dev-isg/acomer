@@ -669,7 +669,9 @@ margin-right: 10px;
   text-shadow:1px 1px 1px #666;
   padding:0 4px;
 }
-
+#pagina {
+margin-left: 20px;
+}
 .overlay_arrow{
   left:50%;
   margin-left:-16px;
