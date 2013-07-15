@@ -2445,6 +2445,7 @@ form#application .control-group .btn-solicito{
   }
   .footer .footer-ie8 p{
     text-align: center;
+    margin-right: 0;
   }
   .logan{
     font-size: 1em;
