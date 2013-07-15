@@ -10,12 +10,12 @@
         <meta name="description" content="ListaDelSabor.com es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales">
         <meta name="viewport" content="width=device-width">
         <link href="/img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>             
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>         
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
           <script src="<?php echo $this->basePath()?>/js/lib/jquery-1.8.3.min.js"></script>  
         <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css')
                         ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
 
-        <script type="text/javascript">
+        <!--<script type="text/javascript">
           function initialize() {
             var centerLng = new google.maps.LatLng(-12.111858,-77.016091);
             var styles = [
@@ -54,11 +54,11 @@
             var map = new google.maps.Map(document.getElementById("map_canvas"),
                 myOptions);
           }
-        </script>
+        </script>-->
     </head>
 
-  <body class="lista-<?php echo $this->clase; ?>" onload="initialize()">
-    <div id="map_canvas" style="position: fixed!important; top: 0; bottom: 0; left: 0; right: 0; z-index: 0;"></div>
+  <body class="lista-<?php echo $this->clase; ?>">
+    <!--<div id="map_canvas" style="position: fixed!important; top: 0; bottom: 0; left: 0; right: 0; z-index: 0;"></div>-->
     <div class="contenido">
       <div class="content-sidebar">
         <div class="contenido-busqueda">
@@ -108,9 +108,9 @@
       
           
             <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action='<?php echo $this->url; ?>/buscar'>
-              <input id="q" name="q" value="<?php echo htmlspecialchars($palabraBuscar, ENT_QUOTES, 'utf-8'); ?>" type="text" placeholder="Escribe el nombre del plato" />
-
+              <input id="q" name="q" value="<?php echo htmlspecialchars($palabraBuscar, ENT_QUOTES, 'utf-8'); ?>" type="text" placeholder="Ingrese el plato" />
               <input type="submit"  class="btn btn-search-home" value="Buscar"/>
+              <em>Ejm: lomo saltado</em>
             </form>  
           
           
