@@ -23,6 +23,7 @@ use Zend\Json\Json;
 use Zend\Mail\Message;
 use Zend\Mail\Transport\Sendmail as SendmailTransport;
 // use Zend\I18n\Filter\Alnum;
+//use Zend\View\Helper\HeadTitle; 
 // use Platos\Model\Platos;
 // use Platos\Model\PlatosTable;
 // use Classes\Solr;
@@ -94,6 +95,8 @@ class IndexController extends AbstractActionController
         $select = $sql->select()
             ->from(array('f' => 'ta_ubigeo')) 
             ->where(array('f.ch_provincia'=>'lima'));
+               
+             
              $selectString = $sql->getSqlStringForSqlObject($select);
           // echo $selectString;exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
@@ -101,26 +104,27 @@ class IndexController extends AbstractActionController
     }
    public function detalleubicacionAction()
     { 
-          $view = new ViewModel();
-
-          
+          $view = new ViewModel();   
           $request = $this->getRequest();
+          $this->layout()->clase = 'buscar-distrito';
           if ($request->isGet()) {
            $datos =$this->request->getQuery();   
            $texto = $datos['q'];    
            $filter   = new \Zend\I18n\Filter\Alnum(true);
            $palabra = $filter->filter($texto);       
            $distrito = $datos['distrito'];  
-            if($texto == '')    
+              if($texto == '')    
+              {$this->redirect()->toUrl('/');}
+              if($palabra == '')    
               {$this->redirect()->toUrl('/');}
            if($distrito != 'todos los distritos')
            {
-                       $limite = 9;    
+                       $limite = 10;    
                         $resultados = false;
                         $palabraBuscar = isset($palabra) ? $palabra : false ;
                           $fd = array (  
                             'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
-                              'sort'=>'en_destaque desc',
+                              'sort'=>'en_destaque desc ',
                               ); 
 
 						$solar = \Classes\Solr::getInstance()->getSolr();
@@ -252,20 +256,52 @@ class IndexController extends AbstractActionController
        return $view;
       }
     
-         
+      public function onBootstrap($e)
+    {
+
+        $app = $e->getParam('application');
+        $app->getEventManager()->attach('render', array($this, 'setLayoutTitle'));
+    }    
+    public function setLayoutTitle($e)
+    {
+        $matches    = $e->getRouteMatch();
+        $action     = $matches->getParam('action');
+        $controller = $matches->getParam('controller');
+        $module     = __NAMESPACE__;
+        $siteName   = 'Zend Framework';
+
+        // Getting the view helper manager from the application service manager
+        $viewHelperManager = $e->getApplication()->getServiceManager()->get('viewHelperManager');
+
+        // Getting the headTitle helper from the view helper manager
+        $headTitleHelper   = $viewHelperManager->get('headTitle');
+
+        // Setting a separator string for segments
+        $headTitleHelper->setSeparator(' - ');
+
+        // Setting the action, controller, module and site name as title segments
+        $headTitleHelper->append($action);
+        $headTitleHelper->append($controller);
+        $headTitleHelper->append($module);
+        $headTitleHelper->append($siteName);
+    }
      public function verAction()             
         {  
         $view = new ViewModel();
        $this->layout('layout/layout-portada');
+       $this->layout()->clase = 'buscar';
         $filtered = $this->params()->fromQuery('q');
               $filter   = new \Zend\I18n\Filter\Alnum(true);
                   $texto = $filter->filter($filtered);
 
-                        $limite = 100;    
+
+                        $limite = 10;    
+
                         $resultados = false;
                         $palabraBuscar = isset($texto) ? $texto : false ;
                           $fd = array (  
-                            'fq'=>'en_estado:activo AND restaurant_estado:activo');
+                            'fq'=>'en_estado:activo AND restaurant_estado:activo',
+                              );
                           if($palabraBuscar=='')
                           {
 
@@ -321,16 +357,21 @@ class IndexController extends AbstractActionController
         $form = new Formularios();
         $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
         $comidas =  $this->joinAction()->toArray();
+        
         $com = array();
         foreach($comidas as $y){
             $com[$y['va_distrito']] = $y['va_distrito'];
         }
     
-     //   $form->get('distrito')->setValue($comidas[1]['ch_distrito']);
-        //$form->get('distrito')->setValue($comidas[1]['va_distrito']);
+        //Registro de valores en cookie
+    
+        setcookie('distrito', $com);
+        setcookie('q', $texto);
+        $form->get('distrito')->setValue($comidas[41]['va_distrito']);
         $form->get('distrito')->setValueOptions($com);
         $form->get('q')->setValue($texto);
         $form->get('submit')->setValue('Buscar');
+
         
         
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
@@ -345,20 +386,20 @@ class IndexController extends AbstractActionController
         // $lista=$this->getConfigTable()->cantComentarios(2,3);
                 // $this->layout()->clase = 'Search';
          //$view->setVariables(array('distritos' => $distritos ));
+
         return $view;
     }
     
-
-
-    
+ 
     public function jsonmapasaAction()    { 
         $distrito=  $this->params()->fromQuery('distrito');
         $view  = new viewModel();
         $view->setTerminal(true);
         $texto = $this->params()->fromQuery('plato');
+      //  var_dump($texto);exit;
         $filter   = new \Zend\I18n\Filter\Alnum(true);
         $plato = $filter->filter($texto);
-        
+     
         
              if($distrito != 'todos los distritos')
            {
@@ -479,8 +520,8 @@ class IndexController extends AbstractActionController
         $adapter = $this->dbAdapter;
         $sql = new Sql($adapter);
        $select = $sql->select();
-        $select->from('ta_distrito');
-       // $select->where(array('ch_provincia' => 'LIMA'));
+        $select->from('ta_distrito')
+       ->order('va_distrito asc DESC'); 
            $selectString = $sql->getSqlStringForSqlObject($select);
             //var_dump($selectString);exit;
           $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);

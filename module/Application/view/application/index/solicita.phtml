@@ -8,7 +8,7 @@ $this->headTitle($title);
 	<div class="descrip-product">
 		<div class="contenido-static">
 			<h2>Solicite registrar un plato</h2>
-			<p>Si conoces un plato que te agrada, el lugar donde lo venden y no lo encontraste en <a href="/" title="Lista del sabor" atl="listadelsabor">listadelsabor.com</a>, por favor llena el siguiente formulario y nos estaremos comunicando contigo para registrarlo.</p>
+			<p>Si conoces un plato que te agrada, el lugar donde lo venden y no lo encontraste en <a href="<?php echo $this->host('base') ?>" title="Lista del sabor" atl="listadelsabor">listadelsabor.com</a>, por favor llena el siguiente formulario y nos estaremos comunicando contigo para registrarlo.</p>
 			<?php
 			$form = $this->form;
 			//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));

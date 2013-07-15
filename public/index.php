@@ -1,6 +1,6 @@
 <?php
 
-error_reporting(E_ALL & ~E_STRICT);
+error_reporting(E_ALL);
 ini_set('session.cookie_httponly', 1);
 /**
  * This makes our life easier when dealing with paths. Everything is relative

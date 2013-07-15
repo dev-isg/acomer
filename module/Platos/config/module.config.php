@@ -3,6 +3,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Platos\Controller\Index' => 'Platos\Controller\IndexController',
+                 'Application\Controller\Index' => 'Application\Controller\IndexController',
         ),
     ),
     'router' => array(
@@ -41,10 +42,10 @@ return array(
                     ),
                 ),
             ),
-        'ver' => array(
-                'type' => 'Literal',
+        'plato' => array(
+                'type' => 'Segment',
                 'options' => array(
-                    'route' => '/plato',
+                    'route' => '/plato[/:nombre]',
                     'defaults' => array(
                         'controller' => 'Platos\Controller\Index',
                         'action' => 'verplatos'
@@ -67,7 +68,8 @@ return array(
                     ),
                     
                 ),
-            ),
+            ),            
+            
         ),
     ),
     'view_manager' => array(

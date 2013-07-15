@@ -130,6 +130,31 @@ return array(
                     )
                 )
             ),
+
+                    'solicita' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/solicita',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'solicita'
+                    )
+                )
+            ),
+
+            'platos' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/plato/:nombre',
+                    'defaults' => array(
+                        'controller' => 'Platos\Controller\Index',
+                        'action' => 'verplatos'
+                    )
+                    
+                )
+            ),
+            
+
         ),
     ),
     'service_manager' => array(
@@ -154,6 +179,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Platos\Controller\Index' => 'Platos\Controller\IndexController'
 //            'Local\Controller\Index' => 'Local\Controller\IndexController',
 //            'Application\Controller\Hola' => 'Application\Controller\HolaController',
 //            'Application\Controller\Formulario' => 'Application\Controller\FormularioController'
@@ -192,7 +218,8 @@ return array(
 
     'view_helpers' => array(
         'invokables' => array(
-            'host' => 'Application\View\Helper\Host'
+            'host' => 'Application\View\Helper\Host',
+            'canonicalUrl' => 'Application\View\Helper\CanonicalUrl',
         )
     )
 

@@ -18,7 +18,6 @@ return array(
         'username' => 'kevin',
         'password' => '123456',
         'dsn' => 'mysql:dbname=bd_acomer;host=192.168.1.40',
-        
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         )
@@ -29,13 +28,29 @@ return array(
         'folder' => '/solr'
     ),
     'host' => array(
+
         'base' => 'http://192.168.1.38:8080',
         'static' => 'http://192.168.1.38:8080',
         'images' => 'http://192.168.1.38:8080/imagenes'
     ),
+
+
+
+
     'upload' => array(
         'images' => APPLICATION_PATH . '/public/imagenes'
     ),
+
+            
+               'host' => array (
+                               'static' => '',
+                               'images' => 'http://192.168.1.38:8080/imagenes'
+               ),
+               'upload' => array(
+                       'images' => APPLICATION_PATH . '/public/imagenes'
+               ),
+ 
+
     'service_manager' => array(
         'factories' => array(
             'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory'
