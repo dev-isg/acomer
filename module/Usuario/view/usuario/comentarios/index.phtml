@@ -116,8 +116,8 @@
      $(item).raty({ 
                      readOnly: true,
                       score: p, 
-                      starOff: '/img/t1.png',
-                      starOn : '/img/t2.png'                         
+                      starOff: '<?php echo $this->host('static')?>/img/t1.png',
+                      starOn : '<?php echo $this->host('static')?>/img/t2.png'                         
       });
    }
      $("#tabla-puntaje").find(':input').each(function() {
