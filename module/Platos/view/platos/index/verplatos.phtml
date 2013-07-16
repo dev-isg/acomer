@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="<?php echo $this->basePath()?>/css/jquery-ui.css">
    <div class="content-left">
       <?php
@@ -191,7 +192,7 @@
                       }
                       ?>
                   </ul>
-                  <?php echo (count($this->comentarios)> 10)?$this->paginationControl($this->comentarios, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/platos/index/verplatos?id='.$this->variable.'&')):""; ?>
+                  <?php echo (count($this->comentarios)>0)?$this->paginationControl($this->comentarios, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/plato/'.$this->urlnombre.'?')):""; ?>
               </div>
               <!--Fin de comentarios-->
             </div>

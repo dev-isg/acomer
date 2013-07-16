@@ -207,7 +207,7 @@ return array(
     ),
     'module_layouts' => array(
         'Application' => array(
-            'index' => 'layout/layout-portada',
+            'index' => '/../view/layout/layout-portada',
             'terminos' => 'layout/layout-portada',
             'nosotros' => 'layout/layout-portada',
             'solicita' => 'layout/layout-portada',

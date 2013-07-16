@@ -15,7 +15,6 @@
         <p>Platos destacados</p>
       </div>
     </div>
-    <div id ="error"><?php $this->mama;?></div>
     <div class="recomendados-platos primer-home" style="padding-bottom: 90px;">
       <ul>
          <?php  foreach ($this->lista  as $list) : ?>
@@ -119,8 +118,9 @@
                     <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8');?></span>
                      <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
                      </div>
-                   <a href="/platos/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">
+                 <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">
 
+       
                
                        <div class="details">
                            <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
@@ -167,11 +167,9 @@
            <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
            </div>
 
-            <!--<a href="/plato?id=<?php echo $list->in_id;?>" class="mosaic-backdrop">-->
-          <!--  &q=<?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?>&distrito=<?php echo $list->Distrito;?> -->  
+           <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">
 
-            <a href="/platos/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">
-               
+        
 
              <div class="details">
                  <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>

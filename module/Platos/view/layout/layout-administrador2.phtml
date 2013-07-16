@@ -28,7 +28,8 @@
                         ->prependStylesheet($this->basePath() . '/css/bootstrap.css') ?>                                
                                    
     </head>
-    <body>
+    <body>  
+        <?php echo $this->key ?>
             <div class="container-fluid">
             <div class="row-fluid">
                 <!-- cabecera-->
@@ -44,7 +45,7 @@
                                             <ul class="dropdown-menu">
                                                 <li><a href="#"><i class="icon-cog"></i> Configuración</a></li>
                                                   <li class="divider"></li>
-                                                <li><a href="/usuario/index/logout"><i class="icon-off"></i> Logout</a></li>
+                                                <li><a href="/auth/logout"><i class="icon-off"></i> Logout</a></li>
                                             </ul>
                                         </li>
                                     </ul>

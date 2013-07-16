@@ -17,7 +17,7 @@ use Application\Form\Formularios;
 use Application\Form\Solicita;
 use Application\Form\Contactenos;
 // use Application\Model\Entity\Procesa;
-// use Application\Model\Usuario;
+
 use Application\Model\Entity\Album;
 use Zend\Json\Json;
 use Zend\Mail\Message;
@@ -27,7 +27,7 @@ use Zend\Mail\Transport\Sendmail as SendmailTransport;
 // use Platos\Model\Platos;
 // use Platos\Model\PlatosTable;
 // use Classes\Solr;
-
+use \Zend\View\Helper\HeadTitle;
 class IndexController extends AbstractActionController
 {
     protected $configTable;
@@ -108,7 +108,8 @@ class IndexController extends AbstractActionController
           $request = $this->getRequest();
           $this->layout()->clase = 'buscar-distrito';
           if ($request->isGet()) {
-           $datos =$this->request->getQuery();   
+           $datos =$this->request->getQuery(); 
+         //  var_dump($datos);exit;
            $texto = $datos['q'];    
            $filter   = new \Zend\I18n\Filter\Alnum(true);
            $palabra = $filter->filter($texto);       
@@ -119,7 +120,7 @@ class IndexController extends AbstractActionController
               {$this->redirect()->toUrl('/');}
            if($distrito != 'todos los distritos')
            {
-                       $limite = 10;    
+                       $limite = 100;    
                         $resultados = false;
                         $palabraBuscar = isset($palabra) ? $palabra : false ;
                           $fd = array (  
@@ -157,6 +158,7 @@ class IndexController extends AbstractActionController
                             'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
                             'wt'=>'json');                                              
                         $results = false;
+                        
                         if ($query)
                         { 
                          $solr = \Classes\Solr::getInstance()->getSolr();
@@ -179,7 +181,7 @@ class IndexController extends AbstractActionController
                  }       
                  else 
                  {
-                    $limite = 9;    
+                    $limite = 100;    
                         $resultados = false;
                         $palabraBuscar = isset($palabra) ? $palabra : false ;
                           $fd = array (  
@@ -237,7 +239,7 @@ class IndexController extends AbstractActionController
                         
          }
         $form = new Formularios();
-        $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
+       
         $comidas =  $this->joinAction()->toArray();
         $com = array();
         foreach($comidas as $y){
@@ -248,10 +250,10 @@ class IndexController extends AbstractActionController
          $form->get('distrito')->setValueOptions($com);
          $form->get('submit')->setValue('Buscar');
          
-           $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
+         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(10);
-         
+         $paginator->setItemCountPerPage(5);
+          $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
          $view->setVariables( array('distrito'=>$distrito,'plato'=>$palabra,'lista' => $listades,'hola'=>$results->response->docs,'holas'=>$paginator,'form' => $form));//,'error'=>$error
        return $view;
       }
@@ -295,7 +297,7 @@ class IndexController extends AbstractActionController
                   $texto = $filter->filter($filtered);
 
 
-                        $limite = 10;    
+                        $limite = 100;    
 
                         $resultados = false;
                         $palabraBuscar = isset($texto) ? $texto : false ;
@@ -364,7 +366,9 @@ class IndexController extends AbstractActionController
         }
     
         //Registro de valores en cookie
-    
+      //  $titulo =$this->headTitle('Crear campaña - anuncio| Perured.pe');
+       // var_dump($titulo);exit
+      //  $this->view->idNavigation = 'crear_campania';
         setcookie('distrito', $com);
         setcookie('q', $texto);
         $form->get('distrito')->setValue($comidas[41]['va_distrito']);
@@ -372,20 +376,11 @@ class IndexController extends AbstractActionController
         $form->get('q')->setValue($texto);
         $form->get('submit')->setValue('Buscar');
 
-        
-        
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(10);
+         $paginator->setItemCountPerPage(5); 
          
-         
-        $view->setVariables( array('lista' => $listades,'hola'=>$results->response->docs,'holas'=>$paginator,'form' => $form,'nombre'=>$texto));
-     
-    
-        // $distritos=$this->josAction();
-        // $lista=$this->getConfigTable()->cantComentarios(2,3);
-                // $this->layout()->clase = 'Search';
-         //$view->setVariables(array('distritos' => $distritos ));
+         $view->setVariables( array('lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form,'nombre'=>$texto));
 
         return $view;
     }
