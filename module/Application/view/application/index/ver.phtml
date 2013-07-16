@@ -157,9 +157,10 @@ echo $this->form()->closeTag(); ?>
                    <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" >
                                   <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="border:0;">
                     </a>
+
                     </div>
                     <div class="detalle-restaurante">
-                      <div class="detalle-nombre"><p class="nombre_r"><a href="/platos/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></a></p>
+                      <div class="detalle-nombre"><p class="nombre_r"><a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></a></p>
                         <div class="punt">
                           <div class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>" style="margin: 0px;width: 118px !important;display:inline-block;"></div>
                         </div> 
@@ -244,6 +245,4 @@ echo $this->form()->closeTag(); ?>
 ?> 
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>  
 <script src="<?php echo $this->basePath()?>/js/vendor/gmaps.js"></script> 
-  
 
-  

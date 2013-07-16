@@ -14,6 +14,7 @@ class LoginForm extends Form
             'name' => 'va_nombre',
             'attributes' => array(
                 'type'  => 'text',
+                'class' => 'span4'
             ),
             'options' => array(
                 'label' => 'Usuario',
@@ -23,16 +24,18 @@ class LoginForm extends Form
             'name' => 'va_contrasenia',
             'attributes' => array(
                 'type'  => 'password',
+                'class' => 'span4'
             ),
             'options' => array(
-                'label' => 'Password',
+                'label' => 'Password',                
             ),
         ));
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'Login',
+                'class' => 'btn btn-info btn-block'
+                'value' => 'INGRESAR',
                 'id' => 'submitbutton',
             ),
         ));

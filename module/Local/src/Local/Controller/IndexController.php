@@ -87,7 +87,10 @@ class IndexController extends AbstractActionController
 
     
     public function agregarlocalAction() {
-
+       $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
         $form = new LocalForm();
         $id = $this->params()->fromQuery('id');
 
@@ -133,7 +136,10 @@ class IndexController extends AbstractActionController
  
     
     public function editarlocalAction() {
-
+       $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
         $id = (int) $this->params()->fromQuery('id', 0);
         $idrest=(int) $this->params()->fromRoute('in_id', 0);
       

@@ -54,6 +54,10 @@ class IndexController extends AbstractActionController
      }
   public function agregarusuarioAction()
     {
+        $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
         $form = new UsuarioForm();
         $comidas =  $this->roles()->toArray();
         $com = array();
@@ -89,7 +93,13 @@ class IndexController extends AbstractActionController
     
     public function editarusuarioAction()
      
-    { $comidas =  $this->roles()->toArray();
+    { 
+        
+                                $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
+        $comidas =  $this->roles()->toArray();
         $com = array();
         foreach($comidas as $y){
             $com[$y['in_id']] = $y['va_nombre_rol'];
