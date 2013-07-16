@@ -120,6 +120,19 @@ class PlatosForm extends Form
             ),
         ));
           
+        $this->add(array(
+            'name' => 'va_otros',
+            'type' => 'Text',
+            'attributes' => array(               
+                'class' => 'span10',
+                'id'   => 'va_otros',
+                'placeholder'=>'Ingrese nombre'
+            ),
+            'options' => array(
+                'label' => 'Otros',
+            ),
+        ));
+          
           //el problema NO DESCOMENTAR
 
 //        $this->add(array(
@@ -194,14 +207,14 @@ class PlatosForm extends Form
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $tiplatos=$results->toArray();
             
-        $auxtipo = array();
-        
+        $auxtipo = array('0'=>'otros');
+ 
         foreach($tiplatos as $tipo){
             $auxtipo[$tipo['in_id']] = $tipo['va_nombre'];      
         }
-            $auxtipo['0']='otros';
-//        $result= array_merge($auxtipo[0],$auxtipo);
-            return $auxtipo;
+//            $auxtipo['0']='otros';
+//            $auxres=  array_merge(array(0=>'Otros'),$auxtipo);
+            return $auxtipo;//$auxres;//
             
      }
      
