@@ -369,7 +369,7 @@ class IndexController extends AbstractActionController
       //  $titulo =$this->headTitle('Crear campaña - anuncio| Perured.pe');
        // var_dump($titulo);exit
       //  $this->view->idNavigation = 'crear_campania';
-        setcookie('distrito', $com);
+        setcookie('distrito', $comidas[41]['va_distrito']);
         setcookie('q', $texto);
         $form->get('distrito')->setValue($comidas[41]['va_distrito']);
         $form->get('distrito')->setValueOptions($com);
@@ -655,12 +655,12 @@ class IndexController extends AbstractActionController
         $form=new Solicita("form");
         $request=$this->getRequest();
         if($request->isPost()){
-        $nombre = $this->params()->fromPost('nombre_complet', 0);
-        $email = $this->params()->fromPost('email',0);
-        $plato = $this->params()->fromPost('nombre_plato',0);
-        $descripcion = $this->params()->fromPost('descripcion',0);
-        $nombre_restaurant = $this->params()->fromPost('nombre_restaurant',0);
-        $telefono = $this->params()->fromPost('telefono',0);
+        $nombre =htmlspecialchars ($this->params()->fromPost('nombre_complet', 0));
+        $email = htmlspecialchars ($this->params()->fromPost('email',0));
+        $plato = htmlspecialchars ($this->params()->fromPost('nombre_plato',0));
+        $descripcion = htmlspecialchars ($this->params()->fromPost('descripcion',0));
+        $nombre_restaurant = htmlspecialchars ($this->params()->fromPost('nombre_restaurant',0));
+        $telefono = htmlspecialchars ($this->params()->fromPost('telefono',0));
         //var_dump($nombre);Exit;
         $bodyHtml='<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
                                                <head>
@@ -702,10 +702,10 @@ class IndexController extends AbstractActionController
         $form=new Contactenos("form");
         $request=$this->getRequest();
         if($request->isPost()){
-        $nombre = $this->params()->fromPost('nombre', 0);
-        $email = $this->params()->fromPost('email',0);
-        $asunto = $this->params()->fromPost('asunto',0);
-        $mensaje = $this->params()->fromPost('mensaje',0);
+        $nombre = htmlspecialchars ($this->params()->fromPost('nombre', 0));
+        $email = htmlspecialchars ($this->params()->fromPost('email',0));
+        $asunto = htmlspecialchars ($this->params()->fromPost('asunto',0));
+        $mensaje = htmlspecialchars ($this->params()->fromPost('mensaje',0));
         $bodyHtml='<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
                                                <head>
                                                <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>

@@ -79,8 +79,8 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
-            'layout/layout-administrador'           => __DIR__ . '/../view/layout/layout-administrador.phtml',
-            'layout/layout-portada'           => __DIR__ . '/../view/layout/layout-portada.phtml',
+//            'layout/layout-administrador'           => __DIR__ . '/../view/layout/layout-administrador.phtml',
+//            'layout/layout-portada'           => __DIR__ . '/../view/layout/layout-portada.phtml',
 //            'layout/layout-error'           => __DIR__ . '/../view/layout/layout-error.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
@@ -91,6 +91,7 @@ return array(
     ),
     'module_layouts' => array(
         'Platos' => array(
+            'default'=>'layout/layout-administrador',
             'index' => 'layout/layout-administrador',
             'verplatos' => 'layout/layout-portada'
         ),

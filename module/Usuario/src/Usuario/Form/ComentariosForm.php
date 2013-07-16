@@ -37,7 +37,6 @@ class ComentariosForm extends Form
         $this->add(array(
             'name' => 'va_nombre',
             'type' => 'Text',
-          
             'options' => array(
                 'label' => 'Nombre:',          
             ),

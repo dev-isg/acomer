@@ -49,7 +49,7 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
-            'layout/layout-administrador'           =>  __DIR__ .'/../view/layout/layout-administrador.phtml',
+//            'layout/layout-administrador'           =>  __DIR__ .'/../view/layout/layout-administrador.phtml',
 //            'layout/layout-error'           => __DIR__ . '/../view/layout/layout-error.phtml',
 //            'layout/layout'           =>  __DIR__ .'/../view/layout/layout.phtml',
 //            'local/index/index' => __DIR__ . '/../view/local/index/index.phtml',
@@ -66,6 +66,7 @@ return array(
     
     'module_layouts' => array(
         'Local' => array(
+            'default'=>'layout/layout-administrador',
             'index' => 'layout/layout-administrador'
         ),   
     )
