@@ -17,27 +17,29 @@
                         </head>                       
 
   <body>
-		<div class="contanier">
-			<div class="head-error">
-				 <a class="home-error" href="<?php echo $this->basePath(); ?>/" title="Listado del Sabor">
+    <div class="contenido">
+      <div class="head-error">
+         <a class="home-error" href="<?php echo $this->basePath(); ?>/" title="Listado del Sabor">
               <h1>
-              <img src="<?php echo $this->host('static')?>/img/logo.png" alt="logo">
+              <img src="<?php echo $this->host('static')?>/img/logo.png" alt="logo" style="margin-top: 20px;width: 400px">
             </h1>
           </a>
-			</div>
-			<div class="contenido-error">
-			<h1>ERROR 404 - Pagina no Encontrada</h1>
-			<p>La página solicitada no está disponible. Disculpa por las molestias.</p>
-			<p>Puede haber cambiado de dirección o con frecuencia puede ser debido a algún error en escribir la dirección de la página.</p>
-			<p>Siempre puedes:</p>
-			<ul>
-				<li><a href="javascript:window.history.back();">Volver a la página anterior</a> para probar otra vez.	</li>
-				<li>Ir a la <a href="<?php echo $this->basePath(); ?>/">Página Principal</a></li>
-			</ul>				
-			</div>
+      </div>
+      <div class="contenido-error">
+      <h1 style="padding: 1em;">ERROR 404 - Pagina no Encontrada</h1>
+      <div class="descripcion-error">
+      <p>La página solicitada no está disponible. Disculpa por las molestias.</p>
+      <p>Puede haber cambiado de dirección o con frecuencia puede ser debido a algún error en escribir la dirección de la página.</p>
+      <p>Siempre puedes:</p>
+      <ul>
+        <li><a href="javascript:window.history.back();">Volver a la página anterior</a> para probar otra vez. </li>
+        <li>Ir a la <a href="<?php echo $this->basePath(); ?>/">Página Principal</a></li>
+      </ul> 
+      </div>      
+      </div>
 
-		</div>
+    </div>
       <script src="<?php echo $this->basePath()?>/js/lib/jquery-1.8.3.min.js"></script> 
-      <script src="<?php echo $this->basePath()?>/js/aplicacion.min.js"></script> 
+    
     </body>
 </html>
