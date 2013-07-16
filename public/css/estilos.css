@@ -455,10 +455,15 @@ margin-right: 10px;
   margin-left: 14px;
   background: #f0f0f0;
   width: 671px;
-  margin: 1em 1em 0em 1em;
+  margin: 1em 1em 0.5em 1em;
   border-bottom: 2px solid #fff;
   float: left;
   padding: 10px;
+}
+#pagina {
+position: relative;
+margin-left: 1em;
+padding-bottom: 0em;
 }
 #esconder .sub ,#esconder2 .sub  {
   margin-top: 0px;
