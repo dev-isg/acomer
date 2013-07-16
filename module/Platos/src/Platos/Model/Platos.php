@@ -29,7 +29,7 @@ class Platos implements InputFilterAwareInterface
     public $cantidad;
 //    
 //    para otros
-    public $va_otros;
+
 //    para el filter
     protected $inputFilter;
 //    private $data=array();
@@ -65,7 +65,7 @@ class Platos implements InputFilterAwareInterface
         $this->restaurante_va_nombre= (!empty($data['restaurante_va_nombre'])) ? $data['restaurante_va_nombre'] : null;
         $this->cantidad= (!empty($data['cantidad'])) ? $data['cantidad'] : null;
 //        $this->hola = (!empty($data['hola'])) ? $data['hola'] : null;
-        $this->va_otros=(!empty($data['va_otros'])) ? $data['va_otros'] : null;
+
     }
 
         public function setInputFilter(InputFilterInterface $inputFilter)

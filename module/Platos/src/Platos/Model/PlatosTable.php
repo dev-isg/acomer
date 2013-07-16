@@ -125,23 +125,7 @@ class PlatosTable {
 //            var_dump($selectString);exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $plato = $results->toArray();
-            //-------------------------------inicio---------------------------------------------
-            
-//                    VAR_DUMP($platos->va_otros);
-//                    VAR_DUMP($plato[0]['Ta_tipo_comida_in_id']);EXIT;
-//        if($platos->va_otros!=null){
-//            $datotros=array(
-//                'va_nombre'=>$plato->va_otros,
-//                'ta_tipo_comida_in_id'=>$plato[0]['Ta_tipo_comida_in_id']
-//            );
-//            $adapterot = $this->tableGateway->getAdapter();
-//            $sql = new Sql($adapterot);
-//            $selectOt = $sql->insert('ta_tipo_plato')->values($datotros);
-//            $selectStringOt = $sql->getSqlStringForSqlObject($selectOt);
-//            $results = $adapterot->query($selectStringOt, $adapterot::QUERY_MODE_EXECUTE);      
-//        }
 
-          //---------------------------------fin------------------------------------------------
             $solr = \Classes\Solr::getInstance()->getSolr();
             if ($solr->ping()) {
                 $document = new \Apache_Solr_Document();

@@ -207,7 +207,7 @@ class PlatosForm extends Form
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $tiplatos=$results->toArray();
             
-        $auxtipo = array('0'=>'otros');
+//        $auxtipo = array('0'=>'otros');
  
         foreach($tiplatos as $tipo){
             $auxtipo[$tipo['in_id']] = $tipo['va_nombre'];      
