@@ -380,7 +380,8 @@ class IndexController extends AbstractActionController {
     }
 
     public function verplatosAction() {
-       // echo 'hola mundo'; exit;
+//        echo 'adfdsf';exit;
+//       var_dump($this->getPlatosTable()->getPlato($id));Exit;
         $view = new ViewModel();
        $this->layout('layout/layout-portada');
         $datos =$this->params()->fromRoute(); 
@@ -390,8 +391,11 @@ class IndexController extends AbstractActionController {
         $id = array_pop($nombre);
         
         $distrito = $datos['distrito']; 
-        $plato = $datos['q'];      
-     
+        $plato = $datos['q'];     
+        
+        if(!$this->getPlatosTable()->getPlato($id)){
+            $this->redirect()->toUrl('/');
+        }
         $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();   
 
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
