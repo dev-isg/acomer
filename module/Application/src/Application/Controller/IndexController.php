@@ -366,7 +366,8 @@ class IndexController extends AbstractActionController
         }
     
         //Registro de valores en cookie
-    
+       // $this->view->headTitle('Crear campaña - anuncio| Perured.pe');
+      //  $this->view->idNavigation = 'crear_campania';
         setcookie('distrito', $com);
         setcookie('q', $texto);
         $form->get('distrito')->setValue($comidas[41]['va_distrito']);
