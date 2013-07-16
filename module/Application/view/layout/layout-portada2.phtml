@@ -110,7 +110,7 @@
       
           
             <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action='<?php echo $this->url; ?>/buscar'>
-          <input id="q" name="q"  type="text"  value="<?php echo htmlspecialchars($palabraBuscar, ENT_QUOTES, 'utf-8'); ?>" placeholder="Ingrese el plato"  required="required"/>
+          <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php echo htmlspecialchars($palabraBuscar, ENT_QUOTES, 'utf-8'); ?>" placeholder="Ingrese el plato"  required="required"/>
               <input type="submit"  class="btn btn-search-home" value="Buscar"/>
               <em>Ejm: lomo saltado</em>
             </form>  
