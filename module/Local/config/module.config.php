@@ -66,6 +66,7 @@ return array(
     
     'module_layouts' => array(
         'Local' => array(
+            'default'=>'layout/layout-administrador',
             'index' => 'layout/layout-administrador'
         ),   
     )

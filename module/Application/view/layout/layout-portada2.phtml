@@ -17,6 +17,46 @@
         <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css')
                         ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
 
+        <!--<script type="text/javascript">
+          function initialize() {
+            var centerLng = new google.maps.LatLng(-12.111858,-77.016091);
+            var styles = [
+              {
+                stylers: [
+                  { hue: "#00ffe6" },
+                  { saturation: -20 }
+                ]
+              },{
+                featureType: "road",
+                elementType: "geometry",
+                stylers: [
+                  { lightness: 100 },
+                  { visibility: "simplified" }
+                ]
+              },{
+                featureType: "road",
+                elementType: "labels",
+                stylers: [
+                  { visibility: "off" }
+                ]
+              }
+            ];
+            var myOptions = {
+              zoom: 14,
+              center: centerLng,
+              scrollwheel: false,
+              navigationControl: false,
+              mapTypeControl: false,
+              scaleControl: false,
+              draggable: false,
+              streetViewControl: false,
+              styles: styles,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map_canvas"),
+                myOptions);
+          }
+        </script>-->
     </head>
 
   <body class="lista-<?php echo $this->clase; ?>">

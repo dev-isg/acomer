@@ -75,6 +75,7 @@ return array(
             'index' => 'layout/layout-administrador',
             'comentarios' => 'layout/layout-administrador',
             'login' => 'layout/layout-administrador',
+            
         ) 
     )
 );

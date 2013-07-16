@@ -91,6 +91,7 @@ return array(
     ),
     'module_layouts' => array(
         'Platos' => array(
+            'default'=>'layout/layout-administrador',
             'index' => 'layout/layout-administrador',
             'verplatos' => 'layout/layout-portada'
         ),
