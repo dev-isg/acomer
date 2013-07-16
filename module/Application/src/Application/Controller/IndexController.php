@@ -366,7 +366,7 @@ class IndexController extends AbstractActionController
         }
     
         //Registro de valores en cookie
-        $titulo =$this->headTitle('Crear campaña - anuncio| Perured.pe');
+      //  $titulo =$this->headTitle('Crear campaña - anuncio| Perured.pe');
        // var_dump($titulo);exit
       //  $this->view->idNavigation = 'crear_campania';
         setcookie('distrito', $com);
