@@ -81,6 +81,11 @@ class IndexController extends AbstractActionController
      
     public function agregarrestauranteAction()
     {  
+                                $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
+        
         $form = new RestauranteForm();
         $medio =  $this->medio()->toArray();
         $medi = array();
@@ -177,6 +182,10 @@ class IndexController extends AbstractActionController
      }
  public function editarrestauranteAction()   
     {   
+                             $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
 //     var_dump('hasta aka');
         $id = (int) $this->params()->fromRoute('in_id', 0);
         $va_nombre = $this->params()->fromRoute('va_nombre',0);

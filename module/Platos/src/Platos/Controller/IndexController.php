@@ -71,6 +71,12 @@ class IndexController extends AbstractActionController {
     }
 
     public function agregarplatosAction() {
+        
+                                $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
+        
         $local = (int) $this->params()->fromQuery('id');
 
 //        $restaurante=(int) $this->params()->fromQuery('res', 35);
@@ -230,6 +236,12 @@ class IndexController extends AbstractActionController {
      }
     public function editarplatosAction()   
     {   
+        
+                                $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
+        
 //     var_dump('hasta aka');
         $id = (int) $this->params()->fromRoute('in_id', 0);
         $platicos =  $this->platicos($id)->toArray();
