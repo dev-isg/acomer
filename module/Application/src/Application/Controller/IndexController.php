@@ -252,9 +252,9 @@ class IndexController extends AbstractActionController
          
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(5);
+         $paginator->setItemCountPerPage(10);
           $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
-         $view->setVariables( array('distrito'=>$distrito,'plato'=>$palabra,'lista' => $listades,'hola'=>$results->response->docs,'holas'=>$paginator,'form' => $form));//,'error'=>$error
+         $view->setVariables( array('distrito'=>$distrito,'plato'=>$palabra,'lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form));//,'error'=>$error
        return $view;
       }
     
@@ -376,9 +376,9 @@ class IndexController extends AbstractActionController
         $form->get('q')->setValue($texto);
         $form->get('submit')->setValue('Buscar');
 
-         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
+        $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(5); 
+         $paginator->setItemCountPerPage(10);
          
          $view->setVariables( array('lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form,'nombre'=>$texto));
 
