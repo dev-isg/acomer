@@ -547,7 +547,7 @@ margin-right: 10px;
   font-family: arial;
 }
 .mosaic-backdrop {
-  display:none;
+  /*display:none;*/
   top:0;
   height:100%;
   width:100%;

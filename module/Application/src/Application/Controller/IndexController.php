@@ -378,7 +378,7 @@ class IndexController extends AbstractActionController
         
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(10);
+         $paginator->setItemCountPerPage(5);
          
          
         $view->setVariables( array('lista' => $listades,'hola'=>$results->response->docs,'holas'=>$paginator,'form' => $form,'nombre'=>$texto));

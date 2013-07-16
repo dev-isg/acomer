@@ -52,7 +52,7 @@ echo $this->form()->closeTag(); ?>
                   <div class="mosaic-overlay"><span><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></span>
                     <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas">
                   </div>
-                 <a href="/platos/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"  class="mosaic-backdrop">
+                 <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"  class="mosaic-backdrop">
                     <div class="details">
                        <h4><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></h4>
                       <p class="title-details">Descripción</p>
@@ -102,8 +102,8 @@ echo $this->form()->closeTag(); ?>
                    <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                    <div class="lateral" >
                     <img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas-det">
-                    <a href="/platos/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"  >
-                         <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="border:0;">
+                   <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" >
+                                  <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="border:0;">
                     </a>
                     </div>
                     <div class="detalle-restaurante">
@@ -155,8 +155,8 @@ echo $this->form()->closeTag(); ?>
                 <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
                 <img src="<?php echo $this->host('images') . '/' .  htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas">
                 </div>
-                <a href="/platos/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" class="mosaic-backdrop">
-                <div class="details">
+               <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" >
+                            <div class="details">
                   <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
                   <p class="title-details" style="font-weight: bold;">Ingredientes</p>
                   <p class="desc-plato" style="font-size:0.9em;"> <?php 
