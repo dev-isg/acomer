@@ -17,7 +17,7 @@ use Application\Form\Formularios;
 use Application\Form\Solicita;
 use Application\Form\Contactenos;
 // use Application\Model\Entity\Procesa;
-// use Application\Model\Usuario;
+
 use Application\Model\Entity\Album;
 use Zend\Json\Json;
 use Zend\Mail\Message;
@@ -27,7 +27,7 @@ use Zend\Mail\Transport\Sendmail as SendmailTransport;
 // use Platos\Model\Platos;
 // use Platos\Model\PlatosTable;
 // use Classes\Solr;
-
+use \Zend\View\Helper\HeadTitle;
 class IndexController extends AbstractActionController
 {
     protected $configTable;
@@ -366,7 +366,8 @@ class IndexController extends AbstractActionController
         }
     
         //Registro de valores en cookie
-       // $this->view->headTitle('Crear campaña - anuncio| Perured.pe');
+        $titulo =$this->headTitle('Crear campaña - anuncio| Perured.pe');
+       // var_dump($titulo);exit
       //  $this->view->idNavigation = 'crear_campania';
         setcookie('distrito', $com);
         setcookie('q', $texto);
