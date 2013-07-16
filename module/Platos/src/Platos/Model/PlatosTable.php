@@ -58,22 +58,21 @@ class PlatosTable {
     }
 
     
-    public function guardarPlato(Platos $plato, $imagen, $idlocal = null) {
+    public function guardarPlato(Platos $platos, $imagen, $idlocal = null) {
 //        var_dump($plato->en_estado);Exit;
         $data = array(
 //            'in_id' => $plato->in_id,
             'va_imagen' => $imagen, //$plato->va_imagen,
-            'tx_descripcion' => $plato->tx_descripcion,
-            'va_nombre' => $plato->va_nombre,
-            'va_precio' => $plato->va_precio,
-            'en_destaque' => $plato->en_destaque,
-            'en_estado' => (!empty($plato->en_estado)) ? $plato->en_estado : 2, //$plato->en_estado,
-            'Ta_tipo_plato_in_id' => $plato->Ta_tipo_plato_in_id,
-            'Ta_puntaje_in_id' => (!empty($plato->Ta_puntaje_in_id)) ? $plato->Ta_puntaje_in_id : 0,
+            'tx_descripcion' => $platos->tx_descripcion,
+            'va_nombre' => $platos->va_nombre,
+            'va_precio' => $platos->va_precio,
+            'en_destaque' => $platos->en_destaque,
+            'en_estado' => (!empty($platos->en_estado)) ? $platos->en_estado : 2, //$plato->en_estado,
+            'Ta_tipo_plato_in_id' => $platos->Ta_tipo_plato_in_id,
+            'Ta_puntaje_in_id' => (!empty($platos->Ta_puntaje_in_id)) ? $platos->Ta_puntaje_in_id : 0,
             //'Ta_usuario_in_id' => (!empty($plato->Ta_usuario_in_id)) ? $plato->Ta_usuario_in_id : 1//$plato->Ta_usuario_in_id,
            'Ta_usuario_in_id' => 133,//$plato->Ta_usuario_in_id,
         );
-        VAR_DUMP($plato->va_otros);EXIT;
 
 //        foreach($data as $key=>$value){
 //            if(empty($value)){
@@ -84,7 +83,7 @@ class PlatosTable {
 //        $data['Ta_puntaje_in_id']=0;
 //         $data['cantidad']=0;
 //            print_r($data);exit;
-        $id = (int) $plato->in_id;
+        $id = (int) $platos->in_id;
         
            $adapterc = $this->tableGateway->getAdapter();
            $sql = new Sql($adapterc);
@@ -100,6 +99,7 @@ class PlatosTable {
 
 //            var_dump($this->tableGateway->select(array())->count('*'));Exit;
             if($cant[0]['cantidad']<5){
+             
             $this->tableGateway->insert($data);
 //            var_dump($this->tableGateway->getSql()->select()->from('ta_plato_has_ta_local')->where(array('ta_local_in_id'=>$idlocal))->count());Exit;
             $idplato = $this->tableGateway->getLastInsertValue();
@@ -108,7 +108,7 @@ class PlatosTable {
                     ->values(array('Ta_plato_in_id' => $idplato, 'Ta_local_in_id' => $idlocal));
             $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
             $statement->execute();
-            
+               
             
             $adapter = $this->tableGateway->getAdapter();
             $sql = new Sql($adapter);
@@ -118,14 +118,30 @@ class PlatosTable {
                     ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
                     ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
                     ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud', 'de_longitud', 'va_direccion'), 'left')
-                    ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado'), 'left')
+                    ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado','Ta_tipo_comida_in_id'), 'left')
                     ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito'), 'left')
                     ->where(array('ta_plato.in_id' => $idplato));
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
 //            var_dump($selectString);exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $plato = $results->toArray();
-          //  var_dump($plato);exit;
+            //-------------------------------inicio---------------------------------------------
+            
+//                    VAR_DUMP($platos->va_otros);
+//                    VAR_DUMP($plato[0]['Ta_tipo_comida_in_id']);EXIT;
+//        if($platos->va_otros!=null){
+//            $datotros=array(
+//                'va_nombre'=>$plato->va_otros,
+//                'ta_tipo_comida_in_id'=>$plato[0]['Ta_tipo_comida_in_id']
+//            );
+//            $adapterot = $this->tableGateway->getAdapter();
+//            $sql = new Sql($adapterot);
+//            $selectOt = $sql->insert('ta_tipo_plato')->values($datotros);
+//            $selectStringOt = $sql->getSqlStringForSqlObject($selectOt);
+//            $results = $adapterot->query($selectStringOt, $adapterot::QUERY_MODE_EXECUTE);      
+//        }
+
+          //---------------------------------fin------------------------------------------------
             $solr = \Classes\Solr::getInstance()->getSolr();
             if ($solr->ping()) {
                 $document = new \Apache_Solr_Document();
