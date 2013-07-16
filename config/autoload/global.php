@@ -56,36 +56,36 @@ return array(
             'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory'
         )
     ),
-//    'module_layouts' => array(
-//         'Application' => 'layout/layout-portada',
+    'module_layouts' => array(
+         'Application' => 'layout/layout-portada',
          
-//        'Application' => array(
-//            'index' => 'layout/layout-portada',
-//            'terminos' => 'layout/layout-portada',
-//            'nosotros' => 'layout/layout-portada',
-//            'solicita' => 'layout/layout-portada',
-//            'ver' => 'layout/layout-portada',
-//            'detalleubicacion' => 'layout/layout-portada'
-//        ),
-//        'Local' => array(
-//            'index' => 'layout/layout-administrador'
-//        )
-//        ,
-//        'Platos' => array(
-//            'index' => 'layout/layout-administrador',
-//            'verplatos' => 'layout/layout-portada'
-//        ),
-//        'Usuario' => array(
-//            'index' => 'layout/layout-administrador',
-//            'comentarios' => 'layout/layout-administrador'
-//        )
-//        ,
-//        'Restaurante' => array(
-//            'index' => 'layout/layout-administrador'
-//                )
+        'Application' => array(
+            'index' => 'layout/layout-portada',
+            'terminos' => 'layout/layout-portada',
+            'nosotros' => 'layout/layout-portada',
+            'solicita' => 'layout/layout-portada',
+            'ver' => 'layout/layout-portada',
+            'detalleubicacion' => 'layout/layout-portada'
+        ),
+       'Local' => array(
+            'index' => 'layout/layout-administrador'
+        )
+        ,
+        'Platos' => array(
+            'index' => 'layout/layout-administrador',
+            'verplatos' => 'layout/layout-portada'
+        ),
+       'Usuario' => array(
+            'index' => 'layout/layout-administrador',
+            'comentarios' => 'layout/layout-administrador'
+        )
+        ,
+        'Restaurante' => array(
+           'index' => 'layout/layout-administrador'
+               )
 
         
-//    )
+   )
     
 )
 ;

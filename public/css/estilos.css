@@ -547,7 +547,7 @@ margin-right: 10px;
   font-family: arial;
 }
 .mosaic-backdrop {
-  display:none;
+  /*display:none;*/
   top:0;
   height:100%;
   width:100%;
@@ -669,9 +669,7 @@ margin-right: 10px;
   text-shadow:1px 1px 1px #666;
   padding:0 4px;
 }
-#pagina {
-margin-left: 20px;
-}
+
 .overlay_arrow{
   left:50%;
   margin-left:-16px;
@@ -2013,7 +2011,7 @@ form#application .control-group .btn-solicito{
     width: 1024px;
   }
   .final{
-    margin-top: 25%;
+    margin-top: 10%;
   }
   a.title-home-listado h1 img{
     width: 307px;
@@ -2304,10 +2302,10 @@ form#application .control-group .btn-solicito{
   .footer nav ul{
     margin: 0;
   }
-  .footer footer{
+  .footer .footer-ie8{
     width: 100%;
   }
-  .footer footer p{
+  .footer .footer-ie8 p{
     text-align: center;
   }
   .contenido-bus{
@@ -2316,6 +2314,9 @@ form#application .control-group .btn-solicito{
     height: auto;
     width: 95%;
     min-height: 100%;
+  }
+  .footer .footer-ie8 p{
+    margin-right: 0;
   }
   .contenido-bus ul li{
     width: 32.1%;
@@ -2439,11 +2440,12 @@ form#application .control-group .btn-solicito{
     margin: 0;
     text-align: center;
   }
-  .footer footer{
+  .footer .footer-ie8{
     width: 100%;
   }
-  .footer footer p{
+  .footer .footer-ie8 p{
     text-align: center;
+    margin-right: 0;
   }
   .logan{
     font-size: 1em;
