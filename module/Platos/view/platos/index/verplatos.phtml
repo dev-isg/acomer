@@ -133,7 +133,7 @@
                       $form = $this->form;
                       //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
                       $form->setAttributes(array(
-                          'action' => $this->url . '/plato?id=' . $this->lista[0]['in_id'], //'/usuario/comentarios/agregarcomentarios',
+                          'action' => $this->url . '/plato/'.$this->urlnombre, //.'?id=' . $this->lista[0]['in_id'],
                           'method' => 'post',
                           'class' => 'form-horizontal'
                       ));
@@ -192,7 +192,8 @@
                       }
                       ?>
                   </ul>
-                  <?php echo (count($this->comentarios)>0)?$this->paginationControl($this->comentarios, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/plato/'.$this->urlnombre.'?')):""; ?>
+                  <?php echo (count($this->comentarios)>10)?$this->paginationControl($this->comentarios, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/plato/'.$this->urlnombre.'?')):""; ?>
+
               </div>
               <!--Fin de comentarios-->
             </div>

@@ -406,7 +406,7 @@ class IndexController extends AbstractActionController {
         $request = $this->getRequest();
 
         if ($request->isPost()) {
-     
+    
             if (!isset($_COOKIE['id' . $id])) {
                 $datos = $this->getRequest()->getPost()->toArray();
                 $datos['Ta_plato_in_id'] = $id;
@@ -417,7 +417,10 @@ class IndexController extends AbstractActionController {
                     setcookie('id' . $id, 1);
 //                    $form->clearAttributes();
                     $form->setData(array('va_nombre' => '', 'va_email' => '', 'tx_descripcion' => '')); 
-                    $this->redirect()->toUrl('/plato?id='.$id);
+                    //$this->redirect()->toUrl('/plato?id='.$id);
+                    $datos =$this->params()->fromRoute(); 
+                    
+                    $this->redirect()->toUrl('/plato/'.$datos['nombre']);
                 }
             }
         } 
