@@ -383,9 +383,10 @@ class IndexController extends AbstractActionController {
        // echo 'hola mundo'; exit;
         $view = new ViewModel();
 //        $this->layout('layout/layout-portada');
-        $datos =$this->request->getQuery(); 
+        $datos =$this->request->getQuery();
+//        var_dump($datos);Exit;
         $nombre = explode('-', $datos['nombre']);
-        var_dump($nombre);exit;
+//        var_dump($nombre);exit;
         $id = array_pop($nombre);
         $distrito = $datos['distrito']; 
         $plato = $datos['q'];      

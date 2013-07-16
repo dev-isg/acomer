@@ -193,7 +193,7 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
-            'layout/layout-portada'           => __DIR__ . '/../view/layout/layout-portada.phtml',
+            'layout/layout-portada'           => __DIR__ . '/../view/layout/layout-portada-ad.phtml',
             'layout/layout-error'           => __DIR__ . '/../view/layout/layout-error.phtml',
 //             'layout/layout-portada'  => __DIR__ . '/../view/error/404.phtml',
             // 'layout/layout-dos'  => __DIR__ . '/../view/layout/layout-dos.phtml',
