@@ -312,7 +312,8 @@ class IndexController extends AbstractActionController
        // var_dump($titulo);exit
       //  $this->view->idNavigation = 'crear_campania';
        // setcookie('q', $texto);
-        setcookie('distrito', $com);
+        //setcookie('q', $texto);
+       // setcookie('distrito', $com);
         $form->get('distrito')->setValue($comidas[41]['va_distrito']);
         $form->get('distrito')->setValueOptions($com);
         $form->get('q')->setValue($texto);
@@ -464,7 +465,7 @@ class IndexController extends AbstractActionController
         $adapter = $this->dbAdapter;
         $sql = new Sql($adapter);
        $select = $sql->select();
-        $select->from('ta_distrito')
+        $select->from('ta_distrito')    
        ->order('va_distrito asc DESC'); 
            $selectString = $sql->getSqlStringForSqlObject($select);
             //var_dump($selectString);exit;

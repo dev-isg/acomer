@@ -81,14 +81,14 @@ function initSucursales() {
         var w = $(this).data("lat");
         var u = $(this).data("lng");
         var t = $(".list-suc .ul-suc li a").index(this);
-        var x = $(this).find("h6").text();
+        var x = $(this).find(".phone span").text();
         var s = $(v.target);
         $(".list-suc .ul-suc li a.activo").removeClass("activo");
         if (s.is("span.close-banch")) {
             h();
         } else {
             $(this).addClass("activo");
-            $("h4.ubi-map span").html(" : " + x);
+            $("h4.ubi-map span").html(" : " + "<span class='co_l'>"+x+"</span>");
             a(g[t], null);
         }
         return false;

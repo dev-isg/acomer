@@ -1823,7 +1823,12 @@ form#application .control-group .btn-solicito{
   right: -10px;
   bottom: 6px;
 }
-
+.icon-comment{
+  margin-left: 5px;
+}
+.co_l{
+  color: #7b7b7b;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */

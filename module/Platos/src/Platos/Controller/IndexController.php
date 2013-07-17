@@ -436,17 +436,17 @@ class IndexController extends AbstractActionController {
          $com = array();
          foreach ($comidas as $y) {
              $com[$y['va_distrito']] = $y['va_distrito'];
-         }
+         }        
         $formu->get('distrito')->setValue($_COOKIE['distrito']);
         $formu->get('distrito')->setValueOptions($com);
-        $formu->get('q')->setValue($nombre);
+        $formu->get('q')->setValue($_COOKIE['q']);     
+          //   $formu->get('q')->setValue($listarecomendacion[0]['va_nombre']);
         $formu->get('submit')->setValue('Buscar');
         $this->layout()->clase = 'Detalle';
          $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(10);
-              
+         $paginator->setItemCountPerPage(10);    
         $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id));
@@ -459,8 +459,8 @@ class IndexController extends AbstractActionController {
         $adapter = $this->dbAdapter;
         $sql = new Sql($adapter);
         $select = $sql->select();
-        $select->from('ta_distrito');
-       
+        $select->from('ta_distrito')     
+       ->order('va_distrito asc DESC'); 
         $selectString = $sql->getSqlStringForSqlObject($select);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         //var_dump($results);exit;

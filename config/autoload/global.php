@@ -44,7 +44,9 @@ return array(
             
                'host' => array (
                                'static' => '',
-                               'images' => 'http://192.168.1.38:8080/imagenes'
+                               'images' => 'http://192.168.1.38:8080/imagenes',
+                               'ruta' => 'http://192.168.1.38:8080'
+                   
                ),
                'upload' => array(
                        'images' => APPLICATION_PATH . '/public/imagenes'
