@@ -1,4 +1,4 @@
-    <div class="span10" style="padding: 10px 0px;">
+    <div class="span12" style="padding: 10px 0px;">
    
     <div class="control-group span8 "> 
             <form name='form_busqueda'class="form-search" action='/local/index/index/<?php echo $this->in_id;?>' method ="post" style=" margin: 0px;">
@@ -13,7 +13,8 @@
         <a  class="btn" href="<?php echo $this->basePath();?>/local/index/agregarlocal?id=<?php echo $this->in_id?>">AGREGAR LOCAL</a>
     </div>
     </div>
-<div class="span10" id="flip-scroll">
+<div class="row-fluid">
+<div class="span12" id="flip-scroll">
 <table class="table table-bordered table-hover">
     <thead class="cf">  
         <tr>
@@ -53,6 +54,7 @@
     
 </table>
      <?php echo (count($this->locales)> 0)?$this->paginationControl($this->locales, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/local/index/index/'.$this->in_id.'?')):""; ?>
+</div>
 </div>
 <div class="span4">
   
