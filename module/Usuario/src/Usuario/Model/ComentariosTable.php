@@ -37,8 +37,8 @@ class ComentariosTable
             $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($select);
             $adapter=$this->tableGateway->getAdapter();
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-
-      return $results;
+    $res=$results->buffer();
+      return $res;
     }
     /*
      * agregar y registrar el comentario posiblemente se mueva

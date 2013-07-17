@@ -32,8 +32,9 @@
 <?php endforeach; ?>
       
 </table>
+    <?php echo (count($this->clientes)> 0)?$this->paginationControl($this->clientes, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/usuario/clientes/clientes?')):""; ?>
 </div>
 </div>
 <div class="span10" style="padding: 10px 0;">
-    <a href='/usuario/clientes/exportarexcel' class="btn" >Exportar Datos </a></div>   
-</div>
+    <a href='/usuario/clientes/exportarexcel' class="btn" >Exportar Datos </a>
+</div>   

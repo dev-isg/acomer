@@ -32,7 +32,13 @@ echo $this->form()->closeTag(); ?>
                 <input type="hidden" value="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>">
                 <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                 <div class="mosaic-block cover">
-                  <div class="mosaic-overlay"><span><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></span>
+                   <div class="mosaic-overlay"><span><?php 
+                    if(strlen($doc->name)>27){
+                         $strnom=trim(substr($doc->name, 0, 24));
+                          $strnom.='...';
+                         }else {$strnom=$doc->name;} 
+                         echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?>
+                      </span>
                     <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas">
                   </div>
                  <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"  class="mosaic-backdrop">
@@ -49,7 +55,14 @@ echo $this->form()->closeTag(); ?>
                   </a>
                 </div>
                 <div class="foo">
-                  <p class="nom_res"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p>
+                  <p class="nom_res">   
+                      <?php 
+                         if(strlen($doc->restaurante)>29){
+                         $strres=trim(substr($doc->restaurantee, 0, 26));
+                          $strres.='...';
+                         }else {$strres=$doc->restaurante;}
+                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?>  
+                  </p>
 
                   <div class="pt">       
                     <p class="com"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?> <i class="icon-comment"></i></p>
@@ -190,7 +203,12 @@ echo $this->form()->closeTag(); ?>
                </a>
               </div>
               <div class="foo">
-                <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8'); ?></p>
+                <p class="nom_res"><?php 
+                         if(strlen($list->restaurant_nombre)>29){
+                         $strres=trim(substr($list->restaurant_nombre, 0, 26));
+                          $strres.='...';
+                         }else {$strres=$list->restaurant_nombre;}
+                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></p>
                 <div class="pt">
                   <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
                   <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>

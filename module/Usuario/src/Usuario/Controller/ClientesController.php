@@ -28,9 +28,12 @@ class ClientesController extends AbstractActionController {
         } else {
             $clientes = $this->getTableClientes()->getCliente();
         }
-
+        
+         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($clientes));
+         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+         $paginator->setItemCountPerPage(10);
         return new ViewModel(array(
-                    'clientes' => $clientes,
+                    'clientes' => $paginator,
                 ));
     }
     public function agregarclientesAction(){

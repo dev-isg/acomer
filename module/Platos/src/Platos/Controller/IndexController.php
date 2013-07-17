@@ -440,7 +440,7 @@ class IndexController extends AbstractActionController {
         $formu->get('distrito')->setValue($_COOKIE['distrito']);
         $formu->get('distrito')->setValueOptions($com);
         $formu->get('q')->setValue($_COOKIE['q']);     
-          //   $formu->get('q')->setValue($listarecomendacion[0]['va_nombre']);
+   //  $formu->get('q')->setValue($listarecomendacion[0]['va_nombre']);
         $formu->get('submit')->setValue('Buscar');
         $this->layout()->clase = 'Detalle';
          $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);

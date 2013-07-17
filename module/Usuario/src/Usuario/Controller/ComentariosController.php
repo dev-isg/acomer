@@ -34,8 +34,13 @@ class ComentariosController extends AbstractActionController
         else {
             $comentarios = $this->getComentariosTable()->fetchAll();
         }
+        
+         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($comentarios));
+         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+         $paginator->setItemCountPerPage(10);
+         
         return array(
-          'comentarios' => $comentarios,
+          'comentarios' => $paginator,
             'puntaje' =>$this-> puntaje()
         );
     }

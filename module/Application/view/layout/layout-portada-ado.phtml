@@ -6,12 +6,16 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<!--        <title>Lista del Sabor</title>-->
+        <meta name="viewport" content="width=device-width">
+        <!--<title>Lista del Sabor</title>-->
         <?php echo $this->headTitle() ?>
         <meta name="description" content="ListaDelSabor.com es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales">
-        <meta name="viewport" content="width=device-width">
+        <meta name="keywords" content="" />
+        <meta property="og:title" content=""/>
+        <meta property="og:image" content=""/>
+        <meta property="og:site_name" content=""/>
+        <meta property="og:description" content="">
         <link href="<?php echo $this->host('ruta')?>/img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-
         <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/modernizr.js"></script> 
         <script src="<?php echo $this->host('ruta')?>/js/lib/jquery-1.8.3.min.js"></script>  
         <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css')
@@ -23,7 +27,7 @@
         <div class="contenido-busqueda">
           <div class="content-sidebar-ho">
           <a class="title-home-listado" href="<?php echo $this->basePath(); ?>/" title="Listado del Sabor">
-              <h1>
+            <h1>
               <img src="<?php echo $this->host('ruta')?>/img/logo.png" alt="logo">
             </h1>
           </a>
@@ -31,41 +35,34 @@
           <span class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span> 
           <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
           <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png" alt=""></div>
-
-          
-                        <?php     
-                        header('Content-Type: text/html; charset=utf-8');
-                        $limite = 9;    
-                        $resultados = false;
-                        
-                         $filter   = new \Zend\I18n\Filter\Alnum(true);
+              <?php     
+                header('Content-Type: text/html; charset=utf-8');
+                $limite = 9;    
+                $resultados = false;
+                
+                  $filter   = new \Zend\I18n\Filter\Alnum(true);
                   $texto = $filter->filter($_REQUEST['q']);
-                        $palabraBuscar = isset($texto) ? $texto : false;
-                          $fd = array (  
-                            'fq'=>'en_estado:activo AND restaurant_estado:activo');
-                         
-                        if ($palabraBuscar)
-                        { 
-                          $solar = \Classes\Solr::getInstance()->getSolr();
-                       //  $solar = new Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
-                          if (get_magic_quotes_gpc() == 1)
-                          {
-                            $palabraBuscar = stripslashes($palabraBuscar);
-                          }
-                          try
-                          {
-                            $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
-                         
-
-                          }
-                          catch (Exception $e)
-                          {
-                             
-                           die("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");
-                          }
-                        } ?>          
-      
-          
+                  $palabraBuscar = isset($texto) ? $texto : false;
+                  $fd = array (  
+                    'fq'=>'en_estado:activo AND restaurant_estado:activo');
+                 
+                if ($palabraBuscar)
+                { 
+                  $solar = \Classes\Solr::getInstance()->getSolr();
+               //  $solar = new Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+                  if (get_magic_quotes_gpc() == 1)
+                  {
+                    $palabraBuscar = stripslashes($palabraBuscar);
+                  }
+                  try
+                  {
+                    $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
+                  }
+                  catch (Exception $e)
+                  { 
+                   die("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");
+                  }
+                } ?>
             <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action='<?php echo $this->url; ?>/buscar'>
           <input id="q" name="q"  type="text"  value="<?php echo htmlspecialchars($palabraBuscar, ENT_QUOTES, 'utf-8'); ?>" placeholder="Ingrese el plato"  required="required"/>
               <input type="submit"  class="btn btn-search-home" value="Buscar"/>

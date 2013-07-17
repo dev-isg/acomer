@@ -90,7 +90,7 @@ class RestauranteForm extends Form
              'attributes' => array(               
                 'class' => 'span10',
                 'id'   => 'va_ruc',
-                 'placeholder'=>'Repita su Ruc'
+                 'placeholder'=>'Ingrese su RUC'
             ),
             'options' => array(
                 'label' => 'Ruc',

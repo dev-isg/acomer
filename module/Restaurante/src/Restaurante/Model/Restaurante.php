@@ -29,7 +29,7 @@ class Restaurante implements InputFilterAwareInterface
         $this->va_nombre = (!empty($data['va_nombre'])) ? $data['va_nombre'] : null;
         $this->va_razon_social = (!empty($data['va_razon_social'])) ? $data['va_razon_social'] : null;
         $this->va_web    = (!empty($data['va_web'])) ? $data['va_web'] : null;
-        $this->va_imagen = (!empty($data['va_imagen'])) ? $data['va_imagen'] : null;
+        $this->va_imagen = (!empty($data['va_imagen'])) ? $data['va_imagen'] : 'default-img.jpg';
         $this->va_ruc    = (!empty($data['va_ruc'])) ? $data['va_ruc'] : null;
          $this->en_estado    = (!empty($data['en_estado'])) ? $data['en_estado'] : null;
         $this->Ta_tipo_comida_in_id = (!empty($data['Ta_tipo_comida_in_id'])) ? $data['Ta_tipo_comida_in_id'] : null;

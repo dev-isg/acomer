@@ -104,7 +104,7 @@ class IndexController extends AbstractActionController
         foreach ($servi as $y) {
             $array[$y['in_id']] = $y['va_nombre'];
         }
-
+//        $form->get('servicio')->setOptions(array('required'=>false));
         $form->get('servicio')->setValueOptions($array);
 
         if ($request->isPost()) {

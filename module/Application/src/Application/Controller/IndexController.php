@@ -110,7 +110,8 @@ class IndexController extends AbstractActionController
            $datos =$this->request->getQuery(); 
            $texto = $datos['q'];    
            $filter   = new \Zend\I18n\Filter\Alnum(true);
-           $palabra = $filter->filter($texto);       
+           $palabra = $filter->filter($texto);  
+           setcookie('q', $palabra);
            $distrito = $datos['distrito'];  
               if($texto == '')    
               {$this->redirect()->toUrl('/');}
@@ -246,8 +247,6 @@ class IndexController extends AbstractActionController
         {  
          
         $view = new ViewModel();
-        
-      // $this->headTitle('hola');
        $this->layout('layout/layout-portada');
        $this->layout()->clase = 'buscar';
         $filtered = $this->params()->fromQuery('q');
@@ -270,7 +269,6 @@ class IndexController extends AbstractActionController
                           }
                           try
                           {  $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
-//var_dump($resultados->response->docs);exit;
                           
                           }
                           catch (Exception $e)
@@ -312,8 +310,7 @@ class IndexController extends AbstractActionController
        // var_dump($titulo);exit
       //  $this->view->idNavigation = 'crear_campania';
        // setcookie('q', $texto);
-        //setcookie('q', $texto);
-       // setcookie('distrito', $com);
+       /// setcookie('q', $texto);
         $form->get('distrito')->setValue($comidas[41]['va_distrito']);
         $form->get('distrito')->setValueOptions($com);
         $form->get('q')->setValue($texto);
@@ -336,10 +333,9 @@ class IndexController extends AbstractActionController
         $distrito=  $this->params()->fromQuery('distrito');
         $view  = new viewModel();
         $view->setTerminal(true);
-        $texto = $this->params()->fromQuery('plato');
+        $texto = $this->params()->fromQuery('q');
          setcookie('distrito',$distrito);
-      //  $_COOKIE['distrito'];
-        setcookie('plato',$texto);
+         setcookie('q',$texto);
         $filter   = new \Zend\I18n\Filter\Alnum(true);
         $plato = $filter->filter($texto);
      

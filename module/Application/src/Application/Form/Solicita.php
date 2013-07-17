@@ -70,6 +70,7 @@ class Solicita extends Form
            $this->add(array(
             'name' => 'telefono',
             'type' => 'Text',
+//            'required' => true,
             'options' => array(
 
 //                'label' => 'Telefono',   

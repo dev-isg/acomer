@@ -30,10 +30,11 @@ class Formularios extends Form
         ));
         $this->add(array(
             'name' => 'q',
+ 
             'type' => 'Text',
          
             'attributes' => array(               
-                
+               'required' => true, 
                 'id'   => 'q',
                 
             ),

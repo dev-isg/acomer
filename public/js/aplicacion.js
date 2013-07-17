@@ -97,6 +97,7 @@ function initSucursales() {
 }
 $(document).ready(function() {
     $('input, textarea').placeholder();
+    if ($.browser.mozilla) { $(".verlistado").css("padding-top","10px");};
     $(".agregar-coment-1").click(function(a) {
         a.preventDefault();
         if ($(".agregar-comentario-desc").is(":hidden")) {
@@ -147,7 +148,7 @@ $(document).ready(function() {
     $("#buscarmap").on("click", function() {
         var c = $("#bubi #q").val();
         var a = $("#bubi #fq").val();
-        var b = "http://192.168.1.38:8080/jsonmapasa?distrito=" + a + "&plato=" + c;
+        var b = "http://192.168.1.38:8080/jsonmapasa?distrito=" + a + "&q=" + c;
         $("#map").remove();
         $("#subir-home").remove();
         $(".mensaje").remove();
@@ -169,7 +170,7 @@ $(document).ready(function() {
                         var sms = por.substring(0, 50);
                         var anom = replaceAll(f.name, " ", "-");
                         var adis = replaceAll(f.distrito, " ", "-");
-                        map.addMarker({lat: f.latitud,lng: f.longitud,icon: {size: new google.maps.Size(32, 37),url: "/img/icomap.png"},title: f.restaurante,infoWindow: {content: "<img src='/imagenes/" + f.va_imagen + "' class='img-mapa'>" + "<p class='restaurante-map'>" + "<a href=/plato/" + adis + "-" + anom + "-" + f.id + ">" + f.restaurante + "</a></p>" + "<p class='plato-map'>" + f.name + "</p>" + "<p class='txt-map'>" + sms + "...</p>" + "<a class='a-map' href=/plato/" + adis + "-" + anom + "-" + f.id + "> ver mas </a>"}});
+                        map.addMarker({lat: f.latitud,lng: f.longitud,icon: {size: new google.maps.Size(32, 37),url: "/img/icomap.png"},title: f.restaurante,infoWindow: {content: "<img src='/imagenes/" + f.va_imagen + "' class='img-mapa'>" + "<p class='restaurante-map'>" + "<a href=/plato/" + anom + "-" + f.id + ">" + f.restaurante + "</a></p>" + "<p class='plato-map'>" + f.name + "</p>" + "<p class='txt-map'>" + sms + "...</p>" + "<a class='a-map' href=/plato/" + anom + "-" + f.id + "> ver mas </a>"}});
                     });
                 } else {
                     $("#mapa-buscador").hide();

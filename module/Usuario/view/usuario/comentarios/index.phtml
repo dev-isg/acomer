@@ -78,9 +78,10 @@
         </tr>
 
   <?php endforeach; ?>
- <!--     <div style="clear: both;">
-<?php (count($this->paginator)> 0)?$this->paginationControl($this->paginator, 'Sliding', 'usuario/index/paginador.phtml'):""; ?>-->
+
+
 </table>
+    <?php echo (count($this->comentarios)> 0)?$this->paginationControl($this->comentarios, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/usuario/comentarios/index?')):""; ?>
 <div class="span10" style="padding: 10px 0; margin:0px;">  
      <?php $estado=$_POST["puntaje"];
            $valor=$_POST["estado"];  
