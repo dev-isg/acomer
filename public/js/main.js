@@ -38,9 +38,6 @@ $('#local').validate({
            
       },
       messages:{
-            va_telefono: {
-                required:"Por favor ingresar el numero telefonico"
-             },
             va_razon_social:{
                 required:"Por favor ingresar un horario"
                        },
