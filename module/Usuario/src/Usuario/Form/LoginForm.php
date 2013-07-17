@@ -34,7 +34,7 @@ class LoginForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'class' => 'btn btn-info btn-block'
+                'class' => 'btn btn-info btn-block',
                 'value' => 'INGRESAR',
                 'id' => 'submitbutton',
             ),

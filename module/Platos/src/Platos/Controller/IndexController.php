@@ -423,6 +423,8 @@ class IndexController extends AbstractActionController {
                 $datos = $this->getRequest()->getPost()->toArray();
                 $datos['Ta_plato_in_id'] = $id;
                 $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
+                $datos['va_nombre'] = htmlspecialchars($datos['va_nombre']);
+                $datos['va_email'] = htmlspecialchars($datos['va_email']);
                 $form->setData($datos);
                 if ($form->isValid()) {
                     $this->getComentariosTable()->agregarComentario($form->getData());
