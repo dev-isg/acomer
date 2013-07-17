@@ -392,19 +392,12 @@ class IndexController extends AbstractActionController {
     }
 
     public function verplatosAction() {
-//        echo 'adfdsf';exit;
-//       var_dump($this->getPlatosTable()->getPlato($id));Exit;
+
         $view = new ViewModel();
        $this->layout('layout/layout-portada');
-        $datos =$this->params()->fromRoute(); 
-     
-        $nombre = explode('-', $datos['nombre']);
-    
+        $datos =$this->params()->fromRoute();  
+        $nombre = explode('-', $datos['nombre']);   
         $id = array_pop($nombre);
-        
-        $distrito = $datos['distrito']; 
-        $plato = $datos['q'];     
-        
         if(!$this->getPlatosTable()->getPlato($id)){
             $this->redirect()->toUrl('/');
         }
@@ -439,23 +432,20 @@ class IndexController extends AbstractActionController {
             }
         } 
          $formu = new Formularios();
-        
          $comidas = $this->joinAction()->toArray();
          $com = array();
          foreach ($comidas as $y) {
              $com[$y['va_distrito']] = $y['va_distrito'];
          }
-        $formu->get('distrito')->setValue($_COOKIE['distrito']/*$distrito*/);
+        $formu->get('distrito')->setValue($_COOKIE['distrito']);
         $formu->get('distrito')->setValueOptions($com);
-        $formu->get('q')->setValue($_COOKIE['q']/*$plato*/);
+        $formu->get('q')->setValue($nombre);
         $formu->get('submit')->setValue('Buscar');
         $this->layout()->clase = 'Detalle';
-       // echo 'e';
          $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
-
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(2);
+         $paginator->setItemCountPerPage(10);
               
         $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
