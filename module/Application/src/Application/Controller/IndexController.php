@@ -311,7 +311,7 @@ class IndexController extends AbstractActionController
       //  $titulo =$this->headTitle('Crear campaña - anuncio| Perured.pe');
        // var_dump($titulo);exit
       //  $this->view->idNavigation = 'crear_campania';
-        setcookie('q', $texto);
+       // setcookie('q', $texto);
         setcookie('distrito', $com);
         $form->get('distrito')->setValue($comidas[41]['va_distrito']);
         $form->get('distrito')->setValueOptions($com);

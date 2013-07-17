@@ -46,8 +46,8 @@
                          
                         if ($palabraBuscar)
                         { 
-                          require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-                         $solar = new Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
+                          $solar = \Classes\Solr::getInstance()->getSolr();
+                       //  $solar = new Apache_Solr_Service('192.168.1.38', 8983, '/solr/');
                           if (get_magic_quotes_gpc() == 1)
                           {
                             $palabraBuscar = stripslashes($palabraBuscar);
