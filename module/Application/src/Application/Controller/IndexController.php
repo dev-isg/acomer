@@ -111,7 +111,7 @@ class IndexController extends AbstractActionController
            $texto = $datos['q'];    
            $filter   = new \Zend\I18n\Filter\Alnum(true);
            $palabra = $filter->filter($texto);  
-           setcookie('q', $palabra);
+         //  setcookie('q', $palabra);
            $distrito = $datos['distrito'];  
               if($texto == '')    
               {$this->redirect()->toUrl('/');}
@@ -306,25 +306,15 @@ class IndexController extends AbstractActionController
         }
     
         //Registro de valores en cookie
-      //  $titulo =$this->headTitle('Crear campaña - anuncio| Perured.pe');
-       // var_dump($titulo);exit
       //  $this->view->idNavigation = 'crear_campania';
        // setcookie('q', $texto);
-       /// setcookie('q', $texto);
         $form->get('distrito')->setValue($comidas[41]['va_distrito']);
         $form->get('distrito')->setValueOptions($com);
         $form->get('q')->setValue($texto);
         $form->get('submit')->setValue('Buscar');
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
-         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(10);
-          
-         $a = array();
-         foreach ($paginator as $d=>$value)
-         {
-             $a[] = $value;
-         }
-      //   var_dump($a);exit;
+        $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+        $paginator->setItemCountPerPage(10);
          $view->setVariables( array('lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form,'nombre'=>$texto));
         return $view;
     }
@@ -334,8 +324,8 @@ class IndexController extends AbstractActionController
         $view  = new viewModel();
         $view->setTerminal(true);
         $texto = $this->params()->fromQuery('q');
-         setcookie('distrito',$distrito);
-         setcookie('q',$texto);
+        setcookie('distrito',$distrito);
+        // setcookie('q',$texto);
         $filter   = new \Zend\I18n\Filter\Alnum(true);
         $plato = $filter->filter($texto);
      
