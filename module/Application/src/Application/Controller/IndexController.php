@@ -162,6 +162,7 @@ class IndexController extends AbstractActionController
                           try
                           {
                             $results = $solr->search($query, 0, $limit, $fq  );
+                            
                           }
                           catch (Exception $e)
                           {
@@ -230,7 +231,7 @@ class IndexController extends AbstractActionController
         }
         setcookie('distrito', $datos['distrito']);
         $form->get('distrito')->setValue($distrito);
-        $form->get('q')->setValue($_COOKIE['q']/*$plato*/);
+        $form->get('q')->setValue($palabra);
          $form->get('distrito')->setValueOptions($com);
          $form->get('submit')->setValue('Buscar');     
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
@@ -268,7 +269,10 @@ class IndexController extends AbstractActionController
                             $palabraBuscar = stripslashes($palabraBuscar);
                           }
                           try
-                          {  $resultados = $solar->search($palabraBuscar, 0, $limite,$fd ); }
+                          {  $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
+//var_dump($resultados->response->docs);exit;
+                          
+                          }
                           catch (Exception $e)
                           {        
                          $this->redirect()->toUrl('/');
@@ -315,7 +319,14 @@ class IndexController extends AbstractActionController
         $form->get('submit')->setValue('Buscar');
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(10);       
+         $paginator->setItemCountPerPage(10);
+          
+         $a = array();
+         foreach ($paginator as $d=>$value)
+         {
+             $a[] = $value;
+         }
+      //   var_dump($a);exit;
          $view->setVariables( array('lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form,'nombre'=>$texto));
         return $view;
     }
