@@ -417,8 +417,10 @@ class IndexController extends AbstractActionController {
          $com = array();
          foreach ($comidas as $y) {
              $com[$y['va_distrito']] = $y['va_distrito'];
-         }        
-        $formu->get('distrito')->setValue($_COOKIE['distrito']);
+         }  
+   
+         if($_COOKIE['q']){ $formu->get('distrito')->setValue($_COOKIE['distrito']);}
+         else{ $formu->get('distrito')->setValue($comidas[41]['va_distrito']);}
         $formu->get('distrito')->setValueOptions($com);
         $formu->get('q')->setValue($_COOKIE['q']);     
    //  $formu->get('q')->setValue($listarecomendacion[0]['va_nombre']);
