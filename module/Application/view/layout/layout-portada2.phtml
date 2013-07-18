@@ -29,8 +29,12 @@
       <script>
       var urlJson = "<?php echo $this->host('ruta')?>";
      </script>
-     
-   
+     <?php
+    require './vendor/Classes/Mobile_Detect.php';
+       $detect = new Mobile_Detect;
+     if($detect->isiPad())
+     {echo 'es un ipad';exit;} 
+     ?>
         <div class="contenido">
         <div class="content-sidebar">
         <div class="contenido-busqueda">

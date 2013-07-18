@@ -361,7 +361,7 @@ class PlatosTable {
     }
 
     public function getComentariosxPlatos($idplato) {
-        $adapter = $this->tableGateway->getAdapter();
+         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
         $selecttot = $sql->select()
                 ->from('ta_plato')
@@ -371,9 +371,9 @@ class PlatosTable {
 //            ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array(), 'left')
 //            ->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array(), 'left')
 //            ->join(array('tu'=>'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array(), 'left')
-                ->join(array('tc' => 'ta_comentario'), 'tc.ta_plato_in_id=ta_plato.in_id', array('tx_descripcion', 'ta_puntaje_in_id'), 'left')
+                ->join(array('tc' => 'ta_comentario'), 'tc.ta_plato_in_id=ta_plato.in_id', array('tx_descripcion', 'ta_puntaje_in_id','en_estado'), 'left')
                 ->join(array('tcli' => 'ta_cliente'), 'tcli.in_id=tc.ta_cliente_in_id', array('va_nombre_cliente', 'va_email'), 'left')
-                ->where(array('ta_plato.in_id' => $idplato))
+                ->where(array('ta_plato.in_id' => $idplato,'tc.en_estado'=>'aprobado'))
                 ->order('tc.in_id DESC');
 //            $selecttot->group('ta_plato.in_id');
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
