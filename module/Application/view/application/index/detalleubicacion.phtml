@@ -56,12 +56,12 @@ echo $this->form()->closeTag(); ?>
                   </a>
                 </div>
                 <div class="foo">
-                  <p class="nom_res"><?php 
-                         if(strlen($doc->restaurante)>29){
-                         $strres=trim(substr($doc->restaurantee, 0, 26));
-                          $strres.='...';
+                  <p class="nom_res"> <?php 
+                         if(strlen($doc->restaurante)>20){
+                         $strres=trim(substr($doc->restaurantee, 0, 19));
+                          $strres.='..';
                          }else {$strres=$doc->restaurante;}
-                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?> </p>
+                echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?>  </p>
 
                   <div class="pt">       
                     <p class="com"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?> <i class="icon-comment"></i></p>

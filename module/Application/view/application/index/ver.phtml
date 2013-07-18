@@ -61,11 +61,11 @@ echo $this->form()->closeTag(); ?>
                 <div class="foo">
                   <p class="nom_res">   
                       <?php 
-                         if(strlen($doc->restaurante)>29){
-                         $strres=trim(substr($doc->restaurantee, 0, 26));
-                          $strres.='...';
+                         if(strlen($doc->restaurante)>20){
+                         $strres=trim(substr($doc->restaurantee, 0, 19));
+                          $strres.='..';
                          }else {$strres=$doc->restaurante;}
-                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?>  
+                echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?>  
                   </p>
 
                   <div class="pt">       
