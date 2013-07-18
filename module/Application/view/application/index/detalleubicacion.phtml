@@ -111,7 +111,7 @@ echo $this->form()->closeTag(); ?>
               <?php endforeach; ?>       
                  
               
-     <div id="pagina"><?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar?q='.$this->nombre.'&submit=Buscar'.'&')):""; ?> </div>         
+     <div id="pagina"><?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar-por-distrito?distrito='.$this->distrito.'&q='.$this->nombre.'&submit=Buscar'.'&')):""; ?> </div>         
        </div>         
       <div id="mapa-buscador">
 
