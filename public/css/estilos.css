@@ -895,6 +895,12 @@ label.error {
   height: 22px;
   overflow: hidden;
 }
+.nom_res a{
+  color: rgba(0, 0, 0, 0.77);
+}
+.nom_res a:hover{
+  color: rgba(0, 0, 0, 0.99);
+}
 .tercera-categ{
   padding-bottom: 50px;
 }
@@ -2399,7 +2405,7 @@ form#application .control-group .btn-solicito{
   }
 }
 @media (max-width: 767px) {
-  
+
   .agregar-comentario-desc{
     width: 100%;
   }
