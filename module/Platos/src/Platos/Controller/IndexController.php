@@ -418,18 +418,16 @@ class IndexController extends AbstractActionController {
          foreach ($comidas as $y) {
              $com[$y['va_distrito']] = $y['va_distrito'];
          }  
-   
-         if($_COOKIE['q']){ $formu->get('distrito')->setValue($_COOKIE['distrito']);}
+         if($_COOKIE['distrito']){ $formu->get('distrito')->setValue($_COOKIE['distrito']);}
          else{ $formu->get('distrito')->setValue($comidas[41]['va_distrito']);}
         $formu->get('distrito')->setValueOptions($com);
         $formu->get('q')->setValue($_COOKIE['q']);     
-   //  $formu->get('q')->setValue($listarecomendacion[0]['va_nombre']);
         $formu->get('submit')->setValue('Buscar');
         $this->layout()->clase = 'Detalle';
-         $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
-         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
-         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(10);    
+        $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
+        $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
+        $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+        $paginator->setItemCountPerPage(10);    
         $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id));
