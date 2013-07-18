@@ -100,17 +100,7 @@ return array(
                     )
                 )
             ),
-             'equipo' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/equipo',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action' => 'equipo'
-                    )
-                )
-            ),
-
+      
               'nosotros' => array(
                 'type' => 'Literal',
                 'options' => array(

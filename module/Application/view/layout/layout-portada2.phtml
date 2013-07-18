@@ -30,11 +30,26 @@
       var urlJson = "<?php echo $this->host('ruta')?>";
      </script>
      <?php
-    require './vendor/Classes/Mobile_Detect.php';
-       $detect = new Mobile_Detect;
-     if($detect->isiPad())
-     {echo 'es un ipad';exit;} 
-     ?>
+        require './vendor/Classes/Mobile_Detect.php';
+        $detect = new Mobile_Detect;
+        if($detect->isiPad()){ ?>
+            <style type="text/css">
+              .plato_r span{
+                font-size: 12px!important;
+              }
+              .font-desc-c{
+                font-size: 12px;
+                line-height: 16px;
+              }
+              .nom_res{
+                font-size: 12px;
+              }
+              .details h4{
+                line-height: 14px;
+              }
+            </style>
+          <?php }?>
+
         <div class="contenido">
         <div class="content-sidebar">
         <div class="contenido-busqueda">

@@ -40,7 +40,7 @@
                   
                   echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></h4>
                   <p class="title-details" style="font-weight: bold;">Descripción</p>
-                  <p class="desc-plato" style="font-size:0.9em;"> <?php 
+                  <p class="desc-plato font-desc-c"> <?php 
                         if(strlen($list->tx_descripcion)>100){
                          $str=trim(substr($list->tx_descripcion, 0, 97));
                           $str.='...';
@@ -101,7 +101,7 @@
                                 echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?>
                         </h4>
                        <p class="title-details">Descripción</p>
-                       <p style="font-size:0.9em;"> <?php 
+                       <p class="font-desc-c"> <?php 
                                     if(strlen($list->tx_descripcion)>100){
                                     $str=trim(substr($list->tx_descripcion, 0, 97));
                                      $str.='...';
@@ -157,15 +157,12 @@
                      <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png" alt="" class="mas">
                      </div>
                  <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">
-
-       
-               
                        <div class="details">
                            <h4>
                             <?php 
                            echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?> </h4>
                            <p class="title-details">Descripción</p>
-                           <p style="font-size:0.9em;"><?php 
+                           <p class="font-desc-c"><?php 
                                    if(strlen($list->tx_descripcion)>100){
                                     $str=trim(substr($list->tx_descripcion, 0, 97));
                                      $str.='...';
@@ -234,7 +231,7 @@
                            echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?> 
            </h4>
                  <p class="title-details">Descripción</p>
-                 <p style="font-size:0.9em;"><?php 
+                 <p class="font-desc-c"><?php 
                    if(strlen($list->tx_descripcion)>100){
                     $str=trim(substr($list->tx_descripcion, 0, 97));
                      $str.='...';

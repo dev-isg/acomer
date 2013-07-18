@@ -101,6 +101,9 @@ body{
 form#search{
   /*position: relative;*/
 }
+.font-desc-c{
+  font-size: 0.9em;
+}
 #map_canvas{
   position: fixed!important;
 }
