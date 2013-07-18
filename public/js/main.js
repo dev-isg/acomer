@@ -24,9 +24,6 @@ $('.control-group').removeClass('success');
 };
 $('#local').validate({
       rules: {
-        va_telefono: {
-            required: true                       
-        },
         va_horario: { required: true },
         va_rango_precio :{ required:true},
         ta_dia_in_id:{ required : true },

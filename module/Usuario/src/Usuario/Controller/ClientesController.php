@@ -48,7 +48,7 @@ class ClientesController extends AbstractActionController {
             $datos=$this->getRequest()->getPost()->toArray();
 //            var_dump($datos);exit;
             $form->setData($datos);
-            var_dump($form->isValid($datos));
+//            var_dump($form->isValid($datos));
             if ($form->isValid($datos)) {
 //                $album->exchangeArray($form->getData());
                

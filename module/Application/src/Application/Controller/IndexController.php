@@ -230,7 +230,7 @@ class IndexController extends AbstractActionController
              $com[$y['va_distrito']] = $y['va_distrito'];
         }
         setcookie('distrito', $datos['distrito']);
-         setcookie('q',$texto);
+        setcookie('q',$texto);
         $form->get('distrito')->setValue($distrito);
         $form->get('q')->setValue($texto);
          $form->get('distrito')->setValueOptions($com);
@@ -318,6 +318,7 @@ class IndexController extends AbstractActionController
         }
     
          setcookie('q',$texto);
+           setcookie('distrito',$comidas[41]['va_distrito']);
         $form->get('distrito')->setValue($comidas[41]['va_distrito']);
         $form->get('distrito')->setValueOptions($com);
         $form->get('q')->setValue($texto);

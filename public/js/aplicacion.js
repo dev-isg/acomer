@@ -164,6 +164,7 @@ $(document).ready(function() {
         console.log(b);
         if (($("#bubi #q").val() != "") && ($("#bubi #fq").val() != "seleccione")) {
             $("#mapa-buscador").fadeIn();
+            $("#search #q").attr("value",c);
             var d = $.getJSON(b, function(e) {
                 console.log(e.response.numFound);
                 if (e.response.numFound >= 1) {

@@ -605,7 +605,6 @@ background: url(../../img/back-detalle.png) repeat;
   float: left;
   position: relative;
   padding-bottom: 0px;
-  height: 100%;
 }
 .lista-Detalle .contenido-plato{
   height: auto;
@@ -1803,6 +1802,7 @@ form#application .control-group .btn-solicito{
 .lista-Home .descrip-product{
   margin-top: -35px;
 }
+
 .lista-Home .subir-home{
   margin-top: 0px!important;
   padding-top: 0px;
@@ -2157,7 +2157,9 @@ form#application .control-group .btn-solicito{
   }
 }*/
 @media (min-width: 768px) and (max-width: 979px) {
-
+  .ficha-img img{
+    width: 100%;
+  }
   .footer nav{
     margin-left: 0;
   }
@@ -2397,6 +2399,7 @@ form#application .control-group .btn-solicito{
   }
 }
 @media (max-width: 767px) {
+  
   .agregar-comentario-desc{
     width: 100%;
   }
@@ -2682,6 +2685,9 @@ form#application .control-group .btn-solicito{
   }
 }
 @media (max-width: 480px) {
+  .lista-Home .content-sidebar{
+    height: auto;
+  }
   .img-li-top .puntuaciones{
     position: static;
     margin-top: 10px;
@@ -2705,6 +2711,9 @@ form#application .control-group .btn-solicito{
   .lista-Detalle .img-plato,
   .lista-buscar-distrito .img-plato,
   .lista-buscar .img-plato{
+    height: 100%;
+  }
+  .mosaic-overlay .img-plato{
     height: 100%;
   }
   nav{
