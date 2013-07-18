@@ -696,7 +696,7 @@ class IndexController extends AbstractActionController
     public function contactenosAction(){
         
         $view = new ViewModel();
-        $this->layout('layout/layout-portada');
+        $this->layout('layout/layout-portada2');
         $this->layout()->clase = 'Solicita';
         $form=new Contactenos("form");
         $request=$this->getRequest();
@@ -705,6 +705,8 @@ class IndexController extends AbstractActionController
         $email = htmlspecialchars ($this->params()->fromPost('email',0));
         $asunto = htmlspecialchars ($this->params()->fromPost('asunto',0));
         $mensaje = htmlspecialchars ($this->params()->fromPost('mensaje',0));
+        
+        var_dump($nombre);exit;
         $bodyHtml='<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
                                                <head>
                                                <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>

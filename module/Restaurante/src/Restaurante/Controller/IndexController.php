@@ -37,7 +37,7 @@ class IndexController extends AbstractActionController
         $datos = $this->params()->fromPost('texto');
         $comida = $this->params()->fromPost('comida');
         $estado = $this->params()->fromPost('estado');
-          $lista = $this->getRestauranteTable()->fetchAll();
+        $lista = $this->getRestauranteTable()->fetchAll();
        $request = $this->getRequest();
          if ($request->isPost()) {
             $lista = $this->getRestauranteTable()->buscarRestaurante($datos,$comida,$estado);
@@ -107,6 +107,14 @@ class IndexController extends AbstractActionController
            $form->setInputFilter($restaurante->getInputFilter());
            $nonFile = $request->getPost()->toArray();
            $File    = $this->params()->fromFiles('va_imagen');
+           
+           if($File['name']==null){
+               $File['name']='default-img.jpg';
+               $File['type']='jpg';
+             
+           }
+           var_dump($File);Exit;
+           
            $data    = array_merge_recursive(
                         $this->getRequest()->getPost()->toArray(),          
                        $this->getRequest()->getFiles()->toArray()

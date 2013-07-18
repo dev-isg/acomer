@@ -92,6 +92,7 @@
                 </div>
                 <h4 class="ubi-map">Ubicación <span></span></h4>
                 <div id="mapCont" class="map" data-lat="<?php echo $this->lista[0]['de_latitud']; ?>" data-lng="<?php echo $this->lista[0]['de_longitud']; ?>"></div>
+                <?php if(count($this->locales)>1){?>
                 <h4>Sucursales</h4>
                 <section class="list-suc">
                     <ul class="ul-suc">
@@ -115,7 +116,7 @@
 
                     </ul>
                 </section>
-
+                <?php }?>
             </div>
             <div class="coments-all coments-all-fin">
               <!--Comentarios-->

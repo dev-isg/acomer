@@ -60,6 +60,7 @@ class PlatosTable {
     
     public function guardarPlato(Platos $platos, $imagen, $idlocal = null) {
 //        var_dump($plato->en_estado);Exit;
+
         $data = array(
 //            'in_id' => $plato->in_id,
             'va_imagen' => $imagen, //$plato->va_imagen,
@@ -73,6 +74,8 @@ class PlatosTable {
             //'Ta_usuario_in_id' => (!empty($plato->Ta_usuario_in_id)) ? $plato->Ta_usuario_in_id : 1//$plato->Ta_usuario_in_id,
            'Ta_usuario_in_id' => 133,//$plato->Ta_usuario_in_id,
         );
+        
+
 
 //        foreach($data as $key=>$value){
 //            if(empty($value)){

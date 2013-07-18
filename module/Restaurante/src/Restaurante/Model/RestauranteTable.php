@@ -129,30 +129,43 @@ class RestauranteTable
            $sql = new Sql($adapter);
         
            if($comida=='' and $estado == ''){
+          
              $select = $sql->select()
             ->from(array('f' => 'ta_restaurante')) 
             ->join(array('b' => 'ta_tipo_comida'),'f.Ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
            ->where(array('f.va_nombre'=>$datos));
            }
-           if($datos=='' and $estado == ''){
+          else if($datos=='' and $estado == ''){
+          
              $select = $sql->select()
             ->from(array('f' => 'ta_restaurante')) 
             ->join(array('b' => 'ta_tipo_comida'),'f.Ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
            ->where(array('f.Ta_tipo_comida_in_id'=>$comida));
            }
-         if($datos=='' and $comida == ''){
-
+       else if($datos=='' and $comida == ''){
+             
              $select = $sql->select()
             ->from(array('f' => 'ta_restaurante')) 
             ->join(array('b' => 'ta_tipo_comida'),'f.Ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
            ->where(array('f.en_estado'=>$estado));
            }
-            if($datos=='' and $comida != '' and $estado != '' ){
+        else if($datos=='' and $comida != '' and $estado != '' ){
+           
              $select = $sql->select()
             ->from(array('f' => 'ta_restaurante')) 
             ->join(array('b' => 'ta_tipo_comida'),'f.Ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
             ->where(array('f.en_estado'=>$estado))
             ->where(array('f.Ta_tipo_comida_in_id'=>$comida,'f.en_estado'=>$estado));
+           }
+           else{
+            $select = $sql->select()
+            ->from(array('f' => 'ta_restaurante')) 
+            ->join(array('b' => 'ta_tipo_comida'),'f.Ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
+//            ->where(array('f.en_estado'=>$estado))
+//             ->where(array('f.Ta_tipo_comida_in_id'=>$comida,'f.en_estado'=>$estado))->where->and->like('f.va_nombre', '%'.$datos.'%');
+            ->where(array('f.Ta_tipo_comida_in_id'=>$comida,'f.en_estado'=>$estado,'f.va_nombre'=>$datos));
+//            ->where->like('f.va_nombre', '%'.$datos);
+           
            }
             $selectString = $sql->getSqlStringForSqlObject($select);
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
