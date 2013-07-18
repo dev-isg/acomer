@@ -64,7 +64,17 @@ class IndexController extends AbstractActionController
          exit();
 
     }
-    
+    public function equipoAction()
+    { 
+ 
+       require './vendor/Classes/Mobile_Detect.php';
+       $detect = new \Mobile_Detect;
+       if(!$detect->isMobile())          
+       {echo 'entro';exit;}
+     
+
+}
+
          public function joincomenatariosAction()
     { 
              

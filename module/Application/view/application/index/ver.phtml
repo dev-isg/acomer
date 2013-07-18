@@ -59,13 +59,15 @@ echo $this->form()->closeTag(); ?>
                   </a>
                 </div>
                 <div class="foo">
-                  <p class="nom_res">   
+                  <p class="nom_res">
+                    <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>">   
                       <?php 
                          if(strlen($doc->restaurante)>20){
                          $strres=trim(substr($doc->restaurantee, 0, 19));
                           $strres.='..';
                          }else {$strres=$doc->restaurante;}
-                echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?>  
+                echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?>
+                  </a>   
                   </p>
 
                   <div class="pt">       
@@ -90,7 +92,7 @@ echo $this->form()->closeTag(); ?>
             <span style="padding-left: 10px;color:white;font-weight: bold;"><?php echo  $this->nombre;  ?></span>
 
         </div>    
-        <div class="mostrar"><?php echo $this->mostrar;?></div>
+        <div class="plato_h p"><?php echo $this->mostrar;?></div>
         <?php foreach ($this->general as $doc) : ?>
             
 

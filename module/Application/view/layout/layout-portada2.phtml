@@ -28,11 +28,11 @@
   <body class="lista-<?php echo $this->clase; ?>">
       <script>
       var urlJson = "<?php echo $this->host('ruta')?>";
-    
-  </script>
-    <!--<div id="map_canvas" style="position: fixed!important; top: 0; bottom: 0; left: 0; right: 0; z-index: 0;"></div>-->
-    <div class="contenido">
-      <div class="content-sidebar">
+     </script>
+     
+   
+        <div class="contenido">
+        <div class="content-sidebar">
         <div class="contenido-busqueda">
           <div class="content-sidebar-ho">
           <a class="title-home-listado" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
@@ -45,7 +45,7 @@
           <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
           <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png" alt=""></div>
 
-            <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action='<?php echo $this->url; ?>/buscar'>
+            <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action='<?php echo $this->host('ruta')?>/buscar'>
               <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q'])
                     {echo $_GET['q'];} 
                     else 
@@ -54,10 +54,6 @@
               <input type="submit"  class="btn btn-search-home" value="Buscar"/>
               <em>Ejm: lomo saltado</em>
             </form>  
-          
-          
-          
-   
             <div class="final">
                 <img src="<?php echo $this->host('ruta')?>/img/responsive.png" alt="" style="padding: 37px 10px;">
               </div>
@@ -111,9 +107,12 @@
       </footer>
     </div>
 </div>
+
+    <!--<div id="map_canvas" style="position: fixed!important; top: 0; bottom: 0; left: 0; right: 0; z-index: 0;"></div>-->
+ 
       <script src="<?php echo $this->host('ruta')?>/js/vendor/jquery.placeholder.min.js"></script>   
       <script src="<?php echo $this->host('ruta')?>/js/vendor/mosaic.js"></script>            
-      <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js"></script>
+      <script src="<?php echo $this->host('ruta')?>/js/aplicacion.min.js"></script>
       <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/bootstrap-dropdown.js"></script>
     </body>
 </html>
