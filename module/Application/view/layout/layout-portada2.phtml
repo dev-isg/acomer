@@ -26,6 +26,10 @@
     </head>
 
   <body class="lista-<?php echo $this->clase; ?>">
+      <script>
+      var urlJson = "<?php echo $this->host('ruta')?>";
+    
+  </script>
     <!--<div id="map_canvas" style="position: fixed!important; top: 0; bottom: 0; left: 0; right: 0; z-index: 0;"></div>-->
     <div class="contenido">
       <div class="content-sidebar">
@@ -48,9 +52,9 @@
                         $resultados = false;
                         
                          $filter   = new \Zend\I18n\Filter\Alnum(true);
-                       $plato = $filter->filter($_REQUEST['q']);
-                // setcookie('q',$plato);
-                        $palabraBuscar = isset($plato) ? $plato : false;
+                       $texto = $filter->filter($_REQUEST['q']);
+                   //setcookie('q',$texto);
+                        $palabraBuscar = isset($texto) ? $texto : false;
                           $fd = array (  
                             'fq'=>'en_estado:activo AND restaurant_estado:activo');
                          

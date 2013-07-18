@@ -7,6 +7,11 @@ function replaceAll(c, b, a) {
 var puntaje = function(a, b) {
     $(a).raty({readOnly: true,score: b,starOff: "/img/t2.png",starOn: "/img/t1.png"});
 };
+function regresar(){
+  $("#mapa-buscador").hide();
+   $("#esconder").css("display", "block");
+    $("#esconder2").css("display", "block");
+}
 function initSucursales() {
     var m;
     var p = document.getElementById("mapCont");
@@ -148,7 +153,7 @@ $(document).ready(function() {
     $("#buscarmap").on("click", function() {
         var c = $("#bubi #q").val();
         var a = $("#bubi #fq").val();
-        var b = "http://192.168.1.38:8080/jsonmapasa?distrito=" + a + "&q=" + c;
+        var b = urlJson + "/jsonmapasa?distrito=" + a + "&q=" + c;
         $("#map").remove();
         $("#subir-home").remove();
         $(".mensaje").remove();
@@ -184,7 +189,7 @@ $(document).ready(function() {
                     $(".contenido-plato").append('<div class="recomendados-platos primer-home" id="subir-home" style="padding-bottom: 90px;"></div>');
                     $("#subir-home").append('<div class="sub" style="margin-top: 10px;margin-bottom: 15px;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;"><span  style="padding-left: 10px;color:white;font-weight: bold;">Platos Destacados</span></div>');
                     $("#subir-home").append('<ul id="listajson"></ul>');
-                    $.getJSON("http://192.168.1.38:8080/jsondesta", function(f) {
+                    $.getJSON(urlJson + "/jsondesta", function(f) {
                         $.each(f, function(g, h) {
                             var nplato = replaceAll(h.va_nombre, " ", "-");
                             $("#listajson").append('<li><div class="plato_r"><div class="mosaic-block cover2"><div class="mosaic-overlay"><span>' + h.va_nombre + '</span><img src="/imagenes/' + h.va_imagen + '" class="img-plato"><img src="/img/mas.png" alt="" class="mas"></div><a href="/plato/' + nplato + "-" + h.in_id + '" class="mosaic-backdrop"><div class="details"><h4>' + h.va_nombre + '</h4><p class="title-details" style="font-weight: bold;">Descripción</p><p class="desc-plato" style="font-size:0.9em;">' + h.tx_descripcion + '</p></div></a></div><div class="foo"><p class="nom_res">' + h.restaurant_nombre + '</p><div class="pt"><p class="com">' + h.NumeroComentarios + ' <i class="icon-comment"></i></p><div class="punt"><div class="puntuaciones c' + h.Ta_puntaje_in_id + '"></div></div></div></div></div></li>');
@@ -207,7 +212,7 @@ $(document).ready(function() {
                 $(".contenido-plato").append('<div class="recomendados-platos primer-home" id="subir-home" style="padding-bottom: 90px;"></div>');
                 $("#subir-home").append('<div class="sub" style="margin-top: 10px;margin-bottom: 15px;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;"><span  style="padding-left: 10px;color:white;font-weight: bold;">Platos Destacados</span></div>');
                 $("#subir-home").append('<ul id="listajson"></ul>');
-                $.getJSON("http://192.168.1.38:8080/jsondesta", function(f) {
+                $.getJSON(urlJson+"/jsondesta", function(f) {
                     $.each(f, function(g, h) {
                         var nplato = replaceAll(h.va_nombre, " ", "-");
                         $("#listajson").append('<li><div class="plato_r"><div class="mosaic-block cover2"><div class="mosaic-overlay"><span>' + h.va_nombre + '</span><img src="/imagenes/' + h.va_imagen + '" class="img-plato"><img src="/img/mas.png" alt="" class="mas"></div><a href="/plato/' + nplato + "-" + h.in_id + '" class="mosaic-backdrop"><div class="details"><h4>' + h.va_nombre + '</h4><p class="title-details" style="font-weight: bold;">Descripción</p><p class="desc-plato" style="font-size:0.9em;">' + h.tx_descripcion + '</p></div></a></div><div class="foo"><p class="nom_res">' + h.restaurant_nombre + '</p><div class="pt"><p class="com">' + h.NumeroComentarios + ' <i class="icon-comment"></i></p><div class="punt"><div class="puntuaciones c' + h.Ta_puntaje_in_id + '"></div></div></div></div></div></li>');

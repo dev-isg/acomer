@@ -2,6 +2,8 @@
 namespace Application\Form;
 
 use Zend\Form\Form;
+use Application\Controller\IndexController;
+use Zend\InputFilter\InputFilterProviderInterface;
 
 class Contactenos extends Form
 {
@@ -9,7 +11,8 @@ class Contactenos extends Form
     {
         // we want to ignore the name passed
         parent::__construct('application');
-        $this->setAttribute('method', 'post');
+        $this->setAttribute('method', 'post');        
+
         $this->add(array(
             'name' => 'in_id',
             'type' => 'Hidden',

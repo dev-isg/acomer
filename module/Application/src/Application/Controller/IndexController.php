@@ -108,20 +108,19 @@ class IndexController extends AbstractActionController
           $this->layout()->clase = 'buscar-distrito';
           if ($request->isGet()) {
            $datos =$this->request->getQuery(); 
-           $texto = $datos['q'];    
+           $plato= $datos['q'];    
            $filter   = new \Zend\I18n\Filter\Alnum(true);
-           $palabra = $filter->filter($texto);  
-         //  setcookie('q', $palabra);
+           $texto = $filter->filter($plato);  
            $distrito = $datos['distrito'];  
               if($texto == '')    
               {$this->redirect()->toUrl('/');}
-              if($palabra == '')    
+              if($texto == '')    
               {$this->redirect()->toUrl('/');}
            if($distrito != 'todos los distritos')
            {
                        $limite = 100;    
                         $resultados = false;
-                        $palabraBuscar = isset($palabra) ? $palabra : false ;
+                        $palabraBuscar = isset($texto) ? $texto : false ;
                           $fd = array (  
                             'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
                               'sort'=>'en_destaque desc ',
@@ -145,7 +144,7 @@ class IndexController extends AbstractActionController
                            }                             
                         }
                         $limit = 3;             
-                        $palabraBuscar = isset($palabra) ? $palabra : false ;
+                        $palabraBuscar = isset($texto) ? $texto : false ;
                         $query = "($palabraBuscar) AND (en_destaque:si)";
                         $fq = array (  
                                    'sort'=>'random_' . uniqid() .' asc',
@@ -175,7 +174,7 @@ class IndexController extends AbstractActionController
                  {
                     $limite = 100;    
                         $resultados = false;
-                        $palabraBuscar = isset($palabra) ? $palabra : false ;
+                        $palabraBuscar = isset($texto) ? $texto : false ;
                           $fd = array (  
                             'fq'=>'en_estado:activo AND restaurant_estado:activo');
 
@@ -197,7 +196,7 @@ class IndexController extends AbstractActionController
                           }
                         }          
                         $limit = 3;             
-                        $palabraBuscar = isset($palabra) ? $palabra : false ;
+                        $palabraBuscar = isset($texto) ? $texto : false ;
                         $query = "($palabraBuscar)";
                         $fq = array (  
                                    'sort'=>'random_' . uniqid() .' asc',
@@ -231,15 +230,17 @@ class IndexController extends AbstractActionController
              $com[$y['va_distrito']] = $y['va_distrito'];
         }
         setcookie('distrito', $datos['distrito']);
+         setcookie('q',$texto);
         $form->get('distrito')->setValue($distrito);
-        $form->get('q')->setValue($palabra);
+        $form->get('q')->setValue($texto);
          $form->get('distrito')->setValueOptions($com);
-         $form->get('submit')->setValue('Buscar');     
+         $form->get('submit')->setValue('Buscar'); 
+         $total = (int) $resultados->response->numFound;
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
          $paginator->setItemCountPerPage(10);
           $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
-         $view->setVariables( array('distrito'=>$distrito,'plato'=>$palabra,'lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form));//,'error'=>$error
+         $view->setVariables( array('total' => $total,'distrito'=>$distrito,'plato'=>$texto,'lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form));//,'error'=>$error
        return $view;
       }
 
@@ -247,7 +248,7 @@ class IndexController extends AbstractActionController
         {  
          
         $view = new ViewModel();
-       $this->layout('layout/layout-portada');
+//       $this->layout('layout/layout-portada');
        $this->layout()->clase = 'buscar';
         $filtered = $this->params()->fromQuery('q');
               $filter   = new \Zend\I18n\Filter\Alnum(true);
@@ -307,15 +308,16 @@ class IndexController extends AbstractActionController
     
         //Registro de valores en cookie
       //  $this->view->idNavigation = 'crear_campania';
-       // setcookie('q', $texto);
+         setcookie('q',$texto);
         $form->get('distrito')->setValue($comidas[41]['va_distrito']);
         $form->get('distrito')->setValueOptions($com);
         $form->get('q')->setValue($texto);
         $form->get('submit')->setValue('Buscar');
+        $total = (int) $resultados->response->numFound;
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
         $paginator->setItemCountPerPage(10);
-         $view->setVariables( array('lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form,'nombre'=>$texto));
+         $view->setVariables( array('total' => $total,'lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form,'nombre'=>$texto));
         return $view;
     }
     
@@ -325,7 +327,7 @@ class IndexController extends AbstractActionController
         $view->setTerminal(true);
         $texto = $this->params()->fromQuery('q');
         setcookie('distrito',$distrito);
-        // setcookie('q',$texto);
+        setcookie('q',$texto);
         $filter   = new \Zend\I18n\Filter\Alnum(true);
         $plato = $filter->filter($texto);
      
@@ -427,8 +429,6 @@ class IndexController extends AbstractActionController
     
                      
                          echo $resultados->getRawResponse(); 
-                         $_COOKIE['distrito'];
-                         setcookie('plato',$texto);
                     exit;
                         
                    }
@@ -597,7 +597,7 @@ class IndexController extends AbstractActionController
         $descripcion = htmlspecialchars ($this->params()->fromPost('descripcion',0));
         $nombre_restaurant = htmlspecialchars ($this->params()->fromPost('nombre_restaurant',0));
         $telefono = htmlspecialchars ($this->params()->fromPost('telefono',0));
-        //var_dump($nombre);Exit;
+     
         $bodyHtml='<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
                                                <head>
                                                <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
@@ -614,17 +614,27 @@ class IndexController extends AbstractActionController
                                                      </div>
                                                </body>
                                                </html>';
-        
+    
         $message = new Message();
         $message->addTo('informes@innovationssystems.com', $nombre)
         ->setFrom('no-reply@listadelsabor.pe)', 'listadelsabor.com')
         ->setSubject('Moderacion de comentario de listadelsabor.com')
         ->setBody($bodyHtml);
         $transport = new SendmailTransport();
+  
+//        
+//        $options   = new \Zend\Mail\Transport\SmtpOptions(array(
+//            'name' => 'localhost',
+//            'host' => '127.0.0.1',
+//            'port' => 25,
+//        ));
+//        
+//        $transport->setOptions($options);
+
         $transport->send($message);
-        $this->redirect()->toUrl('/application/index/solicita');
+        $this->redirect()->toUrl('/solicita');
         }
-        
+
         $view->setVariables(array('form' => $form));
          return $view;
         
@@ -633,15 +643,19 @@ class IndexController extends AbstractActionController
     public function contactenosAction(){
         
         $view = new ViewModel();
-        $this->layout('layout/layout-portada');
+//        $this->layout('layout/layout-portada2');
         $this->layout()->clase = 'Solicita';
         $form=new Contactenos("form");
         $request=$this->getRequest();
+//        var_dump($request->isPost());
         if($request->isPost()){
+         
+//               var_dump($request->isPost());exit;
         $nombre = htmlspecialchars ($this->params()->fromPost('nombre', 0));
         $email = htmlspecialchars ($this->params()->fromPost('email',0));
         $asunto = htmlspecialchars ($this->params()->fromPost('asunto',0));
         $mensaje = htmlspecialchars ($this->params()->fromPost('mensaje',0));
+//        var_dump($nombre);exit;
         $bodyHtml='<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
                                                <head>
                                                <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
@@ -664,7 +678,8 @@ class IndexController extends AbstractActionController
         ->setBody($bodyHtml);
         $transport = new SendmailTransport();
         $transport->send($message);
-        $this->redirect()->toUrl('/application/index/contactenos');
+        $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/contactenos');
+//        $this->redirect()->toUrl('/contactenos');///application/index
         }
         
         $view->setVariables(array('form' => $form));

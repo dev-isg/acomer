@@ -112,13 +112,13 @@ class IndexController extends AbstractActionController
                        $this->getRequest()->getFiles()->toArray()
                    ); 
     $form->setData($data);     
-    if ($form->isValid()) {               
+    if ($form->isValid()) { 
             $nonFile = $request->getPost()->toArray();
-            $File = $this->params()->fromFiles('va_imagen');
+        if($File['name']!='')
+          {
             $restaurante->exchangeArray($form->getData());
             $adapter = new \Zend\File\Transfer\Adapter\Http();
           if (!$adapter->isValid()){
-                  
                      $dataError = $adapter->getMessages();
                      $error = array();
                      foreach($dataError as $key=>$row)
@@ -126,7 +126,7 @@ class IndexController extends AbstractActionController
                          $error[] = $row;
                      }
                      $form->setMessages(array('imagen'=>$error ));
-          } else {    
+          } else {
               $anchura = 240;
               $altura = 143; 
               $imf =$File['name'];
@@ -145,7 +145,6 @@ class IndexController extends AbstractActionController
                   $filter   = new \Filter_Alnum();
                   $filtered = $filter->filter($nom);
                   $name = $filtered.'-'.$imf2;
-                  //var_dump($name);exit;
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
@@ -177,16 +176,23 @@ class IndexController extends AbstractActionController
                }
             }       
           }
-        }     
+          else {   
+              $restaurante->exchangeArray($form->getData());
+              $adapter = new \Zend\File\Transfer\Adapter\Http();
+              $name = 'default-img.jpg';
+              $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante'); }
+           }
+          } 
+             
         return array('form' => $form);
      }
  public function editarrestauranteAction()   
     {   
-                             $auth = new \Zend\Authentication\AuthenticationService();
+    $auth = new \Zend\Authentication\AuthenticationService();
         if (!$auth->hasIdentity()) {
             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
         }
-//     var_dump('hasta aka');
         $id = (int) $this->params()->fromRoute('in_id', 0);
         $va_nombre = $this->params()->fromRoute('va_nombre',0);
         //var_dump($id);exit;
@@ -197,7 +203,7 @@ class IndexController extends AbstractActionController
         }
         try {
             $restaurante = $this->getRestauranteTable()->getRestaurante($id);
-           // var_dump($restaurante);exit;
+            
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
@@ -218,6 +224,7 @@ class IndexController extends AbstractActionController
         }
         $form->get('Ta_tipo_comida_in_id')->setValueOptions($com);
         $form->get('va_modalidad')->setValueOptions($medi);
+        //$form->get('va_imagen')->setValue($comidas[0]['']);
 
         $form->bind($restaurante);
 
@@ -226,18 +233,30 @@ class IndexController extends AbstractActionController
         $comida = $this->params()->fromPost('va_modalidad');
         
         if ($request->isPost()) {
-
+           
+            $File    = $this->params()->fromFiles('va_imagen');
             $form->setInputFilter($restaurante->getInputFilter());
             $nonFile = $request->getPost()->toArray();
-            $File    = $this->params()->fromFiles('va_imagen');
+            
             $data    = array_merge_recursive(
                         $this->getRequest()->getPost()->toArray(),          
                        $this->getRequest()->getFiles()->toArray()
                    ); 
             $form->setData($data); 
-            if ($form->isValid()) {
-                $nonFile = $request->getPost()->toArray();
-               $File = $this->params()->fromFiles('va_imagen');            
+         if ($form->isValid()) { 
+            $nonFile = $request->getPost()->toArray();
+        if($File['name']!='')
+          {
+            $adapter = new \Zend\File\Transfer\Adapter\Http();
+          if (!$adapter->isValid()){
+                     $dataError = $adapter->getMessages();
+                     $error = array();
+                     foreach($dataError as $key=>$row)
+                     {
+                         $error[] = $row;
+                     }
+                     $form->setMessages(array('imagen'=>$error ));
+          } else {
               $anchura = 240;
               $altura = 143; 
               $imf =$File['name'];
@@ -256,7 +275,6 @@ class IndexController extends AbstractActionController
                   $filter   = new \Filter_Alnum();
                   $filtered = $filter->filter($nom);
                   $name = $filtered.'-'.$imf2;
-                  //var_dump($name);exit;
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
@@ -284,8 +302,18 @@ class IndexController extends AbstractActionController
                        $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
                   }
+
                }
-            }
+            }       
+          }
+          else {   
+              $restaurante=$this->getRestauranteTable()->getRestaurante($id);
+            
+              $adapter = new \Zend\File\Transfer\Adapter\Http();
+              $name = $restaurante->va_imagen;//'default-img.jpg';
+              $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante'); }
+           }
         }
  
      return array(

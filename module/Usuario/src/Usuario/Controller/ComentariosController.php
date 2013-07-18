@@ -90,8 +90,8 @@ class ComentariosController extends AbstractActionController
    public function mensajecomentarioAction()
             
     {
-        $va_email = $this->params()->fromRoute('va_nombre_cliente', 0);
-        $va_nombre_cliente = $this->params()->fromRoute('email',0);
+        $va_email = $this->params()->fromRoute('va_email', 0);      
+        $va_nombre_cliente = $this->params()->fromRoute('va_nombre_cliente',0);
         $bodyHtml='<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
                                                <head>
                                                <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
@@ -99,15 +99,15 @@ class ComentariosController extends AbstractActionController
                                                <body>
                                                     <div style="color: #7D7D7D"><br />
                                                      Hola <strong style="color:#133088; font-weight: bold;">'.utf8_decode($va_nombre_cliente).'</strong><br />
-                                                     <br />Tu cuenta comentario ha sido eliminado por ser inapropiado<br/><br/>
-                                                     <br /><br /><hr /><br />Cordialmente,<br /><span style="color:#000; font-size: 18px; margin-top:8px;">El Equipo de Tuplato.com</span><br /><br />
+                                                     <br />Tu  comentario ha sido eliminado por ser inapropiado<br/><br/>
+                                                     <br /><br /><hr /><br />Cordialmente,<br /><span style="color:#000; font-size: 18px; margin-top:8px;">El Equipo de listadelsabor.com</span><br /><br />
                                                      </div>
                                                </body>
                                                </html>';
         
         $message = new Message();
         $message->addTo($va_email, $va_nombre_cliente)
-        ->setFrom('no-reply@listadelsabor.pe)', 'listadelsabor.com')
+        ->setFrom('innovations.systems.group@gmail.com', 'listadelsabor.com')
         ->setSubject('Moderacion de comentario de listadelsabor.com')
         ->setBody($bodyHtml);
         $transport = new SendmailTransport();

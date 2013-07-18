@@ -193,7 +193,7 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
-            'layout/layout-portada'           => __DIR__ . '/../view/layout/layout-portada2.phtml',
+//            'layout/layout-portada'           => __DIR__ . '/../view/layout/layout-portada2.phtml',
             'layout/layout-error'           => __DIR__ . '/../view/layout/layout-error.phtml',
 //             'layout/layout-portada'  => __DIR__ . '/../view/error/404.phtml',
             // 'layout/layout-dos'  => __DIR__ . '/../view/layout/layout-dos.phtml',
@@ -207,12 +207,13 @@ return array(
     ),
     'module_layouts' => array(
         'Application' => array(
-            'index' => '/../view/layout/layout-portada',
-            'terminos' => 'layout/layout-portada',
-            'nosotros' => 'layout/layout-portada',
-            'solicita' => 'layout/layout-portada',
-            'ver' => 'layout/layout-portada',
-            'detalleubicacion' => 'layout/layout-portada'
+            'index' => '/../view/layout/layout-portada2',
+            'terminos' => 'layout/layout-portada2',
+            'nosotros' => 'layout/layout-portada2',
+            'solicita' => 'layout/layout-portada2',
+            'contactenos' => 'layout/layout-portada2',
+            'ver' => 'layout/layout-portada2',
+            'detalleubicacion' => 'layout/layout-portada2'
         ),
         ),
 

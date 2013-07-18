@@ -214,6 +214,7 @@ class PlatosForm extends Form
         }
 //            $auxtipo['0']='otros';
 //            $auxres=  array_merge(array(0=>'Otros'),$auxtipo);
+//        var_dump($auxtipo);Exit;
             return $auxtipo;//$auxres;//
             
      }

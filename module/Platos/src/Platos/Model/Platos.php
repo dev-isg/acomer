@@ -50,7 +50,7 @@ class Platos implements InputFilterAwareInterface
     public function exchangeArray($data)
     {
         $this->in_id = (!empty($data['in_id'])) ? $data['in_id'] : null;
-        $this->va_imagen = (!empty($data['va_imagen'])) ? $data['va_imagen'] : null;
+        $this->va_imagen = (!empty($data['va_imagen'])) ? $data['va_imagen'] : 'platos-default.jpg';
         $this->tx_descripcion = (!empty($data['tx_descripcion'])) ? $data['tx_descripcion'] : null;
         $this->va_nombre = (!empty($data['va_nombre'])) ? $data['va_nombre'] : null;
         $this->va_precio = (!empty($data['va_precio'])) ? $data['va_precio'] : null;
@@ -96,22 +96,22 @@ class Platos implements InputFilterAwareInterface
 //            )));
             
             //valida img
-//            $inputFilter->add(
-//                $factory->createInput(array(
-//                    'name'     => 'va_imagen',
-//                    'required' => false,
-//                     'validators' => array(
-//                    array(
-//                        'name'    => 'filemimetype',
-//                        'options' =>  array('mimeType' => 'image/png,image/x-png,image/jpg,image/gif,image/jpeg'),
-//                    ),
-//                    array(
-//                        'name'    => 'filesize',
-//                        'options' =>  array('max' => 204800),
-//                    ),
-//                ),
-//                ))
-//            );
+            $inputFilter->add(
+                $factory->createInput(array(
+                    'name'     => 'va_imagen',
+                    'required' => false,
+                     'validators' => array(
+                    array(
+                        'name'    => 'filemimetype',
+                        'options' =>  array('mimeType' => 'image/png,image/jpg,image/jpeg'),
+                    ),
+                    array(
+                        'name'    => 'filesize',
+                        'options' =>  array('max' => 204800),
+                    ),
+                ),
+                ))
+            );
             //valida descripcion
 //             $inputFilter->add($factory->createInput(array(
 //                'name'     => 'tx_descripcion',
