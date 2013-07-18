@@ -112,6 +112,7 @@ class IndexController extends AbstractActionController
            $filter   = new \Zend\I18n\Filter\Alnum(true);
            $texto = $filter->filter($plato);  
            $distrito = $datos['distrito'];  
+
               if($texto == '')    
               {$this->redirect()->toUrl('/');}
               if($texto == '')    
@@ -251,7 +252,7 @@ class IndexController extends AbstractActionController
             }
            
           $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
-         $view->setVariables( array('total' => $total,'distrito'=>$distrito,'plato'=>$texto,'lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form,'mostrar'=>$mostrar));//,'error'=>$error
+         $view->setVariables( array('total' => $total,'distrito'=>$distrito,'plato'=>$texto,'lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form,'mostrar'=>$mostrar,'nombre'=>$texto));//,'error'=>$error
        return $view;
       }
 
