@@ -27,7 +27,7 @@ use Zend\Mail\Transport\Sendmail as SendmailTransport;
 // use Platos\Model\Platos;
 // use Platos\Model\PlatosTable;
 // use Classes\Solr;
-use \Zend\View\Helper\HeadTitle;
+use Zend\View\Helper\HeadTitle;
 class IndexController extends AbstractActionController
 {
     protected $configTable;
@@ -108,26 +108,25 @@ class IndexController extends AbstractActionController
           $this->layout()->clase = 'buscar-distrito';
           if ($request->isGet()) {
            $datos =$this->request->getQuery(); 
-         //  var_dump($datos);exit;
-           $texto = $datos['q'];    
+           $plato= $datos['q'];    
            $filter   = new \Zend\I18n\Filter\Alnum(true);
-           $palabra = $filter->filter($texto);       
+           $texto = $filter->filter($plato);  
            $distrito = $datos['distrito'];  
               if($texto == '')    
               {$this->redirect()->toUrl('/');}
-              if($palabra == '')    
+              if($texto == '')    
               {$this->redirect()->toUrl('/');}
            if($distrito != 'todos los distritos')
            {
                        $limite = 100;    
                         $resultados = false;
-                        $palabraBuscar = isset($palabra) ? $palabra : false ;
+                        $palabraBuscar = isset($texto) ? $texto : false ;
                           $fd = array (  
                             'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
                               'sort'=>'en_destaque desc ',
                               ); 
 
-						$solar = \Classes\Solr::getInstance()->getSolr();
+			$solar = \Classes\Solr::getInstance()->getSolr();
                        if ($palabraBuscar)
                         { 
                             $solar = \Classes\Solr::getInstance()->getSolr();
@@ -137,20 +136,15 @@ class IndexController extends AbstractActionController
                           }
                           try
                           {
-                            $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
-                              
-
+                            $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );                             
                           }
                           catch (Exception $e)
-                          {
-                          
+                          {                         
                                 echo("<div>ingrese algun valor</div>"); 
-                           }
-                                
+                           }                             
                         }
-          
                         $limit = 3;             
-                        $palabraBuscar = isset($palabra) ? $palabra : false ;
+                        $palabraBuscar = isset($texto) ? $texto : false ;
                         $query = "($palabraBuscar) AND (en_destaque:si)";
                         $fq = array (  
                                    'sort'=>'random_' . uniqid() .' asc',
@@ -168,21 +162,19 @@ class IndexController extends AbstractActionController
                           try
                           {
                             $results = $solr->search($query, 0, $limit, $fq  );
+                            
                           }
                           catch (Exception $e)
                           {
                                     echo("<div>ingrese algun valor</div>");         
                           }
-                        }
-         
-                        
-                        
+                        }      
                  }       
                  else 
                  {
                     $limite = 100;    
                         $resultados = false;
-                        $palabraBuscar = isset($palabra) ? $palabra : false ;
+                        $palabraBuscar = isset($texto) ? $texto : false ;
                           $fd = array (  
                             'fq'=>'en_estado:activo AND restaurant_estado:activo');
 
@@ -196,18 +188,15 @@ class IndexController extends AbstractActionController
                           try
                           {
                             $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
-                          //var_dump($resultados);exit;
-
                           }
                           catch (Exception $e)
                           {
                              
                           $this->redirect()->toUrl('/application');
                           }
-                        }
-          
+                        }          
                         $limit = 3;             
-                        $palabraBuscar = isset($palabra) ? $palabra : false ;
+                        $palabraBuscar = isset($texto) ? $texto : false ;
                         $query = "($palabraBuscar)";
                         $fq = array (  
                                    'sort'=>'random_' . uniqid() .' asc',
@@ -231,83 +220,58 @@ class IndexController extends AbstractActionController
                           
                                    $this->redirect()->toUrl('/application');       
                           }
-                         }
-                     
-                 }       
-                        
-                        
+                         }                
+                 }                                   
          }
-        $form = new Formularios();
-       
+        $form = new Formularios(); 
         $comidas =  $this->joinAction()->toArray();
         $com = array();
         foreach($comidas as $y){
              $com[$y['va_distrito']] = $y['va_distrito'];
         }
-        $form->get('q')->setValue($palabra);
-         $form->get('distrito')->setValue($distrito);
+        setcookie('distrito', $datos['distrito']);
+         setcookie('q',$texto);
+        $form->get('distrito')->setValue($distrito);
+        $form->get('q')->setValue($texto);
          $form->get('distrito')->setValueOptions($com);
-         $form->get('submit')->setValue('Buscar');
-         
+         $form->get('submit')->setValue('Buscar'); 
+//         $total = (int) $resultados->response->numFound;
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
          $paginator->setItemCountPerPage(10);
+         
+            $total=$paginator->getTotalItemCount();
+            $first=$paginator->getPages()->firstItemNumber;
+            $last=$paginator->getPages()->lastItemNumber;
+            if($total==1){
+                $mostrar='Mostrando '.$first.' de '.$total.' resultado';
+            }else{
+                $mostrar='Mostrando '.$first.'-'.$last.' de '.$total.' resultados';
+
+            }
+           
           $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
-         $view->setVariables( array('distrito'=>$distrito,'plato'=>$palabra,'lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form));//,'error'=>$error
+         $view->setVariables( array('total' => $total,'distrito'=>$distrito,'plato'=>$texto,'lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form,'mostrar'=>$mostrar));//,'error'=>$error
        return $view;
       }
-    
-      public function onBootstrap($e)
-    {
 
-        $app = $e->getParam('application');
-        $app->getEventManager()->attach('render', array($this, 'setLayoutTitle'));
-    }    
-    public function setLayoutTitle($e)
-    {
-        $matches    = $e->getRouteMatch();
-        $action     = $matches->getParam('action');
-        $controller = $matches->getParam('controller');
-        $module     = __NAMESPACE__;
-        $siteName   = 'Zend Framework';
-
-        // Getting the view helper manager from the application service manager
-        $viewHelperManager = $e->getApplication()->getServiceManager()->get('viewHelperManager');
-
-        // Getting the headTitle helper from the view helper manager
-        $headTitleHelper   = $viewHelperManager->get('headTitle');
-
-        // Setting a separator string for segments
-        $headTitleHelper->setSeparator(' - ');
-
-        // Setting the action, controller, module and site name as title segments
-        $headTitleHelper->append($action);
-        $headTitleHelper->append($controller);
-        $headTitleHelper->append($module);
-        $headTitleHelper->append($siteName);
-    }
      public function verAction()             
         {  
+         
         $view = new ViewModel();
-       $this->layout('layout/layout-portada');
+//       $this->layout('layout/layout-portada');
        $this->layout()->clase = 'buscar';
         $filtered = $this->params()->fromQuery('q');
               $filter   = new \Zend\I18n\Filter\Alnum(true);
                   $texto = $filter->filter($filtered);
-
-
-                        $limite = 100;    
-
+                   $limite = 100;    
                         $resultados = false;
                         $palabraBuscar = isset($texto) ? $texto : false ;
                           $fd = array (  
                             'fq'=>'en_estado:activo AND restaurant_estado:activo',
                               );
                           if($palabraBuscar=='')
-                          {
-
-                          $this->redirect()->toUrl('/');
-                          }
+                          {$this->redirect()->toUrl('/');  }
                         if ($palabraBuscar)
                         { 
                          $solar = \Classes\Solr::getInstance()->getSolr();
@@ -316,18 +280,14 @@ class IndexController extends AbstractActionController
                             $palabraBuscar = stripslashes($palabraBuscar);
                           }
                           try
-                          {
-                            $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
-                          //  var_dump($resultados);exit;
-
+                          {  $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
+                          
                           }
                           catch (Exception $e)
-                          {
-                             
+                          {        
                          $this->redirect()->toUrl('/');
                           }
                         }
-          
                         $limit = 3;             
                         $palabraBuscar = isset($texto) ? $texto : false ;
                         $query = "($palabraBuscar)";
@@ -344,53 +304,49 @@ class IndexController extends AbstractActionController
                             $query = stripslashes($query);
                           }
                           try
-                          {
-                            $results = $solr->search($query, 0, $limit, $fq  );
-//var_dump($results);exit;
-                          }
+                          {  $results = $solr->search($query, 0, $limit, $fq  ); }
                           catch (Exception $e)
-                          {
-                          
-                                   $this->redirect()->toUrl('/');     
-                          }
+                          { $this->redirect()->toUrl('/');      }
                          }
-          //var_dump($results->response->docs);exit;
+        
         $form = new Formularios();
         $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
-        $comidas =  $this->joinAction()->toArray();
-        
+        $comidas =  $this->joinAction()->toArray();   
         $com = array();
         foreach($comidas as $y){
             $com[$y['va_distrito']] = $y['va_distrito'];
         }
     
-        //Registro de valores en cookie
-      //  $titulo =$this->headTitle('Crear campaña - anuncio| Perured.pe');
-       // var_dump($titulo);exit
-      //  $this->view->idNavigation = 'crear_campania';
-        setcookie('distrito', $comidas[41]['va_distrito']);
-        setcookie('q', $texto);
+         setcookie('q',$texto);
         $form->get('distrito')->setValue($comidas[41]['va_distrito']);
         $form->get('distrito')->setValueOptions($com);
         $form->get('q')->setValue($texto);
         $form->get('submit')->setValue('Buscar');
 
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
-         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(10);
-         
-         $view->setVariables( array('lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form,'nombre'=>$texto));
-
+        $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+        $paginator->setItemCountPerPage(10);
+    
+   $total=$paginator->getTotalItemCount();
+   $first=$paginator->getPages()->firstItemNumber;
+   $last=$paginator->getPages()->lastItemNumber;
+   if($total==1){
+       $mostrar='Mostrando '.$first.' de '.$total.' resultado';
+   }else{
+       $mostrar='Mostrando '.$first.'-'.$last.' de '.$total.' resultados';
+   
+   }
+         $view->setVariables( array('total' => $total,'lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form,'nombre'=>$texto,'mostrar'=>$mostrar));
         return $view;
     }
     
- 
     public function jsonmapasaAction()    { 
         $distrito=  $this->params()->fromQuery('distrito');
         $view  = new viewModel();
         $view->setTerminal(true);
-        $texto = $this->params()->fromQuery('plato');
-      //  var_dump($texto);exit;
+        $texto = $this->params()->fromQuery('q');
+        setcookie('distrito',$distrito);
+        setcookie('q',$texto);
         $filter   = new \Zend\I18n\Filter\Alnum(true);
         $plato = $filter->filter($texto);
      
@@ -514,7 +470,7 @@ class IndexController extends AbstractActionController
         $adapter = $this->dbAdapter;
         $sql = new Sql($adapter);
        $select = $sql->select();
-        $select->from('ta_distrito')
+        $select->from('ta_distrito')    
        ->order('va_distrito asc DESC'); 
            $selectString = $sql->getSqlStringForSqlObject($select);
             //var_dump($selectString);exit;
@@ -660,7 +616,7 @@ class IndexController extends AbstractActionController
         $descripcion = htmlspecialchars ($this->params()->fromPost('descripcion',0));
         $nombre_restaurant = htmlspecialchars ($this->params()->fromPost('nombre_restaurant',0));
         $telefono = htmlspecialchars ($this->params()->fromPost('telefono',0));
-        //var_dump($nombre);Exit;
+     
         $bodyHtml='<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
                                                <head>
                                                <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
@@ -677,17 +633,27 @@ class IndexController extends AbstractActionController
                                                      </div>
                                                </body>
                                                </html>';
-        
+    
         $message = new Message();
         $message->addTo('informes@innovationssystems.com', $nombre)
         ->setFrom('no-reply@listadelsabor.pe)', 'listadelsabor.com')
         ->setSubject('Moderacion de comentario de listadelsabor.com')
         ->setBody($bodyHtml);
         $transport = new SendmailTransport();
+  
+//        
+//        $options   = new \Zend\Mail\Transport\SmtpOptions(array(
+//            'name' => 'localhost',
+//            'host' => '127.0.0.1',
+//            'port' => 25,
+//        ));
+//        
+//        $transport->setOptions($options);
+
         $transport->send($message);
-        $this->redirect()->toUrl('/application/index/solicita');
+        $this->redirect()->toUrl('/solicita');
         }
-        
+
         $view->setVariables(array('form' => $form));
          return $view;
         
@@ -696,17 +662,19 @@ class IndexController extends AbstractActionController
     public function contactenosAction(){
         
         $view = new ViewModel();
-        $this->layout('layout/layout-portada2');
+
         $this->layout()->clase = 'Solicita';
         $form=new Contactenos("form");
         $request=$this->getRequest();
+//        var_dump($request->isPost());
         if($request->isPost()){
+         
+//               var_dump($request->isPost());exit;
         $nombre = htmlspecialchars ($this->params()->fromPost('nombre', 0));
         $email = htmlspecialchars ($this->params()->fromPost('email',0));
         $asunto = htmlspecialchars ($this->params()->fromPost('asunto',0));
         $mensaje = htmlspecialchars ($this->params()->fromPost('mensaje',0));
-        
-        var_dump($nombre);exit;
+
         $bodyHtml='<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
                                                <head>
                                                <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
@@ -729,7 +697,8 @@ class IndexController extends AbstractActionController
         ->setBody($bodyHtml);
         $transport = new SendmailTransport();
         $transport->send($message);
-        $this->redirect()->toUrl('/application/index/contactenos');
+        $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/contactenos');
+//        $this->redirect()->toUrl('/contactenos');///application/index
         }
         
         $view->setVariables(array('form' => $form));

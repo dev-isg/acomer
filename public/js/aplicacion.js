@@ -7,6 +7,11 @@ function replaceAll(c, b, a) {
 var puntaje = function(a, b) {
     $(a).raty({readOnly: true,score: b,starOff: "/img/t2.png",starOn: "/img/t1.png"});
 };
+function regresar(){
+  $("#mapa-buscador").hide();
+   $("#esconder").css("display", "block");
+    $("#esconder2").css("display", "block");
+}
 function initSucursales() {
     var m;
     var p = document.getElementById("mapCont");
@@ -81,14 +86,14 @@ function initSucursales() {
         var w = $(this).data("lat");
         var u = $(this).data("lng");
         var t = $(".list-suc .ul-suc li a").index(this);
-        var x = $(this).find("h6").text();
+        var x = $(this).find(".phone span").text();
         var s = $(v.target);
         $(".list-suc .ul-suc li a.activo").removeClass("activo");
         if (s.is("span.close-banch")) {
             h();
         } else {
             $(this).addClass("activo");
-            $("h4.ubi-map span").html(" : " + x);
+            $("h4.ubi-map span").html(" : " + "<span class='co_l'>"+x+"</span>");
             a(g[t], null);
         }
         return false;
@@ -97,6 +102,7 @@ function initSucursales() {
 }
 $(document).ready(function() {
     $('input, textarea').placeholder();
+    if ($.browser.mozilla) { $(".verlistado").css("padding-top","10px");};
     $(".agregar-coment-1").click(function(a) {
         a.preventDefault();
         if ($(".agregar-comentario-desc").is(":hidden")) {
@@ -147,7 +153,7 @@ $(document).ready(function() {
     $("#buscarmap").on("click", function() {
         var c = $("#bubi #q").val();
         var a = $("#bubi #fq").val();
-        var b = "http://192.168.1.38:8080/jsonmapasa?distrito=" + a + "&plato=" + c;
+        var b = urlJson + "/jsonmapasa?distrito=" + a + "&q=" + c;
         $("#map").remove();
         $("#subir-home").remove();
         $(".mensaje").remove();
@@ -169,7 +175,7 @@ $(document).ready(function() {
                         var sms = por.substring(0, 50);
                         var anom = replaceAll(f.name, " ", "-");
                         var adis = replaceAll(f.distrito, " ", "-");
-                        map.addMarker({lat: f.latitud,lng: f.longitud,icon: {size: new google.maps.Size(32, 37),url: "/img/icomap.png"},title: f.restaurante,infoWindow: {content: "<img src='/imagenes/" + f.va_imagen + "' class='img-mapa'>" + "<p class='restaurante-map'>" + "<a href=/plato/" + adis + "-" + anom + "-" + f.id + ">" + f.restaurante + "</a></p>" + "<p class='plato-map'>" + f.name + "</p>" + "<p class='txt-map'>" + sms + "...</p>" + "<a class='a-map' href=/plato/" + adis + "-" + anom + "-" + f.id + "> ver mas </a>"}});
+                        map.addMarker({lat: f.latitud,lng: f.longitud,icon: {size: new google.maps.Size(32, 37),url: "/img/icomap.png"},title: f.restaurante,infoWindow: {content: "<img src='/imagenes/" + f.va_imagen + "' class='img-mapa'>" + "<p class='restaurante-map'>" + "<a href=/plato/" + anom + "-" + f.id + ">" + f.restaurante + "</a></p>" + "<p class='plato-map'>" + f.name + "</p>" + "<p class='txt-map'>" + sms + "...</p>" + "<a class='a-map' href=/plato/" + anom + "-" + f.id + "> ver mas </a>"}});
                     });
                 } else {
                     $("#mapa-buscador").hide();
@@ -183,7 +189,7 @@ $(document).ready(function() {
                     $(".contenido-plato").append('<div class="recomendados-platos primer-home" id="subir-home" style="padding-bottom: 90px;"></div>');
                     $("#subir-home").append('<div class="sub" style="margin-top: 10px;margin-bottom: 15px;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;"><span  style="padding-left: 10px;color:white;font-weight: bold;">Platos Destacados</span></div>');
                     $("#subir-home").append('<ul id="listajson"></ul>');
-                    $.getJSON("http://192.168.1.38:8080/jsondesta", function(f) {
+                    $.getJSON(urlJson + "/jsondesta", function(f) {
                         $.each(f, function(g, h) {
                             var nplato = replaceAll(h.va_nombre, " ", "-");
                             $("#listajson").append('<li><div class="plato_r"><div class="mosaic-block cover2"><div class="mosaic-overlay"><span>' + h.va_nombre + '</span><img src="/imagenes/' + h.va_imagen + '" class="img-plato"><img src="/img/mas.png" alt="" class="mas"></div><a href="/plato/' + nplato + "-" + h.in_id + '" class="mosaic-backdrop"><div class="details"><h4>' + h.va_nombre + '</h4><p class="title-details" style="font-weight: bold;">Descripción</p><p class="desc-plato" style="font-size:0.9em;">' + h.tx_descripcion + '</p></div></a></div><div class="foo"><p class="nom_res">' + h.restaurant_nombre + '</p><div class="pt"><p class="com">' + h.NumeroComentarios + ' <i class="icon-comment"></i></p><div class="punt"><div class="puntuaciones c' + h.Ta_puntaje_in_id + '"></div></div></div></div></div></li>');
@@ -206,7 +212,7 @@ $(document).ready(function() {
                 $(".contenido-plato").append('<div class="recomendados-platos primer-home" id="subir-home" style="padding-bottom: 90px;"></div>');
                 $("#subir-home").append('<div class="sub" style="margin-top: 10px;margin-bottom: 15px;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;"><span  style="padding-left: 10px;color:white;font-weight: bold;">Platos Destacados</span></div>');
                 $("#subir-home").append('<ul id="listajson"></ul>');
-                $.getJSON("http://192.168.1.38:8080/jsondesta", function(f) {
+                $.getJSON(urlJson+"/jsondesta", function(f) {
                     $.each(f, function(g, h) {
                         var nplato = replaceAll(h.va_nombre, " ", "-");
                         $("#listajson").append('<li><div class="plato_r"><div class="mosaic-block cover2"><div class="mosaic-overlay"><span>' + h.va_nombre + '</span><img src="/imagenes/' + h.va_imagen + '" class="img-plato"><img src="/img/mas.png" alt="" class="mas"></div><a href="/plato/' + nplato + "-" + h.in_id + '" class="mosaic-backdrop"><div class="details"><h4>' + h.va_nombre + '</h4><p class="title-details" style="font-weight: bold;">Descripción</p><p class="desc-plato" style="font-size:0.9em;">' + h.tx_descripcion + '</p></div></a></div><div class="foo"><p class="nom_res">' + h.restaurant_nombre + '</p><div class="pt"><p class="com">' + h.NumeroComentarios + ' <i class="icon-comment"></i></p><div class="punt"><div class="puntuaciones c' + h.Ta_puntaje_in_id + '"></div></div></div></div></div></li>');

@@ -1,55 +1,48 @@
-
 <?php
 $form = $this->form;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
-
 $form->setAttributes(array(
     'action' => $this->url.'/buscar-por-distrito',
     'method' => 'get'
 ));
 $form->prepare();
-
 echo $this->form()->openTag($form);
 ?>
 <?php
-
-//echo $this->formHidden($form->get('in_id'));
-
 ?><?php echo $this->formRow($form->get('distrito'));?><?php
 ?><?php echo $this->formRow($form->get('q'));?><?php
-
-
 ?><?php echo $this->formSubmit($form->get('submit'));?><?php
-?><a class="ver_mapa" style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a><?php
+?><a class="ver_mapa" style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a>
+<div class="return">
+              <a href="javascript:window.history.back();" onclick="regresar()">Regresar</a>
+           </div>
+<?php
 echo $this->form()->closeTag(); ?>
-
 <?php
- if($this->destacados or $this->general){
-?>
-
-<?php
- if($this->destacados){
-?>
-
-   
-
+////      print_r($this->general) ;
+//       print_r($this->destacados) ;
+//       exit;
+ if(($this->destacados) and (count($this->general)>0)){
+?> 
   <div id="esconder">
     <div class="sub">
       <span  style="padding-left: 10px;color:white;font-weight: bold;">Platos Destacados</span>
     </div>
-    <?php  $this->error; ?>
       <div class="contenido-bus">
         <ul>
-
-      <?php foreach ($this->destacados as $doc){
-            ?> 
+      <?php foreach ($this->destacados as $doc ) : ?>          
             <li>
-
               <div class="plato_r" style="display:inline-block;">
                 <input type="hidden" value="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>">
                 <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                 <div class="mosaic-block cover">
-                  <div class="mosaic-overlay"><span><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></span>
+                   <div class="mosaic-overlay"><span><?php 
+                    if(strlen($doc->name)>27){
+                         $strnom=trim(substr($doc->name, 0, 24));
+                          $strnom.='...';
+                         }else {$strnom=$doc->name;} 
+                         echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?>
+                      </span>
                     <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas">
                   </div>
                  <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"  class="mosaic-backdrop">
@@ -64,10 +57,16 @@ echo $this->form()->closeTag(); ?>
                                    echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
                     </div>
                   </a>
-
                 </div>
                 <div class="foo">
-                  <p class="nom_res"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></p>
+                  <p class="nom_res">   
+                      <?php 
+                         if(strlen($doc->restaurante)>29){
+                         $strres=trim(substr($doc->restaurantee, 0, 26));
+                          $strres.='...';
+                         }else {$strres=$doc->restaurante;}
+                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?>  
+                  </p>
 
                   <div class="pt">       
                     <p class="com"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?> <i class="icon-comment"></i></p>
@@ -79,24 +78,19 @@ echo $this->form()->closeTag(); ?>
                 </div> 
               </div>
              </li>
-                <?php
-                    } 
-                    
-                  ?>   
+                <?php endforeach; ?>   
           </ul>     
 
       </div>
 
   </div>
-  <?php } ?>
-
-    <div id="esconder2">                     
+    <div id="esconder2">  
         <div class="sub">
-            <span style="padding-left: 10px;color:white;font-weight: bold;">Mas platos</span>
+            <span style="padding-left: 10px;color:white;font-weight: bold;">Resultados encontrados   </span>
         </div>    
-        <?php foreach ($this->general as $doc)
-                    {
-                ?> 
+        <div class="mostrar"><?php echo $this->mostrar;?></div>
+        <?php foreach ($this->general as $doc) : ?>
+            
 
                  <div class="plato_h">
                    <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
@@ -105,7 +99,54 @@ echo $this->form()->closeTag(); ?>
                    <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" >
                                   <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="border:0;">
                     </a>
+                    </div>
+                    <div class="detalle-restaurante">
+                      <div class="detalle-nombre"><p class="nombre_r"><a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></a></p>
+                        <div class="punt">
+                          <div class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>" style="margin: 0px;width: 118px !important;display:inline-block;"></div>
+                        </div> 
+                      </div>
+                        <p class="nom_plato"><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></p>
+                        <p style="margin-left:10px;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></p>
+                        <p class="com-pla"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i> Comentarios</p>
+                    </div>
+                </div>
+              <?php endforeach; ?>       
+                 
+              
+     <div id="pagina"><?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar?q='.$this->nombre.'&submit=Buscar'.'&')):""; ?> </div>         
+       </div>         
+      <div id="mapa-buscador">
 
+     </div>
+
+         <?php
+              }
+             
+                 
+               
+      elseif((count($this->general)>0) and ($this->destacados == null ))
+                          
+  {
+//      print_r($this->general) ;
+//       print_r($this->destacados) ;
+//       exit;
+       
+?>
+     <div id="esconder2">                     
+        <div class="sub">
+            <span style="padding-left: 10px;color:white;font-weight: bold;"><?php echo  $this->total;  ?> Resultados encontrados</span>
+        </div>    
+        <?php foreach ($this->general as $doc) : ?>
+           
+
+                 <div class="plato_h">
+                   <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
+                   <div class="lateral" >
+                    <img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas-det">
+                   <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" >
+                                  <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="border:0;">
+                    </a>
                     </div>
                     <div class="detalle-restaurante">
                       <div class="detalle-nombre"><p class="nombre_r"><a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></a></p>
@@ -121,20 +162,17 @@ echo $this->form()->closeTag(); ?>
                 </div>
                    
                  
-                <?php
-                    }
-                ?>  
-       <div id="pagina"><?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar?q='.$this->nombre.'&submit=Buscar'.'&')):""; ?> </div>
-
-                                      
+                  <?php endforeach; ?> 
+     <div id="pagina"><?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar?q='.$this->nombre.'&submit=Buscar'.'&')):""; ?> </div>         
        </div>         
-
       <div id="mapa-buscador">
 
-     </div>
-
-         <?php
-              } else 
+     </div>             
+  <?php                
+} 
+              
+              
+             else
                  {
                   ?>
 <div class="descrip-product">
@@ -157,8 +195,7 @@ echo $this->form()->closeTag(); ?>
                 <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
                 <img src="<?php echo $this->host('images') . '/' .  htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas">
                 </div>
-               <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" >
-                            <div class="details">
+              <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">                <div class="details">
                   <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
                   <p class="title-details" style="font-weight: bold;">Ingredientes</p>
                   <p class="desc-plato" style="font-size:0.9em;"> <?php 
@@ -171,7 +208,12 @@ echo $this->form()->closeTag(); ?>
                </a>
               </div>
               <div class="foo">
-                <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8'); ?></p>
+                <p class="nom_res"><?php 
+                         if(strlen($list->restaurant_nombre)>29){
+                         $strres=trim(substr($list->restaurant_nombre, 0, 26));
+                          $strres.='...';
+                         }else {$strres=$list->restaurant_nombre;}
+                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></p>
                 <div class="pt">
                   <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
                   <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
@@ -186,10 +228,9 @@ echo $this->form()->closeTag(); ?>
       </ul>
     </div>
 </div>                     
-
 <?php
 }                   
 ?> 
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>  
 <script src="<?php echo $this->basePath()?>/js/vendor/gmaps.js"></script> 
-  
+

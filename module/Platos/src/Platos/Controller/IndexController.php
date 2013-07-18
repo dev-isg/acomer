@@ -41,23 +41,13 @@ class IndexController extends AbstractActionController {
         }
         
         $basePath = $this->getRequest()->getBasePath();
-//             var_dump($basePath);exit;
         $local = (int) $this->params()->fromQuery('id');
-//        var_dump($restaurante);exit;
         $lista = $this->getPlatosTable()->fetchAll($local);
-//                    $array=array();
-//             foreach($lista as $result){
-//                 $array[]=$result;
-//             }
-//            var_dump($array);exit;
-                $request = $this->getRequest();
-               
+                $request = $this->getRequest();              
         if ($request->isPost()) {
             $consulta=$this->params()->fromPost('texto');
-            $lista = $this->getPlatosTable()->fetchAll($local,$consulta);
-            
+            $lista = $this->getPlatosTable()->fetchAll($local,$consulta);           
         }
-
         return new ViewModel(array(
                     'platos' => $lista,
                     'idlocal' => $local,
@@ -104,9 +94,12 @@ class IndexController extends AbstractActionController {
             if ($form->isValid()) {
                 //obtengo data de img
                 $nonFile = $request->getPost()->toArray();
-                $File = $this->params()->fromFiles('va_imagen');
-                $plato->exchangeArray($form->getData());
-                $adapter = new \Zend\File\Transfer\Adapter\Http();
+//                $File = $this->params()->fromFiles('va_imagen');
+        if($File['name']!='')
+          {
+            $plato->exchangeArray($form->getData());
+            $adapter = new \Zend\File\Transfer\Adapter\Http();
+            
                 if (!$adapter->isValid()) {
                     $dataError = $adapter->getMessages();
                     $error = array();
@@ -142,34 +135,7 @@ class IndexController extends AbstractActionController {
                      $this->getPlatosTable()->guardarPlato($plato,$name,$local);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);   
                   }
-                  if($info['extension']=='png')      
-                  {  $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefrompng($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = $this->_options->upload->images . '/' .$name;
-                       imagepng($nuevaimagen,$copia);
-                      $this->getPlatosTable()->guardarPlato($plato,$name,$local);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);    
-                  }
-                  if($info['extension']=='gif')      
-                  {   $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefromgif($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = $this->_options->upload->images . '/' .$name;
-                       imagegif($nuevaimagen,$copia);
-                     $this->getPlatosTable()->guardarPlato($plato,$name,$local);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);   
-                  }
+
                }
                    if($ancho<$alto)
               {require './vendor/Classes/Filter/Alnum.php';
@@ -188,41 +154,25 @@ class IndexController extends AbstractActionController {
                        $this->getPlatosTable()->guardarPlato($plato,$name,$local);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);   
                   }
-                   if($info['extension']=='png')      
-                  {   $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefrompng($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = $this->_options->upload->images . '/' .$name;
-                       imagepng($nuevaimagen,$copia);
-                     $this->getPlatosTable()->guardarPlato($plato,$name,$local);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);   
-                  }
-                  if($info['extension']=='gif')      
-                  {  $nom = $nonFile['va_nombre']; 
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($nom); 
-                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefromgif($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = $this->_options->upload->images . '/' .$name;
-                       imagegif($nuevaimagen,$copia);
-                       $this->getPlatosTable()->guardarPlato($plato,$name,$local);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);  
-                  }
+     
                }
                 }
+              
+            
             }
+                 else {   
+              $plato->exchangeArray($form->getData());
+              $adapter = new \Zend\File\Transfer\Adapter\Http();
+              $name = 'platos-default.png';
+              $this->getPlatosTable()->guardarPlato($plato,$name,$local);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);
+               }
+        }
         }
         return array('form' => $form, 'id' => $local);
     }
-
+    
+    
    public function platicos($id)
         {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
             $adapter = $this->dbAdapter;
@@ -234,23 +184,22 @@ class IndexController extends AbstractActionController {
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             return $results;       
      }
+     
+     
+     
     public function editarplatosAction()   
     {   
         
-                                $auth = new \Zend\Authentication\AuthenticationService();
+       $auth = new \Zend\Authentication\AuthenticationService();
         if (!$auth->hasIdentity()) {
             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
         }
-        
-//     var_dump('hasta aka');
         $id = (int) $this->params()->fromRoute('in_id', 0);
         $platicos =  $this->platicos($id)->toArray();
        $comeya =$platicos[0]['va_imagen'];
        $va_nombre = 'prueba';//$this->params()->fromRoute('va_nombre',0);
         $idlocal=(int) $this->params()->fromRoute('id_pa', 0);
-//          var_dump($id);exit;
-               
-        if (!$id) {
+  if (!$id) {
            return $this->redirect()->toUrl($this->
             getRequest()->getBaseUrl().'/restaurante/index/agregarrestaurante');  
         }
@@ -265,6 +214,7 @@ class IndexController extends AbstractActionController {
         }
       $adpter=$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $form  = new PlatosForm($adpter,$idlocal);
+        
         $form->get('va_imagen')->setValue($comeya);
         $form->bind($restaurante);
 
@@ -281,12 +231,24 @@ class IndexController extends AbstractActionController {
                         $this->getRequest()->getPost()->toArray(),          
                        $this->getRequest()->getFiles()->toArray()
                    ); 
-            $form->setData($data); 
-            if ($form->isValid()) {
-
+            $form->setData($data);
+      
+  if ($form->isValid()) {
+                //obtengo data de img
                 $nonFile = $request->getPost()->toArray();
-               $File = $this->params()->fromFiles('va_imagen');
-               
+//                $File = $this->params()->fromFiles('va_imagen');
+        if($File['name']!='')
+          {
+            $adapter = new \Zend\File\Transfer\Adapter\Http();
+            
+                if (!$adapter->isValid()) {
+                    $dataError = $adapter->getMessages();
+                    $error = array();
+                    foreach ($dataError as $key => $row) {
+                        $error[] = $row;
+                    }
+                    $form->setMessages(array('imagen' => $error));
+                } else {
               $anchura = 407;
               $altura = 272; 
               $imf =$File['name'];
@@ -296,7 +258,7 @@ class IndexController extends AbstractActionController {
               $alto =$tamanio[1]; 
               $valor  = uniqid();
               if($ancho>$alto)
-              { //echo 'ddd';exit;
+              {//echo 'ddd';exit;
                   require './vendor/Classes/Filter/Alnum.php';
                   $altura =(int)($alto*$anchura/$ancho); 
                   if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg')      
@@ -309,13 +271,11 @@ class IndexController extends AbstractActionController {
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = $this->_options->upload->images . '/' .$name;
+                       $copia = $this->_options->upload->images . '/' . $name;
                        imagejpeg($nuevaimagen,$copia);
-//                        var_dump($restaurante);exit;
-                    $this->getPlatosTable()->guardarPlato($restaurante,$name);
-                    $this->redirect()->toUrl('/platos/index?id='.$idlocal);    
+           $this->getPlatosTable()->guardarPlato($restaurante,$name);
+                    $this->redirect()->toUrl('/platos/index?id='.$idlocal);   
                   }
-
                }
                    if($ancho<$alto)
               {require './vendor/Classes/Filter/Alnum.php';
@@ -331,14 +291,35 @@ class IndexController extends AbstractActionController {
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
                        $copia = $this->_options->upload->images . '/' .$name;
                        imagejpeg($nuevaimagen,$copia);
-
-                       $this->getPlatosTable()->guardarPlato($restaurante,$name);
-                    $this->redirect()->toUrl('/platos/index?id='.$idlocal);    
+                      $this->getPlatosTable()->guardarPlato($restaurante,$name);
+                    $this->redirect()->toUrl('/platos/index?id='.$idlocal);   
                   }
-
                }
-                
+                }
+              
+            
             }
+                 else {  
+              $platos = $this->getPlatosTable()->getPlato($id);
+              $adapter = new \Zend\File\Transfer\Adapter\Http();
+             $name = $platos->va_imagen;
+              $this->getPlatosTable()->guardarPlato($restaurante,$name);
+                    $this->redirect()->toUrl('/platos/index?id='.$idlocal); 
+               }
+        }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         }
  
      return array(
@@ -392,19 +373,12 @@ class IndexController extends AbstractActionController {
     }
 
     public function verplatosAction() {
-//        echo 'adfdsf';exit;
-//       var_dump($this->getPlatosTable()->getPlato($id));Exit;
+
         $view = new ViewModel();
-       $this->layout('layout/layout-portada');
-        $datos =$this->params()->fromRoute(); 
-     
-        $nombre = explode('-', $datos['nombre']);
-    
+//        $this->layout('layout/layout-portada');
+        $datos =$this->params()->fromRoute();  
+        $nombre = explode('-', $datos['nombre']);   
         $id = array_pop($nombre);
-        
-        $distrito = $datos['distrito']; 
-        $plato = $datos['q'];     
-        
         if(!$this->getPlatosTable()->getPlato($id)){
             $this->redirect()->toUrl('/');
         }
@@ -439,24 +413,21 @@ class IndexController extends AbstractActionController {
             }
         } 
          $formu = new Formularios();
-        
          $comidas = $this->joinAction()->toArray();
          $com = array();
          foreach ($comidas as $y) {
              $com[$y['va_distrito']] = $y['va_distrito'];
-         }
-        $formu->get('distrito')->setValue($_COOKIE['distrito']/*$distrito*/);
+         }        
+        $formu->get('distrito')->setValue($_COOKIE['distrito']);
         $formu->get('distrito')->setValueOptions($com);
-        $formu->get('q')->setValue($_COOKIE['q']/*$plato*/);
+        $formu->get('q')->setValue($_COOKIE['q']);     
+   //  $formu->get('q')->setValue($listarecomendacion[0]['va_nombre']);
         $formu->get('submit')->setValue('Buscar');
         $this->layout()->clase = 'Detalle';
-       // echo 'e';
          $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
-
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(2);
-              
+         $paginator->setItemCountPerPage(10);    
         $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id));
@@ -469,8 +440,8 @@ class IndexController extends AbstractActionController {
         $adapter = $this->dbAdapter;
         $sql = new Sql($adapter);
         $select = $sql->select();
-        $select->from('ta_distrito');
-       
+        $select->from('ta_distrito')     
+       ->order('va_distrito asc DESC'); 
         $selectString = $sql->getSqlStringForSqlObject($select);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         //var_dump($results);exit;

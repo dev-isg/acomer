@@ -68,6 +68,7 @@ class RestauranteForm extends Form
             ),
         ));
 
+
         $this->add(array(
             'name' => 'Ta_tipo_comida_in_id',
             'type' => 'Select',  
@@ -90,7 +91,7 @@ class RestauranteForm extends Form
              'attributes' => array(               
                 'class' => 'span10',
                 'id'   => 'va_ruc',
-                 'placeholder'=>'Repita su Ruc'
+                 'placeholder'=>'Ingrese su RUC'
             ),
             'options' => array(
                 'label' => 'Ruc',

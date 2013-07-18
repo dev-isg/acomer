@@ -31,7 +31,8 @@ return array(
 
         'base' => 'http://192.168.1.38:8080',
         'static' => 'http://192.168.1.38:8080',
-        'images' => 'http://192.168.1.38:8080/imagenes'
+        'images' => 'http://192.168.1.38:8080/imagenes',
+        'img'=>'http://192.168.1.38:8080/img'
     ),
 
 
@@ -40,11 +41,16 @@ return array(
     'upload' => array(
         'images' => APPLICATION_PATH . '/public/imagenes'
     ),
-
+    
+    'verifica' => array(
+        'img' => APPLICATION_PATH . '/public/img'
+    ),
             
                'host' => array (
                                'static' => '',
-                               'images' => 'http://192.168.1.38:8080/imagenes'
+                               'images' => 'http://192.168.1.38:8080/imagenes',
+                               'ruta' => 'http://192.168.1.38:8080'
+                   
                ),
                'upload' => array(
                        'images' => APPLICATION_PATH . '/public/imagenes'
@@ -57,15 +63,17 @@ return array(
         )
     ),
     'module_layouts' => array(
-         'Application' => 'layout/layout-portada',
+//         'Application' => 'layout/layout-portada',
          
         'Application' => array(
-            'index' => 'layout/layout-portada',
-            'terminos' => 'layout/layout-portada',
-            'nosotros' => 'layout/layout-portada',
-            'solicita' => 'layout/layout-portada',
-            'ver' => 'layout/layout-portada',
-            'detalleubicacion' => 'layout/layout-portada'
+            'default'=> 'layout/layout-portada2',
+            'index' => 'layout/layout-portada2',
+            'terminos' => 'layout/layout-portada2',
+            'contactenos' => 'layout/layout-portada2',
+            'nosotros' => 'layout/layout-portada2',
+            'solicita' => 'layout/layout-portada2',
+            'ver' => 'layout/layout-portada2',
+            'detalleubicacion' => 'layout/layout-portada2'
         ),
        'Local' => array(
             'index' => 'layout/layout-administrador'
@@ -73,7 +81,7 @@ return array(
         ,
         'Platos' => array(
             'index' => 'layout/layout-administrador',
-            'verplatos' => 'layout/layout-portada'
+            'verplatos' => 'layout/layout-portada2'
         ),
        'Usuario' => array(
             'index' => 'layout/layout-administrador',

@@ -1,4 +1,4 @@
-    <div class="span10">
+    <div class="span12">
     <div class="control-group"> 
             <form name='form_busqueda'class="form-search" action='/usuario/clientes/clientes' method ="post">
                     <div class="control-group">
@@ -8,10 +8,9 @@
                     </div>
             </form>
     </div>
-
     </div>
-<div class="span10" id="flip-scroll">
-       
+<div class="row-fluid">
+<div class="span12" id="flip-scroll">       
 <table class="table table-bordered table-hover">
     <thead  class="cf">  
         <tr>
@@ -33,7 +32,9 @@
 <?php endforeach; ?>
       
 </table>
+    <?php echo (count($this->clientes)> 0)?$this->paginationControl($this->clientes, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/usuario/clientes/clientes?')):""; ?>
+</div>
 </div>
 <div class="span10" style="padding: 10px 0;">
-    <a href='/usuario/clientes/exportarexcel' class="btn" >Exportar Datos </a></div>   
-</div>
+    <a href='/usuario/clientes/exportarexcel' class="btn" >Exportar Datos </a>
+</div>   

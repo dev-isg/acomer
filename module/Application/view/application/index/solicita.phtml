@@ -8,13 +8,13 @@ $this->headTitle($title);
 	<div class="descrip-product">
 		<div class="contenido-static">
 			<h2>Solicite registrar un plato</h2>
-			<p>Si conoces un plato que te agrada, el lugar donde lo venden y no lo encontraste en <a href="<?php echo $this->host('base') ?>" title="Lista del sabor" atl="listadelsabor">listadelsabor.com</a>, por favor llena el siguiente formulario y nos estaremos comunicando contigo para registrarlo.</p>
+			<p>Si conoces un plato que te agrada, el lugar donde lo venden y no lo encontraste en <a href="<?php echo $this->host('ruta')?>" title="Lista del sabor" atl="listadelsabor">listadelsabor.com</a>, por favor llena el siguiente formulario y nos estaremos comunicando contigo para registrarlo.</p>
 			<?php
 			$form = $this->form;
 			//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
 
 			$form->setAttributes(array(
-			    'action' => $this->url.'/application/index/solicita',
+			    'action' => $this->url.'/solicita',
 			    'method' => 'post',
 			    'class' => 'form-horizontal'
 			));
@@ -72,7 +72,7 @@ $this->headTitle($title);
 			    </div>
 			</div>
 			<div class="control-group">
-			    <label class="control-label" for="inputEmail">Teléfono<span class="red">*</span>:</label>
+			    <label class="control-label" for="inputEmail">Teléfono:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($form->get('telefono'));?>
 			    </div>
@@ -107,7 +107,6 @@ function submitForm(){
 		nombre_plato: "required",
 		nombre_restaurant: "required", 
 		telefono: {
-			required: true,
 			number: true
 		}
 	}, 
@@ -121,13 +120,12 @@ function submitForm(){
 		nombre_plato: "Ingrese el nombre del plato", 
 		nombre_restaurant: "Ingrese el nombre del restaurante", 
 		telefono: {
-			required: "Ingrese su teléfono",
 			number: "Ingrese solo numeros"
 		}
 	} 
 	}); 
 	if(validator.form()){ // validation perform 
-		$('form#application').attr({action: 'mycontroller'});	 
+			 
 		$('form#application').submit(); 
 	} 
 }

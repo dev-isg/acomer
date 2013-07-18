@@ -1,12 +1,13 @@
 <div class="masinfo">
-          <a href="#cate-home" id="ver"><img src="<?php echo $this->host('static')?>/img/scroll.png" alt=""></a>
+          <a href="#cate-home" id="ver"><img src="<?php echo $this->host('ruta')?>/img/scroll.png" alt=""></a>
         </div>
         <div class="subir">
-          <a href="#top"><img src="<?php echo $this->host('static')?>/img/scroll-top.png" alt=""></a>
+          <a href="#top"><img src="<?php echo $this->host('ruta')?>/img/scroll-top.png" alt=""></a>
+           
         </div>
 <div class="map-portada">
  <div class="guia">
-    <img src="<?php echo $this->host('static')?>/img/globos.png" alt="">
+    <img src="<?php echo $this->host('ruta')?>/img/globos.png" alt="">
 </div>
   
   <div class="descrip-product">
@@ -17,23 +18,30 @@
     </div>
     <div class="recomendados-platos primer-home" style="padding-bottom: 90px;">
       <ul>
-         <?php  foreach ($this->lista  as $list) : ?>
+         <?php  foreach ($this->lista  as $list) :
+                                    if(strlen($list->va_nombre)>27){
+                         $strnom=trim(substr($list->va_nombre, 0, 24));
+                          $strnom.='...';
+                         }else {$strnom=$list->va_nombre;} ?>
           <li>
             <div class="plato_r">
               <div class="mosaic-block cover">
-                <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
-                <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                <div class="mosaic-overlay"><span><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></span>
+                <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png" alt="" class="mas">
                 </div>
    <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">
 
                 
    
             <div class="details">
-                  <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
+                  <h4>
+                    <?php 
+                  
+                  echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></h4>
                   <p class="title-details" style="font-weight: bold;">Descripción</p>
                   <p class="desc-plato" style="font-size:0.9em;"> <?php 
                         if(strlen($list->tx_descripcion)>100){
-                         $str=trim(substr($list->tx_descripcion, 0, 100));
+                         $str=trim(substr($list->tx_descripcion, 0, 97));
                           $str.='...';
                          }else {$str=$list->tx_descripcion;}       
                   echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
@@ -41,7 +49,12 @@
                </a>
               </div>
               <div class="foo">
-                <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8'); ?></p>
+                <p class="nom_res"><?php 
+                         if(strlen($list->restaurant_nombre)>29){
+                         $strres=trim(substr($list->restaurant_nombre, 0, 26));
+                          $strres.='...';
+                         }else {$strres=$list->restaurant_nombre;}
+                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></p>
                 <div class="pt">
                   <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
                   <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
@@ -65,22 +78,31 @@
     </div>
     <div class="recomendados-platos">
       <ul>       
-         <?php  foreach ($this->listaseg  as $list) : ?>
+         <?php  foreach ($this->listaseg  as $list) : 
+                       if(strlen($list->va_nombre)>27){
+                         $strnom=trim(substr($list->va_nombre, 0, 24));
+                          $strnom.='...';
+                         }else {$strnom=$list->va_nombre;} ?>
+             
+           
           <li>
             <div class="plato_r">
                 <div class="mosaic-block cover">
-                 <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
-                 <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                 <div class="mosaic-overlay"><span><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></span>
+                 <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png" alt="" class="mas">
                  </div>
 
                 <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">
 
              <div class="details">
-                       <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
+                       <h4>
+                           <?php
+                                echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?>
+                        </h4>
                        <p class="title-details">Descripción</p>
                        <p style="font-size:0.9em;"> <?php 
                                     if(strlen($list->tx_descripcion)>100){
-                                    $str=trim(substr($list->tx_descripcion, 0, 100));
+                                    $str=trim(substr($list->tx_descripcion, 0, 97));
                                      $str.='...';
                                     }else {$str=$list->tx_descripcion;} 
                        echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
@@ -88,7 +110,14 @@
                </a>
               </div>
               <div class="foo">
-                <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8'); ?></p>
+                <p class="nom_res"><?php 
+                         if(strlen($list->restaurant_nombre)>29){
+                         $strres=trim(substr($list->restaurant_nombre, 0, 26));
+                          $strres.='...';
+                         }else {$strres=$list->restaurant_nombre;}
+
+                
+                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></p>
                 <div class="pt">
                   <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
                   <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
@@ -111,23 +140,31 @@
     </div>
     <div class="recomendados-platos">
       <ul>
-         <?php foreach ($this->listaval  as $list) : ?> 
+         <?php foreach ($this->listaval  as $list) : 
+                                    if(strlen($list->va_nombre)>27){
+                         $strnom=trim(substr($list->va_nombre, 0, 24));
+                          $strnom.='...';
+                         }else {$strnom=$list->va_nombre;}
+             
+             ?> 
               <li>
                 <div class="plato_r">
                   <div class="mosaic-block cover">
-                    <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8');?></span>
-                     <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+                    <div class="mosaic-overlay"><span><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8');?></span>
+                     <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png" alt="" class="mas">
                      </div>
                  <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">
 
        
                
                        <div class="details">
-                           <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
+                           <h4>
+                            <?php 
+                           echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?> </h4>
                            <p class="title-details">Descripción</p>
                            <p style="font-size:0.9em;"><?php 
                                    if(strlen($list->tx_descripcion)>100){
-                                    $str=trim(substr($list->tx_descripcion, 0, 100));
+                                    $str=trim(substr($list->tx_descripcion, 0, 97));
                                      $str.='...';
                                     }else {$str=$list->tx_descripcion;} 
                          echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
@@ -135,7 +172,12 @@
                    </a>
                   </div>
                   <div class="foo">
-                     <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8');?></p>
+                     <p class="nom_res"><?php 
+                       if(strlen($list->restaurant_nombre)>29){
+                         $strres=trim(substr($list->restaurant_nombre, 0, 27));
+                          $strres.='...';
+                         }else {$strres=$list->restaurant_nombre;}
+                     echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8');?></p>
                      <div class="pt">
                         <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
                         <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
@@ -159,12 +201,19 @@
   <div class="recomendados-platos tercera-categ">
  <ul>
   <?php 
-  foreach ($this->listault  as $list) : ?>   
+  foreach ($this->listault  as $list) : 
+             if(strlen($list->va_nombre)>27){
+         $strnom=trim(substr($list->va_nombre, 0, 24));
+          $strnom.='...';
+        }else {
+            $strnom=$list->va_nombre;
+            }  
+      ?>      
         <li>
         <div class="plato_r">
           <div class="mosaic-block cover">
-           <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8');?></span>
-           <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="img/mas.png" alt="" class="mas">
+           <div class="mosaic-overlay"><span><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8');?></span>
+           <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png" alt="" class="mas">
            </div>
 
            <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">
@@ -172,11 +221,15 @@
         
 
              <div class="details">
-                 <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
+                 <h4>
+                       <?php
+                       
+                           echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?> 
+           </h4>
                  <p class="title-details">Descripción</p>
                  <p style="font-size:0.9em;"><?php 
                    if(strlen($list->tx_descripcion)>100){
-                    $str=trim(substr($list->tx_descripcion, 0, 100));
+                    $str=trim(substr($list->tx_descripcion, 0, 97));
                      $str.='...';
                     }else {$str=$list->tx_descripcion;}                  
                  echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
@@ -184,7 +237,14 @@
             </a>
           </div>
           <div class="foo">
-            <p class="nom_res"><?php echo htmlspecialchars($list->restaurant_nombre, ENT_QUOTES, 'utf-8');?></p>
+            <p class="nom_res"><?php 
+                                   if(strlen($list->restaurant_nombre)>29){
+                         $strres=trim(substr($list->restaurant_nombre, 0, 26));
+                          $strres.='...';
+                         }else {$strres=$list->restaurant_nombre;}
+            
+            
+            echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8');?></p>
             <div class="pt">
               <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
               <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
