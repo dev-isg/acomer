@@ -32,12 +32,12 @@ return array(
         'base' => 'http://192.168.1.38:8080',
         'static' => 'http://192.168.1.38:8080',
         'images' => 'http://192.168.1.38:8080/imagenes',
-        'img'=>'http://192.168.1.38:8080/img'
+        'img'=>'http://192.168.1.38:8080/img',
+        'ruta' => 'http://192.168.1.38:8080',
+        'version'=>1,
+        'destacados' => 'http://192.168.1.38:8080/imagenes/destacados',
+        'general' => 'http://192.168.1.38:8080/imagenes/general',
     ),
-
-
-
-
     'upload' => array(
         'images' => APPLICATION_PATH . '/public/imagenes'
     ),
@@ -46,17 +46,6 @@ return array(
         'img' => APPLICATION_PATH . '/public/img'
     ),
             
-               'host' => array (
-                               'static' => '',
-                               'images' => 'http://192.168.1.38:8080/imagenes',
-                               'ruta' => 'http://192.168.1.38:8080'
-                   
-               ),
-               'upload' => array(
-                       'images' => APPLICATION_PATH . '/public/imagenes'
-               ),
- 
-
     'service_manager' => array(
         'factories' => array(
             'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory'

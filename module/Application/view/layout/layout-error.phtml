@@ -9,8 +9,8 @@
     <title>Error 404 </title>   
         <meta name="description" content="ListaDelSabor.com es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales">
         <meta name="viewport" content="width=device-width">
-        <link href="<?php echo $this->host('static')?>/img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>          
-        <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/style-error.css')
+        <link href="<?php echo $this->host('static')?>/img/favicon.ico?v<?php echo $this->host('version')?>" rel="shortcut icon" type="image/x-icon"/>          
+        <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/style-error.css?v'.$this->host('version'))
                          ?>
                         </head>               
 
@@ -18,7 +18,7 @@
 		 <body>
         <div class="container">
             <div id="header">
-            <a href="<?php echo $this->basePath(); ?>/" ><img src="<?php echo $this->host('static')?>/img/logo.png" title="Listado del Sabor"></a> 
+            <a href="<?php echo $this->basePath(); ?>/" ><img src="<?php echo $this->host('static')?>/img/logo.png?v<?php echo $this->host('version')?>" title="Listado del Sabor"></a> 
                 <h1>PAGINA NO ENCONTRADA</h1>                                           
             </div>
 
@@ -41,7 +41,7 @@
             </div> 
         </div>    
 
-      <script src="<?php echo $this->basePath()?>/js/vendor/prefixfree.min.js"></script> 
+      <script src="<?php echo $this->basePath()?>/js/vendor/prefixfree.min.js?v<?php echo $this->host('version')?>"></script> 
     
     </body>
 </html>

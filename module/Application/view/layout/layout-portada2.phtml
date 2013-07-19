@@ -15,10 +15,10 @@
     <meta property="og:image" content=""/>
     <meta property="og:site_name" content=""/>
     <meta property="og:description" content="">
-    <link href="<?php echo $this->host('ruta')?>/img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-    <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/modernizr.js"></script>           
-    <script src="<?php echo $this->host('ruta')?>/js/lib/jquery-1.8.3.min.js"></script>  
-    <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css')->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+    <link href="<?php echo $this->host('ruta')?>/img/favicon.ico?v<?php echo $this->host('version')?>" rel="shortcut icon" type="image/x-icon"/>
+    <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/modernizr.js?v<?php echo $this->host('version')?>"></script>           
+    <script src="<?php echo $this->host('ruta')?>/js/lib/jquery-1.8.3.min.js?v<?php echo $this->host('version')?>"></script>  
+    <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css?v'.$this->host('version'))->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
     </head>
 
   <body class="lista-<?php echo $this->clase; ?>">
@@ -52,13 +52,13 @@
           <div class="content-sidebar-ho">
           <a class="title-home-listado" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
               <h1>
-              <img src="<?php echo $this->host('ruta')?>/img/logo.png" alt="logo">
+              <img src="<?php echo $this->host('ruta')?>/img/logo.png?v<?php echo $this->host('version')?>" alt="logo">
             </h1>
           </a>
           <span class="logan-1" style="font-size: 3.1em;text-align: right;">-</span> 
           <span class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span> 
           <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
-          <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png" alt=""></div>
+          <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
 
             <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action='<?php echo $this->host('ruta')?>/buscar'>
               <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q'])
@@ -70,7 +70,7 @@
               <em>Ejm: lomo saltado</em>
             </form>  
             <div class="final">
-                <img src="<?php echo $this->host('ruta')?>/img/responsive.png" alt="" style="padding: 37px 10px;">
+                <img src="<?php echo $this->host('ruta')?>/img/responsive.png?v<?php echo $this->host('version')?>" alt="" style="padding: 37px 10px;">
               </div>
           
               <div class="solicitar-publicacion">
@@ -125,9 +125,9 @@
 
     <!--<div id="map_canvas" style="position: fixed!important; top: 0; bottom: 0; left: 0; right: 0; z-index: 0;"></div>-->
  
-      <script src="<?php echo $this->host('ruta')?>/js/vendor/jquery.placeholder.min.js"></script>   
-      <script src="<?php echo $this->host('ruta')?>/js/vendor/mosaic.js"></script>            
-      <script src="<?php echo $this->host('ruta')?>/js/aplicacion.min.js"></script>
-      <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/bootstrap-dropdown.js"></script>
+      <script src="<?php echo $this->host('ruta')?>/js/vendor/jquery.placeholder.min.js?v<?php echo $this->host('version')?>"></script>   
+      <script src="<?php echo $this->host('ruta')?>/js/vendor/mosaic.js?v<?php echo $this->host('version')?>"></script>            
+      <script src="<?php echo $this->host('ruta')?>/js/aplicacion.min.js?v<?php echo $this->host('version')?>"></script>
+      <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/bootstrap-dropdown.js?v<?php echo $this->host('version')?>"></script>
     </body>
 </html>

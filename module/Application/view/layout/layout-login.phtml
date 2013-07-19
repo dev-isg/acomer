@@ -9,8 +9,8 @@
         <title>Administración Restaurante</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">                         
-        <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/main.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.css') ?>                          
+        <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/main.css?v'.$this->host('version'))
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.css?v'.$this->host('version')) ?>                          
                                    
     </head>
     <body>  
@@ -18,8 +18,8 @@
   <div class="contenido"> 
                 <?php echo $this->content; ?>
   </div> 
-   <script src="<?php echo $this->basePath()?>/js/lib/jquery-1.8.3.min.js"></script> 
-  <script src="<?php echo $this->basePath()?>/js/lib/bootstrap.min.js"></script>            
+   <script src="<?php echo $this->basePath()?>/js/lib/jquery-1.8.3.min.js?v<?php echo $this->host('version')?>"></script> 
+  <script src="<?php echo $this->basePath()?>/js/lib/bootstrap.min.js?v<?php echo $this->host('version')?>"></script>            
     </body>
 </html>
     

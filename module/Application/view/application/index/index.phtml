@@ -1,13 +1,13 @@
 <div class="masinfo">
-          <a href="#cate-home" id="ver"><img src="<?php echo $this->host('ruta')?>/img/scroll.png" alt=""></a>
+          <a href="#cate-home" id="ver"><img src="<?php echo $this->host('ruta')?>/img/scroll.png?v<?php echo $this->host('version')?>" alt=""></a>
         </div>
         <div class="subir">
-          <a href="#top"><img src="<?php echo $this->host('ruta')?>/img/scroll-top.png" alt=""></a>
+          <a href="#top"><img src="<?php echo $this->host('ruta')?>/img/scroll-top.png?v<?php echo $this->host('version')?>" alt=""></a>
            
         </div>
 <div class="map-portada">
  <div class="guia">
-    <img src="<?php echo $this->host('ruta')?>/img/globos.png" alt="">
+    <img src="<?php echo $this->host('ruta')?>/img/globos.png?v<?php echo $this->host('version')?>" alt="">
 </div>
   
   <div class="descrip-product">
@@ -28,7 +28,7 @@
               <div class="mosaic-block cover">
                 <div class="mosaic-overlay">
                   <span><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></span>
-                  <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png" alt="" class="mas">
+                  <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" alt="" class="mas">
                 </div>
                 <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">
 
@@ -90,7 +90,7 @@
             <div class="plato_r">
                 <div class="mosaic-block cover">
                  <div class="mosaic-overlay"><span><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></span>
-                 <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png" alt="" class="mas">
+                 <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" alt="" class="mas">
                  </div>
 
                 <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">
@@ -217,7 +217,7 @@
         <div class="plato_r">
           <div class="mosaic-block cover">
            <div class="mosaic-overlay"><span><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8');?></span>
-           <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png" alt="" class="mas">
+           <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" alt="" class="mas">
            </div>
 
            <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">

@@ -10,10 +10,10 @@
    
         <meta name="description" content="ListaDelSabor.com es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales">
         <meta name="viewport" content="width=device-width">
-        <link href="<?php echo $this->host('static')?>/img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+        <link href="<?php echo $this->host('static')?>/img/favicon.ico?v<?php echo $this->host('version')?>" rel="shortcut icon" type="image/x-icon"/>
           
-        <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+        <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css?v'.$this->host('version'))
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css?v'.$this->host('version')) ?>
                         </head>                       
 
   <body>
@@ -21,7 +21,7 @@
       <div class="head-error">
          <a class="home-error" href="<?php echo $this->basePath(); ?>/" title="Listado del Sabor">
               <h1>
-              <img src="<?php echo $this->host('static')?>/img/logo.png" alt="logo" style="margin-top: 20px;width: 400px">
+              <img src="<?php echo $this->host('static')?>/img/logo.png?v<?php echo $this->host('version')?>" alt="logo" style="margin-top: 20px;width: 400px">
             </h1>
           </a>
       </div>
@@ -39,7 +39,7 @@
       </div>
 
     </div>
-      <script src="<?php echo $this->basePath()?>/js/lib/jquery-1.8.3.min.js"></script> 
+      <script src="<?php echo $this->basePath()?>/js/lib/jquery-1.8.3.min.js?v<?php echo $this->host('version')?>"></script> 
     
     </body>
 </html>

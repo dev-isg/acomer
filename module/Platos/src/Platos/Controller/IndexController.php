@@ -60,39 +60,27 @@ class IndexController extends AbstractActionController {
         return array();
     }
 
-    public function agregarplatosAction() {
-        
-                                $auth = new \Zend\Authentication\AuthenticationService();
+    public function agregarplatosAction() {     
+       $auth = new \Zend\Authentication\AuthenticationService();
         if (!$auth->hasIdentity()) {
             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
-        }
-        
+        }       
         $local = (int) $this->params()->fromQuery('id');
-
-//        $restaurante=(int) $this->params()->fromQuery('res', 35);
         $adpter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $form = new PlatosForm($adpter, $local);
         $form->get('submit')->setValue('Add');
         $request = $this->getRequest();
-        if ($request->isPost()) {
-       
+        if ($request->isPost()) {      
             $plato = new Platos();
             $form->setInputFilter($plato->getInputFilter());
-//            $form->setData($request->getPost());
-            //para que reconosca un archivo file en el form
             $form->setInputFilter($plato->getInputFilter());
             $nonFile = $request->getPost()->toArray();
             $File = $this->params()->fromFiles('va_imagen');
             $data = array_merge_recursive(
                     $this->getRequest()->getPost()->toArray(), $this->getRequest()->getFiles()->toArray()
             );
-
-
-            $form->setData($data);
-            // var_dump($this->getRequest()->getPost()->toArray());exit;
-          
+            $form->setData($data);       
             if ($form->isValid()) {
-                //obtengo data de img
                 $nonFile = $request->getPost()->toArray();
 //                $File = $this->params()->fromFiles('va_imagen');
         if($File['name']!='')
@@ -117,7 +105,7 @@ class IndexController extends AbstractActionController {
               $alto =$tamanio[1]; 
               $valor  = uniqid();
               if($ancho>$alto)
-              {//echo 'ddd';exit;
+              {
                   require './vendor/Classes/Filter/Alnum.php';
                   $altura =(int)($alto*$anchura/$ancho); 
                   if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg')      
