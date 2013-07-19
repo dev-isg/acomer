@@ -93,7 +93,7 @@ return array(
         'Platos' => array(
             'default'=>'layout/layout-administrador',
             'index' => 'layout/layout-administrador',
-            'verplatos' => 'layout/layout-portada'
+            'verplatos' => 'layout/layout-portada2'
         ),
     )
 );
