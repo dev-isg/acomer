@@ -424,6 +424,7 @@ class IndexController extends AbstractActionController {
         $formu->get('q')->setValue($_COOKIE['q']);     
         $formu->get('submit')->setValue('Buscar');
         $this->layout()->clase = 'Detalle';
+      //  $this->headTitle('ss');
         $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
