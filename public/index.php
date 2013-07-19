@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
 ini_set('session.cookie_httponly', 1);
+date_default_timezone_set('America/Lima');
 /**
  * This makes our life easier when dealing with paths. Everything is relative
  * to the application root now.
@@ -12,6 +13,13 @@ defined('APPLICATION_PATH')
     
 // Setup autoloading
 require 'init_autoloader.php';
+
+//Cache de navegador
+header('Cache-Control: public');
+$offset = 60 * 60 * 24 * 3;
+$ExpStr = "Expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
+header($ExpStr);
+
 // if (false) {
 // 	$frontendOpts = array (
 // 			'lifetime' => 60 * 30, //30 minutos
