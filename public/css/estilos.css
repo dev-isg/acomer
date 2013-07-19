@@ -2705,6 +2705,15 @@ form#application .control-group .btn-solicito{
   .lista-Home .content-sidebar{
     height: auto;
   }
+  .lista-Nosotros .content-sidebar{
+    height: auto;
+  }
+  .lista-Terminos .content-sidebar{
+    height: auto;
+  }
+  .lista-Solicita .content-sidebar{
+    height: auto;
+  }
   .img-li-top .puntuaciones{
     position: static;
     margin-top: 10px;
