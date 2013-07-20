@@ -79,7 +79,7 @@ class IndexController extends AbstractActionController
     
 
      
-    public function agregarrestauranteAction()
+     public function agregarrestauranteAction()
     {  
                                 $auth = new \Zend\Authentication\AuthenticationService();
         if (!$auth->hasIdentity()) {
@@ -107,14 +107,6 @@ class IndexController extends AbstractActionController
            $form->setInputFilter($restaurante->getInputFilter());
            $nonFile = $request->getPost()->toArray();
            $File    = $this->params()->fromFiles('va_imagen');
-           
-           if($File['name']==null){
-               $File['name']='default-img.jpg';
-               $File['type']='jpg';
-             
-           }
-           var_dump($File);Exit;
-           
            $data    = array_merge_recursive(
                         $this->getRequest()->getPost()->toArray(),          
                        $this->getRequest()->getFiles()->toArray()
@@ -156,8 +148,10 @@ class IndexController extends AbstractActionController
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = $this->_options->upload->images . '/' . $name;
+                       $copia = $this->_options->upload->images . '/restaurante/principal/' . $name;
+                       $origen = $this->_options->upload->images . '/restaurante/original/' . $name;
                        imagejpeg($nuevaimagen,$copia);
+                       imagejpeg($viejaimagen,$origen);
                        $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
                   }
@@ -175,8 +169,10 @@ class IndexController extends AbstractActionController
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = $this->_options->upload->images . '/' . $name;
+                       $copia = $this->_options->upload->images . '/restaurante/principal/' . $name;
+                       $origen = $this->_options->upload->images . '/restaurante/original/' . $name;
                        imagejpeg($nuevaimagen,$copia);
+                       imagejpeg($viejaimagen,$origen);
                        $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
                   }
@@ -286,8 +282,10 @@ class IndexController extends AbstractActionController
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = $this->_options->upload->images . '/' . $name;
+                       $copia = $this->_options->upload->images . '/restaurante/principal/' . $name;
+                       $origen = $this->_options->upload->images . '/restaurante/original/' . $name;
                        imagejpeg($nuevaimagen,$copia);
+                       imagejpeg($viejaimagen,$origen);
                        $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
                   }
@@ -305,8 +303,10 @@ class IndexController extends AbstractActionController
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = $this->_options->upload->images . '/' . $name;
+                       $copia = $this->_options->upload->images . '/restaurante/principal/' . $name;
+                       $origen = $this->_options->upload->images . '/restaurante/original/' . $name;
                        imagejpeg($nuevaimagen,$copia);
+                       imagejpeg($viejaimagen,$origen);
                        $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
                   }

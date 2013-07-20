@@ -35,17 +35,11 @@ return array(
         'img'=>'http://192.168.1.38:8080/img',
         'ruta' => 'http://192.168.1.38:8080',
         'version'=>1,
-        'destacados' => 'http://192.168.1.38:8080/imagenes/destacados',
-        'general' => 'http://192.168.1.38:8080/imagenes/general',
     ),
     'upload' => array(
-        'images' => APPLICATION_PATH . '/public/imagenes'
+        'images' => APPLICATION_PATH . '/public/imagenes',
     ),
-    
-    'verifica' => array(
-        'img' => APPLICATION_PATH . '/public/img'
-    ),
-            
+             
     'service_manager' => array(
         'factories' => array(
             'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory'

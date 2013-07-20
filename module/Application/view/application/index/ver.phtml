@@ -43,7 +43,7 @@ echo $this->form()->closeTag(); ?>
                          }else {$strnom=$doc->name;} 
                          echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?>
                       </span>
-                    <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas">
+                    <img src="<?php echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas">
                   </div>
                  <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"  class="mosaic-backdrop">
                     <div class="details">
@@ -101,7 +101,7 @@ echo $this->form()->closeTag(); ?>
                    <div class="lateral" >
                     <img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas-det">
                    <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" >
-                                  <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="border:0;">
+                                  <img src="<?php echo $this->host('images') . '/plato/general/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="border:0;">
                     </a>
                     </div>
                     <div class="detalle-restaurante">
@@ -149,7 +149,7 @@ echo $this->form()->closeTag(); ?>
                    <div class="lateral" >
                     <img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas-det">
                    <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" >
-                                  <img src="<?php echo $this->host('images') . '/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="border:0;">
+                                  <img src="<?php echo $this->host('images') . '/plato/general/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" style="border:0;">
                     </a>
                     </div>
                     <div class="detalle-restaurante">
@@ -197,9 +197,9 @@ echo $this->form()->closeTag(); ?>
             <div class="plato_r">
               <div class="mosaic-block cover">
                 <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
-                <img src="<?php echo $this->host('images') . '/' .  htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png" alt="" class="mas">
+                <img src="<?php echo $this->host('images') . '/plato/destacado/' .  htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png" alt="" class="mas">
                 </div>
-              <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">                <div class="details">
+              <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">                             <div class="details">
                   <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
                   <p class="title-details" style="font-weight: bold;">Ingredientes</p>
                   <p class="desc-plato" style="font-size:0.9em;"> <?php 

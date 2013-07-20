@@ -156,7 +156,7 @@ class PlatosTable {
 //          else{
 //              echo ('<script>confirm("supero los platos permitidos")</script>');
 //          }
-        } else {
+        } else {// echo 'hola';exit;
 
             if ($this->getPlato($id)) {
                 $this->tableGateway->update($data, array('in_id' => $id));

@@ -3,6 +3,7 @@ namespace Restaurante\Model;
 
 
 
+use Zend\Db\TableGateway\AbstractTableGateway;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
@@ -10,26 +11,18 @@ use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Platform;
-
-
-
-
-
 use Zend\Http\Request;
 
 
 class RestauranteTable
 {
    
-
      protected $tableGateway;
      public $dbAdapter;
     
 
-    public function __construct(TableGateway $tableGateway)
-    {
+    public function __construct(TableGateway $tableGateway) {
         $this->tableGateway = $tableGateway;
-      
     }
    
 
@@ -70,7 +63,7 @@ class RestauranteTable
         }
         return $row;
     }
-    public function guardarRestaurante(Restaurante $restaurante, $comida ,$imagen)
+  public function guardarRestaurante(Restaurante $restaurante, $comida ,$imagen)
     {
         $data = array(
            'va_nombre'         => $restaurante->va_nombre,
@@ -80,16 +73,20 @@ class RestauranteTable
            'va_ruc'            => $restaurante->va_ruc,
            'Ta_tipo_comida_in_id'  => $restaurante->Ta_tipo_comida_in_id );
         $id = (int)$restaurante->in_id;
+        
         if ($id == 0) 
           {
+                   //     var_dump($comida);exit;
                 $this->tableGateway->insert($data); 
+                
                 $idRestaurante=$this->tableGateway->getLastInsertValue();
+          
                     if($comida != '')
                     { 
                     foreach($comida as $key=>$value)
-                      {               
+                      {             
                         $insert = $this->tableGateway->getSql()->insert()->into('ta_restaurante_has_ta_medio_pago')
-                                ->values(array('Ta_restaurante_in_id'=>$idRestaurante,'Ta_medio_pago_in_id'=>$value));
+                        ->values(array('Ta_restaurante_in_id'=>$idRestaurante,'Ta_medio_pago_in_id'=>$value));
                         $selectString2 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insert);
                         $adapter=$this->tableGateway->getAdapter();
                         $result = $adapter->query($selectString2, $adapter::QUERY_MODE_EXECUTE);
