@@ -43,7 +43,8 @@ echo $this->form()->closeTag(); ?>
                          }else {$strnom=$doc->name;} 
                          echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?>
                       </span>
-                    <img src="<?php echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato"><img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas">
+                    <img src="<?php echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); ?>" class="img-plato">
+                    <img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas">
                   </div>
                  <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"  class="mosaic-backdrop">
                     <div class="details">
