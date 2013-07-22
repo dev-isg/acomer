@@ -8,3 +8,7 @@ nbproject
 .settings
 composer.lock
 vendor/bin
+vendor/zendframework
+public/imagenes/*jpg
+public/imagenes/*gif
+public/imagenes/*png

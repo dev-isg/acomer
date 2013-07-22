@@ -52,6 +52,14 @@ class PlatosForm extends Form
                 'id'   => 'Ta_puntaje_in_id',         
             ),
         ));
+        
+                $this->add(array(
+            'name' => 'en_estado',
+            'type' => 'Hidden',
+           'attributes' => array(               
+                'id'   => 'en_estado',         
+            ),
+        ));
        
   
         $this->add(array(
@@ -109,6 +117,19 @@ class PlatosForm extends Form
             ),
             'options' => array(
                 'label' => 'Precio',
+            ),
+        ));
+          
+        $this->add(array(
+            'name' => 'va_otros',
+            'type' => 'Text',
+            'attributes' => array(               
+                'class' => 'span10',
+                'id'   => 'va_otros',
+                'placeholder'=>'Ingrese nombre'
+            ),
+            'options' => array(
+                'label' => 'Otros',
             ),
         ));
           
@@ -186,14 +207,15 @@ class PlatosForm extends Form
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $tiplatos=$results->toArray();
             
-        $auxtipo = array();
-        
+//        $auxtipo = array('0'=>'otros');
+ 
         foreach($tiplatos as $tipo){
             $auxtipo[$tipo['in_id']] = $tipo['va_nombre'];      
         }
-            $auxtipo['0']='otros';
-//        $result= array_merge($auxtipo[0],$auxtipo);
-            return $auxtipo;
+//            $auxtipo['0']='otros';
+//            $auxres=  array_merge(array(0=>'Otros'),$auxtipo);
+//        var_dump($auxtipo);Exit;
+            return $auxtipo;//$auxres;//
             
      }
      

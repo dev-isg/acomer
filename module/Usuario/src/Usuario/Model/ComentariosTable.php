@@ -37,8 +37,8 @@ class ComentariosTable
             $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($select);
             $adapter=$this->tableGateway->getAdapter();
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-
-      return $results;
+    $res=$results->buffer();
+      return $res;
     }
     /*
      * agregar y registrar el comentario posiblemente se mueva
@@ -85,17 +85,14 @@ class ComentariosTable
                 ->query('SELECT ta_comentario.*,SUM(ta_puntaje_in_id)AS SumaPuntaje ,COUNT(ta_comentario.in_id ) AS NumeroComentarios,
                     ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS TotPuntaje
                     FROM ta_comentario
-                    where ta_comentario.ta_plato_in_id='.$coment['Ta_plato_in_id'], $adapter2::QUERY_MODE_EXECUTE);
+                    where ta_comentario.en_estado=aprobado and ta_comentario.ta_plato_in_id='.$coment['Ta_plato_in_id'], $adapter2::QUERY_MODE_EXECUTE);
                         $prom=$promselect->toArray();
-//        var_dump($coment['Ta_plato_in_id']);exit;
-
              
               $update = $this->tableGateway->getSql()->update()->table('ta_plato')
                         ->set(array('Ta_puntaje_in_id'=>$prom[0]['TotPuntaje']))
                         ->where(array('ta_plato.in_id'=>$coment['Ta_plato_in_id']));//$prom[0]['in_id']
                 $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
                 $statementup->execute();
-              //  $platos = new \Platos\Model\PlatosTable();
                 $this->cromSolr($coment['Ta_plato_in_id']);
                 
                 
@@ -117,8 +114,7 @@ public function cromSolr($id)
             $selectString = $sql->getSqlStringForSqlObject($selecttot);            
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);                      
             $plato=$results->toArray(); 
-            require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-                                $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr');  
+             $solr = \Classes\Solr::getInstance()->getSolr();
                                            if ($solr->ping())
                                         {
                                              $solr->deleteByQuery('id:'.$id);
@@ -178,6 +174,7 @@ public function cromSolr($id)
             ->join(array('u'=>'ta_cliente'),'f.ta_cliente_in_id=u.in_id',array('va_nombre_cliente','va_email'))
             ->join(array('m'=>'ta_puntaje'),'f.ta_puntaje_in_id=m.in_id',array('va_valor'))
             ->where(array('f.ta_puntaje_in_id'=>$puntaje));
+    
            }
            if($datos=='' and $puntaje != '' and $estado != '' ){
              $select = $sql->select()
@@ -188,8 +185,10 @@ public function cromSolr($id)
             ->where(array('f.en_estado'=>$estado,'f.ta_puntaje_in_id'=>$puntaje));
            }
             $selectString = $sql->getSqlStringForSqlObject($select);
+
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-            $rowset = $results;
+            $rowset = $results->buffer();
+            //var_dump($rowset);exit;
          if (!$rowset) {
             throw new \Exception("No hay data");
             }

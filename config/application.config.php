@@ -7,8 +7,8 @@ return array(
         'Restaurante',
         'Admin',
         'Local',
-        'Platos'
-       
+        'Platos',
+        'Classes'
 
     ),
 

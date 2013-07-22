@@ -21,7 +21,7 @@ class Formularios extends Form
     {
         // we want to ignore the name passed
         parent::__construct('bubi');
-        $this->setAttribute('method', 'post');
+        $this->setAttribute('method', 'get');
      
         
        $this->add(array(
@@ -30,10 +30,11 @@ class Formularios extends Form
         ));
         $this->add(array(
             'name' => 'q',
+ 
             'type' => 'Text',
          
             'attributes' => array(               
-                
+               'required' => true, 
                 'id'   => 'q',
                 
             ),
@@ -68,21 +69,15 @@ class Formularios extends Form
         $this->add(array(
             'name' => 'distrito',
             'type' => 'Select',
-             'attributes' => array(               
-              
-                'id'   => 'fq'
+             'attributes'=> array( 
+                'id' => 'fq'
             ),
            'options' => array(
-                   
-                  'value_options' => array(
-                          '' => 'selecccione :',
-                                               
-                     ),
+                'value_options' => array(
+                '' => 'selecccione :',                
+                ),
              )
         ));
-        
-        
-  
      
         $this->add(array(
             'name' => 'va_contrasenia',

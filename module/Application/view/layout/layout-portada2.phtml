@@ -1,0 +1,138 @@
+<?php echo $this->doctype(); ?>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  
+    <?php echo $this->headTitle(' Lista del Sabor')?>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="ListaDelSabor.com es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales">
+    <meta name="keywords" content="" />
+    <meta property="og:title" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:description" content="">
+    <link href="<?php echo $this->host('ruta')?>/img/favicon.ico?v<?php echo $this->host('version')?>" rel="shortcut icon" type="image/x-icon"/>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/headjs/0.99/head.load.min.js"></script>
+    <!--
+    <script src="<?php echo $this->host('ruta')?>/js/lib/jquery-1.8.3.min.js?v<?php echo $this->host('version')?>"></script>-->
+    <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css?v'.$this->host('version'))->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+    </head>
+
+  <body class="lista-<?php echo $this->clase; ?>">
+    <script>
+      var urlJson = "<?php echo $this->host('ruta')?>";
+    </script>
+    <?php
+      require './vendor/Classes/Mobile_Detect.php';
+      $detect = new Mobile_Detect;
+      if($detect->isiPad()){ ?>
+        <style type="text/css">
+          .plato_r span{
+            font-size: 12px!important;
+          }
+          .font-desc-c{
+            font-size: 12px;
+            line-height: 16px;
+          }
+          .nom_res{
+            font-size: 12px;
+          }
+          .details h4{
+            line-height: 14px;
+          }
+        </style>
+    <?php }?>
+
+     <script>
+    head.js("<?php echo $this->host('ruta')?>/js/lib/jquery-1.8.3.min.js?v<?php echo $this->host('version')?>")  
+    .js("<?php echo $this->host('ruta')?>/js/vendor/jquery.placeholder.min.js?v<?php echo $this->host('version')?>")
+    .js("<?php echo $this->host('ruta')?>/js/vendor/mosaic.js?v<?php echo $this->host('version')?>")
+     .js("<?php echo $this->host('ruta')?>/js/modernizr.js?v<?php echo $this->host('version')?>")
+    .js("<?php echo $this->host('ruta')?>/js/aplicacion.min.js?v<?php echo $this->host('version')?>")
+    .js("<?php echo $this->host('ruta')?>/js/bootstrap-dropdown.js?v<?php echo $this->host('version')?>");
+    </script>
+ 
+        <div class="contenido">
+        <div class="content-sidebar">
+        <div class="contenido-busqueda">
+          <div class="content-sidebar-ho">
+          <a class="title-home-listado" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
+              <h1>
+              <img src="<?php echo $this->host('ruta')?>/img/logo.png?v<?php echo $this->host('version')?>" alt="logo">
+            </h1>
+          </a>
+          <span class="logan-1" style="font-size: 3.1em;text-align: right;">-</span> 
+          <span class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span> 
+          <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
+          <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
+
+            <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action='<?php echo $this->host('ruta')?>/buscar'>
+              <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"     placeholder="Ingrese el plato"  required="required"/>
+              <input type="submit"  class="btn btn-search-home" value="Buscar"/>
+              <em>Ejm: lomo saltado</em>
+            </form>  
+            <div class="final">
+                <img src="<?php echo $this->host('ruta')?>/img/responsive.png?v<?php echo $this->host('version')?>" alt="" style="padding: 37px 10px;">
+              </div>
+          
+              <div class="solicitar-publicacion">
+                <a href="<?php echo $this->host('ruta')?>/solicita" class="btn btn-warning btn-soli">Solicite su publicación</a>
+              </div>
+          </div>
+          </div><!--Fin del sidebar-->
+      </div>
+
+      <div class="contenido-plato">         
+        <?php echo $this->content; ?>
+       
+       <!--  <div class="subir">
+          <a href="#top"><img src="<?php echo $this->host('static')?>/img/scroll-top.png" alt=""></a>
+        </div> -->
+        <!--  <div class="arrow">
+            <img src="<?php echo $this->host('static')?>/img/flechamenu.png" alt="">
+        </div> -->
+        
+      </div>
+    <div class="footer">
+          <nav class="fo">
+            <ul class="fa">
+              <li>
+                <a href="<?php echo $this->host('ruta')?>/nosotros">Nosotros</a>
+              </li>
+              <li>
+                <a href="<?php echo $this->host('ruta')?>/terminos">Términos y condiciones</a>
+              </li>
+              <li>
+                <a href="<?php echo $this->host('ruta')?>/contactenos">Contáctenos</a>
+              </li>
+              <li>
+                <div class="ups-crap btn-group dropup">
+                  <button class="ups-dev dropdown-toggle" data-toggle="dropdown">Más buscados<span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="<?php echo $this->host('ruta')?>/buscar?q=ceviche">Ceviche</a></li>
+                    <li><a href="<?php echo $this->host('ruta')?>/buscar?q=lomo saltado">Lomo saltado</a></li>
+                    <li><a href="<?php echo $this->host('ruta')?>/buscar?q=arroz con pollo">Arroz con pollo</a></li>
+                  </ul>
+                </div><!-- /btn-group -->
+              </li>
+            </ul>
+          </nav>
+      <footer class="footer-ie8">
+        <p>
+          Desarrollado por ISG - Innovations Systems Group  - Derechos Reservados
+        </p>
+      </footer>
+    </div>
+</div>
+
+    <!-- 
+      <script src="<?php echo $this->host('ruta')?>/js/vendor/jquery.placeholder.min.js?v<?php echo $this->host('version')?>"></script>   
+      <script src="<?php echo $this->host('ruta')?>/js/vendor/mosaic.js?v<?php echo $this->host('version')?>"></script>            
+      <script src="<?php echo $this->host('ruta')?>/js/aplicacion.min.js?v<?php echo $this->host('version')?>"></script>
+      <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/bootstrap-dropdown.js?v<?php echo $this->host('version')?>"></script>-->
+    </body>
+</html>

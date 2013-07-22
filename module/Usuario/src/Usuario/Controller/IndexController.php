@@ -7,16 +7,25 @@ use Zend\Http\Request;
 use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
 use Usuario\Model\Usuario;          // <-- Add this import
-use Usuario\Form\UsuarioForm;       // <-- Add this import
+use Usuario\Form\UsuarioForm; 
+use Usuario\Form\LoginForm;  // <-- Add this import
 use Usuario\Model\UsuarioTable; 
 use Zend\Db\Sql\Sql;
 use Zend\Db\Adapter\Adapter;
+use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\Adapter\DbTable as AuthAdapter;
+use Zend\Authentication\Result as Result;
 
 class IndexController extends AbstractActionController
 {
   protected $usuarioTable;
   public $dbAdapter;
     public function indexAction() {
+                $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
+        
         $filtrar = $this->params()->fromPost('submit'); //$this->_request->getParams();
         $datos = $this->params()->fromPost('texto');
         $tipo = $this->params()->fromPost('listado');
@@ -45,6 +54,10 @@ class IndexController extends AbstractActionController
      }
   public function agregarusuarioAction()
     {
+        $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
         $form = new UsuarioForm();
         $comidas =  $this->roles()->toArray();
         $com = array();
@@ -80,7 +93,13 @@ class IndexController extends AbstractActionController
     
     public function editarusuarioAction()
      
-    { $comidas =  $this->roles()->toArray();
+    { 
+        
+                                $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
+        $comidas =  $this->roles()->toArray();
         $com = array();
         foreach($comidas as $y){
             $com[$y['in_id']] = $y['va_nombre_rol'];
@@ -240,9 +259,9 @@ class IndexController extends AbstractActionController
     public function listarvariosAction(){
          $echo = new IndexController();
         $mas =$echo->rolesAction();
-        var_dump($mas);exit;
+//        var_dump($mas);exit;
       $datos=$this->getUsuarioTable()->listar2();
-      var_dump($datos);exit;
+//      var_dump($datos);exit;
     }
     //imprimer con roles desde sql del zend
     public function moreAction(){
@@ -268,6 +287,92 @@ class IndexController extends AbstractActionController
         $array = array('hola'=>'desde sql',
                         'yea'=>$u->rolAll($adapter)); 
        return new ViewModel($array);
+    }
+    
+    
+     public function loginAction()
+    {
+      
+         $view =new ViewModel();
+//        $view->setTerminal(true);
+        $this->layout('layout/layout-login');
+        
+        
+        $form = new LoginForm();
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            
+              
+            // get post data
+            $post = $request->getPost();
+           
+            // get the db adapter
+            $sm = $this->getServiceLocator();
+            $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+            
+
+            // create auth adapter
+            $authAdapter = new AuthAdapter($dbAdapter);
+              
+            // configure auth adapter
+            $authAdapter->setTableName('Ta_usuario')
+                    ->setIdentityColumn('va_nombre')
+                    ->setCredentialColumn('va_contrasenia');
+
+            // pass authentication information to auth adapter
+            $authAdapter->setIdentity($post->get('va_nombre'))
+                    ->setCredential($post->get('va_contrasenia'));
+
+            // create auth service and set adapter
+            // auth services provides storage after authenticate
+            $authService = new AuthenticationService();
+            $authService->setAdapter($authAdapter);
+
+            // authenticate
+//            var_dump($authAdapter->authenticate());Exit;
+            $result = $authService->authenticate();
+//             var_dump($result->isValid());Exit;
+           
+            // check if authentication was successful
+            // if authentication was successful, user information is stored automatically by adapter
+            if ($result->isValid()) {
+                // redirect to user index page
+                
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante/index/index');
+              
+            } else {
+
+                switch ($result->getCode()) {
+                    case Result::FAILURE_IDENTITY_NOT_FOUND:
+                        /** do stuff for nonexistent identity * */
+                        break;
+
+                    case Result::FAILURE_CREDENTIAL_INVALID:
+                        /** do stuff for invalid credential * */
+                        break;
+
+                    case Result::SUCCESS:
+                        /** do stuff for successful authentication * */
+                        break;
+
+                    default:
+                        /** do stuff for other failure * */
+                        break;
+                }
+            }
+        }
+          $view->setVariables(array('form' => $form));
+         return $view;
+//        return array('form' => $form);
+    }
+    
+    public function logoutAction()
+    {
+        $auth = new AuthenticationService();
+        $auth->clearIdentity();
+         return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+//        return $this->redirect()->toRoute('user');
     }
 
 

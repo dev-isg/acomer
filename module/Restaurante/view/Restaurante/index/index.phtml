@@ -3,7 +3,7 @@
   <a  class="btn" href="<?php echo $this->basePath();?>/restaurante/index/agregarrestaurante">AGREGAR RESTAURANTE</a>
     </div>
     </div> -->
-    <div class="span10">
+    <div class="span12">
    
 <form name='form_busqueda'class="form-search" action='<?php echo $this->basePath(); ?>/restaurante/index/index' method ="post">
    <div class="control-group span3">
@@ -36,8 +36,8 @@
     </div>
     </form>  
     </div>    
-
-<div class="span10" id="flip-scroll">
+<div class="row-fluid">
+<div class="span12" id="flip-scroll">
 <table class="table table-bordered table-hover">
     <thead class="cf">  
         <tr>
@@ -84,5 +84,5 @@
 </table>
      <?php echo (count($this->restaurante)> 0)?$this->paginationControl($this->restaurante, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/restaurante/index/index?')):""; ?>
 </div>
-
+</div>
 

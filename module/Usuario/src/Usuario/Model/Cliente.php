@@ -24,7 +24,8 @@ class Cliente extends TableGateway{
                         OR (va_email LIKE "%'.$consulta.'%")');
 //                    ->where('(in_id LIKE "%'.$consulta.'%") OR (va_nombre LIKE "%'.$consulta.'%") 
 //                        OR (va_email LIKE "%'.$consulta.'%")');
-            return $datos;//->toArray();     
+            $res=$datos->buffer();
+            return $res;//->toArray();     
     }
     
          public function getClientePorId($id)

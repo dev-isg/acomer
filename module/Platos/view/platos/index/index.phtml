@@ -1,5 +1,5 @@
 
-    <div class="span10" style="padding: 10px 0px;">
+    <div class="span12" style="padding: 10px 0px;">
    
     <div class="control-group span8 "> 
             <form name='form_busqueda'class="form-search" action='#' method ="post" style=" margin: 0px;">
@@ -15,7 +15,8 @@
     </div>
 
     </div>
-<div class="span10" id="flip-scroll">
+    <div class="row-fluid">
+<div class="span12" id="flip-scroll">
 <table class="table table-bordered table-hover" id="tabla-platos">
     <thead class="cf">  
         <tr>
@@ -65,6 +66,7 @@
     
 </table>
 </div>
+</div>
 <!-- <div class="span4">  
     <div class="modal small hide fade" id="eli-plato" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
@@ -82,14 +84,15 @@
     </div>
     
 </div> -->
+  <script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js"></script>
 <script>
   $(document).ready(function(){
       var puntaje = function(item,p){
      $(item).raty({ 
                      readOnly: true,
                       score: p, 
-                      starOff: '/img/t2.png',
-                      starOn : '/img/t1.png'                         
+                      starOff: '<?php echo $this->host('static')?>/img/t2.png',
+                      starOn : '<?php echo $this->host('static')?>/img/t1.png'                         
       });
    }
      $("#tabla-platos").find(':input').each(function() {

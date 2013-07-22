@@ -3,7 +3,7 @@
   <a  class="btn" href="<?php echo $this->basePath();?>/restaurante/index/agregarrestaurante">AGREGAR RESTAURANTE</a>
     </div>
     </div> -->
-    <div class="span10">
+    <div class="span12">
    
      <form name='form_busqueda'class="form-search" action='<?php echo $this->basePath(); ?>/usuario/comentarios/index' method ="post">
      <div class="control-group span3">
@@ -40,8 +40,8 @@
     </form>
     </div>
        
-
- <div class="span10" id="flip-scroll">
+<div class="row-fluid">
+ <div class="span12" id="flip-scroll">
  <table class="table table-bordered table-hover" id="tabla-puntaje">
     <thead class="cf">  
         <tr>
@@ -78,9 +78,10 @@
         </tr>
 
   <?php endforeach; ?>
- <!--     <div style="clear: both;">
-<?php (count($this->paginator)> 0)?$this->paginationControl($this->paginator, 'Sliding', 'usuario/index/paginador.phtml'):""; ?>-->
+
+
 </table>
+    <?php echo (count($this->comentarios)> 0)?$this->paginationControl($this->comentarios, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/usuario/comentarios/index?')):""; ?>
 <div class="span10" style="padding: 10px 0; margin:0px;">  
      <?php $estado=$_POST["puntaje"];
            $valor=$_POST["estado"];  
@@ -91,7 +92,7 @@
                 
 </div>
 </div>
-
+</div>
 <div class="span4">
   
     <div class="modal small hide fade" id="eli-com" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -110,14 +111,15 @@
     </div>
     
 </div>
+<script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js"></script>
 <script>
   $(document).ready(function(){
       var puntaje = function(item,p){
      $(item).raty({ 
                      readOnly: true,
                       score: p, 
-                      starOff: '/img/t1.png',
-                      starOn : '/img/t2.png'                         
+                      starOff: '<?php echo $this->host('static')?>/img/t1.png',
+                      starOn : '<?php echo $this->host('static')?>/img/t2.png'                         
       });
    }
      $("#tabla-puntaje").find(':input').each(function() {

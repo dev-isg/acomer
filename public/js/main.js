@@ -24,9 +24,6 @@ $('.control-group').removeClass('success');
 };
 $('#local').validate({
       rules: {
-        va_telefono: {
-            required: true                       
-        },
         va_horario: { required: true },
         va_rango_precio :{ required:true},
         ta_dia_in_id:{ required : true },
@@ -38,9 +35,6 @@ $('#local').validate({
            
       },
       messages:{
-            va_telefono: {
-                required:"Por favor ingresar el numero telefonico"
-             },
             va_razon_social:{
                 required:"Por favor ingresar un horario"
                        },
@@ -93,7 +87,7 @@ $('#restaurante').validate({
                 number:true,
                 rucReal:true            
             },
-        va_imagen : { required : true},
+        
         Ta_tipo_comida_in_id:{
                 required : true
               }       
@@ -115,9 +109,7 @@ $('#restaurante').validate({
                 number : "Por favor ingresar solo numeros",
                 rucReal:" Ingresa un Ruc valido "
             },
-            va_imagen : {
-              required : "Por favor ingresar una imagen"
-            },       
+                
             Ta_tipo_comida_in_id :{
               required : "Por favor ingresar un tipo de plato"                
             }
@@ -144,7 +136,7 @@ $('#platos').validate({
                 required : true,
                 number:true                       
             },
-        va_imagen : { required : true},
+      
         Ta_tipo_plato:{
                 required : true
               }       
@@ -161,9 +153,7 @@ $('#platos').validate({
                 required : "Por favor ingrese un precio",
                 number : "Por favor ingresar solo numeros"              
             },
-            va_imagen : {
-              required : "Por favor ingresar una imagen"
-            },       
+                 
             Ta_tipo_plato :{
               required : "Por favor ingresar un tipo de plato"                
             }
@@ -258,7 +248,6 @@ $.getJSON('/local/index/jsondepartamento',function(data){
     }
 });
 });
-
   $("#departamento").change(function(evento){
    var dep=parseInt($(this).val());
    var url="/local/index/jsonprovincia?iddepa=" + dep;

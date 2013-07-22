@@ -27,12 +27,17 @@ return array(
             'application' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/application',
+                    'route'    => '/',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Index',
                         'action'        => 'index',
                     ),
+//                    'solicita'=>array(
+//                      '__NAMESPACE__' => 'Application\Controller',
+//                        'controller'    => 'Index',
+//                        'action'        => 'solicita',     
+//                    ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
@@ -49,8 +54,108 @@ return array(
                             ),
                         ),
                     ),
+                    
                 ),
             ),
+            'busqueda' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/buscar',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'ver'
+                    )
+                )
+            ),
+
+            'busqueda-distrito' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/buscar-por-distrito',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'detalleubicacion'
+                    )
+                )
+            ),
+            
+            
+            'jsonmapasa' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/jsonmapasa',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'jsonmapasa'
+                    )
+                )
+            ),
+             'jsondesta' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/jsondesta',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'jsondesta'
+                    )
+                )
+            ),
+      
+              'nosotros' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/nosotros',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'nosotros'
+                    )
+                )
+            ),
+                'terminos' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/terminos',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'terminos'
+                    )
+                )
+            ),
+                  'contactenos' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/contactenos',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'contactenos'
+                    )
+                )
+            ),
+
+                    'solicita' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/solicita',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'solicita'
+                    )
+                )
+            ),
+
+            'platos' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/plato/:nombre',
+                    'defaults' => array(
+                        'controller' => 'Platos\Controller\Index',
+                        'action' => 'verplatos'
+                    )
+                    
+                )
+            ),
+            
+
         ),
     ),
     'service_manager' => array(
@@ -75,8 +180,10 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Hola' => 'Application\Controller\HolaController',
-             'Application\Controller\Formulario' => 'Application\Controller\FormularioController'
+            'Platos\Controller\Index' => 'Platos\Controller\IndexController'
+//            'Local\Controller\Index' => 'Local\Controller\IndexController',
+//            'Application\Controller\Hola' => 'Application\Controller\HolaController',
+//            'Application\Controller\Formulario' => 'Application\Controller\FormularioController'
             
         ),
     ),
@@ -87,15 +194,35 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
-            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
-             'layout/layout-portada'  => __DIR__ . '/../view/layout/layout-portada.phtml',
-                 'layout/layout-dos'  => __DIR__ . '/../view/layout/layout-dos.phtml',
+//            'layout/layout-portada'           => __DIR__ . '/../view/layout/layout-portada2.phtml',
+            'layout/layout-error'           => __DIR__ . '/../view/layout/layout-error.phtml',
+//             'layout/layout-portada'  => __DIR__ . '/../view/error/404.phtml',
+            // 'layout/layout-dos'  => __DIR__ . '/../view/layout/layout-dos.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ),
         'template_path_stack' => array(
-            __DIR__ . '/../view',
+            'application'=>__DIR__ . '/../view',
         ),
     ),
+    'module_layouts' => array(
+        'Application' => array(
+            'index' => '/../view/layout/layout-portada2',
+            'terminos' => 'layout/layout-portada2',
+            'nosotros' => 'layout/layout-portada2',
+            'solicita' => 'layout/layout-portada2',
+            'contactenos' => 'layout/layout-portada2',
+            'ver' => 'layout/layout-portada2',
+            'detalleubicacion' => 'layout/layout-portada2'
+        ),
+        ),
+
+    'view_helpers' => array(
+        'invokables' => array(
+            'host' => 'Application\View\Helper\Host',
+            'canonicalUrl' => 'Application\View\Helper\CanonicalUrl',
+        )
+    )
+
 );

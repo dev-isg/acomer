@@ -97,5 +97,35 @@ class Module implements AutoloaderProviderInterface
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+//        
+//                      $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function($e) {
+//             $result = $e->getResult();
+//             $result->setTerminal(TRUE);
+//             
+//
+//            });
+//          $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this,'onDispatchError'), 100); 
+          
+                                $e->getApplication()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) {
+            $controller      = $e->getTarget();
+            $controllerClass = get_class($controller);
+            $moduleNamespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
+            $config          = $e->getApplication()->getServiceManager()->get('config');
+
+            $routeMatch = $e->getRouteMatch();
+            $actionName = strtolower($routeMatch->getParam('action', 'not-found')); // get the action name
+
+            if (isset($config['module_layouts'][$moduleNamespace][$actionName])) {
+                $controller->layout($config['module_layouts'][$moduleNamespace][$actionName]);
+            }elseif(isset($config['module_layouts'][$moduleNamespace]['default'])) {
+                $controller->layout($config['module_layouts'][$moduleNamespace]['default']);
+            }
+
+        }, 100);
     }
+    
+            function onDispatchError(MvcEvent $e) {
+            $vm = $e->getViewModel();
+            $vm->setTemplate('layout/layout-error');
+}
 }

@@ -1,0 +1,45 @@
+<?php echo $this->doctype(); ?>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Error 404 </title>
+   
+        <meta name="description" content="ListaDelSabor.com es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales">
+        <meta name="viewport" content="width=device-width">
+        <link href="<?php echo $this->host('static')?>/img/favicon.ico?v<?php echo $this->host('version')?>" rel="shortcut icon" type="image/x-icon"/>
+          
+        <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css?v'.$this->host('version'))
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css?v'.$this->host('version')) ?>
+                        </head>                       
+
+  <body>
+    <div class="contenido">
+      <div class="head-error">
+         <a class="home-error" href="<?php echo $this->basePath(); ?>/" title="Listado del Sabor">
+              <h1>
+              <img src="<?php echo $this->host('static')?>/img/logo.png?v<?php echo $this->host('version')?>" alt="logo" style="margin-top: 20px;width: 400px">
+            </h1>
+          </a>
+      </div>
+      <div class="contenido-error">
+      <h1 style="padding: 1em;">ERROR 404 - Pagina no Encontrada</h1>
+      <div class="descripcion-error">
+      <p>La página solicitada no está disponible. Disculpa por las molestias.</p>
+      <p>Puede haber cambiado de dirección o con frecuencia puede ser debido a algún error en escribir la dirección de la página.</p>
+      <p>Siempre puedes:</p>
+      <ul>
+        <li><a href="javascript:window.history.back();">Volver a la página anterior</a> para probar otra vez. </li>
+        <li>Ir a la <a href="<?php echo $this->basePath(); ?>/">Página Principal</a></li>
+      </ul> 
+      </div>      
+      </div>
+
+    </div>
+      <script src="<?php echo $this->basePath()?>/js/lib/jquery-1.8.3.min.js?v<?php echo $this->host('version')?>"></script> 
+    
+    </body>
+</html>

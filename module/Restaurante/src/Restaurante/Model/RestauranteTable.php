@@ -3,6 +3,7 @@ namespace Restaurante\Model;
 
 
 
+use Zend\Db\TableGateway\AbstractTableGateway;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
@@ -10,26 +11,18 @@ use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Platform;
-
-
-
-
-
 use Zend\Http\Request;
 
 
 class RestauranteTable
 {
    
-
      protected $tableGateway;
      public $dbAdapter;
     
 
-    public function __construct(TableGateway $tableGateway)
-    {
+    public function __construct(TableGateway $tableGateway) {
         $this->tableGateway = $tableGateway;
-      
     }
    
 
@@ -41,7 +34,8 @@ class RestauranteTable
         $select = $sql->select()
                 ->from(array('f' => 'ta_restaurante'))
                 ->join(array('b' => 'ta_tipo_comida'), 'f.Ta_tipo_comida_in_id=b.in_id', array('va_nombre_tipo'))//,array('va_nombre_rol'))
-              ->where(array('f.Ta_tipo_comida_in_id=b.in_id'));//,'f.en_estado=1'));    
+              ->where(array('f.Ta_tipo_comida_in_id=b.in_id'))
+               ->order('in_id DESC');
         
         $selectString = $sql->getSqlStringForSqlObject($select);
     
@@ -69,7 +63,7 @@ class RestauranteTable
         }
         return $row;
     }
-    public function guardarRestaurante(Restaurante $restaurante, $comida ,$imagen)
+  public function guardarRestaurante(Restaurante $restaurante, $comida ,$imagen)
     {
         $data = array(
            'va_nombre'         => $restaurante->va_nombre,
@@ -79,16 +73,20 @@ class RestauranteTable
            'va_ruc'            => $restaurante->va_ruc,
            'Ta_tipo_comida_in_id'  => $restaurante->Ta_tipo_comida_in_id );
         $id = (int)$restaurante->in_id;
+        
         if ($id == 0) 
           {
+                   //     var_dump($comida);exit;
                 $this->tableGateway->insert($data); 
+                
                 $idRestaurante=$this->tableGateway->getLastInsertValue();
+          
                     if($comida != '')
                     { 
                     foreach($comida as $key=>$value)
-                      {               
+                      {             
                         $insert = $this->tableGateway->getSql()->insert()->into('ta_restaurante_has_ta_medio_pago')
-                                ->values(array('Ta_restaurante_in_id'=>$idRestaurante,'Ta_medio_pago_in_id'=>$value));
+                        ->values(array('Ta_restaurante_in_id'=>$idRestaurante,'Ta_medio_pago_in_id'=>$value));
                         $selectString2 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insert);
                         $adapter=$this->tableGateway->getAdapter();
                         $result = $adapter->query($selectString2, $adapter::QUERY_MODE_EXECUTE);
@@ -129,30 +127,48 @@ class RestauranteTable
            $sql = new Sql($adapter);
         
            if($comida=='' and $estado == ''){
+          
              $select = $sql->select()
             ->from(array('f' => 'ta_restaurante')) 
             ->join(array('b' => 'ta_tipo_comida'),'f.Ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
            ->where(array('f.va_nombre'=>$datos));
            }
+
+//          else if($datos=='' and $estado == ''){
+          
+
+
            if($datos=='' and $estado == ''){
+
              $select = $sql->select()
             ->from(array('f' => 'ta_restaurante')) 
             ->join(array('b' => 'ta_tipo_comida'),'f.Ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
            ->where(array('f.Ta_tipo_comida_in_id'=>$comida));
            }
-         if($datos=='' and $comida == ''){
-
+       else if($datos=='' and $comida == ''){
+             
              $select = $sql->select()
             ->from(array('f' => 'ta_restaurante')) 
             ->join(array('b' => 'ta_tipo_comida'),'f.Ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
            ->where(array('f.en_estado'=>$estado));
            }
-            if($datos=='' and $comida != '' and $estado != '' ){
+        else if($datos=='' and $comida != '' and $estado != '' ){
+           
              $select = $sql->select()
             ->from(array('f' => 'ta_restaurante')) 
             ->join(array('b' => 'ta_tipo_comida'),'f.Ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
             ->where(array('f.en_estado'=>$estado))
             ->where(array('f.Ta_tipo_comida_in_id'=>$comida,'f.en_estado'=>$estado));
+           }
+           else{
+            $select = $sql->select()
+            ->from(array('f' => 'ta_restaurante')) 
+            ->join(array('b' => 'ta_tipo_comida'),'f.Ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
+//            ->where(array('f.en_estado'=>$estado))
+//             ->where(array('f.Ta_tipo_comida_in_id'=>$comida,'f.en_estado'=>$estado))->where->and->like('f.va_nombre', '%'.$datos.'%');
+            ->where(array('f.Ta_tipo_comida_in_id'=>$comida,'f.en_estado'=>$estado,'f.va_nombre'=>$datos));
+//            ->where->like('f.va_nombre', '%'.$datos);
+           
            }
             $selectString = $sql->getSqlStringForSqlObject($select);
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);

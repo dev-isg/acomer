@@ -28,9 +28,12 @@ class ClientesController extends AbstractActionController {
         } else {
             $clientes = $this->getTableClientes()->getCliente();
         }
-
+        
+         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($clientes));
+         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+         $paginator->setItemCountPerPage(10);
         return new ViewModel(array(
-                    'clientes' => $clientes,
+                    'clientes' => $paginator,
                 ));
     }
     public function agregarclientesAction(){
@@ -45,7 +48,7 @@ class ClientesController extends AbstractActionController {
             $datos=$this->getRequest()->getPost()->toArray();
 //            var_dump($datos);exit;
             $form->setData($datos);
-            var_dump($form->isValid($datos));
+//            var_dump($form->isValid($datos));
             if ($form->isValid($datos)) {
 //                $album->exchangeArray($form->getData());
                

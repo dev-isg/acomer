@@ -37,6 +37,12 @@ class IndexController extends AbstractActionController
     
     public function indexAction()
     {
+        
+        $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/usuario/index/login');
+        }
+//        $this->layout('layout/layout22');
         //$this->dbAdapter=$this->getServiceLocator()->get('Zend\Db\Adapter');
         //$u=new Ubigeo($this->dbAdapter);
        // var_dump($u->getUbigeo());exit;
@@ -81,7 +87,10 @@ class IndexController extends AbstractActionController
 
     
     public function agregarlocalAction() {
-
+       $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
         $form = new LocalForm();
         $id = $this->params()->fromQuery('id');
 
@@ -95,7 +104,7 @@ class IndexController extends AbstractActionController
         foreach ($servi as $y) {
             $array[$y['in_id']] = $y['va_nombre'];
         }
-
+//        $form->get('servicio')->setOptions(array('required'=>false));
         $form->get('servicio')->setValueOptions($array);
 
         if ($request->isPost()) {
@@ -127,7 +136,10 @@ class IndexController extends AbstractActionController
  
     
     public function editarlocalAction() {
-
+       $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
         $id = (int) $this->params()->fromQuery('id', 0);
         $idrest=(int) $this->params()->fromRoute('in_id', 0);
       

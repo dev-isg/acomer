@@ -54,7 +54,7 @@ class Local implements InputFilterAwareInterface
         $this->provincia = (!empty($data['provincia'])) ? $data['provincia'] : null;
         $this->distrito = (!empty($data['distrito'])) ? $data['distrito'] : null;
         
-//        $this->servicio=(!empty($data['servicio'])) ? $data['servicio'] : null;
+        $this->servicio=(!empty($data['servicio'])) ? $data['servicio'] : null;
     }
     
   public function getArrayCopy()
@@ -75,7 +75,7 @@ class Local implements InputFilterAwareInterface
             
                $inputFilter->add($factory->createInput(array(
                 'name'     => 'va_telefono',
-                'required' => true,
+                'required' => false,
                 'filters'  => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
@@ -86,7 +86,7 @@ class Local implements InputFilterAwareInterface
                         'options' => array(
                             'encoding' => 'UTF-8',
                             'min'      => 1,
-                            'max'      => 10,
+                            'max'      => 18,
                         ),
                     ),
                 ),
@@ -111,9 +111,9 @@ class Local implements InputFilterAwareInterface
                 ),
             )));
         
-//            $inputFilter->add($factory->createInput(array(
-//                'name'     => 'va_horario_opcional',
-//                'required' => true,
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'servicio',
+                'required' => false,)));
 //                'filters'  => array(
 //                    array('name' => 'StripTags'),
 //                    array('name' => 'StringTrim'),

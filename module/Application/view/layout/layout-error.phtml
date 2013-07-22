@@ -1,0 +1,48 @@
+<?php echo $this->doctype(); ?>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Error 404 </title>   
+        <meta name="description" content="ListaDelSabor.com es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales">
+        <meta name="viewport" content="width=device-width">
+        <link href="<?php echo $this->host('static')?>/img/favicon.ico?v<?php echo $this->host('version')?>" rel="shortcut icon" type="image/x-icon"/>          
+        <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/style-error.css?v'.$this->host('version'))
+                         ?>
+                        </head>               
+
+  <body>
+		 <body>
+        <div class="container">
+            <div id="header">
+            <a href="<?php echo $this->basePath(); ?>/" ><img src="<?php echo $this->host('static')?>/img/logo.png?v<?php echo $this->host('version')?>" title="Listado del Sabor"></a> 
+                <h1>PAGINA NO ENCONTRADA</h1>                                           
+            </div>
+
+            <div class="warning">            
+                <p class="sign alert">Alert!</p>
+                <p>La página que está buscando es posible que se ha borrado, haya cambiado de nombre o no esté disponible temporalmente..</p>
+            </div>
+
+            <h4><i class="sign tip">Tip: </i><strong>Por favor intente lo siguiente:</strong></h4>
+            <ul>
+              <li>Compruebe la ortografía</li>
+              <li>Ir a la <a href="<?php echo $this->basePath(); ?>/">Página Principal</a></li>
+              <li><a href="javascript:history.back()">Volver a la página anterior</a></li>
+            </ul>
+
+            <div id="footer">            
+                <div class="contact"><i class="sign call">Tip: </i><p class="marquee">Si crees que esto es un error en el servidor, por favor póngase en contacto con el administrador del sistema.</p></div>            
+
+                <p class="copyright">&copy; 2013 Innovations Systems Group</p>
+            </div> 
+        </div>    
+
+      <script src="<?php echo $this->basePath()?>/js/vendor/prefixfree.min.js?v<?php echo $this->host('version')?>"></script> 
+    
+    </body>
+</html>
+<?php echo $this->content;?>

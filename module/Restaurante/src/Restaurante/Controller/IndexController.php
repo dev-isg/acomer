@@ -20,13 +20,24 @@ class IndexController extends AbstractActionController
 {
   protected $restauranteTable;
   public $dbAdapter;
-    
+    protected $_options;
+    public function __construct()
+    {
+    	$this->_options = new \Zend\Config\Config ( include APPLICATION_PATH . '/config/autoload/global.php' );
+    }
      public function indexAction() {
+         
+        $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
+
+         
         $filtrar = $this->params()->fromPost('submit'); 
         $datos = $this->params()->fromPost('texto');
         $comida = $this->params()->fromPost('comida');
         $estado = $this->params()->fromPost('estado');
-          $lista = $this->getRestauranteTable()->fetchAll();
+        $lista = $this->getRestauranteTable()->fetchAll();
        $request = $this->getRequest();
          if ($request->isPost()) {
             $lista = $this->getRestauranteTable()->buscarRestaurante($datos,$comida,$estado);
@@ -38,7 +49,7 @@ class IndexController extends AbstractActionController
             $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
          $paginator->setItemCountPerPage(10);
-         
+//          $this->layout('layout/layout-portada');
         return array(
           'restaurante' => $paginator,//$lista,
             'comida' => $this->comidas()
@@ -68,8 +79,13 @@ class IndexController extends AbstractActionController
     
 
      
-    public function agregarrestauranteAction()
+ public function agregarrestauranteAction()
     {  
+                                $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
+        
         $form = new RestauranteForm();
         $medio =  $this->medio()->toArray();
         $medi = array();
@@ -96,13 +112,13 @@ class IndexController extends AbstractActionController
                        $this->getRequest()->getFiles()->toArray()
                    ); 
     $form->setData($data);     
-    if ($form->isValid()) {               
+    if ($form->isValid()) { 
             $nonFile = $request->getPost()->toArray();
-            $File = $this->params()->fromFiles('va_imagen');
+        if($File['name']!='')
+          {
             $restaurante->exchangeArray($form->getData());
             $adapter = new \Zend\File\Transfer\Adapter\Http();
           if (!$adapter->isValid()){
-                  
                      $dataError = $adapter->getMessages();
                      $error = array();
                      foreach($dataError as $key=>$row)
@@ -110,7 +126,7 @@ class IndexController extends AbstractActionController
                          $error[] = $row;
                      }
                      $form->setMessages(array('imagen'=>$error ));
-          } else {    
+          } else {
               $anchura = 240;
               $altura = 143; 
               $imf =$File['name'];
@@ -129,12 +145,13 @@ class IndexController extends AbstractActionController
                   $filter   = new \Filter_Alnum();
                   $filtered = $filter->filter($nom);
                   $name = $filtered.'-'.$imf2;
-                  //var_dump($name);exit;
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
+                       $copia = $this->_options->upload->images . '/restaurante/principal/' . $name;
+                       $origen = $this->_options->upload->images . '/restaurante/original/' . $name;
                        imagejpeg($nuevaimagen,$copia);
+                       imagejpeg($viejaimagen,$origen);
                        $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
                   }
@@ -152,8 +169,10 @@ class IndexController extends AbstractActionController
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
+                       $copia = $this->_options->upload->images . '/restaurante/principal/' . $name;
+                       $origen = $this->_options->upload->images . '/restaurante/original/' . $name;
                        imagejpeg($nuevaimagen,$copia);
+                       imagejpeg($viejaimagen,$origen);
                        $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
                   }
@@ -161,12 +180,22 @@ class IndexController extends AbstractActionController
                }
             }       
           }
-        }     
+          else {   
+              $restaurante->exchangeArray($form->getData());
+              $name = 'default-img.jpg';
+              $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante'); }
+           }
+          } 
+             
         return array('form' => $form);
      }
  public function editarrestauranteAction()   
     {   
-//     var_dump('hasta aka');
+    $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }
         $id = (int) $this->params()->fromRoute('in_id', 0);
         $va_nombre = $this->params()->fromRoute('va_nombre',0);
         //var_dump($id);exit;
@@ -177,7 +206,7 @@ class IndexController extends AbstractActionController
         }
         try {
             $restaurante = $this->getRestauranteTable()->getRestaurante($id);
-           // var_dump($restaurante);exit;
+            
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
@@ -198,6 +227,7 @@ class IndexController extends AbstractActionController
         }
         $form->get('Ta_tipo_comida_in_id')->setValueOptions($com);
         $form->get('va_modalidad')->setValueOptions($medi);
+        //$form->get('va_imagen')->setValue($comidas[0]['']);
 
         $form->bind($restaurante);
 
@@ -206,18 +236,30 @@ class IndexController extends AbstractActionController
         $comida = $this->params()->fromPost('va_modalidad');
         
         if ($request->isPost()) {
-
+           
+            $File    = $this->params()->fromFiles('va_imagen');
             $form->setInputFilter($restaurante->getInputFilter());
             $nonFile = $request->getPost()->toArray();
-            $File    = $this->params()->fromFiles('va_imagen');
+            
             $data    = array_merge_recursive(
                         $this->getRequest()->getPost()->toArray(),          
                        $this->getRequest()->getFiles()->toArray()
                    ); 
             $form->setData($data); 
-            if ($form->isValid()) {
-                $nonFile = $request->getPost()->toArray();
-               $File = $this->params()->fromFiles('va_imagen');            
+         if ($form->isValid()) { 
+            $nonFile = $request->getPost()->toArray();
+        if($File['name']!='')
+          {
+            $adapter = new \Zend\File\Transfer\Adapter\Http();
+          if (!$adapter->isValid()){
+                     $dataError = $adapter->getMessages();
+                     $error = array();
+                     foreach($dataError as $key=>$row)
+                     {
+                         $error[] = $row;
+                     }
+                     $form->setMessages(array('imagen'=>$error ));
+          } else {
               $anchura = 240;
               $altura = 143; 
               $imf =$File['name'];
@@ -226,8 +268,14 @@ class IndexController extends AbstractActionController
               $ancho =$tamanio[0]; 
               $alto =$tamanio[1]; 
               $valor  = uniqid();
+              $imagen_restaurante=$this->getRestauranteTable()->getRestaurante($id);
+              $imagen = $imagen_restaurante->va_imagen;
               if($ancho>$alto)
-              {//echo 'ddd';exit;
+              { 
+                $eliminar = $this->_options->upload->images . '/restaurante/original/' . $imagen;
+                $eliminar1 = $this->_options->upload->images . '/restaurante/principal/' . $imagen;
+                  unlink($eliminar);
+                  unlink($eliminar1);
                   require './vendor/Classes/Filter/Alnum.php';
                   $altura =(int)($alto*$anchura/$ancho); 
                   if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg')      
@@ -236,19 +284,24 @@ class IndexController extends AbstractActionController
                   $filter   = new \Filter_Alnum();
                   $filtered = $filter->filter($nom);
                   $name = $filtered.'-'.$imf2;
-                  //var_dump($name);exit;
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
+                       $copia = $this->_options->upload->images . '/restaurante/principal/' . $name;
+                       $origen = $this->_options->upload->images . '/restaurante/original/' . $name;
                        imagejpeg($nuevaimagen,$copia);
+                       imagejpeg($viejaimagen,$origen);
                        $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
                   }
 
                }
                    if($ancho<$alto)
-              {require './vendor/Classes/Filter/Alnum.php';
+              {$eliminar = $this->_options->upload->images . '/restaurante/original/' . $imagen;
+                $eliminar1 = $this->_options->upload->images . '/restaurante/principal/' . $imagen;
+                  unlink($eliminar);
+                  unlink($eliminar1);
+                       require './vendor/Classes/Filter/Alnum.php';
                   $anchura =(int)($ancho*$altura/$alto); 
                   if($info['extension']=='jpg'or $info['extension']=='JPG'or $info['extension']=='jpeg')      
                   {  $nom = $nonFile['va_nombre']; 
@@ -259,13 +312,23 @@ class IndexController extends AbstractActionController
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = "C:/source/zf2/acomer/public/imagenes/$name";
+                       $copia = $this->_options->upload->images . '/restaurante/principal/' . $name;
+                       $origen = $this->_options->upload->images . '/restaurante/original/' . $name;
                        imagejpeg($nuevaimagen,$copia);
+                       imagejpeg($viejaimagen,$origen);
                        $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante');  
                   }
+
                }
-            }
+            }       
+          }
+          else {   
+              $restaura=$this->getRestauranteTable()->getRestaurante($id);
+              $name = $restaura->va_imagen;//'default-img.jpg';
+              $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante'); }
+           }
         }
  
      return array(
@@ -388,8 +451,7 @@ class IndexController extends AbstractActionController
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
-        require './vendor/SolrPhpClient/Apache/Solr/Service.php';
-        $solr = new \Apache_Solr_Service('192.168.1.38', 8983, '/solr');
+       $solr = \Classes\Solr::getInstance()->getSolr();
         if ($solr->ping()){
             $solr->deleteByQuery('id:' . $id);
             $document = new \Apache_Solr_Document();
@@ -414,5 +476,23 @@ class IndexController extends AbstractActionController
             $solr->optimize();
         }
     }
+    
+    
+      public function cronsolarAction()
+        {
+        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+            $adapter = $this->dbAdapter;
+            $sql = new Sql($adapter); 
+            $select = $sql->select()
+            ->from('ta_plato');
+            $selectS = $sql->getSqlStringForSqlObject($select);
+            $resul = $adapter->query($selectS, $adapter::QUERY_MODE_EXECUTE);
+            $plato=$resul->toArray();
+            foreach ($plato as $result) 
+            {
+            $this->estadoRestauranteSolarAction($result['in_id']);
+            }
+           echo 'cron finalizado';exit;
+        }
 
 }

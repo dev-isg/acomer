@@ -4,7 +4,7 @@
 $title = 'Editar Platos '.$this->va_nombre;
 $this->headTitle($title);
 ?>
-<div class="span8">
+<div class="span12">
 <?php
 $form = $this->form;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
@@ -23,7 +23,7 @@ echo $this->form()->openTag($form);
 <?php echo $this->formHidden($form->get('Ta_usuario_in_id'));?>
 <?php echo $this->formHidden($form->get('Ta_puntaje_in_id'));?>   
 <?php //echo $this->formHidden($form->get('en_destaque'));?>
-<?php //echo $this->formHidden($form->get('en_estado'));?>
+<?php echo $this->formHidden($form->get('en_estado'));?>
 <div class="row-fluid">
 <div class="control-group span6"><?php echo $this->formRow($form->get('va_nombre'));?></div>
 <div class="control-group span6"><?php echo $this->formRow($form->get('va_imagen'));?></div>
