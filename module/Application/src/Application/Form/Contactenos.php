@@ -10,7 +10,7 @@ class Contactenos extends Form
     public function __construct($name = null)
     {
         // we want to ignore the name passed
-        parent::__construct('applicationxxx');
+        parent::__construct('application');
         $this->setAttribute('method', 'post');        
 
         $this->add(array(
@@ -53,9 +53,7 @@ class Contactenos extends Form
 
                 // 'label' => 'correo',
             ),
-<<<<<<< HEAD
-           
-=======
+
         'validators' => array( 
                 array( 
                     'name' => 'EmailAddress', 
@@ -66,7 +64,7 @@ class Contactenos extends Form
                     ) 
                 ) 
             )
->>>>>>> 9a80fd3af131a6977549ea2e3ceff4effe65f406
+
         ));
         $this->add(array(
             'name' => 'asunto',            

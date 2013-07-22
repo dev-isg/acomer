@@ -13,9 +13,17 @@ return array(
     'db' => array(
         'driver' => 'Pdo',
         
+<<<<<<< HEAD
         'username' => 'root',
         'password' => '',
         'dsn' => 'mysql:dbname=bd_acomer;host=localhost',
+=======
+        'username' => 'kevin',
+        'password' => '123456',
+
+        'dsn' => 'mysql:dbname=bd_acomer;host=192.168.1.50',
+
+>>>>>>> db0998c1bf2c7e4013c382acddbd8e715225210d
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         )
@@ -28,11 +36,11 @@ return array(
    
 'host' => array(
 
-        'base' => 'http://192.168.1.39:8080',
-        'static' => 'http://192.168.1.39:8080',
-        'images' => 'http://192.168.1.39:8080/imagenes',
-        'img'=>'http://192.168.1.39:8080/img',
-        'ruta' => 'http://192.168.1.39:8080',
+        'base' => 'http://192.168.1.50:8080',
+        'static' => 'http://192.168.1.50:8080',
+        'images' => 'http://192.168.1.50:8080/imagenes',
+        'img'=>'http://192.168.1.50:8080/img',
+        'ruta' => 'http://192.168.1.50:8080',
         'version'=>1,
     ),
 
