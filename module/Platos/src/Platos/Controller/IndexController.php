@@ -360,12 +360,7 @@ class IndexController extends AbstractActionController {
               $valor  = uniqid();
               
              $va = $this->getPlatosTable()->getPlato($id);
-             $imagen_antigua = $va->va_imagen;
-//            var_dump($imagen_antigua);
-//            var_dump($idlocal);
-//            var_dump($array[0]['Ta_restaurante_in_id']);
-//            exit;
-             
+             $imagen_antigua = $va->va_imagen;  
               if($ancho>$alto)
               {
                 $eliminar = $this->_options->upload->images . '/plato/destacado/' . $imagen_antigua;
@@ -375,7 +370,10 @@ class IndexController extends AbstractActionController {
                   unlink($eliminar);
                   unlink($eliminar1);
                   unlink($eliminar2);
-                  unlink($eliminar3);        
+                  unlink($eliminar3);  
+                  
+          
+                                       
                   require './vendor/Classes/Filter/Alnum.php';
                   $altura =(int)($alto*$anchura/$ancho); 
                   if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg')      
@@ -384,7 +382,22 @@ class IndexController extends AbstractActionController {
                   $filter   = new \Filter_Alnum();
                   $filtered = $filter->filter($nom);
                   $name = $filtered.'-'.$imf2;
-                  //var_dump($name);exit;
+                  
+                  
+                     if(!is_dir($this->_options->upload->images . '/plato/principal/'.$array[0]['Ta_restaurante_in_id'].'/' , 0777))
+                       { mkdir($this->_options->upload->images . '/plato/principal/'.$array[0]['Ta_restaurante_in_id'].'/' , 0777); 
+                            mkdir($this->_options->upload->images . '/plato/general/'.$array[0]['Ta_restaurante_in_id'].'/' , 0777);
+                            mkdir($this->_options->upload->images . '/plato/destacado/'.$array[0]['Ta_restaurante_in_id'].'/' , 0777);
+                            mkdir($this->_options->upload->images . '/plato/original/'.$array[0]['Ta_restaurante_in_id'].'/' , 0777);
+                                mkdir($this->_options->upload->images . '/plato/principal/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' , 0777); 
+                                mkdir($this->_options->upload->images . '/plato/general/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' , 0777);
+                                mkdir($this->_options->upload->images . '/plato/destacado/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' , 0777);
+                                mkdir($this->_options->upload->images . '/plato/original/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' , 0777); 
+                                       $principal = $this->_options->upload->images . '/plato/principal/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;
+                                       $destacado = $this->_options->upload->images . '/plato/destacado/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;
+                                       $general = $this->_options->upload->images . '/plato/general/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;
+                                       $original = $this->_options->upload->images .  '/plato/original/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;}
+                    
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);  
                       $destaque = imagecreatetruecolor($destacadox, $destacadoy);
@@ -423,6 +436,20 @@ class IndexController extends AbstractActionController {
                   $filter   = new \Filter_Alnum();
                   $filtered = $filter->filter($nom); 
                    $name = $filtered.'-'.$imf2;
+                   if(!is_dir($this->_options->upload->images . '/plato/principal/'.$array[0]['Ta_restaurante_in_id'].'/' , 0777))
+                       { mkdir($this->_options->upload->images . '/plato/principal/'.$array[0]['Ta_restaurante_in_id'].'/' , 0777); 
+                            mkdir($this->_options->upload->images . '/plato/general/'.$array[0]['Ta_restaurante_in_id'].'/' , 0777);
+                            mkdir($this->_options->upload->images . '/plato/destacado/'.$array[0]['Ta_restaurante_in_id'].'/' , 0777);
+                            mkdir($this->_options->upload->images . '/plato/original/'.$array[0]['Ta_restaurante_in_id'].'/' , 0777);
+                                mkdir($this->_options->upload->images . '/plato/principal/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' , 0777); 
+                                mkdir($this->_options->upload->images . '/plato/general/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' , 0777);
+                                mkdir($this->_options->upload->images . '/plato/destacado/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' , 0777);
+                                mkdir($this->_options->upload->images . '/plato/original/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' , 0777); 
+                                       $principal = $this->_options->upload->images . '/plato/principal/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;
+                                       $destacado = $this->_options->upload->images . '/plato/destacado/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;
+                                       $general = $this->_options->upload->images . '/plato/general/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;
+                                       $original = $this->_options->upload->images .  '/plato/original/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;}
+                       
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        $destaque = imagecreatetruecolor($destacadox, $destacadoy);

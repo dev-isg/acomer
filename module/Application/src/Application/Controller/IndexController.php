@@ -645,9 +645,9 @@ class IndexController extends AbstractActionController
                                                </html>';
     
         $message = new Message();
-        $message->addTo('informes@innovationssystems.com', $nombre)
-        ->setFrom('no-reply@listadelsabor.pe)', 'listadelsabor.com')
-        ->setSubject('Moderacion de comentario de listadelsabor.com');
+        $message->addTo('listadelsabor@innovationssystems.com', $nombre)
+        ->setFrom('listadelsabor@innovationssystems.com', 'listadelsabor.com')
+        ->setSubject('Solicitar platos de listadelsabor.com');
         //->setBody($bodyHtml);
             $bodyPart = new \Zend\Mime\Message();
             $bodyMessage = new \Zend\Mime\Part($bodyHtml);
@@ -656,7 +656,7 @@ class IndexController extends AbstractActionController
             $message->setBody($bodyPart);
             $message->setEncoding('UTF-8');
             
-        $transport = new SendmailTransport();//$this->getServiceLocator('mail.transport')
+        $transport = $this->getServiceLocator()->get('mail.transport');//new SendmailTransport();//$this->getServiceLocator('mail.transport')
         $transport->send($message);
         $this->redirect()->toUrl('/solicita');
         }
@@ -700,7 +700,7 @@ class IndexController extends AbstractActionController
         $message = new Message();
         $message->addTo('listadelsabor@innovationssystems.com', $nombre)
         ->setFrom('listadelsabor@innovationssystems.com', 'listadelsabor.com')
-        ->setSubject('Moderacion de comentario de ListaDelSabor.com');
+        ->setSubject('Contactos de ListaDelSabor.com');
 //        ->setBody($bodyHtml);
             $bodyPart = new \Zend\Mime\Message();
             $bodyMessage = new \Zend\Mime\Part($bodyHtml);

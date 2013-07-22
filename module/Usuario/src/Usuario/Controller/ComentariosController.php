@@ -111,7 +111,7 @@ class ComentariosController extends AbstractActionController
         $message = new Message();
         $message->addTo($va_email, $va_nombre_cliente)
         ->setFrom('listadelsabor@innovationssystems.com', 'listadelsabor.com')
-        ->setSubject('Moderacion de comentario de ListaDelSabor.com');
+        ->setSubject('Moderación de comentario de ListaDelSabor.com');
             $bodyPart = new \Zend\Mime\Message();
             $bodyMessage = new \Zend\Mime\Part($bodyHtml);
             $bodyMessage->type = 'text/html';
