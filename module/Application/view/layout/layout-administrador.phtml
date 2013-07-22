@@ -11,9 +11,9 @@
         <meta name="viewport" content="width=device-width"> 
        
 <!--         <script data-main="/js/main" src="<?php echo $this->basePath()?>/js/require.js"></script>  -->
-         <script src="<?php echo $this->basePath()?>/js/lib/jquery-1.8.3.min.js"></script>        
-        <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/main.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.css') ?>                                
+         <script src="<?php echo $this->basePath()?>/js/lib/jquery-1.8.3.min.js?v<?php echo $this->host('version')?>"></script>        
+        <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/main.css?v'.$this->host('version'))
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.css?v'.$this->host('version')) ?>                                
                                    
     </head>
     <body>  
@@ -75,10 +75,10 @@
                </div>
       </div> 
        </div>
-         <script src="<?php echo $this->basePath()?>/js/vendor/jquery.sidr.min.js"></script> 
-         <script src="<?php echo $this->basePath()?>/js/lib/bootstrap.min.js"></script> 
-         <script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.js"></script>       
-         <script src="<?php echo $this->basePath()?>/js/main.min.js"></script> 
+         <script src="<?php echo $this->basePath()?>/js/vendor/jquery.sidr.min.js?v<?php echo $this->host('version')?>"></script> 
+         <script src="<?php echo $this->basePath()?>/js/lib/bootstrap.min.js?v<?php echo $this->host('version')?>"></script> 
+         <script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.js?v<?php echo $this->host('version')?>"></script>       
+         <script src="<?php echo $this->basePath()?>/js/main.min.js?v<?php echo $this->host('version')?>"></script> 
           </body>
 </html>
     

@@ -16,16 +16,16 @@
        
        
 <!--         <script data-main="/js/main" src="<?php echo $this->basePath()?>/js/require.js"></script>  -->
-         <script src="<?php echo $this->basePath()?>/js/lib/jquery-1.8.3.min.js"></script> 
-         <script src="<?php echo $this->basePath()?>/js/vendor/jquery.sidr.min.js"></script> 
-         <script src="<?php echo $this->basePath()?>/js/lib/bootstrap.min.js"></script> 
-         <script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.js"></script> 
-         <script src="<?php echo $this->basePath()?>/js/vendor/gmap3.min.js"></script> 
-            <script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js"></script> 
-         <script src="<?php echo $this->basePath()?>/js/main.js"></script> 
+         <script src="<?php echo $this->basePath()?>/js/lib/jquery-1.8.3.min.js?v<?php echo $this->host('version')?>"></script> 
+         <script src="<?php echo $this->basePath()?>/js/vendor/jquery.sidr.min.js?v<?php echo $this->host('version')?>"></script> 
+         <script src="<?php echo $this->basePath()?>/js/lib/bootstrap.min.js?v<?php echo $this->host('version')?>"></script> 
+         <script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.js?v<?php echo $this->host('version')?>"></script> 
+         <script src="<?php echo $this->basePath()?>/js/vendor/gmap3.min.js?v<?php echo $this->host('version')?>"></script> 
+            <script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js?v<?php echo $this->host('version')?>"></script> 
+         <script src="<?php echo $this->basePath()?>/js/main.js?v<?php echo $this->host('version')?>"></script> 
          
-        <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/main.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.css') ?>                                
+        <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/main.css?v'.$this->host('version'))
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.css?v'.$this->host('version')) ?>                                
                                    
     </head>
     <body>  

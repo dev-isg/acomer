@@ -101,6 +101,9 @@ body{
 form#search{
   /*position: relative;*/
 }
+.font-desc-c{
+  font-size: 0.9em;
+}
 #map_canvas{
   position: fixed!important;
 }
@@ -461,8 +464,9 @@ margin-right: 10px;
   padding: 10px;
 }
 #pagina {
-margin-left: 1em;
-padding-bottom: 0em;
+  float: left;
+  width: 100%;
+  text-align: center;
 }
 .head-error {
 width: 100%;
@@ -671,6 +675,12 @@ background: url(../../img/back-detalle.png) repeat;
 .subir a img{
   width: 28px;
   border: 0;
+}
+.plato_h.p{
+  background: #f0f0f0;
+  color: #7b7b7b;
+  font-size: 14px;
+  font-weight: bold;
 }
 .busquedad {
   font-size: 1.2em;
@@ -894,6 +904,12 @@ label.error {
   font-family: arial;
   height: 22px;
   overflow: hidden;
+}
+.nom_res a{
+  color: rgba(0, 0, 0, 0.77);
+}
+.nom_res a:hover{
+  color: rgba(0, 0, 0, 0.99);
 }
 .tercera-categ{
   padding-bottom: 50px;
@@ -2157,6 +2173,7 @@ form#application .control-group .btn-solicito{
   }
 }*/
 @media (min-width: 768px) and (max-width: 979px) {
+
   .ficha-img img{
     width: 100%;
   }
@@ -2399,7 +2416,7 @@ form#application .control-group .btn-solicito{
   }
 }
 @media (max-width: 767px) {
-  
+
   .agregar-comentario-desc{
     width: 100%;
   }
@@ -2686,6 +2703,15 @@ form#application .control-group .btn-solicito{
 }
 @media (max-width: 480px) {
   .lista-Home .content-sidebar{
+    height: auto;
+  }
+  .lista-Nosotros .content-sidebar{
+    height: auto;
+  }
+  .lista-Terminos .content-sidebar{
+    height: auto;
+  }
+  .lista-Solicita .content-sidebar{
     height: auto;
   }
   .img-li-top .puntuaciones{
