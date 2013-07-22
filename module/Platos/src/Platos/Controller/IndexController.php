@@ -327,10 +327,7 @@ class IndexController extends AbstractActionController {
                     }
                     $form->setMessages(array('imagen' => $error));
                 } else {
-                    
-                    
-                    
-                    
+ 
                     $restaura = $this->restaurante($idlocal);
                        $rowset = $restaura;
                        $array = array();
@@ -361,8 +358,24 @@ class IndexController extends AbstractActionController {
               $ancho =$tamanio[0]; 
               $alto =$tamanio[1]; 
               $valor  = uniqid();
+              
+             $va = $this->getPlatosTable()->getPlato($id);
+             $imagen_antigua = $va->va_imagen;
+//            var_dump($imagen_antigua);
+//            var_dump($idlocal);
+//            var_dump($array[0]['Ta_restaurante_in_id']);
+//            exit;
+             
               if($ancho>$alto)
-              {//echo 'ddd';exit;
+              {
+                $eliminar = $this->_options->upload->images . '/plato/destacado/' . $imagen_antigua;
+                $eliminar1 = $this->_options->upload->images . '/plato/general/' . $imagen_antigua;
+                $eliminar2 = $this->_options->upload->images . '/plato/original/' . $imagen_antigua;
+                $eliminar3 = $this->_options->upload->images . '/plato/principal/' . $imagen_antigua;
+                  unlink($eliminar);
+                  unlink($eliminar1);
+                  unlink($eliminar2);
+                  unlink($eliminar3);        
                   require './vendor/Classes/Filter/Alnum.php';
                   $altura =(int)($alto*$anchura/$ancho); 
                   if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg')      
@@ -392,12 +405,17 @@ class IndexController extends AbstractActionController {
                     $this->redirect()->toUrl('/platos/index?id='.$idlocal);   
                   }
                }
-               
-               
-               
-               
+  
                    if($ancho<$alto)
-              {require './vendor/Classes/Filter/Alnum.php';
+              {$eliminar = $this->_options->upload->images . '/plato/destacado/' . $imagen_antigua;
+                $eliminar1 = $this->_options->upload->images . '/plato/general/' . $imagen_antigua;
+                $eliminar2 = $this->_options->upload->images . '/plato/original/' . $imagen_antigua;
+                $eliminar3 = $this->_options->upload->images . '/plato/principal/' . $imagen_antigua;
+                  unlink($eliminar);
+                  unlink($eliminar1);
+                  unlink($eliminar2);
+                  unlink($eliminar3);
+                  require './vendor/Classes/Filter/Alnum.php';
                   $anchura =(int)($ancho*$altura/$alto); 
                   if($info['extension']=='jpg'or $info['extension']=='JPG'or $info['extension']=='jpeg')      
                   {  $nom = $nonFile['va_nombre']; 
@@ -407,10 +425,21 @@ class IndexController extends AbstractActionController {
                    $name = $filtered.'-'.$imf2;
                       $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                       $nuevaimagen = imagecreatetruecolor($anchura, $altura);
+                       $destaque = imagecreatetruecolor($destacadox, $destacadoy);
+                      $generale = imagecreatetruecolor($generalx, $generaly);
                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                       $copia = $this->_options->upload->images . '/' .$name;
-                       imagejpeg($nuevaimagen,$copia);
-                    $this->getPlatosTable()->guardarPlato($restaurante,$name);
+                        imagecopyresized($destaque, $viejaimagen, 0, 0, 0, 0, $destacadox, $destacadoy,$ancho, $alto);
+                       imagecopyresized($generale, $viejaimagen, 0, 0, 0, 0, $generalx, $generaly,$ancho, $alto);                                      
+                     $principal = $this->_options->upload->images . '/plato/principal/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;
+                                     $destacado = $this->_options->upload->images . '/plato/destacado/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;
+                                     $general = $this->_options->upload->images . '/plato/general/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;
+                                     $original = $this->_options->upload->images .  '/plato/original/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;
+                                                 imagejpeg($nuevaimagen,$principal);
+                                                 imagejpeg($destaque,$destacado);
+                                                 imagejpeg($generale,$general);
+                                                 imagejpeg($viejaimagen,$original);  
+                             $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' .$name; 
+                       $this->getPlatosTable()->guardarPlato($restaurante,$nombre);
                     $this->redirect()->toUrl('/platos/index?id='.$idlocal);   
                   }
                }
