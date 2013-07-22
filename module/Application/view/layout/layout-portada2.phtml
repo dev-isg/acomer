@@ -11,10 +11,10 @@
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="ListaDelSabor.com es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales">
     <meta name="keywords" content="" />
-    <meta property="og:title" content="<?php echo $this->title; ?>"/>
-    <meta property="og:image" content="<?php echo $this->image; ?>"/>
+    <meta property="og:title" content="<?php  $titulo=(!$this->title)?$this->headTitle(' Lista del Sabor'):$this->title ; echo $titulo; ?>"/>
+    <meta property="og:image" content="<?php $imagen=(!$this->image)?$this->host('ruta').'/img/logo-face.png':$this->image ; echo $imagen; ?>"/>
     <meta property="og:site_name" content=""/>
-    <meta property="og:description" content="<?php echo $this->description; ?>">
+    <meta property="og:description" content="<?php $descrip=(!$this->description)?'Es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales':$this->description ; echo $descrip; ?>">
     <link href="<?php echo $this->host('ruta')?>/img/favicon.ico?v<?php echo $this->host('version')?>" rel="shortcut icon" type="image/x-icon"/>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/headjs/0.99/head.load.min.js"></script>
     <!--
