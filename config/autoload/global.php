@@ -3,10 +3,8 @@
  * Global Configuration Override
  *
  * You can use this file for overriding configuration values from modules, etc.
- * You would place values in here that are agnostic to the environment and not
- * sensitive to security.
- *
- * @NOTE: In practice, this file will typically be INCLUDED in your source
+ * You would place values in here that are agnostic to the environment and not * sensitive to security.
+ * * @NOTE: In practice, this file will typically be INCLUDED in your source
  * control, so do not include passwords or other sensitive information in this
  * file.
  */
@@ -17,25 +15,26 @@ return array(
         
         'username' => 'kevin',
         'password' => '123456',
-        'dsn' => 'mysql:dbname=bd_acomer;host=192.168.1.40',
+        'dsn' => 'mysql:dbname=bd_acomer;host=192.168.1.41',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         )
     ),
     'solr' => array(
-        'host' => '192.168.1.38',
+        'host' => '192.168.1.39',
         'port' => '8983',
         'folder' => '/solr'
     ),
-    'host' => array(
+   
+'host' => array(
 
-        'base' => 'http://local.listadelsabor',
-        'static' => 'http://local.listadelsabor',
-        'images' => 'http://local.listadelsabor/imagenes',
-        'img'=>'http://local.listadelsabor/img',
-        'ruta' => 'http://local.listadelsabor',
+        'base' => 'http://192.168.1.39:8080',
+        'static' => 'http://192.168.1.39:8080',
+        'images' => 'http://192.168.1.39:8080/imagenes',
+        'img'=>'http://192.168.1.39:8080/img',
+        'ruta' => 'http://192.168.1.39:8080',
+        'version'=>1,
     ),
-
 
 
 
