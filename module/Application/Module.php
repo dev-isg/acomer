@@ -83,14 +83,7 @@ class Module
      public function getServiceConfig()
     {
         return array(
-            'factories' => array(
-//                        'Usuario\Model\Cliente'=>function($sm){
-//                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-//                    $table = new Cliente($dbAdapter);
-//                    return $table;
-//                    
-//                 },
-                         
+            'factories' => array(   
                 'Application\Model\UsuarioTable' =>  function($sm) {
                     $tableGateway = $sm->get('UsuarioTableGateway');
                     $table = new UsuarioTable($tableGateway);
@@ -102,6 +95,13 @@ class Module
                     $resultSetPrototype->setArrayObjectPrototype(new Usuario());
                     return new TableGateway('ta_usuario', $dbAdapter, null, $resultSetPrototype);
                 },
+               'mail.transport' => function ($sm) {
+                $config = $sm->get('config'); 
+                $transport = new \Zend\Mail\Transport\Smtp();   
+                $transport->setOptions(new \Zend\Mail\Transport\SmtpOptions($config['mail']['transport']['options']));
+
+                return $transport;
+            },
             ),
         );
     }

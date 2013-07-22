@@ -85,17 +85,14 @@ class ComentariosTable
                 ->query('SELECT ta_comentario.*,SUM(ta_puntaje_in_id)AS SumaPuntaje ,COUNT(ta_comentario.in_id ) AS NumeroComentarios,
                     ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS TotPuntaje
                     FROM ta_comentario
-                    where ta_comentario.ta_plato_in_id='.$coment['Ta_plato_in_id'], $adapter2::QUERY_MODE_EXECUTE);
+                    where ta_comentario.en_estado=aprobado and ta_comentario.ta_plato_in_id='.$coment['Ta_plato_in_id'], $adapter2::QUERY_MODE_EXECUTE);
                         $prom=$promselect->toArray();
-//        var_dump($coment['Ta_plato_in_id']);exit;
-
              
               $update = $this->tableGateway->getSql()->update()->table('ta_plato')
                         ->set(array('Ta_puntaje_in_id'=>$prom[0]['TotPuntaje']))
                         ->where(array('ta_plato.in_id'=>$coment['Ta_plato_in_id']));//$prom[0]['in_id']
                 $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
                 $statementup->execute();
-              //  $platos = new \Platos\Model\PlatosTable();
                 $this->cromSolr($coment['Ta_plato_in_id']);
                 
                 
@@ -187,6 +184,7 @@ public function cromSolr($id)
             ->where(array('f.en_estado'=>$estado,'f.ta_puntaje_in_id'=>$puntaje));
            }
             $selectString = $sql->getSqlStringForSqlObject($select);
+//            var_dump($selectString);exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $rowset = $results;
          if (!$rowset) {

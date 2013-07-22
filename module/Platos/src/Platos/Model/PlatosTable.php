@@ -302,7 +302,7 @@ class PlatosTable {
                 ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('pais' => 'ch_pais', 'departamento' => 'ch_departamento', 'provincia' => 'ch_provincia', 'distrito' => 'ch_distrito'), 'left')
                 ->join(array('tc' => 'ta_comentario'), 'tc.ta_plato_in_id=ta_plato.in_id', array('estado_comen'=>'en_estado'), 'left')
 //            ->join(array('tcli'=>'ta_cliente'),'tcli.in_id=tc.ta_cliente_in_id',array('va_nombre_cliente','va_email'),'left')
-                ->where(array('ta_plato.in_id' => $idplato));
+                ->where(array('ta_plato.in_id' => $idplato,'tc.en_estado'=>'aprobado'));
         $selecttot->group('ta_plato.in_id');
 
         $selectString = $sql->getSqlStringForSqlObject($selecttot);

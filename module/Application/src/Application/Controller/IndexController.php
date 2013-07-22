@@ -647,19 +647,16 @@ class IndexController extends AbstractActionController
         $message = new Message();
         $message->addTo('informes@innovationssystems.com', $nombre)
         ->setFrom('no-reply@listadelsabor.pe)', 'listadelsabor.com')
-        ->setSubject('Moderacion de comentario de listadelsabor.com')
-        ->setBody($bodyHtml);
-        $transport = new SendmailTransport();
-  
-//        
-//        $options   = new \Zend\Mail\Transport\SmtpOptions(array(
-//            'name' => 'localhost',
-//            'host' => '127.0.0.1',
-//            'port' => 25,
-//        ));
-//        
-//        $transport->setOptions($options);
-
+        ->setSubject('Moderacion de comentario de listadelsabor.com');
+        //->setBody($bodyHtml);
+            $bodyPart = new \Zend\Mime\Message();
+            $bodyMessage = new \Zend\Mime\Part($bodyHtml);
+            $bodyMessage->type = 'text/html';
+            $bodyPart->setParts(array($bodyMessage));
+            $message->setBody($bodyPart);
+            $message->setEncoding('UTF-8');
+            
+        $transport = new SendmailTransport();//$this->getServiceLocator('mail.transport')
         $transport->send($message);
         $this->redirect()->toUrl('/solicita');
         }
@@ -701,11 +698,18 @@ class IndexController extends AbstractActionController
                                                </html>';
         
         $message = new Message();
-        $message->addTo('innovations.systems.group@gmail.com', $nombre)
-        ->setFrom('no-reply@listadelsabor.pe)', 'listadelsabor.com')
-        ->setSubject('Moderacion de comentario de listadelsabor.com')
-        ->setBody($bodyHtml);
-        $transport = new SendmailTransport();
+        $message->addTo('kevcast15@gmail.com', $nombre)
+        ->setFrom('no-reply@listadelsabor.pe', 'listadelsabor.com')
+        ->setSubject('Moderacion de comentario de listadelsabor.com');
+//        ->setBody($bodyHtml);
+            $bodyPart = new \Zend\Mime\Message();
+            $bodyMessage = new \Zend\Mime\Part($bodyHtml);
+            $bodyMessage->type = 'text/html';
+            $bodyPart->setParts(array($bodyMessage));
+            $message->setBody($bodyPart);
+            $message->setEncoding('UTF-8');
+
+        $transport = $this->getServiceLocator()->get('mail.transport');//new SendmailTransport();
         $transport->send($message);
         $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/contactenos');
 //        $this->redirect()->toUrl('/contactenos');///application/index

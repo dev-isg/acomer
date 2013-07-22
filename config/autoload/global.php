@@ -23,7 +23,7 @@ return array(
         )
     ),
     'solr' => array(
-        'host' => '192.168.1.38',
+        'host' => '192.168.1.39',
         'port' => '8983',
         'folder' => '/solr'
     ),
@@ -31,9 +31,9 @@ return array(
 
         'base' => 'http://192.168.1.38:8080',
         'static' => 'http://192.168.1.38:8080',
-        'images' => 'http://192.168.1.38:8080/imagenes',
+        'images' => 'http://192.168.1.40:8080/imagenes',
         'img'=>'http://192.168.1.38:8080/img',
-        'ruta' => 'http://192.168.1.38:8080',
+        'ruta' => 'http://192.168.1.40:8080',
         'version'=>1,
     ),
     'upload' => array(
@@ -76,7 +76,21 @@ return array(
                )
 
         
-   )
-    
+   ),
+     'mail' => array(
+       'transport' => array(
+           'options' => array(
+               'host'              =>'smtp.innovationssystems.com',
+               'port'=>587,
+              
+//               'connection_class'  => 'plain',
+               'connection_config' => array(
+                   'username' => 'listadelsabor@innovationssystems.com',
+                   'password' => 'L1st@d3ls@b0r',
+//                   'ssl' => ''
+               ),
+           ),
+       ),
+   ), 
 )
 ;
