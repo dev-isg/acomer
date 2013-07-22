@@ -525,6 +525,7 @@ class IndexController extends AbstractActionController {
         $view = new ViewModel();
 //        $this->layout('layout/layout-portada');
         $datos =$this->params()->fromRoute();  
+        
         $nombre = explode('-', $datos['nombre']);   
         $id = array_pop($nombre);
         if(!$this->getPlatosTable()->getPlato($id)){
