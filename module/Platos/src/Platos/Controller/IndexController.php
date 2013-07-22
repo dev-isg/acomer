@@ -383,7 +383,7 @@ class IndexController extends AbstractActionController {
             $this->redirect()->toUrl('/');
         }
         $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();   
-
+//        var_dump($listarecomendacion);Exit;
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
