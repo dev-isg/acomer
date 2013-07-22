@@ -71,11 +71,7 @@
           <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
 
             <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action='<?php echo $this->host('ruta')?>/buscar'>
-              <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q'])
-                    {echo $_GET['q'];} 
-                    else 
-                    { echo $_COOKIE['q'];}                   
-              ?>" placeholder="Ingrese el plato"  required="required"/>
+              <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"     placeholder="Ingrese el plato"  required="required"/>
               <input type="submit"  class="btn btn-search-home" value="Buscar"/>
               <em>Ejm: lomo saltado</em>
             </form>  

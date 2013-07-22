@@ -17,6 +17,9 @@ class Solicita extends Form
         $this->add(array(
             'name' => 'nombre_complet',
             'type' => 'Text',
+             'attributes' => array(          
+           'required' => 'required'   
+            ),
             'options' => array(
 
             // 'label' => 'nombre',
@@ -27,6 +30,9 @@ class Solicita extends Form
         $this->add(array(
             'name' => 'email',
             'type' => 'Email',
+              'attributes' => array(          
+           'required' => 'required'   
+            ),
             'options' => array(
 
                 // 'label' => 'correo',
@@ -35,6 +41,9 @@ class Solicita extends Form
         $this->add(array(
             'name' => 'nombre_plato',
             'type' => 'Text',
+              'attributes' => array(          
+           'required' => 'required'   
+            ),
             'options' => array(
 
 //                'label' => 'nombre de plato',
@@ -59,6 +68,9 @@ class Solicita extends Form
          $this->add(array(
             'name' => 'nombre_restaurant',
             'type' => 'Text',
+              'attributes' => array(          
+           'required' => 'required'   
+            ),
             'options' => array(
 
 //                'label' => 'nombre restaurante',   
