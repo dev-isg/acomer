@@ -492,7 +492,7 @@ class IndexController extends AbstractActionController
             {
             $this->estadoRestauranteSolarAction($result['in_id']);
             }
-            echo 'resultado final';exit;
+           echo 'cron finalizado';exit;
         }
 
 }
