@@ -107,17 +107,20 @@ class ComentariosController extends AbstractActionController
                                                      <br /><br /><hr /><br />Cordialmente,<br /><span style="color:#000; font-size: 18px; margin-top:8px;">El Equipo de listadelsabor.com</span><br /><br />
                                                      </div>
                                                </body>
-                                               </html>';
-        
+                                               </html>';      
         $message = new Message();
         $message->addTo($va_email, $va_nombre_cliente)
-        ->setFrom('innovations.systems.group@gmail.com', 'listadelsabor.com')
-        ->setSubject('Moderacion de comentario de listadelsabor.com')
-        ->setBody($bodyHtml);
-        $transport = new SendmailTransport();
+        ->setFrom('listadelsabor@innovationssystems.com', 'listadelsabor.com')
+        ->setSubject('Moderacion de comentario de ListaDelSabor.com');
+            $bodyPart = new \Zend\Mime\Message();
+            $bodyMessage = new \Zend\Mime\Part($bodyHtml);
+            $bodyMessage->type = 'text/html';
+            $bodyPart->setParts(array($bodyMessage));
+            $message->setBody($bodyPart);
+            $message->setEncoding('UTF-8');
+        $transport = $this->getServiceLocator()->get('mail.transport');
         $transport->send($message);
         $this->redirect()->toUrl('/usuario/comentarios/index');
-
       }
     
      public function eliminarcomentarioAction() {

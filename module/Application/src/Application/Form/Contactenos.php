@@ -18,8 +18,12 @@ class Contactenos extends Form
             'type' => 'Hidden',
         ));
         $this->add(array(
-            'name' => 'nombre',
+            'name' => 'nombre',            
             'type' => 'Text',
+            'attributes' => array(
+            'id' => 'nombre',
+             'required' => 'required'            
+            ),
             'options' => array(
 
             // 'label' => 'nombre',
@@ -40,11 +44,16 @@ class Contactenos extends Form
 
         $this->add(array(
             'name' => 'email',
-            'type' => 'Email',
+             'type' => 'Email',
+              'attributes' => array(
+            'id' => 'email',
+           'required' => 'required'     
+            ),
             'options' => array(
 
                 // 'label' => 'correo',
             ),
+
         'validators' => array( 
                 array( 
                     'name' => 'EmailAddress', 
@@ -55,14 +64,20 @@ class Contactenos extends Form
                     ) 
                 ) 
             )
+
         ));
         $this->add(array(
-            'name' => 'asunto',
+            'name' => 'asunto',            
             'type' => 'Text',
+             'attributes' => array(
+            'id' => 'asunto',
+           'required' => 'required'   
+            ),
             'options' => array(
 
 //                'label' => 'nombre de plato',
             ),
+           
         ));
         
            $this->add(array(
@@ -70,6 +85,8 @@ class Contactenos extends Form
             'type' => 'Textarea',
             'attributes' => array(               
                 'class' => 'span11',
+                'required' => 'required',      
+                'id' => 'mensaje',
                 'colls'=>40,
                 'rows'=>4
             ),

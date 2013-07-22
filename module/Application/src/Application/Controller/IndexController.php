@@ -646,7 +646,7 @@ class IndexController extends AbstractActionController
     
         $message = new Message();
         $message->addTo('listadelsabor@innovationssystems.com', $nombre)
-        ->setFrom('no-reply@listadelsabor.pe', 'listadelsabor.com')
+        ->setFrom('listadelsabor@innovationssystems.com', 'listadelsabor.com')
         ->setSubject('Solicitar platos de listadelsabor.com');
         //->setBody($bodyHtml);
             $bodyPart = new \Zend\Mime\Message();
