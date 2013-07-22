@@ -28,7 +28,11 @@ class ComentariosController extends AbstractActionController
         $datos = $this->params()->fromPost('texto');
         $estado = $this->params()->fromPost('estado');
         $puntaje = $this->params()->fromPost('puntaje');
-         if (isset($filtrar)) {
+//        var_dump($datos);
+//        var_dump($estado);
+//        var_dump($puntaje);
+//        exit;
+         if (isset($filtrar)) { 
             $comentarios = $this->getComentariosTable()->buscarComentario($datos,$estado,$puntaje);
         }
         else {
