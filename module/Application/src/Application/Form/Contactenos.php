@@ -10,7 +10,7 @@ class Contactenos extends Form
     public function __construct($name = null)
     {
         // we want to ignore the name passed
-        parent::__construct('applicationxxx');
+        parent::__construct('application');
         $this->setAttribute('method', 'post');        
 
         $this->add(array(
