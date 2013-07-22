@@ -175,7 +175,13 @@ $(document).ready(function() {
                         var c = b.substring(0, 50);
                         var l = replaceAll(j.name, " ", "-");
                         var k = replaceAll(j.distrito, " ", "-");
-                        map.addMarker({lat: j.latitud,lng: j.longitud,icon: {size: new google.maps.Size(32, 37),url: "/img/icomap.png"},title: j.restaurante,infoWindow: {content: "<img src=" + urlJson + "/imagenes/plato/general/" + j.va_imagen + " class='img-mapa'><p class='restaurante-map'><a href=/plato/" + l + "-" + j.id + ">" + j.restaurante + "</a></p><p class='plato-map'>" + j.name + "</p><p class='txt-map'>" + c + "...</p><a class='a-map' href=/plato/" + l + "-" + j.id + "> ver mas </a>"}});
+                        var z = j.va_imagen;
+                        if (z=="platos-default.png"){
+                            map.addMarker({lat: j.latitud,lng: j.longitud,icon: {size: new google.maps.Size(32, 37),url: "/img/icomap.png"},title: j.restaurante,infoWindow: {content: "<img src=" + urlJson + "/imagenes/defecto/" + j.va_imagen + " class='img-mapa'><p class='restaurante-map'><a href=/plato/" + l + "-" + j.id + ">" + j.restaurante + "</a></p><p class='plato-map'>" + j.name + "</p><p class='txt-map'>" + c + "...</p><a class='a-map' href=/plato/" + l + "-" + j.id + "> ver mas </a>"}});
+                        }else{
+                            map.addMarker({lat: j.latitud,lng: j.longitud,icon: {size: new google.maps.Size(32, 37),url: "/img/icomap.png"},title: j.restaurante,infoWindow: {content: "<img src=" + urlJson + "/imagenes/plato/general/" + j.va_imagen + " class='img-mapa'><p class='restaurante-map'><a href=/plato/" + l + "-" + j.id + ">" + j.restaurante + "</a></p><p class='plato-map'>" + j.name + "</p><p class='txt-map'>" + c + "...</p><a class='a-map' href=/plato/" + l + "-" + j.id + "> ver mas </a>"}});
+                        }
+                    
                     });
                 } else {
                     $("#mapa-buscador").hide();

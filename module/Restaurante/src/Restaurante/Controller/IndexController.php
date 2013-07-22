@@ -476,5 +476,23 @@ class IndexController extends AbstractActionController
             $solr->optimize();
         }
     }
+    
+    
+      public function cronsolarAction()
+        {
+        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+            $adapter = $this->dbAdapter;
+            $sql = new Sql($adapter); 
+            $select = $sql->select()
+            ->from('ta_plato');
+            $selectS = $sql->getSqlStringForSqlObject($select);
+            $resul = $adapter->query($selectS, $adapter::QUERY_MODE_EXECUTE);
+            $plato=$resul->toArray();
+            foreach ($plato as $result) 
+            {
+            $this->estadoRestauranteSolarAction($result['in_id']);
+            }
+            echo 'resultado final';exit;
+        }
 
 }
