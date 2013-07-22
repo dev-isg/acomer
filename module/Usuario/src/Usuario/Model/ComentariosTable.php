@@ -174,6 +174,7 @@ public function cromSolr($id)
             ->join(array('u'=>'ta_cliente'),'f.ta_cliente_in_id=u.in_id',array('va_nombre_cliente','va_email'))
             ->join(array('m'=>'ta_puntaje'),'f.ta_puntaje_in_id=m.in_id',array('va_valor'))
             ->where(array('f.ta_puntaje_in_id'=>$puntaje));
+    
            }
            if($datos=='' and $puntaje != '' and $estado != '' ){
              $select = $sql->select()
@@ -184,9 +185,10 @@ public function cromSolr($id)
             ->where(array('f.en_estado'=>$estado,'f.ta_puntaje_in_id'=>$puntaje));
            }
             $selectString = $sql->getSqlStringForSqlObject($select);
-//            var_dump($selectString);exit;
+
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-            $rowset = $results;
+            $rowset = $results->buffer();
+            //var_dump($rowset);exit;
          if (!$rowset) {
             throw new \Exception("No hay data");
             }

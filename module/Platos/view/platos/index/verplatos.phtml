@@ -34,7 +34,9 @@
    			</div>
    			<div class="ficha-product">
    				<div class="ficha-img">
-   					<img src="<?php echo $this->host('images') . '/plato/principal/' . $this->lista[0]['va_imagen'];?>">
+   					<img src="<?php if ($this->lista[0]['va_imagen']=='platos-default.png')
+                                            {echo $this->host('images') . '/defecto/' . $this->lista[0]['va_imagen'];}
+                                        else{echo $this->host('images') . '/plato/principal/' . $this->lista[0]['va_imagen'];}?>">
    				</div>
    				<div class="ficha-desc">
                   <h2><?php echo $this->lista[0]['restaurant_nombre'];?></h2>  
@@ -84,7 +86,10 @@
             </div>
             <div class="content-info">
                 <div class="info-img">
-                    <img src="<?php echo $this->host('images') . '/' . $this->lista[0]['restaurant_img']; ?>">
+                    <img src="<?php if($this->lista[0]['restaurant_img']=='default-img.jpg')
+                        {echo $this->host('images') . '/defecto/' . $this->lista[0]['restaurant_img'];}
+                        else
+                            {echo $this->host('images') . '/restaurante/principal/' . $this->lista[0]['restaurant_img'];}?>">
                 </div>
                 <h4 class="ubi-map">Mapa de ubicación <span></span></h4>
                 <div id="mapCont" class="map" data-lat="<?php echo $this->lista[0]['de_latitud']; ?>" data-lng="<?php echo $this->lista[0]['de_longitud']; ?>"></div>

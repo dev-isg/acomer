@@ -29,11 +29,13 @@ return array(
     ),
     'host' => array(
 
-        'base' => 'http://192.168.1.38:8080',
-        'static' => 'http://192.168.1.38:8080',
-        'images' => 'http://192.168.1.40:8080/imagenes',
-        'img'=>'http://192.168.1.38:8080/img',
-        'ruta' => 'http://192.168.1.40:8080',
+
+        'base' => 'http://192.168.1.39:8080',
+        'static' => 'http://192.168.1.39:8080',
+        'images' => 'http://192.168.1.39:8080/imagenes',
+        'img'=>'http://192.168.1.39:8080/img',
+        'ruta' => 'http://192.168.1.39:8080',
+
         'version'=>1,
     ),
     'upload' => array(

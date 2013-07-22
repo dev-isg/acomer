@@ -79,7 +79,7 @@ class IndexController extends AbstractActionController
     
 
      
-     public function agregarrestauranteAction()
+ public function agregarrestauranteAction()
     {  
                                 $auth = new \Zend\Authentication\AuthenticationService();
         if (!$auth->hasIdentity()) {
@@ -182,7 +182,6 @@ class IndexController extends AbstractActionController
           }
           else {   
               $restaurante->exchangeArray($form->getData());
-              $adapter = new \Zend\File\Transfer\Adapter\Http();
               $name = 'default-img.jpg';
               $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante'); }
@@ -269,8 +268,14 @@ class IndexController extends AbstractActionController
               $ancho =$tamanio[0]; 
               $alto =$tamanio[1]; 
               $valor  = uniqid();
+              $imagen_restaurante=$this->getRestauranteTable()->getRestaurante($id);
+              $imagen = $imagen_restaurante->va_imagen;
               if($ancho>$alto)
-              {//echo 'ddd';exit;
+              { 
+                $eliminar = $this->_options->upload->images . '/restaurante/original/' . $imagen;
+                $eliminar1 = $this->_options->upload->images . '/restaurante/principal/' . $imagen;
+                  unlink($eliminar);
+                  unlink($eliminar1);
                   require './vendor/Classes/Filter/Alnum.php';
                   $altura =(int)($alto*$anchura/$ancho); 
                   if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg')      
@@ -292,7 +297,11 @@ class IndexController extends AbstractActionController
 
                }
                    if($ancho<$alto)
-              {require './vendor/Classes/Filter/Alnum.php';
+              {$eliminar = $this->_options->upload->images . '/restaurante/original/' . $imagen;
+                $eliminar1 = $this->_options->upload->images . '/restaurante/principal/' . $imagen;
+                  unlink($eliminar);
+                  unlink($eliminar1);
+                       require './vendor/Classes/Filter/Alnum.php';
                   $anchura =(int)($ancho*$altura/$alto); 
                   if($info['extension']=='jpg'or $info['extension']=='JPG'or $info['extension']=='jpeg')      
                   {  $nom = $nonFile['va_nombre']; 
@@ -315,10 +324,8 @@ class IndexController extends AbstractActionController
             }       
           }
           else {   
-              $restaurante=$this->getRestauranteTable()->getRestaurante($id);
-            
-              $adapter = new \Zend\File\Transfer\Adapter\Http();
-              $name = $restaurante->va_imagen;//'default-img.jpg';
+              $restaura=$this->getRestauranteTable()->getRestaurante($id);
+              $name = $restaura->va_imagen;//'default-img.jpg';
               $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante'); }
            }
@@ -469,5 +476,23 @@ class IndexController extends AbstractActionController
             $solr->optimize();
         }
     }
+    
+    
+      public function cronsolarAction()
+        {
+        $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+            $adapter = $this->dbAdapter;
+            $sql = new Sql($adapter); 
+            $select = $sql->select()
+            ->from('ta_plato');
+            $selectS = $sql->getSqlStringForSqlObject($select);
+            $resul = $adapter->query($selectS, $adapter::QUERY_MODE_EXECUTE);
+            $plato=$resul->toArray();
+            foreach ($plato as $result) 
+            {
+            $this->estadoRestauranteSolarAction($result['in_id']);
+            }
+           echo 'cron finalizado';exit;
+        }
 
 }

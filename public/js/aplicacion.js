@@ -1,110 +1,112 @@
-function replaceAll(c, b, a) {
-    while (c.toString().indexOf(b) != -1) {
-        c = c.toString().replace(b, a);
+function replaceAll(f, d, e) {
+    while (f.toString().indexOf(d) != -1) {
+        f = f.toString().replace(d, e);
     }
-    return c;
+    return f;
 }
-var puntaje = function(a, b) {
-    $(a).raty({readOnly: true,score: b,starOff: "/img/t2.png",starOn: "/img/t1.png"});
+var puntaje = function(d, c) {
+    $(d).raty({readOnly: true,score: c,starOff: "/img/t2.png",starOn: "/img/t1.png"});
 };
-function regresar(){
-  $("#mapa-buscador").hide();
-   $("#esconder").css("display", "block");
+function regresar() {
+    $("#mapa-buscador").hide();
+    $("#esconder").css("display", "block");
     $("#esconder2").css("display", "block");
 }
 function initSucursales() {
-    var m;
-    var p = document.getElementById("mapCont");
-    var l = $("#mapCont").data("lat");
-    var n = $("#mapCont").data("lng");
-    var g = Array();
-    var j = new google.maps.MarkerImage("/img/point.png", new google.maps.Size(26, 32), new google.maps.Point(0, 0));
-    var e = new google.maps.MarkerImage("/img/point.png", new google.maps.Size(26, 32), new google.maps.Point(0, 0));
-    var c = new google.maps.LatLng(l, n);
-    var r = {center: c,zoom: 17,mapTypeId: google.maps.MapTypeId.ROADMAP,backgroundColor: "#ffffff",disableDefaultUI: true,navigationControl: true,navigationControlOptions: {position: google.maps.ControlPosition.TOP_RIGHT,style: google.maps.NavigationControlStyle.SMALL}};
-    var b = new google.maps.Map(p, r);
-    var q = Array();
-    function o(u, t) {
-        place = new google.maps.LatLng(u.lat, u.lng);
-        var s = new google.maps.Marker({icon: t,position: place,map: b,title: u.title,zIndex: 100});
-        i = u.index;
-        (function(w, v) {
-            google.maps.event.addListener(v, "click", function() {
-                a(v, w);
+    var x;
+    var u = document.getElementById("mapCont");
+    var y = $("#mapCont").data("lat");
+    var w = $("#mapCont").data("lng");
+    var C = Array();
+    var A = new google.maps.MarkerImage("/img/point.png", new google.maps.Size(26, 32), new google.maps.Point(0, 0));
+    var E = new google.maps.MarkerImage("/img/point.png", new google.maps.Size(26, 32), new google.maps.Point(0, 0));
+    var G = new google.maps.LatLng(y, w);
+    var s = {center: G,zoom: 17,mapTypeId: google.maps.MapTypeId.ROADMAP,backgroundColor: "#ffffff",disableDefaultUI: true,navigationControl: true,navigationControlOptions: {position: google.maps.ControlPosition.TOP_RIGHT,style: google.maps.NavigationControlStyle.SMALL}};
+    var H = new google.maps.Map(u, s);
+    var t = Array();
+    function v(a, b) {
+        place = new google.maps.LatLng(a.lat, a.lng);
+        var c = new google.maps.Marker({icon: b,position: place,map: H,title: a.title,zIndex: 100});
+        i = a.index;
+        (function(d, e) {
+            google.maps.event.addListener(e, "click", function() {
+                I(e, d);
             });
-        })(i, s);
-        return s;
+        })(i, c);
+        return c;
     }
-    function m(u) {
-        var v;
-        for (var t = 0; t < u.length; t++) {
-            if (u[t].lat) {
-                var s = o(u[t], j);
-                g[t] = s;
+    function x(b) {
+        var a;
+        for (var c = 0; c < b.length; c++) {
+            if (b[c].lat) {
+                var d = v(b[c], A);
+                C[c] = d;
             }
         }
     }
-    $(".list-suc .ul-suc li a").each(function(t) {
-        var u = $(this).data("lat");
-        var s = $(this).data("lng");
-        var v = $(this).find("h6").text();
-        q[t] = new Object();
-        q[t].lat = u;
-        q[t].lng = s;
-        q[t].title = v;
-        q[t].index = t;
+    $(".list-suc .ul-suc li a").each(function(c) {
+        var b = $(this).data("lat");
+        var d = $(this).data("lng");
+        var a = $(this).find("h6").text();
+        t[c] = new Object();
+        t[c].lat = b;
+        t[c].lng = d;
+        t[c].title = a;
+        t[c].index = c;
     });
-    m(q);
-    var k = {lat: l,lng: n,index: g.length};
-    g.push(o(k, e));
-    function f() {
-        $(g).each(function() {
-            this.setIcon(j);
+    x(t);
+    var z = {lat: y,lng: w,index: C.length};
+    C.push(v(z, E));
+    function D() {
+        $(C).each(function() {
+            this.setIcon(A);
         });
     }
-    function a(s, t) {
-        if (t == null) {
-            f();
-            s.setIcon(e);
-            b.panTo(s.getPosition());
+    function I(b, a) {
+        if (a == null) {
+            D();
+            b.setIcon(E);
+            H.panTo(b.getPosition());
         } else {
-            if (t == (g.length - 1)) {
-                h();
+            if (a == (C.length - 1)) {
+                B();
             } else {
-                $(".list-suc .ul-suc li a").eq(t).trigger("click");
+                $(".list-suc .ul-suc li a").eq(a).trigger("click");
             }
         }
     }
-    function h() {
+    function B() {
         $("h4.ubi-map span").html("");
-        index = g.length - 1;
-        a(g[index], null);
+        index = C.length - 1;
+        I(C[index], null);
         $(".ubicancion").effect("highlight", {}, 1000);
         $(".list-suc .ul-suc li a.activo").removeClass("activo");
     }
-    function d(v) {
-        var w = $(this).data("lat");
-        var u = $(this).data("lng");
-        var t = $(".list-suc .ul-suc li a").index(this);
-        var x = $(this).find(".phone span").text();
-        var s = $(v.target);
+    function F(c) {
+        var b = $(this).data("lat");
+        var d = $(this).data("lng");
+        var e = $(".list-suc .ul-suc li a").index(this);
+        var a = $(this).find(".phone span").text();
+        var f = $(c.target);
         $(".list-suc .ul-suc li a.activo").removeClass("activo");
-        if (s.is("span.close-banch")) {
-            h();
+        if (f.is("span.close-banch")) {
+            B();
         } else {
             $(this).addClass("activo");
-            $("h4.ubi-map span").html(" : " + "<span class='co_l'>"+x+"</span>");
-            a(g[t], null);
+            $("h4.ubi-map span").html(" : <span class='co_l'>" + a + "</span>");
+            I(C[e], null);
         }
         return false;
     }
-    $(".list-suc .ul-suc li a").on("click", d);
+    $(".list-suc .ul-suc li a").on("click", F);
 }
 $(document).ready(function() {
-    $('input, textarea').placeholder();
-    if ($.browser.mozilla) { $(".verlistado").css("padding-top","10px");};
-    $(".agregar-coment-1").click(function(a) {
-        a.preventDefault();
+    $("input, textarea").placeholder();
+    if ($.browser.mozilla) {
+        $(".verlistado").css("padding-top", "10px");
+    }
+    $(".agregar-coment-1").click(function(b) {
+        b.preventDefault();
         if ($(".agregar-comentario-desc").is(":hidden")) {
             $(".agregar-comentario-desc").show("slow");
         } else {
@@ -126,15 +128,15 @@ $(document).ready(function() {
         $("body,html").animate({scrollTop: 0}, 500);
         return false;
     });
-    $("#ver").on("click", function(b) {
-        b.preventDefault();
-        var a = $(this).attr("href");
-        switch (a) {
+    $("#ver").on("click", function(c) {
+        c.preventDefault();
+        var d = $(this).attr("href");
+        switch (d) {
             case "#cate-home":
-                offset = $(a).offset().top - 20;
+                offset = $(d).offset().top - 20;
                 break;
             default:
-                offset = $(a).offset().top;
+                offset = $(d).offset().top;
                 break;
         }
         $("html, body").animate({scrollTop: offset}, "slow");
@@ -151,9 +153,9 @@ $(document).ready(function() {
         }
     }).keyup();
     $("#buscarmap").on("click", function() {
-        var c = $("#bubi #q").val();
-        var a = $("#bubi #fq").val();
-        var b = urlJson + "/jsonmapasa?distrito=" + a + "&q=" + c;
+        var h = $("#bubi #q").val();
+        var f = $("#bubi #fq").val();
+        var e = urlJson + "/jsonmapasa?distrito=" + f + "&q=" + h;
         $("#map").remove();
         $("#subir-home").remove();
         $(".mensaje").remove();
@@ -161,22 +163,25 @@ $(document).ready(function() {
         $("#mapa-buscador").append("<div id='map' style='height:800px;'></div>");
         $("#esconder").css("display", "none");
         $("#esconder2").css("display", "none");
-        console.log(b);
         if (($("#bubi #q").val() != "") && ($("#bubi #fq").val() != "seleccione")) {
             $("#mapa-buscador").fadeIn();
-            $("#search #q").attr("value",c);
-            var d = $.getJSON(b, function(e) {
-                console.log(e.response.numFound);
-                if (e.response.numFound >= 1) {
+            $("#search #q").attr("value", h);
+            var g = $.getJSON(e, function(a) {
+                if (a.response.numFound >= 1) {
                     map = new GMaps({el: "#map",zoom: 12,lat: -12.043333,lng: -77.028333});
-                    $.each(e.response.docs, function(g, f) {
-                        map.setCenter(f.latitud, f.longitud);
-                        console.log(f);
-                        var por = f.tx_descripcion;
-                        var sms = por.substring(0, 50);
-                        var anom = replaceAll(f.name, " ", "-");
-                        var adis = replaceAll(f.distrito, " ", "-");
-                        map.addMarker({lat: f.latitud,lng: f.longitud,icon: {size: new google.maps.Size(32, 37),url: "/img/icomap.png"},title: f.restaurante,infoWindow: {content: "<img src='/plato/general/" + f.va_imagen + "' class='img-mapa'>" + "<p class='restaurante-map'>" + "<a href=/plato/" + anom + "-" + f.id + ">" + f.restaurante + "</a></p>" + "<p class='plato-map'>" + f.name + "</p>" + "<p class='txt-map'>" + sms + "...</p>" + "<a class='a-map' href=/plato/" + anom + "-" + f.id + "> ver mas </a>"}});
+                    $.each(a.response.docs, function(d, j) {
+                        map.setCenter(j.latitud, j.longitud);
+                        var b = j.tx_descripcion;
+                        var c = b.substring(0, 50);
+                        var l = replaceAll(j.name, " ", "-");
+                        var k = replaceAll(j.distrito, " ", "-");
+                        var z = j.va_imagen;
+                        if (z=="platos-default.png"){
+                            map.addMarker({lat: j.latitud,lng: j.longitud,icon: {size: new google.maps.Size(32, 37),url: "/img/icomap.png"},title: j.restaurante,infoWindow: {content: "<img src=" + urlJson + "/imagenes/defecto/" + j.va_imagen + " class='img-mapa'><p class='restaurante-map'><a href=/plato/" + l + "-" + j.id + ">" + j.restaurante + "</a></p><p class='plato-map'>" + j.name + "</p><p class='txt-map'>" + c + "...</p><a class='a-map' href=/plato/" + l + "-" + j.id + "> ver mas </a>"}});
+                        }else{
+                            map.addMarker({lat: j.latitud,lng: j.longitud,icon: {size: new google.maps.Size(32, 37),url: "/img/icomap.png"},title: j.restaurante,infoWindow: {content: "<img src=" + urlJson + "/imagenes/plato/general/" + j.va_imagen + " class='img-mapa'><p class='restaurante-map'><a href=/plato/" + l + "-" + j.id + ">" + j.restaurante + "</a></p><p class='plato-map'>" + j.name + "</p><p class='txt-map'>" + c + "...</p><a class='a-map' href=/plato/" + l + "-" + j.id + "> ver mas </a>"}});
+                        }
+                    
                     });
                 } else {
                     $("#mapa-buscador").hide();
@@ -190,18 +195,18 @@ $(document).ready(function() {
                     $(".contenido-plato").append('<div class="recomendados-platos primer-home" id="subir-home" style="padding-bottom: 90px;"></div>');
                     $("#subir-home").append('<div class="sub" style="margin-top: 10px;margin-bottom: 15px;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;"><span  style="padding-left: 10px;color:white;font-weight: bold;">Platos Destacados</span></div>');
                     $("#subir-home").append('<ul id="listajson"></ul>');
-                    $.getJSON(urlJson + "/jsondesta", function(f) {
-                        $.each(f, function(g, h) {
-                            var nplato = replaceAll(h.va_nombre, " ", "-");
-                            $("#listajson").append('<li><div class="plato_r"><div class="mosaic-block cover2"><div class="mosaic-overlay"><span>' + h.va_nombre + '</span><img src="/plato/destacado/' + h.va_imagen + '" class="img-plato"><img src="/img/mas.png" alt="" class="mas"></div><a href="/plato/' + nplato + "-" + h.in_id + '" class="mosaic-backdrop"><div class="details"><h4>' + h.va_nombre + '</h4><p class="title-details" style="font-weight: bold;">Descripción</p><p class="desc-plato" style="font-size:0.9em;">' + h.tx_descripcion + '</p></div></a></div><div class="foo"><p class="nom_res">' + h.restaurant_nombre + '</p><div class="pt"><p class="com">' + h.NumeroComentarios + ' <i class="icon-comment"></i></p><div class="punt"><div class="puntuaciones c' + h.Ta_puntaje_in_id + '"></div></div></div></div></div></li>');
+                    $.getJSON(urlJson + "/jsondesta", function(b) {
+                        $.each(b, function(j, d) {
+                            var c = replaceAll(d.va_nombre, " ", "-");
+                            $("#listajson").append('<li><div class="plato_r"><div class="mosaic-block cover2"><div class="mosaic-overlay"><span>' + d.va_nombre + '</span><img src=' + urlJson + '/imagenes/plato/destacado/' + d.va_imagen + ' class="img-plato"><img src="/img/mas.png" alt="" class="mas"></div><a href="/plato/' + c + "-" + d.in_id + '" class="mosaic-backdrop"><div class="details"><h4>' + d.va_nombre + '</h4><p class="title-details" style="font-weight: bold;">Descripción</p><p class="desc-plato" style="font-size:0.9em;">' + d.tx_descripcion + '</p></div></a></div><div class="foo"><p class="nom_res">' + d.restaurant_nombre + '</p><div class="pt"><p class="com">' + d.NumeroComentarios + ' <i class="icon-comment"></i></p><div class="punt"><div class="puntuaciones c' + d.Ta_puntaje_in_id + '"></div></div></div></div></div></li>');
                         });
                         $(".cover2").mosaic({animation: "slide",anchor_y: "top",hover_y: "300px"});
                     });
                 }
             });
-            d.fail(function(g, h, e) {
-                var f = h + ", " + e;
-                console.log(f);
+            g.fail(function(b, a, d) {
+                var c = a + ", " + d;
+                console.log(c);
                 $("#mapa-buscador").hide();
                 $(".descrip-product").remove();
                 $("#subir-home").remove();
@@ -213,10 +218,10 @@ $(document).ready(function() {
                 $(".contenido-plato").append('<div class="recomendados-platos primer-home" id="subir-home" style="padding-bottom: 90px;"></div>');
                 $("#subir-home").append('<div class="sub" style="margin-top: 10px;margin-bottom: 15px;background: url(/img/img-resultados.png);width: 41%;padding: 0.9em 0px;"><span  style="padding-left: 10px;color:white;font-weight: bold;">Platos Destacados</span></div>');
                 $("#subir-home").append('<ul id="listajson"></ul>');
-                $.getJSON(urlJson+"/jsondesta", function(f) {
-                    $.each(f, function(g, h) {
-                        var nplato = replaceAll(h.va_nombre, " ", "-");
-                        $("#listajson").append('<li><div class="plato_r"><div class="mosaic-block cover2"><div class="mosaic-overlay"><span>' + h.va_nombre + '</span><img src="/plato/destacado/' + h.va_imagen + '" class="img-plato"><img src="/img/mas.png" alt="" class="mas"></div><a href="/plato/' + nplato + "-" + h.in_id + '" class="mosaic-backdrop"><div class="details"><h4>' + h.va_nombre + '</h4><p class="title-details" style="font-weight: bold;">Descripción</p><p class="desc-plato" style="font-size:0.9em;">' + h.tx_descripcion + '</p></div></a></div><div class="foo"><p class="nom_res">' + h.restaurant_nombre + '</p><div class="pt"><p class="com">' + h.NumeroComentarios + ' <i class="icon-comment"></i></p><div class="punt"><div class="puntuaciones c' + h.Ta_puntaje_in_id + '"></div></div></div></div></div></li>');
+                $.getJSON(urlJson + "/jsondesta", function(j) {
+                    $.each(j, function(m, l) {
+                        var k = replaceAll(l.va_nombre, " ", "-");
+                        $("#listajson").append('<li><div class="plato_r"><div class="mosaic-block cover2"><div class="mosaic-overlay"><span>' + l.va_nombre + '</span><img src=' + urlJson + 'magenes/plato/destacado/' + l.va_imagen + 'class="img-plato"><img src="/img/mas.png" alt="" class="mas"></div><a href="/plato/' + k + "-" + l.in_id + '" class="mosaic-backdrop"><div class="details"><h4>' + l.va_nombre + '</h4><p class="title-details" style="font-weight: bold;">Descripción</p><p class="desc-plato" style="font-size:0.9em;">' + l.tx_descripcion + '</p></div></a></div><div class="foo"><p class="nom_res">' + l.restaurant_nombre + '</p><div class="pt"><p class="com">' + l.NumeroComentarios + ' <i class="icon-comment"></i></p><div class="punt"><div class="puntuaciones c' + l.Ta_puntaje_in_id + '"></div></div></div></div></div></li>');
                     });
                     $(".cover2").mosaic({animation: "slide",anchor_y: "top",hover_y: "300px"});
                 });
@@ -227,7 +232,7 @@ $(document).ready(function() {
         }
     });
 });
-$("#bubi #fq").change(function(a) {
+$("#bubi #fq").change(function(b) {
     if (($("#bubi #q").val() != "") && ($("#bubi #fq").val() != "seleccione distrito")) {
         $("#buscarmap").removeClass("disabled").addClass("map");
         $("#buscarmap").attr("href", "#");
