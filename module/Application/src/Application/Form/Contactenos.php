@@ -20,14 +20,10 @@ class Contactenos extends Form
         $this->add(array(
             'name' => 'nombre',            
             'type' => 'Text',
-            'attributes' => array(
-            'id' => 'nombre',
-             'required' => 'required'            
-            ),
-            'options' => array(
-
-            // 'label' => 'nombre',
-            ),
+             'attributes' => array(
+                'id' => 'nombre',
+                'required' => true     
+                ),
             'validators' => array( 
                     array(
                         'name'    => 'StringLength',
@@ -38,23 +34,21 @@ class Contactenos extends Form
                         ),
                     ),
             )
+            			
+
             
         ));
 
 
         $this->add(array(
-            'name' => 'email',
+             'name' => 'email',
              'type' => 'Email',
-              'attributes' => array(
-            'id' => 'email',
-           'required' => 'required'     
-            ),
-            'options' => array(
+             'attributes' => array(
+                'id' => 'email',
+                'required' => true     
+                ),
 
-                // 'label' => 'correo',
-            ),
-
-        'validators' => array( 
+            'validators' => array( 
                 array( 
                     'name' => 'EmailAddress', 
                     'options' => array( 
@@ -71,12 +65,9 @@ class Contactenos extends Form
             'type' => 'Text',
              'attributes' => array(
             'id' => 'asunto',
-           'required' => 'required'   
+           'required' => true   
             ),
-            'options' => array(
 
-//                'label' => 'nombre de plato',
-            ),
            
         ));
         
@@ -85,16 +76,12 @@ class Contactenos extends Form
             'type' => 'Textarea',
             'attributes' => array(               
                 'class' => 'span11',
-                'required' => 'required',      
+                'required' => true,      
                 'id' => 'mensaje',
                 'colls'=>40,
                 'rows'=>4
             ),
-            'options' => array(
 
-//                'label' => 'descripcion',
-
-            ),
         ));
 
         $this->add(array(

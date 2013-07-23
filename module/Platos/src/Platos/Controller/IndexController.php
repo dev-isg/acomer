@@ -604,7 +604,17 @@ class IndexController extends AbstractActionController {
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
         $paginator->setItemCountPerPage(10);    
-        $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
+        $config = $this->getServiceLocator()->get('Config');
+//        var_dump($config['host']['images'].'/'.);exit;
+//           if ($this->lista[0]['va_imagen']=='platos-default.png')
+//              {echo $config['host']['images']. '/defecto/' . $listarecomendacion[0]['va_imagen'];}
+//            else{echo $config['host']['images'] . '/plato/principal/' . $listarecomendacion[0]['va_imagen'];}
+            
+                                                        
+        $this->layout()->title=$listarecomendacion[0]['va_nombre'];   
+        $this->layout()->image=$listarecomendacion[0]['va_imagen']=='platos-default.png'?$config['host']['images']. '/defecto/' . $listarecomendacion[0]['va_imagen']:$config['host']['images'] . '/plato/principal/' . $listarecomendacion[0]['va_imagen'];
+        $this->layout()->description=$listarecomendacion[0]['tx_descripcion'];
+                $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id));
         

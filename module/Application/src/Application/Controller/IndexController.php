@@ -676,29 +676,31 @@ class IndexController extends AbstractActionController
 //        var_dump($request->isPost());
         if($request->isPost()){
          
-//               var_dump($request->isPost());exit;
-        $nombre = htmlspecialchars ($this->params()->fromPost('nombre', 0));
-        $email = htmlspecialchars ($this->params()->fromPost('email',0));
-        $asunto = htmlspecialchars ($this->params()->fromPost('asunto',0));
-        $mensaje = htmlspecialchars ($this->params()->fromPost('mensaje',0));
-
+        $datos=array();
+        $datos['nombre']= htmlspecialchars ($this->params()->fromPost('nombre', 0));
+        $datos['email']= htmlspecialchars ($this->params()->fromPost('email',0));
+        $datos['asunto'] = htmlspecialchars ($this->params()->fromPost('asunto',0));
+        $datos['mensaje'] = htmlspecialchars ($this->params()->fromPost('mensaje',0));
+          $form->setData($datos);
+           if ($form->isValid()) {
+                
         $bodyHtml='<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
                                                <head>
                                                <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
                                                </head>
                                                <body>
                                                     <div style="color: #7D7D7D"><br />
-                                                     Nombre <strong style="color:#133088; font-weight: bold;">'.utf8_decode($nombre).'</strong><br />
-                                                     Email <strong style="color:#133088; font-weight: bold;">'.utf8_decode($email).'</strong><br />
-                                                     Asunto <strong style="color:#133088; font-weight: bold;">'.utf8_decode($asunto).'</strong><br />
-                                                     Mensaje <strong style="color:#133088; font-weight: bold;">'.utf8_decode($mensaje).'</strong><br />
+                                                     Nombre <strong style="color:#133088; font-weight: bold;">'.utf8_decode($datos['nombre']).'</strong><br />
+                                                     Email <strong style="color:#133088; font-weight: bold;">'.utf8_decode($datos['email']).'</strong><br />
+                                                     Asunto <strong style="color:#133088; font-weight: bold;">'.utf8_decode($datos['asunto']).'</strong><br />
+                                                     Mensaje <strong style="color:#133088; font-weight: bold;">'.utf8_decode($datos['mensaje']).'</strong><br />
                                               
                                                      </div>
                                                </body>
                                                </html>';
         
         $message = new Message();
-        $message->addTo('listadelsabor@innovationssystems.com', $nombre)
+        $message->addTo('listadelsabor@innovationssystems.com', $datos['nombre'])
         ->setFrom('listadelsabor@innovationssystems.com', 'listadelsabor.com')
         ->setSubject('Contactos de ListaDelSabor.com');
 //        ->setBody($bodyHtml);
@@ -713,6 +715,7 @@ class IndexController extends AbstractActionController
         $transport->send($message);
         $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/contactenos');
 //        $this->redirect()->toUrl('/contactenos');///application/index
+                }
         }
         
         $view->setVariables(array('form' => $form));

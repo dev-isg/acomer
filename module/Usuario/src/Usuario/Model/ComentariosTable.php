@@ -33,7 +33,7 @@ class ComentariosTable
              ->join(array('u'=>'ta_cliente'),'ta_cliente_in_id=u.in_id',array('va_nombre_cliente','va_email'))
              ->join(array('f'=>'ta_puntaje'),'ta_comentario.ta_puntaje_in_id=f.in_id',array('va_valor'));
              // ->where('(r.in_id LIKE "%'.$consulta.'%") OR (r.va_nombre LIKE "%'.$consulta.'%") OR (u.ch_distrito LIKE "%'.$consulta.'%")');//OR (ta_restaurante_in_id LIKE "%'.$consulta.'%") OR (ta_ubigeo_in_id LIKE "%'.$consulta.'%")
-            
+            $select->order('ta_comentario.in_id DESC');
             $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($select);
             $adapter=$this->tableGateway->getAdapter();
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
@@ -85,7 +85,7 @@ class ComentariosTable
                 ->query('SELECT ta_comentario.*,SUM(ta_puntaje_in_id)AS SumaPuntaje ,COUNT(ta_comentario.in_id ) AS NumeroComentarios,
                     ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS TotPuntaje
                     FROM ta_comentario
-                    where ta_comentario.en_estado=aprobado and ta_comentario.ta_plato_in_id='.$coment['Ta_plato_in_id'], $adapter2::QUERY_MODE_EXECUTE);
+                    where  ta_comentario.ta_plato_in_id='.$coment['Ta_plato_in_id'], $adapter2::QUERY_MODE_EXECUTE);
                         $prom=$promselect->toArray();
              
               $update = $this->tableGateway->getSql()->update()->table('ta_plato')
@@ -184,6 +184,7 @@ public function cromSolr($id)
             ->join(array('m'=>'ta_puntaje'),'f.ta_puntaje_in_id=m.in_id',array('va_valor'))
             ->where(array('f.en_estado'=>$estado,'f.ta_puntaje_in_id'=>$puntaje));
            }
+           $select->order('f.in_id DESC');
             $selectString = $sql->getSqlStringForSqlObject($select);
 
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
