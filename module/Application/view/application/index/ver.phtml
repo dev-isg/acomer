@@ -145,8 +145,6 @@ echo $this->form()->closeTag(); ?>
             <span style="padding-left: 10px;color:white;font-weight: bold;"><?php echo  $this->nombre;  ?></span>
         </div>    
         <?php foreach ($this->general as $doc) : ?>
-           
-
                  <div class="plato_h">
                    <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                    <div class="lateral" >
@@ -169,10 +167,8 @@ echo $this->form()->closeTag(); ?>
                         <p class="com-pla"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i> Comentarios</p>
                     </div>
 
-                </div>
-                   
-                 
-                  <?php endforeach; ?> 
+                </div>   
+      <?php endforeach; ?> 
      <div id="pagina"><?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar?q='.$this->nombre.'&submit=Buscar'.'&')):""; ?> </div>         
        </div>         
       <div id="mapa-buscador">
