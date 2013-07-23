@@ -36,7 +36,7 @@
    				<div class="ficha-img">
    					<img src="<?php if ($this->lista[0]['va_imagen']=='platos-default.png')
                                             {echo $this->host('images') . '/defecto/' . $this->lista[0]['va_imagen'];}
-                                        else{echo $this->host('images') . '/plato/principal/' . $this->lista[0]['va_imagen'];}?>">
+                                        else{echo $this->host('images') . '/plato/principal/' . $this->lista[0]['va_imagen'];}?>" title="" alt="">
    				</div>
    				<div class="ficha-desc">
                   <h2><?php echo $this->lista[0]['restaurant_nombre'];?></h2>  
@@ -91,7 +91,7 @@
                     <img src="<?php if($this->lista[0]['restaurant_img']=='default-img.jpg')
                         {echo $this->host('images') . '/defecto/' . $this->lista[0]['restaurant_img'];}
                         else
-                            {echo $this->host('images') . '/restaurante/principal/' . $this->lista[0]['restaurant_img'];}?>">
+                            {echo $this->host('images') . '/restaurante/principal/' . $this->lista[0]['restaurant_img'];}?>" title="" alt="">
                 </div>
                 <h4 class="ubi-map">Mapa de ubicación <span></span></h4>
                 <div id="mapCont" class="map" data-lat="<?php echo $this->lista[0]['de_latitud']; ?>" data-lng="<?php echo $this->lista[0]['de_longitud']; ?>"></div>
@@ -214,6 +214,7 @@
  </div>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script> 
+<<<<<<< HEAD
 <!-- <script>
   
   head.js("<?php echo $this->basePath()?>/js/jquery-ui.min.js?v<?php echo $this->host('version')?>")  
@@ -224,6 +225,8 @@
 </script>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 -->
+=======
+>>>>>>> 91957429809f0a183acf0ffeace8b5c6d8951aa9
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -232,10 +235,12 @@
   js.src = "//connect.facebook.net/es_ES/all.js#xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 91957429809f0a183acf0ffeace8b5c6d8951aa9
 <script src="<?php echo $this->basePath()?>/js/jquery-ui.min.js?v<?php echo $this->host('version')?>"></script>
-<script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script> 
 <script src="<?php echo $this->basePath()?>/js/vendor/gmaps.min.js?v<?php echo $this->host('version')?>"></script>
 <script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.min.js?v<?php echo $this->host('version')?>"></script>
 <script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js?v<?php echo $this->host('version')?>"></script>
