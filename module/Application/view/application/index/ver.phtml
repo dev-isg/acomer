@@ -99,7 +99,7 @@ echo $this->form()->closeTag(); ?>
          <div class="plato_h">
            <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
             <div class="lateral" >
-              <img src="<?php echo $this->host('static')?>/img/mas.png" alt="" title="" class="mas-det">
+              <img src="<?php echo $this->host('static')?>/img/mas.png" alt="<?php echo $doc->name; ?>" title="<?php echo $doc->name; ?>" class="mas-det">
             <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" title="<?php echo $doc->name; ?>" alt="<?php echo $doc->name; ?>">
                 <img src="<?php if($doc->va_imagen=='platos-default.png')
                 { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
@@ -109,7 +109,7 @@ echo $this->form()->closeTag(); ?>
             </div>
             <div class="detalle-restaurante">
               <div class="detalle-nombre"><p class="nombre_r">
-                <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" alt="" title=""><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></a></p>
+                <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" alt="<?php echo $doc->name; ?>" title="<?php echo $doc->name; ?>"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></a></p>
                 <div class="punt">
                   <div class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>" style="margin: 0px;width: 118px !important;display:inline-block;"></div>
                 </div> 
@@ -159,7 +159,7 @@ echo $this->form()->closeTag(); ?>
                     </div>
                     <div class="detalle-restaurante">
                       <div class="detalle-nombre"><p class="nombre_r">
-                        <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" alt="" title=""><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></a></p>
+                        <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" alt="<?php echo $doc->name; ?>" title="<?php echo $doc->name; ?>"><?php echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?></a></p>
                         <div class="punt">
                           <div class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>" style="margin: 0px;width: 118px !important;display:inline-block;"></div>
                         </div> 
