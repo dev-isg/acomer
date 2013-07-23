@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="ListaDelSabor.com es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales">
     <meta name="keywords" content="" />
-    <meta property="og:title" content="<?php  $titulo=(!$this->title)?$this->headTitle(' Lista del Sabor'):$this->title ; echo $titulo; ?>"/>
+    <meta property="og:title" content="<?php  $titulo=(!$this->title)?'Lista del Sabor':$this->title.':Lista del Sabor' ; echo $titulo; ?>"/>
     <meta property="og:image" content="<?php $imagen=(!$this->image)?$this->host('ruta').'/img/logo-face.png':$this->image ; echo $imagen; ?>"/>
     <meta property="og:site_name" content=""/>
     <meta property="og:description" content="<?php $descrip=(!$this->description)?'Es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales':$this->description ; echo $descrip; ?>">

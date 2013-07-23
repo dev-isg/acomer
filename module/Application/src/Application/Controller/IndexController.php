@@ -620,25 +620,28 @@ class IndexController extends AbstractActionController
         $form=new Solicita("form");
         $request=$this->getRequest();
         if($request->isPost()){
-        $nombre =htmlspecialchars ($this->params()->fromPost('nombre_complet', 0));
-        $email = htmlspecialchars ($this->params()->fromPost('email',0));
-        $plato = htmlspecialchars ($this->params()->fromPost('nombre_plato',0));
-        $descripcion = htmlspecialchars ($this->params()->fromPost('descripcion',0));
-        $nombre_restaurant = htmlspecialchars ($this->params()->fromPost('nombre_restaurant',0));
-        $telefono = htmlspecialchars ($this->params()->fromPost('telefono',0));
-     
+        $datos= array();
+        $datos['nombre_complet'] =htmlspecialchars ($this->params()->fromPost('nombre_complet', 0));
+        $datos['email'] = htmlspecialchars ($this->params()->fromPost('email',0));
+        $datos['nombre_plato'] = htmlspecialchars ($this->params()->fromPost('nombre_plato',0));
+        $datos['descripcion'] = htmlspecialchars ($this->params()->fromPost('descripcion',0));
+        $datos['nombre_restaurant'] = htmlspecialchars ($this->params()->fromPost('nombre_restaurant',0));
+        $datos['telefono']= htmlspecialchars ($this->params()->fromPost('telefono',0));
+//        var_dump($datos);exit;
+            $form->setData($datos);
+       if ($form->isValid()) {
         $bodyHtml='<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
                                                <head>
                                                <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
                                                </head>
                                                <body>
                                                     <div style="color: #7D7D7D"><br />
-                                                     Nombre <strong style="color:#133088; font-weight: bold;">'.utf8_decode($nombre).'</strong><br />
-                                                     Email <strong style="color:#133088; font-weight: bold;">'.utf8_decode($email).'</strong><br />
-                                                     Plato <strong style="color:#133088; font-weight: bold;">'.utf8_decode($plato).'</strong><br />
-                                                     Descripcion <strong style="color:#133088; font-weight: bold;">'.utf8_decode($descripcion).'</strong><br />
-                                                     Restaurante <strong style="color:#133088; font-weight: bold;">'.utf8_decode($nombre_restaurant).'</strong><br />
-                                                     Telefono <strong style="color:#133088; font-weight: bold;">'.utf8_decode($telefono).'</strong><br />
+                                                     Nombre <strong style="color:#133088; font-weight: bold;">'.utf8_decode($datos['nombre_complet']).'</strong><br />
+                                                     Email <strong style="color:#133088; font-weight: bold;">'.utf8_decode($datos['email']).'</strong><br />
+                                                     Plato <strong style="color:#133088; font-weight: bold;">'.utf8_decode($datos['nombre_plato']).'</strong><br />
+                                                     Descripcion <strong style="color:#133088; font-weight: bold;">'.utf8_decode($datos['descripcion']).'</strong><br />
+                                                     Restaurante <strong style="color:#133088; font-weight: bold;">'.utf8_decode($datos['nombre_restaurant']).'</strong><br />
+                                                     Telefono <strong style="color:#133088; font-weight: bold;">'.utf8_decode($datos['telefono']).'</strong><br />
                                               
                                                      </div>
                                                </body>
@@ -660,7 +663,7 @@ class IndexController extends AbstractActionController
         $transport->send($message);
         $this->redirect()->toUrl('/solicita');
         }
-
+        }
         $view->setVariables(array('form' => $form));
          return $view;
         
@@ -669,11 +672,11 @@ class IndexController extends AbstractActionController
     public function contactenosAction(){
         
         $view = new ViewModel();
-
+       
         $this->layout()->clase = 'Solicita';
         $form=new Contactenos("form");
         $request=$this->getRequest();
-//        var_dump($request->isPost());
+
         if($request->isPost()){
          
         $datos=array();
@@ -681,6 +684,7 @@ class IndexController extends AbstractActionController
         $datos['email']= htmlspecialchars ($this->params()->fromPost('email',0));
         $datos['asunto'] = htmlspecialchars ($this->params()->fromPost('asunto',0));
         $datos['mensaje'] = htmlspecialchars ($this->params()->fromPost('mensaje',0));
+//        $form->setInputFilter(new \Application\Form\ContactenosFiltro());
           $form->setData($datos);
            if ($form->isValid()) {
                 

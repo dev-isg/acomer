@@ -83,7 +83,6 @@ class IndexController extends AbstractActionController {
         if ($request->isPost()) {      
             $plato = new Platos();
             $form->setInputFilter($plato->getInputFilter());
-            $form->setInputFilter($plato->getInputFilter());
             $nonFile = $request->getPost()->toArray();
             $File = $this->params()->fromFiles('va_imagen');
             $data = array_merge_recursive(
