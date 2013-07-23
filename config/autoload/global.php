@@ -25,8 +25,7 @@ return array(
         'folder' => '/solr'
     ),
    
-'host' => array(
-
+    'host' => array(
         'base' => 'http://192.168.1.47:8080',
         'static' => 'http://192.168.1.47:8080',
         'images' => 'http://192.168.1.47:8080/imagenes',
@@ -34,8 +33,6 @@ return array(
         'ruta' => 'http://192.168.1.47:8080',
         'version'=>1,
     ),
-
-
 
     'upload' => array(
         'images' => APPLICATION_PATH . '/public/imagenes'

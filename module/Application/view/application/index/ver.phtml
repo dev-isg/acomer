@@ -46,10 +46,10 @@ echo $this->form()->closeTag(); ?>
                     <img src="<?php if($doc->va_imagen=='platos-default.png')
                         { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
                         else
-                    {  echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); }?>" class="img-plato" alt="" title="">
+                    {  echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); }?>" class="img-plato" alt="<?php echo $doc->name; ?>" title="<?php echo $doc->name; ?>">
                     <img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas">
                   </div>
-                 <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"  class="mosaic-backdrop" title="" alt="">
+                 <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"  class="mosaic-backdrop" title="<?php echo $doc->name; ?>" alt="<?php echo $doc->name; ?>">
                     <div class="details">
                       <h4><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></h4>
                       <p class="title-details">Descripción</p>
@@ -100,11 +100,11 @@ echo $this->form()->closeTag(); ?>
            <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
             <div class="lateral" >
               <img src="<?php echo $this->host('static')?>/img/mas.png" alt="" title="" class="mas-det">
-            <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" title="" alt="">
+            <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" title="<?php echo $doc->name; ?>" alt="<?php echo $doc->name; ?>">
                 <img src="<?php if($doc->va_imagen=='platos-default.png')
                 { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
                 else
-            {  echo $this->host('images') . '/plato/general/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" style="border:0;" title="" alt="">
+            {  echo $this->host('images') . '/plato/general/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" style="border:0;" title="<?php echo $doc->name; ?>" alt="<?php echo $doc->name; ?>">
             </a>
             </div>
             <div class="detalle-restaurante">
@@ -149,11 +149,11 @@ echo $this->form()->closeTag(); ?>
                    <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                    <div class="lateral" >
                     <img src="<?php echo $this->host('static')?>/img/mas.png" alt="" alt="" class="mas-det">
-                   <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" title="" alt="">
+                   <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" title="<?php echo $doc->name; ?>" alt="<?php echo $doc->name; ?>">
                                   <img src="<?php if($doc->va_imagen=='platos-default.png')
                         { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
                         else
-                    {  echo $this->host('images') . '/plato/general/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" style="border:0;" title="" alt="">
+                    {  echo $this->host('images') . '/plato/general/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" style="border:0;" title="<?php echo $doc->name; ?>" alt="<?php echo $doc->name; ?>">
                     </a>
                     </div>
                     <div class="detalle-restaurante">
@@ -201,9 +201,9 @@ echo $this->form()->closeTag(); ?>
                 <img src="<?php if($doc->va_imagen=='platos-default.png')
                         { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
                         else
-                    {  echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" class="img-plato" title="" alt=""><img src="<?php echo $this->host('ruta')?>/img/mas.png" class="mas">
+                    {  echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" class="img-plato" title="<?php echo $doc->name; ?>" alt="<?php echo $doc->name; ?>"><img src="<?php echo $this->host('ruta')?>/img/mas.png" class="mas">
                 </div>
-              <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop" title="" alt="">                       
+              <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop" title="<?php echo $doc->name; ?>" alt="<?php echo $doc->name; ?>">                       
                 <div class="details">
                   <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
                   <p class="title-details" style="font-weight: bold;">Ingredientes</p>
