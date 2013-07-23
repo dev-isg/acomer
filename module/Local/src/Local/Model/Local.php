@@ -28,9 +28,10 @@ class Local implements InputFilterAwareInterface
     public $departamento;
     public $provincia;
     public $distrito;
+    public $va_direccion_referencia;
     
     protected $inputFilter;
-//    public $servicio;
+
     
     public function exchangeArray($data)
     {
@@ -40,9 +41,6 @@ class Local implements InputFilterAwareInterface
         $this->va_rango_precio     = (!empty($data['va_rango_precio'])) ? $data['va_rango_precio'] : null;
         $this->va_direccion     = (!empty($data['va_direccion'])) ? $data['va_direccion'] : null;
         $this->ta_restaurante_in_id     = (!empty($data['ta_restaurante_in_id'])) ? $data['ta_restaurante_in_id'] : null;
-//        $this->ta_mapa_in_id    = (!empty($data['ta_mapa_in_id'])) ? $data['ta_mapa_in_id'] : null;
-//        $this->ta_ubigeo_in_id     = (!empty($data['ta_ubigeo_in_id'])) ? $data['ta_ubigeo_in_id'] : null;
-//        $this->ta_horario_in_id    = (!empty($data['ta_horario_in_id'])) ? $data['ta_horario_in_id'] : null;
         $this->va_dia    = (!empty($data['va_dia'])) ? $data['va_dia'] : null;
         
         $this->de_latitud = (!empty($data['de_latitud'])) ? $data['de_latitud'] : null;
@@ -53,6 +51,8 @@ class Local implements InputFilterAwareInterface
         $this->departamento = (!empty($data['departamento'])) ? $data['departamento'] : null;
         $this->provincia = (!empty($data['provincia'])) ? $data['provincia'] : null;
         $this->distrito = (!empty($data['distrito'])) ? $data['distrito'] : null;
+        
+        $this->va_direccion_referencia=(!empty($data['va_direccion_referencia'])) ? $data['va_direccion_referencia'] : null;
         
         $this->servicio=(!empty($data['servicio'])) ? $data['servicio'] : null;
     }
@@ -152,6 +152,25 @@ class Local implements InputFilterAwareInterface
         $inputFilter->add($factory->createInput(array(
                 'name'     => 'va_horario',
                 'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 70,
+                        ),
+                    ),
+                ),
+            )));
+        
+                $inputFilter->add($factory->createInput(array(
+                'name'     => 'va_direccion_referencia',
+                'required' => false,
                 'filters'  => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),

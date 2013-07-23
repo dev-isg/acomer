@@ -59,6 +59,14 @@
                            </li>
 
                         </ul>
+                        <?php if($this->lista[0]['va_direccion_referencia']){?>
+                        <h4>Dirección de Referencia</h4>
+                        <ul class="ubi-lupa">
+                           <li>
+                            <div class="ubicancion"><?php echo $this->lista[0]['va_direccion_referencia'];?></div>
+                           </li>
+                        </ul>
+                         <?php } ?>                       
                         <h4>Teléfono</h4>
                         <ul class="servicios-desc">
                             <li><?php echo $this->lista[0]['va_telefono'];?></li>

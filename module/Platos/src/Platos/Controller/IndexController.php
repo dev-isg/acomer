@@ -609,11 +609,16 @@ class IndexController extends AbstractActionController {
 //              {echo $config['host']['images']. '/defecto/' . $listarecomendacion[0]['va_imagen'];}
 //            else{echo $config['host']['images'] . '/plato/principal/' . $listarecomendacion[0]['va_imagen'];}
             
-                                                        
+                                                    
         $this->layout()->title=$listarecomendacion[0]['va_nombre'];   
         $this->layout()->image=$listarecomendacion[0]['va_imagen']=='platos-default.png'?$config['host']['images']. '/defecto/' . $listarecomendacion[0]['va_imagen']:$config['host']['images'] . '/plato/principal/' . $listarecomendacion[0]['va_imagen'];
         $this->layout()->description=$listarecomendacion[0]['tx_descripcion'];
-                $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
+        $this->layout()->url=$config['host']['ruta'].'/plato/'.$datos['nombre'];
+
+        
+        
+        
+        $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id));
         

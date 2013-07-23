@@ -69,6 +69,7 @@ class LocalTable
            'va_rango_precio'            => $local['va_rango_precio'],  
            'va_horario_opcional'  => $local['va_horario_opcional'],
             'va_direccion' => $local['va_direccion'],
+            'va_direccion_referencia'=>$local['va_direccion_referencia'],
            //'ta_restaurante_in_id' => $local['ta_restaurante_in_id'],
             'ta_ubigeo_in_id' => $convertir[0]['in_id'],  
            'va_dia'=>$local['va_dia'],
@@ -135,7 +136,8 @@ class LocalTable
             'va_direccion' => $local->va_direccion,
            'ta_restaurante_in_id' => $local->ta_restaurante_in_id,
             'ta_ubigeo_in_id' => $convertir[0]['in_id'],//$local->ta_ubigeo_in_id
-             'va_dia'=>$local->va_dia
+             'va_dia'=>$local->va_dia,
+            'va_direccion_referencia'=>$local->va_direccion_referencia
         );
 
 
