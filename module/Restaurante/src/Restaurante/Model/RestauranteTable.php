@@ -134,10 +134,6 @@ class RestauranteTable
            ->where(array('f.va_nombre'=>$datos));
            }
 
-//          else if($datos=='' and $estado == ''){
-          
-
-
            if($datos=='' and $estado == ''){
 
              $select = $sql->select()
@@ -160,7 +156,7 @@ class RestauranteTable
             ->where(array('f.en_estado'=>$estado))
             ->where(array('f.Ta_tipo_comida_in_id'=>$comida,'f.en_estado'=>$estado));
            }
-           else{
+           else if($datos!='' and $comida != '' and $estado != '' ){
             $select = $sql->select()
             ->from(array('f' => 'ta_restaurante')) 
             ->join(array('b' => 'ta_tipo_comida'),'f.Ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
@@ -171,6 +167,7 @@ class RestauranteTable
            
            }
             $selectString = $sql->getSqlStringForSqlObject($select);
+            
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $rowset = $results;
          if (!$rowset) {

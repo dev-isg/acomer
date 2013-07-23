@@ -11,10 +11,14 @@
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="ListaDelSabor.com es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales">
     <meta name="keywords" content="" />
-    <meta property="og:title" content=""/>
-    <meta property="og:image" content=""/>
-    <meta property="og:site_name" content=""/>
-    <meta property="og:description" content="">
+    <meta property="fb:app_id" content="163599600492790">
+    <meta property="og:title" content="Lista del Sabor"/>
+    <meta property="og:image" content="<?php echo $this->host('ruta')?>/img/logo-face.png"/>
+    <meta property="og:url" content="<?php echo $this->host('ruta')?>"/>
+    <meta property="og:site_name" content="Lista del Sabor"/>
+    <meta property="og:description" content="Es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales">
+<meta name="msapplication-TileColor" content="#123456"/>
+<meta name="msapplication-TileImage" content="<?php echo $this->host('ruta')?>/img/logo-face.png"/>
     <link href="<?php echo $this->host('ruta')?>/img/favicon.ico?v<?php echo $this->host('version')?>" rel="shortcut icon" type="image/x-icon"/>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/headjs/0.99/head.load.min.js"></script>
     <!--
@@ -70,7 +74,7 @@
           <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
           <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
 
-            <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action='<?php echo $this->host('ruta')?>/buscar'>
+            <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar">
               <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"     placeholder="Ingrese el plato"  required="required"/>
               <input type="submit"  class="btn btn-search-home" value="Buscar"/>
               <em>Ejm: lomo saltado</em>
