@@ -20,7 +20,7 @@ return array(
         )
     ),
     'solr' => array(
-        'host' => '192.168.1.39',
+        'host' => '192.168.1.40',
         'port' => '8983',
         'folder' => '/solr'
     ),
