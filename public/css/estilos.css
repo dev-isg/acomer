@@ -98,6 +98,12 @@ body{
   height: 100%;
   min-height: 100%;
 }*/
+.mosaic-block a:hover{
+  text-decoration: none;
+}
+.nom_res a:hover{
+  text-decoration: none; 
+}
 form#search{
   /*position: relative;*/
 }
@@ -1852,6 +1858,9 @@ form#application .control-group .btn-solicito{
 .co_l{
   color: #7b7b7b;
   font-size: 15px;
+}
+#map img {
+  max-width: none;
 }
 /* ==========================================================================
    Helper classes
