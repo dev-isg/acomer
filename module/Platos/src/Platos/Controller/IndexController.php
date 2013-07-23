@@ -412,7 +412,7 @@ class IndexController extends AbstractActionController {
                                                  imagejpeg($nuevaimagen,$principal);
                                                  imagejpeg($destaque,$destacado);
                                                  imagejpeg($generale,$general);
-                                                 imagejpeg($viejaimagen,$original);  
+                                                 imagejpeg($viejaimagen,$original);             
                              $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' .$name; 
                        $this->getPlatosTable()->guardarPlato($restaurante,$nombre);
                     $this->redirect()->toUrl('/platos/index?id='.$idlocal);   
@@ -552,7 +552,6 @@ class IndexController extends AbstractActionController {
         $view = new ViewModel();
 //        $this->layout('layout/layout-portada');
         $datos =$this->params()->fromRoute();  
-        
         $nombre = explode('-', $datos['nombre']);   
         $id = array_pop($nombre);
         if(!$this->getPlatosTable()->getPlato($id)){
@@ -605,7 +604,17 @@ class IndexController extends AbstractActionController {
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
         $paginator->setItemCountPerPage(10);    
-        $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
+        $config = $this->getServiceLocator()->get('Config');
+//        var_dump($config['host']['images'].'/'.);exit;
+//           if ($this->lista[0]['va_imagen']=='platos-default.png')
+//              {echo $config['host']['images']. '/defecto/' . $listarecomendacion[0]['va_imagen'];}
+//            else{echo $config['host']['images'] . '/plato/principal/' . $listarecomendacion[0]['va_imagen'];}
+            
+                                                        
+        $this->layout()->title=$listarecomendacion[0]['va_nombre'];   
+        $this->layout()->image=$listarecomendacion[0]['va_imagen']=='platos-default.png'?$config['host']['images']. '/defecto/' . $listarecomendacion[0]['va_imagen']:$config['host']['images'] . '/plato/principal/' . $listarecomendacion[0]['va_imagen'];
+        $this->layout()->description=$listarecomendacion[0]['tx_descripcion'];
+                $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id));
         
