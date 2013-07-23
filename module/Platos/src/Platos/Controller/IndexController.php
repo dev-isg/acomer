@@ -411,7 +411,7 @@ class IndexController extends AbstractActionController {
                                                  imagejpeg($nuevaimagen,$principal);
                                                  imagejpeg($destaque,$destacado);
                                                  imagejpeg($generale,$general);
-                                                 imagejpeg($viejaimagen,$original);  
+                                                 imagejpeg($viejaimagen,$original);             
                              $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' .$name; 
                        $this->getPlatosTable()->guardarPlato($restaurante,$nombre);
                     $this->redirect()->toUrl('/platos/index?id='.$idlocal);   

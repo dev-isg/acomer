@@ -93,11 +93,11 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-html,
+/*html,
 body{
   height: 100%;
-}
-
+  min-height: 100%;
+}*/
 form#search{
   /*position: relative;*/
 }
@@ -191,18 +191,20 @@ cursor: pointer;
   display: block;
   margin: 0 auto;
 }
-.contenido{
-
+.container{  
   width: 990px;
   margin: 0px auto;
   height: 100%;
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .content-sidebar{
   width: 266px;
   float: left;
   height: 100%;
-
+  position: absolute;
 }
 .mensaje{
 font-size: 18px;
@@ -250,6 +252,7 @@ padding-left: 2em;
 .control-group label{
   color: #7b7b7b;
 }
+
 .contenido-busqueda h2{
 color: white;
 text-align: center;
@@ -606,7 +609,7 @@ background: url(../../img/back-detalle.png) repeat;
 .contenido-plato {
   /*background: url(../img/map.jpg) repeat fixed;*/
   width: 724px;
-  float: left;
+  float: right;
   position: relative;
   padding-bottom: 0px;
 }
@@ -2043,6 +2046,9 @@ form#application .control-group .btn-solicito{
 
 /*Activando responsive web desing*/
 @media (min-width: 1200px) {
+  .cont-home{
+    width: 1024px;
+  }
   .footer footer p{
     margin-right: 10px;
   }
@@ -2101,7 +2107,7 @@ form#application .control-group .btn-solicito{
   .contenido-plato{
     width: 75%;
   }
-  .contenido{
+  .container{
     width: 100%;
   }
   .footer{
@@ -2197,7 +2203,7 @@ form#application .control-group .btn-solicito{
   .contenido-plato{
     width: 75%;
   }
-  .contenido{
+  .container{
     width: 100%;
   }
   .footer{
@@ -2477,7 +2483,7 @@ form#application .control-group .btn-solicito{
   .contenido-plato{
     width: 65%;
   }
-  .contenido{
+  .container{
     width: 100%;
   }
   .recomendados-platos ul li{
