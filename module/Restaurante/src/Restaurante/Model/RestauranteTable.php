@@ -133,11 +133,7 @@ class RestauranteTable
             ->join(array('b' => 'ta_tipo_comida'),'f.Ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
            ->where(array('f.va_nombre'=>$datos));
            }
-
-//          else if($datos=='' and $estado == ''){
-          
-
-
+           
            if($datos=='' and $estado == ''){
 
              $select = $sql->select()
