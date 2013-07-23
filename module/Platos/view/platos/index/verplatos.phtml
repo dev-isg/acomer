@@ -45,8 +45,9 @@
    					<p class="desc"><?php echo $this->lista[0]['tx_descripcion'];?></p>
    					<p class="costo">Costo</p>
    					<p class="precio">S/.<?php echo $this->lista[0]['va_precio'];?></p>
-            <div class="fb-like" data-href="<?php echo  "http://listadelsabor.com/plato/" .$this->urlnombre ?>" data-send="false" data-layout="box_count" data-width="450" data-show-faces="false" data-font="tahoma"></div>
-   				</div>
+<!--           <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "http://listadelsabor.com/plato/" .$this->urlnombre ?>" data-text="Visita este sitio" data-via="ISGSAC" data-lang="es" data-dnt="true">Twittear</a>                  -->
+           <div class="fb-like" data-href="<?php echo  "http://listadelsabor.com/plato/" .$this->urlnombre ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+	</div>
    			</div>
    			<div class="content-coments">
    				<div class="coments-all">
@@ -209,17 +210,20 @@
     </div>
 </div>
        <div id="mapa-buscador">
-<!--        <div id='map' style="height:800px;"></div>-->
+    
  </div>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script> 
-<script>
+<!-- <script>
+  
   head.js("<?php echo $this->basePath()?>/js/jquery-ui.min.js?v<?php echo $this->host('version')?>")  
   .js("<?php echo $this->basePath()?>/js/vendor/jquery.validate.min.js?v<?php echo $this->host('version')?>")
   .js("<?php echo $this->basePath()?>/js/vendor/gmaps.min.js?v<?php echo $this->host('version')?>")
   .js("<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js?v<?php echo $this->host('version')?>")
   .js("<?php echo $this->basePath()?>/js/verplatos.js?v<?php echo $this->host('version')?>");
 </script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+-->
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -228,12 +232,13 @@
   js.src = "//connect.facebook.net/es_ES/all.js#xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<!--
+
+
 <script src="<?php echo $this->basePath()?>/js/jquery-ui.min.js?v<?php echo $this->host('version')?>"></script>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script> 
 <script src="<?php echo $this->basePath()?>/js/vendor/gmaps.min.js?v<?php echo $this->host('version')?>"></script>
 <script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.min.js?v<?php echo $this->host('version')?>"></script>
 <script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js?v<?php echo $this->host('version')?>"></script>
-<script src="<?php echo $this->basePath()?>/js/verplatos.js?v<?php echo $this->host('version')?>"></script>-->
+<script src="<?php echo $this->basePath()?>/js/verplatos.js?v<?php echo $this->host('version')?>"></script>
 
 		
