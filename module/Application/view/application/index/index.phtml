@@ -31,26 +31,23 @@
                   <img src="<?php if ($list->va_imagen=='platos-default.png')
                       {echo $this->host('images') . '/defecto/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');}
                   else
-                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" alt="" class="mas">
+                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" title="" alt="" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" class="mas">
                 </div>
-                <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">
-
-                
-   
-                <div class="details">
-                  <h4>
-                    <?php 
-                  
-                  echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></h4>
-                  <p class="title-details" style="font-weight: bold;">Descripción</p>
-                  <p class="desc-plato font-desc-c"> <?php 
-                        if(strlen($list->tx_descripcion)>100){
-                         $str=trim(substr($list->tx_descripcion, 0, 97));
-                          $str.='...';
-                         }else {$str=$list->tx_descripcion;}       
-                  echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
-                </div>
-               </a>
+                <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop" title="" alt="">
+                  <div class="details">
+                    <h4>
+                      <?php 
+                    
+                    echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></h4>
+                    <p class="title-details" style="font-weight: bold;">Descripción</p>
+                    <p class="desc-plato font-desc-c"> <?php 
+                          if(strlen($list->tx_descripcion)>100){
+                           $str=trim(substr($list->tx_descripcion, 0, 97));
+                            $str.='...';
+                           }else {$str=$list->tx_descripcion;}       
+                    echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
+                  </div>
+                </a>
               </div>
               <div class="foo">
                 <p class="nom_res"><a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>"><?php 
@@ -83,12 +80,10 @@
     <div class="recomendados-platos">
       <ul>       
          <?php  foreach ($this->listaseg  as $list) : 
-                       if(strlen($list->va_nombre)>27){
-                         $strnom=trim(substr($list->va_nombre, 0, 24));
-                          $strnom.='...';
-                         }else {$strnom=$list->va_nombre;} ?>
-             
-           
+           if(strlen($list->va_nombre)>27){
+             $strnom=trim(substr($list->va_nombre, 0, 24));
+              $strnom.='...';
+             }else {$strnom=$list->va_nombre;} ?>
           <li>
             <div class="plato_r">
                 <div class="mosaic-block cover">
@@ -96,24 +91,19 @@
                  <img src="<?php if ($list->va_imagen=='platos-default.png')
                       {echo $this->host('images') . '/defecto/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');}
                   else
-                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" alt="" class="mas">
+                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" class="img-plato" alt="" title=""><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" alt="" class="mas">
                  </div>
-
-                <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">
-
-             <div class="details">
-                       <h4>
-                           <?php
-                                echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?>
-                        </h4>
-                       <p class="title-details">Descripción</p>
-                       <p class="font-desc-c"> <?php 
-                                    if(strlen($list->tx_descripcion)>100){
-                                    $str=trim(substr($list->tx_descripcion, 0, 97));
-                                     $str.='...';
-                                    }else {$str=$list->tx_descripcion;} 
+                <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop" alt="" title="">
+                  <div class="details">
+                    <h4><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></h4>
+                      <p class="title-details">Descripción</p>
+                      <p class="font-desc-c"> <?php 
+                          if(strlen($list->tx_descripcion)>100){
+                          $str=trim(substr($list->tx_descripcion, 0, 97));
+                           $str.='...';
+                          }else {$str=$list->tx_descripcion;} 
                        echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
-                   </div>
+                  </div>
                </a>
               </div>
               <div class="foo">
@@ -150,10 +140,10 @@
     <div class="recomendados-platos">
       <ul>
          <?php foreach ($this->listaval  as $list) : 
-                                    if(strlen($list->va_nombre)>27){
-                         $strnom=trim(substr($list->va_nombre, 0, 24));
-                          $strnom.='...';
-                         }else {$strnom=$list->va_nombre;}
+            if(strlen($list->va_nombre)>27){
+             $strnom=trim(substr($list->va_nombre, 0, 24));
+              $strnom.='...';
+             }else {$strnom=$list->va_nombre;}
              
              ?> 
               <li>
@@ -163,22 +153,20 @@
                      <img src="<?php if ($list->va_imagen=='platos-default.png')
                       {echo $this->host('images') . '/defecto/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');}
                   else
-                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png" alt="" class="mas">
-                     </div>
-                 <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">
-                       <div class="details">
-                           <h4>
-                            <?php 
-                           echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?> </h4>
-                           <p class="title-details">Descripción</p>
-                           <p class="font-desc-c"><?php 
+                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" class="img-plato" title="" alt=""><img src="<?php echo $this->host('ruta')?>/img/mas.png" alt="" class="mas">
+                    </div>
+                    <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop" alt="" title="">
+                      <div class="details">
+                        <h4><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?> </h4>
+                          <p class="title-details">Descripción</p>
+                          <p class="font-desc-c"><?php 
                                    if(strlen($list->tx_descripcion)>100){
                                     $str=trim(substr($list->tx_descripcion, 0, 97));
                                      $str.='...';
                                     }else {$str=$list->tx_descripcion;} 
                          echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
-                       </div>
-                   </a>
+                      </div>
+                    </a>
                   </div>
                   <div class="foo">
                      <p class="nom_res">
@@ -227,21 +215,13 @@
           <div class="mosaic-block cover">
            <div class="mosaic-overlay"><span><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8');?></span>
            <img src="<?php if ($list->va_imagen=='platos-default.png')
-                      {echo $this->host('images') . '/defecto/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');}
-                  else
-                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" alt="" class="mas">
+              {echo $this->host('images') . '/defecto/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');}
+               else
+                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" class="img-plato" title="" alt=""><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" alt="" class="mas">
            </div>
-
-           <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">
-
-        
-
-             <div class="details">
-                 <h4>
-                       <?php
-                       
-                           echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?> 
-           </h4>
+           <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop" title="" alt="">
+            <div class="details">
+                <h4><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></h4>
                  <p class="title-details">Descripción</p>
                  <p class="font-desc-c"><?php 
                    if(strlen($list->tx_descripcion)>100){
