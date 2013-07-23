@@ -23,18 +23,26 @@ class ClientesController extends AbstractActionController {
 
     public function clientesAction() {
         $consulta = $this->params()->fromPost('texto');
-        if ($this->getRequest()->isPost()) {
-            $clientes = $this->getTableClientes()->getCliente($consulta);
-        } else {
-            $clientes = $this->getTableClientes()->getCliente();
-        }
+        $clientes = $this->getTableClientes()->getCliente();
         
-         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($clientes));
+        $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($clientes));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
          $paginator->setItemCountPerPage(10);
-        return new ViewModel(array(
+
+        
+        if ($this->getRequest()->isPost()) {
+            
+            $clientes = $this->getTableClientes()->getCliente($consulta);
+        $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($clientes));
+         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+         $paginator->setItemCountPerPage(10);
+
+        }
+                return new ViewModel(array(
                     'clientes' => $paginator,
                 ));
+
+
     }
     public function agregarclientesAction(){
         $form = new ClienteForm();
