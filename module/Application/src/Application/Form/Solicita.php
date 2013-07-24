@@ -8,8 +8,9 @@ class Solicita extends Form
     public function __construct($name = null)
     {
         // we want to ignore the name passed
-        parent::__construct('application');
+        parent::__construct('application2');
         $this->setAttribute('method', 'post');
+        $this->setInputFilter(new \Application\Form\SolicitaFiltro());
         $this->add(array(
             'name' => 'in_id',
             'type' => 'Hidden',
@@ -18,11 +19,7 @@ class Solicita extends Form
             'name' => 'nombre_complet',
             'type' => 'Text',
              'attributes' => array(          
-           'required' => 'required'   
-            ),
-            'options' => array(
-
-            // 'label' => 'nombre',
+            
             ),
         ));
 
@@ -31,22 +28,18 @@ class Solicita extends Form
             'name' => 'email',
             'type' => 'Email',
               'attributes' => array(          
-           'required' => 'required'   
+            
             ),
-            'options' => array(
 
-                // 'label' => 'correo',
-            ),
         ));
         $this->add(array(
             'name' => 'nombre_plato',
             'type' => 'Text',
               'attributes' => array(          
-           'required' => 'required'   
+        
             ),
             'options' => array(
 
-//                'label' => 'nombre de plato',
             ),
         ));
         
@@ -69,7 +62,7 @@ class Solicita extends Form
             'name' => 'nombre_restaurant',
             'type' => 'Text',
               'attributes' => array(          
-           'required' => 'required'   
+//           'required' => 'required'   
             ),
             'options' => array(
 

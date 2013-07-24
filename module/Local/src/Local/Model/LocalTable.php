@@ -32,7 +32,8 @@ class LocalTable
               $select = $this->tableGateway->getSql()->select()
              ->join(array('r'=>'ta_restaurante'),'ta_restaurante_in_id=r.in_id',array('va_nombre'))
              ->join(array('u'=>'ta_ubigeo'),'ta_ubigeo_in_id=u.in_id',array('ch_pais','ch_departamento','ch_provincia','ch_distrito'))
-              ->where('(r.in_id LIKE "%'.$id.'%") AND ((r.va_nombre LIKE "%'.$consulta.'%") OR (u.ch_distrito LIKE "%'.$consulta.'%"))');//OR (ta_restaurante_in_id LIKE "%'.$consulta.'%") OR (ta_ubigeo_in_id LIKE "%'.$consulta.'%")
+              ->where('(r.in_id LIKE "%'.$id.'%") AND ((r.va_nombre LIKE "%'.$consulta.'%") OR (u.ch_distrito LIKE "%'.$consulta.'%"))')//OR (ta_restaurante_in_id LIKE "%'.$consulta.'%") OR (ta_ubigeo_in_id LIKE "%'.$consulta.'%")
+            ->order('in_id DESC');
               //->where(array('r.in_id'=>$id));//('ta_restaurante_in_id='.'1');//r.in_id
               $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($select);
 //              var_dump($selectString);exit;
@@ -69,6 +70,7 @@ class LocalTable
            'va_rango_precio'            => $local['va_rango_precio'],  
            'va_horario_opcional'  => $local['va_horario_opcional'],
             'va_direccion' => $local['va_direccion'],
+            'va_direccion_referencia'=>$local['va_direccion_referencia'],
            //'ta_restaurante_in_id' => $local['ta_restaurante_in_id'],
             'ta_ubigeo_in_id' => $convertir[0]['in_id'],  
            'va_dia'=>$local['va_dia'],
@@ -135,7 +137,8 @@ class LocalTable
             'va_direccion' => $local->va_direccion,
            'ta_restaurante_in_id' => $local->ta_restaurante_in_id,
             'ta_ubigeo_in_id' => $convertir[0]['in_id'],//$local->ta_ubigeo_in_id
-             'va_dia'=>$local->va_dia
+             'va_dia'=>$local->va_dia,
+            'va_direccion_referencia'=>$local->va_direccion_referencia
         );
 
 

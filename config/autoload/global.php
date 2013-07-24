@@ -12,8 +12,8 @@ return array(
     // ...AGREGASTE PARA LA CONEXION GLOBAL
     'db' => array(
         'driver' => 'Pdo',
-        'username' => 'kevin',
-        'password' => '123456',
+        'username' => 'jerspr',
+        'password' => 'pariona',
         'dsn' => 'mysql:dbname=bd_acomer;host=192.168.1.50',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
@@ -25,8 +25,7 @@ return array(
         'folder' => '/solr'
     ),
    
-'host' => array(
-
+    'host' => array(
         'base' => 'http://192.168.1.40:8080',
         'static' => 'http://192.168.1.40:8080',
         'images' => 'http://192.168.1.40:8080/imagenes',
@@ -34,8 +33,6 @@ return array(
         'ruta' => 'http://192.168.1.40:8080',
         'version'=>1,
     ),
-
-
 
     'upload' => array(
         'images' => APPLICATION_PATH . '/public/imagenes'

@@ -31,9 +31,9 @@
                   <img src="<?php if ($list->va_imagen=='platos-default.png')
                       {echo $this->host('images') . '/defecto/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');}
                   else
-                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" title="" alt="" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" class="mas">
+                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" title="<?php echo $list->va_nombre;?>" alt="<?php echo $list->va_nombre;?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" class="mas">
                 </div>
-                <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop" title="" alt="">
+                <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop" title="<?php echo $list->va_nombre;?>" alt="<?php echo $list->va_nombre;?>">
                   <div class="details">
                     <h4>
                       <?php 
@@ -51,7 +51,7 @@
               </div>
               <div class="foo">
                 <p class="nom_res">
-                  <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" title="" alt=""><?php 
+                  <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" title="<?php echo $list->va_nombre;?>" alt="<?php echo $list->va_nombre;?>"><?php 
                      if(strlen($list->restaurant_nombre)>29){
                      $strres=trim(substr($list->restaurant_nombre, 0, 26));
                       $strres.='...';
@@ -92,9 +92,9 @@
                  <img src="<?php if ($list->va_imagen=='platos-default.png')
                       {echo $this->host('images') . '/defecto/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');}
                   else
-                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" class="img-plato" alt="" title=""><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" alt="" class="mas">
+                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" class="img-plato" alt="<?php echo $list->va_nombre;?>" title="<?php echo $list->va_nombre;?>"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" alt="" class="mas">
                  </div>
-                <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop" alt="" title="">
+                <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop" alt="<?php echo $list->va_nombre;?>" title="<?php echo $list->va_nombre;?>">
                   <div class="details">
                     <h4><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></h4>
                       <p class="title-details">Descripción</p>
@@ -109,7 +109,7 @@
               </div>
               <div class="foo">
                 <p class="nom_res">
-                  <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" title="" alt="">
+                  <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" title="<?php echo $list->va_nombre;?>" alt="<?php echo $list->va_nombre;?>">
                     <?php 
                        if(strlen($list->restaurant_nombre)>29){
                        $strres=trim(substr($list->restaurant_nombre, 0, 26));
@@ -154,7 +154,7 @@
                      <img src="<?php if ($list->va_imagen=='platos-default.png')
                       {echo $this->host('images') . '/defecto/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');}
                   else
-                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" class="img-plato" title="" alt=""><img src="<?php echo $this->host('ruta')?>/img/mas.png" alt="" class="mas">
+                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" class="img-plato" title="<?php echo $list->va_nombre;?>" alt="<?php echo $list->va_nombre;?>"><img src="<?php echo $this->host('ruta')?>/img/mas.png" alt="" class="mas">
                     </div>
                     <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop" alt="" title="">
                       <div class="details">
@@ -171,7 +171,7 @@
                   </div>
                   <div class="foo">
                      <p class="nom_res">
-                        <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" title="" alt="">
+                        <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" title="<?php echo $list->va_nombre;?>" alt="<?php echo $list->va_nombre;?>">
                           <?php 
                           if(strlen($list->restaurant_nombre)>29){
                          $strres=trim(substr($list->restaurant_nombre, 0, 27));
@@ -218,9 +218,9 @@
            <img src="<?php if ($list->va_imagen=='platos-default.png')
               {echo $this->host('images') . '/defecto/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');}
                else
-                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" class="img-plato" title="" alt=""><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" alt="" class="mas">
+                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');} ?>" class="img-plato" title="<?php echo $list->va_nombre;?>" alt="<?php echo $list->va_nombre;?>"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" alt="" class="mas">
            </div>
-           <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop" title="" alt="">
+           <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop" title="<?php echo $list->va_nombre;?>" alt="<?php echo $list->va_nombre;?>">
             <div class="details">
                 <h4><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></h4>
                  <p class="title-details">Descripción</p>
@@ -235,7 +235,7 @@
           </div>
           <div class="foo">
             <p class="nom_res">
-              <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" title="" alt="">
+              <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" title="<?php echo $list->va_nombre;?>" alt="<?php echo $list->va_nombre;?>">
                 <?php 
                   if(strlen($list->restaurant_nombre)>29){
                   $strres=trim(substr($list->restaurant_nombre, 0, 26));

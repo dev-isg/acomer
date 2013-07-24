@@ -71,17 +71,18 @@ class IndexController extends AbstractActionController
        $request = $this->getRequest();
         if ($request->isPost()) {
              $consulta=$this->params()->fromPost('texto');
-            $lista =  $this->getLocalTable()->listar($id,$consulta);    
+            $lista =  $this->getLocalTable()->listar($id,$consulta);   
+
         }
-//       $lista =  $this->getLocalTable()->listar();
-//      var_dump($lista);exit;
         
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
-         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+         $page=(int)$this->params()->fromQuery('page', 1);
+         $paginator->setCurrentPageNumber($page);
          $paginator->setItemCountPerPage(10);
         return new ViewModel(array(
-                    'locales' =>$paginator,// $lista,
-                'in_id'=>$id
+                  'locales' =>$paginator,
+                  
+                  'in_id'=>$id
                 ));
     }
 

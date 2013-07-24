@@ -231,9 +231,20 @@ class LocalForm extends Form
                 
                      ),
              )
+        ));                        
+            $this->add(array(
+            'name' => 'va_direccion_referencia',
+            'type' => 'Text',
+            'attributes' => array(               
+                'class' => 'span10',
+                'id'   => 'va_direccion_referencia',
+                'placeholder'=>'Ingrese el direccion'
+            ),
+            'options' => array(
+                'label' => 'Direccion de referencia',
+            ),
         ));
 
-        
         
     }
 }
