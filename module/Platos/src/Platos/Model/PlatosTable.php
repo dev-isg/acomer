@@ -442,13 +442,6 @@ class PlatosTable {
                 ORDER BY ' . $order . ' desc
                 LIMIT ' . $lim, $adapter::QUERY_MODE_EXECUTE);
 
-
-//        print_r($primer->toArray());Exit;
-//        $aux=array();
-//        foreach($primer as $value){
-//            $aux[]=$value;
-//        }
-
         return $primer; //->toArray();//$data;// $aux;//select()->from('usuario')->query()->fetchAll();
     }
 

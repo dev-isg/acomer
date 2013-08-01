@@ -201,9 +201,9 @@ echo $this->form()->closeTag(); ?>
               <div class="mosaic-block cover">
                 <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
                 <img src="<?php if($doc->va_imagen=='platos-default.png')
-                        { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
+                        { echo $this->host('images') . '/defecto/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');}
                         else
-                    {  echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" class="img-plato" title="<?php echo $doc->name; ?>" alt="<?php echo $doc->name; ?>"><img src="<?php echo $this->host('ruta')?>/img/mas.png" class="mas">
+                    {  echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" class="img-plato" title="<?php echo $doc->name; ?>" alt="<?php echo $doc->name; ?>"><img src="<?php echo $this->host('ruta')?>/img/mas.png" class="mas">
                 </div>
               <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop" title="<?php echo $doc->name; ?>" alt="<?php echo $doc->name; ?>">                       
                 <div class="details">
