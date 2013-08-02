@@ -434,7 +434,7 @@ class IndexController extends AbstractActionController
         exit();
     }
     
-             public function estadoRestauranteSolarAction($id = 17 ) {
+       public function estadoRestauranteSolarAction($id) {
            $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
             $adapter = $this->dbAdapter;
             $sql = new Sql($adapter);
