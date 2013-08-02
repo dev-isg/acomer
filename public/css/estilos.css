@@ -2730,6 +2730,9 @@ form#application .control-group .btn-solicito{
   .lista-Solicita .content-sidebar{
     height: auto;
   }
+  .lista-buscar .content-sidebar{
+    height: auto;
+  }
   .img-li-top .puntuaciones{
     position: static;
     margin-top: 10px;
