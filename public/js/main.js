@@ -133,8 +133,8 @@ $('#platos').validate({
               required: true           
         },
          va_precio:{
-                required : true,
-                number:true                       
+                required : true
+                /*number:true */                      
             },
       
         Ta_tipo_plato:{
@@ -150,8 +150,8 @@ $('#platos').validate({
                 required:"Por favor ingresar la descripcion"
                             },
             va_precio: {
-                required : "Por favor ingrese un precio",
-                number : "Por favor ingresar solo numeros"              
+                required : "Por favor ingrese un precio"
+               /* number : "Por favor ingresar solo numeros"      */        
             },
                  
             Ta_tipo_plato :{
