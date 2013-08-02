@@ -12,9 +12,9 @@ return array(
     // ...AGREGASTE PARA LA CONEXION GLOBAL
     'db' => array(
         'driver' => 'Pdo',
-        'username' => 'root',
-        'password' => '',
-        'dsn' => 'mysql:dbname=liston;host=localhost',
+        'username' => 'kevin',
+        'password' => '123456',
+        'dsn' => 'mysql:dbname=liston;host=192.168.1.50',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         )
