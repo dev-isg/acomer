@@ -1222,7 +1222,7 @@ width: 49%;
 .descrip-product .ficha-product{
   margin-top: 5px;
   width: 678px;
-  height: 272px;
+  height: 100%;
   background: #eaeaea;
   padding: 5px;
   -webkit-border-radius: 4px;
