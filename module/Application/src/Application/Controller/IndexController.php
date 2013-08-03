@@ -111,7 +111,8 @@ class IndexController extends AbstractActionController
     }
    public function detalleubicacionAction()
     { 
-          $view = new ViewModel();   
+          $view = new ViewModel(); 
+         
           $request = $this->getRequest();
           $this->layout()->clase = 'buscar-distrito';
           if ($request->isGet()) {

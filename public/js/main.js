@@ -82,11 +82,11 @@ $('#restaurante').validate({
         },
         va_web :{
                    url:true},
-        va_ruc:{
+       /* va_ruc:{
                 required : true,
                 number:true,
                 rucReal:true            
-            },
+            },*/
         
         Ta_tipo_comida_in_id:{
                 required : true
@@ -104,11 +104,11 @@ $('#restaurante').validate({
             va_web:{
                 url:"Por favor ingresa una Url valida"
             },
-            va_ruc: {
+           /* va_ruc: {
                 required : "Por favor ingrese un Ruc",
                 number : "Por favor ingresar solo numeros",
                 rucReal:" Ingresa un Ruc valido "
-            },
+            },*/
                 
             Ta_tipo_comida_in_id :{
               required : "Por favor ingresar un tipo de plato"                
@@ -133,8 +133,8 @@ $('#platos').validate({
               required: true           
         },
          va_precio:{
-                required : true,
-                number:true                       
+                required : true
+                /*number:true */                      
             },
       
         Ta_tipo_plato:{
@@ -150,8 +150,8 @@ $('#platos').validate({
                 required:"Por favor ingresar la descripcion"
                             },
             va_precio: {
-                required : "Por favor ingrese un precio",
-                number : "Por favor ingresar solo numeros"              
+                required : "Por favor ingrese un precio"
+               /* number : "Por favor ingresar solo numeros"      */        
             },
                  
             Ta_tipo_plato :{

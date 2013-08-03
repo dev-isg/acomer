@@ -376,7 +376,7 @@ line-height: 10px !important;
 border: 0;
 background:url(../img/lupa2.png) no-repeat;
 padding: 8px 16px;
-padding-top: 8px;
+padding-top: 9px;
 margin-left: -4px;
 line-height: 16px;
 }
@@ -1222,7 +1222,7 @@ width: 49%;
 .descrip-product .ficha-product{
   margin-top: 5px;
   width: 678px;
-  height: 272px;
+  height: 100%;
   background: #eaeaea;
   padding: 5px;
   -webkit-border-radius: 4px;
@@ -2728,6 +2728,9 @@ form#application .control-group .btn-solicito{
     height: auto;
   }
   .lista-Solicita .content-sidebar{
+    height: auto;
+  }
+  .lista-buscar .content-sidebar{
     height: auto;
   }
   .img-li-top .puntuaciones{

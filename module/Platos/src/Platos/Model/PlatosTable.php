@@ -417,7 +417,7 @@ class PlatosTable {
 
     public function cantComentxPlato($destaque = 1, $lim, $val, $estado = 1) {
         if ($val == 1) {
-            $puntaje = '>=0'; //'is not null or ta_comentario.ta_puntaje_in_id!=0'; 
+            $puntaje = '>0'; // $puntaje = '>=0'; 'is not null or ta_comentario.ta_puntaje_in_id!=0'; 
             $order = 'ta_puntaje_in_id';
         } else if ($val == 2) {
             $puntaje = '=0'; //'is null or ta_comentario.ta_puntaje_in_id!=0';
@@ -441,13 +441,6 @@ class PlatosTable {
                 GROUP BY in_id 
                 ORDER BY ' . $order . ' desc
                 LIMIT ' . $lim, $adapter::QUERY_MODE_EXECUTE);
-
-
-//        print_r($primer->toArray());Exit;
-//        $aux=array();
-//        foreach($primer as $value){
-//            $aux[]=$value;
-//        }
 
         return $primer; //->toArray();//$data;// $aux;//select()->from('usuario')->query()->fetchAll();
     }

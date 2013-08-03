@@ -36,7 +36,7 @@ class RestauranteForm extends Form
             'type' => 'Text',
               'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'va_razon_social',
+                'id'   => 'va_razo_social',
                 'placeholder'=>'Ingrese la Razon Social'
             ),
             'options' => array(

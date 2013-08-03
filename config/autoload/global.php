@@ -12,9 +12,9 @@ return array(
     // ...AGREGASTE PARA LA CONEXION GLOBAL
     'db' => array(
         'driver' => 'Pdo',
-        'username' => 'jerspr',
-        'password' => 'pariona',
-        'dsn' => 'mysql:dbname=bd_acomer;host=192.168.1.50',
+        'username' => 'kevin',
+        'password' => '123456',
+        'dsn' => 'mysql:dbname=liston;host=192.168.1.50',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         )
@@ -26,11 +26,11 @@ return array(
     ),
    
     'host' => array(
-        'base' => 'http://192.168.1.50:8080',
-        'static' => 'http://192.168.1.50:8080',
-        'images' => 'http://192.168.1.50:8080/imagenes',
-        'img'=>'http://192.168.1.50:8080/img',
-        'ruta' => 'http://192.168.1.50:8080',
+        'base' => 'http://192.168.1.40:8080',
+        'static' => 'http://192.168.1.40:8080',
+        'images' => 'http://192.168.1.40:8080/imagenes',
+        'img'=>'http://192.168.1.40:8080/img',
+        'ruta' => 'http://192.168.1.40:8080',
         'version'=>1,
     ),
 

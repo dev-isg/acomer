@@ -21,6 +21,7 @@ class IndexController extends AbstractActionController
   protected $restauranteTable;
   public $dbAdapter;
     protected $_options;
+    
     public function __construct()
     {
     	$this->_options = new \Zend\Config\Config ( include APPLICATION_PATH . '/config/autoload/global.php' );
@@ -433,7 +434,7 @@ class IndexController extends AbstractActionController
         exit();
     }
     
-             public function estadoRestauranteSolarAction($id) {
+       public function estadoRestauranteSolarAction($id) {
            $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
             $adapter = $this->dbAdapter;
             $sql = new Sql($adapter);
@@ -449,9 +450,10 @@ class IndexController extends AbstractActionController
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
+        //var_dump($plato);exit;
        $solr = \Classes\Solr::getInstance()->getSolr();
         if ($solr->ping()){
-            $solr->deleteByQuery('id:' . $id);
+           $solr->deleteByQuery('id:' . $id);
             $document = new \Apache_Solr_Document();
             $document->id = $id;
             $document->name = $plato[0]['va_nombre'];
@@ -468,10 +470,11 @@ class IndexController extends AbstractActionController
             $document->va_imagen = $plato[0]['va_imagen'];
             $document->comentarios = $plato[0]['cantidad'];
             $document->restaurant_estado = $plato[0]['restaurant_estado'];
-            $document->puntuacion = $plato[0]['Ta_puntaje_in_id'];
+            $document->puntuacion = $plato[0]['Ta_puntaje_in_id']; 
             $solr->addDocument($document);
             $solr->commit();
             $solr->optimize();
+         
         }
     }
     
@@ -483,14 +486,15 @@ class IndexController extends AbstractActionController
             $sql = new Sql($adapter); 
             $select = $sql->select()
             ->from('ta_plato');
-            $selectS = $sql->getSqlStringForSqlObject($select);
+            $selectS = $sql->getSqlStringForSqlObject($select);   
             $resul = $adapter->query($selectS, $adapter::QUERY_MODE_EXECUTE);
             $plato=$resul->toArray();
             foreach ($plato as $result) 
-            {
-            $this->estadoRestauranteSolarAction($result['in_id']);
-            }
+            {$this->estadoRestauranteSolarAction($result['in_id']);}
            echo 'cron finalizado';exit;
         }
 
-}
+    }
+                        
+                                  
+                             
