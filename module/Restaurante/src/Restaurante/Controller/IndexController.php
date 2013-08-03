@@ -190,7 +190,7 @@ class IndexController extends AbstractActionController
      }
  public function editarrestauranteAction()   
     {   
-    $auth = new \Zend\Authentication\AuthenticationService();
+        $auth = new \Zend\Authentication\AuthenticationService();
         if (!$auth->hasIdentity()) {
             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
         }
