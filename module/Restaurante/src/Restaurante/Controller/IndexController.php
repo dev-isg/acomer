@@ -44,7 +44,7 @@ class IndexController extends AbstractActionController
             $lista = $this->getRestauranteTable()->buscarRestaurante($datos,$comida,$estado);
         }
 
-            $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
+         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
          $paginator->setItemCountPerPage(10);
 //          $this->layout('layout/layout-portada');
@@ -476,7 +476,16 @@ class IndexController extends AbstractActionController
          
         }
     }
-    
+     public function eliminarSolarAction() {
+          
+       $solr = \Classes\Solr::getInstance()->getSolr();
+        if ($solr->ping()){
+           $solr->deleteByQuery('*:*');
+            $solr->commit();
+            $solr->optimize();
+         
+        }
+    }
     
       public function cronsolarAction()
         {
