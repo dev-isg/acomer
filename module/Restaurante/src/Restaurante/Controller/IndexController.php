@@ -33,8 +33,7 @@ class IndexController extends AbstractActionController
             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
         }
 
-         
-        $filtrar = $this->params()->fromPost('submit'); 
+       
         $datos = $this->params()->fromPost('texto');
         $comida = $this->params()->fromPost('comida');
         $estado = $this->params()->fromPost('estado');
@@ -49,10 +48,10 @@ class IndexController extends AbstractActionController
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
          $paginator->setItemCountPerPage(10);
 //          $this->layout('layout/layout-portada');
-        return array(
+        return new ViewModel(array(
           'restaurante' => $paginator,//$lista,
             'comida' => $this->comidas()
-        );
+        ));
   
     }
   
@@ -80,7 +79,7 @@ class IndexController extends AbstractActionController
      
  public function agregarrestauranteAction()
     {  
-                                $auth = new \Zend\Authentication\AuthenticationService();
+        $auth = new \Zend\Authentication\AuthenticationService();
         if (!$auth->hasIdentity()) {
             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
         }
