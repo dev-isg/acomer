@@ -2718,6 +2718,7 @@ form#application .control-group .btn-solicito{
   }
 }
 @media (max-width: 480px) {
+  .lista-Detalle .content-sidebar{height:auto;}
   .lista-Home .content-sidebar{
     height: auto;
   }
