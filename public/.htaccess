@@ -1,30 +1,18 @@
-RewriteEngine On
-# The following rule tells Apache that if the requested filename
-# exists, simply serve it.
-RewriteCond %{REQUEST_FILENAME} -s [OR]
-RewriteCond %{REQUEST_FILENAME} -l [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^.*$ - [NC,L]
-# The following rewrites all other queries to index.php. The 
-# condition ensures that if you are using Apache aliases to do
-# mass virtual hosting, the base path will be prepended to 
-# allow proper resolution of the index.php file; it will work
-# in non-aliased environments as well, providing a safe, one-size 
-# fits all solution.
-RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
-RewriteRule ^(.*) - [E=BASE:%1]
-RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]
-
-
 <FilesMatch "\.(ico|pdf|flv)$">
 Header set Cache-Control "max-age=29030400, public"
 </FilesMatch>
 <FilesMatch "\.(jpg|jpeg|png|gif|swf)$">
 Header set Cache-Control "max-age=604800, public"
 </FilesMatch>
-<FilesMatch "\.(xml|txt|css|js)$">
-Header set Cache-Control "max-age=172800, proxy-revalidate"
-</FilesMatch>
-<FilesMatch "\.(html|htm|php)$">
-Header set Cache-Control "max-age=60, private, proxy-revalidate"
-</FilesMatch>
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+#RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^.*$ - [NC,L]
+RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
+RewriteRule ^(.*) - [E=BASE:%1]
+RewriteRule !\.(jpg|jpeg|png|gif|swf|ico|pdf|flv)$ %{ENV:BASE}index.php
+RewriteRule .*(.jpg|.jpeg|.png|.gif|.swf|.ico|.pdf|.flv)$ /imagenes/defecto/default-img.jpg [L]
