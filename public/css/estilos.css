@@ -1671,6 +1671,8 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   overflow: hidden;
 }
 .ficha-product .ficha-img{
+  text-align: center;
+  line-height: 272px;
   width: 407px;
   height: 272px;
   overflow: hidden;

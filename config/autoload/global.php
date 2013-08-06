@@ -27,11 +27,11 @@ return array(
    
     'host' => array(
 
-        'base' => 'http://local.listadelsabor',
-        'static' => 'http://local.listadelsabor',
-        'images' => 'http://local.listadelsabor/imagenes',
-        'img'=>'http://local.listadelsabor/img',
-        'ruta' => 'http://local.listadelsabor',
+        'base' => 'http://192.168.1.50:8080',
+        'static' => 'http://192.168.1.50:8080',
+        'images' => 'http://192.168.1.50:8080/imagenes',
+        'img'=>'http://192.168.1.50:8080/img',
+        'ruta' => 'http://192.168.1.50:8080',
 
         'version'=>1,
     ),

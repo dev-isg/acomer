@@ -663,10 +663,15 @@ class IndexController extends AbstractActionController
             
         $transport = $this->getServiceLocator()->get('mail.transport');//new SendmailTransport();//$this->getServiceLocator('mail.transport')
         $transport->send($message);
+        $this->flashMessenger()->addMessage('Su mensaje a sido enviado...');
         $this->redirect()->toUrl('/solicita');
         }
         }
-        $view->setVariables(array('form' => $form));
+        $flashMessenger = $this->flashMessenger();
+            if ($flashMessenger->hasMessages()) {
+                $mensajes = $flashMessenger->getMessages();
+            }
+        $view->setVariables(array('form' => $form,'mensaje'=>$mensajes));
          return $view;
         
     }
@@ -721,12 +726,16 @@ class IndexController extends AbstractActionController
 
         $transport = $this->getServiceLocator()->get('mail.transport');//new SendmailTransport();
         $transport->send($message);
+        $this->flashMessenger()->addMessage('Su mensaje a sido enviado...');
         $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/contactenos');
 //        $this->redirect()->toUrl('/contactenos');///application/index
                 }
         }
-        
-        $view->setVariables(array('form' => $form));
+        $flashMessenger = $this->flashMessenger();
+            if ($flashMessenger->hasMessages()) {
+                $mensajes = $flashMessenger->getMessages();
+            }
+        $view->setVariables(array('form' => $form,'mensaje'=>$mensajes));
          return $view;
         
         
