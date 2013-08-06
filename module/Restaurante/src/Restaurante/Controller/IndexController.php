@@ -476,7 +476,7 @@ class IndexController extends AbstractActionController
          
         }
     }
-     public function eliminarSolarAction() {
+     public function eliminarsolarAction() {
           
        $solr = \Classes\Solr::getInstance()->getSolr();
         if ($solr->ping()){
