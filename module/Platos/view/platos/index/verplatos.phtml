@@ -26,7 +26,13 @@
    		<div class="descrip-product">
    			<div class="etiqueta-cat">
    				<div class="etiqueta">
-   					<p><span><?php echo ucwords($this->lista[0]['va_nombre']);?></span></p>
+                                    <?php  
+                                              if(strlen($this->lista[0]['va_nombre'])>21){
+                                              $str=trim(substr($this->lista[0]['va_nombre'], 0, 18));
+                                              $str.='...';
+                                              }else {$str=$this->lista[0]['va_nombre'];} 
+                                               ?>
+   					<p><span><?php echo ucwords($str);?></span></p>
    				</div>
            <div class="return">
               <a href="javascript:window.history.back();">Regresar</a>
@@ -195,7 +201,7 @@
                                               $str.='...';
                                               }else {$str=$comt->va_nombre_cliente;} 
                                               echo $str;
-                                               ?></h3>
+                                               ?></h4>
                                                   <div class="puntuaciones c<?php echo $comt->ta_puntaje_in_id; ?>"></div>
                                           </div>
                                           <div class="img-li-bottom">
