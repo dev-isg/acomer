@@ -146,6 +146,11 @@ class Comentarios
                     ),
                 ),
             )));
+  
+    $inputFilter->add($factory->createInput(array(
+                'name'     => 'Ta_puntaje_in_id',
+                'required' => true
+            )));
             $this->inputFilter = $inputFilter;
         }
 
