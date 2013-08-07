@@ -16,7 +16,7 @@ require 'init_autoloader.php';
 
 //Cache de navegador
 header('Cache-Control: public');
-$offset = 60 * 60 * 24 * 3;
+$offset = 60 * 60;
 $ExpStr = "Expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
 header($ExpStr);
 

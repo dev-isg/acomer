@@ -83,8 +83,11 @@ $this->headTitle($title);
 			      <?php echo $this->formSubmit($form->get('submit'));?>
 			    </div>
 			</div>
-
+                         <?php echo $this->form()->closeTag();?> 
 		</div>
+                        <?php if($this->mensaje){ ?>
+            <div class="alert alert-success"><?php echo $this->mensaje[0];?></div>
+            <?php } ?>
 	</div>
 	
 </div>

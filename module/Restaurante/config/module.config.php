@@ -65,10 +65,10 @@ return array(
         ),
     ),
     
-        'module_layouts' => array(
-        'Restaurante' => array(
-            'default'=>'layout/layout-administrador',
-            'index' => 'layout/layout-administrador'
-                )     
-    )
+//        'module_layouts' => array(
+//        'Restaurante' => array(
+//            'default'=>'layout/layout-administrador',
+//            'index' => 'layout/layout-administrador'
+//                )     
+//    )
 );

@@ -26,7 +26,13 @@
    		<div class="descrip-product">
    			<div class="etiqueta-cat">
    				<div class="etiqueta">
-   					<p><span><?php echo $this->lista[0]['tipo_plato_nombre'];?></span></p>
+                                    <?php  
+                                              if(strlen($this->lista[0]['va_nombre'])>21){
+                                              $str=trim(substr($this->lista[0]['va_nombre'], 0, 18));
+                                              $str.='...';
+                                              }else {$str=$this->lista[0]['va_nombre'];} 
+                                               ?>
+   					<p><span><?php echo ucwords($str);?></span></p>
    				</div>
            <div class="return">
               <a href="javascript:window.history.back();">Regresar</a>
@@ -43,10 +49,13 @@
    					<div class="puntuaciones c<?php echo $this->lista[0]['Ta_puntaje_in_id'];?>"></div>
                   <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
    					<p class="desc"><?php echo $this->lista[0]['tx_descripcion'];?></p>
-   					<p class="costo">Costo</p>
-   					<p class="precio">S/.<?php echo $this->lista[0]['va_precio'];?></p>
-<!--           <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "http://listadelsabor.com/plato/" .$this->urlnombre ?>" data-text="Visita este sitio" data-via="ISGSAC" data-lang="es" data-dnt="true">Twittear</a>                  -->
-           <div class="fb-like" data-href="<?php echo  "http://listadelsabor.com/plato/" .$this->urlnombre ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+   					<?php if($this->lista[0]['va_precio']){?>
+                                        <p class="costo">Precio</p>
+   					<p class="precio"><?php echo $this->lista[0]['va_precio'];?></p>
+                                        <?php }?>
+<!--           <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "http://listadelsabor.com/plato/" .$this->urlnombre ?>" data-text="Visita este sitio" data-via="ISGSAC" data-lang="es" data-dnt="true">Twittear</a>               
+<div class="fb-like" data-href="<?php echo  "http://listadelsabor.com/plato/" .$this->urlnombre ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>   -->
+           <div class="fb-like" data-href="<?php echo  "http://listadelsabor.com/plato/" .$this->urlnombre ?>" data-send="false" data-layout="box_count" data-width="450" data-show-faces="false"></div>
 	</div>
    			</div>
    			<div class="content-coments">
@@ -140,36 +149,40 @@
                   <a href="#" class="btn btn-warning agregar-coment-1">Agregar comentario</a>
               </div>
               <div class="agregar-comentario-desc" style="display:none;">
-                  <?php
-                  $title = 'Agregar nuevo comentario';
-                  $this->headTitle($this->lista[0]['va_nombre'].' :');
-                  ?>
+                <?php
+                $title = 'Agregar nuevo comentario';
+                $this->headTitle($this->lista[0]['va_nombre'].' :');
+                ?>
                   <div class="form-envio-men">
-                      <?php
-                      $form = $this->form;
-                      //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
-                      $form->setAttributes(array(
-                          'action' => $this->url . '/plato/'.$this->urlnombre, //.'?id=' . $this->lista[0]['in_id'],
-                          'method' => 'post',
-                          'class' => 'form-horizontal'
-                      ));
-                      $form->prepare();
+                    <?php
+                    $form = $this->form;
+                    //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
+                    $form->setAttributes(array(
+                        'action' => $this->url . '/plato/'.$this->urlnombre, //.'?id=' . $this->lista[0]['in_id'],
+                        'method' => 'post',
+                        'class' => 'form-horizontal'
+                    ));
+                    $form->prepare();
 
-                      echo $this->form()->openTag($form);
-                      ?><legend><?php echo $this->escapeHtml($title); ?></legend>
-                      <?php
-                      echo $this->formHidden($form->get('in_id'));
-                      echo $this->formHidden($form->get('Ta_puntaje_in_id'));
-                      echo $this->formHidden($form->get('Ta_plato_in_id'));
-                      ?>
-                      <div class="control-group"><?php echo $this->formRow($form->get('va_nombre')); ?></div>
-                      <div class="control-group"><?php echo $this->formRow($form->get('va_email')); ?></div>
-                      <div class="control-group">
-                        <label style="color:#444;">Valora tu plato:</label>
-                        <p id="star"></p> 
-                      </div>
-                      <div class="control-group"><?php echo $this->formRow($form->get('tx_descripcion'));?></div>
-                      <div class="control-group"><?php echo $this->formSubmit($form->get('submit')); ?></div>
+                    echo $this->form()->openTag($form);
+                    ?><legend><?php echo $this->escapeHtml($title); ?></legend>
+                    <?php
+                    echo $this->formHidden($form->get('in_id'));
+                    
+                    echo $this->formHidden($form->get('Ta_plato_in_id'));
+                    ?>
+                    <div class="control-group"><?php echo $this->formRow($form->get('va_nombre')); ?></div>
+                    <div class="control-group"><?php echo $this->formRow($form->get('va_email')); ?></div>
+                    <div class="control-group">
+                      <label style="color:#444;">Valora tu plato:</label>
+                      <p id="star"></p>
+                      <label class="error-votos" style="display:none;">De una puntuación.</label>
+                      <?php echo $this->formHidden($form->get('Ta_puntaje_in_id'));?>
+                    </div>
+                    <div class="control-group"><?php echo $this->formRow($form->get('tx_descripcion'));?></div>
+                    <div class="control-group">
+                      <a href="#" class="btn btn-success btn-comentarioDev">Agregar</a>
+                    </div>
                       <?php echo $this->form()->closeTag(); ?>
                   </div>
               </div>
@@ -194,7 +207,7 @@
                                               $str.='...';
                                               }else {$str=$comt->va_nombre_cliente;} 
                                               echo $str;
-                                               ?></h3>
+                                               ?></h4>
                                                   <div class="puntuaciones c<?php echo $comt->ta_puntaje_in_id; ?>"></div>
                                           </div>
                                           <div class="img-li-bottom">
@@ -222,7 +235,7 @@
  </div>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script> 
-<<<<<<< HEAD
+
 <!-- <script>
   
   head.js("<?php echo $this->basePath()?>/js/jquery-ui.min.js?v<?php echo $this->host('version')?>")  
@@ -233,25 +246,23 @@
 </script>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 -->
-=======
->>>>>>> 91957429809f0a183acf0ffeace8b5c6d8951aa9
+
+<script src="<?php echo $this->basePath()?>/js/jquery-ui.min.js?v<?php echo $this->host('version')?>"></script>
+<script src="<?php echo $this->basePath()?>/js/vendor/gmaps.min.js?v<?php echo $this->host('version')?>"></script>
+<script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.min.js?v<?php echo $this->host('version')?>"></script>
+<script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js?v<?php echo $this->host('version')?>"></script>
+<script src="<?php echo $this->basePath()?>/js/verplatos.js?v<?php echo $this->host('version')?>"></script>
+
+
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
+<script>
+
+  (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/es_ES/all.js#xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 91957429809f0a183acf0ffeace8b5c6d8951aa9
-<script src="<?php echo $this->basePath()?>/js/jquery-ui.min.js?v<?php echo $this->host('version')?>"></script>
-<script src="<?php echo $this->basePath()?>/js/vendor/gmaps.min.js?v<?php echo $this->host('version')?>"></script>
-<script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.min.js?v<?php echo $this->host('version')?>"></script>
-<script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js?v<?php echo $this->host('version')?>"></script>
-<script src="<?php echo $this->basePath()?>/js/verplatos.js?v<?php echo $this->host('version')?>"></script>
 
 		

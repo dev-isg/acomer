@@ -111,7 +111,8 @@ class IndexController extends AbstractActionController
     }
    public function detalleubicacionAction()
     { 
-          $view = new ViewModel();   
+          $view = new ViewModel(); 
+         
           $request = $this->getRequest();
           $this->layout()->clase = 'buscar-distrito';
           if ($request->isGet()) {
@@ -648,8 +649,9 @@ class IndexController extends AbstractActionController
                                                </html>';
     
         $message = new Message();
-        $message->addTo('listadelsabor@innovationssystems.com', $nombre)
-        ->setFrom('listadelsabor@innovationssystems.com', 'listadelsabor.com')
+          $config = $this->getServiceLocator()->get('Config');
+        $message->addTo($config['mail']['transport']['options']['connection_config']['username'], $nombre)
+        ->setFrom($config['mail']['transport']['options']['connection_config']['username'], 'listadelsabor.com')
         ->setSubject('Solicitar platos de listadelsabor.com');
         //->setBody($bodyHtml);
             $bodyPart = new \Zend\Mime\Message();
@@ -661,10 +663,15 @@ class IndexController extends AbstractActionController
             
         $transport = $this->getServiceLocator()->get('mail.transport');//new SendmailTransport();//$this->getServiceLocator('mail.transport')
         $transport->send($message);
+        $this->flashMessenger()->addMessage('Su mensaje a sido enviado...');
         $this->redirect()->toUrl('/solicita');
         }
         }
-        $view->setVariables(array('form' => $form));
+        $flashMessenger = $this->flashMessenger();
+            if ($flashMessenger->hasMessages()) {
+                $mensajes = $flashMessenger->getMessages();
+            }
+        $view->setVariables(array('form' => $form,'mensaje'=>$mensajes));
          return $view;
         
     }
@@ -704,8 +711,10 @@ class IndexController extends AbstractActionController
                                                </html>';
         
         $message = new Message();
-        $message->addTo('listadelsabor@innovationssystems.com', $datos['nombre'])
-        ->setFrom('listadelsabor@innovationssystems.com', 'listadelsabor.com')
+        $config = $this->getServiceLocator()->get('Config');
+      
+        $message->addTo($config['mail']['transport']['options']['connection_config']['username'], $datos['nombre'])
+        ->setFrom($config['mail']['transport']['options']['connection_config']['username'], 'listadelsabor.com')
         ->setSubject('Contactos de ListaDelSabor.com');
 //        ->setBody($bodyHtml);
             $bodyPart = new \Zend\Mime\Message();
@@ -717,12 +726,16 @@ class IndexController extends AbstractActionController
 
         $transport = $this->getServiceLocator()->get('mail.transport');//new SendmailTransport();
         $transport->send($message);
+        $this->flashMessenger()->addMessage('Su mensaje a sido enviado...');
         $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/contactenos');
 //        $this->redirect()->toUrl('/contactenos');///application/index
                 }
         }
-        
-        $view->setVariables(array('form' => $form));
+        $flashMessenger = $this->flashMessenger();
+            if ($flashMessenger->hasMessages()) {
+                $mensajes = $flashMessenger->getMessages();
+            }
+        $view->setVariables(array('form' => $form,'mensaje'=>$mensajes));
          return $view;
         
         

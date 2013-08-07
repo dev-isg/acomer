@@ -108,7 +108,7 @@ class ComentariosForm extends Form
             'type' => 'Submit',
             'attributes' => array(
                 'value' => 'Go',
-                'class' => 'btn btn-success',
+                'class' => 'btn btn-success btn-comentarioDev',
                 'id' => 'submitbutton',
             ),
         ));

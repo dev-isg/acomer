@@ -12,25 +12,25 @@ return array(
     // ...AGREGASTE PARA LA CONEXION GLOBAL
     'db' => array(
         'driver' => 'Pdo',
-        'username' => 'jerspr',
-        'password' => 'pariona',
-        'dsn' => 'mysql:dbname=bd_acomer;host=localhost',
+        'username' => 'kevin',
+        'password' => '123456',
+        'dsn' => 'mysql:dbname=liston;host=192.168.1.50',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         )
     ),
     'solr' => array(
-        'host' => '192.168.1.40',
+        'host' => '192.168.1.45',
         'port' => '8983',
         'folder' => '/solr'
     ),
    
     'host' => array(
-        'base' => 'http://192.168.1.47:8080',
-        'static' => 'http://192.168.1.47:8080',
-        'images' => 'http://192.168.1.47:8080/imagenes',
-        'img'=>'http://192.168.1.47:8080/img',
-        'ruta' => 'http://192.168.1.47:8080',
+        'base' => 'http://192.168.1.48:8080',
+        'static' => 'http://192.168.1.48:8080',
+        'images' => 'http://192.168.1.48:8080/imagenes',
+        'img'=>'http://192.168.1.48:8080/img',
+        'ruta' => 'http://192.168.1.48:8080',
         'version'=>1,
     ),
 
@@ -88,10 +88,9 @@ return array(
         )
         ,
         'Restaurante' => array(
+            'default'=>'layout/layout-administrador',
            'index' => 'layout/layout-administrador'
                )
-
-        
    )
     
 )

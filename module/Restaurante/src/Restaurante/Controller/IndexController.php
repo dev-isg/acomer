@@ -21,6 +21,7 @@ class IndexController extends AbstractActionController
   protected $restauranteTable;
   public $dbAdapter;
     protected $_options;
+    
     public function __construct()
     {
     	$this->_options = new \Zend\Config\Config ( include APPLICATION_PATH . '/config/autoload/global.php' );
@@ -32,8 +33,7 @@ class IndexController extends AbstractActionController
             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
         }
 
-         
-        $filtrar = $this->params()->fromPost('submit'); 
+       
         $datos = $this->params()->fromPost('texto');
         $comida = $this->params()->fromPost('comida');
         $estado = $this->params()->fromPost('estado');
@@ -44,14 +44,14 @@ class IndexController extends AbstractActionController
             $lista = $this->getRestauranteTable()->buscarRestaurante($datos,$comida,$estado);
         }
 
-            $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
+         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
          $paginator->setItemCountPerPage(10);
 //          $this->layout('layout/layout-portada');
-        return array(
+        return new ViewModel(array(
           'restaurante' => $paginator,//$lista,
             'comida' => $this->comidas()
-        );
+        ));
   
     }
   
@@ -79,7 +79,7 @@ class IndexController extends AbstractActionController
      
  public function agregarrestauranteAction()
     {  
-                                $auth = new \Zend\Authentication\AuthenticationService();
+        $auth = new \Zend\Authentication\AuthenticationService();
         if (!$auth->hasIdentity()) {
             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
         }
@@ -190,7 +190,7 @@ class IndexController extends AbstractActionController
      }
  public function editarrestauranteAction()   
     {   
-    $auth = new \Zend\Authentication\AuthenticationService();
+        $auth = new \Zend\Authentication\AuthenticationService();
         if (!$auth->hasIdentity()) {
             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
         }
@@ -433,7 +433,7 @@ class IndexController extends AbstractActionController
         exit();
     }
     
-             public function estadoRestauranteSolarAction($id) {
+       public function estadoRestauranteSolarAction($id) {
            $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
             $adapter = $this->dbAdapter;
             $sql = new Sql($adapter);
@@ -449,9 +449,10 @@ class IndexController extends AbstractActionController
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
+        //var_dump($plato);exit;
        $solr = \Classes\Solr::getInstance()->getSolr();
         if ($solr->ping()){
-            $solr->deleteByQuery('id:' . $id);
+           $solr->deleteByQuery('id:' . $id);
             $document = new \Apache_Solr_Document();
             $document->id = $id;
             $document->name = $plato[0]['va_nombre'];
@@ -468,13 +469,23 @@ class IndexController extends AbstractActionController
             $document->va_imagen = $plato[0]['va_imagen'];
             $document->comentarios = $plato[0]['cantidad'];
             $document->restaurant_estado = $plato[0]['restaurant_estado'];
-            $document->puntuacion = $plato[0]['Ta_puntaje_in_id'];
+            $document->puntuacion = $plato[0]['Ta_puntaje_in_id']; 
             $solr->addDocument($document);
             $solr->commit();
             $solr->optimize();
+         
         }
     }
-    
+     public function eliminarsolarAction() {
+          
+       $solr = \Classes\Solr::getInstance()->getSolr();
+        if ($solr->ping()){
+           $solr->deleteByQuery('*:*');
+            $solr->commit();
+            $solr->optimize();
+         
+        }
+    }
     
       public function cronsolarAction()
         {
@@ -483,14 +494,15 @@ class IndexController extends AbstractActionController
             $sql = new Sql($adapter); 
             $select = $sql->select()
             ->from('ta_plato');
-            $selectS = $sql->getSqlStringForSqlObject($select);
+            $selectS = $sql->getSqlStringForSqlObject($select);   
             $resul = $adapter->query($selectS, $adapter::QUERY_MODE_EXECUTE);
             $plato=$resul->toArray();
             foreach ($plato as $result) 
-            {
-            $this->estadoRestauranteSolarAction($result['in_id']);
-            }
+            {$this->estadoRestauranteSolarAction($result['in_id']);}
            echo 'cron finalizado';exit;
         }
 
-}
+    }
+                        
+                                  
+                             
