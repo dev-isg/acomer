@@ -104,9 +104,60 @@
           <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
 
             <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar">
-              <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"     placeholder="Ingrese el plato"  required="required"/>
-              <input type="submit"  class="btn btn-search-home" value="Buscar"/>
-              <em>Ejm: lomo saltado</em>
+              <p>
+                <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"     placeholder="Ingrese el plato"  required="required"/>
+                <em>Ejm: lomo saltado</em>
+              </p>
+              <p>
+                <select name="distrito" id="fq"><option value="ANCON">ANCON</option>
+                  <option value="ATE">ATE</option>
+                  <option value="BARRANCO">BARRANCO</option>
+                  <option value="BREÑA">BREÑA</option>
+                  <option value="CARABAYLLO">CARABAYLLO</option>
+                  <option value="CHACLACAYO">CHACLACAYO</option>
+                  <option value="CHORRILLOS">CHORRILLOS</option>
+                  <option value="CIENEGUILLA">CIENEGUILLA</option>
+                  <option value="COMAS">COMAS</option>
+                  <option value="EL AGUSTINO">EL AGUSTINO</option>
+                  <option value="INDEPENDENCIA">INDEPENDENCIA</option>
+                  <option value="JESUS MARIA">JESUS MARIA</option>
+                  <option value="LA MOLINA">LA MOLINA</option>
+                  <option value="LA VICTORIA">LA VICTORIA</option>
+                  <option value="LIMA">LIMA</option>
+                  <option value="LINCE">LINCE</option>
+                  <option value="LOS OLIVOS">LOS OLIVOS</option>
+                  <option value="LURIGANCHO">LURIGANCHO</option>
+                  <option value="LURIN">LURIN</option>
+                  <option value="MAGDALENA DEL MAR">MAGDALENA DEL MAR</option>
+                  <option value="MIRAFLORES">MIRAFLORES</option>
+                  <option value="PACHACAMAC">PACHACAMAC</option>
+                  <option value="PUCUSANA">PUCUSANA</option>
+                  <option value="PUEBLO LIBRE">PUEBLO LIBRE</option>
+                  <option value="PUENTE PIEDRA">PUENTE PIEDRA</option>
+                  <option value="PUNTA HERMOSA">PUNTA HERMOSA</option>
+                  <option value="PUNTA NEGRA">PUNTA NEGRA</option>
+                  <option value="RIMAC">RIMAC</option>
+                  <option value="SAN BARTOLO">SAN BARTOLO</option>
+                  <option value="SAN BORJA">SAN BORJA</option>
+                  <option value="SAN ISIDRO">SAN ISIDRO</option>
+                  <option value="SAN JUAN DE LURIGANCHO">SAN JUAN DE LURIGANCHO</option>
+                  <option value="SAN JUAN DE MIRAFLORES">SAN JUAN DE MIRAFLORES</option>
+                  <option value="SAN LUIS">SAN LUIS</option>
+                  <option value="SAN MARTIN DE PORRES">SAN MARTIN DE PORRES</option>
+                  <option value="SAN MIGUEL">SAN MIGUEL</option>
+                  <option value="SANTA ANITA">SANTA ANITA</option>
+                  <option value="SANTA MARIA DEL MAR">SANTA MARIA DEL MAR</option>
+                  <option value="SANTA ROSA">SANTA ROSA</option>
+                  <option value="SANTIAGO DE SURCO">SANTIAGO DE SURCO</option>
+                  <option value="SURQUILLO">SURQUILLO</option>
+                  <option value="todos los distritos" selected="selected">todos los distritos</option>
+                  <option value="VILLA EL SALVADOR">VILLA EL SALVADOR</option>
+                  <option value="VILLA MARIA DEL TRIUNFO">VILLA MARIA DEL TRIUNFO</option>
+                </select>
+              </p>
+              <p style="margin-top:5px;">
+                <input type="submit"  class="btn btn-warning btn-soli" value="Buscar"/>
+              </p>
             </form>  
             <div class="final">
                 <img src="<?php echo $this->host('ruta')?>/img/responsive.png?v<?php echo $this->host('version')?>" alt="" style="padding: 37px 10px;">

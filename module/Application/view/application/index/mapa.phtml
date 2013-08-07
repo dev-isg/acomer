@@ -2,12 +2,12 @@
 
 <form  accept-charset="utf-8" method="get" class="form-horizontal" id="bubi" autocomplete="on" >
                              
-                 <SELECT name="fq" id="fq" class="span2">
-                <OPTION value="">seleccione:</OPTION>
+                 <select name="fq" id="fq" class="span2">
+                <option value="">seleccione:</option>
                    <?php  foreach ($this->distritos as $distritos) : ?>
-                  <OPTION   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></OPTION>
+                  <option   value="<?php echo $distritos['ch_distrito']; ?>"><?php echo $distritos['ch_distrito']; ?></option>
                   <?php endforeach; ?>
-                 </SELECT>
+                 </select>
                
                 <input id="q" name="q" type="text" placeholder="Ejm: Ceviche, tallarines" value=""/>
                  <button class="verlistado" value="listar" type="submit" ></button>                       
