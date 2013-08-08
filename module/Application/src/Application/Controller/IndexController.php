@@ -39,7 +39,8 @@ class IndexController extends AbstractActionController
         $view = new ViewModel();
        
 //        $this->layout('layout/layout-portada2');
-        
+        $comidas =  $this->joinAction()->toArray();
+        $this->layout()->comidas = $comidas;
         $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
         $listadeseg=$this->getConfigTable()->cantComentxPlato(1,'3,3',1);
         $listaval=$this->getConfigTable()->cantComentxPlato(2,3,3);
@@ -235,12 +236,15 @@ class IndexController extends AbstractActionController
          }
         $form = new Formularios(); 
         $comidas =  $this->joinAction()->toArray();
+         $this->layout()->comidas = $comidas;
         $com = array();
         foreach($comidas as $y){
              $com[$y['va_distrito']] = $y['va_distrito'];
         }
-        setcookie('distrito', $datos['distrito']);
+       // setcookie('distrito', $datos['distrito']);
         setcookie('q',$texto);
+         setcookie('distrito',$distrito);
+        $form->get('distrito')->setValue($_COOKIE['distrito']);
         $form->get('distrito')->setValue($distrito);
         $form->get('q')->setValue($texto);
          $form->get('distrito')->setValueOptions($com);
@@ -270,66 +274,131 @@ class IndexController extends AbstractActionController
          
         $view = new ViewModel();
 //       $this->layout('layout/layout-portada');
+        
        $this->layout()->clase = 'buscar';
         $filtered = $this->params()->fromQuery('q');
+        $distrito = $this->params()->fromQuery('distrito');
+       
               $filter   = new \Zend\I18n\Filter\Alnum(true);
                   $texto = $filter->filter($filtered);
-                   $limite = 100;    
+                    if($distrito != 'todos los distritos')
+                    {
+                       $limite = 100;    
                         $resultados = false;
                         $palabraBuscar = isset($texto) ? $texto : false ;
                           $fd = array (  
-                            'fq'=>'en_estado:activo AND restaurant_estado:activo',
-                              );
-                          if($palabraBuscar=='')
-                          {$this->redirect()->toUrl('/');  }
-                        if ($palabraBuscar)
+                            'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
+                              'sort'=>'en_destaque desc ',
+                              ); 
+
+			$solar = \Classes\Solr::getInstance()->getSolr();
+                       if ($palabraBuscar)
                         { 
-                         $solar = \Classes\Solr::getInstance()->getSolr();
-                         if (get_magic_quotes_gpc() == 1)
+                            $solar = \Classes\Solr::getInstance()->getSolr();
+                          if (get_magic_quotes_gpc() == 1)
                           {
                             $palabraBuscar = stripslashes($palabraBuscar);
                           }
                           try
-                          {  $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
-                          
+                          {
+                            $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );                             
                           }
                           catch (Exception $e)
-                          {        
-                         $this->redirect()->toUrl('/');
-                          }
+                          {                         
+                                echo("<div>ingrese algun valor</div>"); 
+                           }                             
                         }
+                        $limit = 3;             
+                        $palabraBuscar = isset($texto) ? $texto : false ;
+                        $query = "($palabraBuscar) AND (en_destaque:si)";
+                        $fq = array (  
+                                   'sort'=>'random_' . uniqid() .' asc',
+                            'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
+                            'wt'=>'json');                                              
+                        $results = false;
+                        
+                        if ($query)
+                        { 
+                         $solr = \Classes\Solr::getInstance()->getSolr();
+                          if (get_magic_quotes_gpc() == 1)
+                          {
+                            $query = stripslashes($query);
+                          }
+                          try
+                          {
+                            $results = $solr->search($query, 0, $limit, $fq  );
+                            
+                          }
+                          catch (Exception $e)
+                          {
+                                    echo("<div>ingrese algun valor</div>");         
+                          }
+                        }      
+                 }       
+                 else 
+                 {
+                    $limite = 100;    
+                        $resultados = false;
+                        $palabraBuscar = isset($texto) ? $texto : false ;
+                          $fd = array (  
+                            'fq'=>'en_estado:activo AND restaurant_estado:activo');
+
+                        if ($palabraBuscar)
+                        { 
+                         $solar = \Classes\Solr::getInstance()->getSolr();
+                          if (get_magic_quotes_gpc() == 1)
+                          {
+                            $palabraBuscar = stripslashes($palabraBuscar);
+                          }
+                          try
+                          {
+                            $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
+                          }
+                          catch (Exception $e)
+                          {
+                             
+                          $this->redirect()->toUrl('/application');
+                          }
+                        }          
                         $limit = 3;             
                         $palabraBuscar = isset($texto) ? $texto : false ;
                         $query = "($palabraBuscar)";
                         $fq = array (  
                                    'sort'=>'random_' . uniqid() .' asc',
-                            'fq'=>'en_estado:activo AND restaurant_estado:activo AND en_destaque:si');                                           
+                            'fq'=>'en_estado:activo AND restaurant_estado:activo  AND en_destaque:si');                                           
                         $results = false;
                         if ($query)
                         { 
    
-                        $solr = \Classes\Solr::getInstance()->getSolr();
-                        if (get_magic_quotes_gpc() == 1)
+                            $solr = \Classes\Solr::getInstance()->getSolr();
+                          if (get_magic_quotes_gpc() == 1)
                           {
                             $query = stripslashes($query);
                           }
                           try
-                          {  $results = $solr->search($query, 0, $limit, $fq  ); }
+                          {
+                            $results = $solr->search($query, 0, $limit, $fq  );
+
+                          }
                           catch (Exception $e)
-                          { $this->redirect()->toUrl('/');      }
-                         }
+                          {
+                          
+                                   $this->redirect()->toUrl('/application');       
+                          }
+                         }                
+                 } 
         
         $form = new Formularios();
         $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
-        $comidas =  $this->joinAction()->toArray();   
+        $comidas =  $this->joinAction()->toArray();
+        $this->layout()->comidas = $comidas;
         $com = array();
         foreach($comidas as $y){
             $com[$y['va_distrito']] = $y['va_distrito'];
         }
-    
          setcookie('q',$texto);
-           setcookie('distrito',$comidas[41]['va_distrito']);
-        $form->get('distrito')->setValue($comidas[41]['va_distrito']);
+         setcookie('distrito',$distrito);
+        $form->get('distrito')->setValue($distrito);
         $form->get('distrito')->setValueOptions($com);
         $form->get('q')->setValue($texto);
         $form->get('submit')->setValue('Buscar');

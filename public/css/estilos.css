@@ -141,8 +141,8 @@ form#search{
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
-  margin-left: 40px;
-  width: 145px;
+  margin-left: 20px;
+  width: 197px;
   float: left;
   font-weight: bold;  
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
@@ -1875,6 +1875,19 @@ form#application .control-group .btn-solicito{
   width: 220px!important;
   background: url(../img/arrow.png) #cccccc no-repeat 195px 7px;
 }
+.content-sidebar-ho #search #fq{
+  border: 0;
+  margin-top: 10px;
+  border-bottom: 1px solid #d4e59c;
+  background: url(../img/arrow.png) #ff8500 no-repeat 195px 7px;
+  color: white;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+}
+.btn-soli{
+  margin-top: 5px;
+  width: 100px;
+  height: 35px;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
@@ -2068,6 +2081,9 @@ form#application .control-group .btn-solicito{
 
 /*Activando responsive web desing*/
 @media (min-width: 1200px) {
+  #search input[type="text"]{
+    margin-left: 40px;
+  }
   .cont-home{
     width: 1024px;
   }
@@ -2145,14 +2161,14 @@ form#application .control-group .btn-solicito{
     width: 100%;
   }
   #search input[type="text"]{
-    margin-left: 0;
+    margin-left: 14px;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     -o-border-radius: 0;
     border-radius: 0;
-    padding: 6px 0px;
+    padding: 6px 10px;
     font-size: 14px;
-    width: 80%;
+    width: 81%;
   }
   #search .btn-search-home {
     background: #CE450A url(../img/lupa-search.png) no-repeat 50%;
@@ -2257,14 +2273,14 @@ form#application .control-group .btn-solicito{
     font-size: 1em;
   }
   #search input[type="text"]{
-    margin-left: 0;
+    margin-left: 5%;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     -o-border-radius: 0;
     border-radius: 0;
-    padding: 6px 0px;
+    padding: 6px 10px;
     font-size: 14px;
-    width: 80%;
+    width: 82%;
   }
   #search .btn-search-home {
     background: #CE450A url(../img/lupa-search.png) no-repeat 50%;
@@ -2275,6 +2291,10 @@ form#application .control-group .btn-solicito{
     -o-border-radius: 0;
     border-radius: 0;
     padding: 8px 0;
+  }
+  .form-horizontal p #fq {
+    width: 90%!important;
+    background: url(../img/arrow.png) #cccccc no-repeat 95% 7px;
   }
   .final{
     margin-top: 40%;
@@ -2445,7 +2465,20 @@ form#application .control-group .btn-solicito{
   }
 }
 @media (max-width: 767px) {
-
+  #search input[type="text"] {
+    margin-left: 0px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+    padding: 6px 10px;
+    font-size: 14px;
+    width: 100%;
+  }
+  .form-horizontal p #fq {
+    width: 100%!important;
+    background: url(../img/arrow.png) #cccccc no-repeat 98% 7px;
+  }
   .agregar-comentario-desc{
     width: 100%;
   }
@@ -2929,12 +2962,12 @@ form#application .control-group .btn-solicito{
     border: 0 none;
     color: #fff;
     padding: 13px 15px 11px 20px;
-    -webkit-border-radius: 14px 0 0 14px;
-    -moz-border-radius: 14px 0 0 14px;
-    -o-border-radius: 14px 0 0 14px;
-    border-radius: 14px 0 0 14px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
     margin-left: 5%;
-    width: 67%;
+    width: 80%;
     float: left;
     font-weight: bold;
     font-size: 1em;
@@ -2946,6 +2979,9 @@ form#application .control-group .btn-solicito{
     font-weight: normal;
     height: 24px;
     border-bottom: 1px solid #d4e59c;
+  }
+  .form-horizontal p #fq{
+    width: 90%!important;
   }
   #search .btn-search-home {
     background: url(../img/lupa-search.png) no-repeat;
@@ -2986,12 +3022,12 @@ form#application .control-group .btn-solicito{
     border: 0 none;
     color: #fff;
     padding: 13px 15px 11px 20px;
-    -webkit-border-radius: 14px 0 0 14px;
-    -moz-border-radius: 14px 0 0 14px;
-    -o-border-radius: 14px 0 0 14px;
-    border-radius: 14px 0 0 14px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
     margin-left: 5%;
-    width: 63%;
+    width: 80%;
     float: left;
     font-weight: bold;
     font-size: 1em;
