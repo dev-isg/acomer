@@ -61,7 +61,10 @@ return array(
     'service_manager' => array(
         'factories' => array(
             'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory'
-        )
+        ),
+//        'aliases' => array(
+//                'translator' => 'MvcTranslator',
+//            ),
     ),
     'module_layouts' => array(
 //         'Application' => 'layout/layout-portada',

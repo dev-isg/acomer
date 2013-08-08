@@ -418,7 +418,7 @@ class PlatosTable {
     public function cantComentxPlato($destaque = 1, $lim, $val, $estado = 1) {
         if ($val == 1) {
             $puntaje = '>0'; // $puntaje = '>=0'; 'is not null or ta_comentario.ta_puntaje_in_id!=0'; 
-            $order = 'ta_puntaje_in_id';
+            $order = 'RAND()';//'ta_puntaje_in_id';
         } else if ($val == 2) {
             $puntaje = '=0'; //'is null or ta_comentario.ta_puntaje_in_id!=0';
             $order = 'in_id';
