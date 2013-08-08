@@ -125,11 +125,10 @@ class PlatosForm extends Form
             'type' => 'Text',
             'attributes' => array(               
                 'class' => 'span10',
-                'id'   => 'va_otros',
-                'placeholder'=>'Ingrese nombre'
+                'id'   => 'va_otros'
             ),
             'options' => array(
-                'label' => 'Otros',
+                'label' => 'ingrese nuevo tipo de plato',
             ),
         ));
           

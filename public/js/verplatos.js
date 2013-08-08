@@ -1,4 +1,4 @@
- $(document).ready(function(){      
+ $(document).ready(function(){
 
         initSucursales();
         $('#star').raty({
@@ -11,8 +11,9 @@
         });
         $("#side").height($("#main").height()); 
         //comentarios validacion
-var validar=function(elemento){
-   $(elemento).validate({
+    
+
+   $('#comentarios').validate({
         rules: {
             va_nombre: {
                 required: true,
@@ -23,9 +24,12 @@ var validar=function(elemento){
                 email : true           
             },
             tx_descripcion:{
-                required : true ,
+                required : true,
                  minlength : 15                      
-            }            
+            },
+            Ta_puntaje_in_id:{
+                required: true
+            }       
         },
         messages:{
             va_nombre: {
@@ -38,6 +42,9 @@ var validar=function(elemento){
             },                
             va_email :{
                 required : "Por favor ingresar un email"                
+            },
+            Ta_puntaje_in_id:{
+                required:"De su puntuacion"
             }
         },
         highlight: function(element) {
@@ -48,8 +55,33 @@ var validar=function(elemento){
             .addClass('valid')
             .closest('.control-group').removeClass('error').addClass('success');
         }
-        });
-}
-validar('#comentarios');            
+    });
 
+    $('.btn-comentarioDev').click(function(e){
+        e.preventDefault();
+        if($("#Ta_puntaje_in_id").val()==""){
+            $('.error-votos').show();
+            if($("#comentarios").valid()){
+                
+            }else{
+                
+            }
+        }else{
+            $('.error-votos').hide();
+            if($("#comentarios").valid()){
+                $("#comentarios").get(0).submit();
+            }else{
+                $("#comentarios").submit();
+            }
+        }
+    });
+
+    
+    /*$('#comentarios').submit(function() {
+        if($("#Ta_puntaje_in_id").val()==""){
+            $('.error-votos').show();
+        }else{
+
+        }
+    });*/
 });

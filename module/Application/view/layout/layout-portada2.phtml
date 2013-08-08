@@ -103,17 +103,27 @@
           <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
           <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
 
-            <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar">
-              <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"     placeholder="Ingrese el plato"  required="required"/>
-              <input type="submit"  class="btn btn-search-home" value="Buscar"/>
-              <em>Ejm: lomo saltado</em>
+          <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar-por-distrito">   <p>
+                <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"     placeholder="Ingrese el plato"  required="required"/>
+                <em>Ejm: lomo saltado</em>
+              </p>
+              <p><select name="distrito" id="fq" value="">
+           <?php if($_GET['distrito']){ ?><OPTION VALUE="<?php echo $_GET['distrito']; ?>">
+                 <?php echo $_GET['distrito']; ?></OPTION> <?php } 
+           elseif (!$_GET['distrito'] and !$_COOKIE['distrito']) {
+           ?><OPTION VALUE="todos los distritos">todos los distritos</OPTION> <?php  } else {?>
+           <OPTION VALUE="<?php echo $_COOKIE['distrito']; ?>"><?php echo $_COOKIE['distrito']; ?></OPTION> <?php } ?>
+               <?php  foreach ($this->comidas as $comida) : ?>
+           <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"><?php echo $comida['va_distrito']; ?></OPTION>
+              <?php endforeach; ?>
+            </select>
+              </p>
+              <p style="margin-top:5px;">
+                <input type="submit"  class="btn btn-warning btn-soli" value="Buscar"/>
+              </p>
             </form>  
             <div class="final">
                 <img src="<?php echo $this->host('ruta')?>/img/responsive.png?v<?php echo $this->host('version')?>" alt="" style="padding: 37px 10px;">
-              </div>
-          
-              <div class="solicitar-publicacion">
-                <a href="<?php echo $this->host('ruta')?>/solicita" class="btn btn-warning btn-soli">Solicite su publicación</a>
               </div>
           </div>
           </div><!--Fin del sidebar-->
@@ -140,7 +150,13 @@
                 <a href="<?php echo $this->host('ruta')?>/terminos">Términos y condiciones</a>
               </li>
               <li>
-                <a href="<?php echo $this->host('ruta')?>/contactenos">Contáctenos</a>
+                <div class="ups-crap btn-group dropup">
+                  <button class="ups-dev dropdown-toggle" data-toggle="dropdown">Contáctenos<span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="<?php echo $this->host('ruta')?>/solicita">Solicite su publicación</a></li>
+                    <li><a href="<?php echo $this->host('ruta')?>/contactenos">Escríbenos</a></li>
+                  </ul>
+                </div>
               </li>
               <li>
                 <div class="ups-crap btn-group dropup">

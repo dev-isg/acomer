@@ -58,11 +58,11 @@ class PlatosTable {
     }
 
     
-    public function guardarPlato(Platos $platos, $imagen, $idlocal = null) {
-//        var_dump($plato->en_estado);Exit;
+    public function guardarPlato(Platos $platos, $imagen, $idlocal = null,$otro =null) {
 
         $data = array(
 //            'in_id' => $plato->in_id,
+            
             'va_imagen' => $imagen, //$plato->va_imagen,
             'tx_descripcion' => $platos->tx_descripcion,
             'va_nombre' => $platos->va_nombre,
@@ -75,17 +75,30 @@ class PlatosTable {
            'Ta_usuario_in_id' => 133,//$plato->Ta_usuario_in_id,
         );
         
+        
+        if($otro!='')
+            {
+            $adaptado = $this->tableGateway->getAdapter();
+           $sq = new Sql($adaptado);
+           $seleccionar = $sq->select()->from('ta_local')
+           ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = ta_local.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado','Ta_tipo_comida_in_id'), 'left')
+           ->where(array('ta_local.in_id'=>$idlocal));
+            $selectStrin = $sq->getSqlStringForSqlObject($seleccionar);
+            $resultados = $adaptado->query($selectStrin, $adaptado::QUERY_MODE_EXECUTE);
+            $resultado=$resultados->toArray();
+            $resultado[0]['Ta_tipo_comida_in_id'];
+            $insertar = $this->tableGateway->getSql()->insert()
+                    ->into('ta_tipo_plato')
+                    ->values(array('va_nombre' =>$otro, 'Ta_tipo_comida_in_id' => $resultado[0]['Ta_tipo_comida_in_id']));
+            $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insertar);
+            $statement->execute();
+            $idtipoplato=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();
+            }else{
+                
+                
+            }
 
-
-//        foreach($data as $key=>$value){
-//            if(empty($value)){
-//                $data[$key]=1;
-//            }
-//        }
         $data['en_destaque'] = 'si';
-//        $data['Ta_puntaje_in_id']=0;
-//         $data['cantidad']=0;
-//            print_r($data);exit;
         $id = (int) $platos->in_id;
         
            $adapterc = $this->tableGateway->getAdapter();
@@ -101,11 +114,11 @@ class PlatosTable {
 
 
 //            var_dump($this->tableGateway->select(array())->count('*'));Exit;
-            if($cant[0]['cantidad']<5){
-             
+            if($cant[0]['cantidad']<5){ 
+                if(!empty($idtipoplato))
+                    {$data['Ta_tipo_plato_in_id'] = $idtipoplato;}
             $this->tableGateway->insert($data);
-//            var_dump($this->tableGateway->getSql()->select()->from('ta_plato_has_ta_local')->where(array('ta_local_in_id'=>$idlocal))->count());Exit;
-            $idplato = $this->tableGateway->getLastInsertValue();
+             $idplato = $this->tableGateway->getLastInsertValue();
             $insert = $this->tableGateway->getSql()->insert()
                     ->into('ta_plato_has_ta_local')
                     ->values(array('Ta_plato_in_id' => $idplato, 'Ta_local_in_id' => $idlocal));
@@ -125,7 +138,6 @@ class PlatosTable {
                     ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito'), 'left')
                     ->where(array('ta_plato.in_id' => $idplato));
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
-//            var_dump($selectString);exit;
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $plato = $results->toArray();
 
@@ -152,13 +164,13 @@ class PlatosTable {
                 $solr->commit();
                 $solr->optimize();
             }
+            
           }
-//          else{
-//              echo ('<script>confirm("supero los platos permitidos")</script>');
-//          }
         } else {// echo 'hola';exit;
 
-            if ($this->getPlato($id)) {
+            if ($this->getPlato($id)){
+                 if(!empty($idtipoplato))
+                    {$data['Ta_tipo_plato_in_id'] = $idtipoplato;}
                 $this->tableGateway->update($data, array('in_id' => $id));
                 $this->cromSolr($id);
             } else {
