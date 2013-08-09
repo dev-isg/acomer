@@ -427,10 +427,29 @@ class PlatosTable {
         return $primer;
     }
 
-    public function cantComentxPlato($destaque = 1, $lim, $val, $estado = 1) {
+    public function cantComentxPlato($destaque = 1, $lim=null, $val, $estado = 1) {
+        $adapter = $this->tableGateway->getAdapter();
+
         if ($val == 1) {
             $puntaje = '>0'; // $puntaje = '>=0'; 'is not null or ta_comentario.ta_puntaje_in_id!=0'; 
-            $order = 'RAND()';//'ta_puntaje_in_id';
+            $order = 'ta_puntaje_in_id';
+            $cantidad = $this->tableGateway->getAdapter()
+            ->query('SELECT COUNT(DISTINCT(ta_plato.in_id )) AS NumeroResultados
+                FROM ta_plato
+                LEFT JOIN  ta_comentario ON ta_plato.in_id = ta_comentario.ta_plato_in_id
+                LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id`
+                LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id`
+                LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
+                LEFT JOIN `ta_ubigeo` AS `tu` ON `tu`.`in_id` = `tl`.`ta_ubigeo_in_id`
+                LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
+                where ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null  and ta_plato.ta_puntaje_in_id ' . $puntaje
+                , $adapter::QUERY_MODE_EXECUTE)->toArray();
+            $total=$cantidad[0]['NumeroResultados'];
+            
+            if($total<=6) { $aleatorio=0;}
+            else {$aleatorio=rand(1,$total-6+1);}
+ 
+            
         } else if ($val == 2) {
             $puntaje = '=0'; //'is null or ta_comentario.ta_puntaje_in_id!=0';
             $order = 'in_id';
@@ -438,7 +457,8 @@ class PlatosTable {
             $puntaje = '!=0'; //'is null or ta_comentario.ta_puntaje_in_id!=0';
             $order = 'in_id';
         }
-        $adapter = $this->tableGateway->getAdapter();
+        $limit=($lim)?'LIMIT '.$lim:'LIMIT '.$aleatorio.',6';
+   
         $primer = $this->tableGateway->getAdapter()
                 ->query('SELECT ta_plato.*,tr.va_nombre AS restaurant_nombre ,COUNT(ta_comentario.in_id ) AS NumeroComentarios
                      ,tu.ch_distrito AS Distrito
@@ -451,8 +471,7 @@ class PlatosTable {
                 LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
                 where ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null  and ta_plato.ta_puntaje_in_id ' . $puntaje . '
                 GROUP BY in_id 
-                ORDER BY ' . $order . ' desc
-                LIMIT ' . $lim, $adapter::QUERY_MODE_EXECUTE);
+                ORDER BY ' . $order . ' desc ' . $limit, $adapter::QUERY_MODE_EXECUTE);
 
         return $primer; //->toArray();//$data;// $aux;//select()->from('usuario')->query()->fetchAll();
     }
