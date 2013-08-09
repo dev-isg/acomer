@@ -38,14 +38,22 @@ class IndexController extends AbstractActionController
        
         $view = new ViewModel();
        
-//        $this->layout('layout/layout-portada2');
         $comidas =  $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
-        $listades=$this->getConfigTable()->cantComentxPlato(1,'0,3',1);
-        $listadeseg=$this->getConfigTable()->cantComentxPlato(1,'3,3',1);
+        $listatot=$this->getConfigTable()->cantComentxPlato(1,null,1);
+       $listatot= $listatot->toArray();
+       
+        foreach($listatot as $key=>$value){
+            if($key<3){
+                $listades[]=$listatot[$key];
+            }else{
+                $listadeseg[]=$listatot[$key];
+            }      
+            
+        }
+        
         $listaval=$this->getConfigTable()->cantComentxPlato(2,3,3);
         $listault=$this->getConfigTable()->cantComentxPlato(2,3,2);
-//        var_dump($listaval->toArray());exit;
         $this->layout()->clase = 'Home';
         $view->setVariables(array('lista' => $listades,'listaseg'=>$listadeseg,'listaval'=>$listaval,'listault'=>$listault,'clase'=>'Home'));
          return $view;
