@@ -634,8 +634,7 @@ class IndexController extends AbstractActionController {
         $adapter = $this->dbAdapter;
         $sql = new Sql($adapter);
         $select = $sql->select();
-        $select->from('ta_distrito')     
-       ->order('va_distrito asc DESC'); 
+        $select->from('ta_distrito') ;   
         $selectString = $sql->getSqlStringForSqlObject($select);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         //var_dump($results);exit;

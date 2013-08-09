@@ -1,3 +1,4 @@
+
 <?php
 $form = $this->form;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
@@ -17,9 +18,6 @@ echo $this->form()->openTag($form);
            </div><?php
 echo $this->form()->closeTag(); ?>
 <?php
-////      print_r($this->general) ;
-//       print_r($this->destacados) ;
-//       exit;
  if(($this->destacados) and (count($this->general)>0)){
 ?> 
   <div id="esconder">
@@ -120,7 +118,10 @@ echo $this->form()->closeTag(); ?>
                       </div>
                         <p class="nom_plato"><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></p>
                         <p style="margin-left:10px;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></p>
-                        <p class="com-pla"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i> Comentarios</p>
+                        <p class="com-pla">
+                          <em style="float:left;margin-left:10px;color:#ccc;">Santiago de surco</em>
+                          <?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i> Comentarios
+                        </p>
                     </div>
                 </div>
               <?php endforeach; ?>       
@@ -191,8 +192,7 @@ echo $this->form()->closeTag(); ?>
      </div>             
   <?php                
 } 
-              
-              
+ 
              else
                  {
                   ?>

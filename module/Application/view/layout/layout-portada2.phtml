@@ -108,21 +108,14 @@
                 <em>Ejm: lomo saltado</em>
               </p>
               <p>
-           <select name="distrito" id="fq" value="">
-     
-           <?php if($_GET['distrito'] or $_COOKIE['distrito']){ ?><OPTION VALUE="<?php echo $_GET['distrito']; ?>" selected="selected">
-                 <?php echo $_GET['distrito']; ?></OPTION>
-       <?php  foreach ($this->comidas as $comida) : ?>
-           <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"><?php echo $comida['va_distrito']; ?></OPTION>
+          <select name="distrito" id="fq" value="">
+               <?php  foreach ($this->comidas as $comida) : ?>
+           <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"
+               <?php if(isset($_GET['distrito']) and $_GET['distrito']==$comida['va_distrito'] )
+               {echo 'selected';}if(isset($_COOKIE['distrito']) and $_COOKIE['distrito']==$comida['va_distrito'] )
+                   { echo 'selected';} if(!isset($_COOKIE['distrito']) and !isset($_GET['distrito'])){echo '';}?>  ><?php echo $comida['va_distrito']; ?></OPTION>
               <?php endforeach; ?>
-
-       <?php }  
-           else{
-           ?><OPTION VALUE="todos los distritos">todos los distritos</OPTION> 
-   <?php  foreach ($this->comidas as $comida) : ?>
-           <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"><?php echo $comida['va_distrito']; ?></OPTION>
-              <?php endforeach; }?>
-            </select>
+          </select>
               </p>
               <p style="margin-top:5px;">
                 <input type="submit"  class="btn btn-warning btn-soli" value="Buscar"/>
