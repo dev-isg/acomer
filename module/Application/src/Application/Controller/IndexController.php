@@ -281,6 +281,8 @@ class IndexController extends AbstractActionController
 //       $this->layout('layout/layout-portada');
        $this->layout()->clase = 'buscar';
         $filtered = $this->params()->fromQuery('q');
+        $pieces = explode(" ", $filtered);
+        var_dump($pieces);
               $filter   = new \Zend\I18n\Filter\Alnum(true);
          $texto = $filter->filter($filtered);
                   
