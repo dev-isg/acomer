@@ -294,16 +294,12 @@ class IndexController extends AbstractActionController
               $filter   = new \Zend\I18n\Filter\Alnum(true);
               
          $texto = $filter->filter($filtered);
-          $pieza = explode(" ", $texto);
-           // var_dump($pieza);       
-                  
+          $pieza = explode(" ", $texto);         
             $comidas =  $this->joinAction()->toArray();   
             $com = array();
-            foreach($comidas as $y){ if($pieza == $comidas)
-            { $distrito = $y['va_distrito'];}
-            
-            }
-            var_dump($distrito);exit;
+            foreach($comidas as $y){
+            $com[$y['va_distrito']] = $y['va_distrito'];}
+      
       
       
                    $limite = 100;    
