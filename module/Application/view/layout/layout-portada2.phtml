@@ -127,15 +127,16 @@
         </div>
       <?php }elseif($detect3->isMobile()){ ?>        
           <script language="JavaScript">
-
-            if (screen.width > 481){
-              $(".mayor-mobile")show();
-              $(".menor-mobile")hide();
-            }
-            if(screen.width < 48){
-              $(".mayor-mobile")hide();
-              $(".menor-mobile")show();
-            }
+            $(document).ready(function(){
+              if (screen.width > 768){
+                $(".mayor-mobile")show();
+                $(".menor-mobile")hide();
+              }
+              if(screen.width < 480){
+                $(".mayor-mobile")hide();
+                $(".menor-mobile")show();
+              }
+            });
              
           </script> 
         
@@ -167,7 +168,7 @@
             </div>
             </div><!--Fin del sidebar-->
         </div>
-        <div class="content-sidebar mayor-mobile" style="none">
+        <div class="content-sidebar mayor-mobile" style="display:none">
           <div class="contenido-busqueda">
             <div class="content-sidebar-ho">
             <a class="title-home-listado" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">

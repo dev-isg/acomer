@@ -289,17 +289,21 @@ class IndexController extends AbstractActionController
 //       $this->layout('layout/layout-portada');
        $this->layout()->clase = 'buscar';
         $filtered = $this->params()->fromQuery('q');
-        $pieces = explode(" ", $filtered);
-        var_dump($pieces);
+       
+       
               $filter   = new \Zend\I18n\Filter\Alnum(true);
+              
          $texto = $filter->filter($filtered);
-                  
+          $pieza = explode(" ", $texto);
+           // var_dump($pieza);       
                   
             $comidas =  $this->joinAction()->toArray();   
             $com = array();
-            foreach($comidas as $y){
-            $com[$y['va_distrito']] = $y['va_distrito'];}
-      
+            foreach($comidas as $y){ if($pieza == $comidas)
+            { $distrito = $y['va_distrito'];}
+            
+            }
+            var_dump($distrito);exit;
       
       
                    $limite = 100;    
