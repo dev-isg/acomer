@@ -35,7 +35,7 @@
     <?php
       require './vendor/Classes/Mobile_Detect.php';
       $detect = new Mobile_Detect;
-      if($detect->isiPad()){ ?>
+      if($detect->isiPad()){?>
         <style type="text/css">
           .plato_r span{
             font-size: 12px!important;
@@ -88,45 +88,125 @@
         
       <?php } ?>
 
-      <!--<div class="contenido">-->
       <div class="container cont-home">
-      <div class="content-sidebar">
-        <div class="contenido-busqueda">
-          <div class="content-sidebar-ho">
-          <a class="title-home-listado" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
-            <h1>
-              <img src="<?php echo $this->host('ruta')?>/img/logo.png?v<?php echo $this->host('version')?>" alt="logo">
-            </h1>
-          </a>
-          <span class="logan-1" style="font-size: 3.1em;text-align: right;">-</span> 
-          <span class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span> 
-          <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
-          <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
+        <!--BUSCADOR SOLO PARA PC Y TABLET-->
+      <?php
+      require './vendor/Classes/Mobile_Detect.php';
+      $detect3 = new Mobile_Detect;
+      if($detect3->isTablet()){ ?>
+        <div class="content-sidebar">
+          <div class="contenido-busqueda">
+            <div class="content-sidebar-ho">
+            <a class="title-home-listado" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
+              <h1>
+                <img src="<?php echo $this->host('ruta')?>/img/logo.png?v<?php echo $this->host('version')?>" alt="logo">
+              </h1>
+            </a>
+            <span class="logan-1" style="font-size: 3.1em;text-align: right;">-</span> 
+            <span class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span> 
+            <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
+            <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
 
-          <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar-por-distrito">   <p>
-                <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"     placeholder="Ingrese el plato"  required="required"/>
-                <em>Ejm: lomo saltado</em>
-              </p>
-              <p>
-          <select name="distrito" id="fq" value="">
-               <?php  foreach ($this->comidas as $comida) : ?>
-           <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"
-               <?php if(isset($_GET['distrito']) and $_GET['distrito']==$comida['va_distrito'] )
-               {echo 'selected';}if(isset($_COOKIE['distrito']) and $_COOKIE['distrito']==$comida['va_distrito'] )
-                   { echo 'selected';} if(!isset($_COOKIE['distrito']) and !isset($_GET['distrito'])){echo '';}?>  ><?php echo $comida['va_distrito']; ?></OPTION>
-              <?php endforeach; ?>
-          </select>
-              </p>
-              <p style="margin-top:5px;">
-                <input type="submit"  class="btn btn-warning btn-soli" value="Buscar"/>
-              </p>
-            </form>  
-            <div class="final">
+            <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar-por-distrito">   <p>
+                  <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"     placeholder="Ingrese el plato"  required="required"/>
+                  <em>Ejm: lomo saltado</em>
+                </p>
+                <p>
+                    <!--MODIFICAR LAS COOKIES DEL COMBOBOX-->
+             <select name="distrito" id="fq" value="">
+                 <?php  foreach ($this->comidas as $comida) : ?>
+             <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"
+                 <?php if(isset($_GET['distrito'])  and $_GET['distrito']==$comida['va_distrito'] )
+                 {echo 'selected';}elseif (isset($_COOKIE['distrito'])  and $_COOKIE['distrito']==$comida['va_distrito'] )
+                 {echo 'selected';} elseif(!isset($_GET['distrito'])  and !isset($_COOKIE['distrito']) ){echo '';}?>>
+                     <?php echo $comida['va_distrito']; ?></OPTION>
+                <?php endforeach; ?>
+             </select>
+                </p>
+                <p style="margin-top:5px;">
+                  <input type="submit"  class="btn btn-warning btn-soli" value="Buscar"/>
+                </p>
+              </form>  
+              <div class="final">
+                  <img src="<?php echo $this->host('ruta')?>/img/responsive.png?v<?php echo $this->host('version')?>" alt="" style="padding: 37px 10px;">
+                </div>
+            </div>
+            </div><!--Fin del sidebar-->
+        </div>
+        
+        <!--BUSCADOR SOLO PARA MOVILESSSSSSSSSSSS -->
+      <?php }elseif($detect3->isMobile()){ ?>
+        
+        <div class="content-sidebar">
+          <div class="contenido-busqueda">
+            <div class="content-sidebar-ho">
+              <a class="title-home-listado" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
+                <h1>
+                  Listadelsabor.com
+                </h1>
+              </a>
+              <span class="logan-1" style="font-size: 3.1em;text-align: right;">-</span> 
+              <span class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span> 
+              <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
+              <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
+
+              <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar">
+                <p>
+                  <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"     placeholder="Ingrese el plato"  required="required"/>
+                  <input type="submit"  class="verlistado" value="Buscar"/>
+                </p>
+                <p>
+                  <em>Ejm: ceviche en miraflores</em>
+                </p>
+              </form>  
+              <div class="final">
                 <img src="<?php echo $this->host('ruta')?>/img/responsive.png?v<?php echo $this->host('version')?>" alt="" style="padding: 37px 10px;">
               </div>
-          </div>
-          </div><!--Fin del sidebar-->
-      </div>
+            </div>
+            </div><!--Fin del sidebar-->
+        </div>
+      <?php }else{?>
+        <div class="content-sidebar">
+          <div class="contenido-busqueda">
+            <div class="content-sidebar-ho">
+            <a class="title-home-listado" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
+              <h1>
+                <img src="<?php echo $this->host('ruta')?>/img/logo.png?v<?php echo $this->host('version')?>" alt="logo">
+              </h1>
+            </a>
+            <span class="logan-1" style="font-size: 3.1em;text-align: right;">-</span> 
+            <span class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span> 
+            <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
+            <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
+
+            <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar-por-distrito">   <p>
+                  <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"     placeholder="Ingrese el plato"  required="required"/>
+                  <em>Ejm: lomo saltado</em>
+                </p>
+                <p>
+             <select name="distrito" id="fq" value="">
+                 <?php  foreach ($this->comidas as $comida) : ?>
+             <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"
+                 <?php if(isset($_GET['distrito'])  and $_GET['distrito']==$comida['va_distrito'] )
+                 {echo 'selected';}elseif (isset($_COOKIE['distrito'])  and $_COOKIE['distrito']==$comida['va_distrito'] )
+                 {echo 'selected';} elseif(!isset($_GET['distrito'])  and !isset($_COOKIE['distrito']) ){echo '';}?>>
+                     <?php echo $comida['va_distrito']; ?></OPTION>
+                <?php endforeach; ?>
+             </select>
+                </p>
+                <p style="margin-top:5px;">
+                  <input type="submit"  class="btn btn-warning btn-soli" value="Buscar"/>
+                </p>
+              </form>  
+              <div class="final">
+                  <img src="<?php echo $this->host('ruta')?>/img/responsive.png?v<?php echo $this->host('version')?>" alt="" style="padding: 37px 10px;">
+                </div>
+            </div>
+            </div><!--Fin del sidebar-->
+        </div>
+      <?php }?>
+
+      
 
       <div class="contenido-plato">         
         <?php echo $this->content; ?>

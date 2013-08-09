@@ -1,27 +1,7 @@
 
 <link rel="stylesheet" href="<?php echo $this->basePath()?>/css/jquery-ui.css?v<?php echo $this->host('version')?>">
    <div class="content-left">
-      <?php
-      $formu = $this->formu;
-      //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
-
-      $formu->setAttributes(array(
-          'action' => $this->url.'/buscar-por-distrito',
-          'method' => 'get'
-      ));
-      $formu->prepare();
-
-      echo $this->form()->openTag($formu);
-      ?>
-      <?php
-      echo $this->formHidden($formu->get('in_id'));
-      ?><?php echo $this->formRow($formu->get('distrito'));?><?php
-      ?><?php echo $this->formRow($formu->get('q'));?><?php
-
-
-      ?><?php echo $this->formSubmit($formu->get('submit'));?><?php
-      ?><a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a><?php
-      echo $this->form()->closeTag(); ?>
+<a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a>
       <div id="esconder">
    		<div class="descrip-product">
    			<div class="etiqueta-cat">

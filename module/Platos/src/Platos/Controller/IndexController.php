@@ -589,18 +589,19 @@ class IndexController extends AbstractActionController {
                 }
             }
         } 
-         $formu = new Formularios();
+//         $formu = new Formularios();
          $comidas = $this->joinAction()->toArray();
          $this->layout()->comidas=$comidas;
-         $com = array();
-         foreach ($comidas as $y) {
-             $com[$y['va_distrito']] = $y['va_distrito'];
-         }  
-         if($_COOKIE['distrito']){ $formu->get('distrito')->setValue($_COOKIE['distrito']);}
-         else{ $formu->get('distrito')->setValue($comidas[41]['va_distrito']);}
-        $formu->get('distrito')->setValueOptions($com);
-        $formu->get('q')->setValue($_COOKIE['q']);     
-        $formu->get('submit')->setValue('Buscar');
+    // var_dump($_COOKIE['distrito']);exit;
+//         $com = array();
+//         foreach ($comidas as $y) {
+//             $com[$y['va_distrito']] = $y['va_distrito'];
+//         }  
+//     if($_COOKIE['distrito']){ $formu->get('distrito')->setValue($_COOKIE['distrito']);}
+//        // else{ $formu->get('distrito')->setValue($comidas[41]['va_distrito']);}
+//        $formu->get('distrito')->setValueOptions($com);
+//        $formu->get('q')->setValue($_COOKIE['q']);     
+//        $formu->get('submit')->setValue('Buscar');
         $this->layout()->clase = 'Detalle';
       //  $this->headTitle('ss');
         $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
