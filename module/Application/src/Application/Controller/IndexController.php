@@ -251,7 +251,7 @@ class IndexController extends AbstractActionController
              $com[$y['va_distrito']] = $y['va_distrito'];
         }
         setcookie('q',$texto);
-      setcookie('distrito',$distrito);
+        setcookie('distrito',$distrito);
        // var_dump($_COOKIE['distrito']);exit;
        // $form->get('distrito')->setValue($_COOKIE['distrito']);
         $form->get('distrito')->setValue($distrito);
