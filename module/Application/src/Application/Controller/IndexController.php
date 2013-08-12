@@ -337,6 +337,7 @@ class IndexController extends AbstractActionController
         
         $limit = 3;
         $palabraBuscar = isset($texto) ? $texto : false;
+//         var_dump($distrito);exit;
         $query = "($palabraBuscar)";
         $fq = array(
             'sort' => 'random_' . uniqid() . ' asc',
@@ -355,7 +356,7 @@ class IndexController extends AbstractActionController
                 $this->redirect()->toUrl('/');
             }
         }
-        
+//         var_dump($results->response->docs);Exit;
         $form = new Formularios();
         $listades = $this->getConfigTable()->cantComentxPlato(1, '0,3', 1);
         setcookie('q', $texto);
@@ -375,7 +376,7 @@ class IndexController extends AbstractActionController
         } else {
             $mostrar = 'Mostrando ' . $first . '-' . $last . ' de ' . $total . ' resultados';
         }
-   
+//    var_dump($results->response->docs);exit;
         $view->setVariables(array(
             'total' => $total,
             'lista' => $listades,

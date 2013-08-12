@@ -271,7 +271,7 @@
 							<select name="distrito" id="fq" value="">
                  <?php  foreach ($this->comidas as $comida) : ?>
                  
-                   <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"
+                   <OPTION VALUE="<?php //echo $comida['va_distrito']; ?>"
 									<?php
 									       if($_GET['distrito']){
                                                 if($_GET['distrito'] == $comida['va_distrito']){
@@ -339,6 +339,7 @@
 								lomo saltado</em>
 						</p>
 						<p>
+						<?php if($this->comidas){?>
 							<select name="distrito" id="fq" value="">
                  <?php  foreach ($this->comidas as $comida) : ?>
                  
@@ -364,6 +365,7 @@
                                  
                             <?php endforeach;?>
                      </select>
+                     <?php }?>
 						</p>
 						<p style="margin-top: 5px;">
 							<input type="submit" class="btn btn-warning btn-soli"
