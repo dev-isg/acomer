@@ -450,7 +450,7 @@ class PlatosTable {
                 $aleatorio=0;
             }
             else {
-                $aleatorio=rand(1,$total-6+1);
+                $aleatorio=rand(0,$total-6);
             }
 
         } else if ($val == 2) {

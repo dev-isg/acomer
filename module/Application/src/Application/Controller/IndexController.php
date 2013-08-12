@@ -286,21 +286,19 @@ class IndexController extends AbstractActionController
       public function verAction()             
  {      
         $view = new ViewModel();
-//echo 'dd';exit;
-//       $this->layout('layout/layout-portada');
+
        $this->layout()->clase = 'buscar';
         $filtered = $this->params()->fromQuery('q');
               $filter   = new \Zend\I18n\Filter\Alnum(true); 
          $text = $filter->filter($filtered);
           $busqueda = explode(" ", $text);
           $distritos =  $this->joinAction()->toArray(); 
+          $plato = $this->joinPlatoAction()->toArray();
           for($f=0;$f<=count($distritos);$f++){ 
             for($i=0;$i<=count($busqueda);$i++){ 
                            if($busqueda[$i]==$distritos[$f]['va_distrito'])
                             {
                             $distrito = $distritos[$f]['va_distrito'];
-                            
-  
                             }
                            else
                             {  
@@ -308,6 +306,20 @@ class IndexController extends AbstractActionController
                            
                             }            
                     }
+            }
+            
+            for($f=0;$f<=count($plato);$f++){
+                for($i=0;$i<=count($busqueda);$i++){
+                    if($busqueda[$i]==$plato[$f]['va_nombre'])
+                    {
+                        $platoname = $plato[$f]['va_nombre'];
+                    }
+                    else
+                    {
+                        $texto = $pieza[$i];
+                         
+                    }
+                }
             }
            
             
@@ -531,6 +543,21 @@ class IndexController extends AbstractActionController
             //var_dump($results);exit;
             return $results;
             
+      }
+      
+      public function joinPlatoAction()
+      {
+          $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+          $adapter = $this->dbAdapter;
+          $sql = new Sql($adapter);
+          $select = $sql->select();
+          $select->from('ta_plato');
+          $selectString = $sql->getSqlStringForSqlObject($select);
+          //var_dump($selectString);exit;
+          $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+          //var_dump($results);exit;
+          return $results;
+      
       }
     public function addAction()
     { 

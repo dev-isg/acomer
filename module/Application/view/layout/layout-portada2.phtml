@@ -49,7 +49,7 @@
       var urlJson = "<?php echo $this->host('ruta')?>";
     </script>
     <?php
-    require './vendor/Classes/Mobile_Detect.php';
+    require_once'./vendor/Classes/Mobile_Detect.php';
     $detect = new Mobile_Detect();
     if ($detect->isiPad()) {
         ?>
@@ -305,20 +305,29 @@
 						<p>
 							<select name="distrito" id="fq" value="">
                  <?php  foreach ($this->comidas as $comida) : ?>
-             <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"
+                 
+                   <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"
 									<?php
-            
-if (isset($_GET['distrito']) and $_GET['distrito'] == $comida['va_distrito']) {
-                echo 'selected';
-            } elseif ($_COOKIE['distrito'] and $_COOKIE['distrito'] == $comida['va_distrito']) {
-                echo 'selected';
-            } elseif (! $_GET['distrito'] and ! ($_COOKIE['distrito'])) {
+									       if($_GET['distrito']){
+                                                if($_GET['distrito'] == $comida['va_distrito']){
+                                                        echo 'selected';
+                                                    }
+                                           }else{
+                                                if(isset($_COOKIE['distrito'])){
+                                                        if($_COOKIE['distrito'] == $comida['va_distrito']){
+                                                                 echo 'selected';
+                                                        } 
+                                                    }else{
+                                                        echo '';
+                                                    }
 
-            }
-            ?>>
-                     <?php echo $comida['va_distrito']; ?></OPTION>
-                <?php endforeach; ?>
-             </select>
+                                           }
+                                           
+                                     ?>>
+                                 <?php echo $comida['va_distrito']; ?></OPTION>
+                                 
+                            <?php endforeach;?>
+                     </select>
 						</p>
 						<p style="margin-top: 5px;">
 							<input type="submit" class="btn btn-warning btn-soli"
@@ -461,7 +470,7 @@ if (isset($_GET['distrito']) and $_GET['distrito'] == $comida['va_distrito']) {
   <script src="<?php echo $this->host('ruta')?>/js/vendor/mosaic.js?v<?php echo $this->host('version')?>"></script>
 
   <?php
-    require './vendor/Classes/Mobile_Detect.php';
+//     require_once './vendor/Classes/Mobile_Detect.php';
     $detect4 = new Mobile_Detect;
     if($detect4->isMobile()){?>
       <script src="<?php echo $this->host('ruta')?>/js/aplicacion-mobile.js?v<?php echo $this->host('version')?>"></script>
