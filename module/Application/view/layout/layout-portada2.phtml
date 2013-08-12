@@ -237,43 +237,8 @@
             </div>
             </div><!--Fin del sidebar-->
         </div>
-        <div class="content-sidebar ladscape" style="display:none;">
-          <div class="contenido-busqueda">
-            <div class="content-sidebar-ho">
-            <a class="title-home-listado" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
-              <h1>
-                <img src="<?php echo $this->host('ruta')?>/img/logo.png?v<?php echo $this->host('version')?>" alt="logo">
-              </h1>
-            </a>
-            <span class="logan-1" style="font-size: 3.1em;text-align: right;">-</span> 
-            <span class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span> 
-            <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
-            <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
-
-
-					<form accept-charset="utf-8" method="get" class="form-horizontal"
-						id="search"
-						action="<?php echo $this->host('ruta')?>/buscar-por-distrito">
-						<p>
-							<input id="q" name="q" type="text" onclick="this.value=''"
-								value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"
-								placeholder="Ingrese el plato" required="required" /> <input
-								type="submit" class="verlistado" value="Buscar" />
-						</p>
-						<p>
-							<em>Ejm: ceviche en miraflores</em>
-						</p>
-					</form>
-					<div class="final">
-						<img
-							src="<?php echo $this->host('ruta')?>/img/responsive.png?v<?php echo $this->host('version')?>"
-							alt="" style="padding: 37px 10px;">
-					</div>
-				</div>
-			</div>
-			<!--Fin del sidebar-->
-		</div>
-		<div class="content-sidebar mayor-mobile" style="display: none">
+     
+		<div class="content-sidebar mayor-mobile ladscape" style="display: none">
 			<div class="contenido-busqueda">
 				<div class="content-sidebar-ho">
 					<a class="title-home-listado"
