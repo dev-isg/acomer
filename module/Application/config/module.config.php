@@ -90,6 +90,18 @@ return array(
                     )
                 )
             ),
+            
+            'jsonmovil' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/jsonmovil',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'uno'
+                    )
+                )
+            ),
+            
              'jsondesta' => array(
                 'type' => 'Literal',
                 'options' => array(
