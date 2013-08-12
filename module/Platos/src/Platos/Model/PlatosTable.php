@@ -446,10 +446,13 @@ class PlatosTable {
                 , $adapter::QUERY_MODE_EXECUTE)->toArray();
             $total=$cantidad[0]['NumeroResultados'];
             
-            if($total<=6) { $aleatorio=0;}
-            else {$aleatorio=rand(1,$total-6+1);}
- 
-//             var_dump($aleatorio);exit;
+            if($total<=6) { 
+                $aleatorio=0;
+            }
+            else {
+                $aleatorio=rand(1,$total-6+1);
+            }
+
         } else if ($val == 2) {
             $puntaje = '=0'; //'is null or ta_comentario.ta_puntaje_in_id!=0';
             $order = 'in_id';
