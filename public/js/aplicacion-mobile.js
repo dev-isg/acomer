@@ -155,8 +155,7 @@ $(document).ready(function() {
     }).keyup();
     $("#buscarmap").on("click", function() {
         var h = $("#bubi #q").val();
-        var f = $("#bubi #fq").val();
-        var e = urlJson + "/jsonmapasa?distrito=" + f + "&q=" + h;
+        var e = urlJson + "/jsonmovil?q=" + h;
         $("#map").remove();
         $("#subir-home").remove();
         $(".mensaje").remove();
