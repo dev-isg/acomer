@@ -1,23 +1,3 @@
-<?php //
-$form = $this->form;
-//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
-$form->setAttributes(array(
-    'action' => $this->url.'/buscar-por-distrito',
-    'method' => 'get'
-));
-$form->prepare();
-echo $this->form()->openTag($form);
-?>
-<?php
-?><?php echo $this->formRow($form->get('distrito'));?><?php
-?><?php echo $this->formRow($form->get('q'));?><?php
-?><?php echo $this->formSubmit($form->get('submit'));?><?php
-?>
-<a class="ver_mapa" style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a><div class="return">
-              <a href="javascript:window.history.back();" onclick="regresar()">Regresar</a>
-           </div>
-<?php
-echo $this->form()->closeTag(); ?>
 <?php
  if(($this->destacados) and (count($this->general)>0)){
 ?> 
@@ -79,17 +59,38 @@ echo $this->form()->closeTag(); ?>
                 </div> 
               </div>
              </li>
-                <?php endforeach; ?>   
-          </ul>     
-
+          <?php endforeach; ?>   
+        </ul>
       </div>
-
-  </div>
+    </div>
     <div id="esconder2">                     
         <div class="sub">
           <span style="padding-left: 10px;color:white;font-weight: bold;"><?php echo  ucwords($this->plato); ?></span>
         </div>    
-        <div class="plato_h p"><?php echo $this->mostrar; ?></div>
+        <div class="plato_h p">
+          <?php echo $this->mostrar; ?>
+          <?php //
+          $form = $this->form;
+          //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
+          $form->setAttributes(array(
+              'action' => $this->url.'/buscar-por-distrito',
+              'method' => 'get'
+          ));
+          $form->prepare();
+          echo $this->form()->openTag($form);
+          ?>
+          <?php
+          ?><?php echo $this->formRow($form->get('distrito'));?><?php
+          ?><?php echo $this->formRow($form->get('q'));?><?php
+          ?><?php echo $this->formSubmit($form->get('submit'));?><?php
+          ?>
+          <a class="ver_mapa" style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Resultados en mapa</a>
+          <!--<div class="return">
+            <a href="javascript:window.history.back();" onclick="regresar()">Regresar</a>
+          </div>-->
+          <?php
+          echo $this->form()->closeTag(); ?>
+        </div>
 
         <?php foreach ($this->general as $doc) : ?>
             
@@ -120,7 +121,7 @@ echo $this->form()->closeTag(); ?>
                         <p class="nom_plato"><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></p>
                         <p style="margin-left:10px;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></p>
                         <p class="com-pla">
-                          <em style="float:left;margin-left:10px;color:#ccc;"><?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?></em>
+                          <em style="float:left;margin-left:10px;color:#ff8400;"><?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?></em>
                           <?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i> Comentarios
                         </p>
                     </div>
@@ -128,11 +129,17 @@ echo $this->form()->closeTag(); ?>
               <?php endforeach; ?>       
                  
               
-     <div id="pagina"><?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar-por-distrito?distrito='.$this->distrito.'&q='.$this->nombre.'&submit=Buscar'.'&')):""; ?> </div>         
-       </div>         
-      <div id="mapa-buscador">
-
-     </div>
+      <div id="pagina">
+        <?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar-por-distrito?distrito='.$this->distrito.'&q='.$this->nombre.'&submit=Buscar'.'&')):""; ?> 
+      </div>         
+    </div>
+    <div id="mapa-buscador">
+      <div class="regresar regr">
+        <div class="return">
+          <a href="javascript:window.history.back();" onclick="regresar()">Regresar</a>
+       </div>
+      </div>
+    </div>
 
          <?php
               }
@@ -180,7 +187,7 @@ echo $this->form()->closeTag(); ?>
                         <p class="nom_plato"><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></p>
                         <p style="margin-left:10px;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></p>
                         <p class="com-pla">
-                          <em style="float:left;margin-left:10px;color:#ccc;"><?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?></em>
+                          <em style="float:left;margin-left:10px;color:#ff8400;"><?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?></em>
                           <?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i> Comentarios</p>
                     </div>
 

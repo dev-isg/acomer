@@ -41,6 +41,7 @@
     <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css?v'.$this->host('version'))->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')?>
 
 
+
     </head>
 
 <body class="lista-<?php echo $this->clase; ?>">
@@ -122,73 +123,133 @@
     if ($detect3->isTablet()) {
         ?>
         <div class="content-sidebar">
-			<div class="contenido-busqueda">
-				<div class="content-sidebar-ho">
-					<a class="title-home-listado"
-						href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
-						<h1>Listadelsabor.com</h1>
-					</a> <span class="logan-1"
-						style="font-size: 3.1em; text-align: right;">-</span> <span
-						class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span>
-					<span class="logan-1" style="font-size: 3.1em; text-align: right;">-</span>
-					<div class="fec">
-						<img
-							src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>"
-							alt="">
-					</div>
 
-					<form accept-charset="utf-8" method="get" class="form-horizontal"
-						id="search"
-						action="<?php echo $this->host('ruta')?>/buscar-por-distrito">
-						<p>
-							<input id="q" name="q" type="text" onclick="this.value=''"
-								value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"
-								placeholder="Ingrese el plato" required="required" /> <input
-								type="submit" class="verlistado" value="Buscar" />
-						</p>
-						<p>
-							<em>Ejm: ceviche en miraflores</em>
-						</p>
-					</form>
-					<div class="final">
-						<img
-							src="<?php echo $this->host('ruta')?>/img/responsive.png?v<?php echo $this->host('version')?>"
-							alt="" style="padding: 37px 10px;">
-					</div>
-				</div>
-			</div>
-			<!--Fin del sidebar-->
-		</div>
-      <?php }elseif($detect3->isMobile()){ ?>        
-          <script language="JavaScript">
-            $(document).ready(function(){
-              if (screen.width > 768){
-                $(".mayor-mobile")show();
-                $(".menor-mobile")hide();
-              }
-              if(screen.width < 480){
-                $(".mayor-mobile")hide();
-                $(".menor-mobile")show();
-              }
-            });
-             
-          </script>
+          <div class="contenido-busqueda">
+            <div class="content-sidebar-ho">
+            <a class="title-home-listado" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
+              <h1>
+                <img src="<?php echo $this->host('ruta')?>/img/logo.png?v<?php echo $this->host('version')?>" alt="logo">
+              </h1>
+            </a>
+            <span class="logan-1" style="font-size: 3.1em;text-align: right;">-</span> 
+            <span class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span> 
+            <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
+            <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
 
-		<div class="content-sidebar menor-mobile">
-			<div class="contenido-busqueda">
-				<div class="content-sidebar-ho">
-					<a class="title-home-listado"
-						href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
-						<h1>Listadelsabor.com</h1>
-					</a> <span class="logan-1"
-						style="font-size: 3.1em; text-align: right;">-</span> <span
-						class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span>
-					<span class="logan-1" style="font-size: 3.1em; text-align: right;">-</span>
-					<div class="fec">
-						<img
-							src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>"
-							alt="">
-					</div>
+            <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar-por-distrito">   <p>
+                  <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"     placeholder="Ingrese el plato"  required="required"/>
+                  <em>Ejm: lomo saltado</em>
+                </p>
+                <p>
+             <select name="distrito" id="fq" value="">
+                 <?php  foreach ($this->comidas as $comida) : ?>
+             <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"
+                 <?php if(isset($_GET['distrito'])  and $_GET['distrito']==$comida['va_distrito'] )
+                 {echo 'selected';}elseif (isset($_COOKIE['distrito'])  and $_COOKIE['distrito']==$comida['va_distrito'] )
+                 {echo 'selected';} elseif(!isset($_GET['distrito'])  and !isset($_COOKIE['distrito']) ){echo '';}?>>
+                     <?php echo $comida['va_distrito']; ?></OPTION>
+                <?php endforeach; ?>
+             </select>
+                </p>
+                <p style="margin-top:5px;">
+                  <input type="submit"  class="btn btn-warning btn-soli" value="Buscar"/>
+                </p>
+              </form>  
+              <div class="final">
+                  <img src="<?php echo $this->host('ruta')?>/img/responsive.png?v<?php echo $this->host('version')?>" alt="" style="padding: 37px 10px;">
+                </div>
+            </div>
+            </div><!--Fin del sidebar-->
+        </div>
+      <?php }elseif($detect3->isMobile()){ ?>
+        <script>
+          $(document).ready(function(){
+            var height = $(window).height();
+            var width = $(window).width();
+            if(width>height) {
+              if ($('.ladscape').is(':hidden')){
+                $('.ladscape').show();
+                $(".title-si").hide();
+              }else{
+                $('.portrait').hide();
+
+              }
+            }else {
+              // Portrait
+              if($('.portrait').is(':hidden')){
+                
+              }else{
+                $('.portrait').show();
+                $(".title-si").show();
+                $('.ladscape').hide();
+              }             
+            }
+          });
+          $(window).on( "orientationchange", function( event ) {
+            var height = $(window).height();
+            var width = $(window).width();
+            if(width>height) {
+              if ($('.ladscape').is(':hidden')){
+                $('.ladscape').show();
+                $(".title-si").hide();
+              }else{
+                $('.portrait').hide();
+              }
+
+            } else {
+              // Portrait
+              if($('.portrait').is(':hidden')){
+                
+              }else{
+                $('.portrait').show();
+                $(".title-si").show();
+                $('.ladscape').hide();
+              }             
+            }
+          });
+          $( window ).orientationchange();
+        </script>
+        <div class="content-sidebar menor-mobile portrait" style="display:block;">
+          <div class="contenido-busqueda">
+            <div class="content-sidebar-ho">
+              <a class="title-home-listado" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
+                <h1 class="title-si">
+                  Listadelsabor.com
+                </h1>
+              </a>
+              <span class="logan-1" style="font-size: 3.1em;text-align: right;">-</span> 
+              <span class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span> 
+              <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
+              <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
+
+              <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar">
+                <p>
+                  <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"     placeholder="Ingrese el plato"  required="required"/>
+                  <input type="submit"  class="verlistado" value="Buscar"/>
+                </p>
+                <p>
+                  <em>Ejm: ceviche en miraflores</em>
+                </p>
+              </form>  
+              <div class="final">
+                <img src="<?php echo $this->host('ruta')?>/img/responsive.png?v<?php echo $this->host('version')?>" alt="" style="padding: 37px 10px;">
+              </div>
+            </div>
+            </div><!--Fin del sidebar-->
+        </div>
+        <div class="content-sidebar ladscape" style="display:none;">
+          <div class="contenido-busqueda">
+            <div class="content-sidebar-ho">
+            <a class="title-home-listado" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
+              <h1>
+                <img src="<?php echo $this->host('ruta')?>/img/logo.png?v<?php echo $this->host('version')?>" alt="logo">
+              </h1>
+            </a>
+            <span class="logan-1" style="font-size: 3.1em;text-align: right;">-</span> 
+            <span class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span> 
+            <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
+            <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
+
 
 					<form accept-charset="utf-8" method="get" class="form-horizontal"
 						id="search"
@@ -346,8 +407,6 @@ if (isset($_GET['distrito']) and $_GET['distrito'] == $comida['va_distrito']) {
 		</div>
       <?php }?>
 
-      
-
       <div class="contenido-plato">         
         <?php echo $this->content; ?>
        
@@ -358,65 +417,61 @@ if (isset($_GET['distrito']) and $_GET['distrito'] == $comida['va_distrito']) {
             <img src="<?php echo $this->host('static')?>/img/flechamenu.png" alt="">
         </div> -->
 
-		</div>
-		<div class="footer">
-			<nav class="fo">
-				<ul class="fa">
-					<li><a href="<?php echo $this->host('ruta')?>/nosotros">Nosotros</a>
-					</li>
-					<li><a href="<?php echo $this->host('ruta')?>/terminos">Términos y
-							condiciones</a></li>
-					<li>
-						<div class="ups-crap btn-group dropup">
-							<button class="ups-dev dropdown-toggle" data-toggle="dropdown">
-								Contáctenos<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu">
-								<li><a href="<?php echo $this->host('ruta')?>/solicita">Solicite
-										su publicación</a></li>
-								<li><a href="<?php echo $this->host('ruta')?>/contactenos">Escríbenos</a></li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<div class="ups-crap btn-group dropup">
-							<button class="ups-dev dropdown-toggle" data-toggle="dropdown">
-								Más buscados<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu">
-								<li><a
-									href="<?php echo $this->host('ruta')?>/buscar?q=ceviche&distrito=todos los distritos">Ceviche</a></li>
-								<li><a
-									href="<?php echo $this->host('ruta')?>/buscar?q=lomo saltado&distrito=todos los distritos">Lomo
-										saltado</a></li>
-								<li><a
-									href="<?php echo $this->host('ruta')?>/buscar?q=makis&distrito=todos los distritos">Makis</a></li>
-								<li><a
-									href="<?php echo $this->host('ruta')?>/buscar?q=arroz con mariscos&distrito=todos los distritos">Arroz
-										con Mariscos</a></li>
-							</ul>
-						</div> <!-- /btn-group -->
-					</li>
-				</ul>
-			</nav>
-			<footer class="footer-ie8">
-				<p>
-					Desarrollado por <a href="http://www.innovationssystems.com"
-						title="Innovations systems group" target="_blank">Innovations
-						systems group</a> - Derechos Reservados
-				</p>
-			</footer>
-		</div>
-	</div>
-	<script
-		src="<?php echo $this->host('ruta')?>/js/vendor/jquery.placeholder.min.js?v<?php echo $this->host('version')?>"></script>
-	<script
-		src="<?php echo $this->host('ruta')?>/js/vendor/mosaic.js?v<?php echo $this->host('version')?>"></script>
-	<script
-		src="<?php echo $this->host('ruta')?>/js/aplicacion.min.js?v<?php echo $this->host('version')?>"></script>
-	<script type="text/javascript"
-		src="<?php echo $this->host('ruta')?>/js/bootstrap-dropdown.js?v<?php echo $this->host('version')?>"></script>
+        
+      </div>
+    <div class="footer">
+          <nav class="fo">
+            <ul class="fa">
+              <li>
+                <a href="<?php echo $this->host('ruta')?>/nosotros">Nosotros</a>
+              </li>
+              <li>
+                <a href="<?php echo $this->host('ruta')?>/terminos">Términos y condiciones</a>
+              </li>
+              <li>
+                <div class="ups-crap btn-group dropup">
+                  <button class="ups-dev dropdown-toggle" data-toggle="dropdown">Contáctenos<span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="<?php echo $this->host('ruta')?>/solicita">Solicite su publicación</a></li>
+                    <li><a href="<?php echo $this->host('ruta')?>/contactenos">Escríbenos</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <div class="ups-crap btn-group dropup">
+                  <button class="ups-dev dropdown-toggle" data-toggle="dropdown">Más buscados<span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="<?php echo $this->host('ruta')?>/buscar?q=ceviche&distrito=todos los distritos">Ceviche</a></li>
+                    <li><a href="<?php echo $this->host('ruta')?>/buscar?q=lomo saltado&distrito=todos los distritos">Lomo saltado</a></li>
+                    <li><a href="<?php echo $this->host('ruta')?>/buscar?q=makis&distrito=todos los distritos">Makis</a></li>
+                    <li><a href="<?php echo $this->host('ruta')?>/buscar?q=arroz con mariscos&distrito=todos los distritos">Arroz con Mariscos</a></li>
+                  </ul>
+                </div><!-- /btn-group -->
+              </li>
+            </ul>
+          </nav>
+      <footer class="footer-ie8">
+        <p>
+          Desarrollado por <a href="http://www.innovationssystems.com" title="Innovations systems group" target="_blank">Innovations systems group</a> - Derechos Reservados
+        </p>
+      </footer>
+    </div>
+</div>
+  <script src="<?php echo $this->host('ruta')?>/js/vendor/jquery.placeholder.min.js?v<?php echo $this->host('version')?>"></script>   
+  <script src="<?php echo $this->host('ruta')?>/js/vendor/mosaic.js?v<?php echo $this->host('version')?>"></script>
 
+  <?php
+    require './vendor/Classes/Mobile_Detect.php';
+    $detect4 = new Mobile_Detect;
+    if($detect4->isMobile()){?>
+      <script src="<?php echo $this->host('ruta')?>/js/aplicacion-mobile.js?v<?php echo $this->host('version')?>"></script>
+    <?php }else{?>
+      <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js?v<?php echo $this->host('version')?>"></script>
+    <?php } ?>  
 
-</body>
+  <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/bootstrap-dropdown.js?v<?php echo $this->host('version')?>"></script>
+ 
+      
+    </body>
+
 </html>

@@ -36,7 +36,7 @@ class Formularios extends Form
             'attributes' => array(               
                'required' => true, 
                 'id'   => 'q',
-                
+                'style' => 'display:none'
             ),
         ));
         $this->add(array(
@@ -70,7 +70,8 @@ class Formularios extends Form
             'name' => 'distrito',
             'type' => 'Select',
              'attributes'=> array( 
-                'id' => 'fq'
+                'id' => 'fq',
+                'style' => 'display:none'
             ),
            'options' => array(
                 'value_options' => array(
@@ -112,6 +113,7 @@ class Formularios extends Form
                 'value' => 'Go',
                 'class' => 'verlistado',
                 'id' => 'submitbutton',
+                'style' => 'display:none'
             ),
         ));
     }

@@ -27,11 +27,19 @@ return array(
    
     'host' => array(
 
+<<<<<<< HEAD
+        'base' => 'http://192.168.1.35:8080',
+        'static' => 'http://192.168.1.35:8080',
+        'images' => 'http://192.168.1.35:8080/imagenes',
+        'img'=>'http://192.168.1.35:8080/img',
+        'ruta' => 'http://192.168.1.35:8080',
+=======
         'base' => 'http://192.168.1.50:8080',
         'static' => 'http://192.168.1.50:8080',
         'images' => 'http://192.168.1.50:8080/imagenes',
         'img'=>'http://192.168.1.50:8080/img',
         'ruta' => 'http://192.168.1.50:8080',
+>>>>>>> 3040675749cbecbd95fdc460d9fb29b714a3d473
 
         'version'=>1,
     ),
