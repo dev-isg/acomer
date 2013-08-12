@@ -209,12 +209,19 @@
           });
           $( window ).orientationchange();
         </script>
-        <div class="content-sidebar menor-mobile portrait" style="display:block;">
+        <div class="content-sidebar menor-mobile" style="display:block;">
           <div class="contenido-busqueda">
             <div class="content-sidebar-ho">
-              <a class="title-home-listado" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
+              <a class="title-home-listado portrait" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
                 <h1 class="title-si">
                   Listadelsabor.com
+                </h1>
+              </a>
+              <a class="title-home-listado ladscape" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor" style="display:none;">
+                <h1>
+                  <img
+                    src="<?php echo $this->host('ruta')?>/img/logo.png?v<?php echo $this->host('version')?>"
+                    alt="logo">
                 </h1>
               </a>
               <span class="logan-1" style="font-size: 3.1em;text-align: right;">-</span> 
@@ -237,77 +244,7 @@
             </div>
             </div><!--Fin del sidebar-->
         </div>
-     
-		<div class="content-sidebar mayor-mobile ladscape" style="display: none">
-			<div class="contenido-busqueda">
-				<div class="content-sidebar-ho">
-					<a class="title-home-listado"
-						href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
-						<h1>
-							<img
-								src="<?php echo $this->host('ruta')?>/img/logo.png?v<?php echo $this->host('version')?>"
-								alt="logo">
-						</h1>
-					</a> <span class="logan-1"
-						style="font-size: 3.1em; text-align: right;">-</span> <span
-						class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span>
-					<span class="logan-1" style="font-size: 3.1em; text-align: right;">-</span>
-					<div class="fec">
-						<img
-							src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>"
-							alt="">
-					</div>
-
-					<form accept-charset="utf-8" method="get" class="form-horizontal"
-						id="search"
-						action="<?php echo $this->host('ruta')?>/buscar-por-distrito">
-						<p>
-							<input id="q" name="q" type="text" onclick="this.value=''"
-								value="<?php if($_GET['q']) {echo $_GET['q'];}else{ echo $_COOKIE['q'];}?>"
-								placeholder="Ingrese el plato" required="required" /> <em>Ejm:
-								lomo saltado</em>
-						</p>
-						<p>
-							<select name="distrito" id="fq" value="">
-                 <?php  foreach ($this->comidas as $comida) : ?>
-                 
-                   <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"
-									<?php
-									       if($_GET['distrito']){
-                                                if($_GET['distrito'] == $comida['va_distrito']){
-                                                        echo 'selected';
-                                                    }
-                                           }else{
-                                                if(isset($_COOKIE['distrito'])){
-                                                        if($_COOKIE['distrito'] == $comida['va_distrito']){
-                                                                 echo 'selected';
-                                                        } 
-                                                    }else{
-                                                        echo '';
-                                                    }
-
-                                           }
-                                           
-                                     ?>>
-                                 <?php echo $comida['va_distrito']; ?></OPTION>
-                                 
-                            <?php endforeach;?>
-                     </select>
-						</p>
-						<p style="margin-top: 5px;">
-							<input type="submit" class="btn btn-warning btn-soli"
-								value="Buscar" />
-						</p>
-					</form>
-					<div class="final">
-						<img
-							src="<?php echo $this->host('ruta')?>/img/responsive.png?v<?php echo $this->host('version')?>"
-							alt="" style="padding: 37px 10px;">
-					</div>
-				</div>
-			</div>
-			<!--Fin del sidebar-->
-		</div>
+		
       <?php }else{?>
         <div class="content-sidebar">
 			<div class="contenido-busqueda">
@@ -437,15 +374,15 @@
   <?php
 //     require_once './vendor/Classes/Mobile_Detect.php';
     $detect4 = new Mobile_Detect;
-    if($detect4->isMobile()){?>
+    if ($detect4->isTablet()) {?>
+      <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js?v<?php echo $this->host('version')?>"></script>
+    <?php }elseif($detect4->isMobile()){?>
       <script src="<?php echo $this->host('ruta')?>/js/aplicacion-mobile.js?v<?php echo $this->host('version')?>"></script>
     <?php }else{?>
       <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js?v<?php echo $this->host('version')?>"></script>
-    <?php } ?>  
+    <?php }?>
 
   <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/bootstrap-dropdown.js?v<?php echo $this->host('version')?>"></script>
- 
-      
-    </body>
+  </body>
 
 </html>

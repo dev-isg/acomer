@@ -150,10 +150,35 @@
 //       exit;
        
 ?>
-     <div id="esconder2">                     
+     <div id="esconder2">
+     dfgrekv4 o4otygo4goj4ogo54ogo5ig                 
         <div class="sub">
-            <span style="padding-left: 10px;color:white;font-weight: bold;"><?php echo  $this->nombre;  ?></span>
-        </div>    
+          <span style="padding-left: 10px;color:white;font-weight: bold;"><?php echo  $this->nombre;  ?></span>
+        </div> 
+        <div class="plato_h p">
+          <?php echo $this->mostrar; ?>
+          <?php //
+          $form = $this->form;
+          //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
+          $form->setAttributes(array(
+              'action' => $this->url.'/buscar',
+              'method' => 'get'
+          ));
+          $form->prepare();
+          echo $this->form()->openTag($form);
+          ?>
+          <?php
+
+          ?><?php echo $this->formRow($form->get('q'));?><?php
+          ?><?php echo $this->formSubmit($form->get('submit'));?><?php
+          ?>
+          <a class="ver_mapa" style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Resultados en mapa</a>
+          <!--<div class="return">
+              <a href="javascript:window.history.back();" onclick="regresar()">Regresar</a>
+           </div>-->
+          <?php
+          echo $this->form()->closeTag(); ?>
+        </div>  
         <?php foreach ($this->general as $doc) : ?>
            
 
