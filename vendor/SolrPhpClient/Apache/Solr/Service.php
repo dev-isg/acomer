@@ -962,7 +962,7 @@ class Apache_Solr_Service
 		// multiple foo=bar strings. This regex should always work since '=' will be urlencoded
 		// anywhere else the regex isn't expecting it
 		$queryString = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $queryString);
-//echo $queryString;exit;
+      //  var_dump($queryString);exit; 
 		if ($method == self::METHOD_GET)
 		{
 			return $this->_sendRawGet($this->_searchUrl . $this->_queryDelimiter . $queryString);

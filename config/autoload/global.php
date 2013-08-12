@@ -26,6 +26,7 @@ return array(
     ),
    
     'host' => array(
+
         'base' => 'http://192.168.1.50:8080',
         'static' => 'http://192.168.1.50:8080',
         'images' => 'http://192.168.1.50:8080/imagenes',

@@ -285,56 +285,41 @@ class IndexController extends AbstractActionController
       
       public function verAction()             
  {      
+    
         $view = new ViewModel();
 
        $this->layout()->clase = 'buscar';
         $filtered = $this->params()->fromQuery('q');
+        $filtered=strtoupper($filtered);
               $filter   = new \Zend\I18n\Filter\Alnum(true); 
-         $text = $filter->filter($filtered);
-          $busqueda = explode(" ", $text);
+         $text =trim($filter->filter($filtered));
+         $text=preg_replace('/\s\s+/', ' ', $text);
+          $busqueda = explode(" EN ",$text); 
+//           var_dump($busqueda);
           $distritos =  $this->joinAction()->toArray(); 
-          $plato = $this->joinPlatoAction()->toArray();
-          for($f=0;$f<=count($distritos);$f++){ 
-            for($i=0;$i<=count($busqueda);$i++){ 
-                           if($busqueda[$i]==$distritos[$f]['va_distrito'])
-                            {
-                            $distrito = $distritos[$f]['va_distrito'];
-                            }
-                           else
-                            {  
-                            $texto = $pieza[$i];
-                           
-                            }            
-                    }
+         
+          for($f=0;$f<count($distritos);$f++){ 
+              
+              for($i=0;$i<count($busqueda);$i++){
+    
+                  if($busqueda[$i]==$distritos[$f]['va_distrito'])//trim($busqueda[$i])
+                  {
+                      $distrito = $distritos[$f]['va_distrito'];
+                      
+                  }else{
+                      $texto = $busqueda[0];
+                  }
+              }
             }
-            
-            for($f=0;$f<=count($plato);$f++){
-                for($i=0;$i<=count($busqueda);$i++){
-                    if($busqueda[$i]==$plato[$f]['va_nombre'])
-                    {
-                        $platoname = $plato[$f]['va_nombre'];
-                    }
-                    else
-                    {
-                        $texto = $pieza[$i];
-                         
-                    }
-                }
-            }
-           
-            
-//            //            $a= similar_text($pieza[$i],$distritos[$f]['va_distrito']);
-////            var_dump($a);exit;
-//                           $texto = $pieza[$i <>$i];
-//                           var_dump($distrito);
-//                           var_dump($texto);exit;
-            
-            
+//             var_dump($texto);
+//             var_dump($distrito);exit;
             $limite = 100;    
                         $resultados = false;
                         $palabraBuscar = isset($texto) ? $texto : false ;
+                       $distrito=($distrito)?' AND distrito:'.$distrito:'';
+//                        var_dump($distrito);exit;
                           $fd = array (  
-                            'fq'=>'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito);
+                            'fq'=>'en_estado:activo AND restaurant_estado:activo'.$distrito);
                           if($palabraBuscar=='')
                           {$this->redirect()->toUrl('/');  }
                         if ($palabraBuscar)
@@ -345,7 +330,11 @@ class IndexController extends AbstractActionController
                             $palabraBuscar = stripslashes($palabraBuscar);
                           }
                           try
-                          {  $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
+                          {  
+//                               var_dump($palabraBuscar);Exit;
+                              $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
+
+                          //var_dump($resultados->response->docs);exit;
  
                           }
                           catch (Exception $e)
@@ -353,12 +342,14 @@ class IndexController extends AbstractActionController
                          $this->redirect()->toUrl('/');
                           }
                         }
+                        
+                        
                         $limit = 3;             
                         $palabraBuscar = isset($texto) ? $texto : false ;
                         $query = "($palabraBuscar)";
                         $fq = array (  
                                    'sort'=>'random_' . uniqid() .' asc',
-                            'fq'=>'en_estado:activo AND restaurant_estado:activo AND en_destaque:si AND distrito:'.$distrito );                                           
+                            'fq'=>'en_estado:activo AND restaurant_estado:activo AND en_destaque:si'.$distrito);                                           
                         $results = false;
                         if ($query)
                         { 
@@ -369,7 +360,7 @@ class IndexController extends AbstractActionController
                             $query = stripslashes($query);
                           }
                           try
-                          {  $results = $solr->search($query, 0, $limit, $fq  ); }
+                          {  $results = $solr->search($query, 0, $limit, $fq); }
                           catch (Exception $e)
                           { $this->redirect()->toUrl('/');      }
                          }
@@ -402,10 +393,123 @@ class IndexController extends AbstractActionController
        $mostrar='Mostrando '.$first.'-'.$last.' de '.$total.' resultados';
    
    }
+//    var_dump($texto);Exit;
          $view->setVariables( array('total' => $total,'lista' => $listades,'destacados'=>$results->response->docs,'general'=>$paginator,'form' => $form,'nombre'=>$texto,'mostrar'=>$mostrar));
         return $view;
     }
     
+    
+    public function jsonmapaAction()    {
+        $distrito=  $this->params()->fromQuery('distrito');
+        $view  = new viewModel();
+        $view->setTerminal(true);
+        $texto = $this->params()->fromQuery('q');
+        setcookie('distrito',$distrito);
+        setcookie('q',$texto);
+        $filter   = new \Zend\I18n\Filter\Alnum(true);
+        $plato = $filter->filter($texto);
+         
+    
+        if($distrito != 'todos los distritos')
+        {
+    
+            $resultados = false;
+            $palabraBuscar = isset($plato) ? $plato : false ;
+            $list = 1000;
+            $fd = array (
+                'fq'=> 'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito,
+                'sort'=>'en_destaque desc',
+                'fl'=>'id,latitud,longitud,tx_descripcion,va_imagen,restaurante_estado,restaurante,name,plato_tipo,distrito',
+                'wt'=>'json');
+            if ($palabraBuscar)
+            {
+                $solar = \Classes\Solr::getInstance()->getSolr();
+                if (get_magic_quotes_gpc() == 1)
+                {
+                    $palabraBuscar = stripslashes($palabraBuscar);
+                }
+                try
+                {
+                    $resultados = $solar->search($palabraBuscar, 0,$list, $fd );
+                }
+                catch (Exception $e)
+                {
+    
+                    die("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");
+    
+                }
+                if($resultados == '')
+    
+                {
+                    echo 'error en busqueda' ;exit;
+                }
+                else  {echo $resultados->getRawResponse();
+                exit;}
+            }
+    
+    
+        }
+    
+         
+        else {
+            $limite = 1000;
+            $resultados = false;
+            $palabraBuscar = isset($plato) ? $plato : false ;
+            $fd = array (
+                'fq'=>'en_estado:activo AND restaurant_estado:activo');
+    
+            if ($palabraBuscar)
+            {
+                $solar = \Classes\Solr::getInstance()->getSolr();
+                if (get_magic_quotes_gpc() == 1)
+                {
+                    $palabraBuscar = stripslashes($palabraBuscar);
+                }
+                try
+                {
+                    $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
+                    //var_dump($resultados);exit;
+    
+                }
+                catch (Exception $e)
+                {
+                     
+                    $this->redirect()->toUrl('/');
+                }
+            }
+    
+            $limit = 3;
+            $palabraBuscar = isset($plato) ? $plato : false ;
+            $query = "($palabraBuscar) AND (en_destaque:si)";
+            $fq = array (
+                'sort'=>'random_' . uniqid() .' asc',
+                'fq'=>'en_estado:activo AND restaurant_estado:activo');
+            $results = false;
+            if ($query)
+            {
+                $solr = \Classes\Solr::getInstance()->getSolr();
+                if (get_magic_quotes_gpc() == 1)
+                {
+                    $query = stripslashes($query);
+                }
+                try
+                {
+                    $results = $solr->search($query, 0, $limit, $fq  );
+    
+                }
+                catch (Exception $e)
+                {
+    
+                    $this->redirect()->toUrl('/');
+                }
+            }
+        }
+    
+         
+        echo $resultados->getRawResponse();
+        exit;
+    
+    }
     public function jsonmapasaAction()    { 
         $distrito=  $this->params()->fromQuery('distrito');
         $view  = new viewModel();
