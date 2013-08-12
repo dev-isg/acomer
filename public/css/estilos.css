@@ -1912,6 +1912,23 @@ form#application .control-group .btn-solicito{
   width: 100px;
   height: 35px;
 }
+#bubi{
+  width: 160px;
+  padding: 0;
+  float: right;
+  margin-top: 0px;
+}
+.lista-buscar-distrito .regr{
+  text-align: center;
+  background: #f0f0f0;
+  margin-bottom: 0px;
+  height: 40px;
+  float: left;
+  width: 100%;
+}
+.lista-buscar-distrito .return{
+  padding-top: 5px;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */

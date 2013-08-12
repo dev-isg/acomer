@@ -286,28 +286,43 @@ class IndexController extends AbstractActionController
       public function verAction()             
  {      
         $view = new ViewModel();
+//echo 'dd';exit;
 //       $this->layout('layout/layout-portada');
        $this->layout()->clase = 'buscar';
         $filtered = $this->params()->fromQuery('q');
-       
-       
-              $filter   = new \Zend\I18n\Filter\Alnum(true);
-              
-         $texto = $filter->filter($filtered);
-          $pieza = explode(" ", $texto);         
-            $comidas =  $this->joinAction()->toArray();   
-            $com = array();
-            foreach($comidas as $y){
-            $com[$y['va_distrito']] = $y['va_distrito'];}
-      
-      
-      
-                   $limite = 100;    
+              $filter   = new \Zend\I18n\Filter\Alnum(true); 
+         $text = $filter->filter($filtered);
+          $busqueda = explode(" ", $text);
+          $distritos =  $this->joinAction()->toArray(); 
+          for($f=0;$f<=count($distritos);$f++){ 
+            for($i=0;$i<=count($busqueda);$i++){ 
+                           if($busqueda[$i]==$distritos[$f]['va_distrito'])
+                            {
+                            $distrito = $distritos[$f]['va_distrito'];
+                            
+  
+                            }
+                           else
+                            {  
+                            $texto = $pieza[$i];
+                           
+                            }            
+                    }
+            }
+           
+            
+//            //            $a= similar_text($pieza[$i],$distritos[$f]['va_distrito']);
+////            var_dump($a);exit;
+//                           $texto = $pieza[$i <>$i];
+//                           var_dump($distrito);
+//                           var_dump($texto);exit;
+            
+            
+            $limite = 100;    
                         $resultados = false;
                         $palabraBuscar = isset($texto) ? $texto : false ;
                           $fd = array (  
-                            'fq'=>'en_estado:activo AND restaurant_estado:activo  and AND distrito:'.$distrito
-                              );
+                            'fq'=>'en_estado:activo AND restaurant_estado:activo AND distrito:'.$distrito);
                           if($palabraBuscar=='')
                           {$this->redirect()->toUrl('/');  }
                         if ($palabraBuscar)
@@ -319,7 +334,7 @@ class IndexController extends AbstractActionController
                           }
                           try
                           {  $resultados = $solar->search($palabraBuscar, 0, $limite,$fd );
-                          
+ 
                           }
                           catch (Exception $e)
                           {        
