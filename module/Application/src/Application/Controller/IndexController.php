@@ -136,7 +136,7 @@ public function __construct()
             $distrito = $datos['distrito'];
             $ruta = $this->_options->data->busqueda .'/busqueda.txt';
             $fp = fopen($ruta,"a");
-            fwrite($fp, "PLATO BUSCADO: $texto \t DISTRITO: $distrito" . PHP_EOL);
+            fwrite($fp, "$texto , $distrito" . PHP_EOL);
             fclose($fp); 
             if ($texto == '') {
                 $this->redirect()->toUrl('/');
@@ -321,7 +321,7 @@ public function __construct()
         $texto = $busqueda[0];
         $ruta = $this->_options->data->busqueda .'/busqueda_movil.txt';
         $fp = fopen($ruta,"a");
-        fwrite($fp, "PLATO BUSCADO: $texto \t DISTRITO: $distrito" . PHP_EOL);
+        fwrite($fp, "$texto , $distrito" . PHP_EOL);
         fclose($fp);
 //         var_dump($texto);
 //         var_dump($distrito);Exit;
