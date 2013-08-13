@@ -135,7 +135,11 @@
      <div id="pagina"><?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar?q='.$this->nombre.'&submit=Buscar'.'&')):""; ?> </div>         
        </div>         
       <div id="mapa-buscador">
-
+        <div class="regresar regr">
+          <div class="return">
+            <a href="javascript:window.history.back();" onclick="regresar()">Regresar</a>
+         </div>
+        </div>
      </div>
 
          <?php
@@ -220,7 +224,11 @@
       <div id="pagina"><?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar?q='.$this->nombre.'&submit=Buscar'.'&')):""; ?> </div>         
        </div>         
       <div id="mapa-buscador">
-
+        <div class="regresar regr mobile-return">
+          <div class="return">
+            <a href="javascript:window.history.back();" onclick="regresar()">Regresar</a>
+         </div>
+        </div>
      </div>             
   <?php                
 } 

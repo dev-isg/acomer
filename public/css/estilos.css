@@ -1929,6 +1929,13 @@ form#application .control-group .btn-solicito{
 .lista-buscar-distrito .return{
   padding-top: 5px;
 }
+#map{
+  float: left;
+}
+.mobile-return .return{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
