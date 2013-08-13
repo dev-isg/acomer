@@ -138,7 +138,7 @@ class IndexController extends AbstractActionController
             if ($texto == '') {
                 $this->redirect()->toUrl('/');
             }
-            if ($distrito != 'todos los distritos') {
+            if ($distrito != 'TODOS LOS DISTRITOS') {
                 $limite = 100;
                 $resultados = false;
                 $palabraBuscar = isset($texto) ? $texto : false;
@@ -495,7 +495,7 @@ class IndexController extends AbstractActionController
         $filter = new \Zend\I18n\Filter\Alnum(true);
         $plato = $filter->filter($texto);
         
-        if ($distrito != 'todos los distritos') {
+        if ($distrito != 'TODOS LOS DISTRITOS') {
             
             $resultados = false;
             $palabraBuscar = isset($plato) ? $plato : false;
@@ -517,15 +517,15 @@ class IndexController extends AbstractActionController
                     
                     die("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");
                 }
-                if ($resultados == '') 
-
-                {
-                    echo 'error en busqueda';
-                    exit();
-                } else {
-                    echo $resultados->getRawResponse();
-                    exit();
-                }
+//                if ($resultados == '') 
+//
+//                {
+//                    echo 'error en busqueda';
+//                    exit();
+//                } else {
+//                    echo $resultados->getRawResponse();
+//                    exit();
+//                }
             }
         } 
 
@@ -551,26 +551,26 @@ class IndexController extends AbstractActionController
                 }
             }
             
-            $limit = 3;
-            $palabraBuscar = isset($plato) ? $plato : false;
-            $query = "($palabraBuscar) AND (en_destaque:si)";
-            $fq = array(
-                'sort' => 'random_' . uniqid() . ' asc',
-                'fq' => 'en_estado:activo AND restaurant_estado:activo'
-            );
-            $results = false;
-            if ($query) {
-                $solr = \Classes\Solr::getInstance()->getSolr();
-                if (get_magic_quotes_gpc() == 1) {
-                    $query = stripslashes($query);
-                }
-                try {
-                    $results = $solr->search($query, 0, $limit, $fq);
-                } catch (Exception $e) {
-                    
-                    $this->redirect()->toUrl('/');
-                }
-            }
+//            $limit = 3;
+//            $palabraBuscar = isset($plato) ? $plato : false;
+//            $query = "($palabraBuscar) AND (en_destaque:si)";
+//            $fq = array(
+//                'sort' => 'random_' . uniqid() . ' asc',
+//                'fq' => 'en_estado:activo AND restaurant_estado:activo'
+//            );
+//            $results = false;
+//            if ($query) {
+//                $solr = \Classes\Solr::getInstance()->getSolr();
+//                if (get_magic_quotes_gpc() == 1) {
+//                    $query = stripslashes($query);
+//                }
+//                try {
+//                    $results = $solr->search($query, 0, $limit, $fq);
+//                } catch (Exception $e) {
+//                    
+//                    $this->redirect()->toUrl('/');
+//                }
+//            }
         }
         
         echo $resultados->getRawResponse();
