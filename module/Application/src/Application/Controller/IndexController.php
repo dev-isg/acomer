@@ -150,7 +150,7 @@ public function __construct()
                 $palabraBuscar = isset($texto) ? $texto : false;
                 $fd = array(
                     'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' . $distrito,
-                    'sort' => 'en_destaque desc '
+//                     'sort' => 'en_destaque desc '
                 );
                 
                 $solar = \Classes\Solr::getInstance()->getSolr();

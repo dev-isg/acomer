@@ -14,7 +14,7 @@ return array(
         'driver' => 'Pdo',
         'username' => 'kevin',
         'password' => '123456',
-        'dsn' => 'mysql:dbname=liston;host=192.168.1.50',
+        'dsn' => 'mysql:dbname=liston_produccion;host=192.168.1.50',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         )
