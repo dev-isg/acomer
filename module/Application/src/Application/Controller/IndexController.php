@@ -34,7 +34,10 @@ class IndexController extends AbstractActionController
     protected $configTable;
 
     public $dbAdapter;
-
+public function __construct()
+	{
+		$this->_options = new \Zend\Config\Config ( include APPLICATION_PATH . '/config/autoload/global.php' );
+	}
     public function indexAction()
     {
         $view = new ViewModel();
@@ -131,7 +134,10 @@ class IndexController extends AbstractActionController
             $filter = new \Zend\I18n\Filter\Alnum(true);
             $texto = $filter->filter($plato);
             $distrito = $datos['distrito'];
-            
+            $ruta = $this->_options->upload->images .'/busqueda.txt';
+            $fp = fopen($ruta,"a");
+            fwrite($fp, "PLATO BUSCADO: $texto \t DISTRITO: $distrito" . PHP_EOL);
+            fclose($fp); 
             if ($texto == '') {
                 $this->redirect()->toUrl('/');
             }
@@ -307,10 +313,15 @@ class IndexController extends AbstractActionController
         // }
         // }
         // }
+        
         if($this->consultaDistrito($busqueda[1])>0){
             $distrito=$busqueda[1];   
         }
         $texto = $busqueda[0];
+        $ruta = $this->_options->upload->images .'/busqueda_movil.txt';
+        $fp = fopen($ruta,"a");
+        fwrite($fp, "PLATO BUSCADO: $texto \t DISTRITO: $distrito" . PHP_EOL);
+        fclose($fp);
 //         var_dump($texto);
 //         var_dump($distrito);Exit;
         $limite = 100;

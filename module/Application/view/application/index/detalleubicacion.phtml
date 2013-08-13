@@ -79,11 +79,9 @@
           $form->prepare();
           echo $this->form()->openTag($form);
           ?>
-          <?php
-          ?><?php echo $this->formRow($form->get('distrito'));?><?php
-          ?><?php echo $this->formRow($form->get('q'));?><?php
-          ?><?php echo $this->formSubmit($form->get('submit'));?><?php
-          ?>
+          <?php echo $this->formRow($form->get('distrito'));?>
+          <?php echo $this->formRow($form->get('q'));?>
+          <?php echo $this->formSubmit($form->get('submit'));?>
           <a class="ver_mapa" style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Resultados en mapa</a>
           <!--<div class="return">
             <a href="javascript:window.history.back();" onclick="regresar()">Regresar</a>
@@ -170,11 +168,9 @@
           $form->prepare();
           echo $this->form()->openTag($form);
           ?>
-          <?php
-
-          ?><?php echo $this->formRow($form->get('q'));?><?php
-          ?><?php echo $this->formSubmit($form->get('submit'));?><?php
-          ?>
+          <?php echo $this->formRow($form->get('distrito'));?>
+          <?php echo $this->formRow($form->get('q'));?>
+          <?php echo $this->formSubmit($form->get('submit'));?>
           <a class="ver_mapa" style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Resultados en mapa</a>
           <!--<div class="return">
               <a href="javascript:window.history.back();" onclick="regresar()">Regresar</a>
@@ -222,7 +218,11 @@
       <div id="pagina"><?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar-por-distrito?distrito='.$this->distrito.'&q='.$this->plato.'&submit=Buscar'.'&')):""; ?> </div>         
        </div>         
       <div id="mapa-buscador">
-
+        <div class="regresar regr">
+          <div class="return">
+            <a href="javascript:window.history.back();" onclick="regresar()">Regresar</a>
+         </div>
+        </div>
      </div>             
   <?php                
 } 

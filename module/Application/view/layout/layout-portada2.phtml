@@ -5,44 +5,29 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang="es-ES" prefix="og: http://ogp.me/ns#">
 <!--<![endif]-->
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   
     <?php echo $this->headTitle('Lista del Sabor')?>    
     <meta name="viewport" content="width=device-width">
+    <meta name="keywords" content="" />
+    <meta property="fb:admins" content="100004562103050" />
+    <meta name="msapplication-TileImage" content="<?php echo $this->host('ruta')?>/img/logo-face.png" />
+    <meta name="description" content="<?php $descripcion=(!$this->description)?"ListaDelSabor.com es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales":$this->description ; echo $descripcion; ?>" />
+    <meta name="keywords"	content="Cocina, Restaurante, Gadtronomía, Sabores , Comida peruana, Cocina peruana, Comidas peruanas, Comida del peru, Gastronomia del peruana, Cocina peru, Restaurante lima, Guia de rastaurantes, Restaurantes en lima, Platos del peru, Comida criolla, Listado de comidas, Platos peruanos, Sabor peru, Sabor peruano, Huariques, Listado de comidas peruanas, Platos tipicos, Platos tipicos del peru, Cevicheria, Aji de gallina, Chicharron, Arroz con pallo, Lomo saltado" />
+    <meta property="og:title"	content="<?php  $titulo=(!$this->title)?'Lista del Sabor':$this->title.':Lista del Sabor' ; echo $titulo; ?>" />
+    <meta property="og:image"	content="<?php $imagen=(!$this->image)?$this->host('ruta').'/img/logo-face.png':$this->image ; echo $imagen; ?>" />
+    <meta property="og:site_name" content="Lista del Sabor" />
+    <meta property="og:description"	content="<?php $descrip=(!$this->description)?'Es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales':$this->description ; echo $descrip; ?>" />
+    <meta property="og:url"	content="<?php $url=(!$this->url)?$this->host('ruta'):$this->url; echo $url;?>" />
 
-<meta name="keywords" content="" />
-<meta property="fb:admins" content="100004562103050" />
-<meta name="msapplication-TileImage"
-	content="<?php echo $this->host('ruta')?>/img/logo-face.png" />
-<meta name="description"
-	content="<?php $descripcion=(!$this->description)?"ListaDelSabor.com es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales":$this->description ; echo $descripcion; ?>" />
-<meta name="keywords"
-	content="Cocina, Restaurante, Gadtronomía, Sabores , Comida peruana, Cocina peruana, Comidas peruanas, Comida del peru, Gastronomia del peruana, Cocina peru, Restaurante lima, Guia de rastaurantes, Restaurantes en lima, Platos del peru, Comida criolla, Listado de comidas, Platos peruanos, Sabor peru, Sabor peruano, Huariques, Listado de comidas peruanas, Platos tipicos, Platos tipicos del peru, Cevicheria, Aji de gallina, Chicharron, Arroz con pallo, Lomo saltado" />
-<meta property="og:title"
-	content="<?php  $titulo=(!$this->title)?'Lista del Sabor':$this->title.':Lista del Sabor' ; echo $titulo; ?>" />
-<meta property="og:image"
-	content="<?php $imagen=(!$this->image)?$this->host('ruta').'/img/logo-face.png':$this->image ; echo $imagen; ?>" />
-<meta property="og:site_name" content="Lista del Sabor" />
-<meta property="og:description"
-	content="<?php $descrip=(!$this->description)?'Es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales':$this->description ; echo $descrip; ?>" />
-<meta property="og:url"
-	content="<?php $url=(!$this->url)?$this->host('ruta'):$this->url; echo $url;?>" />
-
-<link
-	href="<?php echo $this->host('ruta')?>/img/favicon.ico?v<?php echo $this->host('version')?>"
-	rel="shortcut icon" type="image/x-icon" />
-<!--<script src="<?php echo $this->host('ruta')?>/js/head.load.min.js"></script>-->
-<script
-	src="<?php echo $this->host('ruta')?>/js/modernizr.js?v<?php echo $this->host('version')?>"></script>
-<script
-	src="<?php echo $this->host('ruta')?>/js/lib/jquery-1.8.3.min.js?v<?php echo $this->host('version')?>"></script>
+    <link	href="<?php echo $this->host('ruta')?>/img/favicon.ico?v<?php echo $this->host('version')?>"	rel="shortcut icon" type="image/x-icon" />
+    <!--<script src="<?php echo $this->host('ruta')?>/js/head.load.min.js"></script>-->
+    <script	src="<?php echo $this->host('ruta')?>/js/modernizr.js?v<?php echo $this->host('version')?>"></script>
+    <script	src="<?php echo $this->host('ruta')?>/js/lib/jquery-1.8.3.min.js?v<?php echo $this->host('version')?>"></script>
     <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css?v'.$this->host('version'))->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')?>
-
-
-
-    </head>
+  </head>
 
 <body class="lista-<?php echo $this->clase; ?>">
 	<script>
@@ -54,23 +39,23 @@
     if ($detect->isiPad()) {
         ?>
         <style type="text/css">
-.plato_r span {
-	font-size: 12px !important;
-}
+          .plato_r span {
+          	font-size: 12px !important;
+          }
 
-.font-desc-c {
-	font-size: 12px;
-	line-height: 16px;
-}
+          .font-desc-c {
+          	font-size: 12px;
+          	line-height: 16px;
+          }
 
-.nom_res {
-	font-size: 12px;
-}
+          .nom_res {
+          	font-size: 12px;
+          }
 
-.details h4 {
-	line-height: 14px;
-}
-</style>
+          .details h4 {
+          	line-height: 14px;
+          }
+        </style>
     <?php }?>
 
     <?php
@@ -79,38 +64,37 @@
     if ($detect1->isAndroidOS()) {
         ?>
         <style>
-.title-home-listado h1 {
-	margin: 0 !important;
-}
+          .title-home-listado h1 {
+          	margin: 0 !important;
+          }
 
-.contenido-busqueda {
-	position: relative !important;
-}
+          .contenido-busqueda {
+          	position: relative !important;
+          }
 
-.content-sidebar-ho {
-	margin-top: 0;
-	padding-top: 40px;
-}
+          .content-sidebar-ho {
+          	margin-top: 0;
+          	padding-top: 40px;
+          }
 
-.content-sidebar-ho {
-	margin-top: 0;
-}
+          .content-sidebar-ho {
+          	margin-top: 0;
+          }
 
-.title-home-listado h1 {
-	margin: 0;
-	padding-top: 80px;
-}
+          .title-home-listado h1 {
+          	margin: 0;
+          	padding-top: 80px;
+          }
 
-.contenido-busqueda {
-	width: 100%;
-}
-
-@media ( max-width : 480px) {
-	.title-home-listado h1 {
-		padding-top: 0;
-	}
-}
-</style>      
+          .contenido-busqueda {
+          	width: 100%;
+          }
+        @media ( max-width : 480px) {
+        	.title-home-listado h1 {
+        		padding-top: 0;
+        	}
+        }
+      </style>      
         
       <?php } ?>
 
@@ -166,8 +150,10 @@
           $(document).ready(function(){
             var height = $(window).height();
             var width = $(window).width();
+            alert(height + ' --- '+width);
             if(width>height) {
               if ($('.ladscape').is(':hidden')){
+                alert('ladscape');
                 $('.ladscape').show();
                 $(".title-si").hide();
               }else{
@@ -175,9 +161,10 @@
 
               }
             }else {
+              alert('estoy en portrait');
               // Portrait
               if($('.portrait').is(':hidden')){
-                
+                alert('raro');
               }else{
                 $('.portrait').show();
                 $(".title-si").show();
@@ -189,7 +176,7 @@
             var height = $(window).height();
             var width = $(window).width();
             if(width>height) {
-              if ($('.ladscape').is(':hidden')){
+              if($('.ladscape').is(':hidden')){
                 $('.ladscape').show();
                 $(".title-si").hide();
               }else{
@@ -283,24 +270,24 @@
                    <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"
 									<?php
 									       if($_GET['distrito']){
-                                                if($_GET['distrito'] == $comida['va_distrito']){
-                                                        echo 'selected';
-                                                    }
-                                           }else{
-                                                if(isset($_COOKIE['distrito'])){
-                                                        if($_COOKIE['distrito'] == $comida['va_distrito']){
-                                                                 echo 'selected';
-                                                        } 
-                                                    }else{
-                                                        echo '';
-                                                    }
+                              if($_GET['distrito'] == $comida['va_distrito']){
+                                      echo 'selected';
+                                  }
+                         }else{
+                              if(isset($_COOKIE['distrito'])){
+                                      if($_COOKIE['distrito'] == $comida['va_distrito']){
+                                               echo 'selected';
+                                      } 
+                                  }else{
+                                      echo '';
+                                  }
 
-                                           }
+                         }
                                            
-                                     ?>>
-                                 <?php echo $comida['va_distrito']; ?></OPTION>
-                                 
-                            <?php endforeach;?>
+                         ?>>
+                     <?php echo $comida['va_distrito']; ?></OPTION>
+                     
+                <?php endforeach;?>
                      </select>
                      <?php }?>
 						</p>
