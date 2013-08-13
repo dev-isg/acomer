@@ -134,7 +134,7 @@ public function __construct()
             $filter = new \Zend\I18n\Filter\Alnum(true);
             $texto = $filter->filter($plato);
             $distrito = $datos['distrito'];
-            $ruta = $this->_options->upload->images .'/busqueda.txt';
+            $ruta = $this->_options->data->busqueda .'/busqueda.txt';
             $fp = fopen($ruta,"a");
             fwrite($fp, "PLATO BUSCADO: $texto \t DISTRITO: $distrito" . PHP_EOL);
             fclose($fp); 
@@ -319,7 +319,7 @@ public function __construct()
             $distrito=$busqueda[1];   
         }
         $texto = $busqueda[0];
-        $ruta = $this->_options->upload->images .'/busqueda_movil.txt';
+        $ruta = $this->_options->data->busqueda .'/busqueda_movil.txt';
         $fp = fopen($ruta,"a");
         fwrite($fp, "PLATO BUSCADO: $texto \t DISTRITO: $distrito" . PHP_EOL);
         fclose($fp);
