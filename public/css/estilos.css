@@ -21,7 +21,6 @@ textarea {
 body {
     font-size: 1em;
     line-height: 1.4;
-    overflow: hidden;
 }
 
 /*
@@ -296,7 +295,7 @@ margin-bottom: -1px;
 margin-top: -14px;
 }
 .details{ 
-  margin: 5px 11px;
+  margin: 5px 0px;
   padding: 0px 5px;
   height: 145px;
   font-family: helvetica;
@@ -2814,6 +2813,9 @@ form#application .control-group .btn-solicito{
   h1.title-si{
     color: white;
     font-size: 23px;
+  }
+  .padding-map{
+    padding: 0 15px;
   }
 }
 @media (max-width: 480px) {

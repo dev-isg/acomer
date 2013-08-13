@@ -168,7 +168,7 @@ $(document).ready(function() {
             $("#search #q").attr("value", h);
             var g = $.getJSON(e, function(a) {
                 if (a.response.numFound >= 1) {
-                    map = new GMaps({el: "#map",zoom: 12,lat: -12.043333,lng: -77.028333});
+                    map = new GMaps({el: "#map",zoom: 12,lat: -12.043333,lng: -77.028333,scrollwheel:false});
                     $.each(a.response.docs, function(d, j) {
                         map.setCenter(j.latitud, j.longitud);
                         var b = j.tx_descripcion;
