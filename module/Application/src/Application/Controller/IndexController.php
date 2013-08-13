@@ -296,6 +296,7 @@ public function __construct()
         $filtered = $this->params()->fromQuery('q');
         $filtered = strtoupper($filtered);
         $filter = new \Zend\I18n\Filter\Alnum(true);
+        
         $text = trim($filter->filter($filtered));
         $text = preg_replace('/\s\s+/', ' ', $text);
         $busqueda = explode(" EN ", $text);
@@ -370,8 +371,8 @@ public function __construct()
 //         var_dump($results->response->docs);Exit;
         $form = new Formularios();
         $listades = $this->getConfigTable()->cantComentxPlato(1, '0,3', 1);
-        setcookie('q', $texto);
-        $form->get('q')->setValue($texto);
+        setcookie('q', $text);
+        $form->get('q')->setValue($text);
         $form->get('submit')->setValue('Buscar');
         
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
@@ -394,7 +395,7 @@ public function __construct()
             'destacados' => $results->response->docs,
             'general' => $paginator,
             'form' => $form,
-            'nombre' => $texto,
+            'nombre' => $text,
             'mostrar' => $mostrar
         ));
         return $view;
