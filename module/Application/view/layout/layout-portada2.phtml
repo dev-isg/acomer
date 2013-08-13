@@ -283,12 +283,32 @@
               <li>
                 <div class="ups-crap btn-group dropup">
                   <button class="ups-dev dropdown-toggle" data-toggle="dropdown">Más buscados<span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a href="<?php echo $this->host('ruta')?>/buscar?q=ceviche&distrito=todos los distritos">Ceviche</a></li>
-                    <li><a href="<?php echo $this->host('ruta')?>/buscar?q=lomo saltado&distrito=todos los distritos">Lomo saltado</a></li>
-                    <li><a href="<?php echo $this->host('ruta')?>/buscar?q=makis&distrito=todos los distritos">Makis</a></li>
-                    <li><a href="<?php echo $this->host('ruta')?>/buscar?q=arroz con mariscos&distrito=todos los distritos">Arroz con Mariscos</a></li>
-                  </ul>
+                  <?php
+              //     require_once './vendor/Classes/Mobile_Detect.php';
+                  $detect5 = new Mobile_Detect;
+                  if ($detect5->isTablet()) {?>
+                    <ul class="dropdown-menu">
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=ceviche&distrito=todos los distritos">Ceviche</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=lomo saltado&distrito=todos los distritos">Lomo saltado</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=makis&distrito=todos los distritos">Makis</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=arroz con mariscos&distrito=todos los distritos">Arroz con Mariscos</a></li>
+                    </ul>
+                  <?php }elseif($detect5->isMobile()){?>
+                    <ul class="dropdown-menu">
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar?q=ceviche">Ceviche</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar?q=lomo saltado">Lomo saltado</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar?q=makis">Makis</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar?q=arroz con mariscos">Arroz con Mariscos</a></li>
+                    </ul>
+                  <?php }else{?>
+                    <ul class="dropdown-menu">
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=ceviche&distrito=todos los distritos">Ceviche</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=lomo saltado&distrito=todos los distritos">Lomo saltado</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=makis&distrito=todos los distritos">Makis</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=arroz con mariscos&distrito=todos los distritos">Arroz con Mariscos</a></li>
+                    </ul>
+                  <?php }?>
+                  
                 </div><!-- /btn-group -->
               </li>
             </ul>

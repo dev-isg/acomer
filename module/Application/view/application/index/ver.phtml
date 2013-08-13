@@ -29,7 +29,7 @@
                     <div class="details">
                        <h4> <?php 
                     if(strlen($doc->name)>50){
-                         $strnom=trim(substr($doc->name, 0, 47));
+                         $strnom=trim(substr($doc->name, 0, 49));
                           $strnom.='...';
                          }else {$strnom=$doc->name;} 
                          echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></h4>
