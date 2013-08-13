@@ -146,69 +146,12 @@
             </div><!--Fin del sidebar-->
         </div>
       <?php }elseif($detect3->isMobile()){ ?>
-        <script>
-          $(document).ready(function(){
-            var height = $(window).height();
-            var width = $(window).width();
-            alert(height + ' --- '+width);
-            if(width>height) {
-              if ($('.ladscape').is(':hidden')){
-                alert('ladscape');
-                $('.ladscape').show();
-                $(".title-si").hide();
-              }else{
-                $('.portrait').hide();
-
-              }
-            }else {
-              alert('estoy en portrait');
-              // Portrait
-              if($('.portrait').is(':hidden')){
-                alert('raro');
-              }else{
-                $('.portrait').show();
-                $(".title-si").show();
-                $('.ladscape').hide();
-              }             
-            }
-          });
-          $(window).on( "orientationchange", function( event ) {
-            var height = $(window).height();
-            var width = $(window).width();
-            if(width>height) {
-              if($('.ladscape').is(':hidden')){
-                $('.ladscape').show();
-                $(".title-si").hide();
-              }else{
-                $('.portrait').hide();
-              }
-
-            } else {
-              // Portrait
-              if($('.portrait').is(':hidden')){
-                
-              }else{
-                $('.portrait').show();
-                $(".title-si").show();
-                $('.ladscape').hide();
-              }             
-            }
-          });
-          $( window ).orientationchange();
-        </script>
         <div class="content-sidebar menor-mobile" style="display:block;">
           <div class="contenido-busqueda">
             <div class="content-sidebar-ho">
               <a class="title-home-listado portrait" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
                 <h1 class="title-si">
                   Listadelsabor.com
-                </h1>
-              </a>
-              <a class="title-home-listado ladscape" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor" style="display:none;">
-                <h1>
-                  <img
-                    src="<?php echo $this->host('ruta')?>/img/logo.png?v<?php echo $this->host('version')?>"
-                    alt="logo">
                 </h1>
               </a>
               <span class="logan-1" style="font-size: 3.1em;text-align: right;">-</span> 
@@ -340,12 +283,32 @@
               <li>
                 <div class="ups-crap btn-group dropup">
                   <button class="ups-dev dropdown-toggle" data-toggle="dropdown">Más buscados<span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a href="<?php echo $this->host('ruta')?>/buscar?q=ceviche&distrito=todos los distritos">Ceviche</a></li>
-                    <li><a href="<?php echo $this->host('ruta')?>/buscar?q=lomo saltado&distrito=todos los distritos">Lomo saltado</a></li>
-                    <li><a href="<?php echo $this->host('ruta')?>/buscar?q=makis&distrito=todos los distritos">Makis</a></li>
-                    <li><a href="<?php echo $this->host('ruta')?>/buscar?q=arroz con mariscos&distrito=todos los distritos">Arroz con Mariscos</a></li>
-                  </ul>
+                  <?php
+              //     require_once './vendor/Classes/Mobile_Detect.php';
+                  $detect5 = new Mobile_Detect;
+                  if ($detect5->isTablet()) {?>
+                    <ul class="dropdown-menu">
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=ceviche&distrito=todos los distritos">Ceviche</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=lomo saltado&distrito=todos los distritos">Lomo saltado</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=makis&distrito=todos los distritos">Makis</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=arroz con mariscos&distrito=todos los distritos">Arroz con Mariscos</a></li>
+                    </ul>
+                  <?php }elseif($detect5->isMobile()){?>
+                    <ul class="dropdown-menu">
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar?q=ceviche">Ceviche</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar?q=lomo saltado">Lomo saltado</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar?q=makis">Makis</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar?q=arroz con mariscos">Arroz con Mariscos</a></li>
+                    </ul>
+                  <?php }else{?>
+                    <ul class="dropdown-menu">
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=ceviche&distrito=todos los distritos">Ceviche</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=lomo saltado&distrito=todos los distritos">Lomo saltado</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=makis&distrito=todos los distritos">Makis</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=arroz con mariscos&distrito=todos los distritos">Arroz con Mariscos</a></li>
+                    </ul>
+                  <?php }?>
+                  
                 </div><!-- /btn-group -->
               </li>
             </ul>

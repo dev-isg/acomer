@@ -483,7 +483,7 @@ class IndexController extends AbstractActionController
            $solr->deleteByQuery('*:*');
             $solr->commit();
             $solr->optimize();
-         
+          echo 'cron finalizado eliminar';exit;
         }
     }
     

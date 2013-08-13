@@ -26,12 +26,19 @@
                   </div>
                   <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"  class="mosaic-backdrop" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
                     <div class="details">
-                       <h4><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></h4>
+                      <h4>
+                      <?php 
+                    if(strlen($doc->name)>55){
+                         $strnom=trim(substr($doc->name, 0, 49));
+                          $strnom.='...';
+                         }else {$strnom=$doc->name;} 
+                         echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?>
+                      </h4>
                       <p class="title-details">Descripción</p>
                        <p style="font-size:0.9em;"><?php 
                           if(strlen($doc->tx_descripcion)>100){
-                           $str=trim(substr($doc->tx_descripcion, 0, 100));
-                            $str.='...';
+                           $str=trim(substr($doc->tx_descripcion, 0, 92));
+                            $str.='..';
                            }else {$str=$doc->tx_descripcion;}       
                          echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
                     </div>
