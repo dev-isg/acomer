@@ -146,69 +146,12 @@
             </div><!--Fin del sidebar-->
         </div>
       <?php }elseif($detect3->isMobile()){ ?>
-        <script>
-          $(document).ready(function(){
-            var height = $(window).height();
-            var width = $(window).width();
-            alert(height + ' --- '+width);
-            if(width>height) {
-              if ($('.ladscape').is(':hidden')){
-                alert('ladscape');
-                $('.ladscape').show();
-                $(".title-si").hide();
-              }else{
-                $('.portrait').hide();
-
-              }
-            }else {
-              alert('estoy en portrait');
-              // Portrait
-              if($('.portrait').is(':hidden')){
-                alert('raro');
-              }else{
-                $('.portrait').show();
-                $(".title-si").show();
-                $('.ladscape').hide();
-              }             
-            }
-          });
-          $(window).on( "orientationchange", function( event ) {
-            var height = $(window).height();
-            var width = $(window).width();
-            if(width>height) {
-              if($('.ladscape').is(':hidden')){
-                $('.ladscape').show();
-                $(".title-si").hide();
-              }else{
-                $('.portrait').hide();
-              }
-
-            } else {
-              // Portrait
-              if($('.portrait').is(':hidden')){
-                
-              }else{
-                $('.portrait').show();
-                $(".title-si").show();
-                $('.ladscape').hide();
-              }             
-            }
-          });
-          $( window ).orientationchange();
-        </script>
         <div class="content-sidebar menor-mobile" style="display:block;">
           <div class="contenido-busqueda">
             <div class="content-sidebar-ho">
               <a class="title-home-listado portrait" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
                 <h1 class="title-si">
                   Listadelsabor.com
-                </h1>
-              </a>
-              <a class="title-home-listado ladscape" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor" style="display:none;">
-                <h1>
-                  <img
-                    src="<?php echo $this->host('ruta')?>/img/logo.png?v<?php echo $this->host('version')?>"
-                    alt="logo">
                 </h1>
               </a>
               <span class="logan-1" style="font-size: 3.1em;text-align: right;">-</span> 

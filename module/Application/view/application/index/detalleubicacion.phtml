@@ -30,8 +30,8 @@
                       <p class="title-details">Descripción</p>
                        <p style="font-size:0.9em;"><?php 
                           if(strlen($doc->tx_descripcion)>100){
-                           $str=trim(substr($doc->tx_descripcion, 0, 100));
-                            $str.='...';
+                           $str=trim(substr($doc->tx_descripcion, 0, 97));
+                            $str.='..';
                            }else {$str=$doc->tx_descripcion;}       
                          echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
                     </div>

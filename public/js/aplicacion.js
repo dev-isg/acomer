@@ -156,7 +156,6 @@ $(document).ready(function() {
     $("#buscarmap").on("click", function() {
         var h = $("#bubi #q").val();
         var f = $("#bubi #fq").val();
-        alert(h + ' --- ' +f);
         var e = urlJson + "/jsonmapasa?distrito=" + f + "&q=" + h;
         $("#map").remove();
         $("#subir-home").remove();
