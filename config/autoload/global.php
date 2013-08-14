@@ -39,6 +39,10 @@ return array(
         'images' => APPLICATION_PATH . '/public/imagenes'
     ),
     
+    'data' => array(
+        'busqueda' => APPLICATION_PATH . '/data/busqueda'
+    ),
+    
     'verifica' => array(
         'img' => APPLICATION_PATH . '/public/img'
     ),
