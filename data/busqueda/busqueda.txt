@@ -8,3 +8,9 @@ ceviche , TODOS LOS DISTRITOS
 arroz con mariscos , todos los distritos
 lomo saltado , todos los distritos
 makis , TODOS LOS DISTRITOS
+lomo , INDEPENDENCIA
+lomo , INDEPENDENCIA
+arroz con mariscos , TODOS LOS DISTRITOS
+arroz con mariscos , LINCE
+arroz con mariscos , CHORRILLOS
+ceviche , TODOS LOS DISTRITOS

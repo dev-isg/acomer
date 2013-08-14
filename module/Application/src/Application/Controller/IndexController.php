@@ -733,6 +733,8 @@ public function __construct()
     public function nosotrosAction()
     {
         $view = new ViewModel();
+        $comidas = $this->joinAction()->toArray();
+        $this->layout()->comidas = $comidas;
         // $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Nosotros';
         // $view->setVariables(array());
@@ -742,6 +744,8 @@ public function __construct()
     public function solicitaAction()
     {
         $view = new ViewModel();
+        $comidas = $this->joinAction()->toArray();
+        $this->layout()->comidas = $comidas;
         // $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Solicita';
         $form = new Solicita("form");
@@ -809,7 +813,8 @@ public function __construct()
     public function contactenosAction()
     {
         $view = new ViewModel();
-        
+        $comidas = $this->joinAction()->toArray();
+        $this->layout()->comidas = $comidas;
         $this->layout()->clase = 'Solicita';
         $form = new Contactenos("form");
         $request = $this->getRequest();
@@ -878,6 +883,8 @@ public function __construct()
     public function terminosAction()
     {
         $view = new ViewModel();
+        $comidas = $this->joinAction()->toArray();
+        $this->layout()->comidas = $comidas;
         // $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Terminos';
     }
