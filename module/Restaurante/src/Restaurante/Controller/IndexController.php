@@ -229,7 +229,7 @@ class IndexController extends AbstractActionController
 
         $form->bind($restaurante);
 
-        $form->get('submit')->setAttribute('value', 'MODIFICAR');
+        $form->get('submit')->var_dump($value);
         $request = $this->getRequest();
         $comida = $this->params()->fromPost('va_modalidad');
         
