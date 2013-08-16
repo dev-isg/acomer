@@ -1941,6 +1941,9 @@ form#application .control-group .btn-solicito{
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.ficha-desc h2 a{
+  color: #ff8400;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
