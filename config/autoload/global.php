@@ -20,18 +20,18 @@ return array(
         )
     ),
     'solr' => array(
-        'host' => '192.168.1.35',
+        'host' => '192.168.1.37',
         'port' => '8983',
         'folder' => '/solr'
     ),
    
     'host' => array(
 
-        'base' => 'http://192.168.1.35:8080',
-        'static' => 'http://192.168.1.35:8080',
-        'images' => 'http://192.168.1.35:8080/imagenes',
-        'img'=>'http://192.168.1.35:8080/img',
-        'ruta' => 'http://192.168.1.35:8080',
+        'base' => 'http://192.168.1.37:8080',
+        'static' => 'http://192.168.1.37:8080',
+        'images' => 'http://192.168.1.37:8080/imagenes',
+        'img'=>'http://192.168.1.37:8080/img',
+        'ruta' => 'http://192.168.1.37:8080',
         'version'=>1,
     ),
 
