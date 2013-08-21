@@ -693,3 +693,4 @@ Restaurante Turístico Todo Perú , TODOS LOS DISTRITOS
 ceviche , TODOS LOS DISTRITOS
 lomo saltado , TODOS LOS DISTRITOS
 lomo saltado , TODOS LOS DISTRITOS
+ceviche , TODOS LOS DISTRITOS

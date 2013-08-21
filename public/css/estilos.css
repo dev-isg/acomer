@@ -878,6 +878,7 @@ ul.dropdown-menu{
 
 label.error {
   color: red;
+  font-size: 12px;
 }
 .img-plato{
   width: 100%;
@@ -1274,6 +1275,14 @@ width: 49%;
 }
 .form-horizontal #star{
   width: 120px!important;
+  text-align: left;
+}
+#comentarios input,
+#comentarios textarea{
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
 }
 .ficha-product .ficha-desc{
   float: left;
@@ -1393,7 +1402,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
 
 #mapCont{
   display: block;
-  width: 266px;
+  width: 263px;
   height: 214px;
 }
 
@@ -1670,13 +1679,15 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   margin-left: 2px;
 }
 .content-info .info-img{
-  width: 266px;
+  width: 263px;
   height: 157px;
   overflow: hidden;
+  text-align: center;
+  line-height: 157px;
 }
 .ficha-product .ficha-img{
   text-align: center;
-  line-height: 272px;
+  line-height: 271px;
   width: 407px;
   height: 272px;
   overflow: hidden;
@@ -1894,6 +1905,7 @@ form#application .control-group .btn-solicito{
 }
 .error-votos{
   color: red!important;
+  font-size: 12px;
 }
 .form-horizontal p{
   overflow: hidden;
