@@ -9,13 +9,32 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   
-    <?php echo $this->headTitle('Lista del Sabor')?>    
-    <meta name="viewport" content="width=device-width">
+    <?php if ($this->titleplato) {
+            echo $this->headTitle('Comida Criolla,Comida de la selva,Comida peruana,Comida italiana,Comida rapida,Comida china,' . $this->titleplato . 'Pollo a la brasa,
+        Ceviche,Olluquito con charqui,Picante de cuy,Causa rellena,Lomo saltado,Aji de gallina,Rocoto relleno,Papa a la huancaina,
+        Anticuchos,Cebiche,Arroz con Pollo,Ocopa,Arroz con pato,Carapulcra,Olluquito,Arroz Chaufa,Chicharron,Chicharron de pescado,Lista del Sabor - El Primer Portal donde encontrarás los mejores platos de la gastronomía hecha en el Perú. | Lista del Sabor');
+        } else {
+            echo $this->headTitle();
+        }
+        ?>  
+        <meta name="viewport" content="width=device-width">
+        <meta name="keywords" content="Comidas peruanas,Comida criolla,Andina,Gastronomía peruana,Restaurantes en lima,Comida peruana,Platos típicos del peru,Comida china,Comidas tipicas de la selva,Comida italiana,Comida rapida,Arroz con mariscos,Cocina peruana,Ensaladas,Sushi,Comidas rapidas,Comida saludable,Comidas de la sierra,Parrilada,Pastas,Pizzas,Pollo a la brasa,Sushi,Makis,Cocina,Restaurante,Gastronomia,Cocina peruana,Comidas,Comida vegetariana,Platos tipicos,Platos tipicos del peru,Cevicheria,Chicharron,Chicharron de pescado" />
+        <meta property="fb:admins" content="100004562103050" />
+        <meta name="msapplication-TileImage" content="<?php echo $this->host('ruta') ?>/img/logo-face.png" />
+        <meta name="description" content="
+            <?php if($this->description){
+                echo $this->description;
+            }else{
+               echo 'Lista del Sabor - El Primer Portal donde encontrarás los mejores platos de la gastronomía hecha en el Perú. Encontrarás los platos más buscados y mejor recomendados en el Perú,su descripción y los restaurantes que lo venden y su valoración por los comensales';
+            }
+        ?>" />
+    
+<!--    <meta name="viewport" content="width=device-width">
     <meta name="keywords" content="" />
     <meta property="fb:admins" content="100004562103050" />
     <meta name="msapplication-TileImage" content="<?php echo $this->host('ruta')?>/img/logo-face.png" />
     <meta name="description" content="<?php $descripcion=(!$this->description)?"ListaDelSabor.com es una lista de los platos más buscados y mejor recomendados en el Perú, en ella ubicarás sus datos, los restaurantes que lo venden y su valoración por los comensales":$this->description ; echo $descripcion; ?>" />
-    <meta name="keywords"	content="Cocina, Restaurante, Gadtronomía, Sabores , Comida peruana, Cocina peruana, Comidas peruanas, Comida del peru, Gastronomia del peruana, Cocina peru, Restaurante lima, Guia de rastaurantes, Restaurantes en lima, Platos del peru, Comida criolla, Listado de comidas, Platos peruanos, Sabor peru, Sabor peruano, Huariques, Listado de comidas peruanas, Platos tipicos, Platos tipicos del peru, Cevicheria, Aji de gallina, Chicharron, Arroz con pallo, Lomo saltado" />
+    <meta name="keywords"	content="Cocina, Restaurante, Gadtronomía, Sabores , Comida peruana, Cocina peruana, Comidas peruanas, Comida del peru, Gastronomia del peruana, Cocina peru, Restaurante lima, Guia de rastaurantes, Restaurantes en lima, Platos del peru, Comida criolla, Listado de comidas, Platos peruanos, Sabor peru, Sabor peruano, Huariques, Listado de comidas peruanas, Platos tipicos, Platos tipicos del peru, Cevicheria, Aji de gallina, Chicharron, Arroz con pallo, Lomo saltado" />-->
     <meta property="og:title"	content="<?php  $titulo=(!$this->title)?'Lista del Sabor':$this->title.':Lista del Sabor' ; echo $titulo; ?>" />
     <meta property="og:image"	content="<?php $imagen=(!$this->image)?$this->host('ruta').'/img/logo-face.png':$this->image ; echo $imagen; ?>" />
     <meta property="og:site_name" content="Lista del Sabor" />
