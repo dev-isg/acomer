@@ -565,11 +565,12 @@ class IndexController extends AbstractActionController {
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
         $form = new \Usuario\Form\ComentariosForm();
+        if($_COOKIE['va_nombre']and $_COOKIE['va_email'] )
+       {$form->get('va_nombre')->setValue($_COOKIE['va_nombre']);
+        $form->get('va_email')->setValue($_COOKIE['va_email']);}
         $form->get('submit')->setValue('Agregar');
         $request = $this->getRequest();
-
         if ($request->isPost()) {
-    
             if (!isset($_COOKIE['id' . $id])) {
                 $datos = $this->getRequest()->getPost()->toArray();
                 $datos['Ta_plato_in_id'] = $id;
@@ -578,13 +579,12 @@ class IndexController extends AbstractActionController {
                 $datos['va_email'] = htmlspecialchars($datos['va_email']);
                 $form->setData($datos);
                 if ($form->isValid()) {
+                    setcookie('va_nombre',$datos['va_nombre']);
+                    setcookie('va_email',$datos['va_email']);
                     $this->getComentariosTable()->agregarComentario($form->getData());
                     setcookie('id' . $id, 1);
-//                    $form->clearAttributes();
                     $form->setData(array('va_nombre' => '', 'va_email' => '', 'tx_descripcion' => '')); 
-                    //$this->redirect()->toUrl('/plato?id='.$id);
-                    $datos =$this->params()->fromRoute(); 
-                    
+                    $datos =$this->params()->fromRoute();               
                     $this->redirect()->toUrl('/plato/'.$datos['nombre']);
                 }
             }
