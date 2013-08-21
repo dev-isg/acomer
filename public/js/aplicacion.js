@@ -155,6 +155,14 @@ $(document).ready(function() {
     }).keyup();
     $("#buscarmap").on("click", function() {
         var h = $("#bubi #q").val();
+        var condi = h.substring(0, 12);
+        if(condi === 'restaurante:'){
+            var numer = h.length;
+            var hvalor = h.substring(12, numer);
+        }else{
+            var hvalor = h;
+        }
+        
         var f = $("#bubi #fq").val();
         var e = urlJson + "/jsonmapasa?distrito=" + f + "&q=" + h;
         $("#map").remove();
@@ -166,7 +174,7 @@ $(document).ready(function() {
         $("#esconder2").css("display", "none");
         if (($("#bubi #q").val() != "") && ($("#bubi #fq").val() != "seleccione")) {
             $("#mapa-buscador").fadeIn();
-            $("#search #q").attr("value", h);
+            $("#search #q").attr("value", hvalor);
             var g = $.getJSON(e, function(a) {
                 if (a.response.numFound >= 1) {
                     map = new GMaps({el: "#map",zoom: 12,lat: -12.043333,lng: -77.028333,scrollwheel:false});

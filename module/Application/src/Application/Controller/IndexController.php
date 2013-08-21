@@ -132,14 +132,26 @@ public function __construct()
         $this->layout()->clase = 'buscar-distrito';
         if ($request->isGet()) {
             $datos = $this->request->getQuery();
-            $plato = $datos['q'];
-            $filter = new \Zend\I18n\Filter\Alnum(true);
+            $plato = $datos['q'];      
+            $valor = explode(" ",$plato);
+            if($valor[0]=='restaurante:')
+            { $buscar = $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];
+            $texto = $valor[0].'"'.$buscar.'"'; 
+            $distrito = $datos['distrito'];
+            $ruta = $this->_options->data->busqueda .'/busqueda.txt';
+            $fp = fopen($ruta,"a");
+            fwrite($fp, "$buscar , $distrito" . PHP_EOL);
+            fclose($fp);
+            }  
+            else{ $filter = new \Zend\I18n\Filter\Alnum(true);
             $texto = $filter->filter($plato);
             $distrito = $datos['distrito'];
             $ruta = $this->_options->data->busqueda .'/busqueda.txt';
             $fp = fopen($ruta,"a");
             fwrite($fp, "$texto , $distrito" . PHP_EOL);
-            fclose($fp); 
+            fclose($fp);
+            }
+             
             if ($texto == '') {
                 $this->redirect()->toUrl('/');
             }
@@ -285,16 +297,19 @@ public function __construct()
         foreach ($comidas as $y) {
             $com[$y['va_distrito']] = $y['va_distrito'];
         }
-        setcookie('q', $texto);
+         if($valor[0]=='restaurante:')
+         { $form->get('q')->setValue($plato);
+         $valores = $buscar;
+         }  
+         else{ 
+         setcookie('q', $texto);
+         $form->get('q')->setValue($texto);
+         $valores =$texto;
+         }
         setcookie('distrito', $distrito);
-        // var_dump($_COOKIE['distrito']);exit;
-        // $form->get('distrito')->setValue($_COOKIE['distrito']);
         $form->get('distrito')->setValue($distrito);
-        $form->get('q')->setValue($texto);
-        
         $form->get('distrito')->setValueOptions($com);
         $form->get('submit')->setValue('Buscar');
-        // $total = (int) $resultados->response->numFound;
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
         $paginator->setCurrentPageNumber((int) $this->params()
             ->fromQuery('page', 1));
@@ -308,21 +323,32 @@ public function __construct()
         } else {
             $mostrar = 'Mostrando ' . $first . '-' . $last . ' de ' . $total . ' resultados';
         }
+
         foreach($results_platos->response->docs as $plat){
             $arrpl[]=$plat->name;   
         }
-       foreach($results_distritos->response->docs as $rest){
-            $arrest[]=$rest->distrito;   
-        }
+//       foreach($results_distritos->response->docs as $rest){
+//            $arrest[]=$rest->distrito;   
+//        }
 //        var_dump(implode(",",$arrest));
 //        var_dump(implode(",",$arrpl));exit;
   
         $busquedatitle=$palabraBuscar.':'.implode(",",$arrpl).'| Lista del Sabor';
-        $listades = $this->getConfigTable()->cantComentxPlato(1, '0,3', 1);
+        $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
+        $listatot = $listatot->toArray();
+        
+        foreach ($listatot as $key => $value) {
+            if ($key < 3) {
+                $listades[] = $listatot[$key];
+            } else {
+                $listadeseg[] = $listatot[$key];
+            }
+        }
+
         $view->setVariables(array(
             'total' => $total,
             'distrito' => $distrito,
-            'plato' => $texto,
+            'plato' => $valores,
             'lista' => $listades,
             'destacados' => $results->response->docs,
             'general' => $paginator,
@@ -353,27 +379,23 @@ public function __construct()
         
         $this->layout()->clase = 'buscar';
         $filtered = $this->params()->fromQuery('q');
+        $valor = explode(" ", $filtered);
+         if($valor[0]=='restaurante:')
+        {
+        $buscar =  $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];     
+        $texto = $valor[0].'"'.$buscar.'"'; 
+        $distrito = '';
+        $ruta = $this->_options->data->busqueda .'/busqueda_movil.txt';
+        $fp = fopen($ruta,"a");
+        fwrite($fp, "$buscar , $distrito" . PHP_EOL);
+        fclose($fp);
+        }      
+        else{
         $filtered = strtoupper($filtered);
         $filter = new \Zend\I18n\Filter\Alnum(true);
-        
         $text = trim($filter->filter($filtered));
         $text = preg_replace('/\s\s+/', ' ', $text);
         $busqueda = explode(" EN ", $text);
-//         $distritos = $this->joinAction()->toArray();
-        
-        // for($f=0;$f<count($distritos);$f++){
-        
-        // for($i=0;$i<count($busqueda);$i++){
-        // if($busqueda[1]==$distritos[$f]['va_distrito'])//trim($busqueda[$i])
-        // {
-        // $distrito = $distritos[$f]['va_distrito'];
-        
-        // }else{
-        // $texto = $busqueda[0];
-        // }
-        // }
-        // }
-        
         if($this->consultaDistrito($busqueda[1])>0){
             $distrito=$busqueda[1];   
         }
@@ -382,8 +404,7 @@ public function __construct()
         $fp = fopen($ruta,"a");
         fwrite($fp, "$texto , $distrito" . PHP_EOL);
         fclose($fp);
-//         var_dump($texto);
-//         var_dump($distrito);Exit;
+        }
         $limite = 100;
         $resultados = false;
         $palabraBuscar = isset($texto) ? $texto : false;
@@ -427,18 +448,22 @@ public function __construct()
                 $this->redirect()->toUrl('/');
             }
         }
-//         var_dump($results->response->docs);Exit;
         $form = new Formularios();
-        $listades = $this->getConfigTable()->cantComentxPlato(1, '0,3', 1);
-        setcookie('q', $text);
+      
+        if($valor[0]=='restaurante:')
+        {
+        $form->get('q')->setValue($filtered);
+        $valores = $buscar;
+        }
+        else {setcookie('q', $text);
         $form->get('q')->setValue($text);
+        $valores = $texto;
+        }
         $form->get('submit')->setValue('Buscar');
-        
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
         $paginator->setCurrentPageNumber((int) $this->params()
-            ->fromQuery('page', 1));
+        ->fromQuery('page', 1));
         $paginator->setItemCountPerPage(10);
-        
         $total = $paginator->getTotalItemCount();
         $first = $paginator->getPages()->firstItemNumber;
         $last = $paginator->getPages()->lastItemNumber;
@@ -447,7 +472,16 @@ public function __construct()
         } else {
             $mostrar = 'Mostrando ' . $first . '-' . $last . ' de ' . $total . ' resultados';
         }
-//    var_dump($results->response->docs);exit;
+        $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
+        $listatot = $listatot->toArray();
+        
+        foreach ($listatot as $key => $value) {
+            if ($key < 3) {
+                $listades[] = $listatot[$key];
+            } else {
+                $listadeseg[] = $listatot[$key];
+            }
+        }
         $view->setVariables(array(
             'total' => $total,
             'lista' => $listades,
@@ -455,6 +489,7 @@ public function __construct()
             'general' => $paginator,
             'form' => $form,
             'nombre' => $text,
+               'plato' => $valores,
             'mostrar' => $mostrar
         ));
         return $view;
@@ -465,16 +500,28 @@ public function __construct()
         $view = new viewModel();
         $view->setTerminal(true);
         
-        $filtered = $this->params()->fromQuery('q');
-        $filtered = strtoupper($filtered);
-        $filter = new \Zend\I18n\Filter\Alnum(true);
-        $text = trim($filter->filter($filtered));
-        $text = preg_replace('/\s\s+/', ' ', $text);
-        $busqueda = explode(" EN ", $text);
+         $filtered = $this->params()->fromQuery('q');
+        
+        
+        
+        $valor =explode(" ",$filtered);
+        if($valor[0]=='restaurante:')
+            { $buscar = $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];
+            $texto = $valor[0].'"'.$buscar.'"'; }  
+            
+            else{
+                setcookie('q', $texto);
+                $filtered = strtoupper($filtered);
+                $filter = new \Zend\I18n\Filter\Alnum(true);
+                $text = trim($filter->filter($filtered));
+                $text = preg_replace('/\s\s+/', ' ', $text);
+                $busqueda = explode(" EN ", $text);
             if($this->consultaDistrito($busqueda[1])>0){
                 $distrito=$busqueda[1];
             }
-            $texto = $busqueda[0];
+            $texto = $busqueda[0];}
+        
+
             $limite = 100;
             $resultados = false;
             $palabraBuscar = isset($texto) ? $texto : false;
@@ -520,7 +567,7 @@ public function __construct()
         
             $form = new Formularios();
             $listades = $this->getConfigTable()->cantComentxPlato(1, '0,3', 1);
-            setcookie('q', $texto);
+            
             $form->get('q')->setValue($texto);
             $form->get('submit')->setValue('Buscar');
         
@@ -543,18 +590,7 @@ public function __construct()
         exit();
     }
 
-    public function jsonmapaAction()
-    {
-        $distrito = $this->params()->fromQuery('distrito');
-        $view = new viewModel();
-        $view->setTerminal(true);
-        
-
-        
-        echo $resultados->getRawResponse();
-        exit();
-    }
-
+  
     public function jsonmapasaAction()
     {
         $distrito = $this->params()->fromQuery('distrito');
@@ -562,9 +598,13 @@ public function __construct()
         $view->setTerminal(true);
         $texto = $this->params()->fromQuery('q');
         setcookie('distrito', $distrito);
-        setcookie('q', $texto);
-        $filter = new \Zend\I18n\Filter\Alnum(true);
-        $plato = $filter->filter($texto);
+        $valor =explode(" ",$texto);
+        if($valor[0]=='restaurante:')
+            { $buscar = $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];
+            $plato = $valor[0].'"'.$buscar.'"'; }  
+            else{$filter = new \Zend\I18n\Filter\Alnum(true);
+            $plato = $filter->filter($texto);
+            setcookie('q', $texto);}
         
         if ($distrito != 'TODOS LOS DISTRITOS') {
             
@@ -588,19 +628,10 @@ public function __construct()
                     
                     die("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");
                 }
-//                if ($resultados == '') 
-//
-//                {
-//                    echo 'error en busqueda';
-//                    exit();
-//                } else {
-//                    echo $resultados->getRawResponse();
-//                    exit();
-//                }
             }
         } 
 
-        else {
+        else { 
             $limite = 1000;
             $resultados = false;
             $palabraBuscar = isset($plato) ? $plato : false;
@@ -621,27 +652,6 @@ public function __construct()
                     $this->redirect()->toUrl('/');
                 }
             }
-            
-//            $limit = 3;
-//            $palabraBuscar = isset($plato) ? $plato : false;
-//            $query = "($palabraBuscar) AND (en_destaque:si)";
-//            $fq = array(
-//                'sort' => 'random_' . uniqid() . ' asc',
-//                'fq' => 'en_estado:activo AND restaurant_estado:activo'
-//            );
-//            $results = false;
-//            if ($query) {
-//                $solr = \Classes\Solr::getInstance()->getSolr();
-//                if (get_magic_quotes_gpc() == 1) {
-//                    $query = stripslashes($query);
-//                }
-//                try {
-//                    $results = $solr->search($query, 0, $limit, $fq);
-//                } catch (Exception $e) {
-//                    
-//                    $this->redirect()->toUrl('/');
-//                }
-//            }
         }
         
         echo $resultados->getRawResponse();

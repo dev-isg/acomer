@@ -1,0 +1,4 @@
+# robotstxt.org/
+
+User-agent: *
+sitemap:http://listadelsabor.com/sitemap.xml

@@ -24,7 +24,16 @@
                                         else{echo $this->host('images') . '/plato/principal/' . $this->lista[0]['va_imagen'];}?>" title="<?php echo $this->lista[0]['va_nombre'];?>" alt="<?php echo $this->lista[0]['va_nombre'];?>">
    				</div>
    				<div class="ficha-desc">
-                  <h2><?php echo $this->lista[0]['restaurant_nombre'];?></h2>  
+                                    
+                     <?php
+                require './vendor/Classes/Mobile_Detect.php';
+                $detect3 = new Mobile_Detect();
+                if (!$detect3->isMobile()) {
+                   ?>                 
+                  <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2>
+                 <?php }else{?>   
+                     <h2><a href="<?php echo $this->host('ruta')?>/buscar?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2>
+                 <?php  }?> 
    					<div class="puntuaciones c<?php echo $this->lista[0]['Ta_puntaje_in_id'];?>"></div>
                   <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
    					<p class="desc"><?php echo $this->lista[0]['tx_descripcion'];?></p>
@@ -32,9 +41,8 @@
                                         <p class="costo">Precio</p>
    					<p class="precio"><?php echo $this->lista[0]['va_precio'];?></p>
                                         <?php }?>
-<!--           <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "http://listadelsabor.com/plato/" .$this->urlnombre ?>" data-text="Visita este sitio" data-via="ISGSAC" data-lang="es" data-dnt="true">Twittear</a>               
-<div class="fb-like" data-href="<?php echo  "http://listadelsabor.com/plato/" .$this->urlnombre ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>   -->
-           <div class="fb-like" data-href="<?php echo  "http://listadelsabor.com/plato/" .$this->urlnombre ?>" data-send="false" data-layout="box_count" data-width="450" data-show-faces="false"></div>
+
+           <div class="fb-like" data-href="<?php echo  "http://listadelsabor.com/plato/" .$this->urlnombre ?>" data-send="false" data-layout="box_count" data-width="100" data-show-faces="false"></div>
 	</div>
    			</div>
    			<div class="content-coments">

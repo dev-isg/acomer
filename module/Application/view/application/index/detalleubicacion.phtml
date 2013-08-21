@@ -164,7 +164,7 @@ $this->headTitle($this->busquedatitle);
         <div class="sub">
             <span style="padding-left: 10px;color:white;font-weight: bold;"><?php echo  $this->plato;  ?></span>
         </div>
-        <div class="plato_h p">
+          <div class="plato_h p">
           <?php echo $this->mostrar; ?>
           <?php //
           $form = $this->form;
@@ -249,48 +249,62 @@ $this->headTitle($this->busquedatitle);
       </div>
     </div>
     <div id ="error"><?php $this->mama;?></div>
-    <div class="recomendados-platos primer-home" style="padding-bottom: 90px;">
+  <div class="recomendados-platos primer-home" style="padding-bottom: 90px;">
       <ul>
-         <?php  foreach ($this->lista  as $list) : ?>
+         <?php  foreach ($this->lista  as $list) {
+//                     foreach($list2 as $list){
+                    
+                                    if(strlen($list['va_nombre'])>27){
+                         $strnom=trim(substr($list['va_nombre'], 0, 24));
+                          $strnom.='...';
+                         }else {$strnom=$list['va_nombre'];} ?>
           <li>
             <div class="plato_r">
               <div class="mosaic-block cover">
-                <div class="mosaic-overlay"><span><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></span>
-                <img src="<?php if($doc->va_imagen=='platos-default.png')
-                        { echo $this->host('images') . '/defecto/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8');}
-                        else
-                    {  echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" class="img-plato"><img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas">
+                <div class="mosaic-overlay">
+                  <span><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></span>
+                  <img src="<?php if ($list['va_imagen']=='platos-default.png')
+                      {echo $this->host('images') . '/defecto/' . htmlspecialchars($list['va_imagen'], ENT_QUOTES, 'utf-8');}
+                  else
+                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list['va_imagen'], ENT_QUOTES, 'utf-8');} ?>" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" class="mas">
                 </div>
-              <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" class="mosaic-backdrop">              <div class="details">
-                  <h4><?php echo htmlspecialchars($list->va_nombre, ENT_QUOTES, 'utf-8'); ?></h4>
-                  <p class="title-details" style="font-weight: bold;">Ingredientes</p>
-                  <p class="desc-plato" style="font-size:0.9em;"> <?php 
-                        if(strlen($list->tx_descripcion)>100){
-                         $str=trim(substr($list->tx_descripcion, 0, 100));
-                          $str.='...';
-                         }else {$str=$list->tx_descripcion;}       
-                  echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
-                </div>
-               </a>
+                <a href="/plato/<?php echo $this->canonicalUrl($list['va_nombre'], array('suffix' => $list['in_id']));?>" class="mosaic-backdrop" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>">
+                  <div class="details">
+                    <h4>
+                      <?php 
+                    
+                    echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></h4>
+                    <p class="title-details" style="font-weight: bold;">Descripción</p>
+                    <p class="desc-plato font-desc-c"> <?php 
+                          if(strlen($list['tx_descripcion'])>100){
+                           $str=trim(substr($list['tx_descripcion'], 0, 97));
+                            $str.='...';
+                           }else {$str=$list['tx_descripcion'];}       
+                    echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
+                  </div>
+                </a>
               </div>
               <div class="foo">
-                <p class="nom_res"><?php 
-                         if(strlen($list->restaurant_nombre)>29){
-                         $strres=trim(substr($list->restaurant_nombre, 0, 26));
-                          $strres.='...';
-                         }else {$strres=$list->restaurant_nombre;}
-                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></p>
+                <p class="nom_res">
+                  <a href="/plato/<?php echo $this->canonicalUrl($list['va_nombre'], array('suffix' => $list['in_id']));?>" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>"><?php 
+                     if(strlen($list['restaurant_nombre'])>29){
+                     $strres=trim(substr($list['restaurant_nombre'], 0, 26));
+                      $strres.='...';
+                     }else {$strres=$list['restaurant_nombre'];}
+                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></a></p>
                 <div class="pt">
-                  <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
-                  <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
+                  <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list['va_precio'], ENT_QUOTES, 'utf-8'); ?></p>-->
+                  <p class="com"><?php echo $list['NumeroComentarios'] ?> <i class="icon-comment"></i></p>
                   <div class="punt">
-                    <div class="puntuaciones c<?php echo $list->Ta_puntaje_in_id;?>"></div>
+                    <div class="puntuaciones c<?php echo $list['Ta_puntaje_in_id'];?>"></div>
                   </div>
                 </div>
               </div>
             </div>
           </li>
-        <?php endforeach; ?>   
+        <?php 
+//             }
+         }; ?>   
       </ul>
     </div>
 </div>                     

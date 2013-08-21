@@ -17,7 +17,8 @@
         rules: {
             va_nombre: {
                 required: true,
-                 minlength : 4
+                minlength : 4,
+                maxlength : 40
             },
             va_email: {
                 required: true,
@@ -34,7 +35,8 @@
         messages:{
             va_nombre: {
                 required:"Por favor ingresar el nombre del plato",
-                 minlength : "Por favor ingresar minimo 4 caracteres"
+                minlength : "Por favor ingresar minimo 4 caracteres",
+                maxlength : "Por favor ingresar un maximo de 40 cacteres"
             },
             tx_descripcion:{
                 required:"Por favor ingresar una comentario",
