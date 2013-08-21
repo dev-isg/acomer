@@ -377,7 +377,9 @@ class IndexController extends AbstractActionController {
           
                                        
                   require './vendor/Classes/Filter/Alnum.php';
-                  $altura =(int)($alto*$anchura/$ancho); 
+                  $alta =(int)($alto*$anchura/$ancho);
+                  if($alta>272){$altura=272;}
+                  else{$altura=$alta;}
                   if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg')      
                   {   $nom = $nonFile['va_nombre']; 
                   $imf2 =  $valor.'.'.$info['extension'];
@@ -431,7 +433,9 @@ class IndexController extends AbstractActionController {
                   unlink($eliminar2);
                   unlink($eliminar3);
                   require './vendor/Classes/Filter/Alnum.php';
-                  $anchura =(int)($ancho*$altura/$alto); 
+                  $anchu =(int)($ancho*$altura/$alto);
+                  if($anchu>407){$anchura=407;}
+                  else{$anchura=$anchu;}
                   if($info['extension']=='jpg'or $info['extension']=='JPG'or $info['extension']=='jpeg')      
                   {  $nom = $nonFile['va_nombre']; 
                   $imf2 =  $valor.'.'.$info['extension'];
