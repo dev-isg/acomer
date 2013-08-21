@@ -14,13 +14,13 @@ return array(
         'driver' => 'Pdo',
         'username' => 'kevin',
         'password' => '123456',
-        'dsn' => 'mysql:dbname=liston_produccion;host=192.168.1.50',
+        'dsn' => 'mysql:dbname=liston_produccion_final;host=192.168.1.50',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         )
     ),
     'solr' => array(
-        'host' => '192.168.1.35',
+        'host' => '192.168.1.37',
         'port' => '8983',
         'folder' => '/solr'
     ),
