@@ -46,7 +46,8 @@ class ComentariosController extends AbstractActionController
          
         return array(
           'comentarios' => $paginator,
-            'puntaje' =>$this-> puntaje()
+            'puntaje' =>$this-> puntaje(),
+            'texto'=>$datos
         );
     }
     

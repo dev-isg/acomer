@@ -27,6 +27,7 @@ use Zend\Db\Sql\Sql;
 class IndexController extends AbstractActionController {
 
     protected $platosTable;
+     protected $configTable;
     protected $comentariosTable;
     protected $_options;
 	public function __construct()
@@ -53,7 +54,14 @@ class IndexController extends AbstractActionController {
                     'idlocal' => $local,
                 ));
     }
-
+ public function getConfigTable()
+    {
+        if (! $this->configTable) {
+            $sm = $this->getServiceLocator();
+            $this->configTable = $sm->get('Platos\Model\PlatosTable');
+        }
+        return $this->configTable;
+    }
     public function fooAction() {
         // This shows the :controller and :action parameters in default route
         // are working when you browse to /module-specific-root/skeleton/foo
@@ -565,8 +573,91 @@ class IndexController extends AbstractActionController {
         if(!$this->getPlatosTable()->getPlato($id)){
             $this->redirect()->toUrl('/');
         }
-        $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();   
-//        var_dump($listarecomendacion);Exit;
+              
+          $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();  
+          $texto = 'restaurante:"'.$listarecomendacion[0]['restaurant_nombre'].'"'; 
+        
+               $limit = 3;
+                $palabraBuscar = isset($texto) ? $texto : false;
+                $query = "($palabraBuscar)";
+                $fq = array(
+                    'sort' => 'random_' . uniqid() . ' asc',
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo',
+                    'wt' => 'json'
+                );
+                $results = false;
+                if ($query) {
+                    $solr = \Classes\Solr::getInstance()->getSolr();
+                    if (get_magic_quotes_gpc() == 1) {
+                        $query = stripslashes($query);}
+                    try { $results = $solr->search($query, 0, $limit, $fq);
+                    } catch (Exception $e) {
+                  echo ("<div>ingrese algun valor</div>"); }}
+    
+                  if(count($results->response->docs)<=1)
+                  {
+                    if(isset($_COOKIE['q'])){
+                            if($_COOKIE['distrito']!=='TODOS LOS DISTRITOS') {   
+                            $texto =$_COOKIE['q'];
+                            $distrito=$_COOKIE['distrito'];
+                            $limit = 3;
+                            $palabraBuscar = isset($texto) ? $texto : false;
+                            $query = "($palabraBuscar)";
+                            $fq = array(
+                                'sort' => 'random_' . uniqid() . ' asc',
+                                'fq' => 'en_estado:activo AND restaurant_estado:activo  AND distrito:' . $distrito,
+                                'wt' => 'json'
+                            );
+                            $resultados = false;
+                            if ($query) {
+                                $solr = \Classes\Solr::getInstance()->getSolr();
+                                if (get_magic_quotes_gpc() == 1) {
+                                    $query = stripslashes($query);}
+                                try { $resultados = $solr->search($query, 0, $limit, $fq);
+                                } catch (Exception $e) {
+                              echo ("<div>ingrese algun valor</div>"); }} 
+                              }else{$texto =$_COOKIE['q'];
+                            $limit = 3;
+                            $palabraBuscar = isset($texto) ? $texto : false;
+                            $query = "($palabraBuscar)";
+                            $fq = array(
+                                'sort' => 'random_' . uniqid() . ' asc',
+                                'fq' => 'en_estado:activo AND restaurant_estado:activo',
+                                'wt' => 'json'
+                            );
+                            $resultados = false;
+                            if ($query) {
+                                $solr = \Classes\Solr::getInstance()->getSolr();
+                                if (get_magic_quotes_gpc() == 1) {
+                                    $query = stripslashes($query);}
+                                try { $resultados = $solr->search($query, 0, $limit, $fq);
+                                } catch (Exception $e) {
+                              echo ("<div>ingrese algun valor</div>"); }} }
+                          }
+                     else
+                         { 
+                $limit = 3;
+                 $texto = 'plato_tipo:"'.$listarecomendacion[0]['tipo_plato_nombre'].'"'; 
+                
+                $palabraBuscar = isset($texto) ? $texto : false;
+                $query = "($palabraBuscar)";
+                $fq = array(
+                    'sort' => 'random_' . uniqid() . ' asc',
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo',
+                    'wt' => 'json'
+                );
+                $resultados = false;
+                if ($query) {
+                    $solr = \Classes\Solr::getInstance()->getSolr();
+                    if (get_magic_quotes_gpc() == 1) {
+                        $query = stripslashes($query);}
+                    try { $resultados = $solr->search($query, 0, $limit, $fq);
+                    } catch (Exception $e) {
+                  echo ("<div>ingrese algun valor</div>"); }}
+                         }
+                  
+                  }    
+                  
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
@@ -575,10 +666,6 @@ class IndexController extends AbstractActionController {
        {$form->get('va_nombre')->setValue($_COOKIE['va_nombre']);
         $form->get('va_email')->setValue($_COOKIE['va_email']);}
         $form->get('submit')->setValue('Agregar');
-//         if(isset($_COOKIE['nombre'] && $_COOKIE['email'])){
-//             $form->get('va_nombre')->setValue($_COOKIE['nombre']);
-//             $form->get('va_email')->setValue($_COOKIE['email']);
-//         }
         $request = $this->getRequest();
         if ($request->isPost()) {
             if (!isset($_COOKIE['id' . $id])) {
@@ -604,44 +691,27 @@ class IndexController extends AbstractActionController {
             }
         } 
 //         $formu = new Formularios();
-         $comidas = $this->joinAction()->toArray();
-         $this->layout()->comidas=$comidas;
-    // var_dump($_COOKIE['distrito']);exit;
-//         $com = array();
-//         foreach ($comidas as $y) {
-//             $com[$y['va_distrito']] = $y['va_distrito'];
-//         }  
-//     if($_COOKIE['distrito']){ $formu->get('distrito')->setValue($_COOKIE['distrito']);}
-//        // else{ $formu->get('distrito')->setValue($comidas[41]['va_distrito']);}
-//        $formu->get('distrito')->setValueOptions($com);
-//        $formu->get('q')->setValue($_COOKIE['q']);     
-//        $formu->get('submit')->setValue('Buscar');
+        $comidas = $this->joinAction()->toArray();
+        $this->layout()->comidas=$comidas;
         $this->layout()->clase = 'Detalle';
-      //  $this->headTitle('ss');
         $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
+   
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
         $paginator->setItemCountPerPage(10);    
-        $config = $this->getServiceLocator()->get('Config');
-//        var_dump($config['host']['images'].'/'.);exit;
-//           if ($this->lista[0]['va_imagen']=='platos-default.png')
-//              {echo $config['host']['images']. '/defecto/' . $listarecomendacion[0]['va_imagen'];}
-//            else{echo $config['host']['images'] . '/plato/principal/' . $listarecomendacion[0]['va_imagen'];}                                  
+        $config = $this->getServiceLocator()->get('Config');                                
         $this->layout()->title=$listarecomendacion[0]['va_nombre'];   
         $this->layout()->image=$listarecomendacion[0]['va_imagen']=='platos-default.png'?$config['host']['images']. '/defecto/' . $listarecomendacion[0]['va_imagen']:$config['host']['images'] . '/plato/principal/' . $listarecomendacion[0]['va_imagen'];
         $this->layout()->description=trim($listarecomendacion[0]['restaurant_nombre']).'-'.trim($listarecomendacion[0]['tx_descripcion']).'-'.trim($listarecomendacion[0]['va_direccion']).'-'.trim($listarecomendacion[0]['distrito']);
         $this->layout()->url=$config['host']['ruta'].'/plato/'.$datos['nombre'];
-
-        
         $listatitle=trim($listarecomendacion[0]['va_nombre']).':'.
                 trim($listarecomendacion[0]['tipo_plato_nombre']).':'.
                 trim($listarecomendacion[0]['restaurant_nombre']).':'.
                 trim($listarecomendacion[0]['distrito']).'|Lista del Sabor';
-        
-        $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
+    $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id,
-             'listatitle'=>$listatitle));
+             'listatitle'=>$listatitle, 'masplatos' => $results->response->docs,'masplatos2'=>$resultados->response->docs));
         
         return $view;
     }

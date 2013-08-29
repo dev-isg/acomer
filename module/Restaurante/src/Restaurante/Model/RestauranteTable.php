@@ -131,7 +131,7 @@ class RestauranteTable
              $select = $sql->select()
             ->from(array('f' => 'ta_restaurante')) 
             ->join(array('b' => 'ta_tipo_comida'),'f.ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
-           ->where(array('f.va_nombre'=>$datos));
+           ->where(array('f.va_nombre LIKE ?'=>'%'.$datos.'%'));
            }
 
            if($datos=='' and $estado == ''){
@@ -162,7 +162,7 @@ class RestauranteTable
             ->join(array('b' => 'ta_tipo_comida'),'f.ta_tipo_comida_in_id = b.in_id',array('va_nombre_tipo'))
 //            ->where(array('f.en_estado'=>$estado))
 //             ->where(array('f.Ta_tipo_comida_in_id'=>$comida,'f.en_estado'=>$estado))->where->and->like('f.va_nombre', '%'.$datos.'%');
-            ->where(array('f.ta_tipo_comida_in_id'=>$comida,'f.en_estado'=>$estado,'f.va_nombre'=>$datos));
+            ->where(array('f.ta_tipo_comida_in_id'=>$comida,'f.en_estado'=>$estado,'f.va_nombre LIKE ?'=>'%'.$datos.'%'));
 //            ->where->like('f.va_nombre', '%'.$datos);
            
            }
