@@ -83,6 +83,7 @@ class IndexController extends AbstractActionController {
         if ($request->isPost()) { 
              $datos =$this->request->getPost();
              $plato_otro = $datos['va_otros'];
+            
             $plato = new Platos();
             $form->setInputFilter($plato->getInputFilter());
             $nonFile = $request->getPost()->toArray();
@@ -92,6 +93,7 @@ class IndexController extends AbstractActionController {
             );
             $form->setData($data);       
             if ($form->isValid()) {
+                 var_dump($datos);Exit;
                 $nonFile = $request->getPost()->toArray();
 //                $File = $this->params()->fromFiles('va_imagen');
         if($File['name']!='')

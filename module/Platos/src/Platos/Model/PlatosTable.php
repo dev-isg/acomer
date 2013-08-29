@@ -71,6 +71,7 @@ class PlatosTable {
             'en_estado' => (!empty($platos->en_estado)) ? $platos->en_estado : 2, //$plato->en_estado,
             'Ta_tipo_plato_in_id' => $platos->Ta_tipo_plato_in_id,
             'Ta_puntaje_in_id' => (!empty($platos->Ta_puntaje_in_id)) ? $platos->Ta_puntaje_in_id : 0,
+            'va_mistura'=>(!empty($platos->va_mistura)) ? $platos->va_mistura : 0,
             //'Ta_usuario_in_id' => (!empty($plato->Ta_usuario_in_id)) ? $plato->Ta_usuario_in_id : 1//$plato->Ta_usuario_in_id,
            'Ta_usuario_in_id' => 133,//$plato->Ta_usuario_in_id,
         );
@@ -309,8 +310,8 @@ class PlatosTable {
                 ->columns(array('*', 'num' => new \Zend\Db\Sql\Expression('COUNT(tc.in_id)')))
                 ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
                 ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
-                ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud', 'de_longitud', 'va_direccion', 'va_horario', 'va_dia', 'va_telefono','va_direccion_referencia'), 'left')
-                ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_id' => 'in_id', 'restaurant_nombre' => 'va_nombre', 'restaurant_img' => 'va_imagen'), 'left')
+                ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('va_horario_opcional','de_latitud', 'de_longitud', 'va_direccion', 'va_horario', 'va_dia', 'va_telefono','va_direccion_referencia'), 'left')
+                ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_id' => 'in_id', 'restaurant_nombre' => 'va_nombre', 'restaurant_img' => 'va_imagen','web'=>'va_web'), 'left')
                 ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('pais' => 'ch_pais', 'departamento' => 'ch_departamento', 'provincia' => 'ch_provincia', 'distrito' => 'ch_distrito'), 'left')
                 ->join(array('tc' => 'ta_comentario'), 'tc.ta_plato_in_id=ta_plato.in_id', array('estado_comen'=>'en_estado'), 'left')
 //            ->join(array('tcli'=>'ta_cliente'),'tcli.in_id=tc.ta_cliente_in_id',array('va_nombre_cliente','va_email'),'left')

@@ -134,22 +134,19 @@ class PlatosForm extends Form
           
           //el problema NO DESCOMENTAR
 
-//        $this->add(array(
-//            'name' => 'en_destaque',
-//            'type' => 'MultiCheckbox',
-//           // 'label' => 'Modalidad de Pago?',
-//             'attributes' => array(               
-//                'class' => 'checkbox inline',
-//                'id'   => 'en_destaque',
-//                 'placeholder'=>'Ingrese su destaque'
-//            ),
-//            'options' => array(
-//                     
-//                     'value_options' => array(
-//                         '0'=>'hola'
-//                     ),
-//             )
-//        ));
+        $this->add(array(
+            'name' => 'va_mistura',
+            'type' => 'MultiCheckbox',
+             'attributes' => array(               
+                'class' => 'checkbox inline',
+                'id'   => 'va_mistura'
+            ),
+            'options' => array(
+                     'value_options' => array(
+                         '0'=>'Participa en Mistura'
+                     ),
+             )
+        ));
           
                
         $this->add(array(
