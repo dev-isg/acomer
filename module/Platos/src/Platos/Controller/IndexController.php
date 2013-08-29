@@ -101,7 +101,6 @@ class IndexController extends AbstractActionController {
             );
             $form->setData($data);       
             if ($form->isValid()) {
-                 var_dump($datos);Exit;
                 $nonFile = $request->getPost()->toArray();
 //                $File = $this->params()->fromFiles('va_imagen');
         if($File['name']!='')

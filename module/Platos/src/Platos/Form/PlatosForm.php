@@ -143,7 +143,7 @@ class PlatosForm extends Form
             ),
             'options' => array(
                      'value_options' => array(
-                         '0'=>'Participa en Mistura'
+                         '1'=>'Participa en Mistura'
                      ),
              )
         ));
