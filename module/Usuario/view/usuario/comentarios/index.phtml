@@ -52,6 +52,7 @@
             <th>Puntaje</th>
             <th>Plato</th>
             <th>Usuario</th>
+             <th>Email</th>
             <th>Operaciones</th>
         </tr>
     </thead>
@@ -77,6 +78,7 @@
                             $str.='..';
                            }else {$str=$cometarios->va_nombre_cliente;}       
                     echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?></td>
+            <td><?php echo $cometarios->va_email;?></td>
          <td><a name="<?php echo $this->escapeHtml($cometarios->tx_descripcion); ?>" data-id="<?php echo $this->escapeHtml($cometarios->in_id); ?>" href="#" class='eli-com btn btn-danger'><i class='icon-trash icon-white'></i>Delete </a>  <a data-id="<?php echo $this->escapeHtml($cometarios->in_id); ?>" href="<?php echo $this->basePath();?>/usuario/comentarios/mensajecomentario/<?php echo $cometarios->va_email;?>/<?php echo $cometarios->va_nombre_cliente;?>" class='modificar btn btn-success'><i class='icon-edit icon-white'></i>Email </a>
         </tr>
         </tr>
