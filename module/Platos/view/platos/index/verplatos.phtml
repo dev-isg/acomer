@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="<?php echo $this->basePath()?>/css/jquery-ui.css?v<?php echo $this->host('version')?>">
    <div class="content-left">
 <a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a>
@@ -139,7 +138,7 @@
               <div class="agregar-comentario-desc" style="display:none;">
                 <?php
                 $title = 'Agregar nuevo comentario';
-                $this->headTitle($this->lista[0]['va_nombre'].' :');
+                $this->headTitle($this->listatitle);
                 ?>
                   <div class="form-envio-men">
                     <?php

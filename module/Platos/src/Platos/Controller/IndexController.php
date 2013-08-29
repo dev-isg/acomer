@@ -573,6 +573,10 @@ class IndexController extends AbstractActionController {
        {$form->get('va_nombre')->setValue($_COOKIE['va_nombre']);
         $form->get('va_email')->setValue($_COOKIE['va_email']);}
         $form->get('submit')->setValue('Agregar');
+//         if(isset($_COOKIE['nombre'] && $_COOKIE['email'])){
+//             $form->get('va_nombre')->setValue($_COOKIE['nombre']);
+//             $form->get('va_email')->setValue($_COOKIE['email']);
+//         }
         $request = $this->getRequest();
         if ($request->isPost()) {
             if (!isset($_COOKIE['id' . $id])) {
@@ -587,6 +591,10 @@ class IndexController extends AbstractActionController {
                     setcookie('va_email',$datos['va_email']);
                     $this->getComentariosTable()->agregarComentario($form->getData());
                     setcookie('id' . $id, 1);
+
+                     setcookie('nombre',$datos['va_nombre']);
+                     setcookie('email',$datos['va_email']);
+
                     $form->setData(array('va_nombre' => '', 'va_email' => '', 'tx_descripcion' => '')); 
                     $datos =$this->params()->fromRoute();               
                     $this->redirect()->toUrl('/plato/'.$datos['nombre']);
@@ -616,20 +624,22 @@ class IndexController extends AbstractActionController {
 //        var_dump($config['host']['images'].'/'.);exit;
 //           if ($this->lista[0]['va_imagen']=='platos-default.png')
 //              {echo $config['host']['images']. '/defecto/' . $listarecomendacion[0]['va_imagen'];}
-//            else{echo $config['host']['images'] . '/plato/principal/' . $listarecomendacion[0]['va_imagen'];}
-            
-                                                    
+//            else{echo $config['host']['images'] . '/plato/principal/' . $listarecomendacion[0]['va_imagen'];}                                  
         $this->layout()->title=$listarecomendacion[0]['va_nombre'];   
         $this->layout()->image=$listarecomendacion[0]['va_imagen']=='platos-default.png'?$config['host']['images']. '/defecto/' . $listarecomendacion[0]['va_imagen']:$config['host']['images'] . '/plato/principal/' . $listarecomendacion[0]['va_imagen'];
-        $this->layout()->description=$listarecomendacion[0]['tx_descripcion'];
+        $this->layout()->description=trim($listarecomendacion[0]['restaurant_nombre']).'-'.trim($listarecomendacion[0]['tx_descripcion']).'-'.trim($listarecomendacion[0]['va_direccion']).'-'.trim($listarecomendacion[0]['distrito']);
         $this->layout()->url=$config['host']['ruta'].'/plato/'.$datos['nombre'];
 
         
-        
+        $listatitle=trim($listarecomendacion[0]['va_nombre']).':'.
+                trim($listarecomendacion[0]['tipo_plato_nombre']).':'.
+                trim($listarecomendacion[0]['restaurant_nombre']).':'.
+                trim($listarecomendacion[0]['distrito']).'|Lista del Sabor';
         
         $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
-            'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id));
+            'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id,
+             'listatitle'=>$listatitle));
         
         return $view;
     }

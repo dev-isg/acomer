@@ -46,15 +46,17 @@ public function __construct()
         $this->layout()->comidas = $comidas;
         $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
         $listatot = $listatot->toArray();
-        
         foreach ($listatot as $key => $value) {
+            
+              $list[]=$listatot[$key]['va_nombre'];
             if ($key < 3) {
-                $listades[] = $listatot[$key];
+                $listades[] = $listatot[$key];  
             } else {
                 $listadeseg[] = $listatot[$key];
+              
             }
         }
-        
+       $this->layout()->titleplato=implode(",",$list).',';
         $listaval = $this->getConfigTable()->cantComentxPlato(2, 3, 3);
         $listault = $this->getConfigTable()->cantComentxPlato(2, 3, 2);
         $this->layout()->clase = 'Home';
@@ -198,6 +200,7 @@ public function __construct()
                         echo ("<div>ingrese algun valor</div>");
                     }
                 }
+                
             } else {
                 $limite = 100;
                 $resultados = false;
@@ -240,6 +243,52 @@ public function __construct()
                     }
                 }
             }
+            
+            //////////////////////////////////////////random de 5 platos distinc////////////////////////////////////
+                $limit_platos = 5;
+                $query_platos = "-($palabraBuscar)";
+                $fq_platos = array(
+                    'sort' => 'random_' . uniqid() . ' asc',
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo',
+                    'wt' => 'json',
+                    'fl'=>'name'
+                );
+                $results_platos = false;
+                if ($query_platos) {
+                    $solr = \Classes\Solr::getInstance()->getSolr();
+                    if (get_magic_quotes_gpc() == 1) {
+                        $query_platos = stripslashes($query_platos);
+                    }
+                    try {
+                        $results_platos = $solr->search($query_platos, 0, $limit_platos, $fq_platos);
+                    } catch (Exception $e) {
+                        echo ("<div>ingrese algun valor</div>");
+                    }
+                }
+                ///////////////////////////////////////fin/////////////////////////////////////////////////////////
+                //////////////////////////////////////////random de 5 DISTRITOS distinc////////////////////////////////////
+                $limit_distritos = 5;
+                $query_distritos = "-($palabraBuscar)";
+                $fq_distritos = array(
+                    'sort' => 'random_' . uniqid() . ' asc',
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND -distrito:' . $distrito,
+                    'wt' => 'json',
+                    'fl'=>'distrito'
+                );
+                $results_distritos = false;
+                if ($query_distritos) {
+                    $solr = \Classes\Solr::getInstance()->getSolr();
+                    if (get_magic_quotes_gpc() == 1) {
+                        $query_platos = stripslashes($query_distritos);
+                    }
+                    try {
+                        $results_distritos = $solr->search($query_distritos, 0, $limit_distritos, $fq_distritos);
+                    } catch (Exception $e) {
+                        echo ("<div>ingrese algun valor</div>");
+                    }
+                }
+                ///////////////////////////////////////fin/////////////////////////////////////////////////////////
+                
         }
         $form = new Formularios();
         $comidas = $this->joinAction()->toArray();
@@ -274,7 +323,17 @@ public function __construct()
         } else {
             $mostrar = 'Mostrando ' . $first . '-' . $last . ' de ' . $total . ' resultados';
         }
-        
+
+        foreach($results_platos->response->docs as $plat){
+            $arrpl[]=$plat->name;   
+        }
+//       foreach($results_distritos->response->docs as $rest){
+//            $arrest[]=$rest->distrito;   
+//        }
+//        var_dump(implode(",",$arrest));
+//        var_dump(implode(",",$arrpl));exit;
+  
+        $busquedatitle=$palabraBuscar.':'.implode(",",$arrpl).'| Lista del Sabor';
         $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
         $listatot = $listatot->toArray();
         
@@ -285,6 +344,7 @@ public function __construct()
                 $listadeseg[] = $listatot[$key];
             }
         }
+
         $view->setVariables(array(
             'total' => $total,
             'distrito' => $distrito,
@@ -294,7 +354,8 @@ public function __construct()
             'general' => $paginator,
             'form' => $form,
             'mostrar' => $mostrar,
-            'nombre' => $texto
+            'nombre' => $texto,
+            'busquedatitle'=>$busquedatitle
         )); // ,'error'=>$error
         return $view;
     }
