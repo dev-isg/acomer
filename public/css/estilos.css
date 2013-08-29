@@ -1956,6 +1956,15 @@ form#application .control-group .btn-solicito{
 .ficha-desc h2 a{
   color: #ff8400;
 }
+img.bg {
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
@@ -2146,6 +2155,12 @@ form#application .control-group .btn-solicito{
     }
 }
 
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
+  }
+}
 
 /*Activando responsive web desing*/
 @media (min-width: 1200px) {

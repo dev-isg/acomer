@@ -216,7 +216,157 @@
         </div>
 
     </div>
+          
+          
+          
 </div>
+<div class="descrip-product">
+   <?php
+ if(count($this->masplatos)>1) {
+?>  
+   <div id="esconder">
+    <div class="sub">
+      <span  style="padding-left: 10px;color:white;font-weight: bold;">Más Platos </span>
+    </div>
+      <div class="contenido-bus">
+        <ul>
+      <?php foreach ($this->masplatos as $doc ) : ?>          
+            <li>
+              <div class="plato_r" style="display:inline-block;">
+                <input type="hidden" value="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>">
+                <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
+                <div class="mosaic-block cover">
+                  <div class="mosaic-overlay"><span><?php 
+                    if(strlen($doc->name)>27){
+                         $strnom=trim(substr($doc->name, 0, 24));
+                          $strnom.='...';
+                         }else {$strnom=$doc->name;} 
+                         echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></span>
+                    <img src="<?php if($doc->va_imagen=='platos-default.png')
+                        { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
+                        else
+                    {  echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" class="img-plato" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>"><img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas">
+                  </div>
+                  <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"  class="mosaic-backdrop" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                    <div class="details">
+                      <h4>
+                      <?php 
+                    if(strlen($doc->name)>55){
+                         $strnom=trim(substr($doc->name, 0, 49));
+                          $strnom.='...';
+                         }else {$strnom=$doc->name;} 
+                         echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?>
+                      </h4>
+                      <p class="title-details">Descripción</p>
+                       <p style="font-size:0.9em;"><?php 
+                          if(strlen($doc->tx_descripcion)>100){
+                           $str=trim(substr($doc->tx_descripcion, 0, 92));
+                            $str.='..';
+                           }else {$str=$doc->tx_descripcion;}       
+                         echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
+                    </div>
+                  </a>
+                </div>
+                <div class="foo">
+                  <p class="nom_res">
+                    <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                    <?php 
+                         if(strlen($doc->restaurante)>20){
+                         $strres=trim(substr($doc->restaurantee, 0, 19));
+                          $strres.='..';
+                         }else {$strres=$doc->restaurante;}
+                echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?>
+                  </a>  
+                  </p>
+
+                  <div class="pt">       
+                    <p class="com"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?> <i class="icon-comment"></i></p>
+                    <div class="punt">
+                      <div class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>"></div>
+                    </div>     
+                  </div>
+                </div> 
+              </div>
+             </li>
+          <?php endforeach; ?>   
+        </ul>
+      </div>
+    </div>
+  <?php }  else{?> 
+    
+    <div id="esconder">
+    <div class="sub">
+      <span  style="padding-left: 10px;color:white;font-weight: bold;">Más Platos </span>
+    </div>
+      <div class="contenido-bus">
+        <ul>
+      <?php foreach ($this->masplatos2 as $doc ) : ?>          
+            <li>
+              <div class="plato_r" style="display:inline-block;">
+                <input type="hidden" value="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>">
+                <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
+                <div class="mosaic-block cover">
+                  <div class="mosaic-overlay"><span><?php 
+                    if(strlen($doc->name)>27){
+                         $strnom=trim(substr($doc->name, 0, 24));
+                          $strnom.='...';
+                         }else {$strnom=$doc->name;} 
+                         echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></span>
+                    <img src="<?php if($doc->va_imagen=='platos-default.png')
+                        { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
+                        else
+                    {  echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" class="img-plato" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>"><img src="<?php echo $this->host('static')?>/img/mas.png" alt="" class="mas">
+                  </div>
+                  <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>"  class="mosaic-backdrop" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                    <div class="details">
+                      <h4>
+                      <?php 
+                    if(strlen($doc->name)>55){
+                         $strnom=trim(substr($doc->name, 0, 49));
+                          $strnom.='...';
+                         }else {$strnom=$doc->name;} 
+                         echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?>
+                      </h4>
+                      <p class="title-details">Descripción</p>
+                       <p style="font-size:0.9em;"><?php 
+                          if(strlen($doc->tx_descripcion)>100){
+                           $str=trim(substr($doc->tx_descripcion, 0, 92));
+                            $str.='..';
+                           }else {$str=$doc->tx_descripcion;}       
+                         echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
+                    </div>
+                  </a>
+                </div>
+                <div class="foo">
+                  <p class="nom_res">
+                    <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                    <?php 
+                         if(strlen($doc->restaurante)>20){
+                         $strres=trim(substr($doc->restaurantee, 0, 19));
+                          $strres.='..';
+                         }else {$strres=$doc->restaurante;}
+                echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?>
+                  </a>  
+                  </p>
+
+                  <div class="pt">       
+                    <p class="com"><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?> <i class="icon-comment"></i></p>
+                    <div class="punt">
+                      <div class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>"></div>
+                    </div>     
+                  </div>
+                </div> 
+              </div>
+             </li>
+          <?php endforeach; ?>   
+        </ul>
+      </div>
+    </div>
+    
+    
+    <?php } 
+    ?>
+</div>   
        <div id="mapa-buscador">
     
  </div>
