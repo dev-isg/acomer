@@ -110,11 +110,9 @@ class PlatosTable {
             $selectStringC = $sql->getSqlStringForSqlObject($cantidad);
             $results = $adapterc->query($selectStringC, $adapterc::QUERY_MODE_EXECUTE);
             $cant=$results->toArray();
-//            var_dump($cant[0]['cantidad']);exit;
+
         if ($id == 0) {
 
-
-//            var_dump($this->tableGateway->select(array())->count('*'));Exit;
             if($cant[0]['cantidad']<5){ 
                 if(!empty($idtipoplato))
                     {$data['Ta_tipo_plato_in_id'] = $idtipoplato;}
@@ -125,8 +123,7 @@ class PlatosTable {
                     ->values(array('Ta_plato_in_id' => $idplato, 'Ta_local_in_id' => $idlocal));
             $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
             $statement->execute();
-               
-            
+             
             $adapter = $this->tableGateway->getAdapter();
             $sql = new Sql($adapter);
             $selecttot = $sql->select()
@@ -143,7 +140,7 @@ class PlatosTable {
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $plato = $results->toArray();
             $solr = \Classes\Solr::getInstance()->getSolr();
-            if ($solr->ping()) {
+            if ($solr->ping()) {  
                 $document = new \Apache_Solr_Document();
                 $document->id = $plato[0]['in_id'];
                 $document->name = $plato[0]['va_nombre'];
@@ -165,6 +162,7 @@ class PlatosTable {
                 $solr->addDocument($document);
                 $solr->commit();
                 $solr->optimize();
+             
             }
             
           }
@@ -175,13 +173,14 @@ class PlatosTable {
                     {$data['Ta_tipo_plato_in_id'] = $idtipoplato;}
                 $this->tableGateway->update($data, array('in_id' => $id));
                 $this->cromSolr($id);
+               
             } else {
                 throw new \Exception('No existe el id');
             }
         }
     }
 
-    public function cromSolr($id) {
+    public function cromSolr($id) {  
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
         $selecttot = $sql->select()
@@ -198,7 +197,7 @@ class PlatosTable {
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
-      //  var_dump($plato[0]['distrito']);exit;
+
        
         $solr = \Classes\Solr::getInstance()->getSolr();
         if ($solr->ping()) {
@@ -315,6 +314,7 @@ class PlatosTable {
                 ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
                 ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('va_horario_opcional','de_latitud', 'de_longitud', 'va_direccion', 'va_horario', 'va_dia', 'va_telefono','va_direccion_referencia'), 'left')
                 ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_id' => 'in_id', 'restaurant_nombre' => 'va_nombre', 'restaurant_img' => 'va_imagen','web'=>'va_web'), 'left')
+                ->join(array('ttc' => 'ta_tipo_comida'), 'ttc.in_id=tr.ta_tipo_comida_in_id', array('tipo_comida'=>'va_nombre_tipo'), 'left')           
                 ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('pais' => 'ch_pais', 'departamento' => 'ch_departamento', 'provincia' => 'ch_provincia', 'distrito' => 'ch_distrito'), 'left')
                 ->join(array('tc' => 'ta_comentario'), 'tc.ta_plato_in_id=ta_plato.in_id', array('estado_comen'=>'en_estado'), 'left')
 //            ->join(array('tcli'=>'ta_cliente'),'tcli.in_id=tc.ta_cliente_in_id',array('va_nombre_cliente','va_email'),'left')

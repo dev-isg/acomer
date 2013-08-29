@@ -453,7 +453,7 @@ class IndexController extends AbstractActionController
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
-       //var_dump($plato);exit;
+ 
        $solr = \Classes\Solr::getInstance()->getSolr();
         if ($solr->ping()){
            $solr->deleteByQuery('id:' . $id);

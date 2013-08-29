@@ -576,8 +576,8 @@ class IndexController extends AbstractActionController {
               
           $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();  
           $texto = 'restaurante:"'.$listarecomendacion[0]['restaurant_nombre'].'"'; 
-        
-               $limit = 3;
+       // var_dump($listarecomendacion[0]['tipo_comida']);exit;
+                $limit = 3;
                 $palabraBuscar = isset($texto) ? $texto : false;
                 $query = "($palabraBuscar)";
                 $fq = array(
@@ -593,10 +593,12 @@ class IndexController extends AbstractActionController {
                     try { $results = $solr->search($query, 0, $limit, $fq);
                     } catch (Exception $e) {
                   echo ("<div>ingrese algun valor</div>"); }}
-    
+                  
+                  
+              
                   if(count($results->response->docs)<=1)
                   {
-                    if(isset($_COOKIE['q'])){
+                    if($_COOKIE['q']){
                             if($_COOKIE['distrito']!=='TODOS LOS DISTRITOS') {   
                             $texto =$_COOKIE['q'];
                             $distrito=$_COOKIE['distrito'];
@@ -637,8 +639,7 @@ class IndexController extends AbstractActionController {
                      else
                          { 
                 $limit = 3;
-                 $texto = 'plato_tipo:"'.$listarecomendacion[0]['tipo_plato_nombre'].'"'; 
-                
+                $texto = 'tipo_comida:"'.$listarecomendacion[0]['tipo_comida'].'"'; 
                 $palabraBuscar = isset($texto) ? $texto : false;
                 $query = "($palabraBuscar)";
                 $fq = array(
@@ -656,8 +657,7 @@ class IndexController extends AbstractActionController {
                   echo ("<div>ingrese algun valor</div>"); }}
                          }
                   
-                  }    
-                  
+                  }           
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
