@@ -49,7 +49,7 @@
   </head>
 
 <body class="lista-<?php echo $this->clase; ?>">
-  <img src="/img/main-bg.jpg" class="bg" />
+  <img src="/img/b.jpg" class="bg" />
 	<script>
       var urlJson = "<?php echo $this->host('ruta')?>";
     </script>
@@ -127,7 +127,6 @@
     if ($detect3->isTablet()) {
         ?>
         <div class="content-sidebar">
-
           <div class="contenido-busqueda">
             <div class="content-sidebar-ho">
             <a class="title-home-listado" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
@@ -398,26 +397,6 @@
       ga('create', 'UA-43174174-1', 'listadelsabor.com');
       ga('send', 'pageview');
     </script>
-
-    <!-- Start Open Web Analytics Tracker -->
-    <script type="text/javascript">
-    //<![CDATA[
-    var owa_baseUrl = 'http://stats.innovationssystems.com/';
-    var owa_cmds = owa_cmds || [];
-    owa_cmds.push(['setSiteId', '466ecf058e0537f4cfeb5ca736f68f43']);
-    owa_cmds.push(['trackPageView']);
-    owa_cmds.push(['trackClicks']);
-    owa_cmds.push(['trackDomStream']);
-
-    (function() {
-        var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
-        owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl );
-        _owa.src = owa_baseUrl + 'modules/base/js/owa.tracker-combined-min.js';
-        var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
-    }());
-    //]]>
-    </script>
-    <!-- End Open Web Analytics Code -->
 
   </body>
 </html>

@@ -453,7 +453,7 @@ class IndexController extends AbstractActionController
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
-        //var_dump($plato);exit;
+       //var_dump($plato);exit;
        $solr = \Classes\Solr::getInstance()->getSolr();
         if ($solr->ping()){
            $solr->deleteByQuery('id:' . $id);
@@ -466,7 +466,7 @@ class IndexController extends AbstractActionController
             $document->plato_tipo = $plato[0]['tipo_plato_nombre'];
             $document->va_direccion = $plato[0]['va_direccion'];
             $document->restaurante = $plato[0]['restaurant_nombre'];
-            $document->plato_tipo = $plato[0]['nombre_tipo_comida'];
+            $document->tipo_comida = $plato[0]['nombre_tipo_comida'];
             $document->en_destaque = $plato[0]['en_destaque'];
             $document->latitud = $plato[0]['de_latitud'];
             $document->longitud = $plato[0]['de_longitud'];
@@ -478,6 +478,7 @@ class IndexController extends AbstractActionController
             $solr->addDocument($document);
             $solr->commit();
             $solr->optimize();
+           
          
         }
     }

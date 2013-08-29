@@ -109,7 +109,9 @@ public function cromSolr($id)
             ->join(array('pl'=>'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
             ->join(array('tl'=>'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud','de_longitud','va_direccion'), 'left')
             ->join(array('tr'=>'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre'=>'va_nombre','restaurant_estado'=>'en_estado'), 'left')
-            ->join(array('tu'=>'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito'=>'ch_distrito'), 'left')
+            ->join(array('tc' => 'ta_tipo_comida'), 'tc.in_id = tr.Ta_tipo_comida_in_id', array('nombre_tipo_comida' => 'va_nombre_tipo'), 'left')
+                    
+                ->join(array('tu'=>'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito'=>'ch_distrito'), 'left')
             ->where(array('ta_plato.in_id'=>$id));   
             $selectString = $sql->getSqlStringForSqlObject($selecttot);            
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);                      
@@ -128,6 +130,7 @@ public function cromSolr($id)
                                              $document->va_direccion = $plato[0]['va_direccion']; 
                                              $document->restaurante = $plato[0]['restaurant_nombre'];                                         
                                              $document->en_destaque = $plato[0]['en_destaque'];
+                                              $document->tipo_comida = $plato[0]['nombre_tipo_comida'];
                                              $document->latitud = $plato[0]['de_latitud'];                                         
                                              $document->longitud = $plato[0]['de_longitud'];
                                              $document->distrito = $plato[0]['distrito'];
