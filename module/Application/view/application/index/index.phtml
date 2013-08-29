@@ -61,7 +61,7 @@
                 echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></a></p>
                 <div class="pt">
                   <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list['va_precio'], ENT_QUOTES, 'utf-8'); ?></p>-->
-                  <p class="com"><?php echo $list['NumeroComentarios'] ?> <i class="icon-comment"></i></p>
+                  <p class="com"><?php echo $list['NumeroComentarios'] ?>  <a href="/plato/<?php echo $this->canonicalUrl($list['va_nombre'], array('suffix' => $list['in_id']));?>" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>"><i class="icon-comment"></i></p>
                   <div class="punt">
                     <div class="puntuaciones c<?php echo $list['Ta_puntaje_in_id'];?>"></div>
                   </div>
@@ -124,7 +124,9 @@
                 </p>
                 <div class="pt">
                   <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list['va_precio'], ENT_QUOTES, 'utf-8'); ?></p>-->
-                  <p class="com"><?php echo $list['NumeroComentarios'];?> <i class="icon-comment"></i></p>
+                  <p class="com"><?php echo $list['NumeroComentarios'];?>  <a href="/plato/<?php echo $this->canonicalUrl($list['va_nombre'], array('suffix' => $list['in_id']));?>" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>">
+                    <i class="icon-comment"></i>
+                  </a></p>
                   <div class="punt">
                     <div class="puntuaciones c<?php echo $list['Ta_puntaje_in_id'];?>"></div>
                   </div>
@@ -186,7 +188,9 @@
                      </p>
                      <div class="pt">
                         <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
-                        <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
+                        <p class="com"><?php echo $list->NumeroComentarios ?> <a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" title="<?php echo $list->va_nombre;?>" alt="<?php echo $list->va_nombre;?>">
+                          <i class="icon-comment"></i>
+                        </a> </p>
                         <div class="punt">
                           <div class="puntuaciones c<?php echo $list->Ta_puntaje_in_id;?>"></div>
                         </div>
@@ -250,7 +254,9 @@
             </p>
             <div class="pt">
               <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list->va_precio, ENT_QUOTES, 'utf-8'); ?></p>-->
-              <p class="com"><?php echo $list->NumeroComentarios ?> <i class="icon-comment"></i></p>
+              <p class="com"><?php echo $list->NumeroComentarios ?><a href="/plato/<?php echo $this->canonicalUrl($list->va_nombre, array('suffix' => $list->in_id));?>" title="<?php echo $list->va_nombre;?>" alt="<?php echo $list->va_nombre;?>">
+            <i class="icon-comment"></i>
+              </a> </p>
               <div class="punt">
                 <div class="puntuaciones c<?php echo $list->Ta_puntaje_in_id;?>"></div>
               </div>
