@@ -151,7 +151,7 @@ class PlatosTable {
                 $document->va_precio = $plato[0]['va_precio'];
                 $document->en_estado = $plato[0]['en_estado'];
                 $document->plato_tipo = $plato[0]['tipo_plato_nombre'];
-                $document->plato_tipo = $plato[0]['nombre_tipo_comida'];
+                $document->tipo_comida = $plato[0]['nombre_tipo_comida'];
                 $document->va_direccion = $plato[0]['va_direccion'];
                 $document->restaurante = $plato[0]['restaurant_nombre'];
                 $document->en_destaque = $plato[0]['en_destaque'];
@@ -212,7 +212,7 @@ class PlatosTable {
             $document->plato_tipo = $plato[0]['tipo_plato_nombre'];
             $document->va_direccion = $plato[0]['va_direccion'];
             $document->restaurante = $plato[0]['restaurant_nombre'];
-            $document->plato_tipo = $plato[0]['nombre_tipo_comida'];
+            $document->tipo_comida = $plato[0]['nombre_tipo_comida'];
             $document->en_destaque = $plato[0]['en_destaque'];
             $document->latitud = $plato[0]['de_latitud'];
             $document->longitud = $plato[0]['de_longitud'];
