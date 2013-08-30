@@ -86,9 +86,20 @@ class IndexController extends AbstractActionController {
         $local = (int) $this->params()->fromQuery('id');
         $adpter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $form = new PlatosForm($adpter, $local);
+        
+        $promocion =  $this->getPlatosTable()->promocion()->toArray();
+        $promo = array();
+        foreach($promocion as $arrpro){
+            $promo[$arrpro['in_id']] = $arrpro['va_nombre'];
+        }
+        $form->get('va_promocion')->setValueOptions($promo);
+        
         $form->get('submit')->setValue('Add');
         $request = $this->getRequest();
         if ($request->isPost()) { 
+            
+            $promoc= $this->params()->fromPost('va_promocion');
+//            var_dump($promoc);exit;
              $datos =$this->request->getPost();
              $plato_otro = $datos['va_otros'];
             
@@ -181,7 +192,7 @@ class IndexController extends AbstractActionController {
                                             imagejpeg($generale,$general);
                                             imagejpeg($viejaimagen,$original);
                              $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$local.'/' .$name;               
-                             $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro);
+                             $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro,$promoc);
                              return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);                                   
                        }
                        else{    if($platos[0]['cantidad']>=5)
@@ -197,7 +208,7 @@ class IndexController extends AbstractActionController {
                                                  imagejpeg($generale,$general);
                                                  imagejpeg($viejaimagen,$original);  
                              $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$local.'/' .$name;                
-                             $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro);
+                             $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro,$promoc);
                              return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);                                       
                                    }        
                              }                                      
@@ -237,7 +248,7 @@ class IndexController extends AbstractActionController {
                                             imagejpeg($generale,$general);
                                             imagejpeg($viejaimagen,$original);
                              $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$local.'/' .$name;               
-                             $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro);
+                             $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro,$promoc);
                              return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);                                   
                        }
                        else{    if($platos[0]['cantidad']>=5)
@@ -253,7 +264,7 @@ class IndexController extends AbstractActionController {
                                                  imagejpeg($generale,$general);
                                                  imagejpeg($viejaimagen,$original);  
                              $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$local.'/' .$name;                
-                             $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro);
+                             $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro,$promoc);
                              return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);                                       
                                    }        
                           } 
@@ -265,7 +276,7 @@ class IndexController extends AbstractActionController {
               $plato->exchangeArray($form->getData());
               $adapter = new \Zend\File\Transfer\Adapter\Http();
               $name = 'platos-default.png';
-              $this->getPlatosTable()->guardarPlato($plato,$name,$local,$plato_otro);
+              $this->getPlatosTable()->guardarPlato($plato,$name,$local,$plato_otro,$promoc);
               return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);
                }
         }

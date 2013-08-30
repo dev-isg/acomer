@@ -135,7 +135,7 @@ class PlatosForm extends Form
           //el problema NO DESCOMENTAR
 
         $this->add(array(
-            'name' => 'va_mistura',
+            'name' => 'va_promocion',
             'type' => 'MultiCheckbox',
              'attributes' => array(               
                 'class' => 'checkbox inline',
@@ -143,7 +143,6 @@ class PlatosForm extends Form
             ),
             'options' => array(
                      'value_options' => array(
-                         '1'=>'Participa en Mistura'
                      ),
              )
         ));

@@ -57,6 +57,8 @@ public function __construct()
             }
         }
        $this->layout()->titleplato=implode(",",$list).',';
+       $mistura=$this->getConfigTable()->platosParticipantes();
+//       var_dump($mistura->toArray());exit;
         $listaval = $this->getConfigTable()->cantComentxPlato(2, 3, 3);
         $listault = $this->getConfigTable()->cantComentxPlato(2, 3, 2);
         $this->layout()->clase = 'Home';
@@ -65,6 +67,7 @@ public function __construct()
             'listaseg' => $listadeseg,
             'listaval' => $listaval,
             'listault' => $listault,
+            'promociones'=>$mistura,
             'clase' => 'Home'
         ));
         return $view;
