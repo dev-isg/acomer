@@ -126,13 +126,15 @@ class PlatosTable {
                
             ////////////promociones////////////////////
             if($promocion!=null){
-            foreach($promocion as $value){
-            $promo = $this->tableGateway->getSql()->insert()
-                    ->into('Ta_plato_has_ta_tag')
-                    ->values(array('Ta_plato_in_id' => $idplato, 'Ta_tag_in_id' => $value));
-            $statementProm = $this->tableGateway->getSql()->prepareStatementForSqlObject($promo);
-            $statementProm->execute();
-            }
+            
+                    foreach($promocion as $value){
+                    $promo = $this->tableGateway->getSql()->insert()
+                            ->into('Ta_plato_has_ta_tag')
+                            ->values(array('Ta_plato_in_id' => $idplato, 'Ta_tag_in_id' => $value));
+                    $statementProm = $this->tableGateway->getSql()->prepareStatementForSqlObject($promo);
+                    $statementProm->execute();
+                    }
+            
             }
             //////////////fin///////////////
             $adapter = $this->tableGateway->getAdapter();
@@ -182,6 +184,42 @@ class PlatosTable {
                  if(!empty($idtipoplato))
                     {$data['Ta_tipo_plato_in_id'] = $idtipoplato;}
                 $this->tableGateway->update($data, array('in_id' => $id));
+//                if($this->promocionxPlato($id)->toArray()>0){
+//                    $var=1;
+//                }else{$var=0;}
+//                var_dump($var);exit;
+                    if($this->promocionxPlato($id)->toArray()>0){
+                         foreach($promocion as $value){
+                         $delete = $this->tableGateway->getSql()
+                            ->delete()
+                            ->from('Ta_plato_has_ta_tag')
+                            ->where(array('Ta_plato_in_id' => $id));
+                        $selectStringDelete = $this->tableGateway->getSql()->getSqlStringForSqlObject($delete);
+//                        var_dump($selectStringDelete);exit;
+                        $adapter1 = $this->tableGateway->getAdapter();
+                        $adapter1->query($selectStringDelete, $adapter1::QUERY_MODE_EXECUTE);
+                         }
+                      foreach($promocion as $value){
+                        $promo2 = $this->tableGateway->getSql()->insert()
+                               ->into('Ta_plato_has_ta_tag')
+                               ->values(array('Ta_plato_in_id' => $id, 'Ta_tag_in_id' => $value));
+                        $selectStringUpdate = $this->tableGateway->getSql()->getSqlStringForSqlObject($promo2);
+                    $adapter2 = $this->tableGateway->getAdapter();
+                    $adapter2->query($selectStringUpdate, $adapter2::QUERY_MODE_EXECUTE);
+                         }               
+
+
+                    }else{
+                      foreach($promocion as $value){
+                        $update = $this->tableGateway->getSql()->insert()
+                               ->into('Ta_plato_has_ta_tag')
+                               ->values(array('Ta_plato_in_id' => $id, 'Ta_tag_in_id' => $value));
+                   $selectStringUpdate2 = $this->tableGateway->getSql()->getSqlStringForSqlObject($update);
+                $adapter3 = $this->tableGateway->getAdapter();
+                $adapter3->query($selectStringUpdate2, $adapter2::QUERY_MODE_EXECUTE);
+                         }
+                         
+                    }
                 $this->cromSolr($id);
             } else {
                 throw new \Exception('No existe el id');
