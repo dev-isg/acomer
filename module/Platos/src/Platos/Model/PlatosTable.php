@@ -71,7 +71,6 @@ class PlatosTable {
             'en_estado' => (!empty($platos->en_estado)) ? $platos->en_estado : 2, //$plato->en_estado,
             'Ta_tipo_plato_in_id' => $platos->Ta_tipo_plato_in_id,
             'Ta_puntaje_in_id' => (!empty($platos->Ta_puntaje_in_id)) ? $platos->Ta_puntaje_in_id : 0,
-            'va_mistura'=>(!empty($platos->va_mistura)) ? $platos->va_mistura : 2,
             //'Ta_usuario_in_id' => (!empty($plato->Ta_usuario_in_id)) ? $plato->Ta_usuario_in_id : 1//$plato->Ta_usuario_in_id,
            'Ta_usuario_in_id' => 133,//$plato->Ta_usuario_in_id,
         );
@@ -528,6 +527,20 @@ class PlatosTable {
        if($id!=null){
             $selecttot ->where(array('ta_tag.in_id='=>$id))->order('ta_tag.va_nombre DESC');       
        }
+        $selectString = $sql->getSqlStringForSqlObject($selecttot);
+        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        return $results;
+    }
+    
+    public function promocionxPlato($id){
+    
+        $adapter = $this->tableGateway->getAdapter();
+        $sql = new Sql($adapter);
+        $selecttot = $sql->select()
+                ->from('Ta_plato_has_ta_tag')
+                ->join('ta_tag', 'ta_tag.in_id = Ta_plato_has_ta_tag.ta_tag_in_id', array(), 'left');
+            $selecttot ->where(array('Ta_plato_has_ta_tag.Ta_plato_in_id'=>$id));       
+   
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         return $results;
