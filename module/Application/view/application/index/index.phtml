@@ -11,6 +11,80 @@
 </div>
   
   <div class="descrip-product">
+   <?php if($this->promociones){ ?>
+    <div class="sub subir-home" id="subir-home">
+      <div class="content-etiqueta-home">
+        <p>Mistura 2013</p>
+      </div>
+    </div>
+    <div class="recomendados-platos primer-home" style="padding-bottom: 90px;">
+      <ul>
+         <?php  foreach ($this->promociones  as $promo) {
+                                    if(strlen($promo['va_nombre'])>27){
+                         $strnom=trim(substr($promo['va_nombre'], 0, 24));
+                          $strnom.='...';
+                         }else {$strnom=$promo['va_nombre'];} ?>
+          <li>
+            <div class="plato_r">
+              <div class="mosaic-block cover">
+                <div class="mosaic-overlay">
+                  <span><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></span>
+                  <img src="<?php if ($promo['va_imagen']=='platos-default.png')
+                      {echo $this->host('images') . '/defecto/' . htmlspecialchars($promo['va_imagen'], ENT_QUOTES, 'utf-8');}
+                  else
+                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($promo['va_imagen'], ENT_QUOTES, 'utf-8');} ?>" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" class="mas">
+                </div>
+                <a href="/plato/<?php echo $this->canonicalUrl($promo['va_nombre'], array('suffix' => $promo['in_id']));?>" class="mosaic-backdrop" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>">
+                  <div class="details">
+                    <h4>
+                      <?php 
+                    
+                    echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></h4>
+                    <p class="title-details" style="font-weight: bold;">Descripción</p>
+                    <p class="desc-plato font-desc-c"> <?php 
+                          if(strlen($promo['tx_descripcion'])>100){
+                           $str=trim(substr($promo['tx_descripcion'], 0, 97));
+                            $str.='...';
+                           }else {$str=$promo['tx_descripcion'];}       
+                    echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
+                  </div>
+                </a>
+              </div>
+              <div class="foo">
+                <p class="nom_res">
+                  <a href="/plato/<?php echo $this->canonicalUrl($promo['va_nombre'], array('suffix' => $promo['in_id']));?>" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>"><?php 
+                     if(strlen($promo['restaurant_nombre'])>29){
+                     $strres=trim(substr($promo['restaurant_nombre'], 0, 26));
+                      $strres.='...';
+                     }else {$strres=$promo['restaurant_nombre'];}
+                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></a></p>
+                <div class="pt">
+                  <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($promo['va_precio'], ENT_QUOTES, 'utf-8'); ?></p>-->
+                  <p class="com"><?php echo $promo['NumeroComentarios'] ?>  <a href="/plato/<?php echo $this->canonicalUrl($promo['va_nombre'], array('suffix' => $promo['in_id']));?>" title="ver todos los comentarios" alt="<?php echo $promo['va_nombre'];?>"><i class="icon-comment"></i></p>
+                  <div class="punt">
+                    <div class="puntuaciones c<?php echo $promo['Ta_puntaje_in_id'];?>"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li> 
+          <?php } ?>
+      </ul>
+        
+         <?php
+                require './vendor/Classes/Mobile_Detect.php';
+                $detect3 = new Mobile_Detect();
+                if (!$detect3->isMobile()) {
+                   ?>                
+                 <p class="ver_mistura"><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: mistura&distrito=TODOS LOS DISTRITOS" title="<?php echo $this->lista[0]['restaurant_nombre'];?>">ver mas</a></p>
+                 <?php }else{?>   
+                    <p class="ver_mistura"><a href="<?php echo $this->host('ruta')?>/buscar?q=tag: mistura" title="<?php echo $this->lista[0]['restaurant_nombre'];?>">ver mas</a><</p>
+                 <?php  }?>
+
+    </div>
+      <?php 
+      } ?>
+      
     <div class="sub subir-home" id="subir-home">
       <div class="content-etiqueta-home">
         <p>Platos destacados</p>
@@ -62,7 +136,7 @@
                 <div class="pt">
                   <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list['va_precio'], ENT_QUOTES, 'utf-8'); ?></p>-->
                   <p class="com">
-                    <a href="<?php echo $this->host('base')?>/plato/<?php echo $this->canonicalUrl($list['va_nombre'], array('suffix' => $list['in_id']));?>#verComentarios" title="ver todos los comentarios" alt="<?php echo $list['va_nombre'];?>"><?php echo $list['NumeroComentarios'] ?> <i class="icon-comment"></i>
+                    <a href="<?php echo $this->host('base')?>/plato/<?php echo $this->canonicalUrl($list['va_nombre'], array('suffix' => $list['in_id']));?>#verComentarios" title="ver todos los comentarios" alt="<?php echo $list['va_nombre'];?>"><?php echo $list['NumeroComentarios'] ?> <i class="icon-comment"></i></a>
                   </p>
                   <div class="punt">
                     <div class="puntuaciones c<?php echo $list['Ta_puntaje_in_id'];?>"></div>
@@ -71,9 +145,7 @@
               </div>
             </div>
           </li>
-        <?php 
-//             }
-         }; ?>   
+        <?php }; ?>   
       </ul>
     </div>
      
@@ -140,7 +212,7 @@
     </div>
      
 <!--Valoracion fila -->
-<div class="sub" style="margin-top: 0px;">
+    <div class="sub" style="margin-top: 0px;">
       <div class="content-etiqueta-home">
         <p>Platos valorados</p>
       </div>

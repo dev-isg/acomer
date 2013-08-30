@@ -57,6 +57,8 @@ public function __construct()
             }
         }
        $this->layout()->titleplato=implode(",",$list).',';
+       $mistura=$this->getConfigTable()->platosParticipantes();
+//       var_dump($mistura->toArray());exit;
         $listaval = $this->getConfigTable()->cantComentxPlato(2, 3, 3);
         $listault = $this->getConfigTable()->cantComentxPlato(2, 3, 2);
         $this->layout()->clase = 'Home';
@@ -65,6 +67,7 @@ public function __construct()
             'listaseg' => $listadeseg,
             'listaval' => $listaval,
             'listault' => $listault,
+            'promociones'=>$mistura,
             'clase' => 'Home'
         ));
         return $view;
@@ -141,7 +144,13 @@ public function __construct()
             $fp = fopen($ruta,"a");
             fwrite($fp, "$buscar , $distrito" . PHP_EOL);
             fclose($fp);
-            }  
+            }
+            elseif($valor[0]=='tag:')     
+            {
+            $buscar = $valor[1];
+            $texto = $valor[0].'"'.$buscar.'"'; 
+            $distrito = $datos['distrito'];  
+            }
             else{ $filter = new \Zend\I18n\Filter\Alnum(true);
             $texto = $filter->filter($plato);
             $distrito = $datos['distrito'];
@@ -202,6 +211,7 @@ public function __construct()
         
                 
             } else {
+                //var_dump($texto);exit;
                 $limite = 100;
                 $resultados = false;
                 $palabraBuscar = isset($texto) ? $texto : false;
@@ -216,6 +226,7 @@ public function __construct()
                     }
                     try {
                         $resultados = $solar->search($palabraBuscar, 0, $limite, $fd);
+                       var_dump($resultados);exit;
                     } catch (Exception $e) {
                         
                         $this->redirect()->toUrl('/application');

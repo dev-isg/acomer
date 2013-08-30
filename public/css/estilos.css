@@ -1719,10 +1719,15 @@ ul.time{
   margin-left: 2px;
 }
 ul.time .day{
-  color: #b6b6b6;
+  color: #7b7b7b;
   font-size: 14px;
   font-weight: bold;
 
+}
+li a.link-web{
+  color: #7b7b7b;
+  font-size: 14px;
+  font-family: arial;
 }
 ul.time .hour{
   color: #7b7b7b;
@@ -1965,6 +1970,15 @@ img.bg {
   position: fixed;
   top: 0;
   left: 0;
+}
+p.ver_mistura{
+  text-align: right;
+}
+p.ver_mistura a{
+  color: #ff8400;
+  margin-right: 20px;
+  font-size: 13px;
+  font-weight: bold;
 }
 /* ==========================================================================
    Helper classes

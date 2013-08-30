@@ -58,7 +58,7 @@ class PlatosTable {
     }
 
     
-    public function guardarPlato(Platos $platos, $imagen, $idlocal = null,$otro =null) {
+    public function guardarPlato(Platos $platos, $imagen, $idlocal = null,$otro =null,$promocion=null) {
 
         $data = array(
 //            'in_id' => $plato->in_id,
@@ -111,6 +111,7 @@ class PlatosTable {
             $results = $adapterc->query($selectStringC, $adapterc::QUERY_MODE_EXECUTE);
             $cant=$results->toArray();
 
+
         if ($id == 0) {
 
             if($cant[0]['cantidad']<5){ 
@@ -118,12 +119,26 @@ class PlatosTable {
                     {$data['Ta_tipo_plato_in_id'] = $idtipoplato;}
             $this->tableGateway->insert($data);
              $idplato = $this->tableGateway->getLastInsertValue();
+             
             $insert = $this->tableGateway->getSql()->insert()
                     ->into('ta_plato_has_ta_local')
                     ->values(array('Ta_plato_in_id' => $idplato, 'Ta_local_in_id' => $idlocal));
             $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
             $statement->execute();
-             
+
+               
+            ////////////promociones////////////////////
+            if($promocion!=null){
+            foreach($promocion as $value){
+            $promo = $this->tableGateway->getSql()->insert()
+                    ->into('Ta_plato_has_ta_tag')
+                    ->values(array('Ta_plato_in_id' => $idplato, 'Ta_tag_in_id' => $value));
+            $statementProm = $this->tableGateway->getSql()->prepareStatementForSqlObject($promo);
+            $statementProm->execute();
+            }
+            }
+            //////////////fin///////////////
+
             $adapter = $this->tableGateway->getAdapter();
             $sql = new Sql($adapter);
             $selecttot = $sql->select()
@@ -132,6 +147,10 @@ class PlatosTable {
                     ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
                     ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
                     ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud', 'de_longitud', 'va_direccion'), 'left')
+                    
+                    ->join(array('tpt' => 'ta_plato_has_ta_tag'), 'tpt.Ta_plato_in_id = ta_plato.in_id', array('tag'=>'ta_tag_in_id'), 'left')
+                    ->join(array('tt' => 'ta_tag'), 'tt.in_id =tpt.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
+      
                     ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado','Ta_tipo_comida_in_id'), 'left')
                     ->join(array('tc' => 'ta_tipo_comida'), 'tc.in_id = tr.Ta_tipo_comida_in_id', array('nombre_tipo_comida' => 'va_nombre_tipo'), 'left')
                     ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito'), 'left')
@@ -139,6 +158,7 @@ class PlatosTable {
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $plato = $results->toArray();
+            //var_dump( $plato[0]['tag']);exit;
             $solr = \Classes\Solr::getInstance()->getSolr();
             if ($solr->ping()) {  
                 $document = new \Apache_Solr_Document();
@@ -153,6 +173,7 @@ class PlatosTable {
                 $document->restaurante = $plato[0]['restaurant_nombre'];
                 $document->en_destaque = $plato[0]['en_destaque'];
                 $document->latitud = $plato[0]['de_latitud'];
+                $document->tag = $plato[0]['tag'];
                 $document->longitud = $plato[0]['de_longitud'];
                 $document->distrito = $plato[0]['distrito'];
                 $document->va_imagen = $plato[0]['va_imagen'];
@@ -482,12 +503,13 @@ class PlatosTable {
                 ->join('ta_comentario', 'ta_plato.in_id = ta_comentario.ta_plato_in_id', array(), 'left')
                 ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id', array(), 'left')
                 ->join('ta_plato_has_ta_local', 'ta_plato_has_ta_local.ta_plato_in_id = ta_plato.in_id', array(), 'left')
-                ->join('ta_local', 'ta_local.`in_id` = ta_plato_has_ta_local.`ta_local_in_id`', array(), 'left')
-                ->join('ta_ubigeo', 'ta_ubigeo.`in_id` = ta_local.`ta_ubigeo_in_id`', array('Distrito' => 'ch_distrito'), 'left')
+                ->join('ta_local', 'ta_local.in_id = ta_plato_has_ta_local.ta_local_in_id', array(), 'left')
+                ->join('ta_ubigeo', 'ta_ubigeo.in_id = ta_local.ta_ubigeo_in_id', array('Distrito' => 'ch_distrito'), 'left')
                 ->join('ta_restaurante', 'ta_local.ta_restaurante_in_id= ta_restaurante.in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
-                ->where(array('ta_plato.va_mistura'=>'1'))->group('ta_plato.in_id')->order('ta_plato.in_id DESC')->limit(3);
+               ->join('Ta_plato_has_ta_tag', 'ta_plato.in_id = Ta_plato_has_ta_tag.ta_plato_in_id', array(), 'left')
+                ->join('ta_tag', 'ta_tag.in_id = Ta_plato_has_ta_tag.ta_tag_in_id', array(), 'left')
+                ->where(array('ta_tag.in_id'=>'1'))->group('ta_plato.in_id')->order('ta_plato.in_id DESC')->limit(3);
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
-
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         return $results;
         
@@ -508,6 +530,19 @@ class PlatosTable {
                 , $adapter::QUERY_MODE_EXECUTE);
             
             return $cantidad->toArray();
+    }
+    
+   public function promocion($id=null){
+               $adapter = $this->tableGateway->getAdapter();
+        $sql = new Sql($adapter);
+        $selecttot = $sql->select()
+                ->from('ta_tag')->order('ta_tag.va_nombre asc');
+       if($id!=null){
+            $selecttot ->where(array('ta_tag.in_id='=>$id))->order('ta_tag.va_nombre DESC');       
+       }
+        $selectString = $sql->getSqlStringForSqlObject($selecttot);
+        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        return $results;
     }
 
     public function cantComentarios($dest = 1, $lim) {
