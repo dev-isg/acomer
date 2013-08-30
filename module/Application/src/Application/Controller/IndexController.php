@@ -149,6 +149,7 @@ public function __construct()
             {
             $buscar = $valor[1];
             $texto = $valor[0].'"'.$buscar.'"'; 
+          //  var_dump($texto);exit;
             $distrito = $datos['distrito'];  
             }
             else{ $filter = new \Zend\I18n\Filter\Alnum(true);
@@ -226,7 +227,7 @@ public function __construct()
                     }
                     try {
                         $resultados = $solar->search($palabraBuscar, 0, $limite, $fd);
-                       var_dump($resultados);exit;
+                       //var_dump($resultados->response->docs);exit;
                     } catch (Exception $e) {
                         
                         $this->redirect()->toUrl('/application');
@@ -402,7 +403,14 @@ public function __construct()
         $fp = fopen($ruta,"a");
         fwrite($fp, "$buscar , $distrito" . PHP_EOL);
         fclose($fp);
-        }      
+        }   
+        elseif($valor[0]=='tag:')     
+            {
+            $buscar = $valor[1];
+            $texto = $valor[0].'"'.$buscar.'"'; 
+          //  var_dump($texto);exit;
+           // $distrito = $datos['distrito'];  
+            }
         else{
         $filtered = strtoupper($filtered);
         $filter = new \Zend\I18n\Filter\Alnum(true);

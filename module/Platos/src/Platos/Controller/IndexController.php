@@ -315,11 +315,28 @@ class IndexController extends AbstractActionController {
         $form  = new PlatosForm($adpter,$idlocal);
         
         $form->get('va_imagen')->setValue($comeya);
+                        ////////////////PROMOCIONES//////////////////////////
+        $promocion =  $this->getPlatosTable()->promocion()->toArray();
+        $promo = array();
+        foreach($promocion as $arrpro){
+            $promo[$arrpro['in_id']] = $arrpro['va_nombre'];
+        }
+        $form->get('va_promocion')->setValueOptions($promo);
+        /////////////////////PROMOCIONES////////////////////
+        
+
         $form->bind($restaurante);
+        $promobind =  $this->getPlatosTable()->promocionxPlato($id)->toArray();
+
+        $aux = array();
+        foreach ($promobind as $value) {
+            $aux[$value['ta_tag_in_id']] = $value['ta_tag_in_id'];
+            $form->get('va_promocion')->setAttribute('value', $aux);    
+        }
 
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();
-        $comida = $this->params()->fromPost('va_modalidad');
+//        $comida = $this->params()->fromPost('va_modalidad');
         
         if ($request->isPost()) {
             $datos =$this->request->getPost();
@@ -721,7 +738,7 @@ class IndexController extends AbstractActionController {
                 trim($listarecomendacion[0]['tipo_plato_nombre']).':'.
                 trim($listarecomendacion[0]['restaurant_nombre']).':'.
                 trim($listarecomendacion[0]['distrito']).'|Lista del Sabor';
-    $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
+       $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id,
              'listatitle'=>$listatitle, 'masplatos' => $results->response->docs,'masplatos2'=>$resultados->response->docs));
