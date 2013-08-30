@@ -101,7 +101,6 @@ class IndexController extends AbstractActionController {
             );
             $form->setData($data);       
             if ($form->isValid()) {
-                 var_dump($datos);Exit;
                 $nonFile = $request->getPost()->toArray();
 //                $File = $this->params()->fromFiles('va_imagen');
         if($File['name']!='')
@@ -594,12 +593,11 @@ class IndexController extends AbstractActionController {
                     } catch (Exception $e) {
                   echo ("<div>ingrese algun valor</div>"); }}
                   
-                  
-              
+     
                   if(count($results->response->docs)<=1)
                   {
                     if($_COOKIE['q']){
-                            if($_COOKIE['distrito']!=='TODOS LOS DISTRITOS') {   
+                            if($_COOKIE['distrito']!=='TODOS LOS DISTRITOS') {
                             $texto =$_COOKIE['q'];
                             $distrito=$_COOKIE['distrito'];
                             $limit = 3;
@@ -618,7 +616,10 @@ class IndexController extends AbstractActionController {
                                 try { $resultados = $solr->search($query, 0, $limit, $fq);
                                 } catch (Exception $e) {
                               echo ("<div>ingrese algun valor</div>"); }} 
-                              }else{$texto =$_COOKIE['q'];
+                              }else{
+                                  
+                            //echo'111';exit;      
+                            $texto =$_COOKIE['q'];
                             $limit = 3;
                             $palabraBuscar = isset($texto) ? $texto : false;
                             $query = "($palabraBuscar)";
@@ -633,6 +634,7 @@ class IndexController extends AbstractActionController {
                                 if (get_magic_quotes_gpc() == 1) {
                                     $query = stripslashes($query);}
                                 try { $resultados = $solr->search($query, 0, $limit, $fq);
+                   
                                 } catch (Exception $e) {
                               echo ("<div>ingrese algun valor</div>"); }} }
                           }

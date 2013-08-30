@@ -23,10 +23,6 @@ body {
     line-height: 1.4;
     position: relative;
 }
-body,
-html{
-  height: 100%;
-}
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
@@ -1193,7 +1189,7 @@ width: 49%;
 .etiqueta-cat{
   display: block;
   width: 100%;
-  padding-top: 35px;
+  padding-top: 20px;
   float: left;
 }
 .etiqueta{
@@ -2169,6 +2165,10 @@ img.bg {
 
 /*Activando responsive web desing*/
 @media (min-width: 1200px) {
+  body,
+  html{
+    height: 100%;
+  }
   .footer{
     width: 1024px;
   }
@@ -2308,6 +2308,12 @@ img.bg {
     width: 100%;
   }
 }*/
+@media (min-width: 980px) and (max-width: 1199px) {
+  html,
+  body{
+    height: 100%;
+  }
+}
 @media (min-width: 768px) and (max-width: 979px) {
 
   .ficha-img img{
@@ -2553,6 +2559,16 @@ img.bg {
   }
   .fo{
     margin-left: 0!important;
+  }
+  body,
+  html{
+    height: 100%;
+  }
+}
+@media (min-width: 645px) and (max-width: 766px) {
+  body,
+  html{
+    height: 100%;
   }
 }
 @media (max-width: 767px) {
@@ -2862,7 +2878,12 @@ img.bg {
   }
 }
 @media (max-width: 480px) {
-
+  .guia{
+    display: none;
+  }
+  .descrip-product{
+    margin-top: 20px!important;
+  }
   a.title-home-listado{
     text-decoration: none;
   }

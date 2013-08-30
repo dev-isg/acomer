@@ -127,7 +127,6 @@ public function __construct()
     public function detalleubicacionAction()
     {
         $view = new ViewModel();
-        
         $request = $this->getRequest();
         $this->layout()->clase = 'buscar-distrito';
         if ($request->isGet()) {
@@ -200,6 +199,7 @@ public function __construct()
                         echo ("<div>ingrese algun valor</div>");
                     }
                 }
+        
                 
             } else {
                 $limite = 100;
@@ -242,6 +242,8 @@ public function __construct()
                         $this->redirect()->toUrl('/application');
                     }
                 }
+           
+  
             }
             
             //////////////////////////////////////////random de 5 platos distinc////////////////////////////////////

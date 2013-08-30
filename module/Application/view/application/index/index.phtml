@@ -61,7 +61,9 @@
                 echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></a></p>
                 <div class="pt">
                   <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list['va_precio'], ENT_QUOTES, 'utf-8'); ?></p>-->
-                  <p class="com"><a href="/plato/<?php echo $this->canonicalUrl($list['va_nombre'], array('suffix' => $list['in_id']));?>#verComentarios" title="ver todos los comentarios" alt="<?php echo $list['va_nombre'];?>"><?php echo $list['NumeroComentarios'] ?> <i class="icon-comment"></i></p>
+                  <p class="com">
+                    <a href="<?php echo $this->host('base')?>/plato/<?php echo $this->canonicalUrl($list['va_nombre'], array('suffix' => $list['in_id']));?>#verComentarios" title="ver todos los comentarios" alt="<?php echo $list['va_nombre'];?>"><?php echo $list['NumeroComentarios'] ?> <i class="icon-comment"></i>
+                  </p>
                   <div class="punt">
                     <div class="puntuaciones c<?php echo $list['Ta_puntaje_in_id'];?>"></div>
                   </div>
