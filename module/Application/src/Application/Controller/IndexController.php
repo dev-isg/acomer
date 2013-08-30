@@ -130,7 +130,6 @@ public function __construct()
     public function detalleubicacionAction()
     {
         $view = new ViewModel();
-        
         $request = $this->getRequest();
         $this->layout()->clase = 'buscar-distrito';
         if ($request->isGet()) {
@@ -145,7 +144,14 @@ public function __construct()
             $fp = fopen($ruta,"a");
             fwrite($fp, "$buscar , $distrito" . PHP_EOL);
             fclose($fp);
-            }  
+            }
+            elseif($valor[0]=='tag:')     
+            {
+            $buscar = $valor[1];
+            $texto = $valor[0].'"'.$buscar.'"'; 
+          //  var_dump($texto);exit;
+            $distrito = $datos['distrito'];  
+            }
             else{ $filter = new \Zend\I18n\Filter\Alnum(true);
             $texto = $filter->filter($plato);
             $distrito = $datos['distrito'];
@@ -203,8 +209,10 @@ public function __construct()
                         echo ("<div>ingrese algun valor</div>");
                     }
                 }
+        
                 
             } else {
+                //var_dump($texto);exit;
                 $limite = 100;
                 $resultados = false;
                 $palabraBuscar = isset($texto) ? $texto : false;
@@ -219,6 +227,7 @@ public function __construct()
                     }
                     try {
                         $resultados = $solar->search($palabraBuscar, 0, $limite, $fd);
+                       //var_dump($resultados->response->docs);exit;
                     } catch (Exception $e) {
                         
                         $this->redirect()->toUrl('/application');
@@ -245,6 +254,8 @@ public function __construct()
                         $this->redirect()->toUrl('/application');
                     }
                 }
+           
+  
             }
             
             //////////////////////////////////////////random de 5 platos distinc////////////////////////////////////
@@ -392,7 +403,14 @@ public function __construct()
         $fp = fopen($ruta,"a");
         fwrite($fp, "$buscar , $distrito" . PHP_EOL);
         fclose($fp);
-        }      
+        }   
+        elseif($valor[0]=='tag:')     
+            {
+            $buscar = $valor[1];
+            $texto = $valor[0].'"'.$buscar.'"'; 
+          //  var_dump($texto);exit;
+           // $distrito = $datos['distrito'];  
+            }
         else{
         $filtered = strtoupper($filtered);
         $filter = new \Zend\I18n\Filter\Alnum(true);

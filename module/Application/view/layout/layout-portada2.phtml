@@ -49,7 +49,6 @@
   </head>
 
 <body class="lista-<?php echo $this->clase; ?>">
-  <img src="/img/b.jpg" class="bg" />
 	<script>
       var urlJson = "<?php echo $this->host('ruta')?>";
     </script>
@@ -118,7 +117,16 @@
         
       <?php } ?>
 
-      <!--<div class="contenido">-->
+    <!--<div class="contenido">-->
+    <?php 
+    if ($detect1->isAndroidOS()){
+
+    }elseif($detect->isiPad()){
+
+    }else{ ?>
+      <img src="/img/main-bg.jpg" class="bg" />
+    <?php }?>
+
 	<div class="container cont-home">
       
       <?php
@@ -141,16 +149,18 @@
 
             <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar-por-distrito">   <p>
                   <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php 
-                                                                if($_GET['q']) 
-                                                                {$valor = explode(" ",$_GET['q']);
-                                                                if($valor[0]=='restaurante:')
-                                                                   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
-                                                                   else{echo $_GET['q'];};}
-                                                                else{      $valor = explode(" ",$_COOKIE['q']);
-                                                                if($valor[0]=='restaurante:')
-                                                                   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
-                                                                   else{echo $_COOKIE['q'];};}
-                                                                    ?>"     placeholder="Ingrese el plato"  required="required"/>
+                  if($_GET['q']) 
+                  {$valor = explode(" ",$_GET['q']);
+                  if($valor[0]=='restaurante:')
+                   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                elseif ($valor[0]=='tag:') {echo $valor[1];}
+                   else{echo $_GET['q'];};}
+                  else{      $valor = explode(" ",$_COOKIE['q']);
+                            if($valor[0]=='restaurante:')
+                     {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                     elseif ($valor[0]=='tag:') {echo $valor[1];}
+                     else{echo $_COOKIE['q'];};}
+                      ?>"     placeholder="Ingrese el plato"  required="required"/>
                   <em>Ejm: lomo saltado</em>
                 </p>
                 <p>
@@ -191,16 +201,18 @@
               <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar">
                 <p>
                   <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php 
-                                                                if($_GET['q']) 
-                                                                {$valor = explode(" ",$_GET['q']);
-                                                                if($valor[0]=='restaurante:')
-                                                                   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
-                                                                   else{echo $_GET['q'];};}
-                                                                else{      $valor = explode(" ",$_COOKIE['q']);
-                                                                if($valor[0]=='restaurante:')
-                                                                   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
-                                                                   else{echo $_COOKIE['q'];};}
-                                                                    ?>"     placeholder="Ingrese el plato"  required="required"/>
+                                                                 if($_GET['q']) 
+                  {$valor = explode(" ",$_GET['q']);
+                  if($valor[0]=='restaurante:')
+                   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                elseif ($valor[0]=='tag:') {echo $valor[1];}
+                   else{echo $_GET['q'];};}
+                  else{      $valor = explode(" ",$_COOKIE['q']);
+                            if($valor[0]=='restaurante:')
+                     {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                     elseif ($valor[0]=='tag:') {echo $valor[1];}
+                     else{echo $_COOKIE['q'];};}
+                      ?>"     placeholder="Ingrese el plato"  required="required"/>
                   <input type="submit"  class="verlistado" value="Buscar"/>
                 </p>
                 <p>
@@ -241,18 +253,18 @@
 						<p>
 							<input id="q" name="q" type="text" onclick="this.value=''"
 								value="<?php 
-                                                                if($_GET['q']) 
-                                                                {$valor = explode(" ",$_GET['q']);
-                                                                if($valor[0]=='restaurante:')
-                                                                   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
-                                                                   else{echo $_GET['q'];};}
-                                                                else{ 
-                                                                $valor = explode(" ",$_COOKIE['q']);
-                                                                if($valor[0]=='restaurante:')
-                                                                   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
-                                                                   else{echo $_COOKIE['q'];};
-                                                                   }
-                                                                    ?>"
+                        if($_GET['q']) 
+                        {$valor = explode(" ",$_GET['q']);
+                        if($valor[0]=='restaurante:')
+                           {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                           else{echo $_GET['q'];};}
+                        else{ 
+                        $valor = explode(" ",$_COOKIE['q']);
+                        if($valor[0]=='restaurante:')
+                           {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                           else{echo $_COOKIE['q'];};
+                           }
+                            ?>"
 								placeholder="Ingrese el plato" required="required" /> <em>Ejm:
 								lomo saltado</em>
 						</p>
@@ -261,7 +273,7 @@
 							<select name="distrito" id="fq" value="">
                  <?php  foreach ($this->comidas as $comida) : ?>
                  
-                   <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"
+                   <option value="<?php echo $comida['va_distrito']; ?>"
 									<?php
 									       if($_GET['distrito']){
                               if($_GET['distrito'] == $comida['va_distrito']){
@@ -269,17 +281,15 @@
                                   }
                          }else{
                               if(isset($_COOKIE['distrito'])){
-                                      if($_COOKIE['distrito'] == $comida['va_distrito']){
-                                               echo 'selected';
-                                      } 
-                                  }else{
-                                      echo '';
-                                  }
-
+                                if($_COOKIE['distrito'] == $comida['va_distrito']){
+                                         echo 'selected';
+                                } 
+                            }else{
+                                echo '';
+                            }
                          }
-                                           
                          ?>>
-                     <?php echo $comida['va_distrito']; ?></OPTION>
+                     <?php echo $comida['va_distrito']; ?></option>
                      
                 <?php endforeach;?>
                      </select>

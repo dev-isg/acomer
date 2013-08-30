@@ -23,10 +23,6 @@ body {
     line-height: 1.4;
     position: relative;
 }
-body,
-html{
-  height: 100%;
-}
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
@@ -931,9 +927,15 @@ label.error {
     display: inline-block;
     width: 21%;
     text-align: center;
-    color: rgba(0, 0, 0, 0.77);
+    color: #000;
     font-size: 14px;
     margin-bottom: 6px;
+}
+.com a{
+  color: #000;
+}
+.com a:hover{
+  text-decoration: none;
 }
 .img-info-plato{
   width: 250px;
@@ -1187,7 +1189,7 @@ width: 49%;
 .etiqueta-cat{
   display: block;
   width: 100%;
-  padding-top: 35px;
+  padding-top: 20px;
   float: left;
 }
 .etiqueta{
@@ -1252,8 +1254,7 @@ width: 49%;
 }
 .lista-Detalle .descrip-product{
   padding-bottom: 10px;
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 50px;
+  border-bottom: 1px solid #ccc;  
 }
 .lista-Detalle .subir{
   display: none!important;
@@ -1718,10 +1719,15 @@ ul.time{
   margin-left: 2px;
 }
 ul.time .day{
-  color: #b6b6b6;
+  color: #7b7b7b;
   font-size: 14px;
   font-weight: bold;
 
+}
+li a.link-web{
+  color: #7b7b7b;
+  font-size: 14px;
+  font-family: arial;
 }
 ul.time .hour{
   color: #7b7b7b;
@@ -1965,6 +1971,15 @@ img.bg {
   top: 0;
   left: 0;
 }
+p.ver_mistura{
+  text-align: right;
+}
+p.ver_mistura a{
+  color: #ff8400;
+  margin-right: 20px;
+  font-size: 13px;
+  font-weight: bold;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
@@ -2164,6 +2179,10 @@ img.bg {
 
 /*Activando responsive web desing*/
 @media (min-width: 1200px) {
+  body,
+  html{
+    height: 100%;
+  }
   .footer{
     width: 1024px;
   }
@@ -2303,6 +2322,12 @@ img.bg {
     width: 100%;
   }
 }*/
+@media (min-width: 980px) and (max-width: 1199px) {
+  html,
+  body{
+    height: 100%;
+  }
+}
 @media (min-width: 768px) and (max-width: 979px) {
 
   .ficha-img img{
@@ -2548,6 +2573,16 @@ img.bg {
   }
   .fo{
     margin-left: 0!important;
+  }
+  body,
+  html{
+    height: 100%;
+  }
+}
+@media (min-width: 645px) and (max-width: 766px) {
+  body,
+  html{
+    height: 100%;
   }
 }
 @media (max-width: 767px) {
@@ -2857,7 +2892,12 @@ img.bg {
   }
 }
 @media (max-width: 480px) {
-
+  .guia{
+    display: none;
+  }
+  .descrip-product{
+    margin-top: 20px!important;
+  }
   a.title-home-listado{
     text-decoration: none;
   }

@@ -110,8 +110,9 @@ class PlatosTable {
             $results = $adapterc->query($selectStringC, $adapterc::QUERY_MODE_EXECUTE);
             $cant=$results->toArray();
 
+
         if ($id == 0) {
-            
+
             if($cant[0]['cantidad']<5){ 
                 if(!empty($idtipoplato))
                     {$data['Ta_tipo_plato_in_id'] = $idtipoplato;}
@@ -123,6 +124,7 @@ class PlatosTable {
                     ->values(array('Ta_plato_in_id' => $idplato, 'Ta_local_in_id' => $idlocal));
             $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
             $statement->execute();
+
                
             ////////////promociones////////////////////
             if($promocion!=null){
@@ -137,6 +139,7 @@ class PlatosTable {
             
             }
             //////////////fin///////////////
+
             $adapter = $this->tableGateway->getAdapter();
             $sql = new Sql($adapter);
             $selecttot = $sql->select()
@@ -145,6 +148,8 @@ class PlatosTable {
                     ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
                     ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
                     ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud', 'de_longitud', 'va_direccion'), 'left')
+                    ->join(array('tpt' => 'ta_plato_has_ta_tag'), 'tpt.Ta_plato_in_id = ta_plato.in_id', array('tag'=>'ta_tag_in_id'), 'left')
+                    ->join(array('tt' => 'ta_tag'), 'tt.in_id =tpt.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
                     ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado','Ta_tipo_comida_in_id'), 'left')
                     ->join(array('tc' => 'ta_tipo_comida'), 'tc.in_id = tr.Ta_tipo_comida_in_id', array('nombre_tipo_comida' => 'va_nombre_tipo'), 'left')
                     ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito'), 'left')
@@ -152,8 +157,9 @@ class PlatosTable {
             $selectString = $sql->getSqlStringForSqlObject($selecttot);
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $plato = $results->toArray();
+//var_dump( $plato[0]['tag']);exit;
             $solr = \Classes\Solr::getInstance()->getSolr();
-            if ($solr->ping()) {
+            if ($solr->ping()) {  
                 $document = new \Apache_Solr_Document();
                 $document->id = $plato[0]['in_id'];
                 $document->name = $plato[0]['va_nombre'];
@@ -166,6 +172,7 @@ class PlatosTable {
                 $document->restaurante = $plato[0]['restaurant_nombre'];
                 $document->en_destaque = $plato[0]['en_destaque'];
                 $document->latitud = $plato[0]['de_latitud'];
+                $document->tag = $plato[0]['tag'];
                 $document->longitud = $plato[0]['de_longitud'];
                 $document->distrito = $plato[0]['distrito'];
                 $document->va_imagen = $plato[0]['va_imagen'];
@@ -175,6 +182,7 @@ class PlatosTable {
                 $solr->addDocument($document);
                 $solr->commit();
                 $solr->optimize();
+             
             }
             
           }
@@ -221,13 +229,14 @@ class PlatosTable {
                          
                     }
                 $this->cromSolr($id);
+               
             } else {
                 throw new \Exception('No existe el id');
             }
         }
     }
 
-    public function cromSolr($id) {
+    public function cromSolr($id) {  
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
         $selecttot = $sql->select()
@@ -236,7 +245,10 @@ class PlatosTable {
                     ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
                     ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
                     ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud', 'de_longitud', 'va_direccion'), 'left')
-                    ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado'), 'left')
+                  ->join(array('tpt' => 'ta_plato_has_ta_tag'), 'tpt.Ta_plato_in_id = ta_plato.in_id', array('tag'=>'ta_tag_in_id'), 'left')
+                    ->join(array('tt' => 'ta_tag'), 'tt.in_id =tpt.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
+                       
+                ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado'), 'left')
                     ->join(array('tc' => 'ta_tipo_comida'), 'tc.in_id = tr.Ta_tipo_comida_in_id', array('nombre_tipo_comida' => 'va_nombre_tipo'), 'left')                    
                     ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito'), 'left')
                     ->where(array('ta_plato.in_id' => $id));
@@ -244,7 +256,7 @@ class PlatosTable {
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
-      //  var_dump($plato[0]['distrito']);exit;
+
        
         $solr = \Classes\Solr::getInstance()->getSolr();
         if ($solr->ping()) {
@@ -260,6 +272,7 @@ class PlatosTable {
             $document->restaurante = $plato[0]['restaurant_nombre'];
             $document->tipo_comida = $plato[0]['nombre_tipo_comida'];
             $document->en_destaque = $plato[0]['en_destaque'];
+            $document->tag = $plato[0]['tag'];
             $document->latitud = $plato[0]['de_latitud'];
             $document->longitud = $plato[0]['de_longitud'];
             $document->distrito = $plato[0]['distrito'];
@@ -361,6 +374,7 @@ class PlatosTable {
                 ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
                 ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('va_horario_opcional','de_latitud', 'de_longitud', 'va_direccion', 'va_horario', 'va_dia', 'va_telefono','va_direccion_referencia'), 'left')
                 ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_id' => 'in_id', 'restaurant_nombre' => 'va_nombre', 'restaurant_img' => 'va_imagen','web'=>'va_web'), 'left')
+                ->join(array('ttc' => 'ta_tipo_comida'), 'ttc.in_id=tr.ta_tipo_comida_in_id', array('tipo_comida'=>'va_nombre_tipo'), 'left')           
                 ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('pais' => 'ch_pais', 'departamento' => 'ch_departamento', 'provincia' => 'ch_provincia', 'distrito' => 'ch_distrito'), 'left')
                 ->join(array('tc' => 'ta_comentario'), 'tc.ta_plato_in_id=ta_plato.in_id', array('estado_comen'=>'en_estado'), 'left')
 //            ->join(array('tcli'=>'ta_cliente'),'tcli.in_id=tc.ta_cliente_in_id',array('va_nombre_cliente','va_email'),'left')
