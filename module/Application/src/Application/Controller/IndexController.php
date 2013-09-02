@@ -153,9 +153,6 @@ public function __construct()
             if ($texto == '') {
                 $this->redirect()->toUrl('/');
             }
-            if ($texto == '') {
-                $this->redirect()->toUrl('/');
-            }
             if ($distrito != 'TODOS LOS DISTRITOS') {
                 $limite = 100;
                 $resultados = false;
@@ -302,17 +299,13 @@ public function __construct()
         }
          if($valor[0]=='restaurante:')
          { $form->get('q')->setValue($plato);
-         $valores = $buscar;
-         } 
+         $valores = $buscar;} 
          elseif($valor[0]=='tag:')
          { $form->get('q')->setValue($plato);
-         $valores = $buscar;
-         }
-         else{ 
-         setcookie('q', $texto);
+         $valores = $buscar;}
+         else{ setcookie('q', $texto);
          $form->get('q')->setValue($texto);
-         $valores =$texto;
-         }
+         $valores =$texto;}
         setcookie('distrito', $distrito);
         $form->get('distrito')->setValue($distrito);
         $form->get('distrito')->setValueOptions($com);
@@ -388,22 +381,17 @@ public function __construct()
         $filtered = $this->params()->fromQuery('q');
         $valor = explode(" ", $filtered);
          if($valor[0]=='restaurante:')
-        {
-        $buscar =  $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];     
+        {$buscar =  $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];     
         $texto = $valor[0].'"'.$buscar.'"'; 
         $distrito = '';
         $ruta = $this->_options->data->busqueda .'/busqueda_movil.txt';
         $fp = fopen($ruta,"a");
         fwrite($fp, "$buscar , $distrito" . PHP_EOL);
-        fclose($fp);
-        }   
+        fclose($fp); }   
         elseif($valor[0]=='tag:')     
-            {
-            $buscar = $valor[1];
-            $texto = $valor[0].'"'.$buscar.'"'; 
-            }
-        else{
-        $filtered = strtoupper($filtered);
+        {$buscar = $valor[1];
+        $texto = $valor[0].'"'.$buscar.'"';}
+        else{ $filtered = strtoupper($filtered);
         $filter = new \Zend\I18n\Filter\Alnum(true);
         $text = trim($filter->filter($filtered));
         $text = preg_replace('/\s\s+/', ' ', $text);

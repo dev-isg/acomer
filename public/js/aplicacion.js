@@ -155,12 +155,12 @@ $(document).ready(function() {
     }).keyup();
     $("#buscarmap").on("click", function() {
         var h = $("#bubi #q").val();
-        var condi = h.substring(0, 12);
+        var condi = h.substring(0, 12);        
         var cot = h.substring(0, 4);
         if(condi === 'restaurante:'){
             var numer = h.length;
             var hvalor = h.substring(12, numer);
-        }else if(condi === 'tag:'){
+        }else if(cot === 'tag:'){
             var numer = h.length;
             var hvalor = h.substring(4, numer);
         }else{
