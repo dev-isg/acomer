@@ -228,7 +228,7 @@
                    
                  
                   <?php endforeach; ?> 
-      <div id="pagina"><?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar?q='.$this->nombre.'&submit=Buscar'.'&')):""; ?> </div>         
+      <div id="pagina"><?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar?q='.$this->plato.'&submit=Buscar'.'&')):""; ?> </div>         
        </div>         
       <div class="padding-map">
         <div id="mapa-buscador">
