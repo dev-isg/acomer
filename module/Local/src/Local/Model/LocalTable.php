@@ -137,7 +137,8 @@ class LocalTable
             'va_direccion' => $local->va_direccion,
            'ta_restaurante_in_id' => $local->ta_restaurante_in_id,
             'ta_ubigeo_in_id' => $convertir[0]['in_id'],//$local->ta_ubigeo_in_id
-             'va_dia'=>$local->va_dia,
+            'va_email'=>$local->va_email,
+            'va_dia'=>$local->va_dia,
             'va_direccion_referencia'=>$local->va_direccion_referencia
         );
 

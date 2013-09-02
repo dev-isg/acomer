@@ -10,7 +10,6 @@ use \Zend\Form\View\Helper\AbstractHelper;
  */
 class CanonicalUrl extends AbstractHelper
 {
-
     /**
      * Llamado de la función canonicaUrl
      *

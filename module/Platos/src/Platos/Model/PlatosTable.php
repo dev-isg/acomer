@@ -533,7 +533,20 @@ class PlatosTable {
         return $primer; //->toArray();//$data;// $aux;//select()->from('usuario')->query()->fetchAll();
     }
     
-    public function platosParticipantes(){
+    public function platosParticipantes($destaque=2,$estado=1){
+        
+          $cantidad=$this->aleatorios($destaque, $estado, $puntaje='=0',1);
+          $total=$cantidad[0]['NumeroResultados'];
+            if($total<=3) { 
+                $aleatorio=0;
+            }
+            else {
+                $aleatorio=rand(0,$total-3);
+            }
+////           
+//        var_dump($total);
+//        var_dump($aleatorio);
+        $limit=' LIMIT '.$aleatorio.',3';
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
         $selecttot = $sql->select()
@@ -547,17 +560,40 @@ class PlatosTable {
                 ->join('ta_restaurante', 'ta_local.ta_restaurante_in_id= ta_restaurante.in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
                ->join('Ta_plato_has_ta_tag', 'ta_plato.in_id = Ta_plato_has_ta_tag.ta_plato_in_id', array(), 'left')
                 ->join('ta_tag', 'ta_tag.in_id = Ta_plato_has_ta_tag.ta_tag_in_id', array(), 'left')
-                ->where(array('ta_tag.in_id'=>'1'))->group('ta_plato.in_id')->order('ta_plato.in_id DESC')->limit(3);
+                ->where(array('ta_tag.in_id'=>'1'))->group('ta_plato.in_id')->order('ta_plato.in_id DESC');//limit($aleatorio)->offset(3)
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
-        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//        var_dump($selectString);exit;
+        $results = $adapter->query($selectString.$limit, $adapter::QUERY_MODE_EXECUTE);
         return $results;
         
     }
     
-    public function aleatorios($destaque,$estado,$puntaje){
+    public function aleatorios($destaque,$estado,$puntaje,$promocion=null){
+//        $adapter = $this->tableGateway->getAdapter();
+//        $sql = new Sql($adapter);
+//        $selecttot = $sql->select()
+//                ->from('ta_plato')
+//                ->columns(array('*', 'NumeroResultados' => new \Zend\Db\Sql\Expression('COUNT(DISTINCT(ta_plato.in_id ))')))
+//                ->join('ta_comentario', 'ta_plato.in_id = ta_comentario.ta_plato_in_id', array(), 'left')
+//                ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id', array(), 'left')
+//                ->join('ta_plato_has_ta_local', 'ta_plato_has_ta_local.ta_plato_in_id = ta_plato.in_id', array(), 'left')
+//                ->join('ta_local', 'ta_local.in_id = ta_plato_has_ta_local.ta_local_in_id', array(), 'left')
+//                ->join('ta_ubigeo', 'ta_ubigeo.in_id = ta_local.ta_ubigeo_in_id', array('Distrito' => 'ch_distrito'), 'left')
+//                ->join('ta_restaurante', 'ta_local.ta_restaurante_in_id= ta_restaurante.in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
+//               ->join('Ta_plato_has_ta_tag', 'ta_plato.in_id = Ta_plato_has_ta_tag.ta_plato_in_id', array(), 'left')
+//                ->join('ta_tag', 'ta_tag.in_id = Ta_plato_has_ta_tag.ta_tag_in_id', array(), 'left');
+//        if($promocion!=null){
+//              $selecttot->where(array('ta_tag.in_id'=>'1'));//->group('ta_plato.in_id')->order('ta_plato.in_id DESC')->limit($aleatorio);
+//        }else{
+//            $selecttot->where(array('ta_plato.en_destaque'=>$destaque,'ta_plato.en_estado'=>$estado,'ta_restaurante.va_nombre is not null','ta_plato.ta_puntaje_in_id'=>$puntaje));
+//        }
+//                
+//        $selectString = $sql->getSqlStringForSqlObject($selecttot);
+//        var_dump($selectString);Exit;
+//        $cantidad = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        
            $adapter = $this->tableGateway->getAdapter();
-            $cantidad = $this->tableGateway->getAdapter()
-            ->query('SELECT COUNT(DISTINCT(ta_plato.in_id )) AS NumeroResultados
+           $query='SELECT COUNT(DISTINCT(ta_plato.in_id )) AS NumeroResultados
                 FROM ta_plato
                 LEFT JOIN  ta_comentario ON ta_plato.in_id = ta_comentario.ta_plato_in_id
                 LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id`
@@ -565,8 +601,20 @@ class PlatosTable {
                 LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
                 LEFT JOIN `ta_ubigeo` AS `tu` ON `tu`.`in_id` = `tl`.`ta_ubigeo_in_id`
                 LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
-                where ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null  and ta_plato.ta_puntaje_in_id ' . $puntaje
-                , $adapter::QUERY_MODE_EXECUTE);
+                LEFT JOIN `Ta_plato_has_ta_tag` AS `ttag` ON `ta_plato`.`in_id` = `ttag`.`ta_plato_in_id`
+                LEFT JOIN `ta_tag` AS `tag` ON `tag`.`in_id` = `ttag`.`ta_tag_in_id` where';
+                
+         
+           if($promocion==1){
+             $consulta=$query.' tag.in_id=1';
+//             var_dump($consulta);exit;
+          }else{
+              $consulta=$query.' ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null  and ta_plato.ta_puntaje_in_id ' . $puntaje;
+
+          }
+           
+           $cantidad = $this->tableGateway->getAdapter()
+            ->query($consulta, $adapter::QUERY_MODE_EXECUTE);
             
             return $cantidad->toArray();
     }

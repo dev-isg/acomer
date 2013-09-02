@@ -58,10 +58,10 @@ public function __construct()
         }
        $this->layout()->titleplato=implode(",",$list).',';
        $mistura=$this->getConfigTable()->platosParticipantes();
-//       var_dump($mistura->toArray());exit;
         $listaval = $this->getConfigTable()->cantComentxPlato(2, 3, 3);
         $listault = $this->getConfigTable()->cantComentxPlato(2, 3, 2);
         $this->layout()->clase = 'Home';
+        
         $view->setVariables(array(
             'lista' => $listades,
             'listaseg' => $listadeseg,
@@ -337,17 +337,34 @@ public function __construct()
         } else {
             $mostrar = 'Mostrando ' . $first . '-' . $last . ' de ' . $total . ' resultados';
         }
-
-        foreach($results_platos->response->docs as $plat){
-            $arrpl[]=$plat->name;   
+        
+//        var_dump($resultados->response->docs);exit;
+        if(count($resultados->response->docs)<5){
+            foreach($results_platos->response->docs as $plat){
+                $arrpl[]=$plat->name;   
+            }
+        }else{
+            $cont=0;
+           foreach($resultados->response->docs as $plat){
+               if($cont<5){
+                   $arrpl[]=$plat->name;
+                   $cont++;
+               }  
+            }
+            
         }
-//       foreach($results_distritos->response->docs as $rest){
-//            $arrest[]=$rest->distrito;   
-//        }
+        $contares=0;
+       foreach($results_distritos->response->docs as $rest){
+           if($contares<5){
+               $arrest[]=$rest->distrito; 
+               $contares++;
+           }
+              
+        }
 //        var_dump(implode(",",$arrest));
 //        var_dump(implode(",",$arrpl));exit;
   
-        $busquedatitle=$palabraBuscar.':'.implode(",",$arrpl).'| Lista del Sabor';
+        $busquedatitle=$palabraBuscar.':'.implode(",",$arrpl).':'.implode(",",$arrest).'| Lista del Sabor';
         $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
         $listatot = $listatot->toArray();
         
