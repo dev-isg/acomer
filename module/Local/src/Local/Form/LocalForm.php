@@ -54,6 +54,20 @@ class LocalForm extends Form
                 'placeholder'=>'Ingrese el telefono'
             ),
         ));
+        
+                $this->add(array(
+            'name' => 'va_email',
+            'type' => 'Text',       
+            'options' => array(
+                'label' => 'Email',          
+            ),
+            'attributes' => array(               
+                'class' => 'span10  ',
+                'id'   => 'va_email',
+                'placeholder'=>'Ingrese el correo'
+            ),
+        ));
+                
         $this->add(array(
             'name' => 'va_horario',
             'type' => 'Text',

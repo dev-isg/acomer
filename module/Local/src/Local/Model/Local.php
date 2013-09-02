@@ -29,6 +29,7 @@ class Local implements InputFilterAwareInterface
     public $provincia;
     public $distrito;
     public $va_direccion_referencia;
+    public $va_email;
     
     protected $inputFilter;
 
@@ -46,6 +47,7 @@ class Local implements InputFilterAwareInterface
         $this->de_latitud = (!empty($data['de_latitud'])) ? $data['de_latitud'] : null;
         $this->de_longitud = (!empty($data['de_longitud'])) ? $data['de_longitud'] : null;
         $this->va_horario_opcional = (!empty($data['va_horario_opcional'])) ? $data['va_horario_opcional'] : null;
+        $this->va_email= (!empty($data['va_email'])) ? $data['va_email'] : null;
         
         $this->pais = (!empty($data['pais'])) ? $data['pais'] : null;
         $this->departamento = (!empty($data['departamento'])) ? $data['departamento'] : null;
@@ -110,6 +112,20 @@ class Local implements InputFilterAwareInterface
                     ),
                 ),
             )));
+        
+            $inputFilter->add($factory->createInput(array(
+                        'name' => 'va_email',
+                        'required' => false,
+                        'filters' => array(
+                            array('name' => 'StripTags'),
+                            array('name' => 'StringTrim'),
+                        ),
+                        'validators' => array(
+                            array(
+                                'name' => 'EmailAddress'
+                        ))
+                    )));
+                    
         
             $inputFilter->add($factory->createInput(array(
                 'name'     => 'servicio',

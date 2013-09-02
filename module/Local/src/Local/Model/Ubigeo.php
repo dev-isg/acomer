@@ -32,7 +32,7 @@ class Ubigeo extends TableGateway{
        $select=$this->getSql()->select()
                ->columns(array('in_iddep','ch_departamento'))
                ->where(array('in_idpais'=>$pais))
-                ->group('in_iddep'); 
+                ->group('in_iddep')->order('ch_departamento ASC'); 
             $selectString = $this->getSql()->getSqlStringForSqlObject($select);
             $adapter=$this->getAdapter();
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
@@ -46,7 +46,7 @@ class Ubigeo extends TableGateway{
               $select=$this->getSql()->select()
                ->columns(array('in_iddep','in_idprov','ch_provincia'))
                ->where(array('in_iddep'=>$depart))
-                ->group('in_idprov'); 
+                ->group('in_idprov')->order('ch_provincia ASC'); 
             $selectString = $this->getSql()->getSqlStringForSqlObject($select);
             $adapter=$this->getAdapter();
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
@@ -60,7 +60,7 @@ class Ubigeo extends TableGateway{
         $select=$this->getSql()->select()
                ->columns(array('in_iddep','in_idprov','in_iddis','ch_distrito'))
                ->where(array('in_iddep'=>$depart,'in_idprov'=>$prov))
-                ->group('in_iddis'); 
+                ->group('in_iddis')->order('ch_distrito ASC'); 
             $selectString = $this->getSql()->getSqlStringForSqlObject($select);
             $adapter=$this->getAdapter();
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);

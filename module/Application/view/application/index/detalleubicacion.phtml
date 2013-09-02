@@ -136,7 +136,7 @@ $this->headTitle($this->busquedatitle);
                  
               
       <div id="pagina">
-        <?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar-por-distrito?distrito='.$this->distrito.'&q='.$this->nombre.'&submit=Buscar'.'&')):""; ?> 
+        <?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar-por-distrito?distrito='.$this->distrito.'&q='.$this->plato.'&submit=Buscar'.'&')):""; ?> 
       </div>         
     </div>
     <div id="mapa-buscador">
