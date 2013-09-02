@@ -116,7 +116,7 @@ class ComentariosTable
         $plato = $results->toArray();
          $selectto = $sql->select()
                 ->from('ta_plato')  
-                    ->join(array('tpt' => 'ta_plato_has_ta_tag'), 'tpt.Ta_plato_in_id = ta_plato.in_id', array('tag'=>'ta_tag_in_id'), 'left')
+                    ->join(array('tpt' => 'ta_plato_has_ta_tag'), 'tpt.Ta_plato_in_id = ta_plato.in_id', array('tag_id'=>'ta_tag_in_id'), 'left')
                     ->join(array('tt' => 'ta_tag'), 'tt.in_id =tpt.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
                     ->where(array('ta_plato.in_id' => $id));
         $selectStrin = $sql->getSqlStringForSqlObject($selectto);
