@@ -93,10 +93,7 @@ class PlatosTable {
             $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insertar);
             $statement->execute();
             $idtipoplato=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();
-            }else{
-                
-                
-            }
+            }else{}
 
         $data['en_destaque'] = 'si';
         $id = (int) $platos->in_id;
@@ -128,61 +125,19 @@ class PlatosTable {
                
             ////////////promociones////////////////////
             if($promocion!=null){
-            foreach($promocion as $value){
-            $promo = $this->tableGateway->getSql()->insert()
-                    ->into('Ta_plato_has_ta_tag')
-                    ->values(array('Ta_plato_in_id' => $idplato, 'Ta_tag_in_id' => $value));
-            $statementProm = $this->tableGateway->getSql()->prepareStatementForSqlObject($promo);
-            $statementProm->execute();
-            }
+            
+                    foreach($promocion as $value){
+                    $promo = $this->tableGateway->getSql()->insert()
+                            ->into('Ta_plato_has_ta_tag')
+                            ->values(array('Ta_plato_in_id' => $idplato, 'Ta_tag_in_id' => $value));
+                    $statementProm = $this->tableGateway->getSql()->prepareStatementForSqlObject($promo);
+                    $statementProm->execute();
+                    }
+            
             }
             //////////////fin///////////////
 
-            $adapter = $this->tableGateway->getAdapter();
-            $sql = new Sql($adapter);
-            $selecttot = $sql->select()
-                    ->from('ta_plato')
-                    ->join(array('c' => 'ta_comentario'), 'c.ta_plato_in_id=ta_plato.in_id', array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(c.in_id)')), 'left')
-                    ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
-                    ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
-                    ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud', 'de_longitud', 'va_direccion'), 'left')
-                    ->join(array('tpt' => 'ta_plato_has_ta_tag'), 'tpt.Ta_plato_in_id = ta_plato.in_id', array('tag'=>'ta_tag_in_id'), 'left')
-                    ->join(array('tt' => 'ta_tag'), 'tt.in_id =tpt.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
-                    ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado','Ta_tipo_comida_in_id'), 'left')
-                    ->join(array('tc' => 'ta_tipo_comida'), 'tc.in_id = tr.Ta_tipo_comida_in_id', array('nombre_tipo_comida' => 'va_nombre_tipo'), 'left')
-                    ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito'), 'left')
-                    ->where(array('ta_plato.in_id' => $idplato));
-            $selectString = $sql->getSqlStringForSqlObject($selecttot);
-            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-            $plato = $results->toArray();
-//var_dump( $plato[0]['tag']);exit;
-            $solr = \Classes\Solr::getInstance()->getSolr();
-            if ($solr->ping()) {  
-                $document = new \Apache_Solr_Document();
-                $document->id = $plato[0]['in_id'];
-                $document->name = $plato[0]['va_nombre'];
-                $document->tx_descripcion = $plato[0]['tx_descripcion'];
-                $document->va_precio = $plato[0]['va_precio'];
-                $document->en_estado = $plato[0]['en_estado'];
-                $document->plato_tipo = $plato[0]['tipo_plato_nombre'];
-                $document->tipo_comida = $plato[0]['nombre_tipo_comida'];
-                $document->va_direccion = $plato[0]['va_direccion'];
-                $document->restaurante = $plato[0]['restaurant_nombre'];
-                $document->en_destaque = $plato[0]['en_destaque'];
-                $document->latitud = $plato[0]['de_latitud'];
-                $document->tag = $plato[0]['tag'];
-                $document->longitud = $plato[0]['de_longitud'];
-                $document->distrito = $plato[0]['distrito'];
-                $document->va_imagen = $plato[0]['va_imagen'];
-                $document->restaurant_estado = $plato[0]['restaurant_estado'];
-                $document->comentarios = '0';
-                $document->puntuacion = $plato[0]['Ta_puntaje_in_id'];
-                $solr->addDocument($document);
-                $solr->commit();
-                $solr->optimize();
-             
-            }
-            
+           $this->cromSolr($idplato,1);
           }
         } else {// echo 'hola';exit;
 
@@ -190,7 +145,43 @@ class PlatosTable {
                  if(!empty($idtipoplato))
                     {$data['Ta_tipo_plato_in_id'] = $idtipoplato;}
                 $this->tableGateway->update($data, array('in_id' => $id));
-                $this->cromSolr($id);
+//                if($this->promocionxPlato($id)->toArray()>0){
+//                    $var=1;
+//                }else{$var=0;}
+//                var_dump($var);exit;
+                    if($this->promocionxPlato($id)->toArray()>0){
+                         foreach($promocion as $value){
+                         $delete = $this->tableGateway->getSql()
+                            ->delete()
+                            ->from('Ta_plato_has_ta_tag')
+                            ->where(array('Ta_plato_in_id' => $id));
+                        $selectStringDelete = $this->tableGateway->getSql()->getSqlStringForSqlObject($delete);
+//                        var_dump($selectStringDelete);exit;
+                        $adapter1 = $this->tableGateway->getAdapter();
+                        $adapter1->query($selectStringDelete, $adapter1::QUERY_MODE_EXECUTE);
+                         }
+                      foreach($promocion as $value){
+                        $promo2 = $this->tableGateway->getSql()->insert()
+                               ->into('Ta_plato_has_ta_tag')
+                               ->values(array('Ta_plato_in_id' => $id, 'Ta_tag_in_id' => $value));
+                        $selectStringUpdate = $this->tableGateway->getSql()->getSqlStringForSqlObject($promo2);
+                    $adapter2 = $this->tableGateway->getAdapter();
+                    $adapter2->query($selectStringUpdate, $adapter2::QUERY_MODE_EXECUTE);
+                         }               
+
+
+                    }else{
+                      foreach($promocion as $value){
+                        $update = $this->tableGateway->getSql()->insert()
+                               ->into('Ta_plato_has_ta_tag')
+                               ->values(array('Ta_plato_in_id' => $id, 'Ta_tag_in_id' => $value));
+                   $selectStringUpdate2 = $this->tableGateway->getSql()->getSqlStringForSqlObject($update);
+                $adapter3 = $this->tableGateway->getAdapter();
+                $adapter3->query($selectStringUpdate2, $adapter2::QUERY_MODE_EXECUTE);
+                         }
+                         
+                    }
+                $this->cromSolr($id,'');
                
             } else {
                 throw new \Exception('No existe el id');
@@ -198,31 +189,35 @@ class PlatosTable {
         }
     }
 
-    public function cromSolr($id) {  
-        $adapter = $this->tableGateway->getAdapter();
-        $sql = new Sql($adapter);
-        $selecttot = $sql->select()
+       public function cromSolr($id,$caso=null) {
+            $adapter = $this->tableGateway->getAdapter();
+            $sql = new Sql($adapter);
+            $selecttot = $sql->select()
                 ->from('ta_plato')
-              ->join(array('c' => 'ta_comentario'), 'c.ta_plato_in_id=ta_plato.in_id', array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(c.in_id)')), 'left')
+                ->join(array('c' => 'ta_comentario'), 'c.ta_plato_in_id=ta_plato.in_id', array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(c.in_id)')), 'left')
                     ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
                     ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
                     ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud', 'de_longitud', 'va_direccion'), 'left')
-                  ->join(array('tpt' => 'ta_plato_has_ta_tag'), 'tpt.Ta_plato_in_id = ta_plato.in_id', array('tag'=>'ta_tag_in_id'), 'left')
-                    ->join(array('tt' => 'ta_tag'), 'tt.in_id =tpt.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
-                       
-                ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado'), 'left')
-                    ->join(array('tc' => 'ta_tipo_comida'), 'tc.in_id = tr.Ta_tipo_comida_in_id', array('nombre_tipo_comida' => 'va_nombre_tipo'), 'left')                    
+                    ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado'), 'left')
+                    ->join(array('tc' => 'ta_tipo_comida'), 'tc.in_id = tr.Ta_tipo_comida_in_id', array('nombre_tipo_comida' => 'va_nombre_tipo'), 'left')                                      
                     ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito'), 'left')
                     ->where(array('ta_plato.in_id' => $id));
-
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
-
-       
-        $solr = \Classes\Solr::getInstance()->getSolr();
-        if ($solr->ping()) {
-            $solr->deleteByQuery('id:' . $id);
+         $selectto = $sql->select()
+                ->from('ta_plato')  
+                    ->join(array('tpt' => 'ta_plato_has_ta_tag'), 'tpt.Ta_plato_in_id = ta_plato.in_id', array('tag'=>'ta_tag_in_id'), 'left')
+                    ->join(array('tt' => 'ta_tag'), 'tt.in_id =tpt.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
+                    ->where(array('ta_plato.in_id' => $id));
+        $selectStrin = $sql->getSqlStringForSqlObject($selectto);
+        $result = $adapter->query($selectStrin, $adapter::QUERY_MODE_EXECUTE);
+        $tag = $result->toArray();
+ 
+       $solr = \Classes\Solr::getInstance()->getSolr();
+        if ($solr->ping()){
+            if($caso!==1)
+           { $solr->deleteByQuery('id:' . $id);}
             $document = new \Apache_Solr_Document();
             $document->id = $id;
             $document->name = $plato[0]['va_nombre'];
@@ -234,17 +229,20 @@ class PlatosTable {
             $document->restaurante = $plato[0]['restaurant_nombre'];
             $document->tipo_comida = $plato[0]['nombre_tipo_comida'];
             $document->en_destaque = $plato[0]['en_destaque'];
-            $document->tag = $plato[0]['tag'];
             $document->latitud = $plato[0]['de_latitud'];
             $document->longitud = $plato[0]['de_longitud'];
+            foreach ($tag as $resultado)
+            {$document->setMultiValue('tag',$resultado['tag']);  }
             $document->distrito = $plato[0]['distrito'];
             $document->va_imagen = $plato[0]['va_imagen'];
             $document->comentarios = $plato[0]['cantidad'];
             $document->restaurant_estado = $plato[0]['restaurant_estado'];
-            $document->puntuacion = $plato[0]['Ta_puntaje_in_id'];
+            $document->puntuacion = $plato[0]['Ta_puntaje_in_id']; 
             $solr->addDocument($document);
             $solr->commit();
             $solr->optimize();
+           
+         
         }
     }
 
@@ -266,7 +264,7 @@ class PlatosTable {
         $id = $platos["in_id"];
 //        var_dump($platos["in_id"]);exit;
         $this->tableGateway->update($data, array('in_id' => $id));
-        $this->cromSolr($id);
+        $this->cromSolr($id,'');
     }
 
     public function eliminarPlato($id, $estado) {
@@ -274,22 +272,8 @@ class PlatosTable {
         $data = array(
             'en_estado' => $estado,
         );
-//                          var_dump($data);exit;
         $this->tableGateway->update($data, array('in_id' => $id));
-        $this->cromSolr($id);
-
-        //ya no se va borrar
-//            $delete=$this->tableGateway->getSql()->delete()->from('ta_plato_has_ta_local')
-//        ->where(array('ta_plato_in_id'=>$id));
-//            $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($delete);
-//            $statement->execute();
-//                    
-//        $this->tableGateway->delete(array('in_id' => $id));
-//
-//        $delete2=$this->tableGateway->getSql()->delete()->from('ta_comentario')
-//        ->where(array('ta_plato_in_id'=>$id));
-//        $statement2 = $this->tableGateway->getSql()->prepareStatementForSqlObject($delete2);
-//        $statement2->execute();
+        $this->cromSolr($id,'');
     }
 
     /*
@@ -302,7 +286,7 @@ class PlatosTable {
             'en_destaque' => $destaque,
         );
         $this->tableGateway->update($data, array('in_id' => $id));
-        $this->cromSolr($id);
+        $this->cromSolr($id,'');
 
 //                     var_dump($id);
 //            var_dump($destaque);exit;
@@ -508,8 +492,8 @@ class PlatosTable {
                 ->join('ta_ubigeo', 'ta_ubigeo.in_id = ta_local.ta_ubigeo_in_id', array('Distrito' => 'ch_distrito'), 'left')
                 ->join('ta_restaurante', 'ta_local.ta_restaurante_in_id= ta_restaurante.in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
                ->join('Ta_plato_has_ta_tag', 'ta_plato.in_id = Ta_plato_has_ta_tag.ta_plato_in_id', array(), 'left')
-                ->join('ta_tag', 'ta_tag.in_id = Ta_plato_has_ta_tag.ta_tag_in_id', array(), 'left')
-                ->where(array('ta_tag.in_id'=>'1'))->group('ta_plato.in_id')->order('ta_plato.in_id DESC')->limit(3);
+                ->join('ta_tag', 'ta_tag.in_id = Ta_plato_has_ta_tag.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
+                ->where(array('ta_tag.in_id'=>'1','ta_plato.en_estado'=>'activo'))->group('ta_plato.in_id')->order('ta_plato.in_id DESC')->limit(3);
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         return $results;
