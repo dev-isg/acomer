@@ -76,9 +76,9 @@
                 $detect3 = new Mobile_Detect();
                 if (!$detect3->isMobile()) {
                    ?>                
-                 <p class="ver_mistura"><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: mistura&distrito=TODOS LOS DISTRITOS" title="<?php echo $this->lista[0]['restaurant_nombre'];?>">ver mas</a></p>
+                 <p class="ver_mistura"><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: <?php echo $promo['tag'] ?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
                  <?php }else{?>   
-                    <p class="ver_mistura"><a href="<?php echo $this->host('ruta')?>/buscar?q=tag: mistura" title="<?php echo $this->lista[0]['restaurant_nombre'];?>">ver mas</a><</p>
+                    <p class="ver_mistura"><a href="<?php echo $this->host('ruta')?>/buscar?q=tag: <?php echo $promo['tag'] ?>" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
                  <?php  }?>
 
     </div>

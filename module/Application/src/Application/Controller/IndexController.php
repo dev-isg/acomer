@@ -82,14 +82,7 @@ public function __construct()
         echo $valor;
         exit();
     }
-    // public function equipoAction()
-    // {
-    //
-    // require './vendor/Classes/Mobile_Detect.php';
-    // $detect = new \Mobile_Detect;
-    // if($detect->isiPad())
-    // {echo 'es un ipad';exit;}
-    // }
+
     public function joincomenatariosAction()
     {
         $id = $this->params()->fromQuery('id');
@@ -143,15 +136,11 @@ public function __construct()
             $ruta = $this->_options->data->busqueda .'/busqueda.txt';
             $fp = fopen($ruta,"a");
             fwrite($fp, "$buscar , $distrito" . PHP_EOL);
-            fclose($fp);
-            }
+            fclose($fp);}
             elseif($valor[0]=='tag:')     
-            {
-            $buscar = $valor[1];
+            {$buscar = $valor[1];
             $texto = $valor[0].'"'.$buscar.'"'; 
-          //  var_dump($texto);exit;
-            $distrito = $datos['distrito'];  
-            }
+            $distrito = $datos['distrito'];}
             else{ $filter = new \Zend\I18n\Filter\Alnum(true);
             $texto = $filter->filter($plato);
             $distrito = $datos['distrito'];
@@ -161,9 +150,6 @@ public function __construct()
             fclose($fp);
             }
              
-            if ($texto == '') {
-                $this->redirect()->toUrl('/');
-            }
             if ($texto == '') {
                 $this->redirect()->toUrl('/');
             }
@@ -313,13 +299,13 @@ public function __construct()
         }
          if($valor[0]=='restaurante:')
          { $form->get('q')->setValue($plato);
-         $valores = $buscar;
-         }  
-         else{ 
-         setcookie('q', $texto);
+         $valores = $buscar;} 
+         elseif($valor[0]=='tag:')
+         { $form->get('q')->setValue($plato);
+         $valores = $buscar;}
+         else{ setcookie('q', $texto);
          $form->get('q')->setValue($texto);
-         $valores =$texto;
-         }
+         $valores =$texto;}
         setcookie('distrito', $distrito);
         $form->get('distrito')->setValue($distrito);
         $form->get('distrito')->setValueOptions($com);
@@ -412,24 +398,17 @@ public function __construct()
         $filtered = $this->params()->fromQuery('q');
         $valor = explode(" ", $filtered);
          if($valor[0]=='restaurante:')
-        {
-        $buscar =  $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];     
+        {$buscar =  $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];     
         $texto = $valor[0].'"'.$buscar.'"'; 
         $distrito = '';
         $ruta = $this->_options->data->busqueda .'/busqueda_movil.txt';
         $fp = fopen($ruta,"a");
         fwrite($fp, "$buscar , $distrito" . PHP_EOL);
-        fclose($fp);
-        }   
+        fclose($fp); }   
         elseif($valor[0]=='tag:')     
-            {
-            $buscar = $valor[1];
-            $texto = $valor[0].'"'.$buscar.'"'; 
-          //  var_dump($texto);exit;
-           // $distrito = $datos['distrito'];  
-            }
-        else{
-        $filtered = strtoupper($filtered);
+        {$buscar = $valor[1];
+        $texto = $valor[0].'"'.$buscar.'"';}
+        else{ $filtered = strtoupper($filtered);
         $filter = new \Zend\I18n\Filter\Alnum(true);
         $text = trim($filter->filter($filtered));
         $text = preg_replace('/\s\s+/', ' ', $text);
@@ -493,6 +472,11 @@ public function __construct()
         $form->get('q')->setValue($filtered);
         $valores = $buscar;
         }
+         elseif($valor[0]=='tag:')
+        {
+        $form->get('q')->setValue($filtered);
+        $valores = $buscar;
+        }
         else {setcookie('q', $text);
         $form->get('q')->setValue($text);
         $valores = $texto;
@@ -546,7 +530,9 @@ public function __construct()
         if($valor[0]=='restaurante:')
             { $buscar = $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];
             $texto = $valor[0].'"'.$buscar.'"'; }  
-            
+            elseif($valor[0]=='tag:')
+            { $buscar = $valor[1];
+            $texto = $valor[0].'"'.$buscar.'"'; }
             else{
                 setcookie('q', $texto);
                 $filtered = strtoupper($filtered);
@@ -640,6 +626,9 @@ public function __construct()
         if($valor[0]=='restaurante:')
             { $buscar = $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];
             $plato = $valor[0].'"'.$buscar.'"'; }  
+         elseif($valor[0]=='tag:')
+            { $buscar = $valor[1];
+            $plato = $texto; }
             else{$filter = new \Zend\I18n\Filter\Alnum(true);
             $plato = $filter->filter($texto);
             setcookie('q', $texto);}
