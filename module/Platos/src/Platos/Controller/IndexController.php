@@ -160,18 +160,34 @@ class IndexController extends AbstractActionController {
               if($ancho>$alto)
               {
                   require './vendor/Classes/Filter/Alnum.php';
-                  $altura =(int)($alto*$anchura/$ancho); 
+                  require './vendor/Classes/imageworkshop.php';
+                 $alta =(int)($alto*$anchura/$ancho);
+                  if($alta>272){$altura=272;}
+                  else{$altura=$alta;}
                   if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg')      
                   {   $nom = $nonFile['va_nombre']; 
                   $imf2 =  $valor.'.'.$info['extension'];
                   $filter   = new \Filter_Alnum();
                   $filtered = $filter->filter($nom);
                   $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
-                      $nuevaimagen = imagecreatetruecolor($anchura, $altura);
+                  $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/icomap.png');
+                  $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
+                  $nuevaimagen = $viejaimagen;
+                  $margen_dcho = 5;
+                  $margen_inf = 5;
+                  $sx = imagesx($estampa);
+                  
+                  
+                  $sy = imagesy($estampa);
+//                  $im = imagecreatefromjpeg('foto.jpeg');
+                  imagecopymerge($nuevaimagen, $estampa, imagesx($nuevaimagen) - $sx - 0, imagesy($nuevaimagen) - $sy - $margen_inf, 0, $margen_dcho, imagesx($estampa), imagesy($estampa),100);
+
+                   
+                      //$nuevaimagen = imagecreatetruecolor($anchura, $altura);  
                       $destaque = imagecreatetruecolor($destacadox, $destacadoy);
                       $generale = imagecreatetruecolor($generalx, $generaly);
-                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                      
+                    //   imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
                        imagecopyresized($destaque, $viejaimagen, 0, 0, 0, 0, $destacadox, $destacadoy,$ancho, $alto);
                        imagecopyresized($generale, $viejaimagen, 0, 0, 0, 0, $generalx, $generaly,$ancho, $alto);
                     if($platos[0]['cantidad']<=0)
@@ -193,7 +209,8 @@ class IndexController extends AbstractActionController {
                                             imagejpeg($viejaimagen,$original);
                              $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$local.'/' .$name;               
                              $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro,$promoc);
-                             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);                                   
+                             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);
+                             
                        }
                        else{    if($platos[0]['cantidad']>=5)
                                 { echo 'cantidad maxima de platos';}
@@ -216,7 +233,9 @@ class IndexController extends AbstractActionController {
                     }
                    if($ancho<$alto)
               {require './vendor/Classes/Filter/Alnum.php';
-                  $anchura =(int)($ancho*$altura/$alto); 
+                 $anchu =(int)($ancho*$altura/$alto);
+                  if($anchu>407){$anchura=407;}
+                  else{$anchura=$anchu;}
                   if($info['extension']=='jpg'or $info['extension']=='JPG'or $info['extension']=='jpeg')      
                   {  $nom = $nonFile['va_nombre']; 
                   $imf2 =  $valor.'.'.$info['extension'];
@@ -667,15 +686,37 @@ class IndexController extends AbstractActionController {
                                 'sort' => 'random_' . uniqid() . ' asc',
                                 'fq' => 'en_estado:activo AND restaurant_estado:activo',
                                 'wt' => 'json');
+                            $resulta = false;
+                            if ($query) {
+                                $solr = \Classes\Solr::getInstance()->getSolr();
+                                if (get_magic_quotes_gpc() == 1) {
+                                    $query = stripslashes($query);}
+                                try { $resulta = $solr->search($query, 0, $limit, $fq);
+                   
+                                } catch (Exception $e) {
+                              echo ("<div>ingrese algun valor</div>"); }}
+                              
+                                 if(count($resulta->response->docs)<=2) 
+                            {$limit = 3;
+                            $texto = 'tipo_comida:"'.$listarecomendacion[0]['tipo_comida'].'"'; 
+                            $palabraBuscar = isset($texto) ? $texto : false;
+                            $query = "($palabraBuscar)";
+                            $fq = array(
+                                'sort' => 'random_' . uniqid() . ' asc',
+                                'fq' => 'en_estado:activo AND restaurant_estado:activo',
+                                'wt' => 'json');
                             $resultados = false;
                             if ($query) {
                                 $solr = \Classes\Solr::getInstance()->getSolr();
                                 if (get_magic_quotes_gpc() == 1) {
                                     $query = stripslashes($query);}
                                 try { $resultados = $solr->search($query, 0, $limit, $fq);
-                   
                                 } catch (Exception $e) {
                               echo ("<div>ingrese algun valor</div>"); }} }
+                              else{$resultados =$resulta;} 
+                              
+                              
+                              }
                           }
                      else  { 
                 $limit = 3;
@@ -694,24 +735,7 @@ class IndexController extends AbstractActionController {
                     try { $resulta = $solr->search($query, 0, $limit, $fq);
                     } catch (Exception $e) {
                   echo ("<div>ingrese algun valor</div>"); }}
-                  if(count($resulta->response->docs)<=2) 
-                  {$limit = 3;
-                            $texto = 'tipo_comida:"'.$listarecomendacion[0]['tipo_comida'].'"'; 
-                            $palabraBuscar = isset($texto) ? $texto : false;
-                            $query = "($palabraBuscar)";
-                            $fq = array(
-                                'sort' => 'random_' . uniqid() . ' asc',
-                                'fq' => 'en_estado:activo AND restaurant_estado:activo',
-                                'wt' => 'json' );
-                            $resultados = false;
-                            if ($query) {
-                                $solr = \Classes\Solr::getInstance()->getSolr();
-                                if (get_magic_quotes_gpc() == 1) {
-                                    $query = stripslashes($query);}
-                                try { $resultados = $solr->search($query, 0, $limit, $fq);
-                                } catch (Exception $e) {
-                              echo ("<div>ingrese algun valor</div>"); }} }
-                              else{$resultados =$resulta;}}  }           
+                }  }           
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
