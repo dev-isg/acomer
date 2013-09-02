@@ -181,7 +181,9 @@ class PlatosTable {
                          }
                          
                     }
+
                 $this->cromSolr($id,'');
+
                
             } else {
                 throw new \Exception('No existe el id');
