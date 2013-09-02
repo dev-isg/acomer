@@ -620,11 +620,8 @@ class IndexController extends AbstractActionController {
                     try { $results = $solr->search($query, 0, $limit, $fq);
                     } catch (Exception $e) {
                   echo ("<div>ingrese algun valor</div>"); }}
-                  
-     
                   if(count($results->response->docs)<=1)
-                  {
-                    if($_COOKIE['q']){
+                  {if($_COOKIE['q']){
                             if($_COOKIE['distrito']!=='TODOS LOS DISTRITOS') {
                             $texto =$_COOKIE['q'];
                             $distrito=$_COOKIE['distrito'];
@@ -634,8 +631,24 @@ class IndexController extends AbstractActionController {
                             $fq = array(
                                 'sort' => 'random_' . uniqid() . ' asc',
                                 'fq' => 'en_estado:activo AND restaurant_estado:activo  AND distrito:' . $distrito,
-                                'wt' => 'json'
-                            );
+                                'wt' => 'json' );
+                            $resulta = false;
+                            if ($query) {
+                                $solr = \Classes\Solr::getInstance()->getSolr();
+                                if (get_magic_quotes_gpc() == 1) {
+                                    $query = stripslashes($query);}
+                                try { $resulta = $solr->search($query, 0, $limit, $fq);
+                                } catch (Exception $e) {
+                              echo ("<div>ingrese algun valor</div>"); }} 
+                                  if(count($resulta->response->docs)<=2) 
+                            {$limit = 3;
+                            $texto = 'tipo_comida:"'.$listarecomendacion[0]['tipo_comida'].'"'; 
+                            $palabraBuscar = isset($texto) ? $texto : false;
+                            $query = "($palabraBuscar)";
+                            $fq = array(
+                                'sort' => 'random_' . uniqid() . ' asc',
+                                'fq' => 'en_estado:activo AND restaurant_estado:activo',
+                                'wt' => 'json');
                             $resultados = false;
                             if ($query) {
                                 $solr = \Classes\Solr::getInstance()->getSolr();
@@ -643,10 +656,9 @@ class IndexController extends AbstractActionController {
                                     $query = stripslashes($query);}
                                 try { $resultados = $solr->search($query, 0, $limit, $fq);
                                 } catch (Exception $e) {
-                              echo ("<div>ingrese algun valor</div>"); }} 
-                              }else{
-                                  
-                            //echo'111';exit;      
+                              echo ("<div>ingrese algun valor</div>"); }} }
+                              else{$resultados =$resulta;}       
+                              }else{     
                             $texto =$_COOKIE['q'];
                             $limit = 3;
                             $palabraBuscar = isset($texto) ? $texto : false;
@@ -654,8 +666,7 @@ class IndexController extends AbstractActionController {
                             $fq = array(
                                 'sort' => 'random_' . uniqid() . ' asc',
                                 'fq' => 'en_estado:activo AND restaurant_estado:activo',
-                                'wt' => 'json'
-                            );
+                                'wt' => 'json');
                             $resultados = false;
                             if ($query) {
                                 $solr = \Classes\Solr::getInstance()->getSolr();
@@ -666,8 +677,7 @@ class IndexController extends AbstractActionController {
                                 } catch (Exception $e) {
                               echo ("<div>ingrese algun valor</div>"); }} }
                           }
-                     else
-                         { 
+                     else  { 
                 $limit = 3;
                 $texto = 'tipo_comida:"'.$listarecomendacion[0]['tipo_comida'].'"'; 
                 $palabraBuscar = isset($texto) ? $texto : false;
@@ -675,19 +685,33 @@ class IndexController extends AbstractActionController {
                 $fq = array(
                     'sort' => 'random_' . uniqid() . ' asc',
                     'fq' => 'en_estado:activo AND restaurant_estado:activo',
-                    'wt' => 'json'
-                );
-                $resultados = false;
+                    'wt' => 'json' );
+                $resulta = false;
                 if ($query) {
                     $solr = \Classes\Solr::getInstance()->getSolr();
                     if (get_magic_quotes_gpc() == 1) {
                         $query = stripslashes($query);}
-                    try { $resultados = $solr->search($query, 0, $limit, $fq);
+                    try { $resulta = $solr->search($query, 0, $limit, $fq);
                     } catch (Exception $e) {
                   echo ("<div>ingrese algun valor</div>"); }}
-                         }
-                  
-                  }           
+                  if(count($resulta->response->docs)<=2) 
+                  {$limit = 3;
+                            $texto = 'tipo_comida:"'.$listarecomendacion[0]['tipo_comida'].'"'; 
+                            $palabraBuscar = isset($texto) ? $texto : false;
+                            $query = "($palabraBuscar)";
+                            $fq = array(
+                                'sort' => 'random_' . uniqid() . ' asc',
+                                'fq' => 'en_estado:activo AND restaurant_estado:activo',
+                                'wt' => 'json' );
+                            $resultados = false;
+                            if ($query) {
+                                $solr = \Classes\Solr::getInstance()->getSolr();
+                                if (get_magic_quotes_gpc() == 1) {
+                                    $query = stripslashes($query);}
+                                try { $resultados = $solr->search($query, 0, $limit, $fq);
+                                } catch (Exception $e) {
+                              echo ("<div>ingrese algun valor</div>"); }} }
+                              else{$resultados =$resulta;}}  }           
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
