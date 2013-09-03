@@ -346,7 +346,7 @@ class IndexController extends AbstractActionController
         $sql = new Sql($adapter);
         $select = $sql->select() 
            ->from(array('f' => 'ta_restaurante_has_ta_medio_pago')) 
-            ->join(array('b' => 'Ta_medio_pago'),'f.Ta_medio_pago_in_id = b.in_id',array('va_nombre'))
+            ->join(array('b' => 'ta_medio_pago'),'f.ta_medio_pago_in_id = b.in_id',array('va_nombre'))
            ->where(array('f.Ta_restaurante_in_id'=>$id)); 
             $selectString = $sql->getSqlStringForSqlObject($select);
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);

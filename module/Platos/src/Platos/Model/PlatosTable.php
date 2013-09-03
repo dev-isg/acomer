@@ -75,7 +75,6 @@ class PlatosTable {
            'Ta_usuario_in_id' => 133,//$plato->Ta_usuario_in_id,
         );
         
-        
         if($otro!='')
             {
             $adaptado = $this->tableGateway->getAdapter();
@@ -539,7 +538,7 @@ class PlatosTable {
                 LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
                 LEFT JOIN `ta_ubigeo` AS `tu` ON `tu`.`in_id` = `tl`.`ta_ubigeo_in_id`
                 LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
-                LEFT JOIN `Ta_plato_has_ta_tag` AS `ttag` ON `ta_plato`.`in_id` = `ttag`.`ta_plato_in_id`
+                LEFT JOIN `ta_plato_has_ta_tag` AS `ttag` ON `ta_plato`.`in_id` = `ttag`.`ta_plato_in_id`
                 LEFT JOIN `ta_tag` AS `tag` ON `tag`.`in_id` = `ttag`.`ta_tag_in_id` where';
                 
          
