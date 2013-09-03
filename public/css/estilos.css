@@ -622,7 +622,8 @@ background: url(../../img/back-detalle.png) repeat;
   float: right;
   position: relative;
   padding-bottom: 0px;
-  height: 100%;
+  height: auto;
+  min-height: 100%;
 }
 .lista-Detalle .contenido-plato{
   height: auto;
@@ -2337,7 +2338,9 @@ p.ver_mistura a{
   }
 }
 @media (min-width: 768px) and (max-width: 979px) {
-
+  #mapa-buscador{
+    width: 100%;
+  }
   .ficha-img img{
     width: 100%;
   }

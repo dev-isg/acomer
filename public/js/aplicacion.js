@@ -166,7 +166,6 @@ $(document).ready(function() {
         }else{
             var hvalor = h;
         }
-        
         var f = $("#bubi #fq").val();
         var e = urlJson + "/jsonmapasa?distrito=" + f + "&q=" + h;
         $("#map").remove();
