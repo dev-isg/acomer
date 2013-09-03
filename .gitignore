@@ -12,3 +12,4 @@ vendor/zendframework
 public/imagenes/*jpg
 public/imagenes/*gif
 public/imagenes/*png
+public/stats/*
