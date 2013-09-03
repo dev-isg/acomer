@@ -205,7 +205,11 @@ cursor: pointer;
   margin-left: auto;
   background: white;
 }
-
+a.mailto{
+  color: #7b7b7b;
+  font-size: 14px;
+  font-family: arial;
+}
 .content-sidebar{
   width: 266px;
   float: left;
