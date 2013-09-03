@@ -269,7 +269,7 @@ class PlatosTable {
             'va_precio' => $platos["va_precio"],
             'en_destaque' => 1, // $plato->en_destaque,
             'en_estado' => 1, //$plato->en_estado,
-            'Ta_tipo_plato_in_id' => $platos["Ta_tipo_plato_in_id"],
+            'Ta_tipo_plato_in_id' => $platos["ta_tipo_plato_in_id"],
             'Ta_puntaje_in_id' => 1, //$plato->Ta_puntaje_in_id,
             'Ta_usuario_in_id' => 1, //$plato->Ta_usuario_in_id,
         );
@@ -453,7 +453,7 @@ class PlatosTable {
         $adapter = $this->tableGateway->getAdapter();
 
         if ($val == 1) {
-            $puntaje = '>0'; // $puntaje = '>=0'; 'is not null or ta_comentario.ta_puntaje_in_id!=0'; 
+            $puntaje = '>=0'; // $puntaje = '>=0'; 'is not null or ta_comentario.ta_puntaje_in_id!=0'; 
             $order = 'ta_puntaje_in_id';
             $cantidad=$this->aleatorios($destaque, $estado, $puntaje);
             $total=$cantidad[0]['NumeroResultados'];
@@ -491,9 +491,9 @@ class PlatosTable {
         return $primer; //->toArray();//$data;// $aux;//select()->from('usuario')->query()->fetchAll();
     }
     
-    public function platosParticipantes($destaque=2,$estado=1){
+    public function platosParticipantes($destaque=1,$estado=1){
         
-          $cantidad=$this->aleatorios($destaque, $estado, $puntaje='=0',1);
+          $cantidad=$this->aleatorios($destaque, $estado, $puntaje='>=0',1);
           $total=$cantidad[0]['NumeroResultados'];
             if($total<=3) { 
                 $aleatorio=0;
@@ -517,7 +517,7 @@ class PlatosTable {
                 ->join('ta_plato_has_ta_tag', 'ta_plato.in_id = ta_plato_has_ta_tag.ta_plato_in_id', array(), 'left')
              
                 ->join('ta_tag', 'ta_tag.in_id = ta_plato_has_ta_tag.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
-                ->where(array('ta_tag.in_id'=>'1'))->group('ta_plato.in_id')->order('ta_plato.in_id DESC');//limit($aleatorio)->offset(3)
+                ->where(array('ta_tag.in_id'=>'1','ta_plato.en_estado'=>'activo'))->group('ta_plato.in_id')->order('ta_plato.in_id DESC');//limit($aleatorio)->offset(3)
 
 //                ->join('ta_tag', 'ta_tag.in_id = Ta_plato_has_ta_tag.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
 //                ->where(array('ta_tag.in_id'=>'1','ta_plato.en_estado'=>'activo'))->group('ta_plato.in_id')->order('ta_plato.in_id DESC')->limit(3);
@@ -527,6 +527,7 @@ class PlatosTable {
         return $results;
         
     }
+    
     
     public function aleatorios($destaque,$estado,$puntaje,$promocion=null){      
            $adapter = $this->tableGateway->getAdapter();
@@ -543,7 +544,7 @@ class PlatosTable {
                 
          
            if($promocion==1){
-             $consulta=$query.' tag.in_id=1';
+             $consulta=$query.' tag.in_id=1 and ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado;
           }else{
               $consulta=$query.' ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null  and ta_plato.ta_puntaje_in_id ' . $puntaje;
 

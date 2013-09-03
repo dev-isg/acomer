@@ -247,7 +247,7 @@ class RestauranteTable
       public function medio($id){
         
         $datos=$this->tableGateway->getAdapter()->query("SELECT `f`.*, `b`.`va_nombre` AS `va_nombre` FROM `ta_restaurante_has_ta_medio_pago` AS `f` 
-INNER JOIN `Ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHERE `f`.`Ta_restaurante_in_id` = $id ")->execute();
+INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHERE `f`.`Ta_restaurante_in_id` = $id ")->execute();
                 $returnArray=array();
         foreach ($datos as $result) {
             $returnArray[] = $result;

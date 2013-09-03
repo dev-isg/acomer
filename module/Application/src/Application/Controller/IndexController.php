@@ -324,28 +324,41 @@ public function __construct()
             $mostrar = 'Mostrando ' . $first . '-' . $last . ' de ' . $total . ' resultados';
         }
         
-//        var_dump($resultados->response->docs);exit;
-        if(count($resultados->response->docs)<5){
-            foreach($results_platos->response->docs as $plat){
-                $arrpl[]=$plat->name;   
+
+        if (count($resultados->response->docs) < 5 && count($resultados->response->docs) > 0) {
+            $contc = 0;
+            foreach ($resultados->response->docs as $plat) {
+                $arrpl[] = $plat->name;
             }
-        }else{
-            $cont=0;
-           foreach($resultados->response->docs as $plat){
-               if($cont<5){
-                   $arrpl[]=$plat->name;
-                   $cont++;
-               }  
+            if (count($arrpl) < 5) {
+                $maxcantidad = 5 - count($arrpl);
+                foreach ($results_platos->response->docs as $plat2) {
+                    if ($maxcantidad > $contc) {
+                        $arrpl[] = $plat2->name;
+                        $contc++;
+                    }
+                }
             }
-            
+        } elseif (count($resultados->response->docs) < 5 && count($resultados->response->docs) == 0) {
+            foreach ($results_platos->response->docs as $plat) {
+                $arrpl[] = $plat->name;
+            }
+        } else {
+            $cont = 0;
+            foreach ($resultados->response->docs as $plat) {
+                if ($cont < 5) {
+                    $arrpl[] = $plat->name;
+                    $cont++;
+                }
+            }
         }
-        $contares=0;
-       foreach($results_distritos->response->docs as $rest){
-           if($contares<5){
-               $arrest[]=$rest->distrito; 
-               $contares++;
-           }
-              
+
+        $contares = 0;
+        foreach ($results_distritos->response->docs as $rest) {
+            if ($contares < 5) {
+                $arrest[] = $rest->distrito;
+                $contares++;
+            }
         }
 //        var_dump(implode(",",$arrest));
 //        var_dump(implode(",",$arrpl));exit;

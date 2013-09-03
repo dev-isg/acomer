@@ -227,10 +227,12 @@ class IndexController extends AbstractActionController
             $com[$y['in_id']] = $y['va_nombre_tipo'];
         }
         $form->get('Ta_tipo_comida_in_id')->setValueOptions($com);
+        
+        
         $form->get('va_modalidad')->setValueOptions($medi);
-        //$form->get('va_imagen')->setValue($comidas[0]['']);
 
         $form->bind($restaurante);
+        
 
 
         $form->get('submit')->setValue('Editar');
