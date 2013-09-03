@@ -74,7 +74,8 @@ class PlatosTable {
             //'Ta_usuario_in_id' => (!empty($plato->Ta_usuario_in_id)) ? $plato->Ta_usuario_in_id : 1//$plato->Ta_usuario_in_id,
            'Ta_usuario_in_id' => 133,//$plato->Ta_usuario_in_id,
         );
-        
+//       var_dump($platos->ta_tipo_plato_in_id);
+//       var_dump($otro);exit;
         if($otro!='')
             {
             $adaptado = $this->tableGateway->getAdapter();
