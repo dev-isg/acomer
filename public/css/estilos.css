@@ -2045,7 +2045,7 @@ p.ver_mistura a{
 
 #box-btn-platos-verdura {
     width:245px; 
-    height:323px;  
+    height:343px;  
     position:absolute;
 }
 #wok-btn { margin-left:120px; margin-top:0; bottom: 5px;}
@@ -2084,7 +2084,7 @@ p.ver_mistura a{
 }
 .nav-banner ul li{
   float: left;
-  padding-right: 20px;
+  padding-right: 10px;
 }
 .nav-banner ul.dep-home{
   list-style: none;
