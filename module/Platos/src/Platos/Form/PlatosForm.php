@@ -142,8 +142,7 @@ class PlatosForm extends Form
                 'id'   => 'va_mistura'
             ),
             'options' => array(
-                     'value_options' => array(
-                     ),
+                     'value_options' => $this->promocion()
              )
         ));
           
@@ -213,6 +212,27 @@ class PlatosForm extends Form
             return $auxtipo;//$auxres;//
             
      }
+     
+   public function promocion($id=null){
+       $this->dbAdapter =$this->getDbAdapter();
+       $adapter = $this->dbAdapter;
+        
+        $sql = new Sql($adapter);
+        $selecttot = $sql->select()
+                ->from('ta_tag')->order('ta_tag.va_nombre asc');
+       if($id!=null){
+            $selecttot ->where(array('ta_tag.in_id='=>$id))->order('ta_tag.va_nombre DESC');       
+       }
+        $selectString = $sql->getSqlStringForSqlObject($selecttot);
+        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        $promocion=$results->toArray();
+        $promo = array();
+        foreach($promocion as $arrpro){
+            $promo[$arrpro['in_id']] = $arrpro['va_nombre'];
+        }
+        
+        return $promo;
+    }
      
          public function setDbAdapter(AdapterInterface $dbAdapter)
     {

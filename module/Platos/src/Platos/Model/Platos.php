@@ -121,8 +121,6 @@ class Platos implements InputFilterAwareInterface
                 $factory->createInput(array(
                     'name'     => 'va_promocion',
                     'required' => false,
-                   
-            
                 ))
             );
             //valida descripcion
@@ -164,12 +162,7 @@ class Platos implements InputFilterAwareInterface
                     ),
                 ),
             )));
-            
-            $inputFilter->add($factory->createInput(array(
-                'name'     => 'va_mistura',
-                'required' => false,
-            )));
-                        
+                
             
 //            
 //            $inputFilter->add($factory->createInput(array(
