@@ -163,7 +163,7 @@ $sm->sitemapIndexFileName = 'sitemap_index.xml';
 $sm->sitemapFileName = 'platos'.str_pad($avisoSitemapCount,2,'0',STR_PAD_LEFT).'_sitemap.xml';
 $sm->init();
 
-    $platos=$adapter->query('SELECT * FROM TA_PLATO',$adapter::QUERY_MODE_EXECUTE);
+    $platos=$adapter->query('SELECT * FROM ta_plato',$adapter::QUERY_MODE_EXECUTE);
     include APPLICATION_PATH.'/module/Application/src/Application/View/Helper/CanonicalUrl.php';
     $crul=new Application\View\Helper\CanonicalUrl();  
       foreach($platos as $plato){                                                    
