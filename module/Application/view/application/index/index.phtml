@@ -6,8 +6,76 @@
            
         </div>
 <div class="map-portada">
- <div class="guia">
-    <img src="<?php echo $this->host('ruta')?>/img/globos.png?v<?php echo $this->host('version')?>" alt="">
+ <div class="guia-home">
+    <!--<section id="paso-dos">
+      <div id="opacidad" style="display: block;"></div>
+    </section>-->
+    <section id="paso-tres" style="margin-top: 0px;">
+      <div class="nav-banner">
+        <ul class="dep-home" style="float:left;">
+          <li>
+            <div class="paso1 paso">
+              <p>Busca tu plato</p>
+            </div>
+          </li>
+          <li>
+            <div class="paso2 paso">
+              <p>Escoge tu opción</p>
+            </div>
+          </li>
+          <li>
+            <div class="paso3 paso">
+              <p>Disfruta y valora</p>
+            </div>
+          </li>
+        </ul>
+        <ul style="float:right;padding-top: 28px;">
+          <ul class="right redes">
+           <li class="siguenos">Síguenos:</li>
+           <li><a id="face" href="https://www.facebook.com/AvonColombia " class="" target="_blank"> <img src="images/face.png"></a></li>
+           <li><a id="tweet" href="https://twitter.com/Avon_Colombia " target="_blank"><img src="images/tw.png"></a></li>
+           <li><a id="tube" href="http://www.youtube.com/avoncolombia" class="" target="_blank"><img src="images/tube.png"></a></li>
+          </ul>
+          <!--<li>
+            <a class="ft" href="#">
+              <div class="envoltura"></div>
+            </a>
+          </li>
+          <li>
+            <a class="ft" href="#">
+              <div class="envoltura2"></div>
+            </a>
+          </li>-->
+        </ul>
+      </div>
+      <section class="center-dos">      
+      <!--box btn platos-->
+        <div id="box-btn-platos-verdura" style="margin-left: 440px;">
+          <a id="lomosaltado-btn" class="platos-btn" href="javascript:void(0);">
+            <img src="<?php echo $this->host('ruta')?>/img/bann/lomosaltado.png">
+          </a>
+          <a id="sopadezapallo-btn" class="platos-btn" href="javascript:void(0);">
+            <img src="<?php echo $this->host('ruta')?>/img/bann/causa.png">
+          </a>
+          <a id="guisoverdura-btn" class="platos-btn" href="javascript:void(0);">
+            <img src="<?php echo $this->host('ruta')?>/img/bann/parrilla.png">
+          </a>
+          <a id="wok-btn" class="platos-btn" href="javascript:void(0);">
+            <img src="<?php echo $this->host('ruta')?>/img/bann/ceviche.png">
+          </a>
+        </div>
+          
+        <!--FIN box btn platos-->
+      <!--Circulo Grande Platos-->
+        <div id="plato-verdura-lomosaltado" class="caja-platos" style="opacity: 0;"></div>
+        <div id="plato-verdura-sopadezapallo" class="caja-platos" style="opacity: 0;"></div>
+        <div id="plato-verdura-guisoverdura" class="caja-platos" style="opacity: 0;"></div>
+        <div id="plato-verdura-wok" class="caja-platos" style="opacity: 1;"></div>
+            
+        <!--FIN Circulo Grande Platos-->
+        <div id="btn-continua2" style="display: block;"></div>
+      </section>
+    </section>
 </div>
   
   <div class="descrip-product">
@@ -77,7 +145,7 @@
                 if ($detect3->isTablet()) {
                    ?>                
                  <p class="ver_mistura"><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: <?php echo $promo['tag'] ?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
-                 <?php }elseif(isMobile()){?>   
+                 <?php }elseif($detect3->isMobile()){?>   
                     <p class="ver_mistura"><a href="<?php echo $this->host('ruta')?>/buscar?q=tag: <?php echo $promo['tag'] ?>" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
                  <?php  } else{?>
                 <p class="ver_mistura"><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: <?php echo $promo['tag'] ?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
