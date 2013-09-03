@@ -70,9 +70,9 @@ class PlatosTable {
             'en_destaque' => $platos->en_destaque,
             'en_estado' => (!empty($platos->en_estado)) ? $platos->en_estado : 2, //$plato->en_estado,
             'ta_tipo_plato_in_id' => $platos->ta_tipo_plato_in_id,
-            'ta_puntaje_in_id' => (!empty($platos->ta_puntaje_in_id)) ? $platos->ta_puntaje_in_id : 0,
+            'Ta_puntaje_in_id' => (!empty($platos->Ta_puntaje_in_id)) ? $platos->Ta_puntaje_in_id : 0,
             //'Ta_usuario_in_id' => (!empty($plato->Ta_usuario_in_id)) ? $plato->Ta_usuario_in_id : 1//$plato->Ta_usuario_in_id,
-           'ta_usuario_in_id' => 133,//$plato->Ta_usuario_in_id,
+           'Ta_usuario_in_id' => 133,//$plato->Ta_usuario_in_id,
         );
         
         
