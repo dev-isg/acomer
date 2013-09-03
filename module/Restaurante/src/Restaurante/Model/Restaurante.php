@@ -19,7 +19,9 @@ class Restaurante implements InputFilterAwareInterface
     public $va_ruc;
     public $en_estado;
     public $Ta_tipo_comida_in_id;
+        
     protected $inputFilter;
+
 
     
     
@@ -31,8 +33,9 @@ class Restaurante implements InputFilterAwareInterface
         $this->va_web    = (!empty($data['va_web'])) ? $data['va_web'] : null;
         $this->va_imagen = (!empty($data['va_imagen'])) ? $data['va_imagen'] : null;//'default-img.jpg'
         $this->va_ruc    = (!empty($data['va_ruc'])) ? $data['va_ruc'] : null;
-         $this->en_estado    = (!empty($data['en_estado'])) ? $data['en_estado'] : null;
+        $this->en_estado    = (!empty($data['en_estado'])) ? $data['en_estado'] : null;
         $this->Ta_tipo_comida_in_id = (!empty($data['Ta_tipo_comida_in_id'])) ? $data['Ta_tipo_comida_in_id'] : null;
+        
 //$this->direccion  = (!empty($data['direccion'])) ? $data['direccion'] : null;
     }
 // Add content to these methods:
