@@ -87,12 +87,12 @@ class IndexController extends AbstractActionController {
         $adpter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $form = new PlatosForm($adpter, $local);
         
-        $promocion =  $this->getPlatosTable()->promocion()->toArray();
-        $promo = array();
-        foreach($promocion as $arrpro){
-            $promo[$arrpro['in_id']] = $arrpro['va_nombre'];
-        }
-        $form->get('va_promocion')->setValueOptions($promo);
+//        $promocion =  $this->getPlatosTable()->promocion()->toArray();
+//        $promo = array();
+//        foreach($promocion as $arrpro){
+//            $promo[$arrpro['in_id']] = $arrpro['va_nombre'];
+//        }
+//        $form->get('va_promocion')->setValueOptions($promo);
         
         $form->get('submit')->setValue('Add');
         $request = $this->getRequest();
@@ -340,12 +340,12 @@ class IndexController extends AbstractActionController {
         
         $form->get('va_imagen')->setValue($comeya);
                         ////////////////PROMOCIONES//////////////////////////
-        $promocion =  $this->getPlatosTable()->promocion()->toArray();
-        $promo = array();
-        foreach($promocion as $arrpro){
-            $promo[$arrpro['in_id']] = $arrpro['va_nombre'];
-        }
-        $form->get('va_promocion')->setValueOptions($promo);
+//        $promocion =  $this->getPlatosTable()->promocion()->toArray();
+//        $promo = array();
+//        foreach($promocion as $arrpro){
+//            $promo[$arrpro['in_id']] = $arrpro['va_nombre'];
+//        }
+//        $form->get('va_promocion')->setValueOptions($promo);
         /////////////////////PROMOCIONES////////////////////
         
         $form->bind($restaurante);
@@ -360,9 +360,12 @@ class IndexController extends AbstractActionController {
 /////////////////////////////////////////////////////////////////////////////////
         $form->get('submit')->setAttribute('value', 'MODIFICAR');
         $request = $this->getRequest();
-        
+       
         if ($request->isPost()) {
             $promoc= $this->params()->fromPost('va_promocion');
+            
+            var_dump($promoc);
+            
             $datos =$this->request->getPost();
              $plato_otro = $datos['va_otros'];
             $form->setInputFilter($restaurante->getInputFilter());

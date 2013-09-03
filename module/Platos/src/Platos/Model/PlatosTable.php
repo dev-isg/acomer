@@ -150,25 +150,36 @@ class PlatosTable {
 //                }else{$var=0;}
 //                var_dump($var);exit;
                     if($this->promocionxPlato($id)->toArray()>0){
-                         foreach($promocion as $value){
-                         $delete = $this->tableGateway->getSql()
-                            ->delete()
-                            ->from('ta_plato_has_ta_tag')
-                            ->where(array('ta_plato_in_id' => $id));
-                        $selectStringDelete = $this->tableGateway->getSql()->getSqlStringForSqlObject($delete);
-//                        var_dump($selectStringDelete);exit;
-                        $adapter1 = $this->tableGateway->getAdapter();
-                        $adapter1->query($selectStringDelete, $adapter1::QUERY_MODE_EXECUTE);
-                         }
-                      foreach($promocion as $value){
-                        $promo2 = $this->tableGateway->getSql()->insert()
-                               ->into('ta_plato_has_ta_tag')
-                               ->values(array('ta_plato_in_id' => $id, 'ta_tag_in_id' => $value));
-                        $selectStringUpdate = $this->tableGateway->getSql()->getSqlStringForSqlObject($promo2);
-                    $adapter2 = $this->tableGateway->getAdapter();
-                    $adapter2->query($selectStringUpdate, $adapter2::QUERY_MODE_EXECUTE);
-                         }               
 
+                        if ($promocion != null) {
+                        foreach ($promocion as $value) {
+                            $delete = $this->tableGateway->getSql()
+                                    ->delete()
+                                    ->from('ta_plato_has_ta_tag')
+                                    ->where(array('ta_plato_in_id' => $id));
+                            $selectStringDelete = $this->tableGateway->getSql()->getSqlStringForSqlObject($delete);
+                            $adapter1 = $this->tableGateway->getAdapter();
+                            $adapter1->query($selectStringDelete, $adapter1::QUERY_MODE_EXECUTE);
+                        }
+                        foreach ($promocion as $value) {
+                            $promo2 = $this->tableGateway->getSql()->insert()
+                                    ->into('ta_plato_has_ta_tag')
+                                    ->values(array('ta_plato_in_id' => $id, 'ta_tag_in_id' => $value));
+                            $selectStringUpdate = $this->tableGateway->getSql()->getSqlStringForSqlObject($promo2);
+                            $adapter2 = $this->tableGateway->getAdapter();
+                            $adapter2->query($selectStringUpdate, $adapter2::QUERY_MODE_EXECUTE);
+                        }
+                    }else{
+                           $delete = $this->tableGateway->getSql()
+                                    ->delete()
+                                    ->from('ta_plato_has_ta_tag')
+                                    ->where(array('ta_plato_in_id' => $id));
+                            $selectStringDelete = $this->tableGateway->getSql()->getSqlStringForSqlObject($delete);
+                            $adapter1 = $this->tableGateway->getAdapter();
+                            $adapter1->query($selectStringDelete, $adapter1::QUERY_MODE_EXECUTE);
+                            
+                        
+                    }
 
                     }else{
                       foreach($promocion as $value){
