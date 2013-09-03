@@ -149,7 +149,7 @@ class PlatosForm extends Form
           
                
         $this->add(array(
-            'name' =>'Ta_tipo_plato_in_id',// 'ta_tipo_plato',
+            'name' =>'ta_tipo_plato_in_id',// 'ta_tipo_plato',
             'type' => 'Select',  
             
              'attributes' => array(               

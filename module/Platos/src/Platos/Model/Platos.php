@@ -19,7 +19,7 @@ class Platos implements InputFilterAwareInterface
     public $va_precio;
     public $en_destaque;
     public $en_estado;
-    public $Ta_tipo_plato_in_id;
+    public $ta_tipo_plato_in_id;
     public $Ta_puntaje_in_id;
     public $Ta_usuario_in_id;
    public $va_promocion;

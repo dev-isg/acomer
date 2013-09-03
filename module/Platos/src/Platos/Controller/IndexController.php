@@ -99,7 +99,6 @@ class IndexController extends AbstractActionController {
         if ($request->isPost()) { 
             
             $promoc= $this->params()->fromPost('va_promocion');
-//            var_dump($promoc);exit;
              $datos =$this->request->getPost();
              $plato_otro = $datos['va_otros'];
             

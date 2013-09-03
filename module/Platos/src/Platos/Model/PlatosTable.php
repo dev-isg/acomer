@@ -129,7 +129,7 @@ class PlatosTable {
                     foreach($promocion as $value){
                     $promo = $this->tableGateway->getSql()->insert()
                             ->into('ta_plato_has_ta_tag')
-                            ->values(array('Ta_plato_in_id' => $idplato, 'ta_tag_in_id' => $value));
+                            ->values(array('ta_plato_in_id' => $idplato, 'ta_tag_in_id' => $value));
                     $statementProm = $this->tableGateway->getSql()->prepareStatementForSqlObject($promo);
                     $statementProm->execute();
                     }
@@ -154,7 +154,7 @@ class PlatosTable {
                          $delete = $this->tableGateway->getSql()
                             ->delete()
                             ->from('ta_plato_has_ta_tag')
-                            ->where(array('Ta_plato_in_id' => $id));
+                            ->where(array('ta_plato_in_id' => $id));
                         $selectStringDelete = $this->tableGateway->getSql()->getSqlStringForSqlObject($delete);
 //                        var_dump($selectStringDelete);exit;
                         $adapter1 = $this->tableGateway->getAdapter();
@@ -163,7 +163,7 @@ class PlatosTable {
                       foreach($promocion as $value){
                         $promo2 = $this->tableGateway->getSql()->insert()
                                ->into('ta_plato_has_ta_tag')
-                               ->values(array('Ta_plato_in_id' => $id, 'ta_tag_in_id' => $value));
+                               ->values(array('ta_plato_in_id' => $id, 'ta_tag_in_id' => $value));
                         $selectStringUpdate = $this->tableGateway->getSql()->getSqlStringForSqlObject($promo2);
                     $adapter2 = $this->tableGateway->getAdapter();
                     $adapter2->query($selectStringUpdate, $adapter2::QUERY_MODE_EXECUTE);
@@ -174,7 +174,7 @@ class PlatosTable {
                       foreach($promocion as $value){
                         $update = $this->tableGateway->getSql()->insert()
                                ->into('ta_plato_has_ta_tag')
-                               ->values(array('Ta_plato_in_id' => $id, 'ta_tag_in_id' => $value));
+                               ->values(array('ta_plato_in_id' => $id, 'ta_tag_in_id' => $value));
                    $selectStringUpdate2 = $this->tableGateway->getSql()->getSqlStringForSqlObject($update);
                 $adapter3 = $this->tableGateway->getAdapter();
                 $adapter3->query($selectStringUpdate2, $adapter2::QUERY_MODE_EXECUTE);
@@ -563,9 +563,9 @@ class PlatosTable {
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
         $selecttot = $sql->select()
-                ->from('Ta_plato_has_ta_tag')
-                ->join('ta_tag', 'ta_tag.in_id = Ta_plato_has_ta_tag.ta_tag_in_id', array(), 'left');
-            $selecttot ->where(array('Ta_plato_has_ta_tag.Ta_plato_in_id'=>$id));       
+                ->from('ta_plato_has_ta_tag')
+                ->join('ta_tag', 'ta_tag.in_id = ta_plato_has_ta_tag.ta_tag_in_id', array(), 'left');
+            $selecttot ->where(array('ta_plato_has_ta_tag.ta_plato_in_id'=>$id));       
    
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
