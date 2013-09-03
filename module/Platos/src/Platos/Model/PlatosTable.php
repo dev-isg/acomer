@@ -128,8 +128,8 @@ class PlatosTable {
             
                     foreach($promocion as $value){
                     $promo = $this->tableGateway->getSql()->insert()
-                            ->into('Ta_plato_has_ta_tag')
-                            ->values(array('Ta_plato_in_id' => $idplato, 'Ta_tag_in_id' => $value));
+                            ->into('ta_plato_has_ta_tag')
+                            ->values(array('Ta_plato_in_id' => $idplato, 'ta_tag_in_id' => $value));
                     $statementProm = $this->tableGateway->getSql()->prepareStatementForSqlObject($promo);
                     $statementProm->execute();
                     }
@@ -153,7 +153,7 @@ class PlatosTable {
                          foreach($promocion as $value){
                          $delete = $this->tableGateway->getSql()
                             ->delete()
-                            ->from('Ta_plato_has_ta_tag')
+                            ->from('ta_plato_has_ta_tag')
                             ->where(array('Ta_plato_in_id' => $id));
                         $selectStringDelete = $this->tableGateway->getSql()->getSqlStringForSqlObject($delete);
 //                        var_dump($selectStringDelete);exit;
@@ -162,8 +162,8 @@ class PlatosTable {
                          }
                       foreach($promocion as $value){
                         $promo2 = $this->tableGateway->getSql()->insert()
-                               ->into('Ta_plato_has_ta_tag')
-                               ->values(array('Ta_plato_in_id' => $id, 'Ta_tag_in_id' => $value));
+                               ->into('ta_plato_has_ta_tag')
+                               ->values(array('Ta_plato_in_id' => $id, 'ta_tag_in_id' => $value));
                         $selectStringUpdate = $this->tableGateway->getSql()->getSqlStringForSqlObject($promo2);
                     $adapter2 = $this->tableGateway->getAdapter();
                     $adapter2->query($selectStringUpdate, $adapter2::QUERY_MODE_EXECUTE);
@@ -173,8 +173,8 @@ class PlatosTable {
                     }else{
                       foreach($promocion as $value){
                         $update = $this->tableGateway->getSql()->insert()
-                               ->into('Ta_plato_has_ta_tag')
-                               ->values(array('Ta_plato_in_id' => $id, 'Ta_tag_in_id' => $value));
+                               ->into('ta_plato_has_ta_tag')
+                               ->values(array('Ta_plato_in_id' => $id, 'ta_tag_in_id' => $value));
                    $selectStringUpdate2 = $this->tableGateway->getSql()->getSqlStringForSqlObject($update);
                 $adapter3 = $this->tableGateway->getAdapter();
                 $adapter3->query($selectStringUpdate2, $adapter2::QUERY_MODE_EXECUTE);
@@ -504,9 +504,9 @@ class PlatosTable {
                 ->join('ta_local', 'ta_local.in_id = ta_plato_has_ta_local.ta_local_in_id', array(), 'left')
                 ->join('ta_ubigeo', 'ta_ubigeo.in_id = ta_local.ta_ubigeo_in_id', array('Distrito' => 'ch_distrito'), 'left')
                 ->join('ta_restaurante', 'ta_local.ta_restaurante_in_id= ta_restaurante.in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
-               ->join('Ta_plato_has_ta_tag', 'ta_plato.in_id = Ta_plato_has_ta_tag.ta_plato_in_id', array(), 'left')
+                ->join('ta_plato_has_ta_tag', 'ta_plato.in_id = ta_plato_has_ta_tag.ta_plato_in_id', array(), 'left')
              
-                ->join('ta_tag', 'ta_tag.in_id = Ta_plato_has_ta_tag.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
+                ->join('ta_tag', 'ta_tag.in_id = ta_plato_has_ta_tag.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
                 ->where(array('ta_tag.in_id'=>'1'))->group('ta_plato.in_id')->order('ta_plato.in_id DESC');//limit($aleatorio)->offset(3)
 
 //                ->join('ta_tag', 'ta_tag.in_id = Ta_plato_has_ta_tag.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')

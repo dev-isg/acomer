@@ -458,10 +458,8 @@ class IndexController extends AbstractActionController
             $selectS = $sql->getSqlStringForSqlObject($select);   
             $resul = $adapter->query($selectS, $adapter::QUERY_MODE_EXECUTE);
             $plato=$resul->toArray();
-            foreach ($plato as $result) 
-                
-            {$this->getPlatosTable()->cromSolr($result['in_id'],'');
-            }
+            foreach ($plato as $result)     
+            {$this->getPlatosTable()->cromSolr($result['in_id'],'');  }
            echo 'cron finalizado';exit;
         }
 

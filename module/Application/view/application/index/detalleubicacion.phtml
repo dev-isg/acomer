@@ -132,9 +132,7 @@ $this->headTitle($this->busquedatitle);
                         </p>
                     </div>
                 </div>
-              <?php endforeach; ?>       
-                 
-              
+              <?php endforeach; ?>
       <div id="pagina">
         <?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar-por-distrito?distrito='.$this->distrito.'&q='.$this->plato.'&submit=Buscar'.'&')):""; ?> 
       </div>         
@@ -231,13 +229,10 @@ $this->headTitle($this->busquedatitle);
             <a href="javascript:window.history.back();" onclick="regresar()">Regresar</a>
          </div>
         </div>
-     </div>             
-  <?php                
-} 
- 
-             else
-                 {
-                  ?>
+     </div>
+                
+  <?php } else {?>
+
 <div class="descrip-product">
   <div id="error-mensaje">       
     <p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti."</p>
@@ -302,9 +297,7 @@ $this->headTitle($this->busquedatitle);
               </div>
             </div>
           </li>
-        <?php 
-//             }
-         }; ?>   
+        <?php }; ?>   
       </ul>
     </div>
 </div>                     

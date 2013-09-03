@@ -617,6 +617,7 @@ background: url(../../img/back-detalle.png) repeat;
   float: right;
   position: relative;
   padding-bottom: 0px;
+  height: 100%;
 }
 .lista-Detalle .contenido-plato{
   height: auto;
@@ -1842,6 +1843,8 @@ form#application .control-group .btn-solicito{
 }
 #mapa-buscador{
   width: 100%;
+  height: 100%;
+  background: white;
 }
 #error{
 

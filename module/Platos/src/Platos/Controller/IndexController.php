@@ -170,9 +170,10 @@ class IndexController extends AbstractActionController {
                   $filter   = new \Filter_Alnum();
                   $filtered = $filter->filter($nom);
                   $name = $filtered.'-'.$imf2;
-                $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/log.png');
+               $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/log.png');
                 $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
-                $nuevaimagen = $viejaimagen;
+                $nuevaimagen = imagecreatetruecolor($anchura, $altura);
+                        imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
                 $margen_dcho =350;
                 $margen_inf = 10;
                 $sx = imagesx($estampa);
@@ -180,12 +181,10 @@ class IndexController extends AbstractActionController {
 //                  $im = imagecreatefromjpeg('foto.jpeg');
        imagecopy($nuevaimagen, $estampa, imagesx($nuevaimagen) - $sx - $margen_dcho, imagesy($nuevaimagen) - $sy - $margen_inf, 0, 0, imagesx($estampa), imagesy($estampa));
 
-                   
-                      //$nuevaimagen = imagecreatetruecolor($anchura, $altura);  
+               
                       $destaque = imagecreatetruecolor($destacadox, $destacadoy);
                       $generale = imagecreatetruecolor($generalx, $generaly);
-                      
-                    //   imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+               
                        imagecopyresized($destaque, $viejaimagen, 0, 0, 0, 0, $destacadox, $destacadoy,$ancho, $alto);
                        imagecopyresized($generale, $viejaimagen, 0, 0, 0, 0, $generalx, $generaly,$ancho, $alto);
                     if($platos[0]['cantidad']<=0)

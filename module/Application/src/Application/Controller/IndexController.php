@@ -511,7 +511,7 @@ public function __construct()
             'general' => $paginator,
             'form' => $form,
             'nombre' => $text,
-               'plato' => $valores,
+              'plato' => $valores,
             'mostrar' => $mostrar
         ));
         return $view;
