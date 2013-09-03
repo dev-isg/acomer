@@ -78,7 +78,7 @@
     <?php }?>
 
     <?php
-    // require './vendor/Classes/Mobile_Detect.php';
+   require './vendor/Classes/Mobile_Detect.php';
     $detect1 = new Mobile_Detect();
     if ($detect1->isAndroidOS()) {
         ?>
@@ -95,7 +95,6 @@
           	margin-top: 0;
           	padding-top: 40px;
           }
-
           .content-sidebar-ho {
           	margin-top: 0;
           }
@@ -130,7 +129,7 @@
 	<div class="container cont-home">
       
       <?php
-    // require './vendor/Classes/Mobile_Detect.php';
+    require './vendor/Classes/Mobile_Detect.php';
     $detect3 = new Mobile_Detect();
     if ($detect3->isTablet()) {
         ?>
@@ -385,6 +384,8 @@
 </div>
   <script src="<?php echo $this->host('ruta')?>/js/vendor/jquery.placeholder.min.js?v<?php echo $this->host('version')?>"></script>   
   <script src="<?php echo $this->host('ruta')?>/js/vendor/mosaic.js?v<?php echo $this->host('version')?>"></script>
+  <script src="<?php echo $this->host('ruta')?>/js/jquery.flexslider.js"></script>
+  <script src="<?php echo $this->host('ruta')?>/js/main1.js"></script>
 
   <?php
 //     require_once './vendor/Classes/Mobile_Detect.php';
