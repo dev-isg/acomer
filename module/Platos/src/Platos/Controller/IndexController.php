@@ -467,11 +467,11 @@ class IndexController extends AbstractActionController {
                                        
                                        
                                        
-                           $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/log.png');
+                           $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/loguito.png');
                 $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                 $nuevaimagen = $viejaimagen;
-                $margen_dcho =350;
-                $margen_inf = 10;
+                $margen_dcho =340;
+                $margen_inf = 20;
                 $sx = imagesx($estampa);
                 $sy = imagesy($estampa);
 //                  $im = imagecreatefromjpeg('foto.jpeg');
@@ -758,12 +758,12 @@ class IndexController extends AbstractActionController {
                     'sort' => 'random_' . uniqid() . ' asc',
                     'fq' => 'en_estado:activo AND restaurant_estado:activo',
                     'wt' => 'json' );
-                $resulta = false;
+                $resultados = false;
                 if ($query) {
                     $solr = \Classes\Solr::getInstance()->getSolr();
                     if (get_magic_quotes_gpc() == 1) {
                         $query = stripslashes($query);}
-                    try { $resulta = $solr->search($query, 0, $limit, $fq);
+                    try { $resultados = $solr->search($query, 0, $limit, $fq);
                     } catch (Exception $e) {
                   echo ("<div>ingrese algun valor</div>"); }}
                 }  }           

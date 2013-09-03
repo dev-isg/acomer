@@ -203,6 +203,7 @@ cursor: pointer;
   position: relative;
   margin-right: auto;
   margin-left: auto;
+  background: white;
 }
 
 .content-sidebar{
@@ -1842,7 +1843,7 @@ form#application .control-group .btn-solicito{
   display: inline;
 }
 #mapa-buscador{
-  width: 100%;
+  width: 724px;
   height: 100%;
   background: white;
 }

@@ -68,6 +68,7 @@
                         <ul class="servicios-desc">
                           <li><?php echo $this->lista[0]['va_telefono'];?></li>
                         </ul>
+                        
                         <h4>Atención</h4>
                         <ul class="time">
                           <li><span class="day"><?php echo $this->lista[0]['va_dia']; ?></span></li>
@@ -79,6 +80,7 @@
                           <li><span class="hour"><?php echo $this->lista[0]['va_horario_opcional']; ?></span></li>
                         </ul>
                         <?php } ?>
+                        
                     </div>
                     <div class="right-desc">
                         <?php if($this->lista[0]['web']){?>
@@ -99,6 +101,14 @@
                             <li><?php echo $serv->nom_servicio; ?></li>
                           <?php endforeach; ?>
                         </ul>
+                        <?php if($this->lista[0]['va_email']){?>
+                        <h4>Email</h4>
+                        <ul class="servicios-desc">
+                          <li>
+                            <a href="mailto:<?php echo $this->lista[0]['va_email']; ?>">Enviar email</a>
+                          </li>
+                        </ul>
+                        <?php }?>
                     </div>
                 </div>
             </div>
