@@ -320,7 +320,7 @@ class PlatosTable {
                 ->columns(array('*', 'num' => new \Zend\Db\Sql\Expression('COUNT(tc.in_id)')))
                 ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
                 ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
-                ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('va_horario_opcional','de_latitud', 'de_longitud', 'va_direccion', 'va_horario', 'va_dia', 'va_telefono','va_direccion_referencia'), 'left')
+                ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('va_horario_opcional','de_latitud','va_email', 'de_longitud', 'va_direccion', 'va_horario', 'va_dia', 'va_telefono','va_direccion_referencia'), 'left')
                 ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_id' => 'in_id', 'restaurant_nombre' => 'va_nombre', 'restaurant_img' => 'va_imagen','web'=>'va_web'), 'left')
                 ->join(array('ttc' => 'ta_tipo_comida'), 'ttc.in_id=tr.ta_tipo_comida_in_id', array('tipo_comida'=>'va_nombre_tipo'), 'left')           
                 ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('pais' => 'ch_pais', 'departamento' => 'ch_departamento', 'provincia' => 'ch_provincia', 'distrito' => 'ch_distrito'), 'left')

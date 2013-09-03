@@ -203,8 +203,13 @@ cursor: pointer;
   position: relative;
   margin-right: auto;
   margin-left: auto;
+  background: white;
 }
-
+a.mailto{
+  color: #7b7b7b;
+  font-size: 14px;
+  font-family: arial;
+}
 .content-sidebar{
   width: 266px;
   float: left;
@@ -1842,7 +1847,7 @@ form#application .control-group .btn-solicito{
   display: inline;
 }
 #mapa-buscador{
-  width: 100%;
+  width: 724px;
   height: 100%;
   background: white;
 }
