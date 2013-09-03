@@ -324,6 +324,7 @@ public function __construct()
             $mostrar = 'Mostrando ' . $first . '-' . $last . ' de ' . $total . ' resultados';
         }
         
+       
 //        var_dump($resultados->response->docs);Exit;
         $arrpl=array();
         $arrest=array();
