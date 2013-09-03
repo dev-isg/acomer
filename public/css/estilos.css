@@ -2594,6 +2594,9 @@ p.ver_mistura a{
   }
 }
 @media (max-width: 767px) {
+  #mapa-buscador{
+    width: 100%;
+  }
   #search input[type="text"] {
     margin-left: 0px;
     -webkit-border-radius: 0;
