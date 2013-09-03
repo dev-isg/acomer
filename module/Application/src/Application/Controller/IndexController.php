@@ -62,7 +62,7 @@ public function __construct()
         $listault = $this->getConfigTable()->cantComentxPlato(2, 3, 2);
         $this->layout()->clase = 'Home';
         
-        $view->setVariables(ray(
+        $view->setVariables(array(
             'lista' => $listades,
             'listaseg' => $listadeseg,
             'listaval' => $listaval,
