@@ -87,13 +87,6 @@ class IndexController extends AbstractActionController {
         $adpter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $form = new PlatosForm($adpter, $local);
         
-//        $promocion =  $this->getPlatosTable()->promocion()->toArray();
-//        $promo = array();
-//        foreach($promocion as $arrpro){
-//            $promo[$arrpro['in_id']] = $arrpro['va_nombre'];
-//        }
-//        $form->get('va_promocion')->setValueOptions($promo);
-        
         $form->get('submit')->setValue('Add');
         $request = $this->getRequest();
         if ($request->isPost()) { 
@@ -339,13 +332,7 @@ class IndexController extends AbstractActionController {
         $form  = new PlatosForm($adpter,$idlocal);
         
         $form->get('va_imagen')->setValue($comeya);
-                        ////////////////PROMOCIONES//////////////////////////
-//        $promocion =  $this->getPlatosTable()->promocion()->toArray();
-//        $promo = array();
-//        foreach($promocion as $arrpro){
-//            $promo[$arrpro['in_id']] = $arrpro['va_nombre'];
-//        }
-//        $form->get('va_promocion')->setValueOptions($promo);
+
         /////////////////////PROMOCIONES////////////////////
         
         $form->bind($restaurante);
