@@ -169,12 +169,12 @@ class IndexController extends AbstractActionController {
                   $filter   = new \Filter_Alnum();
                   $filtered = $filter->filter($nom);
                   $name = $filtered.'-'.$imf2;
-               $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/log.png');
+               $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/loguito.png');
                 $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                 $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                         imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                $margen_dcho =350;
-                $margen_inf = 10;
+                $margen_dcho =340;
+                $margen_inf = 20;
                 $sx = imagesx($estampa);
                 $sy = imagesy($estampa);
 //                  $im = imagecreatefromjpeg('foto.jpeg');
@@ -238,11 +238,11 @@ class IndexController extends AbstractActionController {
                   $filter   = new \Filter_Alnum();
                   $filtered = $filter->filter($nom); 
                    $name = $filtered.'-'.$imf2;
-                    $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/log.png');
+                    $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/loguito.png');
                 $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                 $nuevaimagen = $viejaimagen;
-                $margen_dcho =350;
-                $margen_inf = 10;
+                $margen_dcho =340;
+                $margen_inf = 20;
                 $sx = imagesx($estampa);
                 $sy = imagesy($estampa);
 //                  $im = imagecreatefromjpeg('foto.jpeg');
@@ -468,6 +468,9 @@ class IndexController extends AbstractActionController {
                                        
                            $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/loguito.png');
                 $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
+                
+                     
+              //  imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
                 $nuevaimagen = $viejaimagen;
                 $margen_dcho =340;
                 $margen_inf = 20;
@@ -477,12 +480,11 @@ class IndexController extends AbstractActionController {
        imagecopy($nuevaimagen, $estampa, imagesx($nuevaimagen) - $sx - $margen_dcho, imagesy($nuevaimagen) - $sy - $margen_inf, 0, 0, imagesx($estampa), imagesy($estampa));
 
                    
-                      //$nuevaimagen = imagecreatetruecolor($anchura, $altura);  
+                      
+                 // $nuevaimagen = imagecreatetruecolor($anchura, $altura);  
                       $destaque = imagecreatetruecolor($destacadox, $destacadoy);
                       $generale = imagecreatetruecolor($generalx, $generaly);
-                      
-                 
-                     //  imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                   
                        imagecopyresized($destaque, $viejaimagen, 0, 0, 0, 0, $destacadox, $destacadoy,$ancho, $alto);
                        imagecopyresized($generale, $viejaimagen, 0, 0, 0, 0, $generalx, $generaly,$ancho, $alto);                                      
                      $principal = $this->_options->upload->images . '/plato/principal/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;
@@ -532,11 +534,11 @@ class IndexController extends AbstractActionController {
                                        $general = $this->_options->upload->images . '/plato/general/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;
                                        $original = $this->_options->upload->images .  '/plato/original/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;}
                        
-                       $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/log.png');
+                       $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/loguito.png');
                 $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
                 $nuevaimagen = $viejaimagen;
-                $margen_dcho =350;
-                $margen_inf = 10;
+                $margen_dcho =340;
+                $margen_inf = 20;
                 $sx = imagesx($estampa);
                 $sy = imagesy($estampa);
 //                  $im = imagecreatefromjpeg('foto.jpeg');
