@@ -245,7 +245,7 @@ public function __construct()
             }
             
             //////////////////////////////////////////random de 5 platos distinc////////////////////////////////////
-                $limit_platos = 5;
+                $limit_platos = 9999;
                 $query_platos = "-($palabraBuscar)";
                 $fq_platos = array(
                     'sort' => 'random_' . uniqid() . ' asc',
@@ -267,7 +267,7 @@ public function __construct()
                 }
                 ///////////////////////////////////////fin/////////////////////////////////////////////////////////
                 //////////////////////////////////////////random de 5 DISTRITOS distinc////////////////////////////////////
-                $limit_distritos = 5;
+                $limit_distritos = 9999;
                 $query_distritos = "-($palabraBuscar)";
                 $fq_distritos = array(
                     'sort' => 'random_' . uniqid() . ' asc',
@@ -282,7 +282,7 @@ public function __construct()
                         $query_platos = stripslashes($query_distritos);
                     }
                     try {
-                        $results_distritos = $solr->search($query_distritos, 0, $limit_distritos, $fq_distritos);
+                        $results_distritos = $solr->search($query_distritos, 0,$limit_distritos, $fq_distritos);
                     } catch (Exception $e) {
                         echo ("<div>ingrese algun valor</div>");
                     }
@@ -324,46 +324,79 @@ public function __construct()
             $mostrar = 'Mostrando ' . $first . '-' . $last . ' de ' . $total . ' resultados';
         }
         
-
+//        var_dump($resultados->response->docs);Exit;
+        $arrpl=array();
+        $arrest=array();
         if (count($resultados->response->docs) < 5 && count($resultados->response->docs) > 0) {
             $contc = 0;
             foreach ($resultados->response->docs as $plat) {
                 $arrpl[] = $plat->name;
+                $arrest[] = $plat->distrito;
             }
             if (count($arrpl) < 5) {
                 $maxcantidad = 5 - count($arrpl);
                 foreach ($results_platos->response->docs as $plat2) {
                     if ($maxcantidad > $contc) {
                         $arrpl[] = $plat2->name;
+                        $arrest[] = $plat2->distrito;
                         $contc++;
                     }
                 }
             }
         } elseif (count($resultados->response->docs) < 5 && count($resultados->response->docs) == 0) {
+            $cont = 0;
+            $contr=0;
             foreach ($results_platos->response->docs as $plat) {
-                $arrpl[] = $plat->name;
+                if($cont<5){
+                    if(!in_array($plat->name,$arrpl)){
+                        $arrpl[] = $plat->name;
+                        $cont++;
+                    }
+                }
+                
+            }
+            foreach ($results_distritos->response->docs as $rest) {
+                 if($contr<5){
+                    if(!in_array($rest->distrito,$arrest)){
+                        $arrest[] = $rest->distrito; 
+                        $contr++;
+                    }
+                }         
             }
         } else {
             $cont = 0;
+            $contr=0;
             foreach ($resultados->response->docs as $plat) {
                 if ($cont < 5) {
-                    $arrpl[] = $plat->name;
-                    $cont++;
+                    if(!in_array($plat->name,$arrpl)){
+                        $arrpl[] = $plat->name;
+                        $cont++;
+                    }   
+                }
+                if($contr<5){
+                    if(!in_array($plat->distrito,$arrest)){
+                        $arrest[] = $plat->distrito;
+                        $contr++;
+                    }
                 }
             }
         }
-
-        $contares = 0;
-        foreach ($results_distritos->response->docs as $rest) {
-            if ($contares < 5) {
-                $arrest[] = $rest->distrito;
-                $contares++;
-            }
-        }
-//        var_dump(implode(",",$arrest));
+//var_dump($arrest);Exit;
+//        $contares = 0;
+//        $arrest=array();
+//        foreach ($results_distritos->response->docs as $rest) {
+//            if ($contares < 5) {
+//                if(!in_array($rest->distrito,$arrest)){
+//                $arrest[] = $rest->distrito;
+//                $contares++;
+//                }
+//
+//            }
+//        }
+//        var_dump(implode(",",$arrest));exit;
 //        var_dump(implode(",",$arrpl));exit;
   
-        $busquedatitle=$palabraBuscar.':'.implode(",",$arrpl).':'.implode(",",$arrest).'| Lista del Sabor';
+        $busquedatitle=$valores.':'.implode(",",$arrpl).':'.implode(",",$arrest).'| Lista del Sabor';
         $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
         $listatot = $listatot->toArray();
         
