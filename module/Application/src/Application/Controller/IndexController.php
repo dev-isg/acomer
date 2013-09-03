@@ -412,7 +412,7 @@ public function __construct()
         $valor = explode(" ", $filtered);
          if($valor[0]=='restaurante:')
         {$buscar =  $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];     
-        $texto = $valor[0].'"'.$buscar.'"'; 
+        $texto = $valor[0].'"'.$buscar.'"';
         $distrito = '';
         $ruta = $this->_options->data->busqueda .'/busqueda_movil.txt';
         $fp = fopen($ruta,"a");

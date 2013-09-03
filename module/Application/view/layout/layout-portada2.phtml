@@ -134,6 +134,7 @@
     $detect3 = new Mobile_Detect();
     if ($detect3->isTablet()) {
         ?>
+         
         <div class="content-sidebar">
           <div class="contenido-busqueda">
             <div class="content-sidebar-ho">
@@ -169,10 +170,11 @@
              <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"
                  <?php if(isset($_GET['distrito'])  and $_GET['distrito']==$comida['va_distrito'] )
                  {echo 'selected';}elseif (isset($_COOKIE['distrito'])  and $_COOKIE['distrito']==$comida['va_distrito'] )
-                 {echo 'selected';} elseif(!isset($_GET['distrito'])  and !isset($_COOKIE['distrito']) ){echo '';}?>>
+                 {echo 'selected';}elseif (isset($_POST['distrito'])  and $_POST['distrito']==$comida['va_distrito'] )
+                 {echo 'selected';}  elseif(!isset($_GET['distrito'])  and !isset($_COOKIE['distrito']) ){echo '';}?>>
                      <?php echo $comida['va_distrito']; ?></OPTION>
                 <?php endforeach; ?>
-             </select>
+             </select>                                                       
                 </p>
                 <p style="margin-top:5px;">
                   <input type="submit"  class="btn btn-warning btn-soli" value="Buscar"/>

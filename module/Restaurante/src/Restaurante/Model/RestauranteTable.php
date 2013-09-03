@@ -34,7 +34,7 @@ class RestauranteTable
         $select = $sql->select()
                 ->from(array('f' => 'ta_restaurante'))
                 ->join(array('b' => 'ta_tipo_comida'), 'f.ta_tipo_comida_in_id=b.in_id', array('va_nombre_tipo'))//,array('va_nombre_rol'))
-              ->where(array('f.ta_tipo_comida_in_id=b.in_id'))
+              ->where(array('f.ta_tipo_comida_in_id=b.in_id','f.en_estado'=>'activo'))
                ->order('in_id DESC');
         
         $selectString = $sql->getSqlStringForSqlObject($select);

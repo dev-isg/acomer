@@ -74,6 +74,7 @@ class LocalTable
            //'ta_restaurante_in_id' => $local['ta_restaurante_in_id'],
             'ta_ubigeo_in_id' => $convertir[0]['in_id'],  
            'va_dia'=>$local['va_dia'],
+               'va_email'=>$local['va_email']
         );
 
         

@@ -30,31 +30,22 @@ class IndexController extends AbstractActionController
      public function indexAction() {
          
         $auth = new \Zend\Authentication\AuthenticationService();
-        if (!$auth->hasIdentity()) {
-            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
-        }
-
-       
+        if (!$auth->hasIdentity())
+        {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
         $datos = $this->params()->fromPost('texto');
-       // setcookie('plato',$datos);
         $comida = $this->params()->fromPost('comida');
         $estado = $this->params()->fromPost('estado');
         $lista = $this->getRestauranteTable()->fetchAll();
         $request = $this->getRequest();
          if ($request->isPost()) {
-            // var_dump($datos);exit; 
-            $lista = $this->getRestauranteTable()->buscarRestaurante($datos,$comida,$estado);
-        }
-
+         $lista = $this->getRestauranteTable()->buscarRestaurante($datos,$comida,$estado);}
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
          $paginator->setItemCountPerPage(10);
-//          $this->layout('layout/layout-portada');
         return new ViewModel(array(
-          'restaurante' => $paginator,//$lista,
+          'restaurante' => $paginator,
             'comida' => $this->comidas(),
-            'texto'=>$datos
-        ));
+            'texto'=>$datos));
   
     }
   
