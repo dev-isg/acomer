@@ -302,7 +302,17 @@ class IndexController extends AbstractActionController {
     }
     
     
-
+        public function tipo_plato($id)
+                {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+                    $adapter = $this->dbAdapter;
+                    $sql = new Sql($adapter);
+                    $select = $sql->select()
+                        ->from('ta_tipo_plato')
+                    ->where(array('in_id' => $id));
+                    $selectString = $sql->getSqlStringForSqlObject($select);
+                    $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+                    return $results;       
+             }
     public function editarplatosAction()   
     {   
         
@@ -322,6 +332,7 @@ class IndexController extends AbstractActionController {
         try {
             $restaurante = $this->getPlatosTable()->getPlato($id);
             
+            
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
@@ -332,9 +343,17 @@ class IndexController extends AbstractActionController {
         $form  = new PlatosForm($adpter,$idlocal);
         
         $form->get('va_imagen')->setValue($comeya);
+        
+    //  $platotipo =  $this->tipo_plato($restaurante->Ta_tipo_plato_in_id)->toArray();
+       //var_dump($platotipo[0]['va_nombre']);exit;
+//        $comidas =  $this->comidas()->toArray();
+//        $com = array();
+//        foreach($comidas as $y){
+//            $com[$y['in_id']] = $y['va_nombre_tipo'];
+//        }
 
         /////////////////////PROMOCIONES////////////////////
-        
+       // $form->get('Ta_tipo_plato_in_id')->setOptions(array($platotipo[0]['in_id'] =>$platotipo[0]['va_nombre']  ));
         $form->bind($restaurante);
         $promobind =  $this->getPlatosTable()->promocionxPlato($id)->toArray();
 

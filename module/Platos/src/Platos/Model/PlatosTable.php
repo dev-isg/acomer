@@ -69,7 +69,7 @@ class PlatosTable {
             'va_precio' => $platos->va_precio,
             'en_destaque' => $platos->en_destaque,
             'en_estado' => (!empty($platos->en_estado)) ? $platos->en_estado : 2, //$plato->en_estado,
-            'ta_tipo_plato_in_id' => $platos->ta_tipo_plato_in_id,
+            'Ta_tipo_plato_in_id' => $platos->Ta_tipo_plato_in_id,
             'Ta_puntaje_in_id' => (!empty($platos->Ta_puntaje_in_id)) ? $platos->Ta_puntaje_in_id : 0,
             //'Ta_usuario_in_id' => (!empty($plato->Ta_usuario_in_id)) ? $plato->Ta_usuario_in_id : 1//$plato->Ta_usuario_in_id,
            'Ta_usuario_in_id' => 133,//$plato->Ta_usuario_in_id,
@@ -143,7 +143,9 @@ class PlatosTable {
 
             if ($this->getPlato($id)){
                  if(!empty($idtipoplato))
-                    {$data['ta_tipo_plato_in_id'] = $idtipoplato;}
+                    {
+                                  //        var_dump($idtipoplato);exit;
+                     $data['ta_tipo_plato_in_id'] = $idtipoplato;}
                 $this->tableGateway->update($data, array('in_id' => $id));
 //                if($this->promocionxPlato($id)->toArray()>0){
 //                    $var=1;

@@ -19,7 +19,7 @@ class Platos implements InputFilterAwareInterface
     public $va_precio;
     public $en_destaque;
     public $en_estado;
-    public $ta_tipo_plato_in_id;
+    public $Ta_tipo_plato_in_id;
     public $Ta_puntaje_in_id;
     public $Ta_usuario_in_id;
    public $va_promocion;
@@ -57,7 +57,7 @@ class Platos implements InputFilterAwareInterface
         $this->en_destaque = (!empty($data['en_destaque'])) ? $data['en_destaque'] : null;
         $this->en_estado = (!empty($data['en_estado'])) ? $data['en_estado'] : null;
         
-        $this->ta_tipo_plato_in_id = (!empty($data['ta_tipo_plato_in_id'])) ? $data['ta_tipo_plato_in_id'] : null;//ta_tipo_plato
+        $this->Ta_tipo_plato_in_id = (!empty($data['Ta_tipo_plato_in_id'])) ? $data['Ta_tipo_plato_in_id'] : null;//ta_tipo_plato
         $this->Ta_puntaje_in_id = (!empty($data['Ta_puntaje_in_id'])) ? $data['Ta_puntaje_in_id'] : 0;
         $this->Ta_usuario_in_id = (!empty($data['Ta_usuario_in_id'])) ? $data['Ta_usuario_in_id'] : 1;
         

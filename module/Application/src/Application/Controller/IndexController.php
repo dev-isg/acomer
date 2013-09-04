@@ -240,8 +240,14 @@ public function __construct()
                         $this->redirect()->toUrl('/application');
                     }
                 }
-           
-  
+//                    if ($resultados)
+//                  {
+//                    $total = (int) $resultados->response->numFound;
+//                    $start = min(1, $total);
+//                    $end = min($limite, $total);
+//                  
+//                    }  
+//  
             }
             
             //////////////////////////////////////////random de 5 platos distinc////////////////////////////////////
@@ -438,6 +444,9 @@ public function __construct()
             'mostrar' => $mostrar,
             'nombre' => $texto,
             'busquedatitle'=>$busquedatitle
+//            'total' =>$total,
+//            'start'=> $start,
+//            'end' =>$end
         )); // ,'error'=>$error
         return $view;
     }
@@ -509,6 +518,9 @@ public function __construct()
             }
         }
         
+      
+        
+        
         $limit = 3;
         $palabraBuscar = isset($texto) ? $texto : false;
 //         var_dump($distrito);exit;
@@ -529,6 +541,7 @@ public function __construct()
             } catch (Exception $e) {
                 $this->redirect()->toUrl('/');
             }
+            
         }
         $form = new Formularios();
       
