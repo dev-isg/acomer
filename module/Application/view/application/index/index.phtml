@@ -85,16 +85,26 @@
    <?php if($this->promociones){ ?>
     <div class="sub subir-home" id="subir-home">
       <div class="content-etiqueta-home etiqueta-mistura">
-        <p>Mistura 2013</p>
+        <?php
+          require './vendor/Classes/Mobile_Detect.php';
+          $detect3 = new Mobile_Detect();
+          if ($detect3->isTablet()) {
+             ?>                
+           <p><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: Mistura&distrito=TODOS LOS DISTRITOS" title="Mistura">Mistura 2013</a></p>
+           <?php }elseif($detect3->isMobile()){?>   
+              <p><a href="<?php echo $this->host('ruta')?>/buscar?q=tag: Mistura" title="Mistura">Mistura 2013</a></p>
+           <?php  } else{?>
+          <p><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: Mistura&distrito=TODOS LOS DISTRITOS" title="Mistura">Mistura 2013</a></p>
+           <?php  } ?>
       </div>
     </div>
     <div class="recomendados-platos primer-home" style="padding-bottom: 90px;">
       <ul>
-         <?php  foreach ($this->promociones  as $promo) {
-                                    if(strlen($promo['va_nombre'])>27){
-                         $strnom=trim(substr($promo['va_nombre'], 0, 24));
-                          $strnom.='...';
-                         }else {$strnom=$promo['va_nombre'];} ?>
+        <?php  foreach ($this->promociones  as $promo) {
+          if(strlen($promo['va_nombre'])>27){
+           $strnom=trim(substr($promo['va_nombre'], 0, 24));
+            $strnom.='...';
+           }else {$strnom=$promo['va_nombre'];} ?>
           <li>
             <div class="plato_r">
               <div class="mosaic-block cover">

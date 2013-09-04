@@ -976,6 +976,9 @@ a.title-home-listado h1 img{
 .sub .etiqueta-mistura{
   background: url(../img/bann/etiqueta-mis.png) no-repeat;  
 }
+.etiqueta-mistura p a{
+  color: #FFF100;
+}
 .primer-home{
   margin-bottom: 10px;
 }
