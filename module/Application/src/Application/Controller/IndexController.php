@@ -46,6 +46,7 @@ public function __construct()
         $this->layout()->comidas = $comidas;
         $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
         $listatot = $listatot->toArray();
+//        var_dump($listatot);exit;
         foreach ($listatot as $key => $value) {
             
               $list[]=$listatot[$key]['va_nombre'];
@@ -336,35 +337,38 @@ public function __construct()
         $arrest=array();
         if (count($resultados->response->docs) < 5 && count($resultados->response->docs) > 0) {
             $contc = 0;
-            $contr = 0;
-            $cont = 0;
-            $contr=0;
+//            $contr = 0;
+//            $cont = 0;
+            $contrc=0;
             foreach ($resultados->response->docs as $plat) {
                     if(!in_array($plat->name,$arrpl)){
                         $arrpl[] = $plat->name;
-                        $cont++;
+//                        $cont++;
                     }
                     if(!in_array($plat->distrito,$arrest)){
                         $arrest[] = $plat->distrito;
-                        $contr++;
+//                        $contr++;
                     }
             }
             if (count($arrpl) < 5) {
                 $maxcantidad = 5 - count($arrpl);
                 foreach ($results_platos->response->docs as $plat2) {
                     if ($maxcantidad > $contc) {
+                        if(!in_array($plat2->name,$arrpl)){
                         $arrpl[] = $plat2->name;
-//                        $arrest[] = $plat2->distrito;
                         $contc++;
+                        }
                     }
                 }
             }
             if(count($arrest) < 5){
                 $maxcantidadr = 5 - count($arrest);
                  foreach ($results_distritos->response->docs as $rest2) {
-                     if ($maxcantidadr > $contr) {
-                        $arrest[] = $rest2->distrito;
-                        $contr++;
+                     if ($maxcantidadr > $contrc) {
+                        if(!in_array($rest2->distrito,$arrest)){
+                            $arrest[] = $rest2->distrito;
+                            $contrc++;
+                         }
                     }
                 }           
             }

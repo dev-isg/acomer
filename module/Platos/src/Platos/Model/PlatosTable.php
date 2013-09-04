@@ -491,7 +491,7 @@ class PlatosTable {
                 LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
                 where ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null  and ta_plato.ta_puntaje_in_id ' . $puntaje .$coment.'
                  GROUP BY in_id 
-                ORDER BY ' . $order . ' desc ' . $limit, $adapter::QUERY_MODE_EXECUTE);
+                ORDER BY ' . $order . ' desc '.$limit , $adapter::QUERY_MODE_EXECUTE);
 
         return $primer; //->toArray();//$data;// $aux;//select()->from('usuario')->query()->fetchAll();
     }
@@ -547,7 +547,7 @@ class PlatosTable {
            if($promocion==1){
              $consulta=$query.' tag.in_id=1 and ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado.' and (ta_comentario.en_estado=1 or ta_comentario.en_estado is null)';
           }else{
-              $consulta=$query.' ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null and ta_plato.ta_puntaje_in_id ' . $puntaje.' and ta_comentario.en_estado=1';
+              $consulta=$query.' ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null and ta_plato.ta_puntaje_in_id ' . $puntaje.' and (ta_comentario.en_estado=1 or ta_comentario.en_estado is null)';
 
           }
            
