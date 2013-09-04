@@ -547,7 +547,7 @@ class PlatosTable {
            if($promocion==1){
              $consulta=$query.' tag.in_id=1 and ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado.' and (ta_comentario.en_estado=1 or ta_comentario.en_estado is null)';
           }else{
-              $consulta=$query.' ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null  and ta_plato.ta_puntaje_in_id ' . $puntaje.' and ta_comentario.en_estado=1';
+              $consulta=$query.' ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null and ta_plato.ta_puntaje_in_id ' . $puntaje.' and ta_comentario.en_estado=1';
 
           }
            
