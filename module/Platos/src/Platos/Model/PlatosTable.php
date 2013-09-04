@@ -454,11 +454,11 @@ class PlatosTable {
         $adapter = $this->tableGateway->getAdapter();
 
         if ($val == 1) {
-            $puntaje = '>=0'; // $puntaje = '>=0'; 'is not null or ta_comentario.ta_puntaje_in_id!=0'; 
+            $puntaje = '>=0 '; // $puntaje = '>=0'; 'is not null or ta_comentario.ta_puntaje_in_id!=0'; 
             $order = 'ta_puntaje_in_id';
             $cantidad=$this->aleatorios($destaque, $estado, $puntaje);
             $total=$cantidad[0]['NumeroResultados'];
-            
+            $coment=' and (ta_comentario.en_estado=1 or ta_comentario.en_estado is null)';
             if($total<=6) { 
                 $aleatorio=0;
             }
@@ -467,11 +467,13 @@ class PlatosTable {
             }
 
         } else if ($val == 2) {
-            $puntaje = '=0'; //'is null or ta_comentario.ta_puntaje_in_id!=0';
+            $puntaje = '=0 '; //'is null or ta_comentario.ta_puntaje_in_id!=0';
             $order = 'in_id';
+            $coment=' and ta_comentario.en_estado is null';
         }else if($val == 3) {
-            $puntaje = '!=0'; //'is null or ta_comentario.ta_puntaje_in_id!=0';
+            $puntaje = '!=0 '; //'is null or ta_comentario.ta_puntaje_in_id!=0';
             $order = 'in_id';
+            $coment=' and ta_comentario.en_estado=1';
         }
         $limit=($lim)?'LIMIT '.$lim:'LIMIT '.$aleatorio.',6';
    
@@ -485,8 +487,8 @@ class PlatosTable {
                 LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
                 LEFT JOIN `ta_ubigeo` AS `tu` ON `tu`.`in_id` = `tl`.`ta_ubigeo_in_id`
                 LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
-                where ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null  and ta_plato.ta_puntaje_in_id ' . $puntaje . '
-                GROUP BY in_id 
+                where ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null  and ta_plato.ta_puntaje_in_id ' . $puntaje .$coment.'
+                 GROUP BY in_id 
                 ORDER BY ' . $order . ' desc ' . $limit, $adapter::QUERY_MODE_EXECUTE);
 
         return $primer; //->toArray();//$data;// $aux;//select()->from('usuario')->query()->fetchAll();
@@ -502,7 +504,6 @@ class PlatosTable {
             else {
                 $aleatorio=rand(0,$total-3);
             }
-
         $limit=' LIMIT '.$aleatorio.',3';
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
@@ -518,11 +519,8 @@ class PlatosTable {
                 ->join('ta_plato_has_ta_tag', 'ta_plato.in_id = ta_plato_has_ta_tag.ta_plato_in_id', array(), 'left')
              
                 ->join('ta_tag', 'ta_tag.in_id = ta_plato_has_ta_tag.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
-                ->where(array('ta_tag.in_id'=>'1','ta_plato.en_estado'=>'activo'))->group('ta_plato.in_id')->order('ta_plato.in_id DESC');//limit($aleatorio)->offset(3)
-
-//                ->join('ta_tag', 'ta_tag.in_id = Ta_plato_has_ta_tag.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
-//                ->where(array('ta_tag.in_id'=>'1','ta_plato.en_estado'=>'activo'))->group('ta_plato.in_id')->order('ta_plato.in_id DESC')->limit(3);
-
+                ->where('ta_tag.in_id=1 and ta_plato.en_estado=1 and (ta_comentario.en_estado=1 or ta_comentario.en_estado is null)')->group('ta_plato.in_id')->order('ta_plato.in_id DESC');//limit($aleatorio)->offset(3)                
+//array('ta_tag.in_id'=>'1','ta_plato.en_estado'=>'activo','ta_comentario.en_estado'=>'aprobado')
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString.$limit, $adapter::QUERY_MODE_EXECUTE);
         return $results;
@@ -545,9 +543,9 @@ class PlatosTable {
                 
          
            if($promocion==1){
-             $consulta=$query.' tag.in_id=1 and ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado;
+             $consulta=$query.' tag.in_id=1 and ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado.' and (ta_comentario.en_estado=1 or ta_comentario.en_estado is null)';
           }else{
-              $consulta=$query.' ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null  and ta_plato.ta_puntaje_in_id ' . $puntaje;
+              $consulta=$query.' ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null  and ta_plato.ta_puntaje_in_id ' . $puntaje.' and ta_comentario.en_estado=1';
 
           }
            
