@@ -654,7 +654,7 @@ background: url(../../img/back-detalle.png) repeat;
   margin-right: 10px;
 }
 .map-portada{
-  background: url(../img/mapa.jpg) repeat;
+  /*background: url(../img/mapa.jpg) repeat;*/
 }
 #buscarmap{
   display: none;
@@ -972,6 +972,9 @@ a.title-home-listado h1 img{
   width: 220px;
   height: 45px;
   background: url(../img/etiqueta.png) no-repeat;
+}
+.sub .etiqueta-mistura{
+  background: url(../img/bann/etiqueta-mis.png) no-repeat;  
 }
 .primer-home{
   margin-bottom: 10px;
@@ -1882,7 +1885,7 @@ form#application .control-group .btn-solicito{
 }
 
 .lista-Home .descrip-product{
-  margin-top: -35px;
+  margin-top: 0px;
 }
 
 .lista-Home .subir-home{
@@ -1995,18 +1998,15 @@ p.ver_mistura a{
 #content-text { width:290px; height:150px; position:absolute; margin-top:275px; margin-left:79px;}
 #content-text p { height:80px; }
 
-
-
 /*ESTILOS GENERALES*/
 #contenedor-general{width:100%; min-height:700px; overflow:hidden; position:absolute; }
 #paso-dos{ width:100%; height:403px; margin:auto;position:relative; z-index:999; background-position:center;}
 #paso-tres{
- width:724px; 
- height:403px; 
+ width:670px; 
+ height:352px; 
  margin:auto; 
  background: url(../img/bann/hy.jpg) repeat; 
- position:relative; 
- z-index:999; 
+ position:relative;  
  background-position:center; 
 }
 #ver-todas-las-recetas a:hover{ background-position:bottom;}
@@ -2017,8 +2017,8 @@ p.ver_mistura a{
   -webkit-opacity: 0.20; filter:alpha(opacity=20);; z-index:99; display:none;}
 .center{ width:1100px; height:950px; margin:auto;/* background-color:#0F0;*/}
 .center-dos{ 
-    width:724px; 
-    height:323px; 
+    width:100%; 
+    height:275px; 
     margin:auto;
     position: relative;
 }
@@ -2035,9 +2035,10 @@ p.ver_mistura a{
 
 /*===== BOTONES DE PLATOS =====*/
 .platos-btn {
-  cursor:pointer; width:162px; height:137px; position:absolute; 
-    /*background:url(../img/boton-over.png) no-repeat; 
-    background-position:0 -137px;*/ 
+  cursor:pointer; 
+  width:116px; 
+  height:117px; 
+  position:absolute; 
   padding-top:8px;
 }
 .platos-btn:hover { background-position:1px 0; }
@@ -2045,16 +2046,16 @@ p.ver_mistura a{
 
 #box-btn-platos-verdura {
     width:245px; 
-    height:343px;  
+    height:290px;  
     position:absolute;
 }
 #wok-btn { margin-left:120px; margin-top:0; bottom: 5px;}
-#guisoverdura-btn { margin-left:-40px; margin-top:153px; bottom: 5px;}
-#sopadezapallo-btn { margin-left:120px; margin-top:153px; bottom: 160px;}
+#guisoverdura-btn { margin-left:-40px; margin-top:0px; bottom: 5px;}
+#sopadezapallo-btn { margin-left:120px; margin-top:0px; bottom: 130px;}
 #lomosaltado-btn { 
     margin-left: -40px;
     margin-top: 0;
-    bottom: 160px;
+    bottom: 130px;
 }
 .nav-banner{
   width: 100%;
@@ -2065,15 +2066,16 @@ p.ver_mistura a{
 
 /*===== PLATOS =====*/
 .caja-platos { 
-  width:300px; 
-  height:306px; 
-  position:absolute; 
+  width:250px; 
+  height:256px; 
+  position:absolute;
+  background-size: 100%;
   background-repeat:no-repeat; 
   margin-top:0px; 
   margin-left:40px; 
   opacity: 0;
   -moz-opacity: 0;-webkit-opacity: 0; filter:alpha(opacity=0); 
-  bottom: 5px;
+  bottom: -5px;
 }
 .nav-banner ul{
   list-style: none;
@@ -2371,6 +2373,189 @@ p.ver_mistura a{
 
 /*Activando responsive web desing*/
 @media (min-width: 1200px) {
+  /*Banner intercativo*/
+
+#content-text { width:290px; height:150px; position:absolute; margin-top:275px; margin-left:79px;}
+#content-text p { height:80px; }
+
+/*ESTILOS GENERALES*/
+#contenedor-general{width:100%; min-height:700px; overflow:hidden; position:absolute; }
+#paso-dos{ width:100%; height:403px; margin:auto;position:relative; z-index:999; background-position:center;}
+#paso-tres{
+ width:670px; 
+ height:403px; 
+ margin:auto; 
+ background: url(../img/bann/hy.jpg) repeat; 
+ position:relative; 
+ z-index:999; 
+ background-position:center; 
+}
+#ver-todas-las-recetas a:hover{ background-position:bottom;}
+
+#opacidad{ width:100%; height:403px; position: absolute;  
+  opacity: 0.20;
+  -moz-opacity: 0.20;
+  -webkit-opacity: 0.20; filter:alpha(opacity=20);; z-index:99; display:none;}
+.center{ width:1100px; height:950px; margin:auto;/* background-color:#0F0;*/}
+.center-dos{ 
+    width:100%; 
+    height:323px; 
+    margin:auto;
+    position: relative;
+}
+
+#box-continuar{ width:579px; height:170px; position:absolute; margin-top:518px; margin-left:258px;}
+#btn-continua a:hover{ background-position:bottom;}
+
+#box-social{ width:200px; height:29px; float:left; margin-left:30px; margin-top:3px;}
+#box-social-dos{ width:100px; height:29px; float:left; margin-left:168px; margin-top:376px;}
+#twitter{ width:70px; height:29px; float:left;}
+#facebook{ width:80px; height:21px;  float:left; overflow:hidden;}
+#pinterest:hover{ background-position:-65px bottom;}
+
+
+/*===== BOTONES DE PLATOS =====*/
+.platos-btn {
+  cursor:pointer; 
+  width:162px; 
+  height:137px; 
+  position:absolute; 
+  padding-top:8px;
+}
+.platos-btn:hover { background-position:1px 0; }
+
+
+#box-btn-platos-verdura {
+    width:245px; 
+    height:343px;  
+    position:absolute;
+}
+#wok-btn { margin-left:120px; margin-top:0; bottom: 5px;}
+#guisoverdura-btn { margin-left:-40px; margin-top:153px; bottom: 5px;}
+#sopadezapallo-btn { margin-left:120px; margin-top:153px; bottom: 160px;}
+#lomosaltado-btn { 
+    margin-left: -40px;
+    margin-top: 0;
+    bottom: 160px;
+}
+.nav-banner{
+  width: 100%;
+  height: 60px;
+  background: url(../img/bann/n.jpg) repeat-x;
+}
+
+
+/*===== PLATOS =====*/
+.caja-platos { 
+  width:300px; 
+  height:306px; 
+  position:absolute; 
+  background-repeat:no-repeat; 
+  margin-top:0px; 
+  margin-left:40px; 
+  opacity: 0;
+  -moz-opacity: 0;-webkit-opacity: 0; filter:alpha(opacity=0); 
+  bottom: -5px;
+}
+.nav-banner ul{
+  list-style: none;
+  overflow: hidden;
+  margin: 0;
+  padding-left: 15px;
+  padding-top: 5px;
+}
+.nav-banner ul li{
+  float: left;
+  padding-right: 10px;
+}
+.nav-banner ul.dep-home{
+  list-style: none;
+  overflow: hidden;
+  margin: 0;
+  padding-left: 15px;
+  padding-top: 8px;
+}
+.nav-banner ul.dep-home li{
+  float: left;
+  padding-right: 20px;
+}
+.envoltura {
+  background: none repeat scroll 0 0 #00c0f7;
+  border-radius: 0.25rem 0.25rem 0.25rem 0.25rem;
+  box-shadow: 0 -1px 2px #FFFFFF, 0 1px 2px rgba(0, 0, 0, 0.2) inset, 0 0.25rem 1rem rgba(0, 0, 0, 0.1) inset;
+  display: inline-block;
+  float: left;
+  height: 1.8rem;
+  margin-left: -5px;
+  margin-right: 0;
+  margin-top: -6px;
+  padding: 0.375rem 0.375rem 0;  
+  width: 76px;
+  cursor: pointer;
+  background-image: url(../img/bann/tt.png);
+  background-repeat: no-repeat;
+  background-position: 10px;
+}
+.envoltura2 {
+  background: none repeat scroll 0 0 #3B5998;
+  border-radius: 0.25rem 0.25rem 0.25rem 0.25rem;
+  box-shadow: 0 -1px 2px #FFFFFF, 0 1px 2px rgba(0, 0, 0, 0.2) inset, 0 0.25rem 1rem rgba(0, 0, 0, 0.1) inset;
+  display: inline-block;
+  float: left;
+  height: 1.8rem;
+  margin-left: -5px;
+  margin-right: 0;
+  margin-top: -6px;
+  padding: 0.375rem 0.375rem 0;  
+  width: 78px;
+  cursor: pointer;
+  z-index: 999;
+  background-image: url(../img/bann/ff.png);
+  background-repeat: no-repeat;
+  background-position: 10px;
+}
+.ft{
+  display: block;
+}
+.paso{  
+  height: 40px;
+  width: 80px;
+  padding-left: 48px;
+  text-align: center;
+}
+.paso p{
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 15px;
+  padding-top: 5px;
+}
+.paso1{
+  background: url(../img/bann/nu.png) no-repeat;
+}
+.paso2{
+  background: url(../img/bann/nu1.png) no-repeat;
+}
+.paso3{
+  background: url(../img/bann/nu2.png) no-repeat;
+}
+#plato-verdura-lomosaltado { background-image:url(../img/bann/lomo-e.png); }
+#plato-verdura-guisoverdura { background-image:url(../img/bann/parrilla-e.png); }
+#plato-verdura-sopadezapallo { background-image:url(../img/bann/causa-e.png); }
+#plato-verdura-wok { background-image:url(../img/bann/ceviche-e.png); }
+
+/*#btn-continua2 { width:200px; height:93px; position:absolute; background-image:url(../img/btn-continuar.png); background-repeat:no-repeat; margin-top:525px; margin-left:451px; display:none; cursor:pointer;}*/
+#btn-continua2:hover{ background-position:bottom;}
+#aji{ width:156px; height:139px; position:absolute; background-image:url(../img/ajibann/.png); background-repeat:no-repeat; margin-top:90px; margin-left:-700px;}
+#composicion2{ width:489px; height:256px; position:absolute; background-image:url(../img/bann/composicion2.png); background-repeat:no-repeat; margin-top:100px; margin-left:-1100px;}
+#plato-marisco{ width:381px; height:316px; position:absolute; background-image:url(../img/bann/plato-marisco.png); background-repeat:no-repeat; margin-top:295px; margin-left:-1000px;}
+#pimenton{ width:134px; height:152px; position:absolute; background-image:url(../img/bann/pimenton.png); background-repeat:no-repeat; margin-top:363px; margin-left:-700px;}
+#aji2{ width:356px; height:242px; position:absolute; background-image:url(../img/bann/aji2.png); background-repeat:no-repeat; margin-top:487px; margin-left:-1000px;}
+#jarro-leche{ width:272px; height:187px; position:absolute; background-image:url(../img/bann/jarro-leche.png); background-repeat:no-repeat; margin-top:615px; margin-left:-1000px;}
+#etiqueta-elige{ width:328px; height:85px; position:absolute; background-image:url(../img/bann/etiqueta-elige.png); background-repeat:no-repeat; margin-top:100px; margin-left:1600px;}
+.bo{ background-position:bottom;}
+
+
+
   body,
   html{
     height: 100%;
@@ -2768,6 +2953,24 @@ p.ver_mistura a{
   .fo{
     margin-left: 0!important;
   }
+  #paso-tres{
+    width: 100%;
+  }
+  .center-dos{
+    width: 100%;
+  }
+  #box-btn-platos-verdura{
+    margin-left: 60%!important;
+  }
+  .nav-banner ul.dep-home li{
+    padding-right: 10px;
+  }
+  #sopadezapallo-btn{
+    margin-left: 90px;
+  }
+  #wok-btn{
+    margin-left: 90px;
+  }
   body,
   html{
     height: 100%;
@@ -3089,6 +3292,9 @@ p.ver_mistura a{
   }
 }
 @media (max-width: 480px) {
+  .guia-home{
+    display: none;
+  }
   .guia{
     display: none;
   }

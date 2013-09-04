@@ -148,7 +148,7 @@ class PlatosForm extends Form
           
                
         $this->add(array(
-            'name' =>'ta_tipo_plato_in_id',// 'ta_tipo_plato',
+            'name' =>'Ta_tipo_plato_in_id',// 'ta_tipo_plato',
             'type' => 'Select',  
             
              'attributes' => array(               
@@ -209,9 +209,8 @@ class PlatosForm extends Form
 //            $auxtipo['0']='otros';
 //            $auxres=  array_merge(array(0=>'Otros'),$auxtipo);
 //        var_dump($auxtipo);Exit;
-            return $auxtipo;//$auxres;//
-            
-     }
+            return $auxtipo;//$auxres;//        
+  }
      
    public function promocion($id=null){
        $this->dbAdapter =$this->getDbAdapter();

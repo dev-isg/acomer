@@ -113,11 +113,14 @@ function entradahome(){
 			$('#roseton-tipo-' + caldo).fadeOut(1000);
 			$('#plato-' + caldo + '-' + plato).animate({opacity:1},1000,function(){
 				$('#btn-continua2').fadeIn(500);
+
 			});
+			$('#plato-' + caldo + '-' + plato).css('display','block');
 			var pp = 0;
 			while (arreglo[pp]) {
 				if (arreglo[pp] != plato) {
 					$('#plato-' + caldo + '-' + arreglo[pp]).animate({opacity:0},1000);
+					$('#plato-' + caldo + '-' + arreglo[pp]).css('display','none');
 				}
 				pp++;
 			}

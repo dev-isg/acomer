@@ -10,7 +10,7 @@
     <!--<section id="paso-dos">
       <div id="opacidad" style="display: block;"></div>
     </section>-->
-    <section id="paso-tres" style="margin-top: 0px;">
+    <section id="paso-tres" style="margin-top: 0px;margin-bottom:10px;">
       <div class="nav-banner">
         <ul class="dep-home" style="float:left;">
           <li>
@@ -30,9 +30,8 @@
           </li>
         </ul>
         <ul class="right redes" style="float:right;padding-top: 5px;">        
-           <li><a id="face" href="#" class="" target="_blank"> <img src="<?php echo $this->host('ruta')?>/img/bann/face.png"></a></li>
-           <li><a id="tweet" href="#" target="_blank"><img src="<?php echo $this->host('ruta')?>/img/bann/tw.png"></a></li>
-           <li><a id="tube" href="#" class="" target="_blank"><img src="<?php echo $this->host('ruta')?>/img/bann/tube.png"></a></li>
+           <li><a id="face" href="https://www.facebook.com/listadelsabor" class="" target="_blank"> <img src="<?php echo $this->host('ruta')?>/img/bann/face.png"></a></li>
+           <li><a id="tweet" href="https://twitter.com/listadelsabor" target="_blank"><img src="<?php echo $this->host('ruta')?>/img/bann/tw.png"></a></li>
           <!--<li>
             <a class="ft" href="#">
               <div class="envoltura"></div>
@@ -47,7 +46,7 @@
       </div>
       <section class="center-dos">      
       <!--box btn platos-->
-        <div id="box-btn-platos-verdura" style="margin-left: 440px;">
+        <div id="box-btn-platos-verdura" style="margin-left: 410px;">
           <a id="lomosaltado-btn" class="platos-btn" href="javascript:void(0);">
             <img src="<?php echo $this->host('ruta')?>/img/bann/lomosaltado.png">
           </a>
@@ -64,11 +63,18 @@
           
         <!--FIN box btn platos-->
       <!--Circulo Grande Platos-->
-        <div id="plato-verdura-lomosaltado" class="caja-platos" style="opacity: 0;"></div>
-        <div id="plato-verdura-sopadezapallo" class="caja-platos" style="opacity: 0;"></div>
-        <div id="plato-verdura-guisoverdura" class="caja-platos" style="opacity: 0;"></div>
-        <div id="plato-verdura-wok" class="caja-platos" style="opacity: 1;"></div>
-            
+        <a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=lomo saltado&distrito=TODOS LOS DISTRITOS" style="display:block;" title="Lomo saltado">
+          <div id="plato-verdura-lomosaltado" class="caja-platos" style="opacity: 0;"></div>
+        </a>
+        <a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=causa&distrito=TODOS LOS DISTRITOS" style="display:block;" title="Causa">
+          <div id="plato-verdura-sopadezapallo" class="caja-platos" style="opacity: 0;"></div>
+        </a>
+        <a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=parrilla&distrito=TODOS LOS DISTRITOS" style="display:block;" title="Parrillas">
+          <div id="plato-verdura-guisoverdura" class="caja-platos" style="opacity: 0;"></div>
+        </a>
+        <a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=ceviche&distrito=TODOS LOS DISTRITOS" style="display:block;" title="Ceviche">
+          <div id="plato-verdura-wok" class="caja-platos" style="opacity: 1;"></div>
+        </a>
         <!--FIN Circulo Grande Platos-->
         <div id="btn-continua2" style="display: block;"></div>
       </section>
@@ -78,7 +84,7 @@
   <div class="descrip-product">
    <?php if($this->promociones){ ?>
     <div class="sub subir-home" id="subir-home">
-      <div class="content-etiqueta-home">
+      <div class="content-etiqueta-home etiqueta-mistura">
         <p>Mistura 2013</p>
       </div>
     </div>
