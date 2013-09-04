@@ -300,9 +300,9 @@ margin-bottom: -1px;
 margin-top: -14px;
 }
 .details{ 
-  margin: 5px 0px;
+  /*margin: 5px 0px;*/
   padding: 0px 5px;
-  height: 145px;
+  height: 150px;
   font-family: helvetica;
   border-bottom: 2px dotted #c1c1c1;
 }
@@ -566,6 +566,9 @@ background: url(../../img/back-detalle.png) repeat;
   height:155px;
   border-radius: 5px 5px 0px 0px;
   background: white;
+}
+.mosaic-block a{
+  display: block;
 }
 .details h4{
   margin: 0;
@@ -2710,6 +2713,15 @@ p.ver_mistura a{
   }
 }
 @media (min-width: 768px) and (max-width: 979px) {
+  .img-plato{
+    height: 100%;
+  }
+  .details{
+    height: 143px;
+  }
+  .mosaic-block{
+    height: 146px;
+  }
   #mapa-buscador{
     width: 100%;
   }

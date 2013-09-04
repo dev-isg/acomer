@@ -135,22 +135,26 @@
                      $strres=trim(substr($promo['restaurant_nombre'], 0, 26));
                       $strres.='...';
                      }else {$strres=$promo['restaurant_nombre'];}
-                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></a></p>
+                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></a>
+                </p>
                 <div class="pt">
-                  <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($promo['va_precio'], ENT_QUOTES, 'utf-8'); ?></p>-->
-                  <p class="com"><?php echo $promo['NumeroComentarios'] ?>  <a href="/plato/<?php echo $this->canonicalUrl($promo['va_nombre'], array('suffix' => $promo['in_id']));?>" title="ver todos los comentarios" alt="<?php echo $promo['va_nombre'];?>"><i class="icon-comment"></i></p>
+                  <p class="com">
+                    <?php echo $promo['NumeroComentarios'] ?>  
+                    <a href="/plato/<?php echo $this->canonicalUrl($promo['va_nombre'], array('suffix' => $promo['in_id']));?>" title="ver todos los comentarios" alt="<?php echo $promo['va_nombre'];?>"><i class="icon-comment"></i></a>
+                    </p>
                   <div class="punt">
                     <div class="puntuaciones c<?php echo $promo['Ta_puntaje_in_id'];?>"></div>
                   </div>
                 </div>
               </div>
+
             </div>
           </li> 
           <?php } ?>
       </ul>
         
          <?php
-                require './vendor/Classes/Mobile_Detect.php';
+               /// require './vendor/Classes/Mobile_Detect.php';
                 $detect3 = new Mobile_Detect();
                 if ($detect3->isTablet()) {
                    ?>                

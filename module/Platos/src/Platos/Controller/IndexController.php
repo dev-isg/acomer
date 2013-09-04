@@ -655,7 +655,7 @@ class IndexController extends AbstractActionController {
               
           $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();  
           $texto = 'restaurante:"'.$listarecomendacion[0]['restaurant_nombre'].'"'; 
-          $idplatito = $listarecomendacion[0]['in_id'];
+          //$idplatito = $listarecomendacion[0]['in_id'];
        // var_dump($listarecomendacion[0]['tipo_comida']);exit;
                 $limit = 3;
                 $palabraBuscar = isset($texto) ? $texto : false;
@@ -673,103 +673,103 @@ class IndexController extends AbstractActionController {
                     try { $results = $solr->search($query, 0, $limit, $fq);
                     } catch (Exception $e) {
                   echo ("<div>ingrese algun valor</div>"); }}
-                  if(count($results->response->docs)<=1)
-                  {if($_COOKIE['q']){
-                            if($_COOKIE['distrito']!=='TODOS LOS DISTRITOS') {
-                            $texto =$_COOKIE['q'];
-                            $distrito=$_COOKIE['distrito'];
-                            $limit = 3;
-                            $palabraBuscar = isset($texto) ? $texto : false;
-                            $query = "($palabraBuscar)";
-                            $fq = array(
-                                'sort' => 'random_' . uniqid() . ' asc',
-                                'fq' => 'en_estado:activo AND restaurant_estado:activo  AND distrito:' . $distrito.' AND -id:' . $idplatito,
-                                'wt' => 'json' );
-                            $resulta = false;
-                            if ($query) {
-                                $solr = \Classes\Solr::getInstance()->getSolr();
-                                if (get_magic_quotes_gpc() == 1) {
-                                    $query = stripslashes($query);}
-                                try { $resulta = $solr->search($query, 0, $limit, $fq);
-                                } catch (Exception $e) {
-                              echo ("<div>ingrese algun valor</div>"); }} 
-                                  if(count($resulta->response->docs)<=2) 
-                            {$limit = 3;
-                            $texto = 'tipo_comida:"'.$listarecomendacion[0]['tipo_comida'].'"'; 
-                            $palabraBuscar = isset($texto) ? $texto : false;
-                            $query = "($palabraBuscar)";
-                            $fq = array(
-                                'sort' => 'random_' . uniqid() . ' asc',
-                                'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:' . $idplatito,
-                                'wt' => 'json');
-                            $resultados = false;
-                            if ($query) {
-                                $solr = \Classes\Solr::getInstance()->getSolr();
-                                if (get_magic_quotes_gpc() == 1) {
-                                    $query = stripslashes($query);}
-                                try { $resultados = $solr->search($query, 0, $limit, $fq);
-                                } catch (Exception $e) {
-                              echo ("<div>ingrese algun valor</div>"); }} }
-                              else{$resultados =$resulta;}       
-                              }else{     
-                            $texto =$_COOKIE['q'];
-                            $limit = 3;
-                            $palabraBuscar = isset($texto) ? $texto : false;
-                            $query = "($palabraBuscar)";
-                            $fq = array(
-                                'sort' => 'random_' . uniqid() . ' asc',
-                                'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:' . $idplatito,
-                                'wt' => 'json');
-                            $resulta = false;
-                            if ($query) {
-                                $solr = \Classes\Solr::getInstance()->getSolr();
-                                if (get_magic_quotes_gpc() == 1) {
-                                    $query = stripslashes($query);}
-                                try { $resulta = $solr->search($query, 0, $limit, $fq);
-                   
-                                } catch (Exception $e) {
-                              echo ("<div>ingrese algun valor</div>"); }}
-                              
-                                 if(count($resulta->response->docs)<=2) 
-                            {$limit = 3;
-                            $texto = 'tipo_comida:"'.$listarecomendacion[0]['tipo_comida'].'"'; 
-                            $palabraBuscar = isset($texto) ? $texto : false;
-                            $query = "($palabraBuscar)";
-                            $fq = array(
-                                'sort' => 'random_' . uniqid() . ' asc',
-                                'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:' . $idplatito,
-                                'wt' => 'json');
-                            $resultados = false;
-                            if ($query){
-                                $solr = \Classes\Solr::getInstance()->getSolr();
-                                if (get_magic_quotes_gpc() == 1) {
-                                    $query = stripslashes($query);}
-                                try { $resultados = $solr->search($query, 0, $limit, $fq);
-                                } catch (Exception $e) {
-                              echo ("<div>ingrese algun valor</div>"); }} }
-                              else{$resultados =$resulta;} 
-                              
-                              
-                              }
-                          }
-                     else  { 
-                $limit = 3;
-                $texto = 'tipo_comida:"'.$listarecomendacion[0]['tipo_comida'].'"'; 
-                $palabraBuscar = isset($texto) ? $texto : false;
-                $query = "($palabraBuscar)";
-                $fq = array(
-                    'sort' => 'random_' . uniqid() . ' asc',
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:' . $idplatito,
-                    'wt' => 'json' );
-                $resultados = false;
-                if ($query) {
-                    $solr = \Classes\Solr::getInstance()->getSolr();
-                    if (get_magic_quotes_gpc() == 1) {
-                        $query = stripslashes($query);}
-                    try { $resultados = $solr->search($query, 0, $limit, $fq);
-                    } catch (Exception $e) {
-                  echo ("<div>ingrese algun valor</div>"); }}
-                }  }           
+//                  if(count($results->response->docs)<=1)
+//                  {if($_COOKIE['q']){
+//                            if($_COOKIE['distrito']!=='TODOS LOS DISTRITOS') {
+//                            $texto =$_COOKIE['q'];
+//                            $distrito=$_COOKIE['distrito'];
+//                            $limit = 3;
+//                            $palabraBuscar = isset($texto) ? $texto : false;
+//                            $query = "($palabraBuscar)";
+//                            $fq = array(
+//                                'sort' => 'random_' . uniqid() . ' asc',
+//                                'fq' => 'en_estado:activo AND restaurant_estado:activo  AND distrito:' . $distrito.' AND -id:' . $idplatito,
+//                                'wt' => 'json' );
+//                            $resulta = false;
+//                            if ($query) {
+//                                $solr = \Classes\Solr::getInstance()->getSolr();
+//                                if (get_magic_quotes_gpc() == 1) {
+//                                    $query = stripslashes($query);}
+//                                try { $resulta = $solr->search($query, 0, $limit, $fq);
+//                                } catch (Exception $e) {
+//                              echo ("<div>ingrese algun valor</div>"); }} 
+//                                  if(count($resulta->response->docs)<=2) 
+//                            {$limit = 3;
+//                            $texto = 'tipo_comida:"'.$listarecomendacion[0]['tipo_comida'].'"'; 
+//                            $palabraBuscar = isset($texto) ? $texto : false;
+//                            $query = "($palabraBuscar)";
+//                            $fq = array(
+//                                'sort' => 'random_' . uniqid() . ' asc',
+//                                'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:' . $idplatito,
+//                                'wt' => 'json');
+//                            $resultados = false;
+//                            if ($query) {
+//                                $solr = \Classes\Solr::getInstance()->getSolr();
+//                                if (get_magic_quotes_gpc() == 1) {
+//                                    $query = stripslashes($query);}
+//                                try { $resultados = $solr->search($query, 0, $limit, $fq);
+//                                } catch (Exception $e) {
+//                              echo ("<div>ingrese algun valor</div>"); }} }
+//                              else{$resultados =$resulta;}       
+//                              }else{     
+//                            $texto =$_COOKIE['q'];
+//                            $limit = 3;
+//                            $palabraBuscar = isset($texto) ? $texto : false;
+//                            $query = "($palabraBuscar)";
+//                            $fq = array(
+//                                'sort' => 'random_' . uniqid() . ' asc',
+//                                'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:' . $idplatito,
+//                                'wt' => 'json');
+//                            $resulta = false;
+//                            if ($query) {
+//                                $solr = \Classes\Solr::getInstance()->getSolr();
+//                                if (get_magic_quotes_gpc() == 1) {
+//                                    $query = stripslashes($query);}
+//                                try { $resulta = $solr->search($query, 0, $limit, $fq);
+//                   
+//                                } catch (Exception $e) {
+//                              echo ("<div>ingrese algun valor</div>"); }}
+//                              
+//                                 if(count($resulta->response->docs)<=2) 
+//                            {$limit = 3;
+//                            $texto = 'tipo_comida:"'.$listarecomendacion[0]['tipo_comida'].'"'; 
+//                            $palabraBuscar = isset($texto) ? $texto : false;
+//                            $query = "($palabraBuscar)";
+//                            $fq = array(
+//                                'sort' => 'random_' . uniqid() . ' asc',
+//                                'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:' . $idplatito,
+//                                'wt' => 'json');
+//                            $resultados = false;
+//                            if ($query){
+//                                $solr = \Classes\Solr::getInstance()->getSolr();
+//                                if (get_magic_quotes_gpc() == 1) {
+//                                    $query = stripslashes($query);}
+//                                try { $resultados = $solr->search($query, 0, $limit, $fq);
+//                                } catch (Exception $e) {
+//                              echo ("<div>ingrese algun valor</div>"); }} }
+//                              else{$resultados =$resulta;} 
+//                              
+//                              
+//                              }
+//                          }
+//                     else  { 
+//                $limit = 3;
+//                $texto = 'tipo_comida:"'.$listarecomendacion[0]['tipo_comida'].'"'; 
+//                $palabraBuscar = isset($texto) ? $texto : false;
+//                $query = "($palabraBuscar)";
+//                $fq = array(
+//                    'sort' => 'random_' . uniqid() . ' asc',
+//                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:' . $idplatito,
+//                    'wt' => 'json' );
+//                $resultados = false;
+//                if ($query) {
+//                    $solr = \Classes\Solr::getInstance()->getSolr();
+//                    if (get_magic_quotes_gpc() == 1) {
+//                        $query = stripslashes($query);}
+//                    try { $resultados = $solr->search($query, 0, $limit, $fq);
+//                    } catch (Exception $e) {
+//                  echo ("<div>ingrese algun valor</div>"); }}
+//                }  }           
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
