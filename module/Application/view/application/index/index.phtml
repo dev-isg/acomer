@@ -45,25 +45,22 @@
         </ul>
       </div>
       <section class="center-dos">      
-      <!--box btn platos-->
         <div id="box-btn-platos-verdura" style="margin-left: 440px;">
-          <a id="lomosaltado-btn" title="Lomo saltado" class="platos-btn" href="javascript:void(0);">
+          <a id="lomosaltado-btn" title="Lomo saltado" class="platos-btn" href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=lomo saltado&distrito=TODOS LOS DISTRITOS">
             <img src="<?php echo $this->host('ruta')?>/img/bann/lomosaltado.png">
           </a>
-          <a id="sopadezapallo-btn" title="Causa" class="platos-btn" href="javascript:void(0);">
+          <a id="sopadezapallo-btn" title="Causa" class="platos-btn" href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=causa&distrito=TODOS LOS DISTRITOS">
             <img src="<?php echo $this->host('ruta')?>/img/bann/causa.png">
           </a>
-          <a id="guisoverdura-btn" title="Parrilla" class="platos-btn" href="javascript:void(0);">
+          <a id="guisoverdura-btn" title="Parrilla" class="platos-btn" href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=parrilla&distrito=TODOS LOS DISTRITOS">
             <img src="<?php echo $this->host('ruta')?>/img/bann/parrilla.png">
           </a>
-          <a id="wok-btn" title="Ceviche" class="platos-btn" href="javascript:void(0);">
+          <a id="wok-btn" title="Ceviche" class="platos-btn" href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=ceviche&distrito=TODOS LOS DISTRITOS">
             <img src="<?php echo $this->host('ruta')?>/img/bann/ceviche.png">
           </a>
         </div>
           
-        <!--FIN box btn platos-->
-      <!--Circulo Grande Platos-->
-        <a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=lomo saltado&distrito=TODOS LOS DISTRITOS" style="display:block;" title="Lomo saltado">
+        <!--<a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=lomo saltado&distrito=TODOS LOS DISTRITOS" style="display:block;" title="Lomo saltado">
           <div id="plato-verdura-lomosaltado" class="caja-platos" style="opacity: 0;"></div>
         </a>
         <a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=causa&distrito=TODOS LOS DISTRITOS" style="display:block;" title="Causa">
@@ -71,7 +68,7 @@
         </a>
         <a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=parrilla&distrito=TODOS LOS DISTRITOS" style="display:block;" title="Parrillas">
           <div id="plato-verdura-guisoverdura" class="caja-platos" style="opacity: 0;"></div>
-        </a>
+        </a>-->
         <a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=ceviche&distrito=TODOS LOS DISTRITOS" style="display:block;" title="Ceviche">
           <div id="plato-verdura-wok" class="caja-platos" style="opacity: 1;"></div>
         </a>
@@ -157,11 +154,11 @@
                 $detect3 = new Mobile_Detect();
                 if ($detect3->isTablet()) {
                    ?>                
-                 <p class="ver_mistura"><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: <?php echo $promo['tag'] ?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
+                 <p class="ver_mistura"><a style="color:#EB008B;" href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: <?php echo $promo['tag'] ?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
                  <?php }elseif($detect3->isMobile()){?>   
-                    <p class="ver_mistura"><a href="<?php echo $this->host('ruta')?>/buscar?q=tag: <?php echo $promo['tag'] ?>" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
+                    <p class="ver_mistura"><a style="color:#EB008B;" href="<?php echo $this->host('ruta')?>/buscar?q=tag: <?php echo $promo['tag'] ?>" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
                  <?php  } else{?>
-                <p class="ver_mistura"><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: <?php echo $promo['tag'] ?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
+                <p class="ver_mistura"><a style="color:#EB008B;" href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: <?php echo $promo['tag'] ?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
                  <?php  } ?>
 
     </div>

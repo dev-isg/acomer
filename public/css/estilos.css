@@ -2008,7 +2008,7 @@ p.ver_mistura a{
  width:670px; 
  height:352px; 
  margin:auto; 
- background: url(../img/bann/hy.jpg) repeat; 
+ background: url(../img/bann/marca.jpg) repeat; 
  position:relative;  
  background-position:center; 
 }
@@ -2052,13 +2052,14 @@ p.ver_mistura a{
     height:290px;  
     position:absolute;
 }
-#wok-btn { margin-left:120px; margin-top:0; bottom: 5px;}
-#guisoverdura-btn { margin-left:-40px; margin-top:0px; bottom: 5px;}
-#sopadezapallo-btn { margin-left:120px; margin-top:0px; bottom: 130px;}
+#wok-btn { margin-left:120px; margin-top:0; bottom: 5px; display: block;}
+#guisoverdura-btn { margin-left:-40px; margin-top:0px; bottom: 5px; display: block;}
+#sopadezapallo-btn { margin-left:120px; margin-top:0px; bottom: 130px; display: block;}
 #lomosaltado-btn { 
     margin-left: -40px;
     margin-top: 0;
     bottom: 130px;
+    display: block;
 }
 .nav-banner{
   width: 100%;
@@ -2328,7 +2329,7 @@ p.ver_mistura a{
     .ir a:after,
     a[href^="javascript:"]:after,
     a[href^="#"]:after {
-        content: "";
+      content: "";
     }
 
     pre,
@@ -2388,7 +2389,7 @@ p.ver_mistura a{
  width:724px; 
  height:403px; 
  margin:auto; 
- background: url(../img/bann/hy.jpg) repeat; 
+ background: url(../img/bann/marca.jpg) repeat; 
  position:relative; 
  z-index:999; 
  background-position:center; 
