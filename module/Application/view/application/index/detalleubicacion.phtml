@@ -148,7 +148,7 @@ $this->headTitle($this->busquedatitle);
            if (!$pagina) {  echo '';  
            }    else{ if($pagina-1>=0 ){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina-1?>" >«Anterior</a></li> <?php } }
            {for($i=0;$i<=$this->total;$i+=10)
-             { ?>  <li><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo ($i/10)?>" ><?php echo (($i/10)+1)?></a></li><?php  } 
+             { ?>  <li <?php if((($i/10))==$_GET['page']){echo 'class="active"';} ?>><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo ($i/10)?>" ><?php echo (($i/10)+1)?></a></li><?php  } 
              
              }  
              if (!$pagina and $this->total>10) { 
@@ -249,7 +249,7 @@ $this->headTitle($this->busquedatitle);
                      if (!$pagina) {  echo '';  
                      }    else{ if($pagina-1>=0 ){?> <li><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina-1?>" >«Anterior</a></li> <?php } }
                      {for($i=0;$i<=$this->total;$i+=10)
-                       { ?>  <li><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo ($i/10)?>" ><?php echo (($i/10)+1)?></a></li><?php  } }  
+                       { ?>  <li <?php if((($i/10))==$_GET['page']){echo 'class="active"';} ?>><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo ($i/10)?>" ><?php echo (($i/10)+1)?></a></li><?php  } }  
                        if (!$pagina and $this->total>10) { 
                        $pagina =0;  
                       if($pagina+1<=$this->total){?> <li><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
