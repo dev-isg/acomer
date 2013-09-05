@@ -149,7 +149,7 @@
              if (!$pagina and $this->total>10) { 
              $pagina =0;  
             if($pagina+1<=$this->total){?> <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
-         }   elseif($pagina and $this->total>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10)){?> <li class="disabled"><a href="buscar?q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+         }   elseif($pagina and $this->total>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10)){?> <li><a href="buscar?q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
         }else{echo '';}
              ?> 
               </ul></div> 
@@ -256,7 +256,7 @@
              if (!$pagina and $this->total>10) { 
              $pagina =0;  
             if($pagina+1<=$this->total){?> <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
-         }   elseif($pagina and $this->total>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10)){?> <li class="disabled"><a href="buscar?q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+         }   elseif($pagina and $this->total>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10)){?> <li><a href="buscar?q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
         }else{echo '';}
              ?> 
               </ul></div> 
