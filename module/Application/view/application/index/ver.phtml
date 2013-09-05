@@ -137,8 +137,24 @@
               <?php endforeach; ?>       
                  
               
-     <div id="pagina"><?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar?q='.$this->nombre.'&submit=Buscar'.'&')):""; ?> </div>         
-       </div>         
+     <div id="pagina">
+          <div class="pagination ">
+              <ul>
+         <?php if($this->total)
+             $pagina = $_GET['page'];
+           if (!$pagina) {  echo '';  
+           }    else{ if($pagina-1>=0 ){?> <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo $pagina-1?>" >«Anterior</a></li> <?php } }
+           {for($i=0;$i<=$this->total;$i+=10)
+             { ?>  <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo ($i/10)?>" ><?php echo (($i/10)+1)?></a></li><?php  } }  
+             if (!$pagina and $this->total>10) { 
+             $pagina =0;  
+            if($pagina+1<=$this->total){?> <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+         }   elseif($pagina and $this->total>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10)){?> <li class="disabled"><a href="buscar?q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+        }else{echo '';}
+             ?> 
+              </ul></div> 
+      </div> 
+      </div>        
       <div class="padding-map" style="display:none;">
         <div id="mapa-buscador">
           <div class="regresar regr mobile-return">
@@ -228,8 +244,24 @@
                    
                  
                   <?php endforeach; ?> 
-      <div id="pagina"><?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar?q='.$this->plato.'&submit=Buscar'.'&')):""; ?> </div>         
-       </div>         
+       <div id="pagina">
+          <div class="pagination ">
+              <ul>
+         <?php if($this->total)
+             $pagina = $_GET['page'];
+           if (!$pagina) {  echo '';  
+           }    else{ if($pagina-1>=0 ){?> <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo $pagina-1?>" >«Anterior</a></li> <?php } }
+           {for($i=0;$i<=$this->total;$i+=10)
+             { ?>  <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo ($i/10)?>" ><?php echo (($i/10)+1)?></a></li><?php  } }  
+             if (!$pagina and $this->total>10) { 
+             $pagina =0;  
+            if($pagina+1<=$this->total){?> <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+         }   elseif($pagina and $this->total>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10)){?> <li class="disabled"><a href="buscar?q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+        }else{echo '';}
+             ?> 
+              </ul></div> 
+         </div>
+    </div>          
       <div class="padding-map" style="display:none;">
         <div id="mapa-buscador">
           <div class="regresar regr mobile-return">

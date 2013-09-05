@@ -95,6 +95,8 @@ $this->headTitle($this->busquedatitle);
           <?php echo $this->formRow($form->get('distrito'));?>
           <?php echo $this->formRow($form->get('q'));?>
           <?php echo $this->formSubmit($form->get('submit'));?>
+         
+            
           <a class="ver_mapa" style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Resultados en mapa</a>
           <!--<div class="return">
             <a href="javascript:window.history.back();" onclick="regresar()">Regresar</a>
@@ -138,10 +140,26 @@ $this->headTitle($this->busquedatitle);
                     </div>
                 </div>
               <?php endforeach; ?>
-      <div id="pagina">
-        <?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar-por-distrito?distrito='.$this->distrito.'&q='.$this->plato.'&submit=Buscar'.'&')):""; ?> 
+   <div id="pagina">
+          <div class="pagination ">
+              <ul>
+         <?php if($this->total){
+             $pagina = $_GET['page'];
+           if (!$pagina) {  echo '';  
+           }    else{ if($pagina-1>=0 ){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina-1?>" >«Anterior</a></li> <?php } }
+           {for($i=0;$i<=$this->total;$i+=10)
+             { ?>  <li><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo ($i/10)?>" ><?php echo (($i/10)+1)?></a></li><?php  } 
+             
+             }  
+             if (!$pagina and $this->total>10) { 
+             $pagina =0;  
+            if($pagina+1<=$this->total){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+         }   elseif($pagina and $this->total>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10)){?> <li class="disabled"><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+        }else{echo '';}
+         }  ?> 
+              </ul></div> 
+         </div>   
       </div>         
-    </div>
     <div id="mapa-buscador" style="display:none;">
       <div class="regresar regr">
         <div class="return">
@@ -149,9 +167,8 @@ $this->headTitle($this->busquedatitle);
        </div>
       </div>
     </div>
-
          <?php
-              }
+  }
              
                  
                
@@ -223,11 +240,25 @@ $this->headTitle($this->busquedatitle);
                     </div>
 
                 </div>
-                   
-                 
                   <?php endforeach; ?> 
-      <div id="pagina"><?php echo (count($this->general)> 0)?$this->paginationControl($this->general, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/buscar-por-distrito?distrito='.$this->distrito.'&q='.$this->plato.'&submit=Buscar'.'&')):""; ?> </div>         
-       </div>         
+            <div id="pagina">
+                    <div class="pagination ">
+                        <ul>
+                   <?php if($this->total){
+                       $pagina = $_GET['page'];
+                     if (!$pagina) {  echo '';  
+                     }    else{ if($pagina-1>=0 ){?> <li><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina-1?>" >«Anterior</a></li> <?php } }
+                     {for($i=0;$i<=$this->total;$i+=10)
+                       { ?>  <li><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo ($i/10)?>" ><?php echo (($i/10)+1)?></a></li><?php  } }  
+                       if (!$pagina and $this->total>10) { 
+                       $pagina =0;  
+                      if($pagina+1<=$this->total){?> <li><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+                   }   elseif($pagina and $this->total>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10)){?> <li class="disabled"><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+                  }else{echo '';}
+  } ?> 
+                        </ul></div> 
+             </div> 
+      </div>            
       <div id="mapa-buscador" style="display:none;">
         <div class="regresar regr">
           <div class="return">

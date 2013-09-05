@@ -655,14 +655,12 @@ class IndexController extends AbstractActionController {
               
           $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();  
           $texto = 'restaurante:"'.$listarecomendacion[0]['restaurant_nombre'].'"'; 
-          //$idplatito = $listarecomendacion[0]['in_id'];
-       // var_dump($listarecomendacion[0]['tipo_comida']);exit;
                 $limit = 3;
                 $palabraBuscar = isset($texto) ? $texto : false;
                 $query = "($palabraBuscar)";
                 $fq = array(
                     'sort' => 'random_' . uniqid() . ' asc',
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo',
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo ',
                     'wt' => 'json'
                 );
                 $results = false;
@@ -673,103 +671,19 @@ class IndexController extends AbstractActionController {
                     try { $results = $solr->search($query, 0, $limit, $fq);
                     } catch (Exception $e) {
                   echo ("<div>ingrese algun valor</div>"); }}
-//                  if(count($results->response->docs)<=1)
-//                  {if($_COOKIE['q']){
-//                            if($_COOKIE['distrito']!=='TODOS LOS DISTRITOS') {
-//                            $texto =$_COOKIE['q'];
-//                            $distrito=$_COOKIE['distrito'];
-//                            $limit = 3;
-//                            $palabraBuscar = isset($texto) ? $texto : false;
-//                            $query = "($palabraBuscar)";
-//                            $fq = array(
-//                                'sort' => 'random_' . uniqid() . ' asc',
-//                                'fq' => 'en_estado:activo AND restaurant_estado:activo  AND distrito:' . $distrito.' AND -id:' . $idplatito,
-//                                'wt' => 'json' );
-//                            $resulta = false;
-//                            if ($query) {
-//                                $solr = \Classes\Solr::getInstance()->getSolr();
-//                                if (get_magic_quotes_gpc() == 1) {
-//                                    $query = stripslashes($query);}
-//                                try { $resulta = $solr->search($query, 0, $limit, $fq);
-//                                } catch (Exception $e) {
-//                              echo ("<div>ingrese algun valor</div>"); }} 
-//                                  if(count($resulta->response->docs)<=2) 
-//                            {$limit = 3;
-//                            $texto = 'tipo_comida:"'.$listarecomendacion[0]['tipo_comida'].'"'; 
-//                            $palabraBuscar = isset($texto) ? $texto : false;
-//                            $query = "($palabraBuscar)";
-//                            $fq = array(
-//                                'sort' => 'random_' . uniqid() . ' asc',
-//                                'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:' . $idplatito,
-//                                'wt' => 'json');
-//                            $resultados = false;
-//                            if ($query) {
-//                                $solr = \Classes\Solr::getInstance()->getSolr();
-//                                if (get_magic_quotes_gpc() == 1) {
-//                                    $query = stripslashes($query);}
-//                                try { $resultados = $solr->search($query, 0, $limit, $fq);
-//                                } catch (Exception $e) {
-//                              echo ("<div>ingrese algun valor</div>"); }} }
-//                              else{$resultados =$resulta;}       
-//                              }else{     
-//                            $texto =$_COOKIE['q'];
-//                            $limit = 3;
-//                            $palabraBuscar = isset($texto) ? $texto : false;
-//                            $query = "($palabraBuscar)";
-//                            $fq = array(
-//                                'sort' => 'random_' . uniqid() . ' asc',
-//                                'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:' . $idplatito,
-//                                'wt' => 'json');
-//                            $resulta = false;
-//                            if ($query) {
-//                                $solr = \Classes\Solr::getInstance()->getSolr();
-//                                if (get_magic_quotes_gpc() == 1) {
-//                                    $query = stripslashes($query);}
-//                                try { $resulta = $solr->search($query, 0, $limit, $fq);
-//                   
-//                                } catch (Exception $e) {
-//                              echo ("<div>ingrese algun valor</div>"); }}
-//                              
-//                                 if(count($resulta->response->docs)<=2) 
-//                            {$limit = 3;
-//                            $texto = 'tipo_comida:"'.$listarecomendacion[0]['tipo_comida'].'"'; 
-//                            $palabraBuscar = isset($texto) ? $texto : false;
-//                            $query = "($palabraBuscar)";
-//                            $fq = array(
-//                                'sort' => 'random_' . uniqid() . ' asc',
-//                                'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:' . $idplatito,
-//                                'wt' => 'json');
-//                            $resultados = false;
-//                            if ($query){
-//                                $solr = \Classes\Solr::getInstance()->getSolr();
-//                                if (get_magic_quotes_gpc() == 1) {
-//                                    $query = stripslashes($query);}
-//                                try { $resultados = $solr->search($query, 0, $limit, $fq);
-//                                } catch (Exception $e) {
-//                              echo ("<div>ingrese algun valor</div>"); }} }
-//                              else{$resultados =$resulta;} 
-//                              
-//                              
-//                              }
-//                          }
-//                     else  { 
-//                $limit = 3;
-//                $texto = 'tipo_comida:"'.$listarecomendacion[0]['tipo_comida'].'"'; 
-//                $palabraBuscar = isset($texto) ? $texto : false;
-//                $query = "($palabraBuscar)";
-//                $fq = array(
-//                    'sort' => 'random_' . uniqid() . ' asc',
-//                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:' . $idplatito,
-//                    'wt' => 'json' );
-//                $resultados = false;
-//                if ($query) {
-//                    $solr = \Classes\Solr::getInstance()->getSolr();
-//                    if (get_magic_quotes_gpc() == 1) {
-//                        $query = stripslashes($query);}
-//                    try { $resultados = $solr->search($query, 0, $limit, $fq);
-//                    } catch (Exception $e) {
-//                  echo ("<div>ingrese algun valor</div>"); }}
-//                }  }           
+                  if(count($results->response->docs)<3)     
+                  {
+                        $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
+                            $listatot = $listatot->toArray();
+                            foreach ($listatot as $key => $value) {
+                                if ($key < 3) {
+                                    $listades[] = $listatot[$key];
+                                } else {
+                                    $listadeseg[] = $listatot[$key];
+                                }
+                            }
+                   }
+
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
@@ -820,10 +734,12 @@ class IndexController extends AbstractActionController {
                 trim($listarecomendacion[0]['tipo_plato_nombre']).':'.
                 trim($listarecomendacion[0]['restaurant_nombre']).':'.
                 trim($listarecomendacion[0]['distrito']).'|Lista del Sabor';
+      
        $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id,
-             'listatitle'=>$listatitle, 'masplatos' => $results->response->docs,'masplatos2'=>$resultados->response->docs));
+             'listatitle'=>$listatitle, 'masplatos' => $results->response->docs,'masplatos2'=>$resultados->response->docs
+             ,'listades' => $listades));
         
         return $view;
     }

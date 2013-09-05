@@ -46,6 +46,7 @@ public function __construct()
         $this->layout()->comidas = $comidas;
         $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
         $listatot = $listatot->toArray();
+//        var_dump($listatot);exit;
         foreach ($listatot as $key => $value) {
             
               $list[]=$listatot[$key]['va_nombre'];
@@ -128,6 +129,8 @@ public function __construct()
         if ($request->isGet()) {
             $datos = $this->request->getQuery();
             $plato = $datos['q'];      
+            $paginas = $datos['page']; 
+         //   var_dump($paginas);exit;
             $valor = explode(" ",$plato);
             if($valor[0]=='restaurante:')
             { $buscar = $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];
@@ -154,7 +157,10 @@ public function __construct()
                 $this->redirect()->toUrl('/');
             }
             if ($distrito != 'TODOS LOS DISTRITOS') {
-                $limite = 100;
+                $limite = 10;
+                if($paginas=='')
+                 {$start = 0;}
+               else{$start=$paginas*10;}
                 $resultados = false;
                 $palabraBuscar = isset($texto) ? $texto : false;
                 $fd = array(
@@ -169,7 +175,7 @@ public function __construct()
                         $palabraBuscar = stripslashes($palabraBuscar);
                     }
                     try {
-                        $resultados = $solar->search($palabraBuscar, 0, $limite, $fd);
+                        $resultados = $solar->search($palabraBuscar,$start, $limite, $fd);
                     } catch (Exception $e) {
                         echo ("<div>ingrese algun valor</div>");
                     }
@@ -199,7 +205,10 @@ public function __construct()
                 
             } else {
                 //var_dump($texto);exit;
-                $limite = 100;
+                $limite = 10;
+                if($paginas=='')
+                 {$start = 0;}
+               else{$start=$paginas*10;}
                 $resultados = false;
                 $palabraBuscar = isset($texto) ? $texto : false;
                 $fd = array(
@@ -212,8 +221,8 @@ public function __construct()
                         $palabraBuscar = stripslashes($palabraBuscar);
                     }
                     try {
-                        $resultados = $solar->search($palabraBuscar, 0, $limite, $fd);
-                       //var_dump($resultados->response->docs);exit;
+                        $resultados = $solar->search($palabraBuscar, $start, $limite, $fd);
+                      
                     } catch (Exception $e) {
                         
                         $this->redirect()->toUrl('/application');
@@ -240,17 +249,7 @@ public function __construct()
                         $this->redirect()->toUrl('/application');
                     }
                 }
-//                    if ($resultados)
-//                  {
-//                    $total = (int) $resultados->response->numFound;
-//                    $start = min(1, $total);
-//                    $end = min($limite, $total);
-//                  
-//                    }  
-//  
             }
-            
-            //////////////////////////////////////////random de 5 platos distinc////////////////////////////////////
                 $limit_platos = 9999;
                 $query_platos = "-($palabraBuscar)";
                 $fq_platos = array(
@@ -316,55 +315,57 @@ public function __construct()
         $form->get('distrito')->setValue($distrito);
         $form->get('distrito')->setValueOptions($com);
         $form->get('submit')->setValue('Buscar');
-        $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
-        $paginator->setCurrentPageNumber((int) $this->params()
+        $paginato = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
+        $paginato->setCurrentPageNumber((int) $this->params()
             ->fromQuery('page', 1));
-        $paginator->setItemCountPerPage(10);
-        
-        $total = $paginator->getTotalItemCount();
-        $first = $paginator->getPages()->firstItemNumber;
-        $last = $paginator->getPages()->lastItemNumber;
-        if ($total == 1) {
-            $mostrar = 'Mostrando ' . $first . ' de ' . $total . ' resultado';
+        $paginato->setItemCountPerPage($limite);
+            if ($resultados)
+                  {
+                    $total = (int) $resultados->response->numFound;
+                    $end = count($resultados->response->docs)+$start;
+                    $inicio = $start+1;    
+                  }  
+        if ($total <= 10) {
+             $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
         } else {
-            $mostrar = 'Mostrando ' . $first . '-' . $last . ' de ' . $total . ' resultados';
+            $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
         }
-        
-       
-//        var_dump($resultados->response->docs);Exit;
         $arrpl=array();
         $arrest=array();
         if (count($resultados->response->docs) < 5 && count($resultados->response->docs) > 0) {
             $contc = 0;
-            $contr = 0;
-            $cont = 0;
-            $contr=0;
+//            $contr = 0;
+//            $cont = 0;
+            $contrc=0;
             foreach ($resultados->response->docs as $plat) {
                     if(!in_array($plat->name,$arrpl)){
                         $arrpl[] = $plat->name;
-                        $cont++;
+//                        $cont++;
                     }
                     if(!in_array($plat->distrito,$arrest)){
                         $arrest[] = $plat->distrito;
-                        $contr++;
+//                        $contr++;
                     }
             }
             if (count($arrpl) < 5) {
                 $maxcantidad = 5 - count($arrpl);
                 foreach ($results_platos->response->docs as $plat2) {
                     if ($maxcantidad > $contc) {
+                        if(!in_array($plat2->name,$arrpl)){
                         $arrpl[] = $plat2->name;
-//                        $arrest[] = $plat2->distrito;
                         $contc++;
+                        }
                     }
                 }
             }
             if(count($arrest) < 5){
                 $maxcantidadr = 5 - count($arrest);
                  foreach ($results_distritos->response->docs as $rest2) {
-                     if ($maxcantidadr > $contr) {
-                        $arrest[] = $rest2->distrito;
-                        $contr++;
+                     if ($maxcantidadr > $contrc) {
+                        if(!in_array($rest2->distrito,$arrest)){
+                            $arrest[] = $rest2->distrito;
+                            $contrc++;
+                         }
                     }
                 }           
             }
@@ -406,21 +407,7 @@ public function __construct()
                 }
             }
         }
-//var_dump($arrest);Exit;
-//        $contares = 0;
-//        $arrest=array();
-//        foreach ($results_distritos->response->docs as $rest) {
-//            if ($contares < 5) {
-//                if(!in_array($rest->distrito,$arrest)){
-//                $arrest[] = $rest->distrito;
-//                $contares++;
-//                }
-//
-//            }
-//        }
-//        var_dump(implode(",",$arrest));exit;
-//        var_dump(implode(",",$arrpl));exit;
-  
+
         $busquedatitle=$valores.':'.implode(",",$arrpl).':'.implode(",",$arrest).'| Lista del Sabor';
         $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
         $listatot = $listatot->toArray();
@@ -432,21 +419,22 @@ public function __construct()
                 $listadeseg[] = $listatot[$key];
             }
         }
-
+    //$paginador = $resultados->response->docs;
         $view->setVariables(array(
             'total' => $total,
             'distrito' => $distrito,
             'plato' => $valores,
             'lista' => $listades,
             'destacados' => $results->response->docs,
-            'general' => $paginator,
+            'general' => $paginato,
             'form' => $form,
             'mostrar' => $mostrar,
             'nombre' => $texto,
-            'busquedatitle'=>$busquedatitle
-//            'total' =>$total,
-//            'start'=> $start,
-//            'end' =>$end
+            'busquedatitle'=>$busquedatitle,
+            'total' =>$total,
+            'start'=> $start,
+            'end' =>$end,
+            'plat'=>$plato
         )); // ,'error'=>$error
         return $view;
     }
@@ -470,6 +458,7 @@ public function __construct()
         
         $this->layout()->clase = 'buscar';
         $filtered = $this->params()->fromQuery('q');
+        $paginas = $this->params()->fromQuery('page');
         $valor = explode(" ", $filtered);
          if($valor[0]=='restaurante:')
         {$buscar =  $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];     
@@ -496,7 +485,10 @@ public function __construct()
         fwrite($fp, "$texto , $distrito" . PHP_EOL);
         fclose($fp);
         }
-        $limite = 100;
+         $limite = 10;
+                if($paginas=='')
+                 {$start = 0;}
+               else{$start=$paginas*10;}
         $resultados = false;
         $palabraBuscar = isset($texto) ? $texto : false;
         $distrito = ($distrito) ? ' AND distrito:' . $distrito : '';
@@ -512,7 +504,7 @@ public function __construct()
                 $palabraBuscar = stripslashes($palabraBuscar);
             }
             try {
-                $resultados = $solar->search($palabraBuscar, 0, $limite, $fd);
+                $resultados = $solar->search($palabraBuscar,$start, $limite, $fd);
             } catch (Exception $e) {
                 $this->redirect()->toUrl('/');
             }
@@ -563,14 +555,18 @@ public function __construct()
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
         $paginator->setCurrentPageNumber((int) $this->params()
         ->fromQuery('page', 1));
-        $paginator->setItemCountPerPage(10);
-        $total = $paginator->getTotalItemCount();
-        $first = $paginator->getPages()->firstItemNumber;
-        $last = $paginator->getPages()->lastItemNumber;
-        if ($total == 1) {
-            $mostrar = 'Mostrando ' . $first . ' de ' . $total . ' resultado';
+       $paginator->setItemCountPerPage($limite);
+    
+            if ($resultados)
+                  {
+                    $total = (int) $resultados->response->numFound;
+                    $end = count($resultados->response->docs)+$start;
+                    $inicio = $start+1;    
+                  }  
+        if ($total <= 10) {
+             $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
         } else {
-            $mostrar = 'Mostrando ' . $first . '-' . $last . ' de ' . $total . ' resultados';
+            $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
         }
         $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
         $listatot = $listatot->toArray();
@@ -590,7 +586,9 @@ public function __construct()
             'form' => $form,
             'nombre' => $text,
               'plato' => $valores,
-            'mostrar' => $mostrar
+            'mostrar' => $mostrar,
+            'plat'=>$filtered
+             
         ));
         return $view;
     }
@@ -624,7 +622,7 @@ public function __construct()
             $texto = $busqueda[0];}
         
 
-            $limite = 100;
+            $limite = 10;
             $resultados = false;
             $palabraBuscar = isset($texto) ? $texto : false;
             $distrito = ($distrito) ? ' AND distrito:' . $distrito : '';
@@ -678,15 +676,17 @@ public function __construct()
                 ->fromQuery('page', 1));
             $paginator->setItemCountPerPage(10);
         
-            $total = $paginator->getTotalItemCount();
-            $first = $paginator->getPages()->firstItemNumber;
-            $last = $paginator->getPages()->lastItemNumber;
-            if ($total == 1) {
-                $mostrar = 'Mostrando ' . $first . ' de ' . $total . ' resultado';
-            } else {
-                $mostrar = 'Mostrando ' . $first . '-' . $last . ' de ' . $total . ' resultados';
-            }
-        
+              if ($resultados)
+                  {
+                    $total = (int) $resultados->response->numFound;
+                    $end = count($resultados->response->docs)+$start;
+                    $inicio = $start+1;    
+                  }  
+        if ($total <= 10) {
+             $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
+        } else {
+            $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
+        }
         $datos= $resultados->getRawResponse();// echo Json::encode($datos);
         echo $datos;
         exit();

@@ -78,7 +78,7 @@
     <?php }?>
 
     <?php
-   require './vendor/Classes/Mobile_Detect.php';
+   require_once './vendor/Classes/Mobile_Detect.php';
     $detect1 = new Mobile_Detect();
     if ($detect1->isAndroidOS()) {
         ?>
@@ -129,7 +129,7 @@
 	<div class="container cont-home">
       
       <?php
-    require './vendor/Classes/Mobile_Detect.php';
+    require_once './vendor/Classes/Mobile_Detect.php';
     $detect3 = new Mobile_Detect();
     if ($detect3->isTablet()) {
         ?>

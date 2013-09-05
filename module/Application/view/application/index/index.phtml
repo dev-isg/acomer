@@ -83,7 +83,7 @@
     <div class="sub subir-home" id="subir-home">
       <div class="content-etiqueta-home etiqueta-mistura">
         <?php
-          require './vendor/Classes/Mobile_Detect.php';
+          require_once './vendor/Classes/Mobile_Detect.php';
           $detect3 = new Mobile_Detect();
           if ($detect3->isTablet()) {
              ?>                
@@ -115,16 +115,15 @@
                 <a href="/plato/<?php echo $this->canonicalUrl($promo['va_nombre'], array('suffix' => $promo['in_id']));?>" class="mosaic-backdrop" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>">
                   <div class="details">
                     <h4>
-                      <?php 
-                    
-                    echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></h4>
-                    <p class="title-details" style="font-weight: bold;">Descripción</p>
-                    <p class="desc-plato font-desc-c"> <?php 
-                          if(strlen($promo['tx_descripcion'])>100){
-                           $str=trim(substr($promo['tx_descripcion'], 0, 97));
-                            $str.='...';
-                           }else {$str=$promo['tx_descripcion'];}       
-                    echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
+                      <?php
+                      echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></h4>
+                      <p class="title-details" style="font-weight: bold;">Descripción</p>
+                      <p class="desc-plato font-desc-c"> <?php 
+                      if(strlen($promo['tx_descripcion'])>100){
+                       $str=trim(substr($promo['tx_descripcion'], 0, 97));
+                        $str.='...';
+                       }else {$str=$promo['tx_descripcion'];}
+                      echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
                   </div>
                 </a>
               </div>
@@ -154,20 +153,18 @@
       </ul>
         
          <?php
-               /// require './vendor/Classes/Mobile_Detect.php';
-                $detect3 = new Mobile_Detect();
-                if ($detect3->isTablet()) {
+        $detect = new Mobile_Detect();
+                if ($detect->isTablet()) {
                    ?>                
                  <p class="ver_mistura"><a style="color:#EB008B;" href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: <?php echo $promo['tag'] ?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
-                 <?php }elseif($detect3->isMobile()){?>   
+                 <?php }elseif($detect->isMobile()){?>   
                     <p class="ver_mistura"><a style="color:#EB008B;" href="<?php echo $this->host('ruta')?>/buscar?q=tag: <?php echo $promo['tag'] ?>" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
                  <?php  } else{?>
                 <p class="ver_mistura"><a style="color:#EB008B;" href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: <?php echo $promo['tag'] ?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
                  <?php  } ?>
-
-    </div>
-      <?php 
-      } ?>
+        </div>
+          <?php 
+          } ?>
       
     <div class="sub subir-home" id="subir-home">
       <div class="content-etiqueta-home">
