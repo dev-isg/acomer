@@ -45,7 +45,9 @@
     <!--<script src="<?php echo $this->host('ruta')?>/js/head.load.min.js"></script>-->
     <script	src="<?php echo $this->host('ruta')?>/js/modernizr.js?v<?php echo $this->host('version')?>"></script>
     <script	src="<?php echo $this->host('ruta')?>/js/lib/jquery-1.8.3.min.js?v<?php echo $this->host('version')?>"></script>
+    <script language="JavaScript" src="<?php echo $this->host('ruta')?>/js/vendor/jquery-ui.js"></script>
     <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css?v'.$this->host('version'))->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')?>
+    <link href="<?php echo $this->host('ruta')?>/css/jquery-ui-auto.css" media="screen" rel="stylesheet" type="text/css">
   </head>
 
 <body class="lista-<?php echo $this->clase; ?>">
@@ -146,7 +148,18 @@
             <span class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span> 
             <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
             <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
-
+ <script>
+  $(function(){
+    var autocompletar = new Array();
+    <?php 
+     for($i = 0;$i< count($this->distritos); $i++){?>
+       autocompletar.push('<?php echo $this->distritos[$i]['ch_distrito'].' , '.$this->distritos[$i]['ch_provincia'].' , '.$this->distritos[$i]['ch_departamento']; ?>');
+     <?php } ?>
+     $("#fq").autocomplete({
+       source: autocompletar 
+     });
+  });
+  </script>
             <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar-por-distrito">   <p>
                   <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php 
                   if($_GET['q']) 
@@ -164,16 +177,7 @@
                   <em>Ejm: lomo saltado</em>
                 </p>
                 <p>
-             <select name="distrito" id="fq" value="">
-                 <?php  foreach ($this->comidas as $comida) : ?>
-             <OPTION VALUE="<?php echo $comida['va_distrito']; ?>"
-                 <?php if(isset($_GET['distrito'])  and $_GET['distrito']==$comida['va_distrito'] )
-                 {echo 'selected';}elseif (isset($_COOKIE['distrito'])  and $_COOKIE['distrito']==$comida['va_distrito'] )
-                 {echo 'selected';}elseif (isset($_POST['distrito'])  and $_POST['distrito']==$comida['va_distrito'] )
-                 {echo 'selected';}  elseif(!isset($_GET['distrito'])  and !isset($_COOKIE['distrito']) ){echo '';}?>>
-                     <?php echo $comida['va_distrito']; ?></OPTION>
-                <?php endforeach; ?>
-             </select>                                                       
+             <input id="fq" name="distrito" type="text"  value="">                                                      
                 </p>
                 <p style="margin-top:5px;">
                   <input type="submit"  class="btn btn-warning btn-soli" value="Buscar"/>
@@ -247,7 +251,18 @@
 							src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>"
 							alt="">
 					</div>
-      
+    <script>
+  $(function(){
+    var autocompletar = new Array();
+    <?php 
+     for($i = 0;$i< count($this->distritos); $i++){?>
+       autocompletar.push('<?php echo $this->distritos[$i]['ch_distrito'].','.$this->distritos[$i]['ch_provincia'].','.$this->distritos[$i]['ch_departamento']; ?>');
+     <?php } ?>
+     $("#fq").autocomplete({
+       source: autocompletar 
+     });
+  });
+  </script>
 					<form accept-charset="utf-8" method="get" class="form-horizontal"
 						id="search"
 						action="<?php echo $this->host('ruta')?>/buscar-por-distrito">
@@ -270,31 +285,7 @@
 								lomo saltado</em>
 						</p>
 						<p>
-					<?php if($this->comidas){?>
-							<select name="distrito" id="fq" value="">
-                 <?php  foreach ($this->comidas as $comida) : ?>
-                 
-                   <option value="<?php echo $comida['va_distrito']; ?>"
-									<?php
-									       if($_GET['distrito']){
-                              if($_GET['distrito'] == $comida['va_distrito']){
-                                      echo 'selected';
-                                  }
-                         }else{
-                              if(isset($_COOKIE['distrito'])){
-                                if($_COOKIE['distrito'] == $comida['va_distrito']){
-                                         echo 'selected';
-                                } 
-                            }else{
-                                echo '';
-                            }
-                         }
-                         ?>>
-                     <?php echo $comida['va_distrito']; ?></option>
-                     
-                <?php endforeach;?>
-                     </select>
-                     <?php }?>  						</p>
+			<input id="fq" name="distrito" type="text"  value="">					</p>
 						<p style="margin-top: 5px;">
 							<input type="submit" class="btn btn-warning btn-soli"
 								value="Buscar" />

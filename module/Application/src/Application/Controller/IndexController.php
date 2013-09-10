@@ -41,9 +41,10 @@ public function __construct()
     public function indexAction()
     {
         $view = new ViewModel();
-      //   $distritos = $this->distritosperu()->toArray();
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
+        $distritos = $this->distritosperu()->toArray();
+        $this->layout()->distritos = $distritos;
         $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
         $listatot = $listatot->toArray();
 //        var_dump($listatot);exit;
@@ -130,12 +131,14 @@ public function __construct()
             $datos = $this->request->getQuery();
             $plato = $datos['q'];      
             $paginas = $datos['page']; 
-         //   var_dump($paginas);exit;
+            $distrit = $datos['distrito'];
+            $valorubigeo =  explode(',', $distrit);
+            $distrito = $valorubigeo[0];
             $valor = explode(" ",$plato);
             if($valor[0]=='restaurante:')
             { $buscar = $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];
             $texto = $valor[0].'"'.$buscar.'"'; 
-            $distrito = $datos['distrito'];
+          //  $distrito = $datos['distrito'];
             $ruta = $this->_options->data->busqueda .'/busqueda.txt';
             $fp = fopen($ruta,"a");
             fwrite($fp, "$buscar , $distrito" . PHP_EOL);
@@ -143,10 +146,11 @@ public function __construct()
             elseif($valor[0]=='tag:')     
             {$buscar = $valor[1];
             $texto = $valor[0].'"'.$buscar.'"'; 
-            $distrito = $datos['distrito'];}
+         //   $distrito = $datos['distrito'];
+         }
             else{ $filter = new \Zend\I18n\Filter\Alnum(true);
             $texto = $filter->filter($plato);
-            $distrito = $datos['distrito'];
+           // $distrito = $datos['distrito'];
             $ruta = $this->_options->data->busqueda .'/busqueda.txt';
             $fp = fopen($ruta,"a");
             fwrite($fp, "$texto , $distrito" . PHP_EOL);
@@ -296,6 +300,8 @@ public function __construct()
                 
         }
         $form = new Formularios();
+        $distritos = $this->distritosperu()->toArray();
+        $this->layout()->distritos = $distritos;
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
         $com = array();
@@ -802,8 +808,12 @@ public function __construct()
         $selectString = $sql->getSqlStringForSqlObject($select);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         return $results;
+        
     }
 
+                
+     
+        
     public function joinPlatoAction()
     {
         $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');

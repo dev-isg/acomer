@@ -644,7 +644,21 @@ class IndexController extends AbstractActionController {
                 ));
 //        return array('lista'=>$listarecomendacion);
     }
-
+//    public function ss()
+//    {
+//       //$headers = use \Zend\Http\Headers::fromString($headerString);
+//       
+//        $this->headScript()->appendScript('$(function(){
+//    var autocompletar = new Array();
+//    
+//    'for($i = 0;$i< count($this->distritos); $i++){. '
+//       autocompletar.push('. echo $this->distritos[$i]['ch_distrito'].' , '.$this->distritos[$i]['ch_provincia'].' , '.$this->distritos[$i]['ch_departamento']; .');
+//    '. } .' 
+//     $("#fq").autocomplete({
+//       source: autocompletar 
+//     });
+//  });');
+//    }
     public function verplatosAction() {
 
         $view = new ViewModel();
@@ -719,12 +733,15 @@ class IndexController extends AbstractActionController {
                 }
             }
         } 
+        
 //         $formu = new Formularios();
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas=$comidas;
+//        $distritosperu = new \Application\Controller\IndexController();
+//        $distritos = $this->$distritosperu->distritosperu()->toArray();
+//        $this->layout()->distritos = $distritos;
         $this->layout()->clase = 'Detalle';
         $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
-   
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
         $paginator->setItemCountPerPage(10);    
