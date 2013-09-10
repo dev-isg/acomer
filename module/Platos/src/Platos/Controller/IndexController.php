@@ -663,7 +663,7 @@ class IndexController extends AbstractActionController {
                 $query = "($palabraBuscar)";
                 $fq = array(
                     'sort' => 'random_' . uniqid() . ' asc',
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo ',
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:'.$listarecomendacion[0]['in_id'],
                     'wt' => 'json'
                 );
                 $results = false;
