@@ -201,10 +201,12 @@ class IndexController extends AbstractActionController {
                              return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);
                              
                        }
-                       else{    if($platos[0]['cantidad']>=5)
-                                { echo 'cantidad maxima de platos';}
-                                else
-                                   {
+                       else{   
+//                           if($platos[0]['cantidad']>=5)
+//                       }
+//                                { echo 'cantidad maxima de platos';}
+//                                else
+//                                   {
                                      $principal = $this->_options->upload->images . '/plato/principal/'.$array[0]['Ta_restaurante_in_id'].'/'.$local.'/' . $name;
                                      $destacado = $this->_options->upload->images . '/plato/destacado/'.$array[0]['Ta_restaurante_in_id'].'/'.$local.'/' . $name;
                                      $general = $this->_options->upload->images . '/plato/general/'.$array[0]['Ta_restaurante_in_id'].'/'.$local.'/' . $name;
@@ -216,7 +218,7 @@ class IndexController extends AbstractActionController {
                              $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$local.'/' .$name;                
                              $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro,$promoc);
                              return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);                                       
-                                   }        
+                                  // }        
                              }                                      
                          }
                     }
@@ -268,10 +270,11 @@ class IndexController extends AbstractActionController {
                              $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro,$promoc);
                              return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);                                   
                        }
-                       else{    if($platos[0]['cantidad']>=5)
-                                { echo 'cantidad maxima de platos';}
-                                else
-                                   {
+                       else{   
+//                           if($platos[0]['cantidad']>=5)
+//                                { echo 'cantidad maxima de platos';}
+//                                else
+//                                   {
                                      $principal = $this->_options->upload->images . '/plato/principal/'.$array[0]['Ta_restaurante_in_id'].'/'.$local.'/' . $name;
                                      $destacado = $this->_options->upload->images . '/plato/destacado/'.$array[0]['Ta_restaurante_in_id'].'/'.$local.'/' . $name;
                                      $general = $this->_options->upload->images . '/plato/general/'.$array[0]['Ta_restaurante_in_id'].'/'.$local.'/' . $name;
@@ -283,7 +286,7 @@ class IndexController extends AbstractActionController {
                              $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$local.'/' .$name;                
                              $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro,$promoc);
                              return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);                                       
-                                   }        
+                                 //  }        
                           } 
                    }    
                   }
@@ -655,7 +658,7 @@ class IndexController extends AbstractActionController {
               
           $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();  
           $texto = 'restaurante:"'.$listarecomendacion[0]['restaurant_nombre'].'"'; 
-                $limit = 3;
+                $limit = 4;
                 $palabraBuscar = isset($texto) ? $texto : false;
                 $query = "($palabraBuscar)";
                 $fq = array(
@@ -671,7 +674,7 @@ class IndexController extends AbstractActionController {
                     try { $results = $solr->search($query, 0, $limit, $fq);
                     } catch (Exception $e) {
                   echo ("<div>ingrese algun valor</div>"); }}
-                  if(count($results->response->docs)<3)     
+                  if(count($results->response->docs)<4)     
                   {
                         $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
                             $listatot = $listatot->toArray();
@@ -738,7 +741,8 @@ class IndexController extends AbstractActionController {
        $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id,
-             'listatitle'=>$listatitle, 'masplatos' => $results->response->docs,'masplatos2'=>$resultados->response->docs
+             'listatitle'=>$listatitle, 'masplatos' => $results->response->docs
+           //'masplatos2'=>$resultados->response->docs
              ,'listades' => $listades));
         
         return $view;

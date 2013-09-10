@@ -119,8 +119,8 @@ class IndexController extends AbstractActionController
                      }
                      $form->setMessages(array('imagen'=>$error ));
           } else {
-              $anchura = 240;
-              $altura = 143; 
+              $anchura = 407;
+              $altura = 272; 
               $imf =$File['name'];
               $info =  pathinfo($File['name']);
               $tamanio = getimagesize($File['tmp_name']);
@@ -130,7 +130,9 @@ class IndexController extends AbstractActionController
               if($ancho>$alto)
               {//echo 'ddd';exit;
                   require './vendor/Classes/Filter/Alnum.php';
-                  $altura =(int)($alto*$anchura/$ancho); 
+                  $alta =(int)($alto*$anchura/$ancho);
+                  if($alta>272){$altura=272;}
+                  else{$altura=$alta;}
                   if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg')      
                   {   $nom = $nonFile['va_nombre']; 
                   $imf2 =  $valor.'.'.$info['extension'];
@@ -151,7 +153,9 @@ class IndexController extends AbstractActionController
                }
                    if($ancho<$alto)
               {require './vendor/Classes/Filter/Alnum.php';
-                  $anchura =(int)($ancho*$altura/$alto); 
+                  $anchu =(int)($ancho*$altura/$alto);
+                  if($anchu>407){$anchura=407;}
+                  else{$anchura=$anchu;}
                   if($info['extension']=='jpg'or $info['extension']=='JPG'or $info['extension']=='jpeg')      
                   {  $nom = $nonFile['va_nombre']; 
                   $imf2 =  $valor.'.'.$info['extension'];
@@ -255,8 +259,8 @@ class IndexController extends AbstractActionController
                      }
                      $form->setMessages(array('imagen'=>$error ));
           } else {
-              $anchura = 240;
-              $altura = 143; 
+              $anchura = 407;
+              $altura = 272; 
               $imf =$File['name'];
               $info =  pathinfo($File['name']);
               $tamanio = getimagesize($File['tmp_name']);
@@ -271,8 +275,10 @@ class IndexController extends AbstractActionController
                 $eliminar1 = $this->_options->upload->images . '/restaurante/principal/' . $imagen;
                   unlink($eliminar);
                   unlink($eliminar1);
-                  require './vendor/Classes/Filter/Alnum.php';
-                  $altura =(int)($alto*$anchura/$ancho); 
+                  require './vendor/Classes/Filter/Alnum.php';                 
+                  $alta =(int)($alto*$anchura/$ancho);
+                  if($alta>272){$altura=272;}
+                  else{$altura=$alta;}
                   if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg')      
                   {   $nom = $nonFile['va_nombre']; 
                   $imf2 =  $valor.'.'.$info['extension'];
@@ -297,7 +303,9 @@ class IndexController extends AbstractActionController
                   unlink($eliminar);
                   unlink($eliminar1);
                        require './vendor/Classes/Filter/Alnum.php';
-                  $anchura =(int)($ancho*$altura/$alto); 
+                   $anchu =(int)($ancho*$altura/$alto);
+                  if($anchu>407){$anchura=407;}
+                  else{$anchura=$anchu;}
                   if($info['extension']=='jpg'or $info['extension']=='JPG'or $info['extension']=='jpeg')      
                   {  $nom = $nonFile['va_nombre']; 
                   $imf2 =  $valor.'.'.$info['extension'];

@@ -1,17 +1,23 @@
 <link rel="stylesheet" href="<?php echo $this->basePath()?>/css/jquery-ui.css?v<?php echo $this->host('version')?>">
-   <div class="content-left">
+<link rel="stylesheet" href="<?php echo $this->basePath()?>/js/flexslider/flexslider.css" type="text/css"/>
+
+<div class="content-left">
 <a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a>
       <div id="esconder">
    		<div class="descrip-product">
-   			<div class="etiqueta-cat">
-   				<div class="etiqueta">
-                                    <?php  
-                                              if(strlen($this->lista[0]['va_nombre'])>21){
-                                              $str=trim(substr($this->lista[0]['va_nombre'], 0, 18));
-                                              $str.='...';
-                                              }else {$str=$this->lista[0]['va_nombre'];} 
-                                               ?>
-   					<p><span><?php echo ucwords($str);?></span></p>
+   			<div class="etiqueta-cat return-css">
+   				<div class="etiqueta-dev">
+            <?php
+              require './vendor/Classes/Mobile_Detect.php';
+              $detect3 = new Mobile_Detect();
+              if ($detect3->isTablet()) {
+                 ?>                 
+                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2>
+               <?php }elseif($detect3->isMobile()){?>   
+                   <h2><a href="<?php echo $this->host('ruta')?>/buscar?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2>
+               <?php } else {?> 
+                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2> 
+            <?php }?>
    				</div>
            <div class="return">
               <a href="javascript:window.history.back();">Regresar</a>
@@ -19,112 +25,39 @@
    			</div>
    			<div class="ficha-product">
    				<div class="ficha-img">
-   					<img src="<?php if ($this->lista[0]['va_imagen']=='platos-default.png')
+            <div class="flexslider carousel">
+              <ul class="slides">
+                <li>
+                  <img src="<?php if ($this->lista[0]['va_imagen']=='platos-default.png')
                                             {echo $this->host('images') . '/defecto/' . $this->lista[0]['va_imagen'];}
-                                        else{echo $this->host('images') . '/plato/principal/' . $this->lista[0]['va_imagen'];}?>" title="<?php echo $this->lista[0]['va_nombre'];?>" alt="<?php echo $this->lista[0]['va_nombre'];?>">
+                                        else{echo $this->host('images') . '/plato/principal/' . $this->lista[0]['va_imagen'];}?>" title="<?php echo $this->lista[0]['va_nombre'];?>" alt="<?php echo $this->lista[0]['va_nombre'];?>" />
+                </li>
+                <li>
+                  <img src="<?php if($this->lista[0]['restaurant_img']=='default-img.jpg')
+                        {echo $this->host('images') . '/defecto/' . $this->lista[0]['restaurant_img'];}
+                        else
+                            {echo $this->host('images') . '/restaurante/principal/' . $this->lista[0]['restaurant_img'];}?>" title="<?php echo $this->lista[0]['restaurant_nombre']?>" alt="<?php echo $this->lista[0]['restaurant_nombre']?>">
+                </li>
+              </ul>
+            </div>
    				</div>
    				<div class="ficha-desc">
-                                    
-                     <?php
-                require './vendor/Classes/Mobile_Detect.php';
-                $detect3 = new Mobile_Detect();
-                if ($detect3->isTablet()) {
-                   ?>                 
-                  <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2>
-                 <?php }elseif($detect3->isMobile()){?>   
-                     <h2><a href="<?php echo $this->host('ruta')?>/buscar?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2>
-                 <?php } else {?> 
-                  <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2> 
-                 <?php }?>
+            <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
    					<div class="puntuaciones c<?php echo $this->lista[0]['Ta_puntaje_in_id'];?>"></div>
-                  <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
    					<p class="desc"><?php echo $this->lista[0]['tx_descripcion'];?></p>
    					<?php if($this->lista[0]['va_precio']){?>
                                         <p class="costo">Precio</p>
    					<p class="precio"><?php echo $this->lista[0]['va_precio'];?></p>
               <?php }?>
             <div class="fb-like" data-href="<?php echo "http://listadelsabor.com/plato/" .$this->urlnombre ?>" data-send="false" data-layout="box_count" data-width="100" data-show-faces="false"></div>
-	</div>
+	        </div>
    			</div>
    			<div class="content-coments">
    				<div class="coments-all">
-                  <div class="cont-accesorios">
-                     <div class="left-desc">
-                        <h4>Dirección</h4>
-                        <ul class="ubi-lupa">
-                           <li>
-                            <div class="ubicancion"><?php echo $this->lista[0]['va_direccion'];?>-<?php echo $this->lista[0]['distrito'];?></div>
-                           </li>
-
-                        </ul>
-                        <?php if($this->lista[0]['va_direccion_referencia']){?>
-                        <h4>Dirección de Referencia</h4>
-                        <ul class="ubi-lupa">
-                          <li>
-                            <div class="ubicancion"><?php echo $this->lista[0]['va_direccion_referencia'];?></div>
-                          </li>
-                        </ul>
-                         <?php } ?>                       
-                        <h4>Teléfono</h4>
-                        <ul class="servicios-desc">
-                          <li><?php echo $this->lista[0]['va_telefono'];?></li>
-                        </ul>
-                        
-                        <h4>Atención</h4>
-                        <ul class="time">
-                          <li><span class="day"><?php echo $this->lista[0]['va_dia']; ?></span></li>
-                          <li><span class="hour"><?php echo $this->lista[0]['va_horario']; ?></span></li>
-                        </ul>
-                        <?php if($this->lista[0]['va_horario_opcional']){?>
-                        <h4>Horario Opcional</h4>
-                        <ul class="time">
-                          <li><span class="hour"><?php echo $this->lista[0]['va_horario_opcional']; ?></span></li>
-                        </ul>
-                        <?php } ?>
-                        
-                    </div>
-                    <div class="right-desc">
-                        <?php if($this->lista[0]['web']){?>
-                        <h4>Página web</h4>
-                        <ul class="time">
-                          <li><a class="link-web" href="<?php echo $this->lista[0]['web'];?>" target="_blank">Visíte su página</a></li>
-                        </ul>
-                        <?php }?>
-                        <h4>Medios de pago</h4>
-                        <ul class="servicios-desc">
-                          <?php foreach ($this->pagos as $pago): ?>
-                            <li><?php echo $pago->nom_pago; ?></li>
-                          <?php endforeach;?>
-                        </ul>
-                        <h4>Servicios</h4>
-                        <ul class="servicios-desc">
-                          <?php foreach ($this->servicios as $serv): ?>
-                            <li><?php echo $serv->nom_servicio; ?></li>
-                          <?php endforeach; ?>
-                        </ul>
-                        <?php if($this->lista[0]['va_email']){?>
-                        <h4>Email</h4>
-                        <ul class="servicios-desc">
-                          <li>
-                            <a class="mailto" href="mailto:<?php echo $this->lista[0]['va_email']; ?>">Enviar email</a>
-                          </li>
-                        </ul>
-                        <?php }?>
-                    </div>
-                </div>
-            </div>
-            <div class="content-info">
-                <div class="info-img">
-                    <img src="<?php if($this->lista[0]['restaurant_img']=='default-img.jpg')
-                        {echo $this->host('images') . '/defecto/' . $this->lista[0]['restaurant_img'];}
-                        else
-                            {echo $this->host('images') . '/restaurante/principal/' . $this->lista[0]['restaurant_img'];}?>" title="<?php echo $this->lista[0]['restaurant_nombre']?>" alt="<?php echo $this->lista[0]['restaurant_nombre']?>">
-                </div>
+              <div class="cont-accesorios">
                 <h4 class="ubi-map">Mapa de ubicación <span></span></h4>
                 <div id="mapCont" class="map" data-lat="<?php echo $this->lista[0]['de_latitud']; ?>" data-lng="<?php echo $this->lista[0]['de_longitud']; ?>"></div>
-
                <?php if(count($this->locales)>1){?>
-
                 <h4>Sucursales</h4>
                 <section class="list-suc">
                     <ul class="ul-suc">
@@ -148,7 +81,154 @@
 
                     </ul>
                 </section>
-    <?php }?>
+                <?php }?>
+              </div>
+            </div>
+            <div class="content-info">
+              <h4>Dirección y teléfono</h4>
+              <ul class="ubi-lupa">
+                 <li>
+                  <div class="ubicancion"><?php echo $this->lista[0]['va_direccion'];?>-<?php echo $this->lista[0]['distrito'];?></div>
+                 </li>
+              </ul>
+              <?php if($this->lista[0]['va_direccion_referencia']){?>
+                <!--<h4>Dirección de Referencia</h4>-->
+                <ul class="ubi-lupa">
+                  <li>
+                    <div class="ubicancion1"><?php echo $this->lista[0]['va_direccion_referencia'];?></div>
+                  </li>
+                </ul>
+                 <?php } ?>                       
+                <!--<h4>Teléfono</h4>-->
+                <ul class="servicios-desc">
+                  <li><?php echo $this->lista[0]['va_telefono'];?></li>
+                </ul>
+                <h4>Atención</h4>
+                  <ul class="time">
+                    <li><span class="day"><?php echo $this->lista[0]['va_dia']; ?></span></li>
+                    <li><span class="hour"><?php echo $this->lista[0]['va_horario']; ?></span></li>
+                  </ul>
+                  <?php if($this->lista[0]['va_horario_opcional']){?>
+                  <h4>Horario Opcional</h4>
+                  <ul class="time">
+                    <li><span class="hour"><?php echo $this->lista[0]['va_horario_opcional']; ?></span></li>
+                  </ul>
+                  <?php } ?>
+                  <?php if($this->lista[0]['web']){?>
+                  <h4>Página web</h4>
+                  <ul class="time">
+                    <li><a class="link-web" href="<?php echo $this->lista[0]['web'];?>" target="_blank">Visíte su página</a></li>
+                  </ul>
+                  <?php }?>
+                  <h4>Medios de pago</h4>
+                  <ul class="servicios-desc1">
+                    <?php foreach ($this->pagos as $pago): ?>
+                      <li><?php echo $pago->nom_pago.'('.$pago->id_pago.')'; ?></li>
+                    <?php endforeach;?>
+                  </ul>
+                  <!--<h4>Servicios</h4>
+                  <ul class="servicios-desc">
+                    <?php foreach ($this->servicios as $serv): ?>
+                      <li><?php echo $serv->nom_servicio; ?></li>
+                    <?php endforeach; ?>
+                  </ul>-->
+                  <?php if($this->lista[0]['va_email']){?>
+                  <h4>Email</h4>
+                  <ul class="servicios-desc">
+                    <li>
+                      <a class="mailto" href="mailto:<?php echo $this->lista[0]['va_email']; ?>">Enviar email</a>
+                    </li>
+                  </ul>
+                  <?php }?>
+                <?php if(count($this->masplatos)>=4) {?>  <h4>Más Platos de <?php echo $this->lista[0]['restaurant_nombre'];?></h4><?php  }
+                else {?> <h4>Más Platos</h4> <?php } ?>
+
+                  <?php
+                    if(count($this->masplatos)>=4) {
+                   ?>  
+                    <div class="lista-plato-li contenido-bus">
+                      <ul>
+                    <?php foreach ($this->masplatos as $doc ) : ?>          
+                          <li>
+                            <div class="list-ver">
+                            <div class="list-img-p">
+                              <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>">
+                                <img src="<?php if($doc->va_imagen=='platos-default.png')
+                                      { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
+                                      else
+                                  {  echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" style="border:0;" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                              </a>
+                            </div>
+                            <div class="list-desc-p">
+                              <div class="left-resultado">
+                                <p class="nombre_r">
+                                  <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                                  <?php 
+                                       if(strlen($doc->restaurante)>20){
+                                       $strres=trim(substr($doc->restaurantee, 0, 19));
+                                        $strres.='..';
+                                       }else {$strres=$doc->restaurante;}
+                              echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?>
+                                </a> 
+                                </p>
+                                <p class="nom_plato"><?php echo $doc->name;?></p>
+                                <div class="punt" style="width:100%!important;text-align:left;">
+                                  <div style="float:left!important;margin-left: 10px;" class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>"></div>
+                                  <em><?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?><i class="icon-comment"></i></em>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                           </li>
+                        <?php endforeach; ?>   
+                      </ul>
+                    </div>
+                <?php } 
+                else {?> 
+                  <div class="lista-plato-li recomendados-platos primer-home" style="padding-bottom: 90px;">
+                    <ul>
+                       <?php  foreach ($this->listades  as $list) {             
+                    if(strlen($list['va_nombre'])>27){
+                                       $strnom=trim(substr($list['va_nombre'], 0, 24));
+                                        $strnom.='...';
+                                       }else {$strnom=$list['va_nombre'];} ?>
+                        <li>
+                          <div class="list-ver">
+                            <div class="list-img-p">
+                              <a href="/plato/<?php echo $this->canonicalUrl($list['va_nombre'], array('suffix' => $list['in_id']));?>">
+                                <img src="<?php if ($list['va_imagen']=='platos-default.png')
+                      {echo $this->host('images') . '/defecto/' . htmlspecialchars($list['va_imagen'], ENT_QUOTES, 'utf-8');}
+                  else
+                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list['va_imagen'], ENT_QUOTES, 'utf-8');} ?>" style="border:0;" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>">
+                              </a>
+                            </div>
+                            <div class="list-desc-p">
+                              <div class="left-resultado">
+                                <p class="nombre_r">
+                                  <a href="/plato/<?php echo $this->canonicalUrl($list['va_nombre'], array('suffix' => $list['in_id']));?>" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>"><?php 
+                     if(strlen($list['restaurant_nombre'])>29){
+                     $strres=trim(substr($list['restaurant_nombre'], 0, 26));
+                      $strres.='...';
+                     }else {$strres=$list['restaurant_nombre'];}
+                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></a></p>
+                                <p class="nom_plato"><?php echo $list['va_nombre'];?></p>
+                                <div class="punt" style="width:100%!important;text-align:left;">
+                                  <div style="float:left!important;margin-left: 10px;" class="puntuaciones c<?php echo $list['Ta_puntaje_in_id'];?>"></div>
+                                  <em><?php echo $list['Ta_puntaje_in_id'];?><i class="icon-comment"></i></em>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        
+                        </li>
+                      <?php }; ?>   
+                    </ul>
+                  </div>
+                  
+                  <?php } 
+                  ?>
+
             </div>
             <div class="coments-all coments-all-fin" id="verComentarios">
               <!--Comentarios-->
@@ -182,7 +262,7 @@
                     <div class="control-group"><?php echo $this->formRow($form->get('va_nombre')); ?></div>
                     <div class="control-group"><?php echo $this->formRow($form->get('va_email')); ?></div>
                     <div class="control-group">
-                      <label style="color:#444;">Valora tu plato:</label>
+                      <label style="color:#444;">Valoración:</label>
                       <p id="star"></p>
                       <label class="error-votos" style="display:none;">De una puntuación.</label>
                       <?php echo $this->formHidden($form->get('Ta_puntaje_in_id'));?>
@@ -240,9 +320,9 @@
           
          
 </div>
-<div class="descrip-product">
+<!--<div class="descrip-product">
         <?php
-      if(count($this->masplatos)>=3) {
+      if(count($this->masplatos)>=4) {
      ?>  
    <div id="esconder">
     <div class="sub">
@@ -364,7 +444,7 @@
                      }else {$strres=$list['restaurant_nombre'];}
                 echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></a></p>
                 <div class="pt">
-                  <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list['va_precio'], ENT_QUOTES, 'utf-8'); ?></p>-->
+                  <p class="pre"><?php echo 'S/. '.  htmlspecialchars($list['va_precio'], ENT_QUOTES, 'utf-8'); ?></p>
                   <p class="com">
                     <a href="<?php echo $this->host('base')?>/plato/<?php echo $this->canonicalUrl($list['va_nombre'], array('suffix' => $list['in_id']));?>#verComentarios" title="ver todos los comentarios" alt="<?php echo $list['va_nombre'];?>"><?php echo $list['NumeroComentarios'] ?> <i class="icon-comment"></i></a>
                   </p>
@@ -382,29 +462,39 @@
     
     <?php } 
     ?>
-</div>   
-       <div id="mapa-buscador">
-    
- </div>
+</div>   -->
+  <div id="mapa-buscador"></div>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script> 
-
-<!-- <script>
-  
-  head.js("<?php echo $this->basePath()?>/js/jquery-ui.min.js?v<?php echo $this->host('version')?>")  
-  .js("<?php echo $this->basePath()?>/js/vendor/jquery.validate.min.js?v<?php echo $this->host('version')?>")
-  .js("<?php echo $this->basePath()?>/js/vendor/gmaps.min.js?v<?php echo $this->host('version')?>")
-  .js("<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js?v<?php echo $this->host('version')?>")
-  .js("<?php echo $this->basePath()?>/js/verplatos.js?v<?php echo $this->host('version')?>");
-</script>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
--->
-
 <script src="<?php echo $this->basePath()?>/js/jquery-ui.min.js?v<?php echo $this->host('version')?>"></script>
 <script src="<?php echo $this->basePath()?>/js/vendor/gmaps.min.js?v<?php echo $this->host('version')?>"></script>
 <script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.min.js?v<?php echo $this->host('version')?>"></script>
 <script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js?v<?php echo $this->host('version')?>"></script>
+<script type="text/javascript" src="<?php echo $this->basePath()?>/js/flexslider/jquery.flexslider-min.js"></script>
 <script src="<?php echo $this->basePath()?>/js/verplatos.js?v<?php echo $this->host('version')?>"></script>
+
+<script type="text/javascript">
+  $(function(){
+    SyntaxHighlighter.all();
+  });
+  $(window).load(function(){
+    $('.flexslider').flexslider({
+      animation: "slide",
+      start: function(slider){
+        $('body').removeClass('loading');
+      }
+    });
+  });
+</script>
+
+<!-- Syntax Highlighter -->
+<script type="text/javascript" src="<?php echo $this->basePath()?>/js/flexslider/shCore.js"></script>
+<script type="text/javascript" src="<?php echo $this->basePath()?>/js/flexslider/shBrushXml.js"></script>
+<script type="text/javascript" src="<?php echo $this->basePath()?>/js/flexslider/shBrushJScript.js"></script>
+
+<!-- Optional FlexSlider Additions -->
+<script src="<?php echo $this->basePath()?>/js/flexslider/jquery.easing.js"></script>
+<script src="<?php echo $this->basePath()?>/js/flexslider/jquery.mousewheel.js"></script>
 
 
 <div id="fb-root"></div>

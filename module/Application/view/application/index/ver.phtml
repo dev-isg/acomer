@@ -115,24 +115,28 @@
                     </a>
                     </div>
                     <div class="detalle-restaurante">
-                      <div class="detalle-nombre"><p class="nombre_r">
-                        <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" alt="<?php echo $doc->name;?>" title="<?php echo $doc->name;?>"><?php 
-                          if(strlen($doc->restaurante)>44){
-                           $str=trim(substr($doc->restaurante, 0, 43));
+                      <div class="left-resultado">
+                        <p class="nombre_r">
+                          <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" alt="<?php echo $doc->name;?>" title="<?php echo $doc->name;?>"><?php 
+                            if(strlen($doc->restaurante)>44){
+                            $str=trim(substr($doc->restaurante, 0, 43));
                             $str.='.';
-                           }else {$str=$doc->restaurante;}       
-                    echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?></a></p>
-                        <div class="punt">
-                          <div class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>" style="margin: 0px;width: 118px !important;display:inline-block;"></div>
-                        </div> 
-                      </div>
-                        <p class="nom_plato"><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></p>
-                        <p style="margin-left:10px;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></p>
-                        <p class="com-pla">
-                          <em style="float:left;margin-left:10px;color:#999;"><?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?></em>
-                          <?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i> Comentarios
+                            }else {$str=$doc->restaurante;}       
+                            echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?>
+                          </a>
                         </p>
-                    </div>
+                        <p class="nom_plato"><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></p>
+                        <div class="punt" style="width:100%!important;text-align:left;">
+                          <div style="float:left!important;margin-left: 10px;" class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>" style="margin: 0px;width: 118px !important;display:inline-block;"></div>
+                          <em><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i></em>
+                        </div>
+                        <p style="margin-left:10px;margin-top:5px;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></p>
+                      </div>
+                      <div class="right-resultado">
+                        <p><?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?></p>
+                        <p><?php echo htmlspecialchars($doc->va_direccion, ENT_QUOTES, 'utf-8'); ?></p>
+                       <p><?php echo htmlspecialchars($doc->va_telefono, ENT_QUOTES, 'utf-8'); ?></p>
+                      </div> 
                 </div>
               <?php endforeach; ?>       
                  
@@ -222,28 +226,32 @@
                     </a>
                     </div>
                     <div class="detalle-restaurante">
-                      <div class="detalle-nombre"><p class="nombre_r">
-                        <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" alt="<?php echo $doc->name;?>" title="<?php echo $doc->name;?>"><?php 
-                          if(strlen($doc->restaurante)>44){
-                           $str=trim(substr($doc->restaurante, 0, 43));
+                      <div class="left-resultado">
+                        <p class="nombre_r">
+                          <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" alt="<?php echo $doc->name;?>" title="<?php echo $doc->name;?>"><?php 
+                            if(strlen($doc->restaurante)>44){
+                            $str=trim(substr($doc->restaurante, 0, 43));
                             $str.='.';
-                           }else {$str=$doc->restaurante;}       
-                    echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?></a></p>
-                        <div class="punt">
-                          <div class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>" style="margin: 0px;width: 118px !important;display:inline-block;"></div>
-                        </div> 
-                      </div>
+                            }else {$str=$doc->restaurante;}       
+                            echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?>
+                          </a>
+                        </p>
                         <p class="nom_plato"><?php echo htmlspecialchars($doc->name, ENT_QUOTES, 'utf-8'); ?></p>
-                        <p style="margin-left:10px;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></p>
-                        <p class="com-pla">
-                          <em style="float:left;margin-left:10px;color:#999;"><?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?></em>
-                          <?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i> Comentarios</p>
+                        <div class="punt" style="width:100%!important;text-align:left;">
+                          <div style="float:left!important;margin-left: 10px;" class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>" style="margin: 0px;width: 118px !important;display:inline-block;"></div>
+                          <em><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i></em>
+                        </div>
+                        <p style="margin-left:10px;margin-top:5px;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></p>
+                      </div>
+                      <div class="right-resultado">
+                        <p><?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?></p>
+                        <p><?php echo htmlspecialchars($doc->va_direccion, ENT_QUOTES, 'utf-8'); ?></p>
+                       <p><?php echo htmlspecialchars($doc->va_telefono, ENT_QUOTES, 'utf-8'); ?></p>
+                      </div> 
                     </div>
-
                 </div>
-                   
-                 
-                  <?php endforeach; ?> 
+
+      <?php endforeach; ?> 
        <div id="pagina">
           <div class="pagination ">
               <ul>

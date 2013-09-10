@@ -337,9 +337,7 @@ margin-bottom: 0px;
   position: relative;
 }
 .detalle-nombre .punt{
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  float: left;
 }
 .mas-det {
   position: absolute;
@@ -444,6 +442,24 @@ p.nombre_r  {
   overflow: hidden;
   vertical-align: top;
 }
+.lista-plato-li p.nombre_r{
+  line-height: 15px!important;
+  margin-bottom: 0;
+  height: 18px;
+}
+.lista-plato-li p.nom_plato{
+  font-size: 12px!important;
+  color: #ff8400!important;
+  margin-left: 8px!important;
+  margin-bottom: 0px!important;
+}
+.lista-plato-li ul li{
+  margin-bottom: 15px;
+  margin-right: 0;
+}
+.lista-plato-li p.nombre_r a{
+  font-size: 14px!important;
+}
 p.nombre_r a {
   color: #ff8400;
   font-weight: bold;
@@ -460,8 +476,16 @@ p.nom_plato {
   font-size: 14px;
   color: #ff8400;
   margin-left: 10px;
-  margin-bottom: 5px;
-  border-bottom: 1px solid #fff;
+  margin-bottom: 0px;
+  /*border-bottom: 1px solid #fff;*/
+}
+.punt em{
+  color: #7b7b7b;
+  font-size: 12px;
+  margin-left: 10px;
+}
+.right-resultado p{
+  margin-bottom: 7px;
 }
 .com-pla {
 text-align: right;
@@ -1208,10 +1232,30 @@ width: 49%;
   padding-top: 20px;
   float: left;
 }
+.etiqueta-dev h2{
+  line-height: 18px;
+  margin: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+}
+.return-css .return{
+  padding-top: 5px;
+}
+.etiqueta-dev h2 a{
+  font-size: 18px;
+  color: white;
+}
 .etiqueta{
   background: url(../../img/etiqueta.png) no-repeat;
   height: 45px;
   width: 240px;
+  position: relative;
+  float: left;
+}
+.etiqueta-dev{
+  background: url(../../img/etiqueta-ver.png) repeat;
+  width: 100%;
   position: relative;
   float: left;
 }
@@ -1321,7 +1365,8 @@ width: 49%;
   width: 105px;
   height: 15px;
   display: block;
-  background: url(../../img/icons.png) no-repeat;
+  background-image: url(../../img/icons.png);
+  background-size: 100%;
 }
 .punt .puntuaciones.c0{
   background-position: 0 -114px;
@@ -1387,6 +1432,15 @@ li.li-suc a.activo span.close-banch{
   background: url(../../img/city.png) no-repeat 0 2px;
   padding-left: 18px;
 }
+.etiqueta h2{
+  line-height: 25px;
+  margin: 0;
+}
+.etiqueta h2 a{
+  font-size: 15px;
+  color: white;
+  margin-left: 15px;
+}
 li.li-suc a header{
   float: left;
 }
@@ -1405,12 +1459,31 @@ ul.servicios-desc{
   margin-left: 5px;
 
 }
+.list-img-p{
+  float: left;
+  width: 25%;  
+}
+.list-desc-p{
+  float: left;
+  width: 75%;
+}
 ul.servicios-desc li{
-  background: url(../img/guion.png) no-repeat 0px 10px;
+  background: url(../img/phone.png) no-repeat left center;
   color: #7b7b7b;
   font-size: 14px;
   font-family: arial;
-  padding-left: 10px;
+  padding-left: 18px;
+}
+ul.servicios-desc1{
+  list-style: none;
+  margin-left: 0;
+}
+ul.servicios-desc1 li{
+  background: url(../img/guion.png) no-repeat left center;
+  color: #7b7b7b;
+  font-size: 14px;
+  font-family: arial;
+  padding-left: 18px;
 }
 
 input:-moz-placeholder,textarea:-moz-placeholder{color:#fff;}
@@ -1419,8 +1492,8 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
 
 #mapCont{
   display: block;
-  width: 263px;
-  height: 214px;
+  width: 403px;
+  height: 230px;
 }
 
 .cont-accesorios{
@@ -1457,15 +1530,34 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   background-position: 0 -91px;
 }
 .ficha-desc h3{
-  font-size: 14px;
+  font-size: 15px;
   font-family: arial;
   color: #ff8400;
   font-weight: bold;
   line-height: 14px;
-  border-bottom: 1px solid white;
-  padding-bottom: 3px;
-  margin-top: 10px;
+  /*border-bottom: 1px solid white;*/
+  padding-bottom: 0px;
+  margin-top: 0px;
 }
+.left-resultado{
+  width: 70%;
+  float: left;
+}
+.right-resultado{
+  width: 30%;
+  float: left;
+}
+.lista-plato-li ul{
+  margin-left: 0;
+}
+.lista-plato-li .puntuaciones {
+  width: 80px;
+  height: 15px;
+  display: block;
+  background-image: url(../../img/icons.png)!important;
+  background-size: 100%;
+}
+
 .contenido-static{
   padding: 15px 25px 15px 25px;
 }
@@ -1534,7 +1626,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
 }
 .content-coments{
   display: block;
-  padding: 10px 18px;
+  padding: 0px 18px 10px 18px;
   overflow: hidden;
   float: left;
 }
@@ -1618,6 +1710,10 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
 }
 .img-li-desc .img-li-top h4{
   border-bottom: 1px solid #e5e5e5;
+}
+.puntuaciones{
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .img-li-top .puntuaciones{
   width: 105px;
@@ -1709,8 +1805,14 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   height: 272px;
   overflow: hidden;
 }
-.cont-accesorios ul.ubi-lupa li .ubicancion{
-  background: url(../../img/ubicacion.png) no-repeat 0 2px;
+.content-info ul.ubi-lupa li .ubicancion{
+  background: url(../../img/pint.png) no-repeat 0 2px;
+  padding-left: 20px;
+  line-height: 16px;
+  color: #7b7b7b;
+  font-size: 14px;
+}
+.content-info ul.ubi-lupa li .ubicancion1{  
   padding-left: 20px;
   line-height: 16px;
   color: #7b7b7b;
@@ -2999,6 +3101,62 @@ p.ver_mistura a{
   }
 }
 @media (max-width: 767px) {
+  #box-btn-platos-verdura {
+    margin-left: 50%!important;
+  }
+  .caja-platos {
+    width: 190px;
+    height: 256px;
+    position: absolute;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin-top: 0px;
+    margin-left: 20px;
+    opacity: 0;
+    -moz-opacity: 0;
+    -webkit-opacity: 0;
+    filter: alpha(opacity=0);
+    bottom: -5px;
+  }
+  #guisoverdura-btn {
+    margin-left: 0px;
+    margin-top: 0px;
+    bottom: 5px;
+    display: block;
+  }
+  .center-dos {
+    width: 100%;
+    height: 275px;
+    margin: auto;
+    position: relative;
+  }
+  #paso-tres{
+    margin-bottom: 0!important;
+  }
+  .right.redes{
+    display: none;
+  }
+  #lomosaltado-btn {
+    margin-left: 0px;
+    margin-top: 0;
+    bottom: 130px;
+    display: block;
+  }
+  .platos-btn {
+    cursor: pointer;
+    width: 100px;
+    height: 117px;
+    position: absolute;
+    padding-top: 8px;
+  }
+  #box-btn-platos-verdura {
+    width: 200px;
+    height: 290px;
+    position: absolute;
+  }
+  #paso-tres{
+    width: 100%;
+  }
   #mapa-buscador{
     width: 100%;
   }
@@ -3033,7 +3191,7 @@ p.ver_mistura a{
     margin-top: 25px;
   }
   .lista-Home .descrip-product{
-    margin-top: -30px;
+    margin-top: 0px;
   }
   .verlistado{
     display: block;
@@ -3306,8 +3464,58 @@ p.ver_mistura a{
   .padding-map{
     padding: 0 15px;
   }
+  .port-general{
+    display: none!important;
+  }
+  #box-btn-platos-verdura{
+    margin-left: 10%!important;
+    width: 60%!important;
+  }
+  #lomosaltado-btn {
+    margin-left: 10%;
+    margin-top: 0;
+    bottom: 130px;
+    display: block;
+  }
+  #guisoverdura-btn {
+    margin-left: 10%;
+    margin-top: 0px;
+    bottom: 5px;
+    display: block;
+  }
+  #sopadezapallo-btn {
+    margin-left: 80%;
+    margin-top: 0px;
+    bottom: 130px;
+    display: block;
+  }
+  #wok-btn {
+    margin-left: 80%;
+    margin-top: 0;
+    bottom: 5px;
+    display: block;
+  }
+  .nav-banner ul.dep-home li {
+    float: left;
+    padding-right: 0px;
+  }
+  .paso p {
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 15px;
+    padding-top: 5px;
+  }
+  .paso {
+    height: 40px;
+    width: 60px;
+    padding-left: 48px;
+    text-align: center;
+  }
 }
 @media (max-width: 480px) {
+  .guia-home{
+    display: none;
+  }
   .guia-home{
     display: none;
   }
