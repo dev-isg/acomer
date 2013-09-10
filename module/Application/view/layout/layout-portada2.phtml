@@ -247,7 +247,7 @@
 							src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>"
 							alt="">
 					</div>
-
+      
 					<form accept-charset="utf-8" method="get" class="form-horizontal"
 						id="search"
 						action="<?php echo $this->host('ruta')?>/buscar-por-distrito">
@@ -270,7 +270,7 @@
 								lomo saltado</em>
 						</p>
 						<p>
-						<?php if($this->comidas){?>
+					<?php if($this->comidas){?>
 							<select name="distrito" id="fq" value="">
                  <?php  foreach ($this->comidas as $comida) : ?>
                  
@@ -294,8 +294,7 @@
                      
                 <?php endforeach;?>
                      </select>
-                     <?php }?>
-						</p>
+                     <?php }?>  						</p>
 						<p style="margin-top: 5px;">
 							<input type="submit" class="btn btn-warning btn-soli"
 								value="Buscar" />

@@ -445,20 +445,24 @@ p.nombre_r  {
 .lista-plato-li p.nombre_r{
   line-height: 15px!important;
   margin-bottom: 0;
-  height: 18px;
+  height: auto!important;
+  padding-left: 8px!important;
 }
 .lista-plato-li p.nom_plato{
   font-size: 12px!important;
   color: #ff8400!important;
   margin-left: 8px!important;
   margin-bottom: 0px!important;
+  line-height: 15px;
 }
 .lista-plato-li ul li{
   margin-bottom: 15px;
   margin-right: 0;
 }
 .lista-plato-li p.nombre_r a{
-  font-size: 14px!important;
+  font-size: 13px!important;
+  height: auto!important;
+  padding-left: 0!important;
 }
 p.nombre_r a {
   color: #ff8400;
@@ -485,7 +489,11 @@ p.nom_plato {
   margin-left: 10px;
 }
 .right-resultado p{
-  margin-bottom: 7px;
+  margin-bottom: 5px;
+}
+.right-resultado p.h-dist{
+  color:#7b7b7b;
+  font-weight: bold;
 }
 .com-pla {
 text-align: right;
@@ -495,8 +503,8 @@ margin-right: 10px;
   margin-left: 14px;
   background: #f0f0f0;
   width: 671px;
-  margin: 1em 1em 0.5em 1em;
-  border-bottom: 2px solid #fff;
+  margin: 0.5em 1em 0em 1em;
+  /*border-bottom: 2px solid #fff;*/
   float: left;
   padding: 10px;
 }
@@ -533,6 +541,9 @@ background: url(../../img/back-detalle.png) repeat;
   padding: 0.9em 0px;
   height: 23px;
   float: left;
+}
+.mistura_etiqueta{
+  background: url(/img/bann/img-resultados-mis.png) no-repeat!important;
 }
 #esconder {
   background: url(../../img/back-detalle.png) repeat;
@@ -668,6 +679,9 @@ background: url(../../img/back-detalle.png) repeat;
 .recomendados-platos ul li{
   float: left;
   margin-right: 10px;
+}
+.lista-plato-li ul li{
+  margin-right: 0;
 }
 .recomendados-platos-uno{
   display: block;
@@ -1235,7 +1249,7 @@ width: 49%;
 .etiqueta-dev h2{
   line-height: 18px;
   margin: 0;
-  margin-top: 10px;
+  margin-top: 8px;
   margin-bottom: 10px;
   margin-left: 15px;
 }
@@ -1467,10 +1481,13 @@ ul.servicios-desc{
   float: left;
   width: 75%;
 }
+.list-desc-p .left-resultado{
+  width: 100%;
+}
 ul.servicios-desc li{
   background: url(../img/phone.png) no-repeat left center;
   color: #7b7b7b;
-  font-size: 14px;
+  font-size: 13px;
   font-family: arial;
   padding-left: 18px;
 }
@@ -1612,6 +1629,10 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   padding-bottom: 3px;
   margin: 0;
   line-height: 14px;
+  margin-bottom: 10px;
+}
+p.costo span{
+  color: #7b7b7b;
 }
 .ficha-desc p.precio{
   font-size: 18px;
@@ -1806,17 +1827,17 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   overflow: hidden;
 }
 .content-info ul.ubi-lupa li .ubicancion{
-  background: url(../../img/pint.png) no-repeat 0 2px;
+  background: url(../../img/pint.png) no-repeat 0 3px;
   padding-left: 20px;
   line-height: 16px;
   color: #7b7b7b;
-  font-size: 14px;
+  font-size: 13px;
 }
 .content-info ul.ubi-lupa li .ubicancion1{  
   padding-left: 20px;
   line-height: 16px;
   color: #7b7b7b;
-  font-size: 14px;
+  font-size: 13px;
 }
 .content-info ul.ubi-lupa li{
   margin-bottom: 5px;
@@ -1838,7 +1859,7 @@ ul.time{
 }
 ul.time .day{
   color: #7b7b7b;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
 
 }
@@ -1849,7 +1870,7 @@ li a.link-web{
 }
 ul.time .hour{
   color: #7b7b7b;
-  font-size: 14px;
+  font-size: 13px;
   font-family: arial;
 
 }
@@ -2815,6 +2836,12 @@ p.ver_mistura a{
   }
 }
 @media (min-width: 768px) and (max-width: 979px) {
+  .lista-plato-li ul{
+    margin-left: 0!important;
+  }
+  .lista-plato-li ul li{
+    width: 100%!important;
+  }
   .img-plato{
     height: 100%;
   }
@@ -2943,6 +2970,7 @@ p.ver_mistura a{
   }
   .content-info {
     width: 37%;
+    float: right;
   }
   .left-desc{
     width: 46.8%;
@@ -3511,8 +3539,25 @@ p.ver_mistura a{
     padding-left: 48px;
     text-align: center;
   }
+  .detalle-restaurante .left-resultado{
+    width: 100%;
+  }
+  .detalle-restaurante .right-resultado{
+    width: 100%;
+    margin-left: 10px;
+  }
+  .detalle-restaurante .right-resultado p{
+    margin-right: 8px;
+    float: left;
+  }
 }
 @media (max-width: 480px) {
+  .detalle-restaurante .right-resultado{
+    line-height: 12px;
+  }
+  #esconder2{
+    padding-bottom: 0!important;
+  }
   .guia-home{
     display: none;
   }

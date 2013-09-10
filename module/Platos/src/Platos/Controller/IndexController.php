@@ -679,7 +679,7 @@ class IndexController extends AbstractActionController {
                         $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
                             $listatot = $listatot->toArray();
                             foreach ($listatot as $key => $value) {
-                                if ($key < 3) {
+                                if ($key < 4) {
                                     $listades[] = $listatot[$key];
                                 } else {
                                     $listadeseg[] = $listatot[$key];

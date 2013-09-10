@@ -22,8 +22,8 @@
 /* FlexSlider Necessary Styles
 *********************************/ 
 .flexslider {margin: 0; padding: 0;}
-.flexslider .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
-.flexslider .slides img {width: 100%; display: block;}
+.flexslider .slides > li {display: none; -webkit-backface-visibility: hidden;text-align: center; line-height: 272px;} /* Hide the slides before the JS is loaded. Avoids image jumping */
+.flexslider .slides img {vertical-align: middle;}
 .flex-pauseplay span {text-transform: capitalize;}
 
 /* Clearfix for the .slides element */

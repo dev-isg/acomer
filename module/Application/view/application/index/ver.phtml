@@ -72,9 +72,15 @@
 
   </div>
     <div id="esconder2">                     
+       <?php if($this->plato=='Mistura') {?>
+        <div class="sub mistura_etiqueta">
+          <span style="padding-left: 10px;color:white;font-weight: bold;"><?php echo  ucwords($this->plato); ?></span>
+        </div> 
+        <?php } else { ?>
         <div class="sub">
           <span style="padding-left: 10px;color:white;font-weight: bold;"><?php echo  ucwords($this->plato); ?></span>
-        </div>    
+        </div> 
+        <?php } ?>   
         <div class="plato_h p">
           <?php echo $this->mostrar; ?>
           <?php //
@@ -101,8 +107,6 @@
         </div>
 
         <?php foreach ($this->general as $doc) : ?>
-            
-
                  <div class="plato_h">
                    <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                    <div class="lateral" >
@@ -138,27 +142,28 @@
                        <p><?php echo htmlspecialchars($doc->va_telefono, ENT_QUOTES, 'utf-8'); ?></p>
                       </div> 
                 </div>
+                </div> 
               <?php endforeach; ?>       
                  
               
-     <div id="pagina">
-          <div class="pagination ">
-              <ul>
-         <?php if($this->total)
-             $pagina = $_GET['page'];
-           if (!$pagina) {  echo '';  
-           }    else{ if($pagina-1>=0 ){?> <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo $pagina-1?>" >«Anterior</a></li> <?php } }
-           {for($i=0;$i<=$this->total;$i+=10)
-             { ?>  <li <?php if((($i/10))==$_GET['page']){echo 'class="active"';} ?>><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo ($i/10)?>" ><?php echo (($i/10)+1)?></a></li><?php  } }  
-             if (!$pagina and $this->total>10) { 
-             $pagina =0;  
-            if($pagina+1<=$this->total){?> <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
-         }   elseif($pagina and $this->total>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10)){?> <li><a href="buscar?q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
-        }else{echo '';}
-             ?> 
-              </ul></div> 
-      </div> 
-      </div>        
+          <div id="pagina">
+              <div class="pagination ">
+                  <ul>
+             <?php if($this->total)
+                 $pagina = $_GET['page'];
+               if (!$pagina) {  echo '';  
+               }    else{ if($pagina-1>=0 ){?> <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo $pagina-1?>" >«Anterior</a></li> <?php } }
+               {for($i=0;$i<=$this->total;$i+=10)
+                 { ?>  <li <?php if((($i/10))==$_GET['page']){echo 'class="active"';} ?>><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo ($i/10)?>" ><?php echo (($i/10)+1)?></a></li><?php  } }  
+                 if (!$pagina and $this->total>10) { 
+                 $pagina =0;  
+                if($pagina+1<=$this->total){?> <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+             }   elseif($pagina and $this->total>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10)){?> <li><a href="buscar?q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+            }else{echo '';}
+                 ?> 
+                  </ul></div> 
+          </div> 
+             
       <div class="padding-map" style="display:none;">
         <div id="mapa-buscador">
           <div class="regresar regr mobile-return">
@@ -183,9 +188,15 @@
 
      <div id="esconder2">
                
-        <div class="sub">
-          <span style="padding-left: 10px;color:white;font-weight: bold;"><?php echo  $this->plato;  ?></span>
+        <?php if($this->plato=='Mistura') {?>
+        <div class="sub mistura_etiqueta">
+          <span style="padding-left: 10px;color:white;font-weight: bold;"><?php echo  ucwords($this->plato); ?></span>
         </div> 
+        <?php } else { ?>
+        <div class="sub">
+          <span style="padding-left: 10px;color:white;font-weight: bold;"><?php echo  ucwords($this->plato); ?></span>
+        </div> 
+        <?php } ?>
         <div class="plato_h p">
           <?php echo $this->mostrar; ?>
           <?php //
@@ -212,8 +223,6 @@
         </div>  
 
         <?php foreach ($this->general as $doc) : ?>
-           
-
                  <div class="plato_h">
                    <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                    <div class="lateral" >
@@ -281,10 +290,10 @@
      </div>            
   <?php                
 } 
- 
-             else
-                 {
-                  ?>
+
+   else
+       {
+        ?>
 
 <div class="descrip-product">
   <div id="error-mensaje">       

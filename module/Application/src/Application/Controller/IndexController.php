@@ -41,7 +41,7 @@ public function __construct()
     public function indexAction()
     {
         $view = new ViewModel();
-        
+      //   $distritos = $this->distritosperu()->toArray();
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
         $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
@@ -787,6 +787,20 @@ public function __construct()
         // var_dump($selectString);exit;
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         // var_dump($results);exit;
+        return $results;
+    }
+    public function distritosperu()
+    {
+        $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+                ->from('ta_ubigeo')
+                ->columns(array('id'=>'in_id','ch_distrito'=>'ch_distrito','ch_provincia'=>'ch_provincia','ch_departamento'=>'ch_departamento'))
+                ->join('ta_local', 'ta_ubigeo.in_id = ta_local.ta_ubigeo_in_id ', array(), 'left')
+            ->where(array('ta_local.ta_ubigeo_in_id!=?'=>null))->group('ta_ubigeo.ch_distrito');               
+        $selectString = $sql->getSqlStringForSqlObject($select);
+        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         return $results;
     }
 
