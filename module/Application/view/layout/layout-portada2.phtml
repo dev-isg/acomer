@@ -285,7 +285,8 @@
 								lomo saltado</em>
 						</p>
 						<p>
-			<input id="fq" name="distrito" type="text"  value="">					</p>
+			<input id="fq" name="distrito" type="text" onclick="this.value=''" value="<?php 
+                     if($_GET['distrito']) {echo $_GET['distrito']; } elseif($_COOKIE['distrito']){   echo $_COOKIE['distrito']; }else {echo 'LIMA,LIMA,LIMA';}?>">					</p>
 						<p style="margin-top: 5px;">
 							<input type="submit" class="btn btn-warning btn-soli"
 								value="Buscar" />

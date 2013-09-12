@@ -156,11 +156,11 @@
         $detect = new Mobile_Detect();
                 if ($detect->isTablet()) {
                    ?>                
-                 <p class="ver_mistura"><a style="color:#EB008B;" href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: <?php echo $promo['tag'] ?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
+                 <p class="ver_mistura"><a style="color:#EB008B;" href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: <?php echo $promo['tag'] ?>" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
                  <?php }elseif($detect->isMobile()){?>   
                     <p class="ver_mistura"><a style="color:#EB008B;" href="<?php echo $this->host('ruta')?>/buscar?q=tag: <?php echo $promo['tag'] ?>" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
                  <?php  } else{?>
-                <p class="ver_mistura"><a style="color:#EB008B;" href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: <?php echo $promo['tag'] ?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
+                <p class="ver_mistura"><a style="color:#EB008B;" href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: <?php echo $promo['tag'] ?>" title="<?php echo $promo['tag'] ?>">ver más platos de <?php echo $promo['tag'] ?></a></p>
                  <?php  } ?>
         </div>
           <?php 

@@ -14,6 +14,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Db\Sql\Sql;
 use Application\Form\Formularios;
 use Application\Form\Solicita;
+use Application\Form\Registro;
 use Application\Form\Contactenos;
 // use Application\Model\Entity\Procesa;
 use Zend\View\Model\JsonModel;
@@ -43,11 +44,10 @@ public function __construct()
         $view = new ViewModel();
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
-        $distritos = $this->distritosperu()->toArray();
+        $distritos = $this->distritosperu();
         $this->layout()->distritos = $distritos;
         $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
         $listatot = $listatot->toArray();
-//        var_dump($listatot);exit;
         foreach ($listatot as $key => $value) {
             
               $list[]=$listatot[$key]['va_nombre'];
@@ -160,7 +160,7 @@ public function __construct()
             if ($texto == '') {
                 $this->redirect()->toUrl('/');
             }
-            if ($distrito != 'TODOS LOS DISTRITOS') {
+            if ($distrito !=null) {
                 $limite = 10;
                 if($paginas=='')
                  {$start = 0;}
@@ -205,7 +205,26 @@ public function __construct()
                         echo ("<div>ingrese algun valor</div>");
                     }
                 }
-        
+          $limit_distritos = 9999;
+                $query_distritos = "-($palabraBuscar)";
+                $fq_distritos = array(
+                    'sort' => 'random_' . uniqid() . ' asc',
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND -distrito:' . $distrito,
+                    'wt' => 'json',
+                    'fl'=>'distrito'
+                );
+                $results_distritos = false;
+                if ($query_distritos) {
+                    $solr = \Classes\Solr::getInstance()->getSolr();
+                    if (get_magic_quotes_gpc() == 1) {
+                        $query_platos = stripslashes($query_distritos);
+                    }
+                    try {
+                        $results_distritos = $solr->search($query_distritos, 0,$limit_distritos, $fq_distritos);
+                    } catch (Exception $e) {
+                        echo ("<div>ingrese algun valor</div>");
+                    }
+                }
                 
             } else {
                 //var_dump($texto);exit;
@@ -276,31 +295,12 @@ public function __construct()
                 }
                 ///////////////////////////////////////fin/////////////////////////////////////////////////////////
                 //////////////////////////////////////////random de 5 DISTRITOS distinc////////////////////////////////////
-                $limit_distritos = 9999;
-                $query_distritos = "-($palabraBuscar)";
-                $fq_distritos = array(
-                    'sort' => 'random_' . uniqid() . ' asc',
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND -distrito:' . $distrito,
-                    'wt' => 'json',
-                    'fl'=>'distrito'
-                );
-                $results_distritos = false;
-                if ($query_distritos) {
-                    $solr = \Classes\Solr::getInstance()->getSolr();
-                    if (get_magic_quotes_gpc() == 1) {
-                        $query_platos = stripslashes($query_distritos);
-                    }
-                    try {
-                        $results_distritos = $solr->search($query_distritos, 0,$limit_distritos, $fq_distritos);
-                    } catch (Exception $e) {
-                        echo ("<div>ingrese algun valor</div>");
-                    }
-                }
+              
                 ///////////////////////////////////////fin/////////////////////////////////////////////////////////
                 
         }
         $form = new Formularios();
-        $distritos = $this->distritosperu()->toArray();
+        $distritos = $this->distritosperu();
         $this->layout()->distritos = $distritos;
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
@@ -701,9 +701,11 @@ public function __construct()
   
     public function jsonmapasaAction()
     {
-        $distrito = $this->params()->fromQuery('distrito');
+        $distrit = $this->params()->fromQuery('distrito');
         $view = new viewModel();
         $view->setTerminal(true);
+        $valor1 =explode(',',$distrit);
+        $distrito = $valor1[0];
         $texto = $this->params()->fromQuery('q');
         setcookie('distrito', $distrito);
         $valor =explode(" ",$texto);
@@ -790,9 +792,7 @@ public function __construct()
         $select = $sql->select();
         $select->from('ta_distrito');
         $selectString = $sql->getSqlStringForSqlObject($select);
-        // var_dump($selectString);exit;
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-        // var_dump($results);exit;
         return $results;
     }
     public function distritosperu()
@@ -807,12 +807,9 @@ public function __construct()
             ->where(array('ta_local.ta_ubigeo_in_id!=?'=>null))->group('ta_ubigeo.ch_distrito');               
         $selectString = $sql->getSqlStringForSqlObject($select);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-        return $results;
-        
+         return $results->toArray();
     }
-
-                
-     
+  
         
     public function joinPlatoAction()
     {
@@ -995,6 +992,64 @@ public function __construct()
                 $transport->send($message);
                 $this->flashMessenger()->addMessage('Su mensaje ha sido enviado...');
                 $this->redirect()->toUrl('/solicita');
+            }
+        }
+        $flashMessenger = $this->flashMessenger();
+        if ($flashMessenger->hasMessages()) {
+            $mensajes = $flashMessenger->getMessages();
+        }
+        $view->setVariables(array(
+            'form' => $form,
+            'mensaje' => $mensajes
+        ));
+        return $view;
+    }
+
+    
+    public function comidas()
+    {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+            ->from('ta_tipo_comida');
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            return $results;
+            
+     }
+    public function ingresardatosAction()
+    {
+        $view = new ViewModel();
+        $this->layout()->clase = 'Solicita';
+        $form = new Registro("form");
+        $comidas =  $this->comidas()->toArray();
+        $com = array();
+        foreach($comidas as $y){
+            $com[$y['in_id']] = $y['va_nombre_tipo'];}
+        $form->get('Ta_tipo_comida_in_id')->setValueOptions($com);
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $datos =$this->request->getPost();
+            $File = $this->params()->fromFiles('va_imagen');
+            $form->setData($datos);
+            if ($form->isValid()) {
+                $valor  = uniqid();
+                $info =  pathinfo($File['name']);
+                 require './vendor/Classes/Filter/Alnum.php';
+                 if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg'){  
+                  $imf2 =  $valor.'.'.$info['extension'];
+                  $filter   = new \Filter_Alnum();
+                  $filtered = $filter->filter($datos->va_nombre_contacto);
+                  $name = $filtered.'-'.$imf2;
+                      $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);                  
+                       $copia = $this->_options->upload->images . '/registro/restaurante/' . $name;       
+                       imagejpeg($viejaimagen,$copia);
+                  }
+               $idrestaurante = $this->getConfigTable()->guardarregistro($datos,$name);
+               $id =$idrestaurante;
+                $this->flashMessenger()->addMessage('Su mensaje ha sido enviado...');
+               
+                $this->redirect()->toUrl('/ingresardatos?id='.$id);
             }
         }
         $flashMessenger = $this->flashMessenger();

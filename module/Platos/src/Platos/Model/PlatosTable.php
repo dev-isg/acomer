@@ -77,8 +77,8 @@ class PlatosTable {
 //       var_dump($platos->ta_tipo_plato_in_id);
 //       var_dump($otro);exit;
         if($otro!='')
-            {
-            $adaptado = $this->tableGateway->getAdapter();
+          {
+           $adaptado = $this->tableGateway->getAdapter();
            $sq = new Sql($adaptado);
            $seleccionar = $sq->select()->from('ta_local')
            ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = ta_local.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado','Ta_tipo_comida_in_id'), 'left')
@@ -109,20 +109,26 @@ class PlatosTable {
 
 
         if ($id == 0) {
-
-          //  if($cant[0]['cantidad']<5){ 
-                if(!empty($idtipoplato))
-                    {$data['ta_tipo_plato_in_id'] = $idtipoplato;}
-            $this->tableGateway->insert($data);
+     if(!empty($idtipoplato))
+           {$data2 = array(
+            'va_imagen' => $imagen, 
+            'tx_descripcion' => $platos->tx_descripcion,
+            'va_nombre' => $platos->va_nombre,
+            'va_precio' => $platos->va_precio,
+            'en_destaque' => $platos->en_destaque,
+            'en_estado' => (!empty($platos->en_estado)) ? $platos->en_estado : 2, 
+            'Ta_tipo_plato_in_id' => $idtipoplato,
+            'Ta_puntaje_in_id' => (!empty($platos->Ta_puntaje_in_id)) ? $platos->Ta_puntaje_in_id : 0,
+            'Ta_usuario_in_id' => 133,
+                     );
+                      $this->tableGateway->insert($data2);
+                }else{  $this->tableGateway->insert($data);}
              $idplato = $this->tableGateway->getLastInsertValue();
-             
             $insert = $this->tableGateway->getSql()->insert()
                     ->into('ta_plato_has_ta_local')
                     ->values(array('Ta_plato_in_id' => $idplato, 'Ta_local_in_id' => $idlocal));
             $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
             $statement->execute();
-
-               
             ////////////promociones////////////////////
             if($promocion!=null){
             
@@ -139,7 +145,7 @@ class PlatosTable {
 
            $this->cromSolr($idplato,1);
          // }
-        } else {// echo 'hola';exit;
+         } else {// echo 'hola';exit;
 
             if ($this->getPlato($id)){
                  if(!empty($idtipoplato))
@@ -385,6 +391,31 @@ class PlatosTable {
         return $results;
     }
 
+     public function guardarregistro($dataregistro,$imagen) {
+         $data = array(
+            'va_nombre_contacto' => $dataregistro->va_nombre_contacto, 
+            'va_correo' => $dataregistro->va_correo,
+             'va_telefono' => $dataregistro->va_telefono,
+            'va_nombre_restaurante' => $dataregistro->va_nombre_restaurante,
+            'va_imagen' =>$imagen,
+            'va_direccion' => $dataregistro->va_direccion,
+            'va_horario' => $dataregistro->va_horario,
+            'Ta_tipo_comida_in_id' => $dataregistro->Ta_tipo_comida_in_id
+        );
+              $adapter = $this->tableGateway->getAdapter();
+              $sql = new Sql($adapter);
+              $selecttot = $sql->insert()
+                      ->into('ta_registro')
+                      ->values($data);
+              $selectString = $sql->getSqlStringForSqlObject($selecttot);
+            $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+     $idrestaurante=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();
+     return $idrestaurante;
+
+    }
+    
+    
+    
     public function getLocalesxRestaurante($idrest) {
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);

@@ -154,6 +154,17 @@ return array(
                     )
                 )
             ),
+                'ingresardatos' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/ingresardatos',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'ingresardatos'
+                    )
+                )
+            ),
+
 
             'platos' => array(
                 'type' => 'Segment',

@@ -12,11 +12,11 @@
               $detect3 = new Mobile_Detect();
               if ($detect3->isTablet()) {
                  ?>                 
-                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2>
+                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2>
                <?php }elseif($detect3->isMobile()){?>   
                    <h2><a href="<?php echo $this->host('ruta')?>/buscar?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2>
                <?php } else {?> 
-                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>&distrito=TODOS LOS DISTRITOS" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo strtoupper($this->lista[0]['restaurant_nombre']);?></a></h2> 
+                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo strtoupper($this->lista[0]['restaurant_nombre']);?></a></h2> 
             <?php }?>
    				</div>
            <div class="return">
@@ -157,7 +157,7 @@
                                 <img src="<?php if($doc->va_imagen=='platos-default.png')
                                       { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
                                       else
-                                  {  echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" style="border:0;" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                                  {  echo $this->host('images') . '/plato/general/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" style="border:0;" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
                               </a>
                             </div>
                             <div class="list-desc-p">
@@ -200,7 +200,7 @@
                                 <img src="<?php if ($list['va_imagen']=='platos-default.png')
                       {echo $this->host('images') . '/defecto/' . htmlspecialchars($list['va_imagen'], ENT_QUOTES, 'utf-8');}
                   else
-                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list['va_imagen'], ENT_QUOTES, 'utf-8');} ?>" style="border:0;" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>">
+                      {echo $this->host('images') . '/plato/general/' . htmlspecialchars($list['va_imagen'], ENT_QUOTES, 'utf-8');} ?>" style="border:0;" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>">
                               </a>
                             </div>
                             <div class="list-desc-p">
@@ -232,6 +232,7 @@
               <div class="top-coment">
                   <p><?php echo $this->cantidad; //$this->lista[0]['num']; //?> comentarios</p>
                   <a href="#" class="btn btn-warning agregar-coment-1">Agregar comentario</a>
+          
               </div>
               <div class="agregar-comentario-desc" style="display:none;">
                 <?php
@@ -271,9 +272,11 @@
                       <?php echo $this->form()->closeTag(); ?>
                   </div>
               </div>
+                  <?php if($_GET['m']==1)  {?>
+                    <h4>El comentario no puede contener Urls.</h4> 
+                  <?php } ?>
               <div class="comentarios-one">
                   <ul>
-
                       <?php
                       if ($this->lista[0]['Ta_puntaje_in_id'] != 0) {
                           foreach ($this->comentarios as $comt) :
@@ -311,6 +314,8 @@
               </div>
               <!--Fin de comentarios-->
             </div>
+                      
+                
         </div>
 
     </div>

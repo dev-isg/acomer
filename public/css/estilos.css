@@ -1400,6 +1400,26 @@ width: 49%;
 .punt .puntuaciones.c5{
   background-position: 0 -91px;
 }
+
+.lista-plato-li .punt .puntuaciones.c0{
+  background-position: 0 -83px;
+}
+.lista-plato-li .punt .puntuaciones.c1{
+  background-position: 0 0px;
+}
+.lista-plato-li .punt .puntuaciones.c2{
+  background-position: 0 -16px;
+}
+.lista-plato-li .punt .puntuaciones.c3{
+  background-position: 0 -33px;
+}
+.lista-plato-li .punt .puntuaciones.c4{
+  background-position: 0 -51px;
+}
+.lista-plato-li .punt .puntuaciones.c5{
+  background-position: 0 -68px;
+}
+
 .list-suc ul{
   list-style: none;
   margin: 0;
@@ -1411,7 +1431,7 @@ width: 49%;
   padding-top: 1px;
 }
 .list-suc ul li.li-suc a{
-  padding: 5px 10px 10px 10px;
+  padding: 5px 0px 10px 0px;
   display: block;
   overflow: hidden;
 }
@@ -1422,7 +1442,7 @@ li.li-suc a h6{
   color: #7b7b7b;
   font-weight: bold;
   margin: 0;
-  font-size: 15px;
+  font-size: 14px;
   width: 225px;
   float: left;
 }
@@ -1435,14 +1455,14 @@ li.li-suc a.activo span.close-banch{
 .phone em{
   float: right;
   color: #7b7b7b;
-  font-size: 14px;
+  font-size: 13px;
   background: url(../img/phone.png) no-repeat 0 3px;
   padding-left: 16px;
 }
 .phone span.text-ellipsis{
   float: left;
   color: #7b7b7b;
-  font-size: 14px;
+  font-size: 13px;
   background: url(../../img/city.png) no-repeat 0 2px;
   padding-left: 18px;
 }
@@ -1733,8 +1753,8 @@ p.costo span{
   border-bottom: 1px solid #e5e5e5;
 }
 .puntuaciones{
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 .img-li-top .puntuaciones{
   width: 105px;
@@ -2067,6 +2087,8 @@ form#application .control-group .btn-solicito{
 }
 .ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content.ui-corner-all{
   width: 216px!important;
+  height: 200px;
+  overflow-y: scroll;
 }
 .ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content.ui-corner-all li a{
   font-size: 13px!important;

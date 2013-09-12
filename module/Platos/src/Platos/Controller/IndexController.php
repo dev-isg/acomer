@@ -101,7 +101,7 @@ class IndexController extends AbstractActionController {
             $File = $this->params()->fromFiles('va_imagen');
             $data = array_merge_recursive(
                     $this->getRequest()->getPost()->toArray(), $this->getRequest()->getFiles()->toArray()
-            );
+            );  
             $form->setData($data);       
             if ($form->isValid()) {
                 $nonFile = $request->getPost()->toArray();
@@ -647,24 +647,32 @@ class IndexController extends AbstractActionController {
 //    public function ss()
 //    {
 //       //$headers = use \Zend\Http\Headers::fromString($headerString);
-//       
-//        $this->headScript()->appendScript('$(function(){
-//    var autocompletar = new Array();
-//    
-//    'for($i = 0;$i< count($this->distritos); $i++){. '
-//       autocompletar.push('. echo $this->distritos[$i]['ch_distrito'].' , '.$this->distritos[$i]['ch_provincia'].' , '.$this->distritos[$i]['ch_departamento']; .');
-//    '. } .' 
-//     $("#fq").autocomplete({
-//       source: autocompletar 
-//     });
-//  });');
+//       ->setHeader();
+////        $this->headScript()->appendScript('$(function(){
+////    var autocompletar = new Array();
+////    
+////    'for($i = 0;$i< count($this->distritos); $i++){. '
+////       autocompletar.push('. echo $this->distritos[$i]['ch_distrito'].' , '.$this->distritos[$i]['ch_provincia'].' , '.$this->distritos[$i]['ch_departamento']; .');
+////    '. } .' 
+////     $("#fq").autocomplete({
+////       source: autocompletar 
+////     });
+////  });');
 //    }
+    
+    
+    public function sActtion()
+            
+    {
+    }
     public function verplatosAction() {
 
         $view = new ViewModel();
 //        $this->layout('layout/layout-portada');
         $datos =$this->params()->fromRoute();  
-        $nombre = explode('-', $datos['nombre']);   
+        $urlerror =  $datos['nombre'];
+        $nombre = explode('-', $datos['nombre']); 
+       
         $id = array_pop($nombre);
         if(!$this->getPlatosTable()->getPlato($id)){
             $this->redirect()->toUrl('/');
@@ -717,7 +725,11 @@ class IndexController extends AbstractActionController {
                 $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
                 $datos['va_nombre'] = htmlspecialchars($datos['va_nombre']);
                 $datos['va_email'] = htmlspecialchars($datos['va_email']);
-                $form->setData($datos);
+               $validar = explode('http://', $datos['tx_descripcion']);
+               if(count($validar)==2){
+               return $this->redirect()->toUrl('/plato/'.$urlerror.'?m=1');}
+               else {
+               $form->setData($datos);
                 if ($form->isValid()) {
                     setcookie('va_nombre',$datos['va_nombre']);
                     setcookie('va_email',$datos['va_email']);
@@ -730,6 +742,7 @@ class IndexController extends AbstractActionController {
                     $form->setData(array('va_nombre' => '', 'va_email' => '', 'tx_descripcion' => '')); 
                     $datos =$this->params()->fromRoute();               
                     $this->redirect()->toUrl('/plato/'.$datos['nombre']);
+                  }
                 }
             }
         } 
