@@ -35,9 +35,15 @@ class RegistroFiltro extends InputFilter{
           $this->add(array(
             'name' => 'va_nombre_restaurante',
             'required' => true,
-            'validators' => array(
-                
-            ),
+             'validators'=>array(
+              array(
+                'name'    => 'StringLength',
+                'options' => array(
+                    'encoding' => 'UTF-8',
+                    'min'      => 3,
+                    'max'      => 100,
+                ),
+            ))
         ));
           
           $this->add(array(
@@ -66,7 +72,7 @@ class RegistroFiltro extends InputFilter{
                 'options' => array(
                     'encoding' => 'UTF-8',
                     'min'      => 3,
-                    'max'      => 100,
+                    'max'      => 200,
                 ),
             ))    
         ));

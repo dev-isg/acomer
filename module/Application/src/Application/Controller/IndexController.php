@@ -15,6 +15,7 @@ use Zend\Db\Sql\Sql;
 use Application\Form\Formularios;
 use Application\Form\Solicita;
 use Application\Form\Registro;
+use Application\Form\Registroplato;
 use Application\Form\Contactenos;
 // use Application\Model\Entity\Procesa;
 use Zend\View\Model\JsonModel;
@@ -73,10 +74,60 @@ public function __construct()
             'clase' => 'Home'
         ));
         return $view;
-        
-        //
     }
-
+    public function ubigeo()
+    {    
+//        header("Content-type: text/javascript");
+//        echo('$(function(){
+//        var autocompletar = new Array();');
+//        echo (for($i = 0;$i< count($this->distritos); $i++){);
+//        echo('  autocompletar.push(');
+//        echo ($this->distritos[$i]['ch_distrito'].','.$this->distritos[$i]['ch_provincia'].','.$this->distritos[$i]['ch_departamento']' ); } );');
+//            
+//        echo ('$("#fq").autocomplete({
+//           source: autocompletar 
+//         }); }););'); 
+      
+        $script = '$(document).ready(function(){ 	
+				$( "#matricula" ).autocomplete({
+      				source: "buscaralumno.php",
+      				minLength: 2
+    			});
+    			$("#matricula").focusout(function(){
+    				$.ajax({
+    					url:"alumno.php",
+    					type:"POST",
+    					dataType:"json",
+    					data:{ matricula:$("#matricula")}
+    				}).done(function(respuesta){
+    					$("#nombre").val(respuesta.nombre);
+    					$("#paterno").val(respuesta.paterno);
+    					$("#materno").val(respuesta.materno);
+    				});
+    			});    			    		
+			});';
+         
+     $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
+        $renderer->inlineScript()
+                ->setScript($script, $type = 'text/javascript');
+         
+         
+    }       
+    public function distritosperu()
+    {
+        $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+                ->from('ta_ubigeo')
+                ->columns(array('id'=>'in_id','ch_distrito'=>'ch_distrito','ch_provincia'=>'ch_provincia','ch_departamento'=>'ch_departamento'))
+                ->join('ta_local', 'ta_ubigeo.in_id = ta_local.ta_ubigeo_in_id ', array(), 'left')
+            ->where(array('ta_local.ta_ubigeo_in_id!=?'=>null))->group('ta_ubigeo.ch_distrito');               
+        $selectString = $sql->getSqlStringForSqlObject($select);
+        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+         return $results->toArray();
+    }
+   
     public function jsondestaAction()
     {
         $listades = $this->getConfigTable()->cantComentxPlato(1, '0,3', 1);
@@ -122,6 +173,37 @@ public function __construct()
         return $results;
     }
     // FUNCION PARA TABLET Y PC
+    
+       public function consultasAction($limit,$plato_tipo=null,$platid=null)       
+    {
+           if($plato_tipo==null and $platid==null)
+           {$texto  = 'en_destaque:si'; 
+           $palabraBuscar = isset($texto) ? $texto : false;
+               $query = "($palabraBuscar) AND (en_destaque:si)";
+                $fq = array(
+                    'sort' => 'random_' . uniqid() . ' asc, puntuacion desc',
+                    'fq' => 'en_estado:activo  AND restaurant_estado:activo ',
+                    'wt' => 'json'
+                );}
+           else{$texto  = 'plato_tipo:'.$plato_tipo; 
+           $palabraBuscar = isset($texto) ? $texto : false;
+               $query = "($palabraBuscar) AND (en_destaque:si)";
+                $fq = array(
+                    'sort' => 'random_' . uniqid() . ' asc, puntuacion desc',
+                    'fq' => 'en_estado:activo  AND restaurant_estado:activo AND -id:'.$platid,
+                    'wt' => 'json'
+                );}    
+                $resultados = false;
+                if ($query) {
+                    $solr = \Classes\Solr::getInstance()->getSolr();
+                    if (get_magic_quotes_gpc() == 1) {
+                        $query = stripslashes($query);}
+                    try { $resultados = $solr->search($query, 0, $limit, $fq);
+                    } catch (Exception $e) {
+                  echo ("<div>ingrese algun valor</div>"); }} 
+                  
+             return $resultados->response->docs;     
+    }
     public function detalleubicacionAction()
     {
         $view = new ViewModel();
@@ -192,19 +274,36 @@ public function __construct()
                     'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' . $distrito,
                     'wt' => 'json'
                 );
-                $results = false;
-                
+                $valoresss = false;    
                 if ($query) {
                     $solr = \Classes\Solr::getInstance()->getSolr();
                     if (get_magic_quotes_gpc() == 1) {
                         $query = stripslashes($query);
                     }
                     try {
-                        $results = $solr->search($query, 0, $limit, $fq);
+            $resulta = $solr->search($query, 0, $limit, $fq);
                     } catch (Exception $e) {
                         echo ("<div>ingrese algun valor</div>");
                     }
                 }
+                
+             if(count($resulta->response->docs)<3)     
+                  {  foreach ($resultados->response->docs as $plat) {
+                    if(!in_array($plat->plato_tipo,$arrpl)){
+                        $arrpl[] = $plat->plato_tipo;   }
+                    if(!in_array($plat->id,$arrest)){
+                        $arrest[] = $plat->id;}}
+                    if(count($resulta->response->docs)==0){
+                   $consultafinal = $this->consultasAction(3,'',''); 
+                    $results =$resulta->response->docs; } 
+                   elseif(count($resulta->response->docs)==1) { 
+                    $consultafinal = $this->consultasAction(2,$plat->plato_tipo,$plat->id); 
+                    $results =$resulta->response->docs;}
+                     elseif(count($resulta->response->docs)==2){
+                   $consultafinal = $this->consultasAction(1,$plat->plato_tipo,$plat->id);  
+                    $results =$resulta->response->docs;  } }
+                  else{$results =$resulta->response->docs;}
+
           $limit_distritos = 9999;
                 $query_distritos = "-($palabraBuscar)";
                 $fq_distritos = array(
@@ -258,7 +357,7 @@ public function __construct()
                     'sort' => 'random_' . uniqid() . ' asc',
                     'fq' => 'en_estado:activo AND restaurant_estado:activo  AND en_destaque:si'
                 );
-                $results = false;
+                $resulta = false;
                 if ($query) {
                     
                     $solr = \Classes\Solr::getInstance()->getSolr();
@@ -266,12 +365,28 @@ public function __construct()
                         $query = stripslashes($query);
                     }
                     try {
-                        $results = $solr->search($query, 0, $limit, $fq);
+                        $resulta = $solr->search($query, 0, $limit, $fq);
                     } catch (Exception $e) {
                         
                         $this->redirect()->toUrl('/application');
                     }
                 }
+               if(count($resulta->response->docs)<3)     
+                  {  foreach ($resultados->response->docs as $plat) {
+                    if(!in_array($plat->plato_tipo,$arrpl)){
+                        $arrpl[] = $plat->plato_tipo;   }
+                    if(!in_array($plat->id,$arrest)){
+                        $arrest[] = $plat->id;}}
+                    if(count($resulta->response->docs)==0){
+                   $consultafinal = $this->consultasAction(3,'',''); 
+                    $results =$resulta->response->docs; } 
+                   elseif(count($resulta->response->docs)==1) { 
+                    $consultafinal = $this->consultasAction(2,$plat->plato_tipo,$plat->id); 
+                    $results =$resulta->response->docs;}
+                     elseif(count($resulta->response->docs)==2){
+                   $consultafinal = $this->consultasAction(1,$plat->plato_tipo,$plat->id);  
+                    $results =$resulta->response->docs;  } }
+                  else{$results =$resulta->response->docs;}
             }
                 $limit_platos = 9999;
                 $query_platos = "-($palabraBuscar)";
@@ -431,7 +546,7 @@ public function __construct()
             'distrito' => $distrito,
             'plato' => $valores,
             'lista' => $listades,
-            'destacados' => $results->response->docs,
+            'destacados' => $results,
             'general' => $paginato,
             'form' => $form,
             'mostrar' => $mostrar,
@@ -440,7 +555,8 @@ public function __construct()
             'total' =>$total,
             'start'=> $start,
             'end' =>$end,
-            'plat'=>$plato
+            'plat'=>$plato,
+            'masdestacados'=>$consultafinal
         )); // ,'error'=>$error
         return $view;
     }
@@ -527,7 +643,7 @@ public function __construct()
             'sort' => 'random_' . uniqid() . ' asc',
             'fq' => 'en_estado:activo AND restaurant_estado:activo AND en_destaque:si' . $distrito
         );
-        $results = false;
+        $resulta = false;
         if ($query) {
             
             $solr = \Classes\Solr::getInstance()->getSolr();
@@ -535,12 +651,28 @@ public function __construct()
                 $query = stripslashes($query);
             }
             try {
-                $results = $solr->search($query, 0, $limit, $fq);
+                $resulta = $solr->search($query, 0, $limit, $fq);
             } catch (Exception $e) {
                 $this->redirect()->toUrl('/');
             }
             
         }
+         if(count($resulta->response->docs)<3)     
+                  {  foreach ($resultados->response->docs as $plat) {
+                    if(!in_array($plat->plato_tipo,$arrpl)){
+                        $arrpl[] = $plat->plato_tipo;   }
+                    if(!in_array($plat->id,$arrest)){
+                        $arrest[] = $plat->id;}}
+                    if(count($resulta->response->docs)==0){
+                   $consultafinal = $this->consultasAction(3,'',''); 
+                    $results =$resulta->response->docs; } 
+                   elseif(count($resulta->response->docs)==1) { 
+                    $consultafinal = $this->consultasAction(2,$plat->plato_tipo,$plat->id); 
+                    $results =$resulta->response->docs;}
+                     elseif(count($resulta->response->docs)==2){
+                   $consultafinal = $this->consultasAction(1,$plat->plato_tipo,$plat->id);  
+                    $results =$resulta->response->docs;  } }
+                  else{$results =$resulta->response->docs;}
         $form = new Formularios();
       
         if($valor[0]=='restaurante:')
@@ -587,10 +719,11 @@ public function __construct()
         $view->setVariables(array(
             'total' => $total,
             'lista' => $listades,
-            'destacados' => $results->response->docs,
+            'destacados' => $results,
             'general' => $paginator,
             'form' => $form,
             'nombre' => $text,
+            'masplatosdestacados'=>$consultafinal,
               'plato' => $valores,
             'mostrar' => $mostrar,
             'plat'=>$filtered
@@ -795,20 +928,7 @@ public function __construct()
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         return $results;
     }
-    public function distritosperu()
-    {
-        $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $adapter = $this->dbAdapter;
-        $sql = new Sql($adapter);
-        $select = $sql->select()
-                ->from('ta_ubigeo')
-                ->columns(array('id'=>'in_id','ch_distrito'=>'ch_distrito','ch_provincia'=>'ch_provincia','ch_departamento'=>'ch_departamento'))
-                ->join('ta_local', 'ta_ubigeo.in_id = ta_local.ta_ubigeo_in_id ', array(), 'left')
-            ->where(array('ta_local.ta_ubigeo_in_id!=?'=>null))->group('ta_ubigeo.ch_distrito');               
-        $selectString = $sql->getSqlStringForSqlObject($select);
-        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-         return $results->toArray();
-    }
+    
   
         
     public function joinPlatoAction()
@@ -1017,11 +1137,13 @@ public function __construct()
             return $results;
             
      }
-    public function ingresardatosAction()
+      public function ingresardatosAction()
     {
         $view = new ViewModel();
         $this->layout()->clase = 'Solicita';
         $form = new Registro("form");
+        
+       // var_dump($form);exit;
         $comidas =  $this->comidas()->toArray();
         $com = array();
         foreach($comidas as $y){
@@ -1047,19 +1169,50 @@ public function __construct()
                   }
                $idrestaurante = $this->getConfigTable()->guardarregistro($datos,$name);
                $id =$idrestaurante;
-                $this->flashMessenger()->addMessage('Su mensaje ha sido enviado...');
-               
-                $this->redirect()->toUrl('/ingresardatos?id='.$id);
+               $this->flashMessenger()->addMessage('El restaurante ha sido registrado correctamente...');
+                $this->redirect()->toUrl('/solicita?id='.$id);
+                
             }
         }
         $flashMessenger = $this->flashMessenger();
         if ($flashMessenger->hasMessages()) {
             $mensajes = $flashMessenger->getMessages();
         }
+        $formu = new Registroplato();
         $view->setVariables(array(
             'form' => $form,
+             'formu' => $formu,
             'mensaje' => $mensajes
         ));
+        return $view;
+    }
+    public function ingresarplatosAction()
+    {
+        $view = new ViewModel();
+        $this->layout()->clase = 'Solicita';
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $datos =$this->request->getPost();
+            $File = $this->params()->fromFiles('va_imagen');
+                $valor  = uniqid();
+                $info =  pathinfo($File['name']);
+                 require './vendor/Classes/Filter/Alnum.php';
+                 if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg'){  
+                  $imf2 =  $valor.'.'.$info['extension'];
+                  $filter   = new \Filter_Alnum();
+                  $filtered = $filter->filter($datos->va_nombre_plato);
+                  $name = $filtered.'-'.$imf2;
+                      $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);                  
+                       $copia = $this->_options->upload->images . '/registro/plato/' . $name;       
+                       imagejpeg($viejaimagen,$copia);
+                  }
+              $resultado = $this->getConfigTable()->guardarplatoregistro($datos,$name);
+              if($resultado==null)
+               { $this->flashMessenger()->addMessage('Ya no puede ingresar más platos...');}
+              else { $this->flashMessenger()->addMessage('Si desea ingrese nuevo plato...');}
+                $this->redirect()->toUrl('/solicita?id='.$datos->Ta_registro_in_id);
+        }
+      
         return $view;
     }
 

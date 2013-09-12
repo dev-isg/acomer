@@ -6,18 +6,17 @@
 <div class="content-left">
 	<div class="descrip-product">
         
-            
+            <?php if($_GET['id']=='') {?>
 		<div class="contenido-static">
 			<h2>Solicite registrar un plato</h2>
 			<p>Si conoces un plato que te agrada, el lugar donde lo venden y no lo encontraste en <a href="<?php echo $this->host('ruta')?>" title="Lista del sabor" atl="listadelsabor">listadelsabor.com</a>, por favor llena el siguiente formulario y nos estaremos comunicando contigo para registrarlo.</p>
-		<?php if($_GET['id']=='') {?>
-
+	
 	<?php
 			$form = $this->form;
 			//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
 
 			$form->setAttributes(array(
-			    'action' => $this->url.'/ingresardatos',
+			    'action' => $this->url.'/solicita',
 			    'method' => 'post',
 			    'class' => 'form-horizontal',
                             'id'=>'application'
@@ -26,20 +25,7 @@
 
 			echo $this->form()->openTag($form);
 			echo $this->formHidden($form->get('in_id'));
-			?>
-			<?php
-			$form = $this->form;
-			//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
-
-			$form->setAttributes(array(
-			    'action' => $this->url.'/usuario/index/agregarusuario',
-			    'method' => 'post'
-			    
-			));
-			$form->prepare();
-
-			echo $this->form()->openTag($form);
-			echo $this->formHidden($form->get('in_id'));
+			
 			?>
 			<h3>Sobre ti:</h3>
 			<div class="control-group">
@@ -98,105 +84,72 @@
 			      <?php echo $this->formSubmit($form->get('submit'));?>
 			    </div>
 			</div>
+                       
                          <?php echo $this->form()->closeTag();?> 
-                        <?php  } else {?> 
+                        
+                       
+		        </div>
+                      <?php } else { ?> <div class="contenido-static">
+			<h2>Solicite registrar un plato</h2>
+			<p>Si conoces un plato que te agrada, el lugar donde lo venden y no lo encontraste en <a href="<?php echo $this->host('ruta')?>" title="Lista del sabor" atl="listadelsabor">listadelsabor.com</a>, por favor llena el siguiente formulario y nos estaremos comunicando contigo para registrarlo.</p>
+                        <br>
 
-                 <?php
-			$form = $this->form;
-			//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
-
-			$form->setAttributes(array(
-			    'action' => $this->url.'/ingresardatos',
+	<?php
+			$formu = $this->formu;
+			
+			$formu->setAttributes(array(
+			    'action' => $this->url.'/ingresarplatos',
 			    'method' => 'post',
 			    'class' => 'form-horizontal',
-                            'id'=>'application'
+                            'id'=>'application3'
 			));
-			$form->prepare();
+			$formu->prepare();
 
-			echo $this->form()->openTag($form);
-			echo $this->formHidden($form->get('in_id'));
+			echo $this->form()->openTag($formu);
+			echo $this->formHidden($formu->get('Ta_registro_in_id')->setValue($_GET['id']));
+			
 			?>
-			<?php
-			$form = $this->form;
-			//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
-
-			$form->setAttributes(array(
-			    'action' => $this->url.'/usuario/index/agregarusuario',
-			    'method' => 'post'
-			    
-			));
-			$form->prepare();
-
-			echo $this->form()->openTag($form);
-			echo $this->formHidden($form->get('in_id'));
-			?>
-			<h3>Sobre ti:</h3>
+			<h3>Datos del Plato:</h3>
 			<div class="control-group">
-			    <label class="control-label" for="inputName">Nombre Completo<span class="red">*</span>:</label>
+			    <label class="control-label" for="inputName">Nombre del Plato<span class="red">*</span>:</label>
 			    <div class="controls">
-			      <?php echo $this->formRow($form->get('va_nombre_contacto'));?>
+			      <?php echo $this->formRow($formu->get('va_nombre_plato'));?>
 			    </div>
 			</div>
 			<div class="control-group">
-			    <label class="control-label" for="inputEmail">Email<span class="red">*</span>:</label>
+			    <label class="control-label" for="inputEmail">Imagen del plato<span class="red">*</span>:</label>
 			    <div class="controls">
-			      <?php echo $this->formRow($form->get('va_correo'));?>
+			      <?php echo $this->formRow($formu->get('va_imagen'));?>
 			    </div>
 			</div>
                             <div class="control-group">
-			    <label class="control-label" for="inputEmail">Teléfono:</label>
+			    <label class="control-label" for="inputEmail">Descripción del plato:</label>
 			    <div class="controls">
-			      <?php echo $this->formRow($form->get('va_telefono'));?>
-			    </div>
-			</div>
-			<h3>Sobre el restaurante:</h3>
-			<div class="control-group">
-			    <label class="control-label" for="inpuNombre">Nombre del restaurante<span class="red">*</span>:</label>
-			    <div class="controls">
-			      <?php echo $this->formRow($form->get('va_nombre_restaurante'));?>
-			    </div>
-			</div>
-                        
-                        <div class="control-group ">
-			    <label class="control-label" for="inputEmail">Tipo de comida :</label>
-			    <div class="controls span4">
-			      <?php echo $this->formRow($form->get('Ta_tipo_comida_in_id'));?>
+			      <?php echo $this->formRow($formu->get('va_descripcion'));?>
 			    </div>
 			</div>
 			<div class="control-group">
-			    <label class="control-label" for="inputEmail">Imagen de Restaurante:</label>
+			    <label class="control-label" for="inpuNombre">Precio del plato<span class="red">*</span>:</label>
 			    <div class="controls">
-			      <?php echo $this->formRow($form->get('va_imagen'));?>
+			      <?php echo $this->formRow($formu->get('va_precio'));?>
 			    </div>
 			</div>
 			<div class="control-group">
-			    <label class="control-label" for="inputEmail">Direccion<span class="red">*</span>:</label>
 			    <div class="controls">
-			      <?php echo $this->formRow($form->get('va_direccion'));?>
+			      <?php echo $this->formSubmit($formu->get('submit'));?>
 			    </div>
 			</div>
-			<div class="control-group">
-			    <label class="control-label" for="inputEmail">Horario de Atención:</label>
-			    <div class="controls">
-			      <?php echo $this->formRow($form->get('va_horario'));?>
-			    </div>
-			</div>
-                    
-			<div class="control-group">
-			    <div class="controls">
-			      <?php echo $this->formSubmit($form->get('submit'));?>
-			    </div>
-			</div>
+                       
                          <?php echo $this->form()->closeTag();?> 
-
-
-                    <?php  }?>
-		</div>
-            
-                        <?php if($this->mensaje){ ?>
+                        
+                       
+		        </div>  <?php if($this->mensaje){ ?>
             <div class="alert alert-success"><?php echo $this->mensaje[0];?></div>
-            <?php } ?>
-	</div>
+            <?php } ?><?php  }?>
+			</div>
+            
+                       
+	
 	
 </div>
 <script type="text/javascript">
@@ -204,40 +157,79 @@
 $('#submitbutton').click(function(){
 	submitForm();
 });
+$('#submitbutton2').click(function(){
+	submitFormPlato();
+});
 
 function submitForm(){ 
 	var validator = $("#application").validate({ 
 	rules: {
-		nombre_complet: {
+		va_nombre_contacto: {
 			required: true
 		}, 
-		email: {
+		va_correo: {
 			required: true,
 			email: true
 		}, 
-		nombre_plato: "required",
-		nombre_restaurant: "required", 
-		telefono: {
-			number: true
+		va_nombre_restaurante: {
+			required: true
+		},
+		va_direccion: {
+			required: true
+		},
+		va_imagen: {
+			required: true
 		}
+
 	}, 
 	errorElement: "em", 
 	messages: { 
-		name: "Ingrese su nombre completo", 
-		email: {
+		va_nombre_contacto: "Ingrese su nombre completo", 
+		va_correo: {
 			required: "Ingrese su correo electrónico",
 			email: "Ingrese un correo valido"
 		}, 
-		nombre_plato: "Ingrese el nombre del plato", 
-		nombre_restaurant: "Ingrese el nombre del restaurante", 
-		telefono: {
-			number: "Ingrese solo numeros"
+		va_nombre_restaurante: "Ingrese el nombre del restaurante",
+		va_direccion:{
+			required: "Ingrese su dirección"
+		},
+		va_imagen: {
+			required: "Ingrese una imagen del restaurante"
 		}
 	} 
 	}); 
 	if(validator.form()){ // validation perform 
 			 
 		$('form#application').submit(); 
+	} 
+}
+
+function submitFormPlato(){ 
+	var validator = $("#application3").validate({ 
+	rules: {
+		va_nombre_plato: {
+			required: true
+		}, 
+		va_imagen: {
+			required: true
+		}, 
+		va_precio: {
+			required: true
+		}
+
+	}, 
+	errorElement: "em", 
+	messages: { 
+		va_nombre_plato: "Ingrese nombre del plato", 
+		va_imagen: {
+			required: "Ingrese la imagen del plato"
+		}, 
+		va_precio: "Ingrese el precio del plato"
+	} 
+	}); 
+	if(validator.form()){ // validation perform 
+			 
+		$('form#application3').submit(); 
 	} 
 }
 

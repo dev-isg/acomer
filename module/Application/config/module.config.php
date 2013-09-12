@@ -144,23 +144,33 @@ return array(
                 )
             ),
 
-                    'solicita' => array(
+//                    'solicita' => array(
+//                'type' => 'Literal',
+//                'options' => array(
+//                    'route' => '/solicita',
+//                    'defaults' => array(
+//                        'controller' => 'Application\Controller\Index',
+//                        'action' => 'solicita'
+//                    )
+//                )
+//            ),
+                'ingresardatos' => array(
                 'type' => 'Literal',
                 'options' => array(
                     'route' => '/solicita',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
-                        'action' => 'solicita'
+                        'action' => 'ingresardatos'
                     )
                 )
             ),
-                'ingresardatos' => array(
+             'ingresarplatos' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route' => '/ingresardatos',
+                    'route' => '/ingresarplatos',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
-                        'action' => 'ingresardatos'
+                        'action' => 'ingresarplatos'
                     )
                 )
             ),

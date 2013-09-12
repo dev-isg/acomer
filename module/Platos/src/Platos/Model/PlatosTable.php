@@ -222,7 +222,7 @@ class PlatosTable {
                     ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado'), 'left')
                     ->join(array('tc' => 'ta_tipo_comida'), 'tc.in_id = tr.Ta_tipo_comida_in_id', array('nombre_tipo_comida' => 'va_nombre_tipo'), 'left')                                      
                     ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito'), 'left')
-                    ->where(array('ta_plato.in_id' => $id));
+                    ->where(array('ta_plato.in_id' => $id ,'c.en_estado'=>'aprobado'));
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
@@ -412,6 +412,39 @@ class PlatosTable {
      $idrestaurante=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();
      return $idrestaurante;
 
+    }
+       public function guardarplatoregistro($dataregistro,$imagen) {
+         $data = array(
+         
+            'va_nombre_plato' => $dataregistro->va_nombre_plato,
+            'va_imagen' =>$imagen,
+            'va_descripcion' => $dataregistro->va_descripcion,
+            'va_precio' => $dataregistro->va_precio,
+            'Ta_registro_in_id' => $dataregistro->Ta_registro_in_id
+        );
+ 
+        $adapte = $this->tableGateway->getAdapter();
+        $sq = new Sql($adapte);
+        $selecttt = $sq->select()
+                ->from('ta_registroplato')
+                ->columns(array('*','num' => new \Zend\Db\Sql\Expression('COUNT(ta_registroplato.in_id)')))
+                ->where(array('Ta_registro_in_id' => $dataregistro->Ta_registro_in_id));
+        $selectStrin = $sq->getSqlStringForSqlObject($selecttt);
+        $results = $adapte->query($selectStrin, $adapte::QUERY_MODE_EXECUTE);
+        $dd = $results->toArray();
+         if($dd[0]['num']<5)
+         { $adapter = $this->tableGateway->getAdapter();
+              $sql = new Sql($adapter);
+              $selecttot = $sql->insert()
+                      ->into('ta_registroplato')
+                      ->values($data);
+              $selectString = $sql->getSqlStringForSqlObject($selecttot);
+            $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            $idrestaurante=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();
+            return $idrestaurante;}
+            else{ return $idrestaurante;}
+             
+        return $idrestaurante;
     }
     
     

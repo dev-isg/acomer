@@ -89,7 +89,10 @@ class ComentariosController extends AbstractActionController
     public function cambiaestadoAction() {
               $id = $this->params()->fromQuery('id');
               $estado = $this->params()->fromQuery('estado');
+              $valor = $this->comentarioid($id);
+              $idplato = $valor[0]['Ta_plato_in_id'];
               $this->getComentariosTable()->estadoComentario((int) $id, $estado);
+              $this->getComentariosTable()->cromSolr($idplato,''); 
               $this->redirect()->toUrl('/usuario/comentarios/index');
     }
     
@@ -127,9 +130,25 @@ class ComentariosController extends AbstractActionController
     
      public function eliminarcomentarioAction() {
         $id = $this->params()->fromPost('id');
+        $valor = $this->comentarioid($id);
+        $idplato = $valor[0]['Ta_plato_in_id'];
         $this->getComentariosTable()->deleteComentario((int) $id);
+        $this->getComentariosTable()->cromSolr($idplato,'');  
         $this->redirect()->toUrl('/usuario/comentarios/index');
     }
+
+    
+     public function comentarioid($id)
+    { $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+            ->from('ta_comentario')
+             ->where(array('in_id'=>$id));
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+       return $results->toArray();    
+     }
 
       public function puntaje()
     {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');

@@ -27,7 +27,7 @@ use Zend\Db\Sql\Sql;
 class IndexController extends AbstractActionController {
 
     protected $platosTable;
-     protected $configTable;
+    protected $configTable;
     protected $comentariosTable;
     protected $_options;
 	public function __construct()
@@ -661,9 +661,26 @@ class IndexController extends AbstractActionController {
 //    }
     
     
-    public function sActtion()
-            
+    public function consultaAction($limit,$id)       
     {
+          $texto  = 'en_destaque:si';
+            $palabraBuscar = isset($texto) ? $texto : false;
+                $query = "($palabraBuscar)";
+                $fq = array(
+                    'sort' => 'random_' . uniqid() . ' asc, puntuacion desc',
+                    'fq' => 'en_estado:activo  AND restaurant_estado:activo AND -id:'.$id,
+                    'wt' => 'json'
+                );
+                $resultados = false;
+                if ($query) {
+                    $solr = \Classes\Solr::getInstance()->getSolr();
+                    if (get_magic_quotes_gpc() == 1) {
+                        $query = stripslashes($query);}
+                    try { $resultados = $solr->search($query, 0, $limit, $fq);
+                    } catch (Exception $e) {
+                  echo ("<div>ingrese algun valor</div>"); }} 
+                  
+             return $resultados->response->docs;     
     }
     public function verplatosAction() {
 
@@ -672,12 +689,10 @@ class IndexController extends AbstractActionController {
         $datos =$this->params()->fromRoute();  
         $urlerror =  $datos['nombre'];
         $nombre = explode('-', $datos['nombre']); 
-       
         $id = array_pop($nombre);
         if(!$this->getPlatosTable()->getPlato($id)){
             $this->redirect()->toUrl('/');
-        }
-              
+        }       
           $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();  
           $texto = 'restaurante:"'.$listarecomendacion[0]['restaurant_nombre'].'"'; 
                 $limit = 4;
@@ -698,16 +713,23 @@ class IndexController extends AbstractActionController {
                   echo ("<div>ingrese algun valor</div>"); }}
                   if(count($results->response->docs)<4)     
                   {
-                        $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
-                            $listatot = $listatot->toArray();
-                            foreach ($listatot as $key => $value) {
-                                if ($key < 4) {
-                                    $listades[] = $listatot[$key];
-                                } else {
-                                    $listadeseg[] = $listatot[$key];
-                                }
-                            }
-                   }
+                     if(count($results->response->docs)==0)
+                    { $consulta = $this->consultaAction(4,$listarecomendacion[0]['in_id']); 
+                    $resultados =$results->response->docs;
+                    } 
+                      elseif(count($results->response->docs)==1)
+                    { $consulta = $this->consultaAction(3,$listarecomendacion[0]['in_id']); 
+                    $resultados =$results->response->docs;}
+                     elseif(count($results->response->docs)==2)
+                    { $consulta = $this->consultaAction(2,$listarecomendacion[0]['in_id']);  
+                    $resultados =$results->response->docs;
+                    }
+                     elseif(count($results->response->docs)==3)
+                    {$consulta = $this->consultaAction(1,$listarecomendacion[0]['in_id']); 
+                    $resultados =$results->response->docs;
+                    } 
+                  }
+                  else{ $resultados =$results->response->docs;}
 
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
@@ -735,10 +757,8 @@ class IndexController extends AbstractActionController {
                     setcookie('va_email',$datos['va_email']);
                     $this->getComentariosTable()->agregarComentario($form->getData());
                     setcookie('id' . $id, 1);
-
-                     setcookie('nombre',$datos['va_nombre']);
-                     setcookie('email',$datos['va_email']);
-
+                    setcookie('nombre',$datos['va_nombre']);
+                    setcookie('email',$datos['va_email']);
                     $form->setData(array('va_nombre' => '', 'va_email' => '', 'tx_descripcion' => '')); 
                     $datos =$this->params()->fromRoute();               
                     $this->redirect()->toUrl('/plato/'.$datos['nombre']);
@@ -771,9 +791,9 @@ class IndexController extends AbstractActionController {
        $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id,
-             'listatitle'=>$listatitle, 'masplatos' => $results->response->docs
+             'listatitle'=>$listatitle, 'masplatos' => $resultados
            //'masplatos2'=>$resultados->response->docs
-             ,'listades' => $listades));
+             ,'listades' => $consulta));
         
         return $view;
     }

@@ -8,7 +8,7 @@ class RegistroplatoFiltro extends InputFilter{
     public function __construct(){
       
         $this->add(array(
-            'name'=>'va_nombre_contacto',
+            'name'=>'va_nombre_plato',
             'required'=>true,
             'validators'=>array(
               array(
@@ -21,23 +21,21 @@ class RegistroplatoFiltro extends InputFilter{
             ))    
         ));
         
-        $this->add(array(
-            'name' => 'va_correo',
-            'required' => true,
-            'validators' => array(
-                array(
-                    'name' => 'EmailAddress'
-                )
-            ),
-        ));
+       
         
         
           $this->add(array(
-            'name' => 'va_nombre_restaurante',
+            'name' => 'va_descripcion',
             'required' => true,
-            'validators' => array(
-                
-            ),
+             'validators'=>array(
+              array(
+                'name'    => 'StringLength',
+                'options' => array(
+                    'encoding' => 'UTF-8',
+                    'min'      => 3,
+                    'max'      => 250,
+                ),
+            )) 
         ));
           
           $this->add(array(
@@ -58,7 +56,7 @@ class RegistroplatoFiltro extends InputFilter{
             );
                 
         $this->add(array(
-            'name'=>'va_direccion',
+            'name'=>'va_precio',
             'required'=>true,
             'validators'=>array(
               array(
@@ -66,38 +64,14 @@ class RegistroplatoFiltro extends InputFilter{
                 'options' => array(
                     'encoding' => 'UTF-8',
                     'min'      => 3,
-                    'max'      => 100,
+                    'max'      => 20,
                 ),
             ))    
         ));
         
-        $this->add(array(
-            'name'=>'va_horario',
-            'required'=>true,
-            'validators'=>array(
-              array(
-                'name'    => 'StringLength',
-                'options' => array(
-                    'encoding' => 'UTF-8',
-                    'min'      => 3,
-                    'max'      => 100,
-                ),
-            ))    
-        ));  
+      
         
-        $this->add(array(
-            'name'=>'va_telefono',
-            'required'=>false,
-            'validators'=>array(
-              array(
-                'name'    => 'StringLength',
-                'options' => array(
-                    'encoding' => 'UTF-8',
-                    'min'      => 6,
-                    'max'      => 20,
-                ),
-            ))    
-        ));          
+                 
         
     } 
 }

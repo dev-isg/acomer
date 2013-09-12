@@ -144,9 +144,7 @@
                 <?php if(count($this->masplatos)>=4) {?>  <h4>Más Platos de <?php echo $this->lista[0]['restaurant_nombre'];?></h4><?php  }
                 else {?> <h4>Más Platos</h4> <?php } ?>
 
-                  <?php
-                    if(count($this->masplatos)>=4) {
-                   ?>  
+                
                     <div class="lista-plato-li recomendados-platos">
                       <ul>
                     <?php foreach ($this->masplatos as $doc ) : ?>          
@@ -182,50 +180,42 @@
                           </div>
                            </li>
                         <?php endforeach; ?>   
-                      </ul>
-                    </div>
-                <?php } 
-                else {?> 
-                  <div class="lista-plato-li recomendados-platos primer-home" style="padding-bottom: 10px;">
-                    <ul>
-                       <?php  foreach ($this->listades  as $list) {             
-                    if(strlen($list['va_nombre'])>27){
-                                       $strnom=trim(substr($list['va_nombre'], 0, 24));
-                                        $strnom.='...';
-                                       }else {$strnom=$list['va_nombre'];} ?>
-                        <li>
-                          <div class="list-ver">
+                          <?php foreach ($this->listades as $doc ) : ?>          
+                          <li>
+                            <div class="list-ver">
                             <div class="list-img-p">
-                              <a href="/plato/<?php echo $this->canonicalUrl($list['va_nombre'], array('suffix' => $list['in_id']));?>">
-                                <img src="<?php if ($list['va_imagen']=='platos-default.png')
-                      {echo $this->host('images') . '/defecto/' . htmlspecialchars($list['va_imagen'], ENT_QUOTES, 'utf-8');}
-                  else
-                      {echo $this->host('images') . '/plato/general/' . htmlspecialchars($list['va_imagen'], ENT_QUOTES, 'utf-8');} ?>" style="border:0;" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>">
+                              <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>">
+                                <img src="<?php if($doc->va_imagen=='platos-default.png')
+                                      { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
+                                      else
+                                  {  echo $this->host('images') . '/plato/general/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" style="border:0;" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
                               </a>
                             </div>
                             <div class="list-desc-p">
                               <div class="left-resultado">
                                 <p class="nombre_r">
-                                  <a href="/plato/<?php echo $this->canonicalUrl($list['va_nombre'], array('suffix' => $list['in_id']));?>" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>"><?php 
-                     if(strlen($list['restaurant_nombre'])>29){
-                     $strres=trim(substr($list['restaurant_nombre'], 0, 26));
-                      $strres.='...';
-                     }else {$strres=$list['restaurant_nombre'];}
-                     echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></a></p>
-                                <p class="nom_plato"><?php echo $list['va_nombre'];?></p>
+                                  <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                                  <?php 
+                                       if(strlen($doc->restaurante)>20){
+                                       $strres=trim(substr($doc->restaurantee, 0, 19));
+                                        $strres.='..';
+                                       }else {$strres=$doc->restaurante;}
+                              echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?>
+                                </a> 
+                                </p>
+                                <p class="nom_plato"><?php echo $doc->name;?></p>
                                 <div class="punt" style="width:100%!important;text-align:left;">
-                                  <div style="float:left!important;margin-left: 10px;" class="puntuaciones c<?php echo $list['Ta_puntaje_in_id'];?>"></div>
-                                  <em><?php echo $list['NumeroComentarios'] ?><i class="icon-comment"></i></em>
+                                  <div style="float:left!important;margin-left: 10px;" class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>"></div>
+                                  <em><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i></em>
                                 </div>
                               </div>
                             </div>
-                          </div>  
-                        </li>
-                      <?php }; ?>   
-                    </ul>
-                  </div>
-                  <?php } 
-                  ?>
+                          </div>
+                           </li>
+                        <?php endforeach; ?>    
+                      </ul>
+                    </div>
+              
             </div>
             <div class="coments-all coments-all-fin" id="verComentarios">
               <!--Comentarios-->
