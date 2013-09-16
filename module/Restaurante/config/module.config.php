@@ -45,6 +45,17 @@ return array(
                     ),
                 ),
             ),
+             'ubigeototaldistrito' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/ubigeototaldistrito',
+                    'defaults' => array(
+                        'controller' => 'Restaurante\Controller\Index',
+                        'action' => 'ubigeototaldistrito'
+                    )
+                    
+                )
+            ),
         ),
     ),
     'view_manager' => array(

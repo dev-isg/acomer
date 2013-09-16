@@ -68,16 +68,13 @@ class Formularios extends Form
        //$echo->rolesAction();
         $this->add(array(
             'name' => 'distrito',
-            'type' => 'Select',
-             'attributes'=> array( 
-                'id' => 'fq',
+             'type' => 'Text',
+         
+            'attributes' => array(               
+               'required' => true, 
+                'id'   => 'fq',
                 'style' => 'display:none'
             ),
-           'options' => array(
-                'value_options' => array(
-                '' => 'selecccione :',                
-                ),
-             )
         ));
      
         $this->add(array(

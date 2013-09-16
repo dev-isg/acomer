@@ -424,17 +424,21 @@ class IndexController extends AbstractActionController
          }    
              
     public function jsoncomidaAction() {
-
+       
         $datos = $this->getRestauranteTable()->comidas();
         echo Json::encode($datos);
         exit();
     }
+    public function ubigeototaldistritoAction()
+    {   $id=$this->params()->fromQuery('term');
+        $datos = $this->getRestauranteTable()->ubigeototal($id);
+        echo Json::encode($datos);
+        exit();}
     public function medioAction()
         {
 
         $datos = $this->getRestauranteTable()->medio();
         echo Json::encode($datos);
-        //var_dump($datos);
         exit();
     }
 
@@ -459,7 +463,7 @@ class IndexController extends AbstractActionController
             $selectS = $sql->getSqlStringForSqlObject($select);   
             $resul = $adapter->query($selectS, $adapter::QUERY_MODE_EXECUTE);
             $plato=$resul->toArray();
-            foreach ($plato as $result)     
+           foreach ($plato as $result)     
             {$this->getPlatosTable()->cromSolr($result['in_id'],'');  }
            echo 'cron finalizado';exit;
         }

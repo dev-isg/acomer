@@ -768,8 +768,8 @@ class IndexController extends AbstractActionController {
         } 
         
 //         $formu = new Formularios();
-        $comidas = $this->joinAction()->toArray();
-        $this->layout()->comidas=$comidas;
+//        $comidas = $this->joinAction()->toArray();
+//        $this->layout()->comidas=$comidas;
 //        $distritosperu = new \Application\Controller\IndexController();
 //        $distritos = $this->$distritosperu->distritosperu()->toArray();
 //        $this->layout()->distritos = $distritos;

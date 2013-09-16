@@ -232,6 +232,21 @@ class RestauranteTable
     }
 
     
+    public function ubigeototal($id)
+     {
+      $datos=$this->tableGateway->getAdapter()->query("
+    SELECT `ta_ubigeo`.`ch_distrito` AS `ch_distrito`, `ta_ubigeo`.`ch_provincia` AS `ch_provincia`, `ta_ubigeo`.`ch_departamento` AS `ch_departamento` FROM `ta_ubigeo` LEFT JOIN `ta_local` ON `ta_ubigeo`.`in_id` = `ta_local`.`ta_ubigeo_in_id`
+     WHERE ta_local.ta_ubigeo_in_id!='' AND `ta_ubigeo`.`ch_distrito` LIKE '%$id%' OR `ta_ubigeo`.`ch_distrito`='LIMA' GROUP BY `ta_ubigeo`.`ch_distrito`")->execute();
+                $returnArray=array();
+        foreach ($datos as $result) {
+            if($result['ch_distrito']=='LIMA')
+            {$returnArray[] = $result['ch_distrito'];
+        }else{$returnArray[] = $result['ch_distrito'].','.ucwords(strtolower($result['ch_provincia'])).','.ucwords(strtolower($result['ch_departamento']));
+        }
+            }
+        return  $returnArray;  
+  }
+    
     public function comidas(){
         
         $datos=$this->tableGateway->getAdapter()->query("SELECT * FROM ta_tipo_comida")->execute();

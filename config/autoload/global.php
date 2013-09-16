@@ -14,23 +14,23 @@ return array(
         'driver' => 'Pdo',
         'username' => 'kevin',
         'password' => '123456',
-        'dsn' => 'mysql:dbname=bd_produccion_final3;host=192.168.1.50',
+        'dsn' => 'mysql:dbname=bd_produccion_final2;host=192.168.1.50',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         )
     ),
     'solr' => array(
-        'host' => '192.168.1.37',
+        'host' => '192.168.1.45',
         'port' => '8983',
         'folder' => '/solr'
     ),
    
     'host' => array(
-        'base' => 'http://192.168.1.37:8080',
-        'static' => 'http://192.168.1.37:8080',
-        'images' => 'http://192.168.1.37:8080/imagenes',
-        'img'=>'http://192.168.1.37:8080/img',
-        'ruta' => 'http://192.168.1.37:8080',
+        'base' => 'http://192.168.1.45:8080',
+        'static' => 'http://192.168.1.45:8080',
+        'images' => 'http://192.168.1.45:8080/imagenes',
+        'img'=>'http://192.168.1.45:8080/img',
+        'ruta' => 'http://192.168.1.45:8080',
         'version'=>1,
     ),
 

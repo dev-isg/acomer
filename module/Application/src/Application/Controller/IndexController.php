@@ -45,8 +45,8 @@ public function __construct()
         $view = new ViewModel();
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
-        $distritos = $this->distritosperu();
-        $this->layout()->distritos = $distritos;
+//        $distritos = $this->distritosperu();
+//        $this->layout()->distritos = $distritos;
         $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
         $listatot = $listatot->toArray();
         foreach ($listatot as $key => $value) {
@@ -75,44 +75,8 @@ public function __construct()
         ));
         return $view;
     }
-    public function ubigeo()
-    {    
-//        header("Content-type: text/javascript");
-//        echo('$(function(){
-//        var autocompletar = new Array();');
-//        echo (for($i = 0;$i< count($this->distritos); $i++){);
-//        echo('  autocompletar.push(');
-//        echo ($this->distritos[$i]['ch_distrito'].','.$this->distritos[$i]['ch_provincia'].','.$this->distritos[$i]['ch_departamento']' ); } );');
-//            
-//        echo ('$("#fq").autocomplete({
-//           source: autocompletar 
-//         }); }););'); 
-      
-        $script = '$(document).ready(function(){ 	
-				$( "#matricula" ).autocomplete({
-      				source: "buscaralumno.php",
-      				minLength: 2
-    			});
-    			$("#matricula").focusout(function(){
-    				$.ajax({
-    					url:"alumno.php",
-    					type:"POST",
-    					dataType:"json",
-    					data:{ matricula:$("#matricula")}
-    				}).done(function(respuesta){
-    					$("#nombre").val(respuesta.nombre);
-    					$("#paterno").val(respuesta.paterno);
-    					$("#materno").val(respuesta.materno);
-    				});
-    			});    			    		
-			});';
-         
-     $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
-        $renderer->inlineScript()
-                ->setScript($script, $type = 'text/javascript');
-         
-         
-    }       
+    
+    
     public function distritosperu()
     {
         $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
@@ -120,10 +84,12 @@ public function __construct()
         $sql = new Sql($adapter);
         $select = $sql->select()
                 ->from('ta_ubigeo')
-                ->columns(array('id'=>'in_id','ch_distrito'=>'ch_distrito','ch_provincia'=>'ch_provincia','ch_departamento'=>'ch_departamento'))
+                ->columns(array('ch_distrito'=>'ch_distrito','ch_provincia'=>'ch_provincia','ch_departamento'=>'ch_departamento'))
                 ->join('ta_local', 'ta_ubigeo.in_id = ta_local.ta_ubigeo_in_id ', array(), 'left')
-            ->where(array('ta_local.ta_ubigeo_in_id!=?'=>null))->group('ta_ubigeo.ch_distrito');               
+            ->where(array('ta_local.ta_ubigeo_in_id!=?'=>null))->group('ta_ubigeo.ch_distrito');    
+
         $selectString = $sql->getSqlStringForSqlObject($select);
+      //  var_dump($selectString);exit;
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
          return $results->toArray();
     }
@@ -242,7 +208,7 @@ public function __construct()
             if ($texto == '') {
                 $this->redirect()->toUrl('/');
             }
-            if ($distrito !=null) {
+            if ($distrito !='LIMA') {
                 $limite = 10;
                 if($paginas=='')
                  {$start = 0;}
@@ -415,14 +381,14 @@ public function __construct()
                 
         }
         $form = new Formularios();
-        $distritos = $this->distritosperu();
-        $this->layout()->distritos = $distritos;
-        $comidas = $this->joinAction()->toArray();
-        $this->layout()->comidas = $comidas;
-        $com = array();
-        foreach ($comidas as $y) {
-            $com[$y['va_distrito']] = $y['va_distrito'];
-        }
+//        $distritos = $this->distritosperu();
+//        $this->layout()->distritos = $distritos;
+//        $comidas = $this->joinAction()->toArray();
+////        $this->layout()->comidas = $comidas;
+//        $com = array();
+//        foreach ($comidas as $y) {
+//            $com[$y['va_distrito']] = $y['va_distrito'];
+//        }
          if($valor[0]=='restaurante:')
          { $form->get('q')->setValue($plato);
          $valores = $buscar;} 
@@ -432,9 +398,9 @@ public function __construct()
          else{ setcookie('q', $texto);
          $form->get('q')->setValue($texto);
          $valores =$texto;}
-        setcookie('distrito', $distrito);
-        $form->get('distrito')->setValue($distrito);
-        $form->get('distrito')->setValueOptions($com);
+        setcookie('distrito', $distrit);
+        $form->get('distrito')->setValue($distrit);
+       // $form->get('distrito')->setValueOptions($com);
         $form->get('submit')->setValue('Buscar');
         $paginato = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($resultados->response->docs));
         $paginato->setCurrentPageNumber((int) $this->params()
@@ -852,7 +818,7 @@ public function __construct()
             $plato = $filter->filter($texto);
             setcookie('q', $texto);}
         
-        if ($distrito != 'TODOS LOS DISTRITOS') {
+        if ($distrito) {
             
             $resultados = false;
             $palabraBuscar = isset($plato) ? $plato : false;
@@ -877,7 +843,7 @@ public function __construct()
             }
         } 
 
-        else { 
+        elseif($distrito=='LIMA') { 
             $limite = 1000;
             $resultados = false;
             $palabraBuscar = isset($plato) ? $plato : false;
@@ -899,7 +865,27 @@ public function __construct()
                 }
             }
         }
-        
+        else{ $resultados = false;
+            $palabraBuscar = isset($plato) ? $plato : false;
+            $list = 1000;
+            $fd = array(
+                'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' . $distrito,
+                //'sort' => 'en_destaque desc',
+                'fl' => 'id,latitud,longitud,tx_descripcion,va_imagen,restaurante_estado,restaurante,name,plato_tipo,distrito',
+                'wt' => 'json'
+            );
+            if ($palabraBuscar) {
+                $solar = \Classes\Solr::getInstance()->getSolr();
+                if (get_magic_quotes_gpc() == 1) {
+                    $palabraBuscar = stripslashes($palabraBuscar);
+                }
+                try {
+                    $resultados = $solar->search($palabraBuscar, 0, $list, $fd);
+                } catch (Exception $e) {
+                    
+                    die("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");
+                }
+            }}
         echo $resultados->getRawResponse();
         exit();
     }

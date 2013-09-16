@@ -39,13 +39,13 @@
     <meta property="og:image"	content="<?php $imagen=(!$this->image)?$this->host('ruta').'/img/logo-face.png':$this->image ; echo $imagen; ?>" />
     <meta property="og:site_name" content="Lista del Sabor" />
     <meta property="og:description"	content="<?php $descrip=(!$this->description)?'Lista del Sabor - El Primer Portal donde encontrarás los mejores platos de la gastronomía hecha en el Perú. Encontrarás los platos más buscados y mejor recomendados en el Perú,su descripción y los restaurantes que lo venden y su valoración por los comensales':$this->description ; echo $descrip; ?>" />
-    <meta property="og:url"	content="<?php $url=(!$this->url)?$this->host('ruta'):$this->url; echo $url;?>" />
-
+    <meta property="og:url"	content="<?php $url=(!$this->url)?$this->host('ruta'):$this->url; echo $url;?>" /> 
     <link	href="<?php echo $this->host('ruta')?>/img/favicon.ico?v<?php echo $this->host('version')?>"	rel="shortcut icon" type="image/x-icon" />
     <!--<script src="<?php echo $this->host('ruta')?>/js/head.load.min.js"></script>-->
     <script	src="<?php echo $this->host('ruta')?>/js/modernizr.js?v<?php echo $this->host('version')?>"></script>
     <script	src="<?php echo $this->host('ruta')?>/js/lib/jquery-1.8.3.min.js?v<?php echo $this->host('version')?>"></script>
     <script language="JavaScript" src="<?php echo $this->host('ruta')?>/js/vendor/jquery-ui.js"></script>
+        <script language="JavaScript" src="<?php echo $this->host('ruta')?>/js/distritos.js"></script>
     <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css?v'.$this->host('version'))->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')?>
     <link href="<?php echo $this->host('ruta')?>/css/jquery-ui-auto.css" media="screen" rel="stylesheet" type="text/css">
   </head>
@@ -148,18 +148,7 @@
             <span class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span> 
             <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
             <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
- <script>
-  $(function(){
-    var autocompletar = new Array();
-    <?php 
-     for($i = 0;$i< count($this->distritos); $i++){?>
-       autocompletar.push('<?php echo $this->distritos[$i]['ch_distrito'].' , '.$this->distritos[$i]['ch_provincia'].' , '.$this->distritos[$i]['ch_departamento']; ?>');
-     <?php } ?>
-     $("#fq").autocomplete({
-       source: autocompletar 
-     });
-  });
-  </script>
+
             <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar-por-distrito">   <p>
                   <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php 
                   if($_GET['q']) 
@@ -177,8 +166,8 @@
                   <em>Ejm: lomo saltado</em>
                 </p>
                 <p>
-             <input id="fq" name="distrito" type="text"  value="">                                                      
-                </p>
+			<input id="fq" name="distrito" type="text" onclick="this.value=''" value="<?php 
+                     if($_GET['distrito']) {echo $_GET['distrito']; } elseif($_COOKIE['distrito']){   echo $_COOKIE['distrito']; }else {echo 'LIMA';}?>"></p>
                 <p style="margin-top:5px;">
                   <input type="submit"  class="btn btn-warning btn-soli" value="Buscar"/>
                 </p>
@@ -251,18 +240,7 @@
 							src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>"
 							alt="">
 					</div>
-  <script>
-  $(function(){
-    var autocompletar = new Array();
-    <?php 
-     for($i = 0;$i< count($this->distritos); $i++){?>
-       autocompletar.push('<?php echo $this->distritos[$i]['ch_distrito'].','.$this->distritos[$i]['ch_provincia'].','.$this->distritos[$i]['ch_departamento']; ?>');
-     <?php } ?>
-     $("#fq").autocomplete({
-       source: autocompletar 
-     });
-  });
-  </script>
+ 
 					<form accept-charset="utf-8" method="get" class="form-horizontal"
 						id="search"
 						action="<?php echo $this->host('ruta')?>/buscar-por-distrito">
@@ -286,7 +264,7 @@
 						</p>
 						<p>
 			<input id="fq" name="distrito" type="text" onclick="this.value=''" value="<?php 
-                     if($_GET['distrito']) {echo $_GET['distrito']; } elseif($_COOKIE['distrito']){   echo $_COOKIE['distrito']; }else {echo 'LIMA,LIMA,LIMA';}?>">					</p>
+                     if($_GET['distrito']) {echo $_GET['distrito']; } elseif($_COOKIE['distrito']){   echo $_COOKIE['distrito']; }else {echo 'LIMA';}?>"></p>
 						<p style="margin-top: 5px;">
 							<input type="submit" class="btn btn-warning btn-soli"
 								value="Buscar" />
