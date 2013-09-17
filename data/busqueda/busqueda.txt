@@ -2613,3 +2613,12 @@ Katitos    , LIMA
 Katitos    , 
 Katitos    , 
 Restaurante Turístico Todo Perú , 
+ceviche , BAGUA
+Torvilé Restaurant , BAGUA
+ceviche , LIMA
+ceviche , SAN MARTIN DE PORRES
+ceviche , SAN MARTIN DE PORRES
+ceviche , LA PERLA
+ceviche , san borja
+ceviche , SAN BORJA
+ceviche , SAN BORJA

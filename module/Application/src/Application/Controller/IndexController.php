@@ -527,18 +527,7 @@ public function __construct()
     }
     
     // FUNCION SOLO PARA MOVILES ,AQUI A QUE PARTIR EL VALOR DEL fromQuery PARA
-    public function consultaDistrito($distrito)
-    {
-        $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $adapter = $this->dbAdapter;
-        $sql = new Sql($adapter);
-        $select = $sql->select();
-        $select->from('ta_distrito')->where->like('va_distrito', '%' . $distrito . '%')->count();
-        $selectString = $sql->getSqlStringForSqlObject($select);
-        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-        return $results;
-    }
-
+ 
     public function verAction()
     {
         $view = new ViewModel();
@@ -1124,7 +1113,7 @@ public function __construct()
       public function ingresardatosAction()
     {
         $view = new ViewModel();
-        $this->layout()->clase = 'Solicita';
+       $this->layout()->clase = 'Solicita';
         $form = new Registro("form");
         
        // var_dump($form);exit;
@@ -1168,7 +1157,7 @@ public function __construct()
              'formu' => $formu,
             'mensaje' => $mensajes
         ));
-        return $view;
+      return $view;
     }
     public function ingresarplatosAction()
     {
