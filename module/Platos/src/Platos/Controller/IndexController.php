@@ -685,7 +685,6 @@ class IndexController extends AbstractActionController {
     public function verplatosAction() {
 
         $view = new ViewModel();
-//        $this->layout('layout/layout-portada');
         $datos =$this->params()->fromRoute();  
         $urlerror =  $datos['nombre'];
         $nombre = explode('-', $datos['nombre']); 
@@ -767,12 +766,6 @@ class IndexController extends AbstractActionController {
             }
         } 
         
-//         $formu = new Formularios();
-//        $comidas = $this->joinAction()->toArray();
-//        $this->layout()->comidas=$comidas;
-//        $distritosperu = new \Application\Controller\IndexController();
-//        $distritos = $this->$distritosperu->distritosperu()->toArray();
-//        $this->layout()->distritos = $distritos;
         $this->layout()->clase = 'Detalle';
         $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
