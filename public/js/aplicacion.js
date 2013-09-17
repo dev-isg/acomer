@@ -167,6 +167,11 @@ $(document).ready(function() {
             var hvalor = h;
         }
         var f = $("#bubi #fq").val();
+        if(f === ''){
+            var e = urlJson + "/jsonmapasa?q=" + h;    
+        }else{
+            var e = urlJson + "/jsonmapasa?distrito=" + f + "&q=" + h;
+        }
         var e = urlJson + "/jsonmapasa?distrito=" + f + "&q=" + h;
         $("#map").remove();
         $("#subir-home").remove();

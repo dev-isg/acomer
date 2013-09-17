@@ -87,11 +87,11 @@
           $detect3 = new Mobile_Detect();
           if ($detect3->isTablet()) {
              ?>                
-           <p><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: Mistura&distrito=TODOS LOS DISTRITOS" title="Mistura">Mistura 2013</a></p>
+           <p><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: Mistura" title="Mistura">Mistura 2013</a></p>
            <?php }elseif($detect3->isMobile()){?>   
               <p><a href="<?php echo $this->host('ruta')?>/buscar?q=tag: Mistura" title="Mistura">Mistura 2013</a></p>
            <?php  } else{?>
-          <p><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: Mistura&distrito=TODOS LOS DISTRITOS" title="Mistura">Mistura 2013</a></p>
+          <p><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=tag: Mistura" title="Mistura">Mistura 2013</a></p>
            <?php  } ?>
       </div>
     </div>

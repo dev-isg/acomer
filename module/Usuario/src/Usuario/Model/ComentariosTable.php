@@ -109,7 +109,7 @@ class ComentariosTable
                     ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud', 'de_longitud', 'va_direccion','va_telefono'), 'left')
                     ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado'), 'left')
                     ->join(array('tc' => 'ta_tipo_comida'), 'tc.in_id = tr.Ta_tipo_comida_in_id', array('nombre_tipo_comida' => 'va_nombre_tipo'), 'left')                                      
-                    ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito'), 'left')
+                    ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito','departamento' => 'ch_departamento'), 'left')
                     ->where(array('ta_plato.in_id' => $id));
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
@@ -142,6 +142,7 @@ class ComentariosTable
             $document->va_telefono = $plato[0]['va_telefono'];
             $document->latitud = $plato[0]['de_latitud'];
       $document->longitud = $plato[0]['de_longitud'];
+      $document->departamento = $plato[0]['departamento'];
             foreach ($tag as $resultado)
             {$document->setMultiValue('tag',$resultado['tag']);  }
             $document->distrito = $plato[0]['distrito'];

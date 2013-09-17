@@ -184,9 +184,8 @@ public function __construct()
             $distrito = $valorubigeo[0];
             $valor = explode(" ",$plato);
             if($valor[0]=='restaurante:')
-            { $buscar = $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];
+            {$buscar = $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];
             $texto = $valor[0].'"'.$buscar.'"'; 
-          //  $distrito = $datos['distrito'];
             $ruta = $this->_options->data->busqueda .'/busqueda.txt';
             $fp = fopen($ruta,"a");
             fwrite($fp, "$buscar , $distrito" . PHP_EOL);
@@ -208,7 +207,7 @@ public function __construct()
             if ($texto == '') {
                 $this->redirect()->toUrl('/');
             }
-            if ($distrito !='LIMA') {
+            if (strtoupper($distrito)and strtoupper($distrito)!='LIMA') {
                 $limite = 10;
                 if($paginas=='')
                  {$start = 0;}
@@ -216,7 +215,7 @@ public function __construct()
                 $resultados = false;
                 $palabraBuscar = isset($texto) ? $texto : false;
                 $fd = array(
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' . $distrito,
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' .$distrito,
 //                     'sort' => 'en_destaque desc '
                 );
                 
@@ -237,7 +236,7 @@ public function __construct()
                 $query = "($palabraBuscar) AND (en_destaque:si)";
                 $fq = array(
                     'sort' => 'random_' . uniqid() . ' asc',
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' . $distrito,
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' .$distrito,
                     'wt' => 'json'
                 );
                 $valoresss = false;    
@@ -274,7 +273,7 @@ public function __construct()
                 $query_distritos = "-($palabraBuscar)";
                 $fq_distritos = array(
                     'sort' => 'random_' . uniqid() . ' asc',
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND -distrito:' . $distrito,
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND -distrito:' .$distrito,
                     'wt' => 'json',
                     'fl'=>'distrito'
                 );
@@ -291,8 +290,8 @@ public function __construct()
                     }
                 }
                 
-            } else {
-                //var_dump($texto);exit;
+            } else{
+             
                 $limite = 10;
                 if($paginas=='')
                  {$start = 0;}
@@ -818,13 +817,13 @@ public function __construct()
             $plato = $filter->filter($texto);
             setcookie('q', $texto);}
         
-        if ($distrito) {
+        if($distrito and $distrito!='LIMA'){
             
             $resultados = false;
             $palabraBuscar = isset($plato) ? $plato : false;
             $list = 1000;
             $fd = array(
-                'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' . $distrito,
+                'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' . strtoupper($distrito),
                 //'sort' => 'en_destaque desc',
                 'fl' => 'id,latitud,longitud,tx_descripcion,va_imagen,restaurante_estado,restaurante,name,plato_tipo,distrito',
                 'wt' => 'json'
@@ -843,8 +842,28 @@ public function __construct()
             }
         } 
 
-        elseif($distrito=='LIMA') { 
+        elseif($distrito=='LIMA'){ 
             $limite = 1000;
+            $resultados = false;
+            $palabraBuscar = isset($plato) ? $plato : false;
+            $fd = array(
+                'fq' => 'en_estado:activo AND restaurant_estado:activo AND departamento:' . strtoupper($distrito),
+            );
+            
+            if ($palabraBuscar) {
+                $solar = \Classes\Solr::getInstance()->getSolr();
+                if (get_magic_quotes_gpc() == 1) {
+                    $palabraBuscar = stripslashes($palabraBuscar);
+                }
+                try {
+                    $resultados = $solar->search($palabraBuscar, 0, $limite, $fd);
+                    // var_dump($resultados);exit;
+                } catch (Exception $e) {
+                    
+                    $this->redirect()->toUrl('/');
+                }
+            }
+        }else{$limite = 1000;
             $resultados = false;
             $palabraBuscar = isset($plato) ? $plato : false;
             $fd = array(
@@ -863,29 +882,8 @@ public function __construct()
                     
                     $this->redirect()->toUrl('/');
                 }
-            }
-        }
-        else{ $resultados = false;
-            $palabraBuscar = isset($plato) ? $plato : false;
-            $list = 1000;
-            $fd = array(
-                'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' . $distrito,
-                //'sort' => 'en_destaque desc',
-                'fl' => 'id,latitud,longitud,tx_descripcion,va_imagen,restaurante_estado,restaurante,name,plato_tipo,distrito',
-                'wt' => 'json'
-            );
-            if ($palabraBuscar) {
-                $solar = \Classes\Solr::getInstance()->getSolr();
-                if (get_magic_quotes_gpc() == 1) {
-                    $palabraBuscar = stripslashes($palabraBuscar);
-                }
-                try {
-                    $resultados = $solar->search($palabraBuscar, 0, $list, $fd);
-                } catch (Exception $e) {
-                    
-                    die("<html><head><title>SEARCH EXCEPTION</title><body><pre>{$e->__toString()}</pre></body></html>");
-                }
             }}
+   
         echo $resultados->getRawResponse();
         exit();
     }
