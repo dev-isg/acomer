@@ -429,11 +429,13 @@ class IndexController extends AbstractActionController
         echo Json::encode($datos);
         exit();
     }
+    
     public function ubigeototaldistritoAction()
     {   $id=$this->params()->fromQuery('term');
         $datos = $this->getRestauranteTable()->ubigeototal($id);
         echo Json::encode($datos);
         exit();}
+        
     public function medioAction()
         {
 

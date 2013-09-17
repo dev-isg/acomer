@@ -2628,3 +2628,28 @@ arroz con mariscos ,
 makis , 
 lomo saltado , 
 lomo saltado , 
+parrilla , TODOS LOS DISTRITOS
+parrilla , lima
+parrilla , lima
+parrilla , lima
+parrilla , SAN ISIDRO
+parrilla , LA PERLA
+chicharron , MIRAFLORES
+chicharron , MIRAFLORES
+lomo saltado , SAN MARTIN DE PORRES
+lomo saltado , SANTIAGO DE SURCO
+ceviche , LIMA
+ceviche , MIRAFLORES
+ceviche , SAN JUAN DE LURIGANCHO
+ceviche , barranco
+ceviche , BAGUA
+ceviche , MIRAFLORES
+Altamar    , 
+ceviche , MIRAFLORES
+ceviche , MIRAFLORES
+ mistura , SAN BORJA
+ceviche , MIRAFLORES
+ceviche , MIRAFLORES
+ mistura , SAN BORJA
+ mistura , SAN BORJA
+ mistura , LIMA
