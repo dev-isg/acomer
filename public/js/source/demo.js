@@ -1,7 +1,7 @@
 ﻿/*jslint  browser: true, white: true, plusplus: true */
 /*global $: true */
 
-$(function () {
+$("#disctQ").focus(function() {
     'use strict';
     var urlstatic = urlJson;
     // Load countries then initialize plugin:
@@ -9,13 +9,12 @@ $(function () {
         url: urlstatic+'/ubigeototaldistrito',
         dataType: 'json'
     }).done(function (source) {
-
         var countriesArray = $.map(source, function (value, key) { return { value: value, data: key }; }),
             countries = $.map(source, function (value) { return value; });
 
         // Setup jQuery ajax mock:
         $.mockjax({
-            url: '*',
+            url: urlstatic+'/ubigeototaldistrito',
             responseTime: 2000,
             response: function (settings) {
                 var query = settings.data.query,
@@ -31,11 +30,12 @@ $(function () {
                     };
 
                 this.responseText = JSON.stringify(response);
+                alert(query);
             }
         });
 
         // Initialize ajax autocomplete:
-        $('#fq').autocomplete({
+        $('#disctQ').autocomplete({
             // serviceUrl: '/autosuggest/service/url',
             lookup: countriesArray,
             lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
@@ -52,9 +52,5 @@ $(function () {
                 //$('#selction-ajax').html('You selected: none');
             }
         });
-
-
-        
     });
-
 });

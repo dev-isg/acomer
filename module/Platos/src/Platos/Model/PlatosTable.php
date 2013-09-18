@@ -456,7 +456,7 @@ class PlatosTable {
         $selecttot = $sql->select()
                 ->from('ta_local')
                 ->columns(array('in_id', 'va_telefono', 'de_latitud', 'de_longitud', 'va_direccion'))
-                ->join(array('tu' => 'ta_ubigeo'), 'ta_local.ta_ubigeo_in_id = tu.in_id', array('distrito' => 'ch_distrito'), 'left')
+                ->join(array('tu' => 'ta_ubigeo'), 'ta_local.ta_ubigeo_in_id = tu.in_id', array('distrito' => 'ch_distrito','depa' => 'ch_departamento'), 'left')
                 ->where(array('ta_restaurante_in_id' => $idrest));
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);

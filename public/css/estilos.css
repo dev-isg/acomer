@@ -1594,7 +1594,9 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   background-image: url(../../img/icons.png)!important;
   background-size: 100%;
 }
-
+.autocomplete-suggestion{
+  font-size: 12px;
+}
 .contenido-static{
   padding: 15px 25px 15px 25px;
 }
@@ -1900,6 +1902,12 @@ ul.time .hour{
   font-size: 12px;
   margin-top: 3px;
   color: red;
+}
+.controls em.exam{
+  display: block;
+  color: #bbb;
+  font-size: 12px;
+  margin-top: 2px;
 }
 .controls ul{
   list-style: none;

@@ -271,5 +271,14 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
         
     }
     
+       public function ubigeototal2($id)
+     {
+      $datos=$this->tableGateway->getAdapter()->query("
+    SELECT `ta_ubigeo`.`ch_distrito` AS `ch_distrito` FROM `ta_ubigeo` LEFT JOIN `ta_local` ON `ta_ubigeo`.`in_id` = `ta_local`.`ta_ubigeo_in_id`
+     WHERE ta_local.ta_ubigeo_in_id!='' AND `ta_ubigeo`.`ch_distrito` LIKE '%$id%' ")->execute();
+         
+        return  $datos;  
+  }
+    
 
 }

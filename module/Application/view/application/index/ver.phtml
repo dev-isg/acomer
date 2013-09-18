@@ -125,12 +125,11 @@
              </li>
                 <?php endforeach; ?> 
           </ul>     
-
       </div>
-
   </div>
+
     <div id="esconder2">                     
-       <?php if($this->plato=='Mistura') {?>
+       <?php if($this->plato=='Mistura' or $this->plato=='mistura' ) {?>
         <div class="sub mistura_etiqueta">
           <span style="padding-left: 10px;color:white;font-weight: bold;"><?php echo  ucwords($this->plato).' 2013'; ?></span>
         </div> 
@@ -195,7 +194,7 @@
                         <p style="margin-left:10px;margin-top:5px;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></p>
                       </div>
                       <div class="right-resultado">
-                        <p><?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?></p>
+                   <p class="h-dist"><?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8').'  ('.htmlspecialchars($doc->departamento, ENT_QUOTES, 'utf-8').')' ?></p>
                         <p><?php echo htmlspecialchars($doc->va_direccion, ENT_QUOTES, 'utf-8'); ?></p>
                        <p><?php echo htmlspecialchars($doc->va_telefono, ENT_QUOTES, 'utf-8'); ?></p>
                       </div> 
@@ -221,7 +220,7 @@
                  ?> 
                   </ul></div> 
           </div> 
-             
+       </div>      
       <div class="padding-map" style="display:none;">
         <div id="mapa-buscador">
           <div class="regresar regr mobile-return">
@@ -311,7 +310,7 @@
                         <p style="margin-left:10px;margin-top:5px;"><?php echo htmlspecialchars($doc->tx_descripcion, ENT_QUOTES, 'utf-8'); ?></p>
                       </div>
                       <div class="right-resultado">
-                        <p><?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8'); ?></p>
+                         <p class="h-dist"><?php echo htmlspecialchars($doc->distrito, ENT_QUOTES, 'utf-8').'  ('.htmlspecialchars($doc->departamento, ENT_QUOTES, 'utf-8').')' ?></p>                    
                         <p><?php echo htmlspecialchars($doc->va_direccion, ENT_QUOTES, 'utf-8'); ?></p>
                        <p><?php echo htmlspecialchars($doc->va_telefono, ENT_QUOTES, 'utf-8'); ?></p>
                       </div> 

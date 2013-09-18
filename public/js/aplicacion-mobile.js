@@ -156,6 +156,7 @@ $(document).ready(function() {
     $("#buscarmap").on("click", function() {
         $(".padding-map").show();
         var h = $("#bubi #q").val();
+        alert(h);
         var condi = h.substring(0, 12);
         var cot = h.substring(0, 4);
         if(condi === 'restaurante:'){
@@ -167,7 +168,7 @@ $(document).ready(function() {
         }else{
             var hvalor = h;
         }
-        var e = urlJson + "/jsonmovil?q=" + h;        
+        var e = urlJson + "/jsonmovil?q=" + h;
         $("#map").remove();
         $("#subir-home").remove();
         $(".mensaje").remove();

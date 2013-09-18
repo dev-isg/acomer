@@ -34,7 +34,7 @@ class IndexController extends AbstractActionController
 {
 
     protected $configTable;
-
+protected $restauranteTable;
     public $dbAdapter;
 public function __construct()
 	{
@@ -165,6 +165,7 @@ public function __construct()
                     if (get_magic_quotes_gpc() == 1) {
                         $query = stripslashes($query);}
                     try { $resultados = $solr->search($query, 0, $limit, $fq);
+                //   var_dump(count($resultados->response->docs));exit;
                     } catch (Exception $e) {
                   echo ("<div>ingrese algun valor</div>"); }} 
                   
@@ -209,13 +210,14 @@ public function __construct()
             }
             if (strtoupper($distrito)and strtoupper($distrito)!='LIMA') {
                 $limite = 10;
+                $distrits = '"'.$distrito.'"';
                 if($paginas=='')
                  {$start = 0;}
                else{$start=$paginas*10;}
                 $resultados = false;
                 $palabraBuscar = isset($texto) ? $texto : false;
                 $fd = array(
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' .$distrito,
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' .$distrits,
 //                     'sort' => 'en_destaque desc '
                 );
                 
@@ -237,6 +239,90 @@ public function __construct()
                 $fq = array(
                     'sort' => 'random_' . uniqid() . ' asc',
                     'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' .$distrito,
+                    'wt' => 'json'
+                );
+                $valoresss = false;    
+                if ($query) {
+                    $solr = \Classes\Solr::getInstance()->getSolr();
+                    if (get_magic_quotes_gpc() == 1) {
+                        $query = stripslashes($query);
+                    }
+                    try {
+            $resulta = $solr->search($query, 0, $limit, $fq);
+           // var_dump(count($resulta->response->docs));exit;
+                    } catch (Exception $e) {
+                        echo ("<div>ingrese algun valor</div>");
+                    }
+                }
+                
+             if(count($resulta->response->docs)<3)     
+                  {  foreach ($resultados->response->docs as $plat) {
+                    if(!in_array($plat->plato_tipo,$arrpl)){
+                        $arrpl[] = $plat->plato_tipo;   }
+                    if(!in_array($plat->id,$arrest)){
+                        $arrest[] = $plat->id;}}
+                    if(count($resulta->response->docs)==0){
+                   $consultafinal = $this->consultasAction(3,'',''); 
+                    $results =$resulta->response->docs; } 
+                   elseif(count($resulta->response->docs)==1) { 
+                    $consultafinal = $this->consultasAction(2,$plat->plato_tipo,$plat->id); 
+                    $results =$resulta->response->docs;}
+                     elseif(count($resulta->response->docs)==2){
+                   $consultafinal = $this->consultasAction(1,$plat->plato_tipo,$plat->id);  
+                    $results =$resulta->response->docs;  } }
+                  else{$results =$resulta->response->docs;}
+
+          $limit_distritos = 9999;
+                $query_distritos = "-($palabraBuscar)";
+                $fq_distritos = array(
+                    'sort' => 'random_' . uniqid() . ' asc',
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND -distrito:' .$distrito,
+                    'wt' => 'json',
+                    'fl'=>'distrito'
+                );
+                $results_distritos = false;
+                if ($query_distritos) {
+                    $solr = \Classes\Solr::getInstance()->getSolr();
+                    if (get_magic_quotes_gpc() == 1) {
+                        $query_platos = stripslashes($query_distritos);
+                    }
+                    try {
+                        $results_distritos = $solr->search($query_distritos, 0,$limit_distritos, $fq_distritos);
+                    } catch (Exception $e) {
+                        echo ("<div>ingrese algun valor</div>");
+                    }
+                }
+                
+            }    elseif (strtoupper($distrito)=='LIMA') {
+                $limite = 10;
+                if($paginas=='')
+                 {$start = 0;}
+               else{$start=$paginas*10;}
+                $resultados = false;
+                $palabraBuscar = isset($texto) ? $texto : false;
+                $fd = array(
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND  departamento:' .$distrito,
+//                     'sort' => 'en_destaque desc '
+                );
+                
+                $solar = \Classes\Solr::getInstance()->getSolr();
+                if ($palabraBuscar) {
+                    $solar = \Classes\Solr::getInstance()->getSolr();
+                    if (get_magic_quotes_gpc() == 1) {
+                        $palabraBuscar = stripslashes($palabraBuscar);
+                    }
+                    try {
+                        $resultados = $solar->search($palabraBuscar,$start, $limite, $fd);
+                    } catch (Exception $e) {
+                        echo ("<div>ingrese algun valor</div>");
+                    }
+                }
+                $limit = 3;
+                $palabraBuscar = isset($texto) ? $texto : false;
+                $query = "($palabraBuscar) AND (en_destaque:si)";
+                $fq = array(
+                    'sort' => 'random_' . uniqid() . ' asc',
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND  departamento:' .$distrito,
                     'wt' => 'json'
                 );
                 $valoresss = false;    
@@ -290,7 +376,7 @@ public function __construct()
                     }
                 }
                 
-            } else{
+            }else{
              
                 $limite = 10;
                 if($paginas=='')
@@ -552,15 +638,85 @@ public function __construct()
         $text = trim($filter->filter($filtered));
         $text = preg_replace('/\s\s+/', ' ', $text);
         $busqueda = explode(" EN ", $text);
-        if($this->consultaDistrito($busqueda[1])>0){
-            $distrito=$busqueda[1];   
+        if($this->getRestauranteTable()->ubigeototal2($busqueda[1])>0){
+            $distrito=$busqueda[1]; 
         }
+
+        
         $texto = $busqueda[0];
         $ruta = $this->_options->data->busqueda .'/busqueda_movil.txt';
         $fp = fopen($ruta,"a");
         fwrite($fp, "$texto , $distrito" . PHP_EOL);
         fclose($fp);
         }
+        if($distrito=='LIMA' or $distrito=='lima')
+       {$limite = 10;
+                if($paginas=='')
+                 {$start = 0;}
+               else{$start=$paginas*10;}
+        $resultados = false;
+        $palabraBuscar = isset($texto) ? $texto : false;
+        //$distrito = ($distrito) ? ' AND distrito:' . $distrito : '';
+        $fd = array(
+            'fq' => 'en_estado:activo AND restaurant_estado:activo AND  departamento:' .$distrito,
+        );
+        if ($palabraBuscar == '') {
+            $this->redirect()->toUrl('/');
+        }
+        
+        
+        if ($palabraBuscar) {
+            $solar = \Classes\Solr::getInstance()->getSolr();
+            if (get_magic_quotes_gpc() == 1) {
+                $palabraBuscar = stripslashes($palabraBuscar);
+            }
+            try {
+                $resultados = $solar->search($palabraBuscar,$start, $limite, $fd);
+            } catch (Exception $e) {
+                $this->redirect()->toUrl('/');
+            }
+        }
+
+        $limit = 3;
+        $palabraBuscar = isset($texto) ? $texto : false;
+//         var_dump($distrito);exit;
+        $query = "($palabraBuscar)";
+        $fq = array(
+            'sort' => 'random_' . uniqid() . ' asc',
+            'fq' => 'en_estado:activo AND restaurant_estado:activo AND en_destaque:si AND  departamento:' .$distrito,
+        );
+        $resulta = false;
+        if ($query) {
+            
+            $solr = \Classes\Solr::getInstance()->getSolr();
+            if (get_magic_quotes_gpc() == 1) {
+                $query = stripslashes($query);
+            }
+            try {
+                $resulta = $solr->search($query, 0, $limit, $fq);
+            } catch (Exception $e) {
+                $this->redirect()->toUrl('/');
+            }
+            
+        }
+         if(count($resulta->response->docs)<3)     
+                  {  foreach ($resultados->response->docs as $plat) {
+                    if(!in_array($plat->plato_tipo,$arrpl)){
+                        $arrpl[] = $plat->plato_tipo;   }
+                    if(!in_array($plat->id,$arrest)){
+                        $arrest[] = $plat->id;}}
+                    if(count($resulta->response->docs)==0){
+                   $consultafinal = $this->consultasAction(3,'',''); 
+                    $results =$resulta->response->docs; } 
+                   elseif(count($resulta->response->docs)==1) { 
+                    $consultafinal = $this->consultasAction(2,$plat->plato_tipo,$plat->id); 
+                    $results =$resulta->response->docs;}
+                     elseif(count($resulta->response->docs)==2){
+                   $consultafinal = $this->consultasAction(1,$plat->plato_tipo,$plat->id);  
+                    $results =$resulta->response->docs;  } }
+                  else{$results =$resulta->response->docs;}}
+        else
+        {
          $limite = 10;
                 if($paginas=='')
                  {$start = 0;}
@@ -574,6 +730,8 @@ public function __construct()
         if ($palabraBuscar == '') {
             $this->redirect()->toUrl('/');
         }
+        
+        
         if ($palabraBuscar) {
             $solar = \Classes\Solr::getInstance()->getSolr();
             if (get_magic_quotes_gpc() == 1) {
@@ -585,10 +743,7 @@ public function __construct()
                 $this->redirect()->toUrl('/');
             }
         }
-        
-      
-        
-        
+
         $limit = 3;
         $palabraBuscar = isset($texto) ? $texto : false;
 //         var_dump($distrito);exit;
@@ -627,6 +782,10 @@ public function __construct()
                    $consultafinal = $this->consultasAction(1,$plat->plato_tipo,$plat->id);  
                     $results =$resulta->response->docs;  } }
                   else{$results =$resulta->response->docs;}
+    }     
+                  
+                  
+                  
         $form = new Formularios();
       
         if($valor[0]=='restaurante:')
@@ -690,11 +849,7 @@ public function __construct()
     {
         $view = new viewModel();
         $view->setTerminal(true);
-        
          $filtered = $this->params()->fromQuery('q');
-        
-        
-        
         $valor =explode(" ",$filtered);
         if($valor[0]=='restaurante:')
             { $buscar = $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];
@@ -709,12 +864,57 @@ public function __construct()
                 $text = trim($filter->filter($filtered));
                 $text = preg_replace('/\s\s+/', ' ', $text);
                 $busqueda = explode(" EN ", $text);
-            if($this->consultaDistrito($busqueda[1])>0){
+            if($this->getRestauranteTable()->ubigeototal2($busqueda[1])>0){
                 $distrito=$busqueda[1];
             }
             $texto = $busqueda[0];}
+            
+            
+            if($distrito=='LIMA' or $distrito=='lima')
+            {  $limite = 10;
+            $resultados = false;
+            $palabraBuscar = isset($texto) ? $texto : false;
+           // $distrito = ($distrito) ? ' AND distrito:' . $distrito : '';
+            $fd = array(
+                'fq' => 'en_estado:activo AND restaurant_estado:activo AND  departamento:' .$distrito,
+            );
+            if ($palabraBuscar == '') {
+                $this->redirect()->toUrl('/');
+            }
+            if ($palabraBuscar) {
+                $solar = \Classes\Solr::getInstance()->getSolr();
+                if (get_magic_quotes_gpc() == 1) {
+                    $palabraBuscar = stripslashes($palabraBuscar);
+                }
+                try {
+                    $resultados = $solar->search($palabraBuscar, 0, $limite, $fd);
+                } catch (Exception $e) {
+                    $this->redirect()->toUrl('/');
+                }
+            }
         
-
+            $limit = 3;
+            $palabraBuscar = isset($texto) ? $texto : false;
+            $query = "($palabraBuscar)";
+            $fq = array(
+                'sort' => 'random_' . uniqid() . ' asc',
+                'fq' => 'en_estado:activo AND restaurant_estado:activo AND en_destaque:si AND  departamento:' .$distrito,
+            );
+            $results = false;
+            if ($query) {
+        
+                $solr = \Classes\Solr::getInstance()->getSolr();
+                if (get_magic_quotes_gpc() == 1) {
+                    $query = stripslashes($query);
+                }
+                try {
+                    $results = $solr->search($query, 0, $limit, $fq);
+                } catch (Exception $e) {
+                    $this->redirect()->toUrl('/');
+                }
+            }}
+            else
+            {
             $limite = 10;
             $resultados = false;
             $palabraBuscar = isset($texto) ? $texto : false;
@@ -757,7 +957,7 @@ public function __construct()
                     $this->redirect()->toUrl('/');
                 }
             }
-        
+    }
             $form = new Formularios();
             $listades = $this->getConfigTable()->cantComentxPlato(1, '0,3', 1);
             
@@ -807,7 +1007,7 @@ public function __construct()
             setcookie('q', $texto);}
         
         if($distrito and $distrito!='LIMA'){
-            
+            $distrit = '"'.$distrito.'"';
             $resultados = false;
             $palabraBuscar = isset($plato) ? $plato : false;
             $list = 1000;
@@ -1266,5 +1466,14 @@ public function __construct()
         $this->layout()->comidas = $comidas;
         // $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Terminos';
+    }
+    
+    
+      public function getRestauranteTable() {
+        if (!$this->restauranteTable) {
+            $sm = $this->getServiceLocator();
+            $this->restauranteTable = $sm->get('Restaurante\Model\RestauranteTable');
+        }
+        return $this->restauranteTable;
     }
 }

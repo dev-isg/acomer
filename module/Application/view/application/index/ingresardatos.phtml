@@ -53,9 +53,9 @@
 			    </div>
 			</div>
                         
-                        <div class="control-group ">
+            <div class="control-group ">
 			    <label class="control-label" for="inputEmail">Tipo de comida :</label>
-			    <div class="controls span4">
+			    <div class="controls">
 			      <?php echo $this->formRow($form->get('Ta_tipo_comida_in_id'));?>
 			    </div>
 			</div>
@@ -63,6 +63,7 @@
 			    <label class="control-label" for="inputEmail">Imagen de Restaurante:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($form->get('va_imagen'));?>
+			      <em class="exam">Solo se permite extensiones .jpg de 2MB máximo</em>
 			    </div>
 			</div>
 			<div class="control-group">
@@ -75,6 +76,7 @@
 			    <label class="control-label" for="inputEmail">Horario de Atención:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($form->get('va_horario'));?>
+			      <em class="exam">ejemplo: 8am a 6pm</em>
 			    </div>
 			</div>
                     
@@ -83,11 +85,8 @@
 			      <?php echo $this->formSubmit($form->get('submit'));?>
 			    </div>
 			</div>
-                       
-                         <?php echo $this->form()->closeTag();?> 
-                        
-                       
-		        </div>
+               	<?php echo $this->form()->closeTag();?> 
+		</div>
                       <?php } else { ?> <div class="contenido-static">
 			<h2>Solicite registrar un plato</h2>
 			<p>Si conoces un plato que te agrada, el lugar donde lo venden y no lo encontraste en <a href="<?php echo $this->host('ruta')?>" title="Lista del sabor" atl="listadelsabor">listadelsabor.com</a>, por favor llena el siguiente formulario y nos estaremos comunicando contigo para registrarlo.</p>
@@ -119,9 +118,10 @@
 			    <label class="control-label" for="inputEmail">Imagen del plato<span class="red">*</span>:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($formu->get('va_imagen'));?>
+			      <em class="exam">Solo se permite extensiones .jpg de 2MB máximo</em>
 			    </div>
 			</div>
-                            <div class="control-group">
+            <div class="control-group">
 			    <label class="control-label" for="inputEmail">Descripción del plato:</label>
 			    <div class="controls">
 			      <?php echo $this->formRow($formu->get('va_descripcion'));?>
@@ -130,7 +130,8 @@
 			<div class="control-group">
 			    <label class="control-label" for="inpuNombre">Precio del plato<span class="red">*</span>:</label>
 			    <div class="controls">
-			      <?php echo $this->formRow($formu->get('va_precio'));?>
+			      	<?php echo $this->formRow($formu->get('va_precio'));?>
+			      	<em class="exam">precio en soles</em>
 			    </div>
 			</div>
 			<div class="control-group">

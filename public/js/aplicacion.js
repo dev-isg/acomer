@@ -185,6 +185,7 @@ $(document).ready(function() {
             $("#search #q").attr("value", hvalor);
             var g = $.getJSON(e, function(a) {
                 if (a.response.numFound >= 1) {
+                    
                     map = new GMaps({el: "#map",zoom: 12,lat: -12.043333,lng: -77.028333,scrollwheel:false});
                     $.each(a.response.docs, function(d, j) {
                         map.setCenter(j.latitud, j.longitud);
@@ -253,7 +254,7 @@ $(document).ready(function() {
                     $(".cover2").mosaic({animation: "slide",anchor_y: "top",hover_y: "300px"});
                 });
             });
-        } else {
+        }else{
             $("#mapa-buscador").hide();
             alert("debe ingresar el plato");
         }

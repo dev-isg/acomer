@@ -150,7 +150,7 @@
             <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
 
             <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar-por-distrito">   <p>
-                  <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php 
+                  <input id="mealQ" name="q"  type="text" onclick="this.value=''" value="<?php 
                   if($_GET['q']) 
                   {$valor = explode(" ",$_GET['q']);
                   if($valor[0]=='restaurante:')
@@ -166,8 +166,10 @@
                   <em>Ejm: lomo saltado</em>
                 </p>
                 <p>
-			<input id="fq" name="distrito" type="text" onclick="this.value=''" value="<?php 
-                     if($_GET['distrito']) {echo $_GET['distrito']; } elseif($_COOKIE['distrito']){   echo $_COOKIE['distrito']; }else {echo 'LIMA';}?>"></p>
+			            <input id="disctQ" name="distrito" type="text" onclick="this.value=''" value="<?php 
+                     if($_GET['distrito']) {echo $_GET['distrito']; } elseif($_COOKIE['distrito']){   echo $_COOKIE['distrito']; }else {echo 'LIMA';}?>">
+                  <em>Ejm: Miraflores, lima, lima</em>
+                </p>
                 <p style="margin-top:5px;">
                   <input type="submit"  class="btn btn-warning btn-soli" value="Buscar"/>
                 </p>
@@ -245,7 +247,7 @@
 						id="search"
 						action="<?php echo $this->host('ruta')?>/buscar-por-distrito">
 						<p>
-							<input id="q" name="q" type="text" onclick="this.value=''"
+							<input id="mealQ" name="q" type="text" onclick="this.value=''"
 								value="<?php 
                      if($_GET['q']) 
                   {$valor = explode(" ",$_GET['q']);
@@ -263,9 +265,10 @@
 								lomo saltado</em>
 						</p>
 						<p>
-			         <input id="fq" name="distrito" type="text" onclick="this.value=''" value="<?php 
+			         <input id="disctQ" name="distrito" type="text" onclick="this.value=''" value="<?php 
                 if($_GET['distrito']) {echo $_GET['distrito']; } elseif($_COOKIE['distrito']){   echo $_COOKIE['distrito']; }else {echo 'LIMA';}?>">
                 <input type="hidden" name="country" id="autocomplete-ajax-x" disabled="disabled" style="color: #CCC; position: absolute; background: transparent; z-index: 1;">
+                <em>Ejm: Miraflores, lima, lima</em>
             </p>
 						<p style="margin-top: 5px;">
 							<input type="submit" class="btn btn-warning btn-soli"
@@ -362,22 +365,27 @@
 //     require_once './vendor/Classes/Mobile_Detect.php';
     $detect4 = new Mobile_Detect;
     if ($detect4->isTablet()) {?>
-      <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js?v<?php echo $this->host('version')?>"></script>
       <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/demo.js"></script>
+      <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js?v<?php echo $this->host('version')?>"></script>
     <?php }elseif($detect4->isMobile()){?>
       <script src="<?php echo $this->host('ruta')?>/js/aplicacion-mobile.js?v<?php echo $this->host('version')?>"></script>
     <?php }else{?>
-      <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js?v<?php echo $this->host('version')?>"></script>
       <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/demo.js"></script>
+      <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js?v<?php echo $this->host('version')?>"></script>
     <?php }?>
 
   <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/bootstrap-dropdown.js?v<?php echo $this->host('version')?>"></script>
 
 
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      (function(i,s,o,g,r,a,m){
+        i['GoogleAnalyticsObject']=r;
+        i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)
+        },
+        i[r].l=1*new Date();
+        a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-43174174-1', 'listadelsabor.com');

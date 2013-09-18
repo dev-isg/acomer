@@ -469,7 +469,8 @@ class IndexController extends AbstractActionController
             {$this->getPlatosTable()->cromSolr($result['in_id'],'');  }
            echo 'cron finalizado';exit;
         }
-
+        
+       
     }
                         
                                   
