@@ -1,17 +1,14 @@
  $(document).ready(function(){
-
-        initSucursales();
-        $('#star').raty({
-            target    : '#Ta_puntaje_in_id',
-            targetType: 'number',
-            starOff: '/img/t2.png',
-            targetKeep:true,
-            starOn : '/img/t1.png'
-
-        });
-        $("#side").height($("#main").height()); 
+    initSucursales();
+    $('#star').raty({
+        target    : '#Ta_puntaje_in_id',
+        targetType: 'number',
+        starOff: '/img/t2.png',
+        targetKeep:true,
+        starOn : '/img/t1.png'
+    });
+    $("#side").height($("#main").height()); 
         //comentarios validacion
-    
 
    $('#comentarios').validate({
         rules: {

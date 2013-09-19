@@ -11,11 +11,11 @@
               $detect3 = new Mobile_Detect();
               if ($detect3->isTablet()) {
                  ?>                 
-                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2>
+                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo ucwords($this->lista[0]['restaurant_nombre']);?></a></h2>
                <?php }elseif($detect3->isMobile()){?>   
                    <h2><a href="<?php echo $this->host('ruta')?>/buscar?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2>
                <?php } else {?> 
-                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo strtoupper($this->lista[0]['restaurant_nombre']);?></a></h2> 
+                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo ucwords($this->lista[0]['restaurant_nombre']);?></a></h2> 
             <?php }?>
    				</div>
            <div class="return">
@@ -145,7 +145,7 @@
                           <li>
                             <div class="list-ver">
                             <div class="list-img-p">
-                              <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>">
+                              <a href="/plato/<?php echo $this->canonicalUrl($this->Canonical($doc->name), array('suffix' => $doc->id));?>">
                                 <img src="<?php if($doc->va_imagen=='platos-default.png')
                                       { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
                                       else
@@ -155,7 +155,7 @@
                             <div class="list-desc-p">
                               <div class="left-resultado">
                                 <p class="nombre_r">
-                                  <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                                  <a href="/plato/<?php echo $this->canonicalUrl($this->Canonical($doc->name), array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
                                   <?php 
                                        if(strlen($doc->restaurante)>20){
                                        $strres=trim(substr($doc->restaurantee, 0, 19));
@@ -188,7 +188,7 @@
                             <div class="list-desc-p">
                               <div class="left-resultado">
                                 <p class="nombre_r">
-                                  <a href="/plato/<?php echo $this->canonicalUrl($doc->name, array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                                  <a href="/plato/<?php echo $this->canonicalUrl($this->Canonical($doc->name), array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
                                   <?php 
                                        if(strlen($doc->restaurante)>20){
                                        $strres=trim(substr($doc->restaurantee, 0, 19));

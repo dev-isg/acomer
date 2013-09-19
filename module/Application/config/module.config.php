@@ -255,6 +255,7 @@ return array(
         'invokables' => array(
             'host' => 'Application\View\Helper\Host',
             'canonicalUrl' => 'Application\View\Helper\CanonicalUrl',
+             'canonical' => 'Application\View\Helper\Canonical',
         )
     )
 

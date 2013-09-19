@@ -105,13 +105,16 @@ body{
   text-decoration: none; 
 }
 form#search{
-  /*position: relative;*/
+  position: relative;
 }
 .font-desc-c{
   font-size: 0.9em;
 }
 #map_canvas{
   position: fixed!important;
+}
+#search{
+  /*overflow: hidden;*/
 }
 #search .btn-search-home{
   background: url(../img/lupa-search.png) no-repeat;
@@ -676,9 +679,12 @@ background: url(../../img/back-detalle.png) repeat;
   list-style: none;
   overflow: hidden;
 }
+.content-info .recomendados-platos ul li{
+  width: 100%;  
+}
 .recomendados-platos ul li{
   float: left;
-  margin-right: 10px;
+  margin-right: 10px;  
 }
 .lista-plato-li ul li{
   margin-right: 0;
@@ -2356,11 +2362,23 @@ p.ver_mistura a{
 #etiqueta-elige{ width:328px; height:85px; position:absolute; background-image:url(../img/bann/etiqueta-elige.png); background-repeat:no-repeat; margin-top:100px; margin-left:1600px;}
 .bo{ background-position:bottom;}
 
-.autocomplete-suggestions { border: 1px solid #999; background: #FFF; cursor: default; overflow: auto; -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); }
+.autocomplete-suggestions { 
+  border: 1px solid #999; 
+  background: #FFF; cursor: 
+  default; overflow: auto; 
+  -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
+  -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
+  box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+  left: 40px;
+  top: 87px;
+  text-align: left;
+}
 .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
 .autocomplete-selected { background: #F0F0F0; }
 .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+#autocompletaLoad{
 
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */

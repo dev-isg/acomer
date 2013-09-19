@@ -70,8 +70,8 @@ class CanonicalUrl extends AbstractHelper
             "U"
         );
         if (!isset($options['spaceChar'])) $options['spaceChar'] = '-';
-        $str = str_replace($replace, $change, $str);
-        $canonical = str_replace(" ", $options['spaceChar'], strtolower($str));
+        $st = str_replace($replace, $change, $str);
+        $canonical = str_replace(" ", $options['spaceChar'], strtolower($st));
         if (isset($options['prefix']))
             $canonical = $options['prefix'] . $options['spaceChar'] . $canonical;
         if (isset($options['suffix']))

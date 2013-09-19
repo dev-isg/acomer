@@ -168,7 +168,7 @@
                 <p>
 			            <input id="disctQ" name="distrito" type="text" onclick="this.value=''" value="<?php 
                 if($_GET['distrito']) {echo $_GET['distrito']; } elseif($_COOKIE['distrito']){   echo $_COOKIE['distrito']; }else {echo 'LIMA';}?>">
-                  <em>Ejm: Miraflores, lima, lima</em>
+                  <em>Ejm: Miraflores, lince, San Isidro</em>
                 </p>
                 <p style="margin-top:5px;">
                   <input type="submit"  class="btn btn-warning btn-soli" value="Buscar"/>
@@ -264,11 +264,11 @@
 								placeholder="Ingrese el plato" required="required" /> <em>Ejm:
 								lomo saltado</em>
 						</p>
-						<p>
+						<p id="autocompletaLoad">
 			         <input id="disctQ" name="distrito" type="text" onclick="this.value=''" value="<?php 
                 if($_GET['distrito']) {echo $_GET['distrito']; } elseif($_COOKIE['distrito']){   echo $_COOKIE['distrito']; }else {echo 'LIMA';}?>">
                 <input type="hidden" name="country" id="autocomplete-ajax-x" disabled="disabled" style="color: #CCC; position: absolute; background: transparent; z-index: 1;">
-                <em>Ejm: Miraflores, lima, lima</em>
+                <em>Ejm: Miraflores, lince, San Isidro</em>
             </p>
 						<p style="margin-top: 5px;">
 							<input type="submit" class="btn btn-warning btn-soli"

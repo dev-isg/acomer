@@ -1311,7 +1311,8 @@ public function __construct()
         $adapter = $this->dbAdapter;
         $sql = new Sql($adapter);
         $select = $sql->select()
-            ->from('ta_tipo_comida');
+            ->from('ta_tipo_comida')
+                ->order('va_nombre_tipo ASC');
             $selectString = $sql->getSqlStringForSqlObject($select);
             $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             return $results;
