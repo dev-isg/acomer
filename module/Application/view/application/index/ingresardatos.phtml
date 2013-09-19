@@ -7,8 +7,20 @@
         
             <?php if($_GET['id']=='') {?>
 		<div class="contenido-static">
-			<h2>Solicite registrar un plato</h2>
-			<p>Si conoces un plato que te agrada, el lugar donde lo venden y no lo encontraste en <a href="<?php echo $this->host('ruta')?>" title="Lista del sabor" atl="listadelsabor">listadelsabor.com</a>, por favor llena el siguiente formulario y nos estaremos comunicando contigo para registrarlo.</p>
+			<h2>Registre su restaurante
+</h2>
+                        <p>Si quiere que sus platos se promocionen totalmente gratis, solo llene el siguiente
+formulario para poder obtener los datos básicos de su restaurante y saber 
+con quien nos podremos comunicar.
+</p>
+<p>Así mismo, podrá seleccionar cuántos platos de su restaurante podrá añadir en el
+un siguiente formulario.
+</p>
+<p>Una vez ingresado todos los datos, pulse el botón "Siguiente" y podrá pasar al
+siguiente formulario.
+</p>
+<p><a href="<?php echo $this->host('ruta')?>" title="Lista del sabor" atl="listadelsabor">listadelsabor.com</a>, agradece el que usted confie en nosotros.
+</p>
 	
 	<?php
 			$form = $this->form;
@@ -26,7 +38,7 @@
 			echo $this->formHidden($form->get('in_id'));
 			
 			?>
-			<h3>Sobre ti:</h3>
+			<h3>Datos contacto:</h3>
 			<div class="control-group">
 			    <label class="control-label" for="inputName">Nombre Completo<span class="red">*</span>:</label>
 			    <div class="controls">
@@ -45,7 +57,7 @@
 			      <?php echo $this->formRow($form->get('va_telefono'));?>
 			    </div>
 			</div>
-			<h3>Sobre el restaurante:</h3>
+			<h3>Datos Restaurante:</h3>
 			<div class="control-group">
 			    <label class="control-label" for="inpuNombre">Nombre del restaurante<span class="red">*</span>:</label>
 			    <div class="controls">
@@ -79,7 +91,12 @@
 			      <em class="exam">ejemplo: 8am a 6pm</em>
 			    </div>
 			</div>
-                    
+                    	<div class="control-group">
+			    <label class="control-label" for="inputEmail">Cantidad de platos a ingresar:</label>
+			    <div class="controls">
+			      <?php echo $this->formRow($form->get('cantidad_platos'));?>
+			    </div>
+			</div>
 			<div class="control-group">
 			    <div class="controls">
 			      <?php echo $this->formSubmit($form->get('submit'));?>
@@ -87,65 +104,80 @@
 			</div>
                	<?php echo $this->form()->closeTag();?> 
 		</div>
-                      <?php } else { ?> <div class="contenido-static">
-			<h2>Solicite registrar un plato</h2>
-			<p>Si conoces un plato que te agrada, el lugar donde lo venden y no lo encontraste en <a href="<?php echo $this->host('ruta')?>" title="Lista del sabor" atl="listadelsabor">listadelsabor.com</a>, por favor llena el siguiente formulario y nos estaremos comunicando contigo para registrarlo.</p>
+                      <?php } else { ?> 
+            
+            
+                  <div class="contenido-static">
+			<h2>Registre sus platos</h2>
+                        <p>En el siguiente formulario podrá añadir la cantidad de platos que decidió en el
+anterior formulario.</p>
+                        <p>Por favor, no olvide de seguir los ejemplos para que no tenga problemas al 
+añadir los datos o las imágenes.
+</p>
+<p>Una vez ingresado todos los datos, pulse el botón "Terminar" y nos 
+comunicaremos a la brevedad con usted.
+</p>
+			<p><a href="<?php echo $this->host('ruta')?>" title="Lista del sabor" atl="listadelsabor">listadelsabor.com</a>, agradece el que usted confie en nosotros.</p>
                         <br>
-
-	<?php
-			$formu = $this->formu;
-			
+                        
+                          <?php if($this->mensaje){ ?>
+            <div class="alert alert-success"><?php echo $this->mensaje[0];?></div><?php  }?>
+                                
+	                <?php  $formu = $this->formu;
 			$formu->setAttributes(array(
 			    'action' => $this->url.'/ingresarplatos',
 			    'method' => 'post',
 			    'class' => 'form-horizontal',
-                            'id'=>'application3'
-			));
+                            'id'=>'application3'));
 			$formu->prepare();
-
-			echo $this->form()->openTag($formu);
-			echo $this->formHidden($formu->get('Ta_registro_in_id')->setValue($_GET['id']));
-			
-			?>
-			<h3>Datos del Plato:</h3>
+			echo $this->form()->openTag($formu);?>
+                        
+                                <div>
+                                     <?php $cantida = $_GET['plato']; for($i=1;$i<=$cantida;$i++)
+                                        {?>
+                                    <div>
+                        
+			<?php echo $this->formHidden($formu->get('Ta_registro_in_id'.$i)->setValue($_GET['id']));?>
+			<h3>Datos del Plato <?php echo $i; ?> : </h3>
 			<div class="control-group">
 			    <label class="control-label" for="inputName">Nombre del Plato<span class="red">*</span>:</label>
 			    <div class="controls">
-			      <?php echo $this->formRow($formu->get('va_nombre_plato'));?>
+			      <?php echo $this->formRow($formu->get('va_nombre_plato'.$i));?>
 			    </div>
 			</div>
 			<div class="control-group">
 			    <label class="control-label" for="inputEmail">Imagen del plato<span class="red">*</span>:</label>
 			    <div class="controls">
-			      <?php echo $this->formRow($formu->get('va_imagen'));?>
+			      <?php echo $this->formRow($formu->get('va_imagen'.$i));?>
 			      <em class="exam">Solo se permite extensiones .jpg de 2MB máximo</em>
 			    </div>
 			</div>
-            <div class="control-group">
+                       <div class="control-group">
 			    <label class="control-label" for="inputEmail">Descripción del plato:</label>
 			    <div class="controls">
-			      <?php echo $this->formRow($formu->get('va_descripcion'));?>
+			      <?php echo $this->formRow($formu->get('va_descripcion'.$i));?>
 			    </div>
 			</div>
 			<div class="control-group">
 			    <label class="control-label" for="inpuNombre">Precio del plato<span class="red">*</span>:</label>
 			    <div class="controls">
-			      	<?php echo $this->formRow($formu->get('va_precio'));?>
-			      	<em class="exam">precio en soles</em>
+			      	<?php echo $this->formRow($formu->get('va_precio'.$i));?>
+			      	<em class="exam">ejemplo: (S/. 45.00)</em>
 			    </div>
-			</div>
-			<div class="control-group">
+			</div> 
+	                   </div>   
+                            <?php }?>
+                            </div>     
+                       <?php echo $this->form()->closeTag();?>     
+                             
+                        <div class="control-group">
 			    <div class="controls">
 			      <?php echo $this->formSubmit($formu->get('submit'));?>
+                                <br>
 			    </div>
-			</div>
-                       
-                         <?php echo $this->form()->closeTag();?> 
-                        
-                       
-		        </div>  <?php if($this->mensaje){ ?>
-            <div class="alert alert-success"><?php echo $this->mensaje[0];?></div>
-            <?php } ?><?php  }?>
+                </div>       
+	     </div>            
+            <?php } ?>
 			</div>
             
                        

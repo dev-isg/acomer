@@ -428,6 +428,7 @@ public function __construct()
                         $arrpl[] = $plat->plato_tipo;   }
                     if(!in_array($plat->id,$arrest)){
                         $arrest[] = $plat->id;}}
+                        
                     if(count($resulta->response->docs)==0){
                    $consultafinal = $this->consultasAction(3,'',''); 
                     $results =$resulta->response->docs; } 
@@ -579,8 +580,11 @@ public function __construct()
                 }
             }
         }
-
+        
         $busquedatitle=$valores.':'.implode(",",$arrpl).':'.implode(",",$arrest).'| Lista del Sabor';
+        
+         $this->layout()->description=$busquedatitle;
+        
         $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
         $listatot = $listatot->toArray();
         
@@ -1325,6 +1329,7 @@ public function __construct()
         $request = $this->getRequest();
         if ($request->isPost()) {
             $datos =$this->request->getPost();
+           // var_dump($datos->cantidad_platos);exit;
             $File = $this->params()->fromFiles('va_imagen');
             $form->setData($datos);
             if ($form->isValid()) {
@@ -1343,7 +1348,7 @@ public function __construct()
                $idrestaurante = $this->getConfigTable()->guardarregistro($datos,$name);
                $id =$idrestaurante;
                $this->flashMessenger()->addMessage('El restaurante ha sido registrado correctamente...');
-                $this->redirect()->toUrl('/solicita?id='.$id);
+                $this->redirect()->toUrl('/solicita?id='.$id.'&plato='.$datos->cantidad_platos);
                 
             }
         }
@@ -1365,25 +1370,39 @@ public function __construct()
         $this->layout()->clase = 'Solicita';
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $datos =$this->request->getPost();
-            $File = $this->params()->fromFiles('va_imagen');
-                $valor  = uniqid();
-                $info =  pathinfo($File['name']);
-                 require './vendor/Classes/Filter/Alnum.php';
-                 if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg'){  
-                  $imf2 =  $valor.'.'.$info['extension'];
-                  $filter   = new \Filter_Alnum();
-                  $filtered = $filter->filter($datos->va_nombre_plato);
-                  $name = $filtered.'-'.$imf2;
-                      $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);                  
-                       $copia = $this->_options->upload->images . '/registro/plato/' . $name;       
-                       imagejpeg($viejaimagen,$copia);
-                  }
-              $resultado = $this->getConfigTable()->guardarplatoregistro($datos,$name);
-              if($resultado==null)
-               { $this->flashMessenger()->addMessage('Ya no puede ingresar más platos...');}
-              else { $this->flashMessenger()->addMessage('Si desea ingrese nuevo plato...');}
-                $this->redirect()->toUrl('/solicita?id='.$datos->Ta_registro_in_id);
+           $datos =$this->request->getPost();
+                $returnArray=array();
+        foreach ($datos as $result) {
+            $returnArray[] = $result;}
+         
+//var_dump($returnArray);exit;
+            
+//          $con = count($returnArray)/4;
+//          for($i=1;$i<=$con;$i++){
+//               $File = $this->params()->fromFiles('va_imagen'.$i);
+//             //   $valor  = uniqid();
+//                $info =  pathinfo($File['name']);
+//                 require './vendor/Classes/Filter/Alnum.php';
+//                 if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg'){  
+////                  $imf2 =  $valor.'.'.$info['extension'];
+//                 $imf2 =  $info['extension']; 
+//                 // $filter   = new \Filter_Alnum();
+//                 // $filtered = $filter->filter($datos->va_nombre_plato.$i);             
+//                 // $name = $filtered.'-'.$imf2;
+//                  $name='plato'.$i.'-'.$returnArray[0].'.'.$imf2;
+//                      $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);                  
+//                       $copia = $this->_options->upload->images . '/registro/plato/' . $name;       
+//                       imagejpeg($viejaimagen,$copia);
+//                  }   
+//          }  
+                     
+               $this->getConfigTable()->guardarplatoregistro($datos);
+//              if($resultado==null)
+//               { 
+//                  $this->flashMessenger()->addMessage('Ya no puede ingresar más platos...');}
+//              else { $this->flashMessenger()->addMessage('Si desea ingrese nuevo plato...');}
+//               
+            $this->redirect()->toUrl('/solicita');
         }
       
         return $view;

@@ -69,6 +69,25 @@ class Registro extends Form
               ),
              )
         ));
+       
+       $this->add(array(
+            'name' => 'cantidad_platos',
+            'type' => 'Select',  
+             'attributes' => array(               
+                'class' => 'span3',
+                'id'   => 'cantidad_platos'
+            ),
+           'options' => array('label' => '',
+                     'value_options' => array(
+                          '0' => 'seleccione la cantidad',
+                          '1' => '1',
+                         '2' => '2','3' => '3','4' => '4','5' => '5',
+                         
+                         
+                         
+              ),
+             )
+        ));
         
          $this->add(array(
             'name' => 'va_direccion',
@@ -106,7 +125,7 @@ class Registro extends Form
             'name' => 'submit',
             'type' => 'Submit',
             'attributes' => array(
-                'value' => 'Enviar',
+                'value' => 'Siguiente',
                 'id' => 'submitbutton',
                 'class' => 'btn btn-primary btn-solicito'
             ),

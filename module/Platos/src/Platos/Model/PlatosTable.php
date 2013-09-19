@@ -414,38 +414,54 @@ class PlatosTable {
      return $idrestaurante;
 
     }
-       public function guardarplatoregistro($dataregistro,$imagen) {
-         $data = array(
+       public function guardarplatoregistro($dataregistro) {
          
-            'va_nombre_plato' => $dataregistro->va_nombre_plato,
-            'va_imagen' =>$imagen,
-            'va_descripcion' => $dataregistro->va_descripcion,
-            'va_precio' => $dataregistro->va_precio,
-            'Ta_registro_in_id' => $dataregistro->Ta_registro_in_id
-        );
- 
-        $adapte = $this->tableGateway->getAdapter();
-        $sq = new Sql($adapte);
-        $selecttt = $sq->select()
-                ->from('ta_registroplato')
-                ->columns(array('*','num' => new \Zend\Db\Sql\Expression('COUNT(ta_registroplato.in_id)')))
-                ->where(array('Ta_registro_in_id' => $dataregistro->Ta_registro_in_id));
-        $selectStrin = $sq->getSqlStringForSqlObject($selecttt);
-        $results = $adapte->query($selectStrin, $adapte::QUERY_MODE_EXECUTE);
-        $dd = $results->toArray();
-         if($dd[0]['num']<5)
-         { $adapter = $this->tableGateway->getAdapter();
-              $sql = new Sql($adapter);
+         $va = count($dataregistro)/4;
+         for($i=1;$i<=$va;$i++)
+         
+           { $valor =  'mama';
+             var_dump($dataregistro->va_nombre_plato.$valor);exit;
+              $data = array(
+                 'va_imagen' =>'plato'.$i.'-'.$dataregistro->Ta_registro_in_id.$i.'.jpg', 
+                   'Ta_registro_in_id' => $dataregistro->Ta_registro_in_id.$i,            
+                  'va_nombre_plato' => $dataregistro->va_nombre_plato.$i,     
+                  'va_descripcion' => $dataregistro->va_descripcion.$i, 
+                   'va_precio' => $dataregistro->va_precio.$i,) ;
+               var_dump($data);exit;
+              $adapter = $this->tableGateway->getAdapter();
+               $sql = new Sql($adapter);
               $selecttot = $sql->insert()
                       ->into('ta_registroplato')
                       ->values($data);
               $selectString = $sql->getSqlStringForSqlObject($selecttot);
             $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
             $idrestaurante=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();
-            return $idrestaurante;}
-            else{ return $idrestaurante;}
-             
-        return $idrestaurante;
+            return $idrestaurante; 
+           }
+        
+         
+//        $adapter = $this->tableGateway->getAdapter();
+////        $sq = new Sql($adapte);
+////        $selecttt = $sq->select()
+////                ->from('ta_registroplato')
+////                ->columns(array('*','num' => new \Zend\Db\Sql\Expression('COUNT(ta_registroplato.in_id)')))
+////                ->where(array('Ta_registro_in_id' => $dataregistro->Ta_registro_in_id));
+////        $selectStrin = $sq->getSqlStringForSqlObject($selecttt);
+////        $results = $adapte->query($selectStrin, $adapte::QUERY_MODE_EXECUTE);
+////        $dd = $results->toArray();
+////         if($dd[0]['num']<5)
+////         { $adapter = $this->tableGateway->getAdapter();
+//              $sql = new Sql($adapter);
+//              $selecttot = $sql->insert()
+//                      ->into('ta_registroplato')
+//                      ->values($data);
+//              $selectString = $sql->getSqlStringForSqlObject($selecttot);
+//            $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//            $idrestaurante=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();
+////            return $idrestaurante;}
+////            else{ return $idrestaurante;}
+//             
+//        return $idrestaurante;
     }
     
     
@@ -592,7 +608,7 @@ class PlatosTable {
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString.$limit, $adapter::QUERY_MODE_EXECUTE);
         return $results;
-        
+     
     }
     
     
