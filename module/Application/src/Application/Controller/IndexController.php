@@ -379,13 +379,14 @@ public function __construct()
             }else{
              
                 $limite = 10;
+                $distrito='LIMA';
                 if($paginas=='')
                  {$start = 0;}
                else{$start=$paginas*10;}
                 $resultados = false;
                 $palabraBuscar = isset($texto) ? $texto : false;
                 $fd = array(
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo'
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND  departamento:' .$distrito,
                 );
                 
                 if ($palabraBuscar) {
@@ -402,11 +403,12 @@ public function __construct()
                     }
                 }
                 $limit = 3;
+                $distrito='LIMA';
                 $palabraBuscar = isset($texto) ? $texto : false;
                 $query = "($palabraBuscar)";
                 $fq = array(
                     'sort' => 'random_' . uniqid() . ' asc',
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo  AND en_destaque:si'
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo  AND en_destaque:si AND  departamento:' .$distrito,
                 );
                 $resulta = false;
                 if ($query) {
@@ -1057,10 +1059,11 @@ public function __construct()
                 }
             }
         }else{$limite = 1000;
+        $distrito= '"LIMA"';
             $resultados = false;
             $palabraBuscar = isset($plato) ? $plato : false;
             $fd = array(
-                'fq' => 'en_estado:activo AND restaurant_estado:activo'
+                'fq' => 'en_estado:activo AND restaurant_estado:activo AND departamento:' .$distrito,
             );
             
             if ($palabraBuscar) {
@@ -1375,38 +1378,29 @@ public function __construct()
         foreach ($datos as $result) {
             $returnArray[] = $result;}
          
-//var_dump($returnArray);exit;
+
             
-//          $con = count($returnArray)/4;
-//          for($i=1;$i<=$con;$i++){
-//               $File = $this->params()->fromFiles('va_imagen'.$i);
-//             //   $valor  = uniqid();
-//                $info =  pathinfo($File['name']);
-//                 require './vendor/Classes/Filter/Alnum.php';
-//                 if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg'){  
-////                  $imf2 =  $valor.'.'.$info['extension'];
-//                 $imf2 =  $info['extension']; 
-//                 // $filter   = new \Filter_Alnum();
-//                 // $filtered = $filter->filter($datos->va_nombre_plato.$i);             
-//                 // $name = $filtered.'-'.$imf2;
-//                  $name='plato'.$i.'-'.$returnArray[0].'.'.$imf2;
-//                      $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);                  
-//                       $copia = $this->_options->upload->images . '/registro/plato/' . $name;       
-//                       imagejpeg($viejaimagen,$copia);
-//                  }   
-//          }  
+          $con = count($datos)/4;
+          for($i=1;$i<=$con;$i++){
+               $File = $this->params()->fromFiles('va_imagen'.$i);
+                $info =  pathinfo($File['name']);
+                // require './vendor/Classes/Filter/Alnum.php';
+                 if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg')      
+                  { $imf2 =  $info['extension']; 
+                  $name='plato'.$i.'-'.$datos->Ta_registro_in_id1.'.'.$imf2;
+                      $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);                  
+                       $copia = $this->_options->upload->images . '/registro/plato/' . $name;       
+                       imagejpeg($viejaimagen,$copia);
+                 }   
+          }  
                      
-               $this->getConfigTable()->guardarplatoregistro($datos);
-//              if($resultado==null)
-//               { 
-//                  $this->flashMessenger()->addMessage('Ya no puede ingresar más platos...');}
-//              else { $this->flashMessenger()->addMessage('Si desea ingrese nuevo plato...');}
-//               
-            $this->redirect()->toUrl('/solicita');
+               $this->getConfigTable()->guardarplatoregistro($datos);        
+            $this->redirect()->toUrl('/solicita?m=1');
         }
-      
+
         return $view;
     }
+
 
     public function contactenosAction()
     {

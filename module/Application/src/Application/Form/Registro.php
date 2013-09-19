@@ -79,7 +79,7 @@ class Registro extends Form
             ),
            'options' => array('label' => '',
                      'value_options' => array(
-                          '0' => 'seleccione la cantidad',
+                         ''=>'',
                           '1' => '1',
                          '2' => '2','3' => '3','4' => '4','5' => '5',
                          

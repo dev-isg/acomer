@@ -167,7 +167,7 @@
                 </p>
                 <p>
 			            <input id="disctQ" name="distrito" type="text" onclick="this.value=''" value="<?php 
-                     if($_GET['distrito']) {echo $_GET['distrito']; } elseif($_COOKIE['distrito']){   echo $_COOKIE['distrito']; }else {echo 'LIMA';}?>">
+                if($_GET['distrito']!='') {echo $_GET['distrito']; } elseif($_COOKIE['distrito']!=''){   echo $_COOKIE['distrito']; }elseif($_GET['distrito']=='' or $_COOKIE['distrito']==''){   echo 'LIMA'; }else {echo 'LIMA';}?>"
                   <em>Ejm: Miraflores, lima, lima</em>
                 </p>
                 <p style="margin-top:5px;">
@@ -266,7 +266,7 @@
 						</p>
 						<p>
 			         <input id="disctQ" name="distrito" type="text" onclick="this.value=''" value="<?php 
-                if($_GET['distrito']) {echo $_GET['distrito']; } elseif($_COOKIE['distrito']){   echo $_COOKIE['distrito']; }else {echo 'LIMA';}?>">
+                if($_GET['distrito']!='') {echo $_GET['distrito']; } elseif($_COOKIE['distrito']!=''){   echo $_COOKIE['distrito']; }elseif($_GET['distrito']=='' or $_COOKIE['distrito']==''){   echo 'LIMA'; }else {echo 'LIMA';}?>">
                 <input type="hidden" name="country" id="autocomplete-ajax-x" disabled="disabled" style="color: #CCC; position: absolute; background: transparent; z-index: 1;">
                 <em>Ejm: Miraflores, lima, lima</em>
             </p>
@@ -365,12 +365,12 @@
 //     require_once './vendor/Classes/Mobile_Detect.php';
     $detect4 = new Mobile_Detect;
     if ($detect4->isTablet()) {?>
-      <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/demo.js"></script>
+      <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/acomer.provincias.js"></script>
       <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js?v<?php echo $this->host('version')?>"></script>
     <?php }elseif($detect4->isMobile()){?>
       <script src="<?php echo $this->host('ruta')?>/js/aplicacion-mobile.js?v<?php echo $this->host('version')?>"></script>
     <?php }else{?>
-      <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/demo.js"></script>
+      <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/acomer.provincias.js"></script>
       <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js?v<?php echo $this->host('version')?>"></script>
     <?php }?>
 

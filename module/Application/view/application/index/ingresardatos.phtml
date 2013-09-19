@@ -3,21 +3,23 @@
 ?>
 <script src="<?php echo $this->host('ruta')?>/js/vendor/jquery.validate.min.js?v<?php echo $this->host('version')?>"></script>
 <div class="content-left">
+    
+    <?php  if(!$_GET['m']) {?>
 	<div class="descrip-product">
         
             <?php if($_GET['id']=='') {?>
 		<div class="contenido-static">
 			<h2>Registre su restaurante
 </h2>
-                        <p>Si quiere que sus platos se promocionen totalmente gratis, solo llene el siguiente
-formulario para poder obtener los datos básicos de su restaurante y saber 
-con quien nos podremos comunicar.
+                        <p>Si quiere que sus platos se promocionen totalmente gratis, 
+solo llene el siguiente formulario para poder obtener los datos 
+básicos de su restaurante y saber la persona con la que nos podremos comunicar.
 </p>
-<p>Así mismo, podrá seleccionar cuántos platos de su restaurante podrá añadir en el
-un siguiente formulario.
+<p>Así mismo, podrá seleccionar la cantidad de platos que desea
+que su restaurante pueda mostrar en nuestro portal.
 </p>
-<p>Una vez ingresado todos los datos, pulse el botón "Siguiente" y podrá pasar al
-siguiente formulario.
+<p>Una vez ingresado todos los datos, 
+pulse el botón "Siguiente" y podrá pasar al siguiente formulario.
 </p>
 <p><a href="<?php echo $this->host('ruta')?>" title="Lista del sabor" atl="listadelsabor">listadelsabor.com</a>, agradece el que usted confie en nosotros.
 </p>
@@ -38,7 +40,7 @@ siguiente formulario.
 			echo $this->formHidden($form->get('in_id'));
 			
 			?>
-			<h3>Datos contacto:</h3>
+			<h3>Datos del Contacto:</h3>
 			<div class="control-group">
 			    <label class="control-label" for="inputName">Nombre Completo<span class="red">*</span>:</label>
 			    <div class="controls">
@@ -57,7 +59,7 @@ siguiente formulario.
 			      <?php echo $this->formRow($form->get('va_telefono'));?>
 			    </div>
 			</div>
-			<h3>Datos Restaurante:</h3>
+			<h3>Datos del Restaurante:</h3>
 			<div class="control-group">
 			    <label class="control-label" for="inpuNombre">Nombre del restaurante<span class="red">*</span>:</label>
 			    <div class="controls">
@@ -173,12 +175,29 @@ comunicaremos a la brevedad con usted.
                         <div class="control-group">
 			    <div class="controls">
 			      <?php echo $this->formSubmit($formu->get('submit'));?>
-                                <br>
+                                <br><br><br>
 			    </div>
                 </div>       
 	     </div>            
             <?php } ?>
-			</div>
+			</div><?php } else { ?> <div class="contenido-static">
+			<h2>Registre sus platos</h2>
+                        <p>En el siguiente formulario podrá añadir la cantidad de platos que decidió en el
+anterior formulario.</p>
+                        <p>Por favor, no olvide de seguir los ejemplos para que no tenga problemas al 
+añadir los datos o las imágenes.
+</p>
+<p>Una vez ingresado todos los datos, pulse el botón "Terminar" y nos 
+comunicaremos a la brevedad con usted.
+</p>
+			<p><a href="<?php echo $this->host('ruta')?>" title="Lista del sabor" atl="listadelsabor">listadelsabor.com</a>, agradece el que usted confie en nosotros.</p>
+                        <br>
+			<h2>Gracias por registrar sus platos, ya nos estaremos comunicando a la brevedad con usted.
+                        </h2>
+                        <div><a  href="<?php echo $this->basePath();?>/solicita" class='modificar btn btn-success'>Agregar Nuevo Restaurante</a>
+                             <a href="<?php echo $this->basePath();?>/" class='listar btn btn-inverse'>Salir</a> 
+                        </div>               
+                         </div>  <?php }  ?>
             
                        
 	
@@ -211,7 +230,11 @@ function submitForm(){
 		},
 		va_imagen: {
 			required: true
+		},
+		cantidad_platos: {
+			required: true
 		}
+                
 
 	}, 
 	errorElement: "em", 
@@ -227,6 +250,8 @@ function submitForm(){
 		},
 		va_imagen: {
 			required: "Ingrese una imagen del restaurante"
+		},cantidad_platos: {
+			required: "seleccione la cantidad de platos"
 		}
 	} 
 	}); 
@@ -239,24 +264,67 @@ function submitForm(){
 function submitFormPlato(){ 
 	var validator = $("#application3").validate({ 
 	rules: {
-		va_nombre_plato: {
+		va_nombre_plato1: {
 			required: true
-		}, 
-		va_imagen: {
+		}, va_imagen1: {
 			required: true
-		}, 
-		va_precio: {
+		}, va_precio1: {
+			required: true
+		},va_nombre_plato2: {
+			required: true
+		}, va_imagen2: {
+			required: true
+		}, va_precio2: {
+			required: true
+		},   va_nombre_plato3: {
+			required: true
+		}, va_imagen3: {
+			required: true
+		}, va_precio3: {
+			required: true
+		},va_nombre_plato4: {
+			required: true
+		}, va_imagen4: {
+			required: true
+		}, va_precio4: {
+			required: true
+		},va_nombre_plato5: {
+			required: true
+		}, va_imagen5: {
+			required: true
+		}, va_precio5: {
 			required: true
 		}
+                
 
 	}, 
 	errorElement: "em", 
 	messages: { 
-		va_nombre_plato: "Ingrese nombre del plato", 
-		va_imagen: {
+		va_nombre_plato1: "Ingrese nombre del plato", 
+		va_imagen1: {
 			required: "Ingrese la imagen del plato"
 		}, 
-		va_precio: "Ingrese el precio del plato"
+		va_precio1: "Ingrese el precio del plato",
+                va_nombre_plato2: "Ingrese nombre del plato", 
+		va_imagen2: {
+			required: "Ingrese la imagen del plato"
+		}, 
+		va_precio2: "Ingrese el precio del plato",
+                va_nombre_plato3: "Ingrese nombre del plato", 
+		va_imagen3: {
+			required: "Ingrese la imagen del plato"
+		}, 
+		va_precio3: "Ingrese el precio del plato",
+                va_nombre_plato4: "Ingrese nombre del plato", 
+		va_imagen4: {
+			required: "Ingrese la imagen del plato"
+		}, 
+		va_precio4: "Ingrese el precio del plato",
+                va_nombre_plato5: "Ingrese nombre del plato", 
+		va_imagen5: {
+			required: "Ingrese la imagen del plato"
+		}, 
+		va_precio5: "Ingrese el precio del plato"
 	} 
 	}); 
 	if(validator.form()){ // validation perform 

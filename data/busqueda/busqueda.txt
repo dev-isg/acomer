@@ -2849,3 +2849,44 @@ ceviche , MIRAFLORES
 ceviche , MIRAFLORES
 ceviche , MIRAFLORES
 ceviche , MIRAFLORES
+ceviche , 
+ceviche , 
+trebol , LIMA
+trebol , LIMA
+lomo saltado , LIMA
+Sopa criolla , LIMA
+ceviche , SAN BORJA
+ceviche , san isidro
+ceviche , san isidro
+ceviche , 
+chocolate , LIMA
+ceviche , SAN ISIDRO
+trebol , LIMA
+ceviche , 
+trebol frio , LIMA
+Trebol Caliente , LIMA
+Makis , LIMA
+katitos , LIMA
+trebol frio , LIMA
+makis , LIMA
+la kaleta , LIMA
+makis , 
+plato x , LIMA
+la kaleta , LIMA
+puerto med , LIMA
+trebol frio , LIMA
+la kaleta , SAN BORJA
+ceviche , LIMA
+ceviche , SAN ISIDRO
+ceviche , 
+lomo saltado , 
+lomo saltado , LIMA
+makis , 
+ceviche , LIMA
+ceviche , LIMA
+ceviche , SAN ISIDRO
+ceviche , 
+ceviche , LIMA
+ceviche , SAN ISIDRO
+ceviche , 
+causa , 

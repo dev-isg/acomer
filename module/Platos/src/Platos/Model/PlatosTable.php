@@ -414,56 +414,29 @@ class PlatosTable {
      return $idrestaurante;
 
     }
-       public function guardarplatoregistro($dataregistro) {
+       
+public function guardarplatoregistro($dataregistro) {
          
          $va = count($dataregistro)/4;
          for($i=1;$i<=$va;$i++)
-         
-           { $valor =  'mama';
-             var_dump($dataregistro->va_nombre_plato.$valor);exit;
+           { 
+             $Ta_registro_in_id = 'Ta_registro_in_id'.$i;
+             $va_descripcion = 'va_descripcion'.$i;
+             $va_nombre_plato = 'va_nombre_plato'.$i;
+             $va_precio = 'va_precio'.$i;
               $data = array(
-                 'va_imagen' =>'plato'.$i.'-'.$dataregistro->Ta_registro_in_id.$i.'.jpg', 
-                   'Ta_registro_in_id' => $dataregistro->Ta_registro_in_id.$i,            
-                  'va_nombre_plato' => $dataregistro->va_nombre_plato.$i,     
-                  'va_descripcion' => $dataregistro->va_descripcion.$i, 
-                   'va_precio' => $dataregistro->va_precio.$i,) ;
-               var_dump($data);exit;
-              $adapter = $this->tableGateway->getAdapter();
-               $sql = new Sql($adapter);
-              $selecttot = $sql->insert()
+                 'va_imagen' =>'plato'.$i.'-'.$dataregistro->$Ta_registro_in_id.'.jpg', 
+                   'Ta_registro_in_id' => $dataregistro->$Ta_registro_in_id,            
+                  'va_nombre_plato' => $dataregistro->$va_nombre_plato,     
+                  'va_descripcion' => $dataregistro->$va_descripcion, 
+                   'va_precio' => $dataregistro->$va_precio,) ;
+             $insertar = $this->tableGateway->getSql()->insert()
                       ->into('ta_registroplato')
                       ->values($data);
-              $selectString = $sql->getSqlStringForSqlObject($selecttot);
-            $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-            $idrestaurante=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();
-            return $idrestaurante; 
+            $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insertar);
+            $statement->execute();
            }
-        
-         
-//        $adapter = $this->tableGateway->getAdapter();
-////        $sq = new Sql($adapte);
-////        $selecttt = $sq->select()
-////                ->from('ta_registroplato')
-////                ->columns(array('*','num' => new \Zend\Db\Sql\Expression('COUNT(ta_registroplato.in_id)')))
-////                ->where(array('Ta_registro_in_id' => $dataregistro->Ta_registro_in_id));
-////        $selectStrin = $sq->getSqlStringForSqlObject($selecttt);
-////        $results = $adapte->query($selectStrin, $adapte::QUERY_MODE_EXECUTE);
-////        $dd = $results->toArray();
-////         if($dd[0]['num']<5)
-////         { $adapter = $this->tableGateway->getAdapter();
-//              $sql = new Sql($adapter);
-//              $selecttot = $sql->insert()
-//                      ->into('ta_registroplato')
-//                      ->values($data);
-//              $selectString = $sql->getSqlStringForSqlObject($selecttot);
-//            $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-//            $idrestaurante=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();
-////            return $idrestaurante;}
-////            else{ return $idrestaurante;}
-//             
-//        return $idrestaurante;
     }
-    
     
     
     public function getLocalesxRestaurante($idrest) {
