@@ -107,13 +107,11 @@
                   <ul class="time">
                     <li><span class="day"><?php echo $this->lista[0]['va_dia']; ?></span></li>
                     <li><span class="hour"><?php echo $this->lista[0]['va_horario']; ?></span></li>
-                  </ul>
-                  <?php if($this->lista[0]['va_horario_opcional']){?>
-                  <h4>Horario Opcional</h4>
-                  <ul class="time">
+                     <?php if($this->lista[0]['va_horario_opcional']){?>
+                    <li><span class="day">Horario Opcional</span></li>
                     <li><span class="hour"><?php echo $this->lista[0]['va_horario_opcional']; ?></span></li>
+                    <?php } ?>
                   </ul>
-                  <?php } ?>
                   <?php if($this->lista[0]['web']){?>
                   <h4>Página web</h4>
                   <ul class="time">

@@ -2890,3 +2890,40 @@ ceviche , LIMA
 ceviche , SAN ISIDRO
 ceviche , 
 causa , 
+la kaleta , 
+la kaleta , 
+La Kaleta   , 
+ceviche , 
+ceviche , LIMA
+ceviche , LIMA
+ceviche , LIMA
+ceviche , 
+arroz con mariscos , 
+ceviche , 
+lomo saltado , 
+lomo saltado , SANTIAGO DE SURCO
+Ceviche , LIMA
+Ceviche , LIMA
+Ceviche , LIMA
+Ceviche , LIMA
+Ceviche , LIMA
+arroz , la perla
+arroz , la molina
+lomo , la perla
+lomo , callao
+lomo , la molina
+lomo , lima
+lomo , lima
+lomo , lima
+lomo , SAN LUIS
+lomo , san luis
+lomo , san isisdro
+lomo , san isidro
+lomo , surco
+lomo , surco
+lomo , surco
+Restaurante Turístico Todo Perú , 
+arroz con mariscos , 
+causa , 
+La Kaleta   , 
+Zen Sushi Bar  , 
