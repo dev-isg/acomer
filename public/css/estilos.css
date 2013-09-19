@@ -2257,13 +2257,9 @@ p.ver_mistura a{
   width:250px; 
   height:256px; 
   position:absolute;
-  background-size: 100%;
-  background-repeat:no-repeat; 
   margin-top:0px; 
   margin-left:40px; 
-  opacity: 0;
-  -moz-opacity: 0;-webkit-opacity: 0; filter:alpha(opacity=0); 
-  bottom: -5px;
+  margin-top: 20px;
 }
 .nav-banner ul{
   list-style: none;
@@ -2349,7 +2345,7 @@ p.ver_mistura a{
 #plato-verdura-lomosaltado { background-image:url(../img/bann/lomo-e.png); }
 #plato-verdura-guisoverdura { background-image:url(../img/bann/parrilla-e.png); }
 #plato-verdura-sopadezapallo { background-image:url(../img/bann/causa-e.png); }
-#plato-verdura-wok { background-image:url(../img/bann/ceviche-e.png); }
+/*#plato-verdura-wok { background-image:url(../img/bann/ceviche-e.png); }*/
 
 /*#btn-continua2 { width:200px; height:93px; position:absolute; background-image:url(../img/btn-continuar.png); background-repeat:no-repeat; margin-top:525px; margin-left:451px; display:none; cursor:pointer;}*/
 #btn-continua2:hover{ background-position:bottom;}
@@ -2654,13 +2650,9 @@ p.ver_mistura a{
 .caja-platos { 
   width:300px; 
   height:306px; 
-  position:absolute; 
-  background-repeat:no-repeat; 
   margin-top:0px; 
   margin-left:40px; 
-  opacity: 0;
-  -moz-opacity: 0;-webkit-opacity: 0; filter:alpha(opacity=0); 
-  bottom: -5px;
+  margin-top: 20px;
 }
 .nav-banner ul{
   list-style: none;

@@ -418,7 +418,7 @@ class IndexController extends AbstractActionController
             foreach ($plato as $result) 
             {
             $this->cambiaestadoLocalRestauranteAction($result['plato'],$estado);
-             $this->getPlatosTable()->cromSolr($result['plato'],'');
+             $this->getPlatosTable()->eliminaprevia($result['plato'],$estado);
             }
             $this->redirect()->toUrl('/restaurante/index');
          }    
@@ -461,16 +461,19 @@ class IndexController extends AbstractActionController
             $adapter = $this->dbAdapter;
             $sql = new Sql($adapter); 
             $select = $sql->select()
-            ->from('ta_plato');
-            $selectS = $sql->getSqlStringForSqlObject($select);   
+            ->from('ta_plato')
+               ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
+                    ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
+                    ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud'), 'left')
+                    ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre'), 'left')    
+             ->where(array('ta_plato.en_estado'=>'activo','tr.en_estado'=>'activo'));
+            $selectS = $sql->getSqlStringForSqlObject($select);  
             $resul = $adapter->query($selectS, $adapter::QUERY_MODE_EXECUTE);
             $plato=$resul->toArray();
            foreach ($plato as $result)     
             {$this->getPlatosTable()->cromSolr($result['in_id'],'');  }
            echo 'cron finalizado';exit;
-        }
-        
-       
+        }  
     }
                         
                                   

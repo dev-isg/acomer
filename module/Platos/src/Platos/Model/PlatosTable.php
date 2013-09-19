@@ -226,6 +226,7 @@ class PlatosTable {
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
+       // var_dump($plato);exit;
          $selectto = $sql->select()
                 ->from('ta_plato')  
                     ->join(array('tpt' => 'ta_plato_has_ta_tag'), 'tpt.Ta_plato_in_id = ta_plato.in_id', array('tag_id'=>'ta_tag_in_id'), 'left')
@@ -268,6 +269,24 @@ class PlatosTable {
         }
     }
 
+    
+      public function eliminaprevia($id, $estado) {
+        if($estado=='activo'){ $this->cromSolr($id,'');}
+        else{$this->eliminarSolr($id);}
+    }
+    
+    
+       public function eliminarSolr($id) 
+      {
+       $solr = \Classes\Solr::getInstance()->getSolr();
+        if ($solr->ping()){
+            $solr->deleteByQuery('id:' . $id); 
+            $solr->commit();
+            $solr->optimize();
+        }
+       }
+    
+    
     public function editarPlato($platos, $imagen, $idrestaurant = null) {
 
 //                var_dump($platos);exit;
@@ -290,12 +309,14 @@ class PlatosTable {
     }
 
     public function eliminarPlato($id, $estado) {
-
+        
         $data = array(
             'en_estado' => $estado,
         );
         $this->tableGateway->update($data, array('in_id' => $id));
-        $this->cromSolr($id,'');
+        if($estado=='activo'){ $this->cromSolr($id,'');}
+        else{$this->eliminarSolr($id);}
+        
     }
 
     /*
