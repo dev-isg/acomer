@@ -1,0 +1,237 @@
+[33mcommit 481d0f6a63a024525e64e8b9898b26fdfac37dc9[m
+Author: Josmel Yupanqui <yyupanqui@innovationssystems.com>
+Date:   Thu Sep 19 18:16:56 2013 -0500
+
+    cambios
+
+ module/Platos/src/Platos/Model/PlatosTable.php     | 679 [31m---------------------[m
+ public/imagenes/registro/plato/plato1-39.jpg       | Bin [31m17926[m -> [32m0[m bytes
+ public/imagenes/registro/plato/plato1-40.jpg       | Bin [31m2693[m -> [32m0[m bytes
+ public/imagenes/registro/plato/plato1-41.jpg       | Bin [31m63386[m -> [32m0[m bytes
+ public/imagenes/registro/plato/plato2-39.jpg       | Bin [31m21317[m -> [32m0[m bytes
+ .../restaurante/contacto-1-523b174693ab3.jpg       | Bin [31m14080[m -> [32m0[m bytes
+ .../restaurante/juan-carbajal-523b2ad3d34b5.jpg    | Bin [31m11749[m -> [32m0[m bytes
+ .../restaurante/sssssssssss-523b56454bd40.jpg      | Bin [31m11697[m -> [32m0[m bytes
+ 8 files changed, 679 deletions(-)
+
+[33mcommit 81e9511783366e7c12967d4f12d77ccccd30221a[m
+Author: Josmel Yupanqui <yyupanqui@innovationssystems.com>
+Date:   Thu Sep 19 18:15:31 2013 -0500
+
+    cambios
+
+ data/busqueda/busqueda.txt                         |  36 [32m+++++++++++++++++++++[m
+ .../view/application/index/detalleubicacion.phtml  |  20 [32m++++++[m[31m------[m
+ .../Application/view/application/index/index.phtml |  33 [32m++++++++++[m[31m---------[m
+ .../Application/view/application/index/ver.phtml   |  18 [32m+++++[m[31m------[m
+ module/Platos/src/Platos/Model/PlatosTable.php     |  25 [32m++++++++++++[m[31m--[m
+ module/Platos/view/platos/index/verplatos.phtml    |   8 [32m++[m[31m---[m
+ .../src/Restaurante/Controller/IndexController.php |  15 [32m+++++[m[31m----[m
+ .../Usuario/src/Usuario/Model/ComentariosTable.php |   1 [32m+[m
+ public/css/estilos.css                             |  14 [32m++[m[31m------[m
+ public/imagenes/registro/plato/plato1-41.jpg       | Bin [31m0[m -> [32m63386[m bytes
+ .../restaurante/sssssssssss-523b56454bd40.jpg      | Bin [31m0[m -> [32m11697[m bytes
+ 11 files changed, 112 insertions(+), 58 deletions(-)
+
+[33mcommit ee21cad53db3083fb4ebbecde3e4b458b69fc1dd[m
+Author: Josmel Yupanqui <yyupanqui@innovationssystems.com>
+Date:   Thu Sep 19 14:52:19 2013 -0500
+
+    cambios
+
+ data/busqueda/busqueda.txt                         | 104 [32m+++++++++++++++++++++[m
+ data/busqueda/busqueda_movil.txt                   |   6 [32m++[m
+ module/Application/config/module.config.php        |   1 [32m+[m
+ .../src/Application/Controller/IndexController.php |   3 [32m+[m[31m-[m
+ .../src/Application/View/Helper/Canonical.php      |  77 [32m+++++++++++++++[m
+ .../src/Application/View/Helper/CanonicalUrl.php   |   4 [32m+[m[31m-[m
+ .../view/application/index/detalleubicacion.phtml  |  20 [32m++[m[31m--[m
+ .../Application/view/application/index/index.phtml |  18 [32m++[m[31m--[m
+ .../view/application/index/ingresardatos.phtml     |   4 [32m+[m[31m-[m
+ .../Application/view/application/index/ver.phtml   |  16 [32m++[m[31m--[m
+ .../Application/view/layout/layout-portada2.phtml  |   6 [32m+[m[31m-[m
+ module/Platos/view/platos/index/verplatos.phtml    |  10 [32m+[m[31m-[m
+ public/css/estilos.css                             |  24 [32m++++[m[31m-[m
+ public/imagenes/registro/plato/plato1-40.jpg       | Bin [31m0[m -> [32m2693[m bytes
+ .../restaurante/juan-carbajal-523b2ad3d34b5.jpg    | Bin [31m0[m -> [32m11749[m bytes
+ public/js/source/jquery.autocomplete.js            |   4 [32m+[m[31m-[m
+ public/js/verplatos.js                             |  21 [32m++[m[31m---[m
+ 17 files changed, 261 insertions(+), 57 deletions(-)
+
+[33mcommit a39044905fd8611dff3ebf7c3c936a8bbfa63b9f[m
+Author: Josmel Yupanqui <yyupanqui@innovationssystems.com>
+Date:   Thu Sep 19 10:52:36 2013 -0500
+
+    cambios
+
+ data/busqueda/busqueda.txt                         | 29 [32m++++++++++++++++++++++[m
+ .../Application/view/layout/layout-portada2.phtml  |  4 [32m+[m[31m--[m
+ 2 files changed, 31 insertions(+), 2 deletions(-)
+
+[33mcommit 09e5ff5e92e6deaf9d638b3d580f1167dbf3e695[m
+Author: Josmel Yupanqui <yyupanqui@innovationssystems.com>
+Date:   Thu Sep 19 10:38:58 2013 -0500
+
+    cambios
+
+ data/busqueda/busqueda.txt                         |  37 [32m+++++++++++++++++++++[m
+ .../view/application/index/ingresardatos.phtml     |   2 [32m+[m[31m-[m
+ .../Application/view/layout/layout-portada2.phtml  |   2 [32m+[m[31m-[m
+ module/Platos/src/Platos/Model/PlatosTable.php     |  15 [31m---------[m
+ module/Platos/view/platos/index/verplatos.phtml    |   8 [32m++[m[31m---[m
+ .../Usuario/src/Usuario/Model/ComentariosTable.php |   1 [31m-[m
+ public/imagenes/registro/plato/plato1-39.jpg       | Bin [31m0[m -> [32m17926[m bytes
+ public/imagenes/registro/plato/plato2-39.jpg       | Bin [31m0[m -> [32m21317[m bytes
+ .../restaurante/contacto-1-523b174693ab3.jpg       | Bin [31m0[m -> [32m14080[m bytes
+ 9 files changed, 42 insertions(+), 23 deletions(-)
+
+[33mcommit 3ccc171b5435a9a1fa489e90e7303d913b979b9f[m
+Author: Josmel Yupanqui <yyupanqui@innovationssystems.com>
+Date:   Thu Sep 19 10:03:21 2013 -0500
+
+    cambios
+
+ .../registro/restaurante/ddddddddddd-523b11b52cc1f.jpg | Bin [31m349594[m -> [32m0[m bytes
+ .../registro/restaurante/ssssssssss-523b1085e9fb4.jpg  | Bin [31m11697[m -> [32m0[m bytes
+ .../restaurante/wwwwwwwwwwwww-523b1161d97e3.jpg        | Bin [31m349594[m -> [32m0[m bytes
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit 11891ec5e75370126db4a53d1473d83234f0e079[m
+Author: Josmel Yupanqui <yyupanqui@innovationssystems.com>
+Date:   Thu Sep 19 10:02:15 2013 -0500
+
+    cambios
+
+ data/busqueda/busqueda.txt                         |  41 [32m++++++++[m
+ .../src/Application/Controller/IndexController.php |  54 [32m+++++[m[31m------[m
+ .../Application/src/Application/Form/Registro.php  |   2 [32m+[m[31m-[m
+ .../view/application/index/ingresardatos.phtml     | 106 [32m+++++++++++++++++[m[31m----[m
+ .../Application/view/layout/layout-portada2.phtml  |   8 [32m+[m[31m-[m
+ module/Platos/src/Platos/Model/PlatosTable.php     |  57 [32m+++[m[31m--------[m
+ public/css/estilos.css                             |   1 [32m+[m
+ public/imagenes/registro/plato/plato1-30.jpg       | Bin [31m11697[m -> [32m0[m bytes
+ .../restaurante/dddddddd-523a134180114.jpg         | Bin [31m11697[m -> [32m0[m bytes
+ .../restaurante/ddddddddd-523a1c0bd736a.jpg        | Bin [31m63386[m -> [32m0[m bytes
+ .../restaurante/ddddddddddd-523b11b52cc1f.jpg      | Bin [31m0[m -> [32m349594[m bytes
+ .../restaurante/ddddddddddddd-523a17a6e645a.jpg    | Bin [31m11697[m -> [32m0[m bytes
+ .../restaurante/dddddddddddddddd-523a177497045.jpg | Bin [31m11697[m -> [32m0[m bytes
+ .../restaurante/dddddddddddddddd-523a30badf352.jpg | Bin [31m63386[m -> [32m0[m bytes
+ .../ddddddddddddddddd-523a423b1af56.jpg            | Bin [31m349594[m -> [32m0[m bytes
+ .../dddddddddddwdwddwd-523a2043455ac.jpg           | Bin [31m63386[m -> [32m0[m bytes
+ .../restaurante/ddddddddwwwwwww-523a24e1f044f.jpg  | Bin [31m63386[m -> [32m0[m bytes
+ .../registro/restaurante/deded-523a14146a257.jpg   | Bin [31m11697[m -> [32m0[m bytes
+ .../registro/restaurante/deded-523a1ba0068f1.jpg   | Bin [31m11697[m -> [32m0[m bytes
+ .../registro/restaurante/deded-523a2026cb35d.jpg   | Bin [31m349594[m -> [32m0[m bytes
+ .../registro/restaurante/deded-523a247d4b823.jpg   | Bin [31m349594[m -> [32m0[m bytes
+ .../dedewdeder3edef3e-523a283aa68c3.jpg            | Bin [31m63386[m -> [32m0[m bytes
+ .../registro/restaurante/dwd-523a1f06ae895.jpg     | Bin [31m349594[m -> [32m0[m bytes
+ .../restaurante/dwdewdewde-523a389b0db53.jpg       | Bin [31m63386[m -> [32m0[m bytes
+ .../restaurante/eeeeeeeeeeeee-523a3f39a6d8d.jpg    | Bin [31m63386[m -> [32m0[m bytes
+ .../restaurante/eeeeeeeeeewdwc-523a3c6cdde84.jpg   | Bin [31m349594[m -> [32m0[m bytes
+ .../restaurante/fernando-olivera-5239fe9debd05.jpg | Bin [31m42449[m -> [32m0[m bytes
+ .../restaurante/jesus-olivera-523a3cd70f26d.jpg    | Bin [31m1934[m -> [32m0[m bytes
+ .../josmel-noel-yupanqui-huaman-5231d67464492.jpg  | Bin [31m11697[m -> [32m0[m bytes
+ .../registro/restaurante/josweme-523a23612e5e8.jpg | Bin [31m349594[m -> [32m0[m bytes
+ .../restaurante/katherine-effio-5231db7a203b4.jpg  | Bin [31m7308[m -> [32m0[m bytes
+ .../registro/restaurante/lucho-s-5239cec9474f4.jpg | Bin [31m42449[m -> [32m0[m bytes
+ .../restaurante/noel-jurareas-5231da07c3dae.jpg    | Bin [31m11697[m -> [32m0[m bytes
+ .../restaurante/ntgregrge-523a22b9cc44a.jpg        | Bin [31m63386[m -> [32m0[m bytes
+ .../registro/restaurante/perreer-523a1a566cfba.jpg | Bin [31m63386[m -> [32m0[m bytes
+ .../registro/restaurante/plato11-523a3b134719e.jpg | Bin [31m63386[m -> [32m0[m bytes
+ .../prueba-de-restaurante-523a0e5fcac45.jpg        | Bin [31m63386[m -> [32m0[m bytes
+ .../restaurante/prueba-final5-523a214b3f31a.jpg    | Bin [31m63386[m -> [32m0[m bytes
+ .../restaurante/prueba-finish-523a192a1686f.jpg    | Bin [31m349594[m -> [32m0[m bytes
+ .../restaurante/prueba-finish2-523a19861a4f6.jpg   | Bin [31m63386[m -> [32m0[m bytes
+ .../registro/restaurante/prueba3-523a1b219f104.jpg | Bin [31m63386[m -> [32m0[m bytes
+ .../registro/restaurante/prueba5-523a1e87a919c.jpg | Bin [31m11697[m -> [32m0[m bytes
+ .../restaurante/ssssssssss-523a16dfefa25.jpg       | Bin [31m11697[m -> [32m0[m bytes
+ .../restaurante/ssssssssss-523b1085e9fb4.jpg       | Bin [31m0[m -> [32m11697[m bytes
+ .../restaurante/ssssssssssss-523a1887dd52a.jpg     | Bin [31m11697[m -> [32m0[m bytes
+ .../restaurante/wwwwwwwwwwwww-523b1161d97e3.jpg    | Bin [31m0[m -> [32m349594[m bytes
+ public/js/source/acomer.provincias.js              |  56 [32m+++++++++++[m
+ public/js/source/demo.js                           |  56 [31m-----------[m
+ 48 files changed, 229 insertions(+), 152 deletions(-)
+
+[33mcommit fd754190dadb12bfb514a807d2f1f220fc1a599c[m
+Author: Josmel Yupanqui <yyupanqui@innovationssystems.com>
+Date:   Wed Sep 18 19:44:41 2013 -0500
+
+    cambios
+
+ data/busqueda/busqueda.txt                         |  37 [32m+++[m
+ .../src/Application/Controller/IndexController.php |  61 [32m+++[m[31m--[m
+ .../Application/src/Application/Form/Registro.php  |  21 [32m+[m[31m-[m
+ .../src/Application/Form/Registroplato.php         | 158 [32m++++++++++++[m[31m-[m
+ .../src/Application/Form/RegistroplatoFiltro.php   | 252 [32m++++++++++++++++++++[m[31m-[m
+ .../view/application/index/ingresardatos.phtml     | 104 [32m++++++[m[31m---[m
+ .../src/Platos/Controller/IndexController.php      |   2 [32m+[m[31m-[m
+ module/Platos/src/Platos/Model/PlatosTable.php     |  68 [32m+++[m[31m---[m
+ .../anticuchos-a-lo-katitos--5231dbd53b9e7.jpg     | Bin [31m11863[m -> [32m0[m bytes
+ .../registro/plato/pancita-5231dd3e4f4f4.jpg       | Bin [31m4276[m -> [32m0[m bytes
+ .../plato/plato-de-lucho-s-5239ceee1dcfd.jpg       | Bin [31m19956[m -> [32m0[m bytes
+ public/imagenes/registro/plato/plato1-30.jpg       | Bin [31m0[m -> [32m11697[m bytes
+ .../registro/plato/plato1-5231d69a0ae3a.jpg        | Bin [31m11697[m -> [32m0[m bytes
+ .../registro/plato/plato11-5231da285231c.jpg       | Bin [31m11697[m -> [32m0[m bytes
+ .../registro/plato/plato2-5231d6a6b24d7.jpg        | Bin [31m11697[m -> [32m0[m bytes
+ .../registro/plato/plato3-5231d6b73c9d1.jpg        | Bin [31m63386[m -> [32m0[m bytes
+ .../registro/plato/plato4-5231d6c44caa4.jpg        | Bin [31m11697[m -> [32m0[m bytes
+ .../registro/plato/plato5-5231d6de9d997.jpg        | Bin [31m11697[m -> [32m0[m bytes
+ .../registro/plato/plato5-5231d6decdf11.jpg        | Bin [31m11697[m -> [32m0[m bytes
+ .../registro/plato/plato6-5231d6f597927.jpg        | Bin [31m63386[m -> [32m0[m bytes
+ .../restaurante/dddddddd-523a134180114.jpg         | Bin [31m0[m -> [32m11697[m bytes
+ .../restaurante/ddddddddd-523a1c0bd736a.jpg        | Bin [31m0[m -> [32m63386[m bytes
+ .../restaurante/ddddddddddddd-523a17a6e645a.jpg    | Bin [31m0[m -> [32m11697[m bytes
+ .../restaurante/dddddddddddddddd-523a177497045.jpg | Bin [31m0[m -> [32m11697[m bytes
+ .../restaurante/dddddddddddddddd-523a30badf352.jpg | Bin [31m0[m -> [32m63386[m bytes
+ .../ddddddddddddddddd-523a423b1af56.jpg            | Bin [31m0[m -> [32m349594[m bytes
+ .../dddddddddddwdwddwd-523a2043455ac.jpg           | Bin [31m0[m -> [32m63386[m bytes
+ .../restaurante/ddddddddwwwwwww-523a24e1f044f.jpg  | Bin [31m0[m -> [32m63386[m bytes
+ .../registro/restaurante/deded-523a14146a257.jpg   | Bin [31m0[m -> [32m11697[m bytes
+ .../registro/restaurante/deded-523a1ba0068f1.jpg   | Bin [31m0[m -> [32m11697[m bytes
+ .../registro/restaurante/deded-523a2026cb35d.jpg   | Bin [31m0[m -> [32m349594[m bytes
+ .../registro/restaurante/deded-523a247d4b823.jpg   | Bin [31m0[m -> [32m349594[m bytes
+ .../dedewdeder3edef3e-523a283aa68c3.jpg            | Bin [31m0[m -> [32m63386[m bytes
+ .../registro/restaurante/dwd-523a1f06ae895.jpg     | Bin [31m0[m -> [32m349594[m bytes
+ .../restaurante/dwdewdewde-523a389b0db53.jpg       | Bin [31m0[m -> [32m63386[m bytes
+ .../restaurante/eeeeeeeeeeeee-523a3f39a6d8d.jpg    | Bin [31m0[m -> [32m63386[m bytes
+ .../restaurante/eeeeeeeeeewdwc-523a3c6cdde84.jpg   | Bin [31m0[m -> [32m349594[m bytes
+ .../restaurante/fernando-olivera-5239fe9debd05.jpg | Bin [31m0[m -> [32m42449[m bytes
+ .../restaurante/jesus-olivera-523a3cd70f26d.jpg    | Bin [31m0[m -> [32m1934[m bytes
+ .../registro/restaurante/josweme-523a23612e5e8.jpg | Bin [31m0[m -> [32m349594[m bytes
+ .../restaurante/ntgregrge-523a22b9cc44a.jpg        | Bin [31m0[m -> [32m63386[m bytes
+ .../registro/restaurante/perreer-523a1a566cfba.jpg | Bin [31m0[m -> [32m63386[m bytes
+ .../registro/restaurante/plato11-523a3b134719e.jpg | Bin [31m0[m -> [32m63386[m bytes
+ .../prueba-de-restaurante-523a0e5fcac45.jpg        | Bin [31m0[m -> [32m63386[m bytes
+ .../restaurante/prueba-final5-523a214b3f31a.jpg    | Bin [31m0[m -> [32m63386[m bytes
+ .../restaurante/prueba-finish-523a192a1686f.jpg    | Bin [31m0[m -> [32m349594[m bytes
+ .../restaurante/prueba-finish2-523a19861a4f6.jpg   | Bin [31m0[m -> [32m63386[m bytes
+ .../registro/restaurante/prueba3-523a1b219f104.jpg | Bin [31m0[m -> [32m63386[m bytes
+ .../registro/restaurante/prueba5-523a1e87a919c.jpg | Bin [31m0[m -> [32m11697[m bytes
+ .../restaurante/ssssssssss-523a16dfefa25.jpg       | Bin [31m0[m -> [32m11697[m bytes
+ .../restaurante/ssssssssssss-523a1887dd52a.jpg     | Bin [31m0[m -> [32m11697[m bytes
+ 51 files changed, 605 insertions(+), 98 deletions(-)
+
+[33mcommit 7e82558b16d6471eaffa1be4944dd3bbf6e991f8[m
+Author: Josmel Yupanqui <yyupanqui@innovationssystems.com>
+Date:   Wed Sep 18 12:49:05 2013 -0500
+
+    cambios
+
+ data/busqueda/busqueda.txt                         | 159 [32m++++++++++++++[m
+ data/busqueda/busqueda_movil.txt                   |  49 [32m+++++[m
+ .../src/Application/Controller/IndexController.php | 243 [32m+++++++++++++++++++[m[31m--[m
+ .../view/application/index/detalleubicacion.phtml  |   5 [32m+[m[31m-[m
+ .../Application/view/application/index/index.phtml |  10 [32m+[m[31m-[m
+ .../view/application/index/ingresardatos.phtml     |  19 [32m+[m[31m-[m
+ .../Application/view/application/index/ver.phtml   |  11 [32m+[m[31m-[m
+ .../Application/view/layout/layout-portada2.phtml  |  28 [32m++[m[31m-[m
+ module/Platos/src/Platos/Model/PlatosTable.php     |   2 [32m+[m[31m-[m
+ module/Platos/view/platos/index/verplatos.phtml    |   4 [32m+[m[31m-[m
+ .../src/Restaurante/Controller/IndexController.php |   3 [32m+[m[31m-[m
+ .../src/Restaurante/Model/RestauranteTable.php     |   9 [32m+[m
+ public/css/estilos.css                             |  10 [32m+[m[31m-[m
+ .../plato/plato-de-lucho-s-5239ceee1dcfd.jpg       | Bin [31m0[m -> [32m19956[m bytes
+ .../registro/restaurante/lucho-s-5239cec9474f4.jpg | Bin [31m0[m -> [32m42449[m bytes
+ public/js/aplicacion-mobile.js                     |   3 [32m+[m[31m-[m
+ public/js/aplicacion.js                            |   3 [32m+[m[31m-[m
+ public/js/source/demo.js                           |  14 [3
