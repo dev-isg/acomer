@@ -1,4 +1,6 @@
 <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/easySlider1.7.js"></script>
+<script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/infinity-scroll/jquery.isotope.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/infinity-scroll/jquery.infinitescroll.min.js"></script>
 <div class="masinfo">
   <a href="#cate-home" id="ver"><img src="<?php echo $this->host('ruta')?>/img/scroll.png?v<?php echo $this->host('version')?>" alt=""></a>
 </div>
@@ -29,19 +31,20 @@
             </div>
           </li>
         </ul>
-        <ul class="right redes" style="float:right;padding-top: 5px;padding-right:15px;">        
+        <ul class="right redes" style="float:right;padding-top: 3px;padding-right:15px;">        
           <li><a id="face" href="https://www.facebook.com/listadelsabor" class="" target="_blank" title="Facebook"> <img src="<?php echo $this->host('ruta')?>/img/bann/face.png"></a></li>
           <li><a id="tweet" href="https://twitter.com/listadelsabor" target="_blank" title="Twitter"><img src="<?php echo $this->host('ruta')?>/img/bann/tw.png"></a></li>
         </ul>
       </div>
       <div class="center-dos">
         <div id="slider">
-          <ul>        
-            <li><a href="#"><img src="/img/slider/01.jpg" alt="Css Template Preview" /></a></li>
-            <li><a href="#"><img src="/img/slider/02.jpg" alt="Css Template Preview" /></a></li>
-            <li><a href="#"><img src="/img/slider/03.jpg" alt="Css Template Preview" /></a></li>
-            <li><a href="#"><img src="/img/slider/04.jpg" alt="Css Template Preview" /></a></li>
-            <li><a href="#"><img src="/img/slider/05.jpg" alt="Css Template Preview" /></a></li>      
+          <ul>  
+              
+                         <?php 
+    foreach ($this->banner  as $banner) :
+        ?>
+          <li><a href="<?php echo $banner['va_url'] ?>"><img src="<?php echo $this->host('images')?>/banner/<?php echo $banner['va_imagen'] ?>" title="<?php echo $banner['va_nombre'] ?>" alt="Css Template Preview" /></a></li>         
+          <?php endforeach; ?>     
           </ul>
         </div>
       </div>
@@ -50,8 +53,7 @@
             <?php 
     foreach ($this->menus  as $menus) :
         ?>
-          <li><a href="buscar-por-distrito?q=<?php echo $menus['va_url'] ?>"><?php echo $menus['va_nombre'] ?></a></li>
-          <li>/</li>
+          <li><a href="<?php echo $menus['va_url'] ?>"><?php echo $menus['va_nombre'] ?></a></li>          
           <?php endforeach; ?>
         </ul>
       </div>
@@ -84,23 +86,25 @@
      
     </div>
     <div class="recomendados-platos primer-home" style="padding-bottom: 90px;">
-      <ul>
+      <ul id="contenedor-pl">
         <?php  foreach ($this->promociones  as $promo) {
           if(strlen($promo['va_nombre'])>27){
            $strnom=trim(substr($promo['va_nombre'], 0, 24));
             $strnom.='...';
            }else {$strnom=$promo['va_nombre'];} ?>
-          <li>
+          <li class="elemento-pl">
             <div class="plato_r">
               <div class="mosaic-block cover">
-                <div class="mosaic-overlay">
-                  <span><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></span>
-                  <img src="<?php if ($promo['va_imagen']=='platos-default.png')
-                      {echo $this->host('images') . '/defecto/' . htmlspecialchars($promo['va_imagen'], ENT_QUOTES, 'utf-8');}
-                  else
-                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($promo['va_imagen'], ENT_QUOTES, 'utf-8');} ?>" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" class="mas">
-                </div>
                 <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($promo['va_nombre']), array('suffix' => $promo['in_id']));?>" class="mosaic-backdrop" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>">
+                  <div class="mosaic-overlay">
+                    <span><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></span>
+                    <img src="<?php if ($promo['va_imagen']=='platos-default.png')
+                        {echo $this->host('images') . '/defecto/' . htmlspecialchars($promo['va_imagen'], ENT_QUOTES, 'utf-8');}
+                    else
+                        {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($promo['va_imagen'], ENT_QUOTES, 'utf-8');} ?>" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" class="mas">
+                  </div>
+                </a>
+                <!--<a href="/plato/<?php echo $this->canonicalUrl($this->canonical($promo['va_nombre']), array('suffix' => $promo['in_id']));?>" class="mosaic-backdrop" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>">
                   <div class="details">
                     <h4>
                       <?php
@@ -113,7 +117,7 @@
                        }else {$str=$promo['tx_descripcion'];}
                       echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
                   </div>
-                </a>
+                </a>-->
               </div>
               <div class="foo">
                 <p class="nom_res">
@@ -133,23 +137,25 @@
                     <div class="puntuaciones c<?php echo $promo['Ta_puntaje_in_id'];?>"></div>
                   </div>
                 </div>
+                <p class="h-dist"><?php echo $promo['Distrito'];?>  (<?php echo $promo['Departamento'];?>)</p>
+                <p class="dire-hom"><?php echo $promo['direccion']; ?>
+                </p>
+                <p class="dire-hom"><em class="iphone-dl"><?php  $telefono =  explode(';', $promo['telefono']);                
+                echo htmlspecialchars($telefono[0], ENT_QUOTES, 'utf-8'); ?></em></p>
               </div>
-
             </div>
           </li> 
           <?php } ?>
       </ul>
-        
-   
-    <?php echo (count($this->promociones)> 0)?$this->paginationControl($this->promociones, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>$this->urlac)):"";?>
 
-        </div>
-          <?php 
-          } ?>
-      
-   
-
-     
+      <?php echo (count($this->promociones)> 0)?$this->paginationControl($this->promociones, 'Sliding', 'application/index/paginador.phtml',array('variable'=>$this->urlac)):"";?>
+      <div class="pagination" role="navigation" style="display:block">
+        <span>1</span>
+        <a href="?page=2">2</a>
+      </div>
+    </div>
+    <?php 
+      } ?>
   </div>
 
 </div>
@@ -157,7 +163,9 @@
   $(document).ready(function(){ 
     $("#slider").easySlider({
       auto: true, 
-      continuous: true
+      continuous: true,
+      speed: 800,
+      pause: 5000
     });
 
     var windw = this;
@@ -178,11 +186,30 @@
         }
       });
     };
-    $('.content-menu-home').followTo(260);
+    $('.content-menu-home').followTo(250);
 
   });
 
-
+$(function(){
+  var $container = $('#contenedor-pl');
+  $container.isotope({
+    itemSelector : '.elemento-pl'
+  });
+  $container.infinitescroll({
+    navSelector  : '.pagination',    // selector for the paged navigation 
+    nextSelector : '.pagination a',  // selector for the NEXT link (to page 2)
+    itemSelector : '.elemento-pl',     // selector for all items you'll retrieve
+    loading: {
+        finishedMsg: 'No more pages to load.',
+        img: 'http://i.imgur.com/qkKy8.gif'
+      }
+    },
+    // call Isotope as a callback
+    function( newElements ) {
+      $container.isotope( 'appended', $( newElements ) ); 
+    }
+  );
+});
 </script>
 
 

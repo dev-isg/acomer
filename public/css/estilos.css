@@ -101,6 +101,10 @@ body{
 .mosaic-block a:hover{
   text-decoration: none;
 }
+.nom_res a{
+  color: #7b7b7b;
+  font-weight: bold;
+}
 .nom_res a:hover{
   text-decoration: none; 
 }
@@ -436,7 +440,7 @@ font-style: italic;
 p.nombre_r  {
   color: #ff8400;
   font-weight: bold;
-  font-size: 18.12px;
+  font-size: 16px;
   padding-left: 4px;
   margin: 0px;
   margin-bottom: 4px;
@@ -470,7 +474,7 @@ p.nombre_r  {
 p.nombre_r a {
   color: #ff8400;
   font-weight: bold;
-  font-size: 18.12px;
+  font-size: 16px;
   padding-left: 4px;
   margin: 0px;
   margin-bottom: 10px;
@@ -483,20 +487,47 @@ p.nom_plato {
   font-size: 14px;
   color: #ff8400;
   margin-left: 10px;
-  margin-bottom: 0px;
+  margin-bottom: 5px;
   /*border-bottom: 1px solid #fff;*/
+}
+.publi-rascacielosIzq {
+  left: -168px;
+  min-width: 160px;
+  position: absolute;
+  top: 10px;
+  z-index: 10;
 }
 .punt em{
   color: #7b7b7b;
   font-size: 12px;
   margin-left: 10px;
 }
+
 .right-resultado p{
   margin-bottom: 5px;
 }
 .right-resultado p.h-dist{
   color:#7b7b7b;
   font-weight: bold;
+}
+.foo p.h-dist{
+  color:#6b6b6b;
+  font-weight: normal;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 0;
+}
+.foo .dire-hom{
+  color: #7b7b7b;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 0;
+  line-height: 16px;
+  margin-bottom: 3px;
+}
+.iphone-dl{
+  background: url(../img/phone.png) no-repeat left center;
+  padding-left: 18px;
 }
 .com-pla {
 text-align: right;
@@ -638,7 +669,6 @@ background: url(../../img/back-detalle.png) repeat;
   border-radius: 10px;
 }
 .mosaic-overlay {
-  display:none;
   z-index:5;
   position:absolute;
   width:100%;
@@ -734,10 +764,27 @@ background: url(../../img/back-detalle.png) repeat;
   bottom: 39px;
   width: 724px;
   text-align: right;
+  z-index: 9999;
 }
 .subir a img{
   width: 28px;
   border: 0;
+}
+#infscr-loading {
+  position: fixed;
+  text-align: center;
+  bottom: 30px;
+  left: 55%;
+  z-index: 100;
+  background: white;
+  background: hsla( 0, 0%, 100%, 0.9 );
+  padding: 20px;
+  color: #222;
+  font-size: 15px;
+  font-weight: bold;
+  -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+          border-radius: 10px;
 }
 .plato_h.p{
   background: #f0f0f0;
@@ -969,9 +1016,6 @@ label.error {
   height: 22px;
   overflow: hidden;
 }
-.nom_res a{
-  color: rgba(0, 0, 0, 0.77);
-}
 .nom_res a:hover{
   color: rgba(0, 0, 0, 0.99);
 }
@@ -984,7 +1028,7 @@ label.error {
     text-align: center;
     color: #000;
     font-size: 14px;
-    margin-bottom: 6px;
+    margin-bottom: 2px;
 }
 .com a{
   color: #000;
@@ -1014,7 +1058,7 @@ a.title-home-listado h1 img{
 }
 .content-sidebar-ho{
   display: block;
-  margin-top: 10%;
+  margin-top: 25%;
 }
 .sub .content-etiqueta-home{
   width: 220px;
@@ -1117,12 +1161,12 @@ font-weight: normal;
 font-family: georgia;
 }
 .foo{
-    margin: 0px !important;
-    background: white;
-    border-radius: 0 0 5px 5px;
-    float: left;
-    width: 100%;
-
+  margin: 0px !important;
+  background: white;
+  border-radius: 0 0 5px 5px;
+  float: left;
+  width: 100%;
+  padding-bottom: 5px;
 }
 .com_r {
 display: inline-block;
@@ -2208,23 +2252,42 @@ p.ver_mistura a{
   font-weight: bold;
 }
 .content-menu-home{
-  width: 724px;
+  width: 100%;
   background: #FF8500;
-  height: 35px;
+  height: auto;
+  z-index: 99;
+  -webkit-box-shadow: 0 2px 3px #bbb;
+  -moz-box-shadow: 0 2px 3px #bbb;
+  -o-box-shadow: 0 2px 3px #bbb;
+  box-shadow: 0 2px 3px #bbb;
 }
 .content-menu-home ul{
   list-style: none;
   margin-left: 0;
   overflow: hidden;
+  margin-bottom: 0;
 }
 .content-menu-home ul li{
-  float: left;
-  margin-left: 5px;
+  float: left;  
   /*color: #FF8500;*/
   color: white;
   font-size: 14px;
-  font-weight: bold;
-  line-height: 35px;
+  line-height: 30px;
+}
+.content-menu-home ul li a{
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-left: 1px solid #f7cb26;
+  font-weight: normal;
+}
+.content-menu-home ul li:first-child a{
+  border-left: 0;
+}
+.content-menu-home ul li a:hover{
+  background: #FA5A00;
+  text-decoration: none;
 }
 .pagination  ul li{
   margin-right: 0;
@@ -2233,7 +2296,6 @@ p.ver_mistura a{
   /*color: #FF8500;*/
   color: white;
   font-size: 14px;
-  font-weight: bold;
 }
 /*Banner intercativo*/
 
@@ -2244,9 +2306,9 @@ p.ver_mistura a{
 #contenedor-general{width:100%; min-height:700px; overflow:hidden; position:absolute; }
 #paso-dos{ width:100%; height:403px; margin:auto;position:relative; z-index:999; background-position:center;}
 #paso-tres{
- width:670px; 
- margin:auto;  
- position:relative;  
+  width:724px; 
+  margin:auto;  
+  position:relative;  
 }
 #ver-todas-las-recetas a:hover{ background-position:bottom;}
 
@@ -2299,7 +2361,7 @@ p.ver_mistura a{
 }
 .nav-banner{
   width: 100%;
-  height: 50px;
+  height: 40px;
   background: white;
 }
 
@@ -2329,11 +2391,11 @@ p.ver_mistura a{
   overflow: hidden;
   margin: 0;
   padding-left: 15px;
-  padding-top: 14px;
+  padding-top: 7px;
 }
 .nav-banner ul.dep-home li{
   float: left;
-  padding-left: 65px;
+  padding-left: 30px;
 }
 .nav-banner ul.dep-home li:first-child{
   padding-left: 0;
@@ -2462,8 +2524,8 @@ p.ver_mistura a{
       define width and height of list item (slide)
       entire slider area will adjust according to the parameters provided here
     */ 
-    width:696px;
-    height:241px;
+    width:724px;
+    height:210px;
     overflow:hidden; 
   } 
   #prevBtn, #nextBtn,
@@ -2473,7 +2535,7 @@ p.ver_mistura a{
     height:34px;
     position:absolute;
     left:3px;
-    top:71px;
+    top:42%;
     z-index:1000;
   } 
   #nextBtn, #slider1next{ 
@@ -2723,7 +2785,10 @@ p.ver_mistura a{
 /*Activando responsive web desing*/
 @media (min-width: 1200px) {
   /*Banner intercativo*/
-
+#slider li, #slider2 li{
+  width: 724px;
+  height: 210px;
+}
 #content-text { width:290px; height:150px; position:absolute; margin-top:275px; margin-left:79px;}
 #content-text p { height:80px; }
 
@@ -2785,7 +2850,7 @@ p.ver_mistura a{
 }
 .nav-banner{
   width: 100%;
-  height: 50px;
+  height: 40px;
   background: white;
 }
 
@@ -2814,7 +2879,7 @@ p.ver_mistura a{
   overflow: hidden;
   margin: 0;
   padding-left: 15px;
-  padding-top: 14px;
+  padding-top: 7px;
 }
 .nav-banner ul.dep-home li{
   float: left;
@@ -2864,7 +2929,7 @@ p.ver_mistura a{
   text-align: center;
 }
 .paso p{
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
   line-height: 15px;
   padding-top: 5px;
@@ -3339,6 +3404,12 @@ p.ver_mistura a{
   }
 }
 @media (max-width: 767px) {
+  .recomendados-platos ul li{
+    margin-right: -10px;
+  }
+  #infscr-loading{
+    left: 30%;
+  }
   #box-btn-platos-verdura {
     margin-left: 50%!important;
   }

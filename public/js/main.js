@@ -591,13 +591,24 @@ $('.check_rest_menu').mousedown(function() {
   data: {id: user} 
   });
 });
- $("#delete-local-menu").on("click",function(){
+$("#delete-local-menu").on("click",function(){
   var menuG=$("#verlocal").attr("data-id");
   $("#" + menuG).closest('tr').remove();
   $('#eli-local').modal('hide');
   console.log(menuG);
   var request = $.ajax({
     url: "/restaurante/index/eliminarmenu?id="+menuG,
+    type: "POST",
+    data: {id: menuG} 
+  });
+});
+$("#delete-local-banner").on("click",function(){
+  var menuG=$("#verlocal").attr("data-id");
+  $("#" + menuG).closest('tr').remove();
+  $('#eli-local').modal('hide');
+  console.log(menuG);
+  var request = $.ajax({
+    url: "/restaurante/index/eliminarbanner?id="+menuG,
     type: "POST",
     data: {id: menuG} 
   });

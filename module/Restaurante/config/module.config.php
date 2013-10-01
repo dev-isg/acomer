@@ -68,6 +68,17 @@ return array(
                     
                 )
             ),
+              'editarbanner' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/editar-banner[/:id]',
+                    'defaults' => array(
+                        'controller' => 'Restaurante\Controller\Index',
+                        'action' => 'editarbanner'
+                    )
+                    
+                )
+            ),
         ),
     ),
     'view_manager' => array(

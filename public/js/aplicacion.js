@@ -114,7 +114,7 @@ $(document).ready(function() {
             $(".agregar-comentario-desc").slideUp();
         }
     });
-    $(".cover").mosaic({animation: "slide",anchor_y: "top",hover_y: "300px"});
+    //$(".cover").mosaic({animation: "slide",anchor_y: "top",hover_y: "300px"});
     $(".subir").hide();
     $(window).scroll(function() {
         if ($(this).scrollTop() > 100) {
@@ -157,12 +157,16 @@ $(document).ready(function() {
         var h = $("#bubi #q").val();
         var condi = h.substring(0, 12);        
         var cot = h.substring(0, 4);
+        var cotName = h.substring(0, 5);
         if(condi === 'restaurante:'){
             var numer = h.length;
             var hvalor = h.substring(12, numer);
         }else if(cot === 'tag:'){
             var numer = h.length;
             var hvalor = h.substring(4, numer);
+        }else if(cotName === 'name:'){
+            var numer = h.length;
+            var hvalor = h.substring(5, numer);
         }else{
             var hvalor = h;
         }

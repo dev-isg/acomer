@@ -159,12 +159,16 @@ $(document).ready(function() {
         alert(h);
         var condi = h.substring(0, 12);
         var cot = h.substring(0, 4);
+        var cotName = h.substring(0, 5);
         if(condi === 'restaurante:'){
             var numer = h.length;
             var hvalor = h.substring(12, numer);
         }else if(cot === 'tag:'){
             var numer = h.length;
             var hvalor = h.substring(4, numer);
+        }else if(cotName === 'name:'){
+            var numer = h.length;
+            var hvalor = h.substring(5, numer);
         }else{
             var hvalor = h;
         }

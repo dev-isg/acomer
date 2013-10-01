@@ -64,79 +64,7 @@ class RestauranteTable
         return $row;
     }
     
-     public function guardarMenu($menu)
-    {
-         $data = array(
-            'va_nombre' => $menu->va_nombre, 
-            'va_url' => $menu->va_url,
-             'en_estado'=>'activo'
-        );
-              $adapter = $this->tableGateway->getAdapter();
-              $sql = new Sql($adapter);
-              $selecttot = $sql->insert()
-                      ->into('ta_menu')
-                      ->values($data);
-              $selectString = $sql->getSqlStringForSqlObject($selecttot);
-            $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-    return $adapter;
-    }
-    
-    
-     public function estadomenu($id,$estado){
-                $data = array(
-            'en_estado' => $estado );    
-        $update = $this->tableGateway->getSql()->update()->table('ta_menu')
-                        ->set($data)
-                        ->where(array('in_id'=>$id));
-                $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
-                $statementup->execute();
-    }
-    
-      public function eliminarmenu($id){    
-          $borrar = $this->tableGateway->getSql()->delete()->from('ta_menu')
-                                ->where(array('in_id'=>$id));
-                        $selectStri = $this->tableGateway->getSql()->getSqlStringForSqlObject($borrar);
-                        $adapter=$this->tableGateway->getAdapter();
-                        $result = $adapter->query($selectStri, $adapter::QUERY_MODE_EXECUTE); 
-                        return $result;
-    }
-   public function editaMenu($menu)
-    {
-       $data = array(
-            'va_nombre' => $menu->va_nombre, 
-            'va_url' => $menu->va_url,
-        );
-       
-        $update = $this->tableGateway->getSql()->update()->table('ta_menu')
-                        ->set($data)
-                        ->where(array('in_id'=>$menu->in_id));//$prom[0]['in_id']
-                $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
-                $statementup->execute();
-    }
-       public function buscarMenu($id)
-    {
-      $adapter=$this->tableGateway->getAdapter();
-             $sql = new Sql($adapter);      
-          $idubigeo=$sql->select()->from('ta_menu')
-                 ->where(array('in_id'=>$id));
-          $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
-            $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);     
-            return $result;
-    }
-    
-         public function listarmenu(){
-        
-  $adapter=$this->tableGateway->getAdapter();
-             $sql = new Sql($adapter);      
-          $idubigeo=$sql->select()->from('ta_menu');
-                  //->columns(array('in_id'))
-                 // ->where(array('in_idpais'=>$pais,'in_iddep'=>$departamento,'in_idprov'=>$provincia,'in_iddis'=>$distrito));
-          $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
-
-            $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);
-        
-            return $result;
-    }
+     
   public function guardarRestaurante(Restaurante $restaurante, $comida ,$imagen)
     {
         $data = array(
@@ -356,6 +284,136 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
          
         return  $datos;  
   }
+    public function guardarMenu($menu)
+    {
+         $data = array(
+            'va_nombre' => $menu->va_nombre, 
+            'va_url' => $menu->va_url,
+               'in_orden' => $menu->in_orden,
+             'en_estado'=>'activo'
+        );
+              $adapter = $this->tableGateway->getAdapter();
+              $sql = new Sql($adapter);
+              $selecttot = $sql->insert()
+                      ->into('ta_menu')
+                      ->values($data);
+              $selectString = $sql->getSqlStringForSqlObject($selecttot);
+            $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+    return $adapter;
+    }
+        public function guardarBanner($banner,$imagen)
+    {
+         $data = array(
+            'va_nombre' => $banner->va_nombre, 
+            'va_imagen' => $imagen,
+               'in_orden' => $banner->in_orden,
+             'va_url' => $banner->va_url,
+             'en_estado'=>'activo'
+        );
+              $adapter = $this->tableGateway->getAdapter();
+              $sql = new Sql($adapter);
+              $selecttot = $sql->insert()
+                      ->into('ta_banner')
+                      ->values($data);
+              $selectString = $sql->getSqlStringForSqlObject($selecttot);
+            $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+    return $adapter;
+    }
     
+     public function estadomenu($id,$estado){
+                $data = array(
+            'en_estado' => $estado );    
+        $update = $this->tableGateway->getSql()->update()->table('ta_menu')
+                        ->set($data)
+                        ->where(array('in_id'=>$id));
+                $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
+                $statementup->execute();
+    }
+    
+      public function eliminarmenu($id){    
+          $borrar = $this->tableGateway->getSql()->delete()->from('ta_menu')
+                                ->where(array('in_id'=>$id));
+                        $selectStri = $this->tableGateway->getSql()->getSqlStringForSqlObject($borrar);
+                        $adapter=$this->tableGateway->getAdapter();
+                        $result = $adapter->query($selectStri, $adapter::QUERY_MODE_EXECUTE); 
+                        return $result;
+    }
+    
+   public function eliminarbanner($id){    
+          $borrar = $this->tableGateway->getSql()->delete()->from('ta_banner')
+                                ->where(array('in_id'=>$id));
+                        $selectStri = $this->tableGateway->getSql()->getSqlStringForSqlObject($borrar);
+                        $adapter=$this->tableGateway->getAdapter();
+                        $result = $adapter->query($selectStri, $adapter::QUERY_MODE_EXECUTE); 
+                        return $result;
+    } 
+
+   public function editaMenu($menu)
+    {
+       $data = array(
+            'va_nombre' => $menu->va_nombre, 
+            'va_url' => $menu->va_url,
+           'in_orden' => $menu->in_orden  );
+        $update = $this->tableGateway->getSql()->update()->table('ta_menu')
+                        ->set($data)
+                        ->where(array('in_id'=>$menu->in_id));
+                $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
+                $statementup->execute();
+    }
+       public function buscarMenu($id)
+    {
+      $adapter=$this->tableGateway->getAdapter();
+             $sql = new Sql($adapter);      
+          $idubigeo=$sql->select()->from('ta_menu')
+                 ->where(array('in_id'=>$id));
+          $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
+            $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);     
+            return $result;
+    }
+    
+       public function buscarBanner($id)
+    {
+      $adapter=$this->tableGateway->getAdapter();
+             $sql = new Sql($adapter);      
+          $idubigeo=$sql->select()->from('ta_banner')
+                 ->where(array('in_id'=>$id));
+          $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
+            $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);     
+            return $result;
+    }
+      public function editaBanner($banner,$imagen)
+    {
+       $data = array(
+            'va_nombre' => $banner->va_nombre, 
+            'va_imagen' => $imagen,
+           'in_orden' => $banner->in_orden,
+            'va_url' => $banner->va_url );
+        $update = $this->tableGateway->getSql()->update()->table('ta_banner')
+                        ->set($data)
+                        ->where(array('in_id'=>$banner->in_id));//$prom[0]['in_id']
+                $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
+                $statementup->execute();
+    }
+         public function listarmenu(){   
+       $adapter=$this->tableGateway->getAdapter();
+       $sql = new Sql($adapter);      
+          $idubigeo=$sql->select()->from('ta_menu');
+           $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
+            $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);
+            return $result;
+    }
+     public function listarbanner(){
+        
+  $adapter=$this->tableGateway->getAdapter();
+             $sql = new Sql($adapter);      
+          $idubigeo=$sql->select()->from('ta_banner');
+                  //->columns(array('in_id'))
+                 // ->where(array('in_idpais'=>$pais,'in_iddep'=>$departamento,'in_idprov'=>$provincia,'in_iddis'=>$distrito));
+          $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
+
+            $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);
+        
+            return $result;
+    }
 
 }

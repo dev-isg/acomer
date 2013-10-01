@@ -1,8 +1,8 @@
 <?php
-namespace Restaurante\Form;
+namespace Admin\Form;
 
 use Zend\Form\Form;
-class MenuForm extends Form
+class BannerForm extends Form
 {
     public function __construct($name = null)
     {
@@ -45,19 +45,22 @@ class MenuForm extends Form
                 'placeholder'=>'Ingrese el orden a mostrar'
             ),
         ));
-      $this->add(array(
-            'name' => 'va_url',
-            'type' => 'Text',
-          
-            'options' => array(
-                'label' => 'Ruta de la Url',          
+     
+         
+         $this->add(array(
+            'name' => 'va_imagen',
+            'type' => 'File',
+              'attributes' => array(               
+                'class' => '',
+                'id'   => 'va_imagen',
+                'placeholder'=>'Ingrese su imagen'
             ),
-            'attributes' => array(               
-                'class' => 'span10  ',
-                'id'   => 'va_nombre',
-                'placeholder'=>'Ingrese la url'
+            'options' => array(
+                'label' => 'Agregar Imagen : ',
             ),
         ));
+         
+       
        
         $this->add(array(
             'name' => 'submit',

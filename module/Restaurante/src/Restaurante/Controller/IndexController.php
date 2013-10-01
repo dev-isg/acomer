@@ -9,7 +9,8 @@ use Zend\Json\Json;
 use Zend\Db\Sql\Sql;
 use Restaurante\Model\Restaurante;        
 use Restaurante\Form\RestauranteForm; 
-use Restaurante\Form\MenuForm;  
+use Restaurante\Form\MenuForm; 
+use Restaurante\Form\BannerForm; 
 use Restaurante\Model\RestauranteTable;  
 use Zend\Db\Adapter\Adapter;
 use Platos\Model\PlatosTable; 
@@ -69,54 +70,7 @@ class IndexController extends AbstractActionController
       
    
     }
-    public function agregarmenuAction(){
-      $auth = new \Zend\Authentication\AuthenticationService();
-        if (!$auth->hasIdentity()) {
-            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
-        }   
-        $form = new MenuForm();
-         $request = $this->getRequest();
-        if ($request->isPost()) {
-           $data = $this->request->getPost(); 
-             $this->getRestauranteTable()->guardarMenu($data);
-             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante/index/listadomenu'); 
-        }
-        return array('form' => $form);
-      }
-      
-      
- public function editarmenuAction(){
-   $auth = new \Zend\Authentication\AuthenticationService();
-        if (!$auth->hasIdentity())
-        {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
-      $id = $this->params()->fromRoute('id');
-      $menu = $this->getRestauranteTable()->buscarMenu($id)->toArray();
-      $form = new MenuForm();
-      $form->get('in_id')->setValue($menu[0]['in_id']);
-      $form->get('va_nombre')->setValue($menu[0]['va_nombre']);
-      $form->get('va_url')->setValue($menu[0]['va_url']);
-      $request = $this->getRequest(); 
-       if ($request->isPost()) {
-           $data = $this->request->getPost(); 
-          $this->getRestauranteTable()->editaMenu($data);
-             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante/index/listadomenu'); 
-        }
-        return array('form' => $form);
-   
-    }
-     public function listadomenuAction(){
-     $auth = new \Zend\Authentication\AuthenticationService();
-        if (!$auth->hasIdentity())
-        {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
-      
-      $lista = $this->getRestauranteTable()->listarmenu();
     
-        return new ViewModel(array(
-          'listamenu' => $lista,
-         ));
-   
-    }
-     
  public function agregarrestauranteAction()
     {  
         $auth = new \Zend\Authentication\AuthenticationService();
@@ -482,6 +436,12 @@ class IndexController extends AbstractActionController
         $this->getRestauranteTable()->eliminarmenu((int) $id);
         $this->redirect()->toUrl('/restaurante/index/listadomenu');
     }
+    
+    public function eliminarbannerAction() {
+        $id = $this->params()->fromQuery('id');
+        $this->getRestauranteTable()->eliminarbanner((int) $id);
+        $this->redirect()->toUrl('/restaurante/index/listadobanner');
+    }
     public function jsoncomidaAction() {
        
         $datos = $this->getRestauranteTable()->comidas();
@@ -502,7 +462,143 @@ class IndexController extends AbstractActionController
         echo Json::encode($datos);
         exit();
     }
-
+public function agregarmenuAction(){
+      $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }   
+        $form = new MenuForm();
+         $request = $this->getRequest();
+        if ($request->isPost()) {
+           $data = $this->request->getPost(); 
+             $this->getRestauranteTable()->guardarMenu($data);
+             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante/index/listadomenu'); 
+        }
+        return array('form' => $form);
+      }
+      public function agregarbannerAction(){
+      $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); } 
+        $form = new BannerForm();
+         $request = $this->getRequest();
+        if ($request->isPost()) {
+            $datos =$this->request->getPost();
+            $File = $this->params()->fromFiles('va_imagen');
+            $form->setData($datos);
+            if ($form->isValid()) {
+                $valor  = uniqid();
+                $info =  pathinfo($File['name']);
+                 require './vendor/Classes/Filter/Alnum.php';
+                 if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg'){  
+                  $imf2 =  $valor.'.'.$info['extension'];
+                  $filter   = new \Filter_Alnum();
+                  $filtered = $filter->filter($datos->va_nombre);
+                  $name = $filtered.'-'.$imf2;
+                      $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);                  
+                       $copia = $this->_options->upload->images . '/banner/' . $name;       
+                       imagejpeg($viejaimagen,$copia);
+                  }
+               $this->getRestauranteTable()->guardarBanner($datos,$name);
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante/index/listadobanner');   
+            }
+        }
+        return array('form' => $form);
+      }
+      
+      
+ public function editarmenuAction(){
+   $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity())
+        {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
+      $id = $this->params()->fromRoute('id');
+      $menu = $this->getRestauranteTable()->buscarMenu($id)->toArray();
+      $form = new MenuForm();
+      $form->get('in_id')->setValue($menu[0]['in_id']);
+      $form->get('va_nombre')->setValue($menu[0]['va_nombre']);
+      $form->get('va_url')->setValue($menu[0]['va_url']);
+        $form->get('in_orden')->setValue($menu[0]['in_orden']);
+      $request = $this->getRequest(); 
+       if ($request->isPost()) {
+           $data = $this->request->getPost(); 
+          $this->getRestauranteTable()->editaMenu($data);
+             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante/index/listadomenu'); 
+        }
+        return array('form' => $form);
+   
+    }
+       public function editarbannerAction(){
+      $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity())
+        {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
+      $id = $this->params()->fromRoute('id');
+      $menu = $this->getRestauranteTable()->buscarBanner($id)->toArray();
+      $form = new BannerForm();
+      $name= $menu[0]['va_imagen'];
+      $form->get('in_id')->setValue($menu[0]['in_id']);
+      $form->get('va_nombre')->setValue($menu[0]['va_nombre']);
+        $form->get('in_orden')->setValue($menu[0]['in_orden']);
+            $form->get('va_url')->setValue($menu[0]['va_url']);
+      $request = $this->getRequest();
+       if ($request->isPost()) {
+            $datos =$this->request->getPost();  
+            $resultado=$this->getRestauranteTable()->buscarBanner($datos->in_id)->toArray();
+            $File = $this->params()->fromFiles('va_imagen');
+            $form->setData($datos);
+            if ($form->isValid()) {
+                $valor  = uniqid();
+                $info =  pathinfo($File['name']);
+                if($File['name']=='')
+               {
+                    $this->getRestauranteTable()->editaBanner($datos,$resultado[0]['va_imagen']);
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante/index/listadobanner');}
+                else{
+                    
+                 $eliminar = $this->_options->upload->images . '/banner/' . $resultado[0]['va_imagen'];
+                unlink($eliminar);
+                require './vendor/Classes/Filter/Alnum.php';
+                 if($info['extension']=='jpg' or $info['extension']=='JPG' or $info['extension']=='jpeg'){  
+                  $imf2 =  $valor.'.'.$info['extension'];
+                  $filter   = new \Filter_Alnum();
+                  $filtered = $filter->filter($datos->va_nombre);
+                  $name = $filtered.'-'.$imf2;
+                      $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);  
+                       $copia = $this->_options->upload->images . '/banner/' . $name;       
+                       imagejpeg($viejaimagen,$copia); }
+                  $this->getRestauranteTable()->editaBanner($datos,$name);
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante/index/listadobanner');   
+                  }
+            }
+        }
+      
+        return array('form' => $form);
+   
+    }
+      public function listadobannerAction(){
+     $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity())
+        {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
+      
+      $lista = $this->getRestauranteTable()->listarbanner();
+    
+        return new ViewModel(array(
+          'listabanner' => $lista,
+         ));
+   
+    }
+     public function listadomenuAction(){
+     $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity())
+        {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
+      
+      $lista = $this->getRestauranteTable()->listarmenu();
+    
+        return new ViewModel(array(
+          'listamenu' => $lista,
+         ));
+   
+    }
+     
      public function eliminarsolarAction() {
           
        $solr = \Classes\Solr::getInstance()->getSolr();

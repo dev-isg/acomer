@@ -553,13 +553,13 @@ public function guardarplatoregistro($dataregistro) {
                 ->join('ta_comentario', 'ta_plato.in_id = ta_comentario.ta_plato_in_id', array(), 'left')
                 ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id', array(), 'left')
                 ->join('ta_plato_has_ta_local', 'ta_plato_has_ta_local.ta_plato_in_id = ta_plato.in_id', array(), 'left')
-                ->join('ta_local', 'ta_local.in_id = ta_plato_has_ta_local.ta_local_in_id', array(), 'left')
-                ->join('ta_ubigeo', 'ta_ubigeo.in_id = ta_local.ta_ubigeo_in_id', array('Distrito' => 'ch_distrito'), 'left')
+                ->join('ta_local', 'ta_local.in_id = ta_plato_has_ta_local.ta_local_in_id', array('direccion'=>'va_direccion','telefono'=>'va_telefono'), 'left')
+                ->join('ta_ubigeo', 'ta_ubigeo.in_id = ta_local.ta_ubigeo_in_id', array('Distrito' => 'ch_distrito','Departamento' => 'ch_departamento'), 'left')
                 ->join('ta_restaurante', 'ta_local.ta_restaurante_in_id= ta_restaurante.in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
                 ->join('ta_plato_has_ta_tag', 'ta_plato.in_id = ta_plato_has_ta_tag.ta_plato_in_id', array(), 'left')
              
                 ->join('ta_tag', 'ta_tag.in_id = ta_plato_has_ta_tag.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
-                ->where('ta_plato.en_estado=1 and (ta_comentario.en_estado=1 or ta_comentario.en_estado is null)')->group('ta_plato.in_id')->order('ta_plato.en_destaque DESC');//limit($aleatorio)->offset(3)                
+                ->where('ta_plato.en_estado=1 and ta_restaurante.en_estado=1 and (ta_comentario.en_estado=1 or ta_comentario.en_estado is null)')->group('ta_plato.in_id')->order('ta_plato.en_destaque DESC');//limit($aleatorio)->offset(3)                
 //array('ta_tag.in_id'=>'1','ta_plato.en_estado'=>'activo','ta_comentario.en_estado'=>'aprobado')
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);

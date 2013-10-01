@@ -45,40 +45,16 @@ public function __construct()
         $view = new ViewModel();
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
-//       
-//        $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
-//        $listatot = $listatot->toArray();
-//        foreach ($listatot as $key => $value) {
-//            
-//              $list[]=$listatot[$key]['va_nombre'];
-//            if ($key < 3) {
-//                $listades[] = $listatot[$key];  
-//            } else {
-//                $listadeseg[] = $listatot[$key];
-//              
-//            }
-//        }
-//       $this->layout()->titleplato=implode(",",$list).',';
-       $mistura=$this->getConfigTable()->platoslistadelsabor();
-//        $listaval = $this->getConfigTable()->cantComentxPlato(2, 3, 3);
-//        $listault = $this->getConfigTable()->cantComentxPlato(2, 3, 2);
-       
-        //var_dump(count($mistura));exit;
-//        $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-//       $total=count($mistura);
-//       $maximo =  (int)(($total/10)+1);
-       
+        $mistura=$this->getConfigTable()->platoslistadelsabor();
+        $total=count($mistura);
+        $maximo =  (int)(($total/9)+1);
         $page2 = (int) $this->params()->fromQuery('page', 1);
-//        if($page2<=$maximo){
+        if($page2<=$maximo){
             $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($mistura));
         $paginator->setCurrentPageNumber($page2);
-         $paginator->setItemCountPerPage(10);
-         
-//         }
-        
-         
-         
-               
+         $paginator->setItemCountPerPage(9); 
+       }
+       else{}
          $url = $_SERVER['REQUEST_URI'];
         if ($url != '/') {
             if ($url) {
@@ -88,7 +64,7 @@ public function __construct()
                 } else {
                     $urlf = $url;
                 }
-                $urlf = $urlf . '&';
+                $urlf = $urlf . '?';
             } else {
                 $urlf = $urlf . '?';
             }
@@ -99,11 +75,13 @@ public function __construct()
         }
         $this->layout()->clase = 'Home';
         $menus = $this->menu();
+        $banner = $this->banner();
         $view->setVariables(array(
             'promociones'=>$paginator,
             'clase' => 'Home',
               'urlac' => $urlf,
-            'menus'=>$menus
+            'menus'=>$menus,
+            'banner'=>$banner
         ));
         return $view;
     }
@@ -116,11 +94,26 @@ public function __construct()
         $sql = new Sql($adapter);
         $select = $sql->select()
                 ->from('ta_menu')
+                
 //                ->columns(array('ch_distrito'=>'ch_distrito','ch_provincia'=>'ch_provincia','ch_departamento'=>'ch_departamento'))
 //                ->join('ta_local', 'ta_ubigeo.in_id = ta_local.ta_ubigeo_in_id ', array(), 'left')
-         ->where(array('en_estado'=>'activo'));
+         ->where(array('en_estado'=>'activo'))
+                ->order('in_orden ASC');
                 //->group('ta_ubigeo.ch_distrito');    
 
+        $selectString = $sql->getSqlStringForSqlObject($select);
+        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+         return $results->toArray();
+    }
+     public function banner()
+    {
+        $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+                ->from('ta_banner')
+      ->where(array('en_estado'=>'activo'))
+                ->order('in_orden ASC');
         $selectString = $sql->getSqlStringForSqlObject($select);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
          return $results->toArray();
@@ -242,7 +235,10 @@ public function __construct()
             elseif($valor[0]=='tag:')     
             {$buscar = $valor[1];
             $texto = $valor[0].'"'.$buscar.'"'; 
-         //   $distrito = $datos['distrito'];
+            }
+            elseif($valor[0]=='name:')     
+            {$buscar = $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];
+            $texto = $valor[0].'"'.$buscar.'"'; 
             }
             else{ $filter = new \Zend\I18n\Filter\Alnum(true);
             $texto = $filter->filter($plato);
@@ -432,9 +428,7 @@ public function __construct()
                 }
                 
             }else{
-   
                 $limite = 10;
-              //  $distrito='LIMA';
                 if($paginas=='')
                  {$start = 0;}
                else{$start=$paginas*10;}
@@ -528,6 +522,9 @@ public function __construct()
          { $form->get('q')->setValue($plato);
          $valores = $buscar;} 
          elseif($valor[0]=='tag:')
+         { $form->get('q')->setValue($plato);
+         $valores = $buscar;}
+         elseif($valor[0]=='name:')
          { $form->get('q')->setValue($plato);
          $valores = $buscar;}
          else{ setcookie('q', $texto);
@@ -684,6 +681,9 @@ public function __construct()
         elseif($valor[0]=='tag:')     
         {$buscar = $valor[1];
         $texto = $valor[0].'"'.$buscar.'"';}
+            elseif($valor[0]=='name:')
+            {$buscar = $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];
+          $texto = $valor[0].'"'.$buscar.'"'; }
         else{ $filtered = strtoupper($filtered);
         $filter = new \Zend\I18n\Filter\Alnum(true);
         $text = trim($filter->filter($filtered));
@@ -855,6 +855,11 @@ public function __construct()
         $form->get('q')->setValue($filtered);
         $valores = $buscar;
         }
+        elseif($valor[0]=='name:')
+        {
+        $form->get('q')->setValue($filtered);
+        $valores = $buscar;
+        }
         else {setcookie('q', $text);
         $form->get('q')->setValue($text);
         $valores = $texto;
@@ -912,6 +917,9 @@ public function __construct()
             { $buscar = $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];
             $texto = $valor[0].'"'.$buscar.'"'; }  
             elseif($valor[0]=='tag:')
+            { $buscar = $valor[1];
+            $texto = $valor[0].'"'.$buscar.'"'; }
+            elseif($valor[0]=='name:')
             { $buscar = $valor[1];
             $texto = $valor[0].'"'.$buscar.'"'; }
             else{
@@ -1058,7 +1066,10 @@ public function __construct()
             $plato = $valor[0].'"'.$buscar.'"'; }  
          elseif($valor[0]=='tag:')
             { $buscar = $valor[1];
-            $plato = $texto; }
+         $plato = $valor[0].'"'.$buscar.'"'; }
+             elseif($valor[0]=='name:')
+            {$buscar = $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];
+          $plato = $valor[0].'"'.$buscar.'"'; }
             else{$filter = new \Zend\I18n\Filter\Alnum(true);
             $plato = $filter->filter($texto);
             setcookie('q', $texto);}

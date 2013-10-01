@@ -2,9 +2,9 @@
 namespace Restaurante\Form;
 
 use Zend\Form\Form;
-class MenuForm extends Form
+class BannerForm extends Form
 {
-    public function __construct($name = null)
+     public function __construct($name = null)
     {
         // we want to ignore the name passed
         parent::__construct('menu');
@@ -23,7 +23,7 @@ class MenuForm extends Form
             'type' => 'Text',
           
             'options' => array(
-                'label' => 'Nombre de la pestania',          
+                'label' => 'Nombre del banner :',          
             ),
             'attributes' => array(               
                 'class' => 'span10  ',
@@ -37,25 +37,39 @@ class MenuForm extends Form
             'type' => 'Text',
           
             'options' => array(
-                'label' => 'Orden',          
+                'label' => 'Ingrese el orden a mostrar :',          
             ),
             'attributes' => array(               
-                'class' => 'span10  ',
+                'class' => 'span2  ',
                 'id'   => 'in_orden',
                 'placeholder'=>'Ingrese el orden a mostrar'
             ),
         ));
-      $this->add(array(
-            'name' => 'va_url',
-            'type' => 'Text',
-          
-            'options' => array(
-                'label' => 'Ruta de la Url',          
+     
+         
+         $this->add(array(
+            'name' => 'va_imagen',
+            'type' => 'File',
+              'attributes' => array(               
+                'class' => '',
+                'id'   => 'va_imagen',
+                'placeholder'=>'Ingrese su imagen'
             ),
-            'attributes' => array(               
-                'class' => 'span10  ',
-                'id'   => 'va_nombre',
+            'options' => array(
+                'label' => 'Agregar Imagen : ',
+            ),
+        ));
+         
+         $this->add(array(
+            'name' => 'va_url',
+            'type' => 'text',
+              'attributes' => array(               
+                'class' => 'span12',
+                'id'   => 'va_imagen',
                 'placeholder'=>'Ingrese la url'
+            ),
+            'options' => array(
+                'label' => 'Agregar url : ',
             ),
         ));
        

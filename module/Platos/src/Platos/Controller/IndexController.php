@@ -673,7 +673,7 @@ class IndexController extends AbstractActionController {
                 );
                 $resultados = false;
                 if ($query) {
-                    $solr = \Classes\Solr::getInstance()->getSolr();
+                    $solr = \Classes\Solr::getInstance()->getSolr();    
                     if (get_magic_quotes_gpc() == 1) {
                         $query = stripslashes($query);}
                     try { $resultados = $solr->search($query, 0, $limit, $fq);

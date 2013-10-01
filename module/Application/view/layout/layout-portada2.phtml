@@ -122,7 +122,6 @@
     <?php }?>
 
 	<div class="container cont-home">
-      
       <?php
     require_once './vendor/Classes/Mobile_Detect.php';
     $detect3 = new Mobile_Detect();
@@ -149,10 +148,12 @@
                   if($valor[0]=='restaurante:')
                    {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
                 elseif ($valor[0]=='tag:') {echo $valor[1];}
+                   elseif ($valor[0]=='name:')   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
                    else{echo $_GET['q'];};}
                   else{      $valor = explode(" ",$_COOKIE['q']);
                             if($valor[0]=='restaurante:')
                      {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                     elseif ($valor[0]=='name:')   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
                      elseif ($valor[0]=='tag:') {echo $valor[1];}
                      else{echo $_COOKIE['q'];};}
                       ?>"     placeholder="Ingrese el plato"  required="required"/>
@@ -195,10 +196,12 @@
                   if($valor[0]=='restaurante:')
                    {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
                 elseif ($valor[0]=='tag:') {echo $valor[1];}
+                elseif ($valor[0]=='name:')   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
                    else{echo $_GET['q'];};}
                   else{      $valor = explode(" ",$_COOKIE['q']);
                             if($valor[0]=='restaurante:')
                      {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                     elseif ($valor[0]=='name:')   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
                      elseif ($valor[0]=='tag:') {echo $valor[1];}
                      else{echo $_COOKIE['q'];};}
                       ?>"     placeholder="Ingrese el plato"  required="required"/>
@@ -216,7 +219,20 @@
         </div>
 
       <?php }else{?>
-        <div class="content-sidebar">
+      <div class="publi-rascacielosIzq">
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-9496719136826499";
+        /* Lista del Sabor */
+        google_ad_slot = "8003997249";
+        google_ad_width = 160;
+        google_ad_height = 600;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+      </div>
+      <div class="content-sidebar">
 			<div class="contenido-busqueda">
 				<div class="content-sidebar-ho">
 					<a class="title-home-listado"
@@ -246,11 +262,13 @@
                   {$valor = explode(" ",$_GET['q']);
                   if($valor[0]=='restaurante:')
                    {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                   elseif ($valor[0]=='name:')   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
                 elseif ($valor[0]=='tag:') {echo $valor[1];}
                    else{echo $_GET['q'];};}
                   else{      $valor = explode(" ",$_COOKIE['q']);
                             if($valor[0]=='restaurante:')
                      {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                     elseif ($valor[0]=='name:')   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
                      elseif ($valor[0]=='tag:') {echo $valor[1];}
                      else{echo $_COOKIE['q'];};}
                       ?>"
@@ -350,7 +368,7 @@
     </div>
 </div>
   <script src="<?php echo $this->host('ruta')?>/js/vendor/jquery.placeholder.min.js?v<?php echo $this->host('version')?>"></script>   
-  <script src="<?php echo $this->host('ruta')?>/js/vendor/mosaic.js?v<?php echo $this->host('version')?>"></script>
+  
   <!--<script src="<?php echo $this->host('ruta')?>/js/jquery.flexslider.js"></script>
   <script src="<?php echo $this->host('ruta')?>/js/main1.js"></script>-->
 

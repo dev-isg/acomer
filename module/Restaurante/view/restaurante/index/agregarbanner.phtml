@@ -1,5 +1,5 @@
 <?php
-$title = 'Agregar nuevo menu';
+$title = 'Agregar nuevo banner';
 $this->headTitle($title);
 ?>
 
@@ -9,7 +9,7 @@ $form = $this->form;
 //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
 
 $form->setAttributes(array(
-    'action' => $this->url.'/restaurante/index/agregarmenu',
+    'action' => $this->url.'/restaurante/index/agregarbanner',
     'method' => 'post',
     'class'=>'form-horizontal'
 ));
@@ -21,6 +21,7 @@ echo $this->form()->openTag($form);
 echo $this->formHidden($form->get('in_id'));
 ?>
 <div class="control-group span5"><?php echo $this->formRow($form->get('va_nombre'));?></div><?php?>
+<div class="control-group span5"><?php echo $this->formRow($form->get('va_imagen'));?></div><?php?>
 <div class="control-group span5"><?php echo $this->formRow($form->get('va_url'));?></div><?php?>
 <div class="control-group span5"><?php echo $this->formRow($form->get('in_orden'));?></div><?php?>
 <div class="control-group span12 "><?php echo $this->formSubmit($form->get('submit'));?></div><?php echo $this->form()->closeTag();?> 
