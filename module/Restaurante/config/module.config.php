@@ -56,6 +56,18 @@ return array(
                     
                 )
             ),
+            
+            'editarmenu' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/editar-menu[/:id]',
+                    'defaults' => array(
+                        'controller' => 'Restaurante\Controller\Index',
+                        'action' => 'editarmenu'
+                    )
+                    
+                )
+            ),
         ),
     ),
     'view_manager' => array(

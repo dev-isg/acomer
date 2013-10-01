@@ -684,7 +684,8 @@ background: url(../../img/back-detalle.png) repeat;
 }
 .recomendados-platos ul li{
   float: left;
-  margin-right: 10px;  
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 .lista-plato-li ul li{
   margin-right: 0;
@@ -1013,7 +1014,7 @@ a.title-home-listado h1 img{
 }
 .content-sidebar-ho{
   display: block;
-  margin-top: 40%;
+  margin-top: 10%;
 }
 .sub .content-etiqueta-home{
   width: 220px;
@@ -1574,7 +1575,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   background-position: 0 -91px;
 }
 .ficha-desc h3{
-  font-size: 15px;
+  font-size: 16px;
   font-family: arial;
   color: #ff8400;
   font-weight: bold;
@@ -1659,6 +1660,7 @@ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;
   margin: 0;
   line-height: 14px;
   margin-bottom: 10px;
+  margin-top: 7px;
 }
 p.costo span{
   color: #7b7b7b;
@@ -1862,7 +1864,32 @@ p.costo span{
   color: #7b7b7b;
   font-size: 13px;
 }
+.ficha-desc ul.ubi-lupa li .ubicancion{
+  background: url(../../img/pint.png) no-repeat 0 3px;
+  padding-left: 20px;
+  line-height: 16px;
+  color: #7b7b7b;
+  font-size: 13px;
+}
+.ficha-desc h4{
+  font-size:0.9em !important;
+  margin-bottom: 0px;
+  border-bottom: 0;
+  padding-bottom: 0;
+  margin-top: 5px;
+}
+.ficha-desc ul.ubi-lupa{
+  list-style: none;
+  margin-left: 0;
+  margin-bottom: 3px;
+}
 .content-info ul.ubi-lupa li .ubicancion1{  
+  padding-left: 20px;
+  line-height: 16px;
+  color: #7b7b7b;
+  font-size: 13px;
+}
+.ficha-desc ul.ubi-lupa li .ubicancion1{  
   padding-left: 20px;
   line-height: 16px;
   color: #7b7b7b;
@@ -1885,6 +1912,7 @@ p.costo span{
 ul.time{
   list-style: none;
   margin-left: 2px;
+  margin-bottom: 0px;
 }
 ul.time .day{
   color: #7b7b7b;
@@ -2179,7 +2207,34 @@ p.ver_mistura a{
   font-size: 13px;
   font-weight: bold;
 }
-
+.content-menu-home{
+  width: 724px;
+  background: #FF8500;
+  height: 35px;
+}
+.content-menu-home ul{
+  list-style: none;
+  margin-left: 0;
+  overflow: hidden;
+}
+.content-menu-home ul li{
+  float: left;
+  margin-left: 5px;
+  /*color: #FF8500;*/
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 35px;
+}
+.pagination  ul li{
+  margin-right: 0;
+}
+.content-menu-home ul li a{
+  /*color: #FF8500;*/
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
 /*Banner intercativo*/
 
 #content-text { width:290px; height:150px; position:absolute; margin-top:275px; margin-left:79px;}
@@ -2190,22 +2245,19 @@ p.ver_mistura a{
 #paso-dos{ width:100%; height:403px; margin:auto;position:relative; z-index:999; background-position:center;}
 #paso-tres{
  width:670px; 
- height:352px; 
- margin:auto; 
- background: url(../img/bann/marca.jpg) repeat; 
+ margin:auto;  
  position:relative;  
- background-position:center; 
 }
 #ver-todas-las-recetas a:hover{ background-position:bottom;}
 
 #opacidad{ width:100%; height:403px; position: absolute;  
   opacity: 0.20;
   -moz-opacity: 0.20;
-  -webkit-opacity: 0.20; filter:alpha(opacity=20);; z-index:99; display:none;}
+  -webkit-opacity: 0.20; filter:alpha(opacity=20); z-index:99; display:none;}
 .center{ width:1100px; height:950px; margin:auto;/* background-color:#0F0;*/}
 .center-dos{ 
     width:100%; 
-    height:275px; 
+    height:210px; 
     margin:auto;
     position: relative;
 }
@@ -2247,8 +2299,8 @@ p.ver_mistura a{
 }
 .nav-banner{
   width: 100%;
-  height: 60px;
-  background: url(../img/bann/n.jpg) repeat-x;
+  height: 50px;
+  background: white;
 }
 
 
@@ -2270,18 +2322,21 @@ p.ver_mistura a{
 }
 .nav-banner ul li{
   float: left;
-  padding-right: 10px;
+  padding-right: 0px;
 }
 .nav-banner ul.dep-home{
   list-style: none;
   overflow: hidden;
   margin: 0;
   padding-left: 15px;
-  padding-top: 8px;
+  padding-top: 14px;
 }
 .nav-banner ul.dep-home li{
   float: left;
-  padding-right: 20px;
+  padding-left: 65px;
+}
+.nav-banner ul.dep-home li:first-child{
+  padding-left: 0;
 }
 .envoltura {
   background: none repeat scroll 0 0 #00c0f7;
@@ -2321,9 +2376,8 @@ p.ver_mistura a{
 .ft{
   display: block;
 }
-.paso{  
-  height: 40px;
-  width: 80px;
+.paso{
+  height: 26px;
   padding-left: 48px;
   text-align: center;
 }
@@ -2332,19 +2386,24 @@ p.ver_mistura a{
   font-weight: bold;
   line-height: 15px;
   padding-top: 5px;
+  color: #FF8500;
 }
 .paso1{
-  background: url(../img/bann/nu.png) no-repeat;
+  background: url(../img/paso1.png) no-repeat center left;
 }
 .paso2{
-  background: url(../img/bann/nu1.png) no-repeat;
+  background: url(../img/paso2.png) no-repeat center left;
 }
 .paso3{
-  background: url(../img/bann/nu2.png) no-repeat;
+  background: url(../img/paso3.png) no-repeat center left;
 }
 #plato-verdura-lomosaltado { background-image:url(../img/bann/lomo-e.png); }
 #plato-verdura-guisoverdura { background-image:url(../img/bann/parrilla-e.png); }
 #plato-verdura-sopadezapallo { background-image:url(../img/bann/causa-e.png); }
+
+#slider{
+  height: 210px!important;
+}
 /*#plato-verdura-wok { background-image:url(../img/bann/ceviche-e.png); }*/
 
 /*#btn-continua2 { width:200px; height:93px; position:absolute; background-image:url(../img/btn-continuar.png); background-repeat:no-repeat; margin-top:525px; margin-left:451px; display:none; cursor:pointer;}*/
@@ -2375,6 +2434,95 @@ p.ver_mistura a{
 #autocompletaLoad{
 
 }
+
+
+
+/* image replacement */
+  .graphic, #prevBtn, #nextBtn, #slider1prev, #slider1next{
+    margin:0;
+    padding:0;
+    display:block;
+    overflow:hidden;
+    text-indent:-8000px;
+  }
+/* // image replacement */
+/* Easy Slider */
+  #slider{
+    width: 100%!important;
+  }
+  #slider ul, #slider li,
+  #slider2 ul, #slider2 li{
+    margin:0;
+    padding:0;
+    list-style:none;
+    }
+  #slider2{margin-top:1em;}
+  #slider li, #slider2 li{ 
+    /* 
+      define width and height of list item (slide)
+      entire slider area will adjust according to the parameters provided here
+    */ 
+    width:696px;
+    height:241px;
+    overflow:hidden; 
+  } 
+  #prevBtn, #nextBtn,
+  #slider1next, #slider1prev{ 
+    display:block;
+    width:34px;
+    height:34px;
+    position:absolute;
+    left:3px;
+    top:71px;
+    z-index:1000;
+  } 
+  #nextBtn, #slider1next{ 
+    left:95%;
+  }                           
+  #prevBtn a, #nextBtn a,
+  #slider1next a, #slider1prev a{  
+    display:block;
+    position:relative;
+    width:34px;
+    height:34px;
+    background:url(../img/left-slider.png) no-repeat 0 0; 
+  } 
+  #nextBtn a, #slider1next a{ 
+    background:url(../img/right-slider.png) no-repeat 0 0; 
+  } 
+    
+  /* numeric controls */  
+
+  ol#controls{
+    margin:1em 0;
+    padding:0;
+    height:28px;  
+    }
+  ol#controls li{
+    margin:0 10px 0 0; 
+    padding:0;
+    float:left;
+    list-style:none;
+    height:28px;
+    line-height:28px;
+    }
+  ol#controls li a{
+    float:left;
+    height:28px;
+    line-height:28px;
+    border:1px solid #ccc;
+    background:#DAF3F8;
+    color:#555;
+    padding:0 10px;
+    text-decoration:none;
+    }
+  ol#controls li.current a{
+    background:#5DC9E1;
+    color:#fff;
+    }
+  ol#controls li a:focus, #prevBtn a:focus, #nextBtn a:focus{outline:none;}
+  
+/* // Easy Slider */
 /* ==========================================================================
    Helper classes
    ========================================================================== */
@@ -2584,12 +2732,8 @@ p.ver_mistura a{
 #paso-dos{ width:100%; height:403px; margin:auto;position:relative; z-index:999; background-position:center;}
 #paso-tres{
  width:724px; 
- height:403px; 
  margin:auto; 
- background: url(../img/bann/marca.jpg) repeat; 
- position:relative; 
  z-index:999; 
- background-position:center; 
 }
 #ver-todas-las-recetas a:hover{ background-position:bottom;}
 
@@ -2600,7 +2744,7 @@ p.ver_mistura a{
 .center{ width:1100px; height:950px; margin:auto;/* background-color:#0F0;*/}
 .center-dos{ 
     width:100%; 
-    height:323px; 
+    height:210px; 
     margin:auto;
     position: relative;
 }
@@ -2641,8 +2785,8 @@ p.ver_mistura a{
 }
 .nav-banner{
   width: 100%;
-  height: 60px;
-  background: url(../img/bann/n.jpg) repeat-x;
+  height: 50px;
+  background: white;
 }
 
 
@@ -2663,14 +2807,14 @@ p.ver_mistura a{
 }
 .nav-banner ul li{
   float: left;
-  padding-right: 10px;
+  padding-right: 0px;
 }
 .nav-banner ul.dep-home{
   list-style: none;
   overflow: hidden;
   margin: 0;
   padding-left: 15px;
-  padding-top: 8px;
+  padding-top: 14px;
 }
 .nav-banner ul.dep-home li{
   float: left;
@@ -2714,26 +2858,25 @@ p.ver_mistura a{
 .ft{
   display: block;
 }
-.paso{  
-  height: 40px;
-  width: 80px;
-  padding-left: 48px;
+.paso{ 
+  height: 26px;
+  padding-left: 25px;
   text-align: center;
 }
 .paso p{
-  font-size: 15px;
+  font-size: 18px;
   font-weight: bold;
   line-height: 15px;
   padding-top: 5px;
 }
 .paso1{
-  background: url(../img/bann/nu.png) no-repeat;
+  background: url(../img/paso1.png) no-repeat center left;
 }
 .paso2{
-  background: url(../img/bann/nu1.png) no-repeat;
+  background: url(../img/paso2.png) no-repeat center left;
 }
 .paso3{
-  background: url(../img/bann/nu2.png) no-repeat;
+  background: url(../img/paso3.png) no-repeat center left;
 }
 #plato-verdura-lomosaltado { background-image:url(../img/bann/lomo-e.png); }
 #plato-verdura-guisoverdura { background-image:url(../img/bann/parrilla-e.png); }

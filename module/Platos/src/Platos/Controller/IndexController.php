@@ -661,14 +661,14 @@ class IndexController extends AbstractActionController {
 //    }
     
     
-    public function consultaAction($limit,$id)       
+    public function consultaAction($limit,$id,$tipo)       
     {
           $texto  = 'en_destaque:si';
             $palabraBuscar = isset($texto) ? $texto : false;
                 $query = "($palabraBuscar)";
                 $fq = array(
                     'sort' => 'random_' . uniqid() . ' asc, puntuacion desc',
-                    'fq' => 'en_estado:activo  AND restaurant_estado:activo AND -id:'.$id,
+                    'fq' => 'en_estado:activo  AND restaurant_estado:activo AND -id:'.$id.'AND plato_tipo:'.$tipo,
                     'wt' => 'json'
                 );
                 $resultados = false;
@@ -692,14 +692,15 @@ class IndexController extends AbstractActionController {
         if(!$this->getPlatosTable()->getPlato($id)){
             $this->redirect()->toUrl('/');
         }       
-          $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray();  
+          $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray(); 
+        
           $texto = 'restaurante:"'.$listarecomendacion[0]['restaurant_nombre'].'"'; 
-                $limit = 4;
+                $limit = 10;
                 $palabraBuscar = isset($texto) ? $texto : false;
                 $query = "($palabraBuscar)";
                 $fq = array(
                     'sort' => 'random_' . uniqid() . ' asc',
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:'.$listarecomendacion[0]['in_id'],
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:'.$listarecomendacion[0]['in_id'] ,
                     'wt' => 'json'
                 );
                 $results = false;
@@ -710,25 +711,40 @@ class IndexController extends AbstractActionController {
                     try { $results = $solr->search($query, 0, $limit, $fq);
                     } catch (Exception $e) {
                   echo ("<div>ingrese algun valor</div>"); }}
-                  if(count($results->response->docs)<4)     
-                  {
-                     if(count($results->response->docs)==0)
-                    { $consulta = $this->consultaAction(4,$listarecomendacion[0]['in_id']); 
-                    $resultados =$results->response->docs;
-                    } 
-                      elseif(count($results->response->docs)==1)
-                    { $consulta = $this->consultaAction(3,$listarecomendacion[0]['in_id']); 
-                    $resultados =$results->response->docs;}
-                     elseif(count($results->response->docs)==2)
-                    { $consulta = $this->consultaAction(2,$listarecomendacion[0]['in_id']);  
+                  if(count($results->response->docs)<10)     
+                  {if(count($results->response->docs)==0)
+                    {  $consulta = $this->consultaAction(10,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
                     $resultados =$results->response->docs;
                     }
-                     elseif(count($results->response->docs)==3)
-                    {$consulta = $this->consultaAction(1,$listarecomendacion[0]['in_id']); 
+                    elseif(count($results->response->docs)==1)
+                    { $consulta = $this->consultaAction(9,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;}
+                     elseif(count($results->response->docs)==2)
+                    { $consulta = $this->consultaAction(8,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']);  
                     $resultados =$results->response->docs;
-                    } 
-                  }
-                  else{ $resultados =$results->response->docs;}
+                    } elseif(count($results->response->docs)==3)
+                    {$consulta = $this->consultaAction(7,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;
+                    }  elseif(count($results->response->docs)==4)
+                    {$consulta = $this->consultaAction(6,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;
+                    }  elseif(count($results->response->docs)==5)
+                    {$consulta = $this->consultaAction(5,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;
+                    }  elseif(count($results->response->docs)==6)
+                    {$consulta = $this->consultaAction(4,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;
+                    }  elseif(count($results->response->docs)==7)
+                    {$consulta = $this->consultaAction(3,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;
+                    }  elseif(count($results->response->docs)==8)
+                    {$consulta = $this->consultaAction(2,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;
+                    }  elseif(count($results->response->docs)==9)
+                    {$consulta = $this->consultaAction(1,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;
+                    }   }
+                  else{  $resultados =$results->response->docs;}
 
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);

@@ -206,19 +206,31 @@
           <div id="pagina">
               <div class="pagination ">
                   <ul>
-             <?php if($this->total)
-                 $pagina = $_GET['page'];
-               if (!$pagina) {  echo '';  
-               }    else{ if($pagina-1>=0 ){?> <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo $pagina-1?>" >«Anterior</a></li> <?php } }
-               {for($i=0;$i<=$this->total;$i+=10)
-                 { ?>  <li <?php if((($i/10))==$_GET['page']){echo 'class="active"';} ?>><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo ($i/10)?>" ><?php echo (($i/10)+1)?></a></li><?php  } }  
-                 if (!$pagina and $this->total>10) { 
-                 $pagina =0;  
-                if($pagina+1<=$this->total){?> <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
-             }   elseif($pagina and $this->total>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10)){?> <li><a href="buscar?q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
-            }else{echo '';}
-                 ?> 
-                  </ul></div> 
+         <?php if($this->total){
+             $pagina = $_GET['page'];
+           if (!$pagina) {  echo '';  
+           }    else{ if($pagina-1>=0 ){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina-1?>" >«Anterior</a></li> <?php } }
+           if ($this->total % 10 == 0)
+          {{for($i=0;$i<=$this->total-1;$i+=10)
+             { ?>  <li <?php if(((int)($i/10))==$_GET['page']){echo 'class="active"';} ?>>
+                 <a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo (int)($i/10)?>" ><?php echo ((int)($i/10)+1)?></a></li><?php  }  }        }
+             else{{for($i=0;$i<=$this->total;$i+=10)
+             { ?>  <li <?php if(((int)($i/10))==$_GET['page']){echo 'class="active"';} ?>><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo (int)($i/10)?>" ><?php echo ((int)($i/10)+1)?></a></li><?php  } 
+             } }
+            if ($this->total % 10 == 0){ 
+             if (!$pagina and $this->total-1>10) { 
+             $pagina =0;  
+            if($pagina+1<=$this->total-1){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+         }   elseif($pagina and $this->total-1>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10-1)){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+        }else{echo '';}
+            }
+            else{    if (!$pagina and $this->total>10) { 
+             $pagina =0;  
+            if($pagina+1<=$this->total){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+         }   elseif($pagina and $this->total>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10)){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+        }else{echo '';}}
+         }  ?> 
+              </ul></div> 
           </div> 
        </div>      
       <div class="padding-map" style="display:none;">
@@ -320,19 +332,31 @@
       <?php endforeach; ?> 
        <div id="pagina">
           <div class="pagination ">
-              <ul>
-         <?php if($this->total)
+            <ul>
+         <?php if($this->total){
              $pagina = $_GET['page'];
            if (!$pagina) {  echo '';  
-           }    else{ if($pagina-1>=0 ){?> <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo $pagina-1?>" >«Anterior</a></li> <?php } }
-           {for($i=0;$i<=$this->total;$i+=10)
-             { ?>  <li <?php if((($i/10))==$_GET['page']){echo 'class="active"';} ?>><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo ($i/10)?>" ><?php echo (($i/10)+1)?></a></li><?php  } }  
-             if (!$pagina and $this->total>10) { 
+           }    else{ if($pagina-1>=0 ){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina-1?>" >«Anterior</a></li> <?php } }
+           if ($this->total % 10 == 0)
+          {{for($i=0;$i<=$this->total-1;$i+=10)
+             { ?>  <li <?php if(((int)($i/10))==$_GET['page']){echo 'class="active"';} ?>>
+                 <a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo (int)($i/10)?>" ><?php echo ((int)($i/10)+1)?></a></li><?php  }  }        }
+             else{{for($i=0;$i<=$this->total;$i+=10)
+             { ?>  <li <?php if(((int)($i/10))==$_GET['page']){echo 'class="active"';} ?>><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo (int)($i/10)?>" ><?php echo ((int)($i/10)+1)?></a></li><?php  } 
+             } }
+            if ($this->total % 10 == 0){ 
+             if (!$pagina and $this->total-1>10) { 
              $pagina =0;  
-            if($pagina+1<=$this->total){?> <li><a href="buscar?q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
-         }   elseif($pagina and $this->total>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10)){?> <li><a href="buscar?q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+            if($pagina+1<=$this->total-1){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+         }   elseif($pagina and $this->total-1>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10-1)){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
         }else{echo '';}
-             ?> 
+            }
+            else{    if (!$pagina and $this->total>10) { 
+             $pagina =0;  
+            if($pagina+1<=$this->total){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+         }   elseif($pagina and $this->total>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10)){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
+        }else{echo '';}}
+         }  ?> 
               </ul></div> 
          </div>
     </div>          

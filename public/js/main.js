@@ -59,7 +59,6 @@ $('#local').validate({
             va_direccion : {
               required : "Por favor ingrese la dirección "
             }
-        
         },
       highlight: function(element) {
         $(element).closest('.control-group').removeClass('success').addClass('error');
@@ -365,14 +364,6 @@ $(".eli").on("click",function(){
 	$('#verusuario').html("Estas seguro de eliminar al usuario " + nom + " ?");
 });
 
-$(".eli-lo").on("click",function(){
-  var id = $(this).attr('data-id');
-  $('#eli-local').modal('show');
-  console.log(id);
-  $('#verlocal').attr({'data-id':id});
-  $('#verlocal').html("Estas seguro de eliminar el local ?");
-});
-
 $(".eli-com").on("click",function(){
   var id = $(this).attr('data-id');
   $('#eli-com').modal('show');
@@ -381,6 +372,13 @@ $(".eli-com").on("click",function(){
   $('#vercom').html("Estas seguro de eliminar el comentario ?");
 });
 
+$(".eli-lo").on("click",function(){
+  var id = $(this).attr('data-id');
+  $('#eli-local').modal('show');
+  console.log(id);
+  $('#verlocal').attr({'data-id':id});
+  $('#verlocal').html("Estas seguro de eliminar el local ?");
+});
 $(".eli-lo").on("click",function(){
   var id = $(this).attr('id');
   var es=$(this).attr('data-name');
@@ -402,10 +400,14 @@ $(".eli-lo").on("click",function(){
     $(this).removeClass('btn btn-danger');
     $(this).addClass('btn btn-primary');
     $(this).append("<i class='icon-trash icon-white'></i>Activar");
-  }
-
- 
- 
+  } 
+});
+$(".eli-co-menu").on("click",function(){
+  var id = $(this).attr('data-id');
+  $('#eli-local').modal('show');
+  console.log(id);
+  $('#verlocal').attr({'data-id':id});
+  $('#verlocal').html("Estas seguro de eliminar el local ?");
 });
 
 $('.check-plato').mousedown(function() {
@@ -469,6 +471,39 @@ $('.check_rest').mousedown(function() {
           $("#la" + id).html("");
           $("#la" + id).html("desactivo");
           $("#" + id).closest('tr').remove();
+              }
+    });
+$('.check_rest_menu').mousedown(function() {
+    var id = $(this).attr('data-id');
+    console.log(id); 
+    var est;
+        if (!$(this).is(':checked')) {
+          if (confirm("Desea Activar al Restaurante ?") ){
+            var est="activo";
+            var request = $.ajax({
+            url: "/restaurante/index/cambiaestadomenu?id="+id +"&estado="+ est,
+            type: "get",
+            data: {id: id , estado:est}
+                   });
+            $(this).prop("checked", "checked");
+            $("#" + id).addClass("success");
+            $("#la" + id).removeClass().addClass("label label-success");
+            $("#la" + id).html("");
+            $("#la" + id).html("activo");
+              //$("#" + id).closest('tr').remove();
+                 };
+        }else{
+          var est="desactivo";
+            var request = $.ajax({
+            url: "/restaurante/index/cambiaestadomenu?id="+id + "&estado=" + est,
+            type: "get",
+            data: {id: id , estado:est}
+                   });
+          $("#" + id).removeClass("success");
+          $("#la" + id).removeClass().addClass("label label-important");
+          $("#la" + id).html("");
+          $("#la" + id).html("desactivo");
+          //$("#" + id).closest('tr').remove();
               }
     }); 
 
@@ -556,17 +591,28 @@ $('.check_rest').mousedown(function() {
   data: {id: user} 
   });
 });
-  $("#delete-comentario").on("click",function(){
-  var user=$("#vercom").attr("data-id");
-  $("#" + user).closest('tr').remove();
-  $('#eli-com').modal('hide');
-  console.log(user);
+ $("#delete-local-menu").on("click",function(){
+  var menuG=$("#verlocal").attr("data-id");
+  $("#" + menuG).closest('tr').remove();
+  $('#eli-local').modal('hide');
+  console.log(menuG);
   var request = $.ajax({
-  url: "/usuario/comentarios/eliminarcomentario?id="+user,
-  type: "POST",
-  data: {id: user} 
+    url: "/restaurante/index/eliminarmenu?id="+menuG,
+    type: "POST",
+    data: {id: menuG} 
   });
 });
+  $("#delete-comentario").on("click",function(){
+    var user=$("#vercom").attr("data-id");
+    $("#" + user).closest('tr').remove();
+    $('#eli-com').modal('hide');
+    console.log(user);
+    var request = $.ajax({
+    url: "/usuario/comentarios/eliminarcomentario?id="+user,
+    type: "POST",
+    data: {id: user} 
+    });
+  });
  
 
 });

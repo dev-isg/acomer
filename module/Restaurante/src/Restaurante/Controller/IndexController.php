@@ -8,7 +8,8 @@ use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
 use Zend\Db\Sql\Sql;
 use Restaurante\Model\Restaurante;        
-use Restaurante\Form\RestauranteForm;       
+use Restaurante\Form\RestauranteForm; 
+use Restaurante\Form\MenuForm;  
 use Restaurante\Model\RestauranteTable;  
 use Zend\Db\Adapter\Adapter;
 use Platos\Model\PlatosTable; 
@@ -68,8 +69,53 @@ class IndexController extends AbstractActionController
       
    
     }
+    public function agregarmenuAction(){
+      $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login');
+        }   
+        $form = new MenuForm();
+         $request = $this->getRequest();
+        if ($request->isPost()) {
+           $data = $this->request->getPost(); 
+             $this->getRestauranteTable()->guardarMenu($data);
+             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante/index/listadomenu'); 
+        }
+        return array('form' => $form);
+      }
+      
+      
+ public function editarmenuAction(){
+   $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity())
+        {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
+      $id = $this->params()->fromRoute('id');
+      $menu = $this->getRestauranteTable()->buscarMenu($id)->toArray();
+      $form = new MenuForm();
+      $form->get('in_id')->setValue($menu[0]['in_id']);
+      $form->get('va_nombre')->setValue($menu[0]['va_nombre']);
+      $form->get('va_url')->setValue($menu[0]['va_url']);
+      $request = $this->getRequest(); 
+       if ($request->isPost()) {
+           $data = $this->request->getPost(); 
+          $this->getRestauranteTable()->editaMenu($data);
+             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante/index/listadomenu'); 
+        }
+        return array('form' => $form);
+   
+    }
+     public function listadomenuAction(){
+     $auth = new \Zend\Authentication\AuthenticationService();
+        if (!$auth->hasIdentity())
+        {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
+      
+      $lista = $this->getRestauranteTable()->listarmenu();
     
-
+        return new ViewModel(array(
+          'listamenu' => $lista,
+         ));
+   
+    }
      
  public function agregarrestauranteAction()
     {  
@@ -422,7 +468,20 @@ class IndexController extends AbstractActionController
             }
             $this->redirect()->toUrl('/restaurante/index');
          }    
-             
+        public function cambiaestadomenuAction() 
+        {
+            $id = $this->params()->fromQuery('id');
+            $estado = $this->params()->fromQuery('estado');
+            $this->getRestauranteTable()->estadomenu((int) $id, $estado);      
+            $this->redirect()->toUrl('/restaurante/index/listadomenu');
+         } 
+         
+         
+     public function eliminarmenuAction() {
+        $id = $this->params()->fromQuery('id');
+        $this->getRestauranteTable()->eliminarmenu((int) $id);
+        $this->redirect()->toUrl('/restaurante/index/listadomenu');
+    }
     public function jsoncomidaAction() {
        
         $datos = $this->getRestauranteTable()->comidas();

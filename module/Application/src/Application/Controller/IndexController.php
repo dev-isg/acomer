@@ -45,39 +45,87 @@ public function __construct()
         $view = new ViewModel();
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
-//        $distritos = $this->distritosperu();
-//        $this->layout()->distritos = $distritos;
-        $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
-        $listatot = $listatot->toArray();
-        foreach ($listatot as $key => $value) {
-            
-              $list[]=$listatot[$key]['va_nombre'];
-            if ($key < 3) {
-                $listades[] = $listatot[$key];  
-            } else {
-                $listadeseg[] = $listatot[$key];
-              
-            }
-        }
-       $this->layout()->titleplato=implode(",",$list).',';
-       $mistura=$this->getConfigTable()->platosParticipantes();
-        $listaval = $this->getConfigTable()->cantComentxPlato(2, 3, 3);
-        $listault = $this->getConfigTable()->cantComentxPlato(2, 3, 2);
-        $this->layout()->clase = 'Home';
+//       
+//        $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
+//        $listatot = $listatot->toArray();
+//        foreach ($listatot as $key => $value) {
+//            
+//              $list[]=$listatot[$key]['va_nombre'];
+//            if ($key < 3) {
+//                $listades[] = $listatot[$key];  
+//            } else {
+//                $listadeseg[] = $listatot[$key];
+//              
+//            }
+//        }
+//       $this->layout()->titleplato=implode(",",$list).',';
+       $mistura=$this->getConfigTable()->platoslistadelsabor();
+//        $listaval = $this->getConfigTable()->cantComentxPlato(2, 3, 3);
+//        $listault = $this->getConfigTable()->cantComentxPlato(2, 3, 2);
+       
+        //var_dump(count($mistura));exit;
+//        $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+//       $total=count($mistura);
+//       $maximo =  (int)(($total/10)+1);
+       
+        $page2 = (int) $this->params()->fromQuery('page', 1);
+//        if($page2<=$maximo){
+            $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($mistura));
+        $paginator->setCurrentPageNumber($page2);
+         $paginator->setItemCountPerPage(10);
+         
+//         }
         
+         
+         
+               
+         $url = $_SERVER['REQUEST_URI'];
+        if ($url != '/') {
+            if ($url) {
+                $page = strpos($url, 'page=');
+                if ($page) {
+                    $urlf = substr($url, 0, $page - 1);
+                } else {
+                    $urlf = $url;
+                }
+                $urlf = $urlf . '&';
+            } else {
+                $urlf = $urlf . '?';
+            }
+        } else {
+            $auxurl = strpos($url, '/');
+            $urlf = substr($url, 0, $auxurl);
+            $urlf = $urlf . '?';
+        }
+        $this->layout()->clase = 'Home';
+        $menus = $this->menu();
         $view->setVariables(array(
-            'lista' => $listades,
-            'listaseg' => $listadeseg,
-            'listaval' => $listaval,
-            'listault' => $listault,
-            'promociones'=>$mistura,
-            'clase' => 'Home'
+            'promociones'=>$paginator,
+            'clase' => 'Home',
+              'urlac' => $urlf,
+            'menus'=>$menus
         ));
         return $view;
     }
     
     
-    public function distritosperu()
+    public function menu()
+    {
+        $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+                ->from('ta_menu')
+//                ->columns(array('ch_distrito'=>'ch_distrito','ch_provincia'=>'ch_provincia','ch_departamento'=>'ch_departamento'))
+//                ->join('ta_local', 'ta_ubigeo.in_id = ta_local.ta_ubigeo_in_id ', array(), 'left')
+         ->where(array('en_estado'=>'activo'));
+                //->group('ta_ubigeo.ch_distrito');    
+
+        $selectString = $sql->getSqlStringForSqlObject($select);
+        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+         return $results->toArray();
+    }
+        public function distritosperu()
     {
         $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $adapter = $this->dbAdapter;
@@ -140,9 +188,9 @@ public function __construct()
     }
     // FUNCION PARA TABLET Y PC
     
-       public function consultasAction($limit,$plato_tipo=null,$platid=null)       
+       public function consultasAction($limit,$plato_tipo=null, $platid=null)       
     {
-           if($plato_tipo==null and $platid==null)
+           if($plato_tipo==null or $platid==null )
            {$texto  = 'en_destaque:si'; 
            $palabraBuscar = isset($texto) ? $texto : false;
                $query = "($palabraBuscar) AND (en_destaque:si)";
@@ -156,7 +204,7 @@ public function __construct()
                $query = "($palabraBuscar) AND (en_destaque:si)";
                 $fq = array(
                     'sort' => 'random_' . uniqid() . ' asc, puntuacion desc',
-                    'fq' => 'en_estado:activo  AND restaurant_estado:activo AND -id:'.$platid,
+                    'fq' => 'en_estado:activo  AND restaurant_estado:activo AND -id:'.$platid  ,
                     'wt' => 'json'
                 );}    
                 $resultados = false;
@@ -195,7 +243,7 @@ public function __construct()
             {$buscar = $valor[1];
             $texto = $valor[0].'"'.$buscar.'"'; 
          //   $distrito = $datos['distrito'];
-         }
+            }
             else{ $filter = new \Zend\I18n\Filter\Alnum(true);
             $texto = $filter->filter($plato);
            // $distrito = $datos['distrito'];
@@ -234,6 +282,7 @@ public function __construct()
                     }
                 }
                 $limit = 3;
+               // $ss= array($distrito);  
                 $palabraBuscar = isset($texto) ? $texto : false;
                 $query = "($palabraBuscar) AND (en_destaque:si)";
                 $fq = array(
@@ -249,7 +298,7 @@ public function __construct()
                     }
                     try {
             $resulta = $solr->search($query, 0, $limit, $fq);
-           // var_dump(count($resulta->response->docs));exit;
+         //  var_dump(count($resulta->response->docs));exit;
                     } catch (Exception $e) {
                         echo ("<div>ingrese algun valor</div>");
                     }
@@ -262,14 +311,17 @@ public function __construct()
                     if(!in_array($plat->id,$arrest)){
                         $arrest[] = $plat->id;}}
                     if(count($resulta->response->docs)==0){
-                   $consultafinal = $this->consultasAction(3,'',''); 
+                   $consultafinal = $this->consultasAction(3,null,null); 
                     $results =$resulta->response->docs; } 
-                   elseif(count($resulta->response->docs)==1) { 
-                    $consultafinal = $this->consultasAction(2,$plat->plato_tipo,$plat->id); 
+                  elseif(count($resulta->response->docs)==1) { 
+                    $consultafina = $this->consultasAction(2,$plat->plato_tipo,$arrest[0]);
+                   if(count($consultafina)<2) 
+                   {$consultafinal = $this->consultasAction(2,null,$arrest[0]);}
+                   else{ $consultafinal=$consultafina;}
                     $results =$resulta->response->docs;}
-                     elseif(count($resulta->response->docs)==2){
-                   $consultafinal = $this->consultasAction(1,$plat->plato_tipo,$plat->id);  
-                    $results =$resulta->response->docs;  } }
+                     elseif(count($resulta->response->docs)==2){    
+                   $consultafinal = $this->consultasAction(1,null,null);     
+                    $results =$resulta->response->docs; } }
                   else{$results =$resulta->response->docs;}
 
           $limit_distritos = 9999;
@@ -293,7 +345,7 @@ public function __construct()
                     }
                 }
                 
-            }    elseif (strtoupper($distrito)=='LIMA') {
+            } elseif (strtoupper($distrito)=='LIMA') {
                 $limite = 10;
                 if($paginas=='')
                  {$start = 0;}
@@ -338,21 +390,24 @@ public function __construct()
                     }
                 }
                 
-             if(count($resulta->response->docs)<3)     
+              if(count($resulta->response->docs)<3)     
                   {  foreach ($resultados->response->docs as $plat) {
                     if(!in_array($plat->plato_tipo,$arrpl)){
                         $arrpl[] = $plat->plato_tipo;   }
                     if(!in_array($plat->id,$arrest)){
                         $arrest[] = $plat->id;}}
                     if(count($resulta->response->docs)==0){
-                   $consultafinal = $this->consultasAction(3,'',''); 
+                   $consultafinal = $this->consultasAction(3,null,null); 
                     $results =$resulta->response->docs; } 
-                   elseif(count($resulta->response->docs)==1) { 
-                    $consultafinal = $this->consultasAction(2,$plat->plato_tipo,$plat->id); 
+                  elseif(count($resulta->response->docs)==1) { 
+                    $consultafina = $this->consultasAction(2,$plat->plato_tipo,$arrest[0]);
+                   if(count($consultafina)<2) 
+                   {$consultafinal = $this->consultasAction(2,null,$arrest[0]);}
+                   else{ $consultafinal=$consultafina;}
                     $results =$resulta->response->docs;}
-                     elseif(count($resulta->response->docs)==2){
-                   $consultafinal = $this->consultasAction(1,$plat->plato_tipo,$plat->id);  
-                    $results =$resulta->response->docs;  } }
+                     elseif(count($resulta->response->docs)==2){    
+                   $consultafinal = $this->consultasAction(1,null,null);     
+                    $results =$resulta->response->docs; } }
                   else{$results =$resulta->response->docs;}
 
           $limit_distritos = 9999;
@@ -377,16 +432,16 @@ public function __construct()
                 }
                 
             }else{
-             
+   
                 $limite = 10;
-                $distrito='LIMA';
+              //  $distrito='LIMA';
                 if($paginas=='')
                  {$start = 0;}
                else{$start=$paginas*10;}
                 $resultados = false;
                 $palabraBuscar = isset($texto) ? $texto : false;
                 $fd = array(
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND  departamento:' .$distrito,
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo',
                 );
                 
                 if ($palabraBuscar) {
@@ -469,14 +524,6 @@ public function __construct()
                 
         }
         $form = new Formularios();
-//        $distritos = $this->distritosperu();
-//        $this->layout()->distritos = $distritos;
-//        $comidas = $this->joinAction()->toArray();
-////        $this->layout()->comidas = $comidas;
-//        $com = array();
-//        foreach ($comidas as $y) {
-//            $com[$y['va_distrito']] = $y['va_distrito'];
-//        }
          if($valor[0]=='restaurante:')
          { $form->get('q')->setValue($plato);
          $valores = $buscar;} 
@@ -509,8 +556,6 @@ public function __construct()
         $arrest=array();
         if (count($resultados->response->docs) < 5 && count($resultados->response->docs) > 0) {
             $contc = 0;
-//            $contr = 0;
-//            $cont = 0;
             $contrc=0;
             foreach ($resultados->response->docs as $plat) {
                     if(!in_array($plat->name,$arrpl)){
@@ -705,21 +750,24 @@ public function __construct()
             }
             
         }
-         if(count($resulta->response->docs)<3)     
+             if(count($resulta->response->docs)<3)     
                   {  foreach ($resultados->response->docs as $plat) {
                     if(!in_array($plat->plato_tipo,$arrpl)){
                         $arrpl[] = $plat->plato_tipo;   }
                     if(!in_array($plat->id,$arrest)){
                         $arrest[] = $plat->id;}}
                     if(count($resulta->response->docs)==0){
-                   $consultafinal = $this->consultasAction(3,'',''); 
+                   $consultafinal = $this->consultasAction(3,null,null); 
                     $results =$resulta->response->docs; } 
-                   elseif(count($resulta->response->docs)==1) { 
-                    $consultafinal = $this->consultasAction(2,$plat->plato_tipo,$plat->id); 
+                  elseif(count($resulta->response->docs)==1) { 
+                    $consultafina = $this->consultasAction(2,$plat->plato_tipo,$arrest[0]);
+                   if(count($consultafina)<2) 
+                   {$consultafinal = $this->consultasAction(2,null,$arrest[0]);}
+                   else{ $consultafinal=$consultafina;}
                     $results =$resulta->response->docs;}
-                     elseif(count($resulta->response->docs)==2){
-                   $consultafinal = $this->consultasAction(1,$plat->plato_tipo,$plat->id);  
-                    $results =$resulta->response->docs;  } }
+                     elseif(count($resulta->response->docs)==2){    
+                   $consultafinal = $this->consultasAction(1,null,null);     
+                    $results =$resulta->response->docs; } }
                   else{$results =$resulta->response->docs;}}
         else
         {
@@ -772,21 +820,24 @@ public function __construct()
             }
             
         }
-         if(count($resulta->response->docs)<3)     
+          if(count($resulta->response->docs)<3)     
                   {  foreach ($resultados->response->docs as $plat) {
                     if(!in_array($plat->plato_tipo,$arrpl)){
                         $arrpl[] = $plat->plato_tipo;   }
                     if(!in_array($plat->id,$arrest)){
                         $arrest[] = $plat->id;}}
                     if(count($resulta->response->docs)==0){
-                   $consultafinal = $this->consultasAction(3,'',''); 
+                   $consultafinal = $this->consultasAction(3,null,null); 
                     $results =$resulta->response->docs; } 
-                   elseif(count($resulta->response->docs)==1) { 
-                    $consultafinal = $this->consultasAction(2,$plat->plato_tipo,$plat->id); 
+                  elseif(count($resulta->response->docs)==1) { 
+                    $consultafina = $this->consultasAction(2,$plat->plato_tipo,$arrest[0]);
+                   if(count($consultafina)<2) 
+                   {$consultafinal = $this->consultasAction(2,null,$arrest[0]);}
+                   else{ $consultafinal=$consultafina;}
                     $results =$resulta->response->docs;}
-                     elseif(count($resulta->response->docs)==2){
-                   $consultafinal = $this->consultasAction(1,$plat->plato_tipo,$plat->id);  
-                    $results =$resulta->response->docs;  } }
+                     elseif(count($resulta->response->docs)==2){    
+                   $consultafinal = $this->consultasAction(1,null,null);     
+                    $results =$resulta->response->docs; } }
                   else{$results =$resulta->response->docs;}
     }     
                   
@@ -1059,11 +1110,11 @@ public function __construct()
                 }
             }
         }else{$limite = 1000;
-        $distrito= '"LIMA"';
+       // $distrito= '"LIMA"';
             $resultados = false;
             $palabraBuscar = isset($plato) ? $plato : false;
             $fd = array(
-                'fq' => 'en_estado:activo AND restaurant_estado:activo AND departamento:' .$distrito,
+                'fq' => 'en_estado:activo AND restaurant_estado:activo ',
             );
             
             if ($palabraBuscar) {

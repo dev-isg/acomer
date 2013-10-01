@@ -45,6 +45,8 @@ class LocalTable
       
     }
     
+
+    
     public function editarLocal($local,$id){
 
           $pais=$local['pais'];
