@@ -93,24 +93,25 @@ class ComentariosTable
                         ->where(array('ta_plato.in_id'=>$coment['Ta_plato_in_id']));//$prom[0]['in_id']
                 $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
                 $statementup->execute();
-                $this->cromSolr($coment['Ta_plato_in_id'],'');
+                $this->cromSolar($coment['Ta_plato_in_id'],'');
                 
                 
     }
 
-      public function cromSolr($id,$caso=null) {
+     public function cromSolar($id,$caso=null) {//echo 'ddd';exit;
             $adapter = $this->tableGateway->getAdapter();
             $sql = new Sql($adapter);
             $selecttot = $sql->select()
                 ->from('ta_plato')
                 ->join(array('c' => 'ta_comentario'), 'c.ta_plato_in_id=ta_plato.in_id', array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(c.in_id)')), 'left')
                     ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id ', array('tipo_plato_nombre' => 'va_nombre'), 'left')
-                    ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.ta_plato_in_id = ta_plato.in_id', array(), 'left')
-                    ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.ta_local_in_id', array('de_latitud', 'de_longitud', 'va_direccion','va_telefono'), 'left')
+                    ->join(array('pl' => 'ta_plato_has_ta_local'), 'pl.Ta_plato_in_id = ta_plato.in_id', array(), 'left')
+                    ->join(array('tl' => 'ta_local'), 'tl.in_id = pl.Ta_local_in_id', array('latitud'=>'de_latitud', 'longitud'=>'de_longitud', 'direccion'=>'va_direccion','telefono'=>'va_telefono'), 'left')
                     ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado'), 'left')
                     ->join(array('tc' => 'ta_tipo_comida'), 'tc.in_id = tr.Ta_tipo_comida_in_id', array('nombre_tipo_comida' => 'va_nombre_tipo'), 'left')                                      
                     ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito','departamento' => 'ch_departamento'), 'left')
-                    ->where(array('ta_plato.in_id' => $id));
+                    ->where(array('ta_plato.in_id' => $id ));
+                 $selecttot->group('ta_plato.in_id');
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
@@ -122,10 +123,9 @@ class ComentariosTable
         $selectStrin = $sql->getSqlStringForSqlObject($selectto);
         $result = $adapter->query($selectStrin, $adapter::QUERY_MODE_EXECUTE);
         $tag = $result->toArray();
- 
        $solr = \Classes\Solr::getInstance()->getSolr();
         if ($solr->ping()){
-            if($caso=='')
+            if($caso!==1)
            { $solr->deleteByQuery('id:' . $id);}
             $document = new \Apache_Solr_Document();
             $document->id = $id;
@@ -134,14 +134,14 @@ class ComentariosTable
             $document->va_precio = $plato[0]['va_precio'];
             $document->en_estado = $plato[0]['en_estado'];
             $document->plato_tipo = $plato[0]['tipo_plato_nombre'];
-            $document->va_direccion = $plato[0]['va_direccion'];
+            $document->va_direccion = $plato[0]['direccion'];
             $document->restaurante = $plato[0]['restaurant_nombre'];
             $document->tipo_comida = $plato[0]['nombre_tipo_comida'];
             $document->en_destaque = $plato[0]['en_destaque'];
-            $document->va_telefono = $plato[0]['va_telefono'];
-            $document->latitud = $plato[0]['de_latitud'];
-      $document->longitud = $plato[0]['de_longitud'];
-      $document->departamento = $plato[0]['departamento'];
+            $document->va_telefono = $plato[0]['telefono'];
+            $document->latitud = $plato[0]['latitud'];
+            $document->longitud = $plato[0]['longitud'];
+            $document->departamento = $plato[0]['departamento'];
             foreach ($tag as $resultado)
             {$document->setMultiValue('tag',$resultado['tag']);  }
             $document->distrito = $plato[0]['distrito'];

@@ -116,6 +116,7 @@ class RestauranteTable
                                $result = $adapter->query($selectString3, $adapter::QUERY_MODE_EXECUTE);
                          }
                    }
+                   
                }
                else 
                    {

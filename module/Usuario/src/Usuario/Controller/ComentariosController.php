@@ -92,7 +92,7 @@ class ComentariosController extends AbstractActionController
               $valor = $this->comentarioid($id);
               $idplato = $valor[0]['Ta_plato_in_id'];
               $this->getComentariosTable()->estadoComentario((int) $id, $estado);
-              $this->getComentariosTable()->cromSolr($idplato,''); 
+              $this->getComentariosTable()->cromSolar($idplato,''); 
               $this->redirect()->toUrl('/usuario/comentarios/index');
     }
     
@@ -133,7 +133,7 @@ class ComentariosController extends AbstractActionController
         $valor = $this->comentarioid($id);
         $idplato = $valor[0]['Ta_plato_in_id'];
         $this->getComentariosTable()->deleteComentario((int) $id);
-        $this->getComentariosTable()->cromSolr($idplato,'');  
+        $this->getComentariosTable()-cromSolar($idplato,'');  
         $this->redirect()->toUrl('/usuario/comentarios/index');
     }
 

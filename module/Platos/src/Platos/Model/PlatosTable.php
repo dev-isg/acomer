@@ -223,6 +223,7 @@ class PlatosTable {
                     ->join(array('tc' => 'ta_tipo_comida'), 'tc.in_id = tr.Ta_tipo_comida_in_id', array('nombre_tipo_comida' => 'va_nombre_tipo'), 'left')                                      
                     ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito','departamento' => 'ch_departamento'), 'left')
                     ->where(array('ta_plato.in_id' => $id ));
+      $selecttot->group('ta_plato.in_id');
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         $plato = $results->toArray();
@@ -240,7 +241,7 @@ class PlatosTable {
            { $solr->deleteByQuery('id:' . $id);}
             $document = new \Apache_Solr_Document();
             $document->id = $id;
-            $document->name = strtolower($plato[0]['va_nombre']);
+            $document->name = $plato[0]['va_nombre'];
             $document->tx_descripcion = $plato[0]['tx_descripcion'];
             $document->va_precio = $plato[0]['va_precio'];
             $document->en_estado = $plato[0]['en_estado'];
@@ -529,7 +530,7 @@ public function guardarplatoregistro($dataregistro) {
    
         $primer = $this->tableGateway->getAdapter()
                 ->query('SELECT ta_plato.*,tr.va_nombre AS restaurant_nombre ,COUNT(ta_comentario.in_id ) AS NumeroComentarios
-                     ,tu.ch_distrito AS Distrito
+                     ,tu.ch_distrito AS Distrito,tu.ch_departamento AS Departamento,tl.va_telefono AS telefono,tl.va_direccion AS direccion
                 FROM ta_plato
                 LEFT JOIN  ta_comentario ON ta_plato.in_id = ta_comentario.ta_plato_in_id
                 LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id`

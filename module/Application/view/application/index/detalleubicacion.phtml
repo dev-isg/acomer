@@ -188,6 +188,11 @@ if((count($this->general)>0))
                     <div class="puntuaciones c<?php echo $list['Ta_puntaje_in_id'];?>"></div>
                   </div>
                 </div>
+                <p class="h-dist"><?php echo $list['Distrito'];?>  (<?php echo $list['Departamento'];?>)</p>
+                <p class="dire-hom"><?php echo $list['direccion']; ?>
+                </p>
+                <p class="dire-hom"><em class="iphone-dl"><?php  $telefono =  explode(';', $list['telefono']);                
+                echo htmlspecialchars($telefono[0], ENT_QUOTES, 'utf-8'); ?></em></p>
               </div>
             </div>
           </li>

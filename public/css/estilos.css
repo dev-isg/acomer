@@ -1356,7 +1356,7 @@ width: 49%;
   margin-top: 5px;
   width: 678px;
   height: 100%;
-  background: #eaeaea;
+  background: #efefef;
   padding: 5px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -1896,10 +1896,9 @@ p.costo span{
 }
 .ficha-product .ficha-img{
   text-align: center;
-  line-height: 271px;
   width: 407px;
-  height: 272px;
-  overflow: hidden;
+  height: 271px;
+  float: left;
 }
 .content-info ul.ubi-lupa li .ubicancion{
   background: url(../../img/pint.png) no-repeat 0 3px;
