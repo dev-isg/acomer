@@ -23,7 +23,7 @@ class MenuForm extends Form
             'type' => 'Text',
           
             'options' => array(
-                'label' => 'Nombre de la pestania',          
+                'label' => 'Nombre de la pestania :',          
             ),
             'attributes' => array(               
                 'class' => 'span10  ',
@@ -37,12 +37,12 @@ class MenuForm extends Form
             'type' => 'Text',
           
             'options' => array(
-                'label' => 'Orden',          
+                'label' => 'Ingrese el orden a mostrar :',          
             ),
             'attributes' => array(               
-                'class' => 'span10  ',
+                'class' => 'span3  ',
                 'id'   => 'in_orden',
-                'placeholder'=>'Ingrese el orden a mostrar'
+                'placeholder'=>'Orden'
             ),
         ));
       $this->add(array(
@@ -50,10 +50,10 @@ class MenuForm extends Form
             'type' => 'Text',
           
             'options' => array(
-                'label' => 'Ruta de la Url',          
+                'label' => 'Ruta de la Url :',          
             ),
             'attributes' => array(               
-                'class' => 'span10  ',
+                'class' => 'span14 ',
                 'id'   => 'va_nombre',
                 'placeholder'=>'Ingrese la url'
             ),

@@ -42,19 +42,18 @@ public function __construct()
 	}
     public function indexAction()
     {
-        $view = new ViewModel();
+             $view = new ViewModel();
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
         $mistura=$this->getConfigTable()->platoslistadelsabor();
-        $total=count($mistura);
-        $maximo =  (int)(($total/9)+1);
         $page2 = (int) $this->params()->fromQuery('page', 1);
-        if($page2<=$maximo){
             $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($mistura));
         $paginator->setCurrentPageNumber($page2);
          $paginator->setItemCountPerPage(9); 
-       }
-       else{}
+         $cante=count($mistura->toArray());
+         if(ceil($cante/9) <$page2){
+             $view->setTerminal(true);
+            $view->setTemplate('layout/layout-error');}
          $url = $_SERVER['REQUEST_URI'];
         if ($url != '/') {
             if ($url) {
@@ -259,10 +258,10 @@ public function __construct()
                  {$start = 0;}
                else{$start=$paginas*10;}
                 $resultados = false;
-                $palabraBuscar = isset($texto) ? $texto : false;
+                $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
+                $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
                 $fd = array(
                     'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' .$distrits,
-//                     'sort' => 'en_destaque desc '
                 );
                 
                 $solar = \Classes\Solr::getInstance()->getSolr();
@@ -277,48 +276,48 @@ public function __construct()
                         echo ("<div>ingrese algun valor</div>");
                     }
                 }
-                $limit = 3;
-               // $ss= array($distrito);  
-                $palabraBuscar = isset($texto) ? $texto : false;
-                $query = "($palabraBuscar) AND (en_destaque:si)";
-                $fq = array(
-                    'sort' => 'random_' . uniqid() . ' asc',
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' .$distrito,
-                    'wt' => 'json'
-                );
-                $valoresss = false;    
-                if ($query) {
-                    $solr = \Classes\Solr::getInstance()->getSolr();
-                    if (get_magic_quotes_gpc() == 1) {
-                        $query = stripslashes($query);
-                    }
-                    try {
-            $resulta = $solr->search($query, 0, $limit, $fq);
-         //  var_dump(count($resulta->response->docs));exit;
-                    } catch (Exception $e) {
-                        echo ("<div>ingrese algun valor</div>");
-                    }
-                }
-                
-             if(count($resulta->response->docs)<3)     
-                  {  foreach ($resultados->response->docs as $plat) {
-                    if(!in_array($plat->plato_tipo,$arrpl)){
-                        $arrpl[] = $plat->plato_tipo;   }
-                    if(!in_array($plat->id,$arrest)){
-                        $arrest[] = $plat->id;}}
-                    if(count($resulta->response->docs)==0){
-                   $consultafinal = $this->consultasAction(3,null,null); 
-                    $results =$resulta->response->docs; } 
-                  elseif(count($resulta->response->docs)==1) { 
-                    $consultafina = $this->consultasAction(2,$plat->plato_tipo,$arrest[0]);
-                   if(count($consultafina)<2) 
-                   {$consultafinal = $this->consultasAction(2,null,$arrest[0]);}
-                   else{ $consultafinal=$consultafina;}
-                    $results =$resulta->response->docs;}
-                     elseif(count($resulta->response->docs)==2){    
-                   $consultafinal = $this->consultasAction(1,null,null);     
-                    $results =$resulta->response->docs; } }
-                  else{$results =$resulta->response->docs;}
+//                $limit = 3;
+//               // $ss= array($distrito);  
+//                $palabraBuscar = isset($texto) ? $texto : false;
+//                $query = "($palabraBuscar) AND (en_destaque:si)";
+//                $fq = array(
+//                    'sort' => 'random_' . uniqid() . ' asc',
+//                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' .$distrito,
+//                    'wt' => 'json'
+//                );
+//                $valoresss = false;    
+//                if ($query) {
+//                    $solr = \Classes\Solr::getInstance()->getSolr();
+//                    if (get_magic_quotes_gpc() == 1) {
+//                        $query = stripslashes($query);
+//                    }
+//                    try {
+//            $resulta = $solr->search($query, 0, $limit, $fq);
+//         //  var_dump(count($resulta->response->docs));exit;
+//                    } catch (Exception $e) {
+//                        echo ("<div>ingrese algun valor</div>");
+//                    }
+//                }
+//                
+//             if(count($resulta->response->docs)<3)     
+//                  {  foreach ($resultados->response->docs as $plat) {
+//                    if(!in_array($plat->plato_tipo,$arrpl)){
+//                        $arrpl[] = $plat->plato_tipo;   }
+//                    if(!in_array($plat->id,$arrest)){
+//                        $arrest[] = $plat->id;}}
+//                    if(count($resulta->response->docs)==0){
+//                   $consultafinal = $this->consultasAction(3,null,null); 
+//                    $results =$resulta->response->docs; } 
+//                  elseif(count($resulta->response->docs)==1) { 
+//                    $consultafina = $this->consultasAction(2,$plat->plato_tipo,$arrest[0]);
+//                   if(count($consultafina)<2) 
+//                   {$consultafinal = $this->consultasAction(2,null,$arrest[0]);}
+//                   else{ $consultafinal=$consultafina;}
+//                    $results =$resulta->response->docs;}
+//                     elseif(count($resulta->response->docs)==2){    
+//                   $consultafinal = $this->consultasAction(1,null,null);     
+//                    $results =$resulta->response->docs; } }
+//                  else{$results =$resulta->response->docs;}
 
           $limit_distritos = 9999;
                 $query_distritos = "-($palabraBuscar)";
@@ -347,10 +346,10 @@ public function __construct()
                  {$start = 0;}
                else{$start=$paginas*10;}
                 $resultados = false;
-                $palabraBuscar = isset($texto) ? $texto : false;
+                $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
+                $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
                 $fd = array(
                     'fq' => 'en_estado:activo AND restaurant_estado:activo AND  departamento:' .$distrito,
-//                     'sort' => 'en_destaque desc '
                 );
                 
                 $solar = \Classes\Solr::getInstance()->getSolr();
@@ -365,46 +364,46 @@ public function __construct()
                         echo ("<div>ingrese algun valor</div>");
                     }
                 }
-                $limit = 3;
-                $palabraBuscar = isset($texto) ? $texto : false;
-                $query = "($palabraBuscar) AND (en_destaque:si)";
-                $fq = array(
-                    'sort' => 'random_' . uniqid() . ' asc',
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND  departamento:' .$distrito,
-                    'wt' => 'json'
-                );
-                $valoresss = false;    
-                if ($query) {
-                    $solr = \Classes\Solr::getInstance()->getSolr();
-                    if (get_magic_quotes_gpc() == 1) {
-                        $query = stripslashes($query);
-                    }
-                    try {
-            $resulta = $solr->search($query, 0, $limit, $fq);
-                    } catch (Exception $e) {
-                        echo ("<div>ingrese algun valor</div>");
-                    }
-                }
-                
-              if(count($resulta->response->docs)<3)     
-                  {  foreach ($resultados->response->docs as $plat) {
-                    if(!in_array($plat->plato_tipo,$arrpl)){
-                        $arrpl[] = $plat->plato_tipo;   }
-                    if(!in_array($plat->id,$arrest)){
-                        $arrest[] = $plat->id;}}
-                    if(count($resulta->response->docs)==0){
-                   $consultafinal = $this->consultasAction(3,null,null); 
-                    $results =$resulta->response->docs; } 
-                  elseif(count($resulta->response->docs)==1) { 
-                    $consultafina = $this->consultasAction(2,$plat->plato_tipo,$arrest[0]);
-                   if(count($consultafina)<2) 
-                   {$consultafinal = $this->consultasAction(2,null,$arrest[0]);}
-                   else{ $consultafinal=$consultafina;}
-                    $results =$resulta->response->docs;}
-                     elseif(count($resulta->response->docs)==2){    
-                   $consultafinal = $this->consultasAction(1,null,null);     
-                    $results =$resulta->response->docs; } }
-                  else{$results =$resulta->response->docs;}
+//                $limit = 3;
+//                $palabraBuscar = isset($texto) ? $texto : false;
+//                $query = "($palabraBuscar) AND (en_destaque:si)";
+//                $fq = array(
+//                    'sort' => 'random_' . uniqid() . ' asc',
+//                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND  departamento:' .$distrito,
+//                    'wt' => 'json'
+//                );
+//                $valoresss = false;    
+//                if ($query) {
+//                    $solr = \Classes\Solr::getInstance()->getSolr();
+//                    if (get_magic_quotes_gpc() == 1) {
+//                        $query = stripslashes($query);
+//                    }
+//                    try {
+//            $resulta = $solr->search($query, 0, $limit, $fq);
+//                    } catch (Exception $e) {
+//                        echo ("<div>ingrese algun valor</div>");
+//                    }
+//                }
+//                
+//              if(count($resulta->response->docs)<3)     
+//                  {  foreach ($resultados->response->docs as $plat) {
+//                    if(!in_array($plat->plato_tipo,$arrpl)){
+//                        $arrpl[] = $plat->plato_tipo;   }
+//                    if(!in_array($plat->id,$arrest)){
+//                        $arrest[] = $plat->id;}}
+//                    if(count($resulta->response->docs)==0){
+//                   $consultafinal = $this->consultasAction(3,null,null); 
+//                    $results =$resulta->response->docs; } 
+//                  elseif(count($resulta->response->docs)==1) { 
+//                    $consultafina = $this->consultasAction(2,$plat->plato_tipo,$arrest[0]);
+//                   if(count($consultafina)<2) 
+//                   {$consultafinal = $this->consultasAction(2,null,$arrest[0]);}
+//                   else{ $consultafinal=$consultafina;}
+//                    $results =$resulta->response->docs;}
+//                     elseif(count($resulta->response->docs)==2){    
+//                   $consultafinal = $this->consultasAction(1,null,null);     
+//                    $results =$resulta->response->docs; } }
+//                  else{$results =$resulta->response->docs;}
 
           $limit_distritos = 9999;
                 $query_distritos = "-($palabraBuscar)";
@@ -433,7 +432,8 @@ public function __construct()
                  {$start = 0;}
                else{$start=$paginas*10;}
                 $resultados = false;
-                $palabraBuscar = isset($texto) ? $texto : false;
+                $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
+                $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
                 $fd = array(
                     'fq' => 'en_estado:activo AND restaurant_estado:activo',
                 );
@@ -451,46 +451,46 @@ public function __construct()
                         $this->redirect()->toUrl('/application');
                     }
                 }
-                $limit = 3;
-                $distrito='LIMA';
-                $palabraBuscar = isset($texto) ? $texto : false;
-                $query = "($palabraBuscar)";
-                $fq = array(
-                    'sort' => 'random_' . uniqid() . ' asc',
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo  AND en_destaque:si AND  departamento:' .$distrito,
-                );
-                $resulta = false;
-                if ($query) {
-                    
-                    $solr = \Classes\Solr::getInstance()->getSolr();
-                    if (get_magic_quotes_gpc() == 1) {
-                        $query = stripslashes($query);
-                    }
-                    try {
-                        $resulta = $solr->search($query, 0, $limit, $fq);
-                    } catch (Exception $e) {
-                        
-                        $this->redirect()->toUrl('/application');
-                    }
-                }
-               if(count($resulta->response->docs)<3)     
-                  {  foreach ($resultados->response->docs as $plat) {
-                    if(!in_array($plat->plato_tipo,$arrpl)){
-                        $arrpl[] = $plat->plato_tipo;   }
-                    if(!in_array($plat->id,$arrest)){
-                        $arrest[] = $plat->id;}}
-                        
-                    if(count($resulta->response->docs)==0){
-                   $consultafinal = $this->consultasAction(3,'',''); 
-                    $results =$resulta->response->docs; } 
-                   elseif(count($resulta->response->docs)==1) { 
-                    $consultafinal = $this->consultasAction(2,$plat->plato_tipo,$plat->id); 
-                    $results =$resulta->response->docs;}
-                     elseif(count($resulta->response->docs)==2){
-                   $consultafinal = $this->consultasAction(1,$plat->plato_tipo,$plat->id);  
-                    $results =$resulta->response->docs;  } }
-                  else{$results =$resulta->response->docs;}
-            }
+//                $limit = 3;
+//                $distrito='LIMA';
+//                $palabraBuscar = isset($texto) ? $texto : false;
+//                $query = "($palabraBuscar)";
+//                $fq = array(
+//                    'sort' => 'random_' . uniqid() . ' asc',
+//                    'fq' => 'en_estado:activo AND restaurant_estado:activo  AND en_destaque:si AND  departamento:' .$distrito,
+//                );
+//                $resulta = false;
+//                if ($query) {
+//                    
+//                    $solr = \Classes\Solr::getInstance()->getSolr();
+//                    if (get_magic_quotes_gpc() == 1) {
+//                        $query = stripslashes($query);
+//                    }
+//                    try {
+//                        $resulta = $solr->search($query, 0, $limit, $fq);
+//                    } catch (Exception $e) {
+//                        
+//                        $this->redirect()->toUrl('/application');
+//                    }
+//                }
+//               if(count($resulta->response->docs)<3)     
+//                  {  foreach ($resultados->response->docs as $plat) {
+//                    if(!in_array($plat->plato_tipo,$arrpl)){
+//                        $arrpl[] = $plat->plato_tipo;   }
+//                    if(!in_array($plat->id,$arrest)){
+//                        $arrest[] = $plat->id;}}
+//                        
+//                    if(count($resulta->response->docs)==0){
+//                   $consultafinal = $this->consultasAction(3,'',''); 
+//                    $results =$resulta->response->docs; } 
+//                   elseif(count($resulta->response->docs)==1) { 
+//                    $consultafinal = $this->consultasAction(2,$plat->plato_tipo,$plat->id); 
+//                    $results =$resulta->response->docs;}
+//                     elseif(count($resulta->response->docs)==2){
+//                   $consultafinal = $this->consultasAction(1,$plat->plato_tipo,$plat->id);  
+//                    $results =$resulta->response->docs;  } }
+//                  else{$results =$resulta->response->docs;}
+       }
                 $limit_platos = 9999;
                 $query_platos = "-($palabraBuscar)";
                 $fq_platos = array(
@@ -642,7 +642,7 @@ public function __construct()
     //$paginador = $resultados->response->docs;
         $view->setVariables(array(
             'total' => $total,
-            'distrito' => $distrito,
+            'distrito' => $valorubigeo[0],
             'plato' => $valores,
             'lista' => $listades,
             'destacados' => $results,
@@ -670,6 +670,7 @@ public function __construct()
         $filtered = $this->params()->fromQuery('q');
         $paginas = $this->params()->fromQuery('page');
         $valor = explode(" ", $filtered);
+        //var_dump($valor);exit;
          if($valor[0]=='restaurante:')
         {$buscar =  $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];     
         $texto = $valor[0].'"'.$buscar.'"';
@@ -706,8 +707,8 @@ public function __construct()
                  {$start = 0;}
                else{$start=$paginas*10;}
         $resultados = false;
-        $palabraBuscar = isset($texto) ? $texto : false;
-        //$distrito = ($distrito) ? ' AND distrito:' . $distrito : '';
+      $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
+       $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
         $fd = array(
             'fq' => 'en_estado:activo AND restaurant_estado:activo AND  departamento:' .$distrito,
         );
@@ -728,47 +729,7 @@ public function __construct()
             }
         }
 
-        $limit = 3;
-        $palabraBuscar = isset($texto) ? $texto : false;
-//         var_dump($distrito);exit;
-        $query = "($palabraBuscar)";
-        $fq = array(
-            'sort' => 'random_' . uniqid() . ' asc',
-            'fq' => 'en_estado:activo AND restaurant_estado:activo AND en_destaque:si AND  departamento:' .$distrito,
-        );
-        $resulta = false;
-        if ($query) {
-            
-            $solr = \Classes\Solr::getInstance()->getSolr();
-            if (get_magic_quotes_gpc() == 1) {
-                $query = stripslashes($query);
-            }
-            try {
-                $resulta = $solr->search($query, 0, $limit, $fq);
-            } catch (Exception $e) {
-                $this->redirect()->toUrl('/');
-            }
-            
-        }
-             if(count($resulta->response->docs)<3)     
-                  {  foreach ($resultados->response->docs as $plat) {
-                    if(!in_array($plat->plato_tipo,$arrpl)){
-                        $arrpl[] = $plat->plato_tipo;   }
-                    if(!in_array($plat->id,$arrest)){
-                        $arrest[] = $plat->id;}}
-                    if(count($resulta->response->docs)==0){
-                   $consultafinal = $this->consultasAction(3,null,null); 
-                    $results =$resulta->response->docs; } 
-                  elseif(count($resulta->response->docs)==1) { 
-                    $consultafina = $this->consultasAction(2,$plat->plato_tipo,$arrest[0]);
-                   if(count($consultafina)<2) 
-                   {$consultafinal = $this->consultasAction(2,null,$arrest[0]);}
-                   else{ $consultafinal=$consultafina;}
-                    $results =$resulta->response->docs;}
-                     elseif(count($resulta->response->docs)==2){    
-                   $consultafinal = $this->consultasAction(1,null,null);     
-                    $results =$resulta->response->docs; } }
-                  else{$results =$resulta->response->docs;}}
+       }
         else
         {
          $limite = 10;
@@ -776,7 +737,8 @@ public function __construct()
                  {$start = 0;}
                else{$start=$paginas*10;}
         $resultados = false;
-        $palabraBuscar = isset($texto) ? $texto : false;
+       $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
+       $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
         $distrito = ($distrito) ? ' AND distrito:' . $distrito : '';
         $fd = array(
             'fq' => 'en_estado:activo AND restaurant_estado:activo' . $distrito
@@ -798,47 +760,7 @@ public function __construct()
             }
         }
 
-        $limit = 3;
-        $palabraBuscar = isset($texto) ? $texto : false;
-//         var_dump($distrito);exit;
-        $query = "($palabraBuscar)";
-        $fq = array(
-            'sort' => 'random_' . uniqid() . ' asc',
-            'fq' => 'en_estado:activo AND restaurant_estado:activo AND en_destaque:si' . $distrito
-        );
-        $resulta = false;
-        if ($query) {
-            
-            $solr = \Classes\Solr::getInstance()->getSolr();
-            if (get_magic_quotes_gpc() == 1) {
-                $query = stripslashes($query);
-            }
-            try {
-                $resulta = $solr->search($query, 0, $limit, $fq);
-            } catch (Exception $e) {
-                $this->redirect()->toUrl('/');
-            }
-            
-        }
-          if(count($resulta->response->docs)<3)     
-                  {  foreach ($resultados->response->docs as $plat) {
-                    if(!in_array($plat->plato_tipo,$arrpl)){
-                        $arrpl[] = $plat->plato_tipo;   }
-                    if(!in_array($plat->id,$arrest)){
-                        $arrest[] = $plat->id;}}
-                    if(count($resulta->response->docs)==0){
-                   $consultafinal = $this->consultasAction(3,null,null); 
-                    $results =$resulta->response->docs; } 
-                  elseif(count($resulta->response->docs)==1) { 
-                    $consultafina = $this->consultasAction(2,$plat->plato_tipo,$arrest[0]);
-                   if(count($consultafina)<2) 
-                   {$consultafinal = $this->consultasAction(2,null,$arrest[0]);}
-                   else{ $consultafinal=$consultafina;}
-                    $results =$resulta->response->docs;}
-                     elseif(count($resulta->response->docs)==2){    
-                   $consultafinal = $this->consultasAction(1,null,null);     
-                    $results =$resulta->response->docs; } }
-                  else{$results =$resulta->response->docs;}
+        
     }     
                   
                   

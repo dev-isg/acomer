@@ -114,7 +114,7 @@ $(document).ready(function() {
             $(".agregar-comentario-desc").slideUp();
         }
     });
-    $(".cover").mosaic({animation: "slide",anchor_y: "top",hover_y: "300px"});
+    //$(".cover").mosaic({animation: "slide",anchor_y: "top",hover_y: "300px"});
     $(".subir").hide();
     $(window).scroll(function() {
         if ($(this).scrollTop() > 100) {
@@ -156,7 +156,6 @@ $(document).ready(function() {
     $("#buscarmap").on("click", function() {
         $(".padding-map").show();
         var h = $("#bubi #q").val();
-        alert(h);
         var condi = h.substring(0, 12);
         var cot = h.substring(0, 4);
         var cotName = h.substring(0, 5);

@@ -2252,7 +2252,7 @@ p.ver_mistura a{
   font-weight: bold;
 }
 .content-menu-home{
-  width: 100%;
+  width: 724px;
   background: #FF8500;
   height: auto;
   z-index: 99;
@@ -2260,6 +2260,9 @@ p.ver_mistura a{
   -moz-box-shadow: 0 2px 3px #bbb;
   -o-box-shadow: 0 2px 3px #bbb;
   box-shadow: 0 2px 3px #bbb;
+}
+.destacado-plato{
+  background: #FFEFBF!important;
 }
 .content-menu-home ul{
   list-style: none;

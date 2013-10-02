@@ -38,12 +38,11 @@
       </div>
       <div class="center-dos">
         <div id="slider">
-          <ul>  
-              
-                         <?php 
-    foreach ($this->banner  as $banner) :
-        ?>
-          <li><a href="<?php echo $banner['va_url'] ?>"><img src="<?php echo $this->host('images')?>/banner/<?php echo $banner['va_imagen'] ?>" title="<?php echo $banner['va_nombre'] ?>" alt="Css Template Preview" /></a></li>         
+          <ul>   
+          <?php 
+          foreach ($this->banner  as $banner) :
+          ?>
+          <li><a href="<?php echo $this->host('ruta')?><?php echo $banner['va_url'] ?>"><img src="<?php echo $this->host('images')?>/banner/<?php echo $banner['va_imagen'] ?>" title="<?php echo $banner['va_nombre'] ?>" alt="Css Template Preview" /></a></li>         
           <?php endforeach; ?>     
           </ul>
         </div>
@@ -149,10 +148,6 @@
       </ul>
 
       <?php echo (count($this->promociones)> 0)?$this->paginationControl($this->promociones, 'Sliding', 'application/index/paginador.phtml',array('variable'=>$this->urlac)):"";?>
-      <div class="pagination" role="navigation" style="display:block">
-        <span>1</span>
-        <a href="?page=2">2</a>
-      </div>
     </div>
     <?php 
       } ?>

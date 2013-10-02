@@ -47,7 +47,10 @@ class IndexController extends AbstractActionController
         return new ViewModel(array(
           'restaurante' => $paginator,
             'comida' => $this->comidas(),
-            'texto'=>$datos));
+            'texto'=>$datos,
+            'estado'=>$estado
+
+            ));
   
     }
   
@@ -485,6 +488,7 @@ public function agregarmenuAction(){
         if ($request->isPost()) {
             $datos =$this->request->getPost();
             $File = $this->params()->fromFiles('va_imagen');
+         //   var_dump($File);exit;
             $form->setData($datos);
             if ($form->isValid()) {
                 $valor  = uniqid();

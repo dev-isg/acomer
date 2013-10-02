@@ -42,14 +42,24 @@ class BannerForm extends Form
             'attributes' => array(               
                 'class' => 'span2  ',
                 'id'   => 'in_orden',
-                'placeholder'=>'Ingrese el orden a mostrar'
+                'placeholder'=>'Orden'
             ),
         ));
      
          
          $this->add(array(
             'name' => 'va_imagen',
-            'type' => 'File',
+            'type' => 'File',          
+             'validators' => array(
+               array(
+                        'name'    => 'filemimetype',
+                        'options' =>  array('mimeType' => 'image/jpg,image/jpeg'),
+                    ),
+                    array(
+                        'name'    => 'filesize',
+                        'options' =>  array('max' => 204800),
+                    ),
+                  ),
               'attributes' => array(               
                 'class' => '',
                 'id'   => 'va_imagen',

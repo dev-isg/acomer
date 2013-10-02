@@ -82,6 +82,7 @@
 
 <?php endforeach; ?>
 </table>
+<?php echo  $this->estado; ?>
      <?php echo (count($this->restaurante)> 0)?$this->paginationControl($this->restaurante, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/restaurante/index/index?')):""; ?>
 </div>
 </div>
