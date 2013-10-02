@@ -42,8 +42,13 @@
           <?php 
           foreach ($this->banner  as $banner) :
           ?>
+          <?php if($banner['va_url']) {?>
           <li><a href="<?php echo $this->host('ruta')?><?php echo $banner['va_url'] ?>"><img src="<?php echo $this->host('images')?>/banner/<?php echo $banner['va_imagen'] ?>" title="<?php echo $banner['va_nombre'] ?>" alt="Css Template Preview" /></a></li>         
-          <?php endforeach; ?>     
+              <?php  } else { ?>
+      <li><img src="<?php echo $this->host('images')?>/banner/<?php echo $banner['va_imagen'] ?>" title="<?php echo $banner['va_nombre'] ?>" alt="Css Template Preview" /></li>         
+               
+              <?php  } ?>
+         <?php endforeach; ?>     
           </ul>
         </div>
       </div>
@@ -52,7 +57,7 @@
             <?php 
     foreach ($this->menus  as $menus) :
         ?>
-          <li><a href="<?php echo $menus['va_url'] ?>"><?php echo $menus['va_nombre'] ?></a></li>          
+          <li><a href="<?php echo $this->host('ruta')?><?php echo $menus['va_url'] ?>"><?php echo $menus['va_nombre'] ?></a></li>          
           <?php endforeach; ?>
         </ul>
       </div>
