@@ -212,7 +212,7 @@ public function __construct()
              return $resultados->response->docs;     
     }
     public function detalleubicacionAction()
-    {
+    {//echo 'entro';exit;
         $view = new ViewModel();
         $request = $this->getRequest();
         $this->layout()->clase = 'buscar-distrito';
@@ -629,7 +629,7 @@ public function __construct()
         
          $this->layout()->description=$busquedatitle;
         
-        $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
+        $listatot = $this->getConfigTable()->cantComentxPlato();
         $listatot = $listatot->toArray();
         
         foreach ($listatot as $key => $value) {
@@ -803,7 +803,7 @@ public function __construct()
         } else {
             $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
         }
-        $listatot = $this->getConfigTable()->cantComentxPlato(1, null, 1);
+        $listatot = $this->getConfigTable()->cantComentxPlato();
         $listatot = $listatot->toArray();
         
         foreach ($listatot as $key => $value) {

@@ -1003,6 +1003,7 @@ label.error {
 .pt {
   display: inline-block;
   width: 100%;
+  padding-top: 7px;
 }
 .pre {
   display: inline-block;
@@ -1017,7 +1018,6 @@ label.error {
   text-align: center;
   margin: 0px;
   font-size: 15px;
-  padding: 5px 0;
   font-family: arial;
   height: 22px;
   overflow: hidden;

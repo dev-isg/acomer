@@ -1,0 +1,29 @@
+<?php if ($this->pageCount): ?>
+<div class="pagination ">
+<!-- Previous page link -->
+<ul>
+<?php if (isset($this->previous)): ?>
+  <li><a href='<?php echo $this->variable;?>page=<?php echo $this->previous?>&estado=<?php echo $this->estado?>&comida=<?php echo $this->comida?>'> « Anterior  </a> </li>
+<?php else: ?>
+  <li class="disabled"> <a href="#">« Anterior</a></li> 
+<?php endif; ?>
+
+<!-- Numbered page links -->
+<?php foreach ($this->pagesInRange as $page): ?>
+  <?php if ($page != $this->current): ?>
+    <li><a href='<?php echo $this->variable;?>page=<?php echo $page; ?>&estado=<?php echo $this->estado?>&comida=<?php echo $this->comida?>'><?php echo $page; ?>
+    </a></li> 
+  <?php else: ?>
+    <li class="active"><a href="#"><?php echo $page; ?></a></li>
+  <?php endif; ?>
+<?php endforeach; ?>
+
+<!-- Next page link -->
+<?php if (isset($this->next)): ?>
+  <li><a class="next" href='<?php echo $this->variable;?>page=<?php echo $this->next?>&estado=<?php echo $this->estado?>&comida=<?php echo $this->comida?>'> Siguiente » </a></li>
+<?php else: ?>
+  <li class="disabled"><a href="#">Siguiente »</a></li>
+<?php endif; ?>
+</ul>
+</div>
+<?php endif; ?>

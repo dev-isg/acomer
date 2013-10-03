@@ -157,7 +157,7 @@
                   <img src="<?php if ($list['va_imagen']=='platos-default.png')
                       {echo $this->host('images') . '/defecto/' . htmlspecialchars($list['va_imagen'], ENT_QUOTES, 'utf-8');}
                   else
-                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list['va_imagen'], ENT_QUOTES, 'utf-8');} ?>" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" class="mas">
+                      {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($list['va_imagen'], ENT_QUOTES, 'utf-8');} ?>" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>" class="img-plato">
                 </div>
                 <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($list['va_nombre']), array('suffix' => $list['in_id']));?>" class="mosaic-backdrop" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>">
                   <div class="details">
@@ -176,13 +176,6 @@
                 </a>
               </div>
               <div class="foo">
-                <p class="nom_res">
-                  <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($list['va_nombre']), array('suffix' => $list['in_id']));?>" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>"><?php 
-                     if(strlen($list['restaurant_nombre'])>29){
-                     $strres=trim(substr($list['restaurant_nombre'], 0, 26));
-                      $strres.='...';
-                     }else {$strres=$list['restaurant_nombre'];}
-                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></a></p>
                 <div class="pt">
                   <!--<p class="pre"><?php echo 'S/. '.  htmlspecialchars($list['va_precio'], ENT_QUOTES, 'utf-8'); ?></p>-->
                   <p class="com"><?php echo $list['NumeroComentarios'] ?> <i class="icon-comment"></i></p>
@@ -190,6 +183,18 @@
                     <div class="puntuaciones c<?php echo $list['Ta_puntaje_in_id'];?>"></div>
                   </div>
                 </div>
+                <p class="nom_res">
+                  <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($list['va_nombre']), array('suffix' => $list['in_id']));?>" title="<?php echo $list['va_nombre'];?>" alt="<?php echo $list['va_nombre'];?>"><?php 
+                     if(strlen($list['restaurant_nombre'])>29){
+                     $strres=trim(substr($list['restaurant_nombre'], 0, 26));
+                      $strres.='...';
+                     }else {$strres=$list['restaurant_nombre'];}
+                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></a></p>
+                <p class="h-dist"><?php echo $list['Distrito'];?>  (<?php echo $list['Departamento'];?>)</p>
+                <p class="dire-hom"><?php echo $list['direccion']; ?>
+                </p>
+                <p class="dire-hom"><em class="iphone-dl"><?php  $telefono =  explode(';', $list['telefono']);                
+                echo htmlspecialchars($telefono[0], ENT_QUOTES, 'utf-8'); ?></em></p>
               </div>
             </div>
           </li>

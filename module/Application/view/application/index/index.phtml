@@ -105,7 +105,7 @@
                     <img src="<?php if ($promo['va_imagen']=='platos-default.png')
                         {echo $this->host('images') . '/defecto/' . htmlspecialchars($promo['va_imagen'], ENT_QUOTES, 'utf-8');}
                     else
-                        {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($promo['va_imagen'], ENT_QUOTES, 'utf-8');} ?>" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>" class="img-plato"><img src="<?php echo $this->host('ruta')?>/img/mas.png?v<?php echo $this->host('version')?>" class="mas">
+                        {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($promo['va_imagen'], ENT_QUOTES, 'utf-8');} ?>" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>" class="img-plato">
                   </div>
                 </a>
                 <!--<a href="/plato/<?php echo $this->canonicalUrl($this->canonical($promo['va_nombre']), array('suffix' => $promo['in_id']));?>" class="mosaic-backdrop" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>">
@@ -124,14 +124,6 @@
                 </a>-->
               </div>
               <div class="foo">
-                <p class="nom_res">
-                  <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($promo['va_nombre']), array('suffix' => $promo['in_id']));?>" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>"><?php 
-                     if(strlen($promo['restaurant_nombre'])>29){
-                     $strres=trim(substr($promo['restaurant_nombre'], 0, 26));
-                      $strres.='...';
-                     }else {$strres=$promo['restaurant_nombre'];}
-                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></a>
-                </p>
                 <div class="pt">
                   <p class="com">
                     <?php echo $promo['NumeroComentarios'] ?>  
@@ -141,7 +133,16 @@
                     <div class="puntuaciones c<?php echo $promo['Ta_puntaje_in_id'];?>"></div>
                   </div>
                 </div>
+                <p class="nom_res">
+                  <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($promo['va_nombre']), array('suffix' => $promo['in_id']));?>" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>"><?php 
+                     if(strlen($promo['restaurant_nombre'])>29){
+                     $strres=trim(substr($promo['restaurant_nombre'], 0, 26));
+                      $strres.='...';
+                     }else {$strres=$promo['restaurant_nombre'];}
+                echo htmlspecialchars($strres, ENT_QUOTES, 'utf-8'); ?></a>
+                </p>
                 <p class="h-dist"><?php echo $promo['Distrito'];?>  (<?php echo $promo['Departamento'];?>)</p>
+                <p class="h-dist"><?php echo $promo['en_destaque'];?></p>
                 <p class="dire-hom"><?php echo $promo['direccion']; ?>
                 </p>
                 <p class="dire-hom"><em class="iphone-dl"><?php  $telefono =  explode(';', $promo['telefono']);                
@@ -193,12 +194,20 @@
 $(function(){
   var $container = $('#contenedor-pl');
   $container.isotope({
-    itemSelector : '.elemento-pl'
+    itemSelector : '.elemento-pl',
+    resizable: false,
+    masonry: {columnWidth:$container.width()/3}
+  });
+  $(window).smartresize(function(){
+    $container.isotope({
+      masonry: {columnWidth: $container.width() / 3}
+    });
   });
   $container.infinitescroll({
     navSelector  : '.pagination',    // selector for the paged navigation 
     nextSelector : '.pagination a',  // selector for the NEXT link (to page 2)
     itemSelector : '.elemento-pl',     // selector for all items you'll retrieve
+    binder: $(window),
     loading: {
         finishedMsg: 'No more pages to load.',
         img: 'http://i.imgur.com/qkKy8.gif'
@@ -206,7 +215,7 @@ $(function(){
     },
     // call Isotope as a callback
     function( newElements ) {
-      $container.isotope( 'appended', $( newElements ) ); 
+      $container.isotope( 'appended', $( newElements ) );
     }
   );
 });

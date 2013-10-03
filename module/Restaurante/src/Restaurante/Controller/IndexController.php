@@ -34,13 +34,19 @@ class IndexController extends AbstractActionController
         $auth = new \Zend\Authentication\AuthenticationService();
         if (!$auth->hasIdentity())
         {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
-        $datos = $this->params()->fromPost('texto');
-        $comida = $this->params()->fromPost('comida');
-        $estado = $this->params()->fromPost('estado');
-        $lista = $this->getRestauranteTable()->fetchAll();
-        $request = $this->getRequest();
-         if ($request->isPost()) {
-         $lista = $this->getRestauranteTable()->buscarRestaurante($datos,$comida,$estado);}
+        $datos = $this->params()->fromQuery('texto');
+        $comida = $this->params()->fromQuery('comida');
+        $estado = $this->params()->fromQuery('estado');
+        if($datos==null and $comida==null and $estado ==null )
+         { $lista = $this->getRestauranteTable()->fetchAll();}
+            else{ $lista = $this->getRestauranteTable()->buscarRestaurante($datos,$comida,$estado);}
+      
+       // $request = $this->getRequest();
+
+        // if ($request->isPost()) {
+        
+         
+      //   }
          $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
          $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
          $paginator->setItemCountPerPage(10);
@@ -48,10 +54,9 @@ class IndexController extends AbstractActionController
           'restaurante' => $paginator,
             'comida' => $this->comidas(),
             'texto'=>$datos,
-            'estado'=>$estado
-
+            'estado'=>$estado,
+            'comid'=>$comida
             ));
-  
     }
   
     public function getRestauranteTable() {

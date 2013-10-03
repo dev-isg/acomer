@@ -5,7 +5,7 @@
     </div> -->
     <div class="span12">
    
-<form name='form_busqueda'class="form-search" action='<?php echo $this->basePath(); ?>/restaurante/index/index' method ="post">
+<form name='form_busqueda'class="form-search" action='<?php echo $this->basePath(); ?>/restaurante/index/index' method ="get">
    <div class="control-group span3">
    <label class="ra radio">    
    POR TIPO :
@@ -82,8 +82,11 @@
 
 <?php endforeach; ?>
 </table>
-<?php echo  $this->estado; ?>
-     <?php echo (count($this->restaurante)> 0)?$this->paginationControl($this->restaurante, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/restaurante/index/index?')):""; ?>
+    <?php if($this->estado) 
+    {$estado=$this->estado;}
+//    else{
+// $estado='activo'; }?>
+     <?php echo (count($this->restaurante)> 0)?$this->paginationControl($this->restaurante, 'Sliding', 'restaurante/index/paginador.phtml',array('variable'=>'/restaurante/index/index?','estado'=>$estado,'comida'=>$this->comid)):""; ?>
 </div>
 </div>
 

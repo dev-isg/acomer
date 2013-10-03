@@ -12,6 +12,25 @@
 //require(['jquery','upload','bootstrap', 'validate','gmap'], function ($) {
 //funciones de usuarios
 $(document).ready(function(){
+  if($("#Ta_tipo_plato_in_id option:selected").text()=='otros'){
+    $(".agregar-campo").show();
+    $("#va_otros").prop('disabled', false);
+  }else{
+    $(".agregar-campo").hide();
+    $("#va_otros").prop('disabled', true);
+  }
+  $("#Ta_tipo_plato_in_id").change(function() {
+    if($("#Ta_tipo_plato_in_id option:selected").text()=='otros'){
+      $(".agregar-campo").show();
+      $("#va_otros").prop('disabled', false);
+    }else{
+      $(".agregar-campo").hide();
+      $("#va_otros").prop('disabled', true);
+    }
+  });
+});
+
+$(document).ready(function(){
 $('#responsive-menu-button').sidr({
       name: 'sidr-main',
       source: '#navigation'
@@ -130,33 +149,23 @@ $('#platos').validate({
         },
         tx_descripcion: {
               required: true           
-        },
-         va_precio:{
-                required : true
-                /*number:true */                      
-            },
-      
+        },      
         Ta_tipo_plato:{
-                required : true
-              }       
+          required : true
+        }       
       },
       messages:{
-            va_nombre: {
-                required:"Por favor ingresar el nombre del plato",
-                minlength : "Minimo 3 caracteres"
-            },
-            tx_descripcion:{
-                required:"Por favor ingresar la descripcion"
-                            },
-            va_precio: {
-                required : "Por favor ingrese un precio"
-               /* number : "Por favor ingresar solo numeros"      */        
-            },
-                 
-            Ta_tipo_plato :{
-              required : "Por favor ingresar un tipo de plato"                
-            }
+        va_nombre: {
+            required:"Por favor ingresar el nombre del plato",
+            minlength : "Minimo 3 caracteres"
         },
+        tx_descripcion:{
+            required:"Por favor ingresar la descripcion"
+        },                 
+        Ta_tipo_plato :{
+          required : "Por favor ingresar un tipo de plato"                
+        }
+      },
       highlight: function(element) {
         $(element).closest('.control-group').removeClass('success').addClass('error');
       },
@@ -182,14 +191,14 @@ $(elemento).validate({
 	        email: true
 	      },
 	      va_contrasenia:{
-                required : true,
-                minlength:6             
-            },
+          required : true,
+          minlength:6             
+        },
         va_contrasenia2:{
-                required : true,
-                equalTo: "#va_contrasenia",
-                minlength:6               
-            }
+          required : true,
+          equalTo: "#va_contrasenia",
+          minlength:6               
+        }
 	    },
 	    messages:{
             va_nombre: {
@@ -580,39 +589,39 @@ $('.check_rest_menu').mousedown(function() {
   data: {id: user} 
   });
 });
- $("#delete-local").on("click",function(){
-  var user=$("#verlocal").attr("data-id");
-  $("#" + user).closest('tr').remove();
-  $('#eli-local').modal('hide');
-  console.log(user);
-  var request = $.ajax({
-  url: "/local/index/eliminarlocal?id="+user,
-  type: "POST",
-  data: {id: user} 
-  });
-});
-$("#delete-local-menu").on("click",function(){
-  var menuG=$("#verlocal").attr("data-id");
-  $("#" + menuG).closest('tr').remove();
-  $('#eli-local').modal('hide');
-  console.log(menuG);
-  var request = $.ajax({
-    url: "/restaurante/index/eliminarmenu?id="+menuG,
+  $("#delete-local").on("click",function(){
+    var user=$("#verlocal").attr("data-id");
+    $("#" + user).closest('tr').remove();
+    $('#eli-local').modal('hide');
+    console.log(user);
+    var request = $.ajax({
+    url: "/local/index/eliminarlocal?id="+user,
     type: "POST",
-    data: {id: menuG} 
+    data: {id: user} 
+    });
   });
-});
-$("#delete-local-banner").on("click",function(){
-  var menuG=$("#verlocal").attr("data-id");
-  $("#" + menuG).closest('tr').remove();
-  $('#eli-local').modal('hide');
-  console.log(menuG);
-  var request = $.ajax({
-    url: "/restaurante/index/eliminarbanner?id="+menuG,
-    type: "POST",
-    data: {id: menuG} 
+  $("#delete-local-menu").on("click",function(){
+    var menuG=$("#verlocal").attr("data-id");
+    $("#" + menuG).closest('tr').remove();
+    $('#eli-local').modal('hide');
+    console.log(menuG);
+    var request = $.ajax({
+      url: "/restaurante/index/eliminarmenu?id="+menuG,
+      type: "POST",
+      data: {id: menuG} 
+    });
   });
-});
+  $("#delete-local-banner").on("click",function(){
+    var menuG=$("#verlocal").attr("data-id");
+    $("#" + menuG).closest('tr').remove();
+    $('#eli-local').modal('hide');
+    console.log(menuG);
+    var request = $.ajax({
+      url: "/restaurante/index/eliminarbanner?id="+menuG,
+      type: "POST",
+      data: {id: menuG} 
+    });
+  });
   $("#delete-comentario").on("click",function(){
     var user=$("#vercom").attr("data-id");
     $("#" + user).closest('tr').remove();
@@ -624,6 +633,4 @@ $("#delete-local-banner").on("click",function(){
     data: {id: user} 
     });
   });
- 
-
 });

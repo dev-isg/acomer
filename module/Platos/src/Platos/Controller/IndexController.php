@@ -793,6 +793,7 @@ class IndexController extends AbstractActionController {
         $this->layout()->description=trim($listarecomendacion[0]['restaurant_nombre']).'-'.trim($listarecomendacion[0]['tx_descripcion']).'-'.trim($listarecomendacion[0]['va_direccion']).'-'.trim($listarecomendacion[0]['va_direccion_referencia'].'-('.trim($listarecomendacion[0]['distrito']).')- teléfono:'.trim($listarecomendacion[0]['va_telefono']));
         $this->layout()->url=$config['host']['ruta'].'/plato/'.$datos['nombre'];
         $listatitle=trim($listarecomendacion[0]['va_nombre']).':'.
+                trim($listarecomendacion[0]['tx_descripcion']).':'.
                 trim($listarecomendacion[0]['tipo_plato_nombre']).':'.
                 trim($listarecomendacion[0]['restaurant_nombre']).':'.
                 trim($listarecomendacion[0]['distrito']).'|Lista del Sabor';
@@ -801,7 +802,6 @@ class IndexController extends AbstractActionController {
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id,
              'listatitle'=>$listatitle, 'masplatos' => $resultados
-           //'masplatos2'=>$resultados->response->docs
              ,'listades' => $consulta));
         
         return $view;

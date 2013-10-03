@@ -376,6 +376,7 @@ class PlatosTable {
                 ->join(array('rp' => 'ta_restaurante_has_ta_medio_pago'), 'rp.ta_restaurante_in_id= tr.in_id', array(), 'left')
                 ->join(array('mp' => 'ta_medio_pago'), 'rp.ta_medio_pago_in_id= mp.in_id', array('id_pago' => 'in_id', 'nom_pago' => 'va_nombre'), 'left')
                 ->where(array('ta_plato.in_id' => $idplato));
+
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
 
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
@@ -501,33 +502,8 @@ public function guardarplatoregistro($dataregistro) {
         return $primer;
     }
 
-    public function cantComentxPlato($destaque = 1, $lim=null, $val, $estado = 1) {
+    public function cantComentxPlato() {
         $adapter = $this->tableGateway->getAdapter();
-
-        if ($val == 1) {
-            $puntaje = '>=0 '; // $puntaje = '>=0'; 'is not null or ta_comentario.ta_puntaje_in_id!=0'; 
-            $order = 'ta_puntaje_in_id';
-            $cantidad=$this->aleatorios($destaque, $estado, $puntaje);
-            $total=$cantidad[0]['NumeroResultados'];
-            $coment=' and (ta_comentario.en_estado=1 or ta_comentario.en_estado is null)';
-            if($total<=6) { 
-                $aleatorio=0;
-            }
-            else {
-                $aleatorio=rand(0,$total-6);
-            }
-
-        } else if ($val == 2) {
-            $puntaje = '=0 '; //'is null or ta_comentario.ta_puntaje_in_id!=0';
-            $order = 'in_id';
-            $coment=' and ta_comentario.en_estado is null';
-        }else if($val == 3) {
-            $puntaje = '!=0 '; //'is null or ta_comentario.ta_puntaje_in_id!=0';
-            $order = 'in_id';
-            $coment=' and ta_comentario.en_estado=1';
-        }
-        $limit=($lim)?'LIMIT '.$lim:'LIMIT '.$aleatorio.',6';
-   
         $primer = $this->tableGateway->getAdapter()
                 ->query('SELECT ta_plato.*,tr.va_nombre AS restaurant_nombre ,COUNT(ta_comentario.in_id ) AS NumeroComentarios
                      ,tu.ch_distrito AS Distrito,tu.ch_departamento AS Departamento,tl.va_telefono AS telefono,tl.va_direccion AS direccion
@@ -538,37 +514,63 @@ public function guardarplatoregistro($dataregistro) {
                 LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
                 LEFT JOIN `ta_ubigeo` AS `tu` ON `tu`.`in_id` = `tl`.`ta_ubigeo_in_id`
                 LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
-                where ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null  and ta_plato.ta_puntaje_in_id ' . $puntaje .$coment.'
+                where ta_plato.en_destaque=1 and ta_plato.en_estado=1  and tr.va_nombre is not null 
                  GROUP BY in_id 
-                ORDER BY ' . $order . ' desc '.$limit , $adapter::QUERY_MODE_EXECUTE);
-
-        return $primer; //->toArray();//$data;// $aux;//select()->from('usuario')->query()->fetchAll();
+               ORDER BY RAND() LIMIT 3' , $adapter::QUERY_MODE_EXECUTE);
+ 
+        return $primer; 
+       
     }
     
-    public function platoslistadelsabor(){
-        $adapter = $this->tableGateway->getAdapter();
-        $sql = new Sql($adapter);
-        $selecttot = $sql->select()
-                ->from('ta_plato')
-                ->columns(array('*', 'NumeroComentarios' => new \Zend\Db\Sql\Expression('COUNT(ta_comentario.in_id)')))
-                ->join('ta_comentario', 'ta_plato.in_id = ta_comentario.ta_plato_in_id', array(), 'left')
-                ->join('ta_tipo_plato', 'ta_plato.ta_tipo_plato_in_id=ta_tipo_plato.in_id', array(), 'left')
-                ->join('ta_plato_has_ta_local', 'ta_plato_has_ta_local.ta_plato_in_id = ta_plato.in_id', array(), 'left')
-                ->join('ta_local', 'ta_local.in_id = ta_plato_has_ta_local.ta_local_in_id', array('direccion'=>'va_direccion','telefono'=>'va_telefono'), 'left')
-                ->join('ta_ubigeo', 'ta_ubigeo.in_id = ta_local.ta_ubigeo_in_id', array('Distrito' => 'ch_distrito','Departamento' => 'ch_departamento'), 'left')
-                ->join('ta_restaurante', 'ta_local.ta_restaurante_in_id= ta_restaurante.in_id', array('restaurant_nombre'=>'va_nombre'), 'left')
-                ->join('ta_plato_has_ta_tag', 'ta_plato.in_id = ta_plato_has_ta_tag.ta_plato_in_id', array(), 'left')
-             
-                ->join('ta_tag', 'ta_tag.in_id = ta_plato_has_ta_tag.ta_tag_in_id', array('tag'=>'va_nombre'), 'left')
-                ->where('ta_plato.en_estado=1 and ta_restaurante.en_estado=1 and (ta_comentario.en_estado=1 or ta_comentario.en_estado is null)')->group('ta_plato.in_id')->order('ta_plato.en_destaque DESC');//limit($aleatorio)->offset(3)                
-//array('ta_tag.in_id'=>'1','ta_plato.en_estado'=>'activo','ta_comentario.en_estado'=>'aprobado')
-        $selectString = $sql->getSqlStringForSqlObject($selecttot);
-        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-        return $results->buffer();
-     
+       public function platoslistadelsabor(){
+       $cantidad=$this->cantidad();
+        $total=$cantidad[0]['NumeroResultados']; 
+         $adapter = $this->tableGateway->getAdapter();  
+         $primer = $this->tableGateway->getAdapter()
+                ->query('(SELECT ta_plato.*,tr.va_nombre AS restaurant_nombre ,COUNT(ta_comentario.in_id ) AS NumeroComentarios
+                     ,tu.ch_distrito AS Distrito,tu.ch_departamento AS Departamento,tl.va_telefono AS telefono,tl.va_direccion AS direccion
+                FROM ta_plato
+                LEFT JOIN  ta_comentario ON ta_plato.in_id = ta_comentario.ta_plato_in_id
+                LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id`
+                LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id` 
+                LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
+                LEFT JOIN `ta_ubigeo` AS `tu` ON `tu`.`in_id` = `tl`.`ta_ubigeo_in_id`
+                LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
+                where ta_plato.en_destaque=1 and ta_plato.en_estado=1  and tr.va_nombre is not null  
+                 GROUP BY in_id 
+                ORDER BY RAND() LIMIT '. $total .') 
+                UNION 
+                (SELECT ta_plato.*,tr.va_nombre AS restaurant_nombre ,COUNT(ta_comentario.in_id ) AS NumeroComentarios
+                     ,tu.ch_distrito AS Distrito,tu.ch_departamento AS Departamento,tl.va_telefono AS telefono,tl.va_direccion AS direccion
+                FROM ta_plato
+                LEFT JOIN  ta_comentario ON ta_plato.in_id = ta_comentario.ta_plato_in_id
+                LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id`
+                LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id` 
+                LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
+                LEFT JOIN `ta_ubigeo` AS `tu` ON `tu`.`in_id` = `tl`.`ta_ubigeo_in_id`
+                LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
+                where ta_plato.en_destaque=2 and ta_plato.en_estado=1  and tr.va_nombre is not null  
+                 GROUP BY in_id)' , $adapter::QUERY_MODE_EXECUTE);
+        return $primer->buffer();
     }
     
-    
+     public function cantidad(){      
+      $adapter = $this->tableGateway->getAdapter();
+           $query='SELECT COUNT(DISTINCT(ta_plato.in_id )) AS NumeroResultados
+                FROM ta_plato
+                LEFT JOIN  ta_comentario ON ta_plato.in_id = ta_comentario.ta_plato_in_id
+                LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id`
+                LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id`
+                LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
+                LEFT JOIN `ta_ubigeo` AS `tu` ON `tu`.`in_id` = `tl`.`ta_ubigeo_in_id`
+                LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
+                LEFT JOIN `ta_plato_has_ta_tag` AS `ttag` ON `ta_plato`.`in_id` = `ttag`.`ta_plato_in_id`
+                LEFT JOIN `ta_tag` AS `tag` ON `tag`.`in_id` = `ttag`.`ta_tag_in_id` where  ta_plato.en_destaque=1 
+                  and ta_plato.en_estado=1  and tr.en_estado=1   and (ta_comentario.en_estado=1 or ta_comentario.en_estado is null)';
+           $cantidad = $this->tableGateway->getAdapter()
+            ->query($query, $adapter::QUERY_MODE_EXECUTE); 
+            return $cantidad->toArray();
+    }
     public function platosParticipantes($destaque=1,$estado=1){
         
           $cantidad=$this->aleatorios($destaque, $estado, $puntaje='>=0',1);
@@ -602,6 +604,8 @@ public function guardarplatoregistro($dataregistro) {
     }
     
     
+     
+    
     public function aleatorios($destaque,$estado,$puntaje,$promocion=null){      
            $adapter = $this->tableGateway->getAdapter();
            $query='SELECT COUNT(DISTINCT(ta_plato.in_id )) AS NumeroResultados
@@ -614,15 +618,11 @@ public function guardarplatoregistro($dataregistro) {
                 LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
                 LEFT JOIN `ta_plato_has_ta_tag` AS `ttag` ON `ta_plato`.`in_id` = `ttag`.`ta_plato_in_id`
                 LEFT JOIN `ta_tag` AS `tag` ON `tag`.`in_id` = `ttag`.`ta_tag_in_id` where';
-                
-         
            if($promocion==1){
              $consulta=$query.' tag.in_id=1 and ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado.' and (ta_comentario.en_estado=1 or ta_comentario.en_estado is null)';
           }else{
               $consulta=$query.' ta_plato.en_destaque=' . $destaque . ' and ta_plato.en_estado=' . $estado . '  and tr.va_nombre is not null and ta_plato.ta_puntaje_in_id ' . $puntaje.' and (ta_comentario.en_estado=1 or ta_comentario.en_estado is null)';
-
-          }
-           
+          } 
            $cantidad = $this->tableGateway->getAdapter()
             ->query($consulta, $adapter::QUERY_MODE_EXECUTE);
             

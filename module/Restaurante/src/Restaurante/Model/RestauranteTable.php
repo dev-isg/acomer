@@ -125,7 +125,7 @@ class RestauranteTable
            }
     }
 
-     public function buscarRestaurante($datos,$comida,$estado){
+     public function buscarRestaurante($datos=null,$comida=null,$estado=null){
         $adapter=$this->tableGateway->getAdapter();
            $sql = new Sql($adapter);
         

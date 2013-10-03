@@ -82,7 +82,7 @@ class ComentariosTable
              
                     $adapter2=$this->tableGateway->getAdapter();
         $promselect=$this->tableGateway->getAdapter()
-                ->query('SELECT ta_comentario.*,SUM(ta_puntaje_in_id)AS SumaPuntaje ,COUNT(ta_comentario.in_id ) AS NumeroComentarios,
+                ->query('SELECT SUM(ta_puntaje_in_id)AS SumaPuntaje ,COUNT(ta_comentario.in_id ) AS NumeroComentarios,
                     ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS TotPuntaje
                     FROM ta_comentario
                     where  ta_comentario.ta_plato_in_id='.$coment['Ta_plato_in_id'], $adapter2::QUERY_MODE_EXECUTE);
@@ -93,9 +93,7 @@ class ComentariosTable
                         ->where(array('ta_plato.in_id'=>$coment['Ta_plato_in_id']));//$prom[0]['in_id']
                 $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
                 $statementup->execute();
-                $this->cromSolar($coment['Ta_plato_in_id'],'');
-                
-                
+                $this->cromSolar($coment['Ta_plato_in_id'],'');        
     }
 
      public function cromSolar($id,$caso=null) {//echo 'ddd';exit;
@@ -110,7 +108,7 @@ class ComentariosTable
                     ->join(array('tr' => 'ta_restaurante'), 'tr.in_id = tl.ta_restaurante_in_id', array('restaurant_nombre' => 'va_nombre', 'restaurant_estado' => 'en_estado'), 'left')
                     ->join(array('tc' => 'ta_tipo_comida'), 'tc.in_id = tr.Ta_tipo_comida_in_id', array('nombre_tipo_comida' => 'va_nombre_tipo'), 'left')                                      
                     ->join(array('tu' => 'ta_ubigeo'), 'tu.in_id = tl.ta_ubigeo_in_id', array('distrito' => 'ch_distrito','departamento' => 'ch_departamento'), 'left')
-                    ->where(array('ta_plato.in_id' => $id ));
+                    ->where(array('ta_plato.in_id' => $id));
                  $selecttot->group('ta_plato.in_id');
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
@@ -220,9 +218,25 @@ class ComentariosTable
          }
          
          
-         public function deleteComentario($id)
+         public function deleteComentario($id, $idplato)
          {       
         $this->tableGateway->delete(array('in_id' => $id));
+        
+        
+        $adapter2=$this->tableGateway->getAdapter();
+        $promselect=$this->tableGateway->getAdapter()
+                ->query('SELECT SUM(ta_puntaje_in_id)AS SumaPuntaje ,COUNT(ta_comentario.in_id ) AS NumeroComentarios,
+                    ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS TotPuntaje
+                    FROM ta_comentario
+                    where  ta_comentario.ta_plato_in_id='.$idplato, $adapter2::QUERY_MODE_EXECUTE);
+                        $prom=$promselect->toArray();
+             
+              $update = $this->tableGateway->getSql()->update()->table('ta_plato')
+                        ->set(array('Ta_puntaje_in_id'=>$prom[0]['TotPuntaje']))
+                        ->where(array('ta_plato.in_id'=>$idplato));//$prom[0]['in_id']
+                $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
+                $statementup->execute();
+               
          }
     
 }

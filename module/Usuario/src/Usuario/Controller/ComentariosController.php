@@ -132,8 +132,8 @@ class ComentariosController extends AbstractActionController
         $id = $this->params()->fromPost('id');
         $valor = $this->comentarioid($id);
         $idplato = $valor[0]['Ta_plato_in_id'];
-        $this->getComentariosTable()->deleteComentario((int) $id);
-        $this->getComentariosTable()-cromSolar($idplato,'');  
+        $this->getComentariosTable()->deleteComentario((int) $id ,$idplato);
+        $this->getComentariosTable()->cromSolar($idplato,'');  
         $this->redirect()->toUrl('/usuario/comentarios/index');
     }
 
