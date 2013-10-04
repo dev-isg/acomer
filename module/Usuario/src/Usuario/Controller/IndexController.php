@@ -147,6 +147,7 @@ class IndexController extends AbstractActionController
      return array(
             'in_id' => $id,
             'form' => $form,
+         'pass'=>$usuario->va_contrasenia
         );
         
     }
