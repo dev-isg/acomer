@@ -1,0 +1,29 @@
+    
+    <div class="span12">
+    </div>    
+<div class="row-fluid">
+<div class="span12" id="flip-scroll">
+<table class="table table-bordered table-hover">
+    <thead class="cf">  
+        <tr>
+          <th>#</th> 
+            <th>Nombre del Plato</th>
+             <th>Descripción</th>
+            <th>Precio</th>
+        </tr>
+    </thead>
+    <?php $count = 1;
+    foreach ($this->listamenu  as $listamenu) :
+        ?>
+      <tr id="<?php echo $this->escapeHtml($listamenu->in_id); ?>">
+       <td><?php echo $count++ ?></td>
+                   <td><?php echo $this->escapeHtml($listamenu->va_nombre_plato); ?></td>
+                   <td><?php echo $this->escapeHtml($listamenu->va_descripcion); ?></td>
+                   <td><?php echo $this->escapeHtml($listamenu->va_precio); ?></td>
+                  </tr>
+<?php endforeach; ?>
+</table>
+     <?php echo (count($this->restaurante)> 0)?$this->paginationControl($this->restaurante, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/restaurante/index/index?')):""; ?>
+</div>
+</div>
+

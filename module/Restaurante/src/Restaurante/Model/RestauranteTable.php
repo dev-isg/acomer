@@ -331,6 +331,9 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
                 $statementup->execute();
     }
     
+    
+    
+    
       public function eliminarmenu($id){    
           $borrar = $this->tableGateway->getSql()->delete()->from('ta_menu')
                                 ->where(array('in_id'=>$id));
@@ -403,18 +406,141 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
             $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);
             return $result;
     }
-     public function listarbanner(){
-        
-  $adapter=$this->tableGateway->getAdapter();
-             $sql = new Sql($adapter);      
-          $idubigeo=$sql->select()->from('ta_banner');
-                  //->columns(array('in_id'))
-                 // ->where(array('in_idpais'=>$pais,'in_iddep'=>$departamento,'in_idprov'=>$provincia,'in_iddis'=>$distrito));
-          $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
-
-            $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);
-        
-            return $result;
+       public function listarRegistro($id=null){   
+       $adapter = $this->tableGateway->getAdapter();
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+               ->from(array('f' => 'ta_registro'))
+                ->join(array('b' => 'ta_tipo_comida'), 'f.ta_tipo_comida_in_id=b.in_id', array('va_nombre_tipo'));
+            if($id!=null)
+            {$select->where(array('f.ta_tipo_comida_in_id=b.in_id','f.in_id='.$id));}
+            else{$select->where(array('f.ta_tipo_comida_in_id=b.in_id','f.en_estado=2'));}
+              $select->order('in_id DESC');
+        $selectString = $sql->getSqlStringForSqlObject($select);
+        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        return $resultSet;
     }
+     public function listarRegistroPlatos($id)
+    {   
+         $adapter=$this->tableGateway->getAdapter();
+             $sql = new Sql($adapter);      
+             $idubigeo=$sql->select()->from('ta_registroplato')
+                     ->where(array('Ta_registro_in_id'=>$id));
+             $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
+             $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);
+             return $result;
+    }
+     public function estadoRegistro($id,$estado){
+            $data = array(
+            'en_estado' => $estado );    
+            $update = $this->tableGateway->getSql()->update()->table('ta_registro')
+                        ->set($data)
+                        ->where(array('in_id'=>$id));
+                $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
+                $statementup->execute();
+          
+    }
+     public function listarbanner()
+    {    
+            $adapter=$this->tableGateway->getAdapter();
+             $sql = new Sql($adapter);      
+             $idubigeo=$sql->select()->from('ta_banner');
+             $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
+             $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);
+             return $result;
+    }
+    
+         public function guardarRestauranteRegistro($restaurante,$platos,$tipoplato)
+      {
+         $data = array(
+            'va_nombre' => $restaurante[0]['va_nombre_restaurante'], 
+            'va_razon_social' => $restaurante[0]['va_nombre_restaurante'], 
+            'va_imagen' => $restaurante[0]['va_imagen'],
+            'Ta_tipo_comida_in_id' => $restaurante[0]['Ta_tipo_comida_in_id'],
+             'en_estado'=>'desactivo' );
+              $adapter = $this->tableGateway->getAdapter();
+              $sql = new Sql($adapter);
+              $selecttot = $sql->insert()
+                      ->into('ta_restaurante')
+                      ->values($data);
+                  $selectString = $sql->getSqlStringForSqlObject($selecttot);
+                     $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+                     $idrestaurante=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();
+                            $dataubigeo = array(
+                                  'va_telefono' => $restaurante[0]['va_telefono'], 
+                                  'va_horario' => $restaurante[0]['va_horario'], 
+                                  'va_direccion' => $restaurante[0]['va_direccion'],
+                                  'Ta_restaurante_in_id' => $idrestaurante,
+                                  'Ta_ubigeo_in_id' => '1246',
+                                  'va_email' => $restaurante[0]['va_correo']);
+                                   $adapte = $this->tableGateway->getAdapter();
+                                   $sq = new Sql($adapte);
+                                   $selectto = $sq->insert()
+                                            ->into('ta_local')
+                                            ->values($dataubigeo);
+                                  $selectStrin = $sql->getSqlStringForSqlObject($selectto);
+                                  $adapter->query($selectStrin, $adapte::QUERY_MODE_EXECUTE);
+                                  $idlocal=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();     
+             $array=array();
+             foreach($platos as $result){
+                 $array[]=$result;}
+            for($i=0;$i<count($platos);$i++)
+            { $dataplato = array(
+               'va_nombre' => $array[$i]['va_nombre_plato'], 
+               'va_imagen' => $array[$i]['va_imagen'], 
+               'en_destaque' =>2,
+               'va_precio' => $array[$i]['va_precio'],
+               'tx_descripcion'=>$array[$i]['va_descripcion'],
+               'en_estado' =>2,    
+               'Ta_tipo_plato_in_id'  =>$tipoplato,
+               'Ta_puntaje_in_id'=>0,
+               'Ta_usuario_in_id'=>133); 
+                  $adapt = $this->tableGateway->getAdapter();
+                   $s = new Sql($adapt);
+                 $selectt = $s->insert()
+                ->into('ta_plato')
+              ->values($dataplato);
+             $selectStri = $sql->getSqlStringForSqlObject($selectt);
+             $adapter->query($selectStri, $adapt::QUERY_MODE_EXECUTE);
+              $idplato=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();}     
+            for($i=0;$i<count($platos);$i++)
+            {$insertar = $this->tableGateway->getSql()->insert()->into('ta_plato_has_ta_local')
+                                       ->values(array('Ta_local_in_id'=>$idlocal,'Ta_plato_in_id'=>($idplato-$i)));
+                               $selectString3 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insertar);
+                               $adapter=$this->tableGateway->getAdapter();
+                               $result = $adapter->query($selectString3, $adapter::QUERY_MODE_EXECUTE);}
+     }
+    
+    public function tipodeplato($id)
+    {    
+        $adapter = $this->tableGateway->getAdapter();
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+               ->from(array('f' => 'ta_tipo_plato'))
+                ->join(array('b' => 'ta_tipo_comida'), 'f.Ta_tipo_comida_in_id=b.in_id', array('comida'=>'in_id'))
+               ->where(array('b.in_id'=>$id,'f.va_nombre'=>'otros'));
+        $selectString = $sql->getSqlStringForSqlObject($select);
+        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        return $resultSet;
+    }
+    
+      public function eliminarRegistroTotales($id){    
+          $borrar = $this->tableGateway->getSql()->delete()->from('ta_registro')
+                                ->where(array('in_id'=>$id));
+                        $selectStri = $this->tableGateway->getSql()->getSqlStringForSqlObject($borrar);
+                        $adapter=$this->tableGateway->getAdapter();
+                        $result = $adapter->query($selectStri, $adapter::QUERY_MODE_EXECUTE); 
+                        return $result;
+    }
+    
+    public function eliminarRegistroTotalPlatos($platosid){ 
+                   $borrar = $this->tableGateway->getSql()->delete()->from('ta_registroplato')
+                                ->where(array('in_id'=>$platosid));
+                        $selectStri = $this->tableGateway->getSql()->getSqlStringForSqlObject($borrar);
+                        $adapter=$this->tableGateway->getAdapter();
+                        $result = $adapter->query($selectStri, $adapter::QUERY_MODE_EXECUTE); 
+                        return $result; 
+               }
+    
 
 }

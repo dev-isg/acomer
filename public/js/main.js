@@ -515,6 +515,47 @@ $('.check_rest_menu').mousedown(function() {
           //$("#" + id).closest('tr').remove();
               }
     }); 
+    
+    
+    
+    $('.check_rest_registrorestaurante').mousedown(function() {
+    var id = $(this).attr('data-id');
+    console.log(id); 
+    var est;
+        if (!$(this).is(':checked')) {
+          if (confirm("Desea Activar al registro ?") ){
+            var est="activo";
+            var request = $.ajax({
+            url: "/restaurante/index/activarregistro?id="+id +"&estado="+ est,
+            type: "get",
+            data: {id: id , estado:est}
+                   });
+            $(this).prop("checked", "checked");
+            $("#" + id).addClass("success");
+            $("#la" + id).removeClass().addClass("label label-success");
+            $("#la" + id).html("");
+            $("#la" + id).html("activo");
+              //$("#" + id).closest('tr').remove();
+                 };
+        }else{
+          var est="desactivo";
+            var request = $.ajax({
+            url: "/restaurante/index/activarregistro?id="+id + "&estado=" + est,
+            type: "get",
+            data: {id: id , estado:est}
+                   });
+          $("#" + id).removeClass("success");
+          $("#la" + id).removeClass().addClass("label label-important");
+          $("#la" + id).html("");
+          $("#la" + id).html("desactivo");
+          //$("#" + id).closest('tr').remove();
+              }
+    });
+    
+    
+    
+    
+    
 
   $('.check').mousedown(function() {
   	var id = $(this).attr('data-id');
@@ -608,6 +649,17 @@ $('.check_rest_menu').mousedown(function() {
     var request = $.ajax({
       url: "/restaurante/index/eliminarmenu?id="+menuG,
       type: "POST",
+      data: {id: menuG} 
+    });
+  });
+   $("#delete-registro-restaurantes").on("click",function(){
+    var menuG=$("#verlocal").attr("data-id");
+    $("#" + menuG).closest('tr').remove();
+    $('#eli-local').modal('hide');
+    console.log(menuG);
+    var request = $.ajax({
+      url: "/restaurante/index/eliminarregistro?id="+menuG,
+      type: "GET",
       data: {id: menuG} 
     });
   });

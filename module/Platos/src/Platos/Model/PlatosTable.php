@@ -408,7 +408,8 @@ class PlatosTable {
             'va_imagen' =>$imagen,
             'va_direccion' => $dataregistro->va_direccion,
             'va_horario' => $dataregistro->va_horario,
-            'Ta_tipo_comida_in_id' => $dataregistro->Ta_tipo_comida_in_id
+            'Ta_tipo_comida_in_id' => $dataregistro->Ta_tipo_comida_in_id,
+             'en_estado'=>'desactivo'
         );
               $adapter = $this->tableGateway->getAdapter();
               $sql = new Sql($adapter);

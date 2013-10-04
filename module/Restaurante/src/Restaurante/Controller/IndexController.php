@@ -78,7 +78,8 @@ class IndexController extends AbstractActionController
       
    
     }
-    
+   
+         
  public function agregarrestauranteAction()
     {  
         $auth = new \Zend\Authentication\AuthenticationService();
@@ -599,16 +600,55 @@ public function agregarmenuAction(){
      $auth = new \Zend\Authentication\AuthenticationService();
         if (!$auth->hasIdentity())
         {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
-      
       $lista = $this->getRestauranteTable()->listarmenu();
-    
         return new ViewModel(array(
           'listamenu' => $lista,
          ));
    
     }
      
-   
+    public function listadoregistroAction()
+       {
+         $auth = new \Zend\Authentication\AuthenticationService();
+         if (!$auth->hasIdentity())
+         {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
+         $lista = $this->getRestauranteTable()->listarRegistro();
+         return new ViewModel(array(
+           'listamenu' => $lista,
+          ));
+        }
+         public function listadoregistroplatosAction()
+        {
+            $auth = new \Zend\Authentication\AuthenticationService();
+            if (!$auth->hasIdentity())
+            {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
+            $id = $this->params()->fromRoute('id');
+            $lista = $this->getRestauranteTable()->listarRegistroPlatos($id);
+            return new ViewModel(array(
+              'listamenu' => $lista,
+             ));
+        }
+        
+         public function activarregistroAction() 
+        {
+            $id = $this->params()->fromQuery('id');
+            $estado = $this->params()->fromQuery('estado');
+            $this->getRestauranteTable()->estadoRegistro((int) $id, $estado); 
+            $restaurante = $this->getRestauranteTable()->listarRegistro($id)->toArray();
+            $platos = $this->getRestauranteTable()->listarRegistroPlatos($id)->toArray();
+            $tipoplato = $this->getRestauranteTable()->tipodeplato($restaurante[0]['Ta_tipo_comida_in_id'])->toArray();
+            $this->getRestauranteTable()->guardarRestauranteRegistro($restaurante,$platos,$tipoplato[0]['in_id']);
+            $this->redirect()->toUrl('/restaurante/index/listadoregistro');
+         }
+         
+          public function eliminarregistroAction() {
+            $id = $this->params()->fromQuery('id');
+            $platos = $this->getRestauranteTable()->listarRegistroPlatos($id);
+            $plato=$platos->toArray();
+           foreach ($plato as $result)     
+            {$this->getRestauranteTable()->eliminarRegistroTotalPlatos((int)$result['in_id']);}
+            $this->getRestauranteTable()->eliminarRegistroTotales((int) $id);
+            $this->redirect()->toUrl('/restaurante/index/listadoregistro');}
     }
                         
                                   

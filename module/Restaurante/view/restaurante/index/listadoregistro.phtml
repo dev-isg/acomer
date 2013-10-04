@@ -1,0 +1,55 @@
+    
+    <div class="span12">
+    </div>    
+<div class="row-fluid">
+<div class="span12" id="flip-scroll">
+<table class="table table-bordered table-hover">
+    <thead class="cf">  
+        <tr>
+          <th>#</th> 
+            <th>N°</th>
+            <th>Status</th>
+            <th>Nombre</th>
+             <th>Restaurante</th>
+            <th>Tipo de Comida</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+        <th colspan="2">Operaciones</th>
+        </tr>
+    </thead>
+    <?php $count = 1;
+    foreach ($this->listamenu  as $listamenu) :
+        ?>
+      <tr id="<?php echo $this->escapeHtml($listamenu->in_id); ?>">
+       <td><?php echo $count++ ?></td>
+       <?php if ($listamenu->en_estado == 'desactivo')  { ?>
+         <td><input data-id="<?php echo $this->escapeHtml($listamenu->in_id); ?>" type="checkbox" class="check_rest_registrorestaurante"> </td>
+                <td><span id="la<?php echo $this->escapeHtml($listamenu->in_id); ?>" class='label label-success'> <?php echo $this->escapeHtml($listamenu->en_estado); ?></span></td>
+                    <td><?php echo $this->escapeHtml($listamenu->va_nombre_contacto); ?></td>
+                   <td><a href="<?php echo $this->basePath();?>/listar-registro-platos/<?php echo $listamenu->in_id;?>"><?php echo $this->escapeHtml($listamenu->va_nombre_restaurante); ?></a></td><td><?php echo $this->escapeHtml($listamenu->va_nombre_tipo); ?></td>
+                       <td><?php echo $this->escapeHtml($listamenu->va_direccion); ?></td>
+ <td><?php echo $this->escapeHtml($listamenu->va_telefono); ?></td>
+        <td><a name="<?php echo $this->escapeHtml($listamenu->va_nombre); ?>" data-id="<?php echo $this->escapeHtml($listamenu->in_id); ?>" href="#" class='eli-co-menu btn btn-danger'><i class='icon-trash icon-white'></i>Delete </a></td>
+ <?php } ?>
+                    </tr>
+<?php endforeach; ?>
+</table>
+     <?php echo (count($this->restaurante)> 0)?$this->paginationControl($this->restaurante, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/restaurante/index/index?')):""; ?>
+</div>
+<div class="modal small hide fade" id="eli-local" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Confirmación de Eliminación</h3>
+  </div>
+  <div class="modal-body">
+      <p class="error-text"><strong><label id="verlocal"></label></strong></p>
+
+  </div>
+  <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+      <button class="btn btn-danger" id="delete-registro-restaurantes">Eliminar</button>
+  </div>
+</div>
+
+</div>
+

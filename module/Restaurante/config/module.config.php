@@ -68,6 +68,17 @@ return array(
                     
                 )
             ),
+            'listadoregistroplatos' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/listar-registro-platos[/:id]',
+                    'defaults' => array(
+                        'controller' => 'Restaurante\Controller\Index',
+                        'action' => 'listadoregistroplatos'
+                    )
+                    
+                )
+            ),
               'editarbanner' => array(
                 'type' => 'Segment',
                 'options' => array(
