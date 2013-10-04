@@ -17,12 +17,12 @@ class UsuarioTable
 {
     protected $tableGateway;
     
-    private $nombre;
-    private $apellido;
-     private $pass;
-    private $correo;
-    private $rol;
-    private $id;
+    private $va_nombre;
+    private $va_apellidos;
+     private $va_contrasenia;
+    private $va_email;
+    private $Ta_rol_in_id;
+    private $in_id;
     
 
     public function __construct(TableGateway $tableGateway)
@@ -228,7 +228,7 @@ public function getAlbum($id)
         }
     }
 
-public function guardarUsuario(Usuario $usuario)
+public function guardarUsuario( $usuario)
     {
         $data = array(
            'va_nombre'     => $usuario->va_nombre,
@@ -239,6 +239,7 @@ public function guardarUsuario(Usuario $usuario)
         );
         
         $id = (int)$usuario->in_id;
+     //   var_dump($id);exit;
         if ($id == 0) {
             $this->tableGateway->insert($data);
         } else {
@@ -285,7 +286,7 @@ public function guardarUsuario(Usuario $usuario)
         
         $this->tableGateway->delete(array('in_id' => $id));
     }
-    public function editarUsuario($id,$data){
+    public function editarUsuario($id,$usuario){
                 $data = array(
             'va_nombre' => $usuario->va_nombre,
             'va_apellidos'  => $usuario->va_apellidos,

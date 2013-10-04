@@ -131,10 +131,15 @@ class IndexController extends AbstractActionController
             $form->setInputFilter($usuario->getInputFilter());
             $form->setData($request->getPost());   
             if (!$form->isValid()) {
-              /// echo 'ddd';exit;//
+             // echo 'ddd';exit;//
                  if($pass1==$pass2){
-                $this->getUsuarioTable()->guardarUsuario($usuario);
+                $this->getUsuarioTable()->guardarUsuario($datos);
                 $this->redirect()->toUrl('/usuario');
+                }
+            }
+            else {
+                foreach ($form->getInputFilter()->getInvalidInput() as $error) {
+                    print_r($error->getMessages());
                 }
             }
             

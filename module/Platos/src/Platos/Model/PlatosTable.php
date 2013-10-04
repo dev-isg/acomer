@@ -503,6 +503,7 @@ public function guardarplatoregistro($dataregistro) {
     }
 
     public function cantComentxPlato() {
+        
         $adapter = $this->tableGateway->getAdapter();
         $primer = $this->tableGateway->getAdapter()
                 ->query('SELECT ta_plato.*,tr.va_nombre AS restaurant_nombre ,COUNT(ta_comentario.in_id ) AS NumeroComentarios
