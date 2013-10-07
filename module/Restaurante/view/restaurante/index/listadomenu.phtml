@@ -41,7 +41,7 @@
                     </tr>
 <?php endforeach; ?>
 </table>
-     <?php echo (count($this->restaurante)> 0)?$this->paginationControl($this->restaurante, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/restaurante/index/index?')):""; ?>
+     <?php echo (count($this->listamenu)> 0)?$this->paginationControl($this->listamenu, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/restaurante/index/listadomenu?')):""; ?>
 </div>
 <div class="modal small hide fade" id="eli-local" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">

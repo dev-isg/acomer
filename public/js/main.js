@@ -538,16 +538,16 @@ $('.check_rest_menu').mousedown(function() {
               //$("#" + id).closest('tr').remove();
                  };
         }else{
-          var est="desactivo";
-            var request = $.ajax({
-            url: "/restaurante/index/activarregistro?id="+id + "&estado=" + est,
-            type: "get",
-            data: {id: id , estado:est}
-                   });
-          $("#" + id).removeClass("success");
-          $("#la" + id).removeClass().addClass("label label-important");
-          $("#la" + id).html("");
-          $("#la" + id).html("desactivo");
+         // var est="desactivo";
+           // var request = $.ajax({
+          //  url: "/restaurante/index/activarregistro?id="+id + "&estado=" + est,
+          //  type: "get",
+          //  data: {id: id , estado:est}
+            //       });
+          //$("#" + id).removeClass("success");
+          //$("#la" + id).removeClass().addClass("label label-important");
+          //$("#la" + id).html("");
+         // $("#la" + id).html("desactivo");
           //$("#" + id).closest('tr').remove();
               }
     });

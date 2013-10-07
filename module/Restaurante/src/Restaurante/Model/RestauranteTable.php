@@ -23,6 +23,7 @@ class RestauranteTable
 
     public function __construct(TableGateway $tableGateway) {
         $this->tableGateway = $tableGateway;
+        $this->_options = new \Zend\Config\Config ( include APPLICATION_PATH . '/config/autoload/global.php' );
     }
    
 
@@ -404,7 +405,7 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
           $idubigeo=$sql->select()->from('ta_menu');
            $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
             $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);
-            return $result;
+            return $result->buffer();
     }
        public function listarRegistro($id=null){   
        $adapter = $this->tableGateway->getAdapter();
@@ -414,11 +415,11 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
                 ->join(array('b' => 'ta_tipo_comida'), 'f.ta_tipo_comida_in_id=b.in_id', array('va_nombre_tipo'));
             if($id!=null)
             {$select->where(array('f.ta_tipo_comida_in_id=b.in_id','f.in_id='.$id));}
-            else{$select->where(array('f.ta_tipo_comida_in_id=b.in_id','f.en_estado=2'));}
+            else{$select->where(array('f.ta_tipo_comida_in_id=b.in_id'));}
               $select->order('in_id DESC');
         $selectString = $sql->getSqlStringForSqlObject($select);
         $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-        return $resultSet;
+        return $resultSet->buffer();
     }
      public function listarRegistroPlatos($id)
     {   
@@ -447,7 +448,7 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
              $idubigeo=$sql->select()->from('ta_banner');
              $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
              $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);
-             return $result;
+             return $result->buffer();
     }
     
          public function guardarRestauranteRegistro($restaurante,$platos,$tipoplato)
@@ -465,7 +466,12 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
                       ->values($data);
                   $selectString = $sql->getSqlStringForSqlObject($selecttot);
                      $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-                     $idrestaurante=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();
+                     $idrestaurante=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();    
+             $original = $this->_options->upload->images . '/registro/restaurante/' . $restaurante[0]['va_imagen']; 
+             $nuevo = $this->_options->upload->images . '/restaurante/principal/' . $restaurante[0]['va_imagen']; 
+             $origen = $this->_options->upload->images . '/restaurante/original/' . $restaurante[0]['va_imagen'];
+               copy($original, $nuevo);
+               copy($original, $origen);
                             $dataubigeo = array(
                                   'va_telefono' => $restaurante[0]['va_telefono'], 
                                   'va_horario' => $restaurante[0]['va_horario'], 
@@ -480,14 +486,22 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
                                             ->values($dataubigeo);
                                   $selectStrin = $sql->getSqlStringForSqlObject($selectto);
                                   $adapter->query($selectStrin, $adapte::QUERY_MODE_EXECUTE);
-                                  $idlocal=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();     
+                                  $idlocal=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();                                  
+           mkdir($this->_options->upload->images . '/plato/principal/'.$idrestaurante.'/' , 0777); 
+           mkdir($this->_options->upload->images . '/plato/general/'.$idrestaurante.'/' , 0777);
+           mkdir($this->_options->upload->images . '/plato/destacado/'.$idrestaurante.'/' , 0777);
+           mkdir($this->_options->upload->images . '/plato/original/'.$idrestaurante.'/' , 0777);
+              mkdir($this->_options->upload->images . '/plato/principal/'.$idrestaurante.'/'.$idlocal.'/' , 0777); 
+              mkdir($this->_options->upload->images . '/plato/general/'.$idrestaurante.'/'.$idlocal.'/' , 0777);
+              mkdir($this->_options->upload->images . '/plato/destacado/'.$idrestaurante.'/'.$idlocal.'/' , 0777);
+              mkdir($this->_options->upload->images . '/plato/original/'.$idrestaurante.'/'.$idlocal.'/' , 0777); 
              $array=array();
              foreach($platos as $result){
                  $array[]=$result;}
             for($i=0;$i<count($platos);$i++)
             { $dataplato = array(
                'va_nombre' => $array[$i]['va_nombre_plato'], 
-               'va_imagen' => $array[$i]['va_imagen'], 
+               'va_imagen' => $idrestaurante.'/'.$idlocal.'/'.$array[$i]['va_imagen'], 
                'en_destaque' =>2,
                'va_precio' => $array[$i]['va_precio'],
                'tx_descripcion'=>$array[$i]['va_descripcion'],
@@ -502,7 +516,16 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
               ->values($dataplato);
              $selectStri = $sql->getSqlStringForSqlObject($selectt);
              $adapter->query($selectStri, $adapt::QUERY_MODE_EXECUTE);
-              $idplato=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();}     
+              $idplato=$this->tableGateway->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue();
+                $original = $this->_options->upload->images . '/registro/plato/' . $array[$i]['va_imagen'];  
+                $principal = $this->_options->upload->images . '/plato/principal/'.$idrestaurante.'/'.$idlocal.'/' . $array[$i]['va_imagen'];
+                $destacado = $this->_options->upload->images . '/plato/destacado/'.$idrestaurante.'/'.$idlocal.'/' . $array[$i]['va_imagen'];
+                $general = $this->_options->upload->images . '/plato/general/'.$idrestaurante.'/'.$idlocal.'/' . $array[$i]['va_imagen'];
+                $origen = $this->_options->upload->images .  '/plato/original/'.$idrestaurante.'/'.$idlocal.'/' . $array[$i]['va_imagen'];
+               copy($original, $principal);
+               copy($original, $destacado);
+               copy($original, $general);
+               copy($original, $origen);}     
             for($i=0;$i<count($platos);$i++)
             {$insertar = $this->tableGateway->getSql()->insert()->into('ta_plato_has_ta_local')
                                        ->values(array('Ta_local_in_id'=>$idlocal,'Ta_plato_in_id'=>($idplato-$i)));

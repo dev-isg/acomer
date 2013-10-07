@@ -590,9 +590,11 @@ public function agregarmenuAction(){
         {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
       
       $lista = $this->getRestauranteTable()->listarbanner();
-    
+      $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
+            $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+            $paginator->setItemCountPerPage(10);
         return new ViewModel(array(
-          'listabanner' => $lista,
+          'listabanner' => $paginator,
          ));
    
     }
@@ -601,8 +603,11 @@ public function agregarmenuAction(){
         if (!$auth->hasIdentity())
         {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
       $lista = $this->getRestauranteTable()->listarmenu();
+       $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
+            $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+            $paginator->setItemCountPerPage(10);
         return new ViewModel(array(
-          'listamenu' => $lista,
+          'listamenu' => $paginator,
          ));
    
     }
@@ -613,8 +618,11 @@ public function agregarmenuAction(){
          if (!$auth->hasIdentity())
          {return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/usuario/index/login'); }
          $lista = $this->getRestauranteTable()->listarRegistro();
-         return new ViewModel(array(
-           'listamenu' => $lista,
+            $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($lista));
+            $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+            $paginator->setItemCountPerPage(10);
+            return new ViewModel(array(
+           'listamenu' => $paginator,
           ));
         }
          public function listadoregistroplatosAction()

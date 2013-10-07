@@ -36,7 +36,7 @@
                     </tr>
 <?php endforeach; ?>
 </table>
-     <?php echo (count($this->restaurante)> 0)?$this->paginationControl($this->restaurante, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/restaurante/index/index?')):""; ?>
+     <?php echo (count($this->listabanner)> 0)?$this->paginationControl($this->listabanner, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/restaurante/index/listadobanner?')):""; ?>
 </div>
 <div class="modal small hide fade" id="eli-local" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
