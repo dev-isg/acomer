@@ -165,9 +165,11 @@ $sm->init();
 
     $platos=$adapter->query('SELECT in_id,va_nombre FROM ta_plato',$adapter::QUERY_MODE_EXECUTE);
     include APPLICATION_PATH.'/module/Application/src/Application/View/Helper/CanonicalUrl.php';
-    $crul=new Application\View\Helper\CanonicalUrl();  
+    include APPLICATION_PATH.'/module/Application/src/Application/View/Helper/Canonical.php';
+    $crul=new Application\View\Helper\CanonicalUrl();
+    $limpiando=new Application\View\Helper\Canonical();
       foreach($platos as $plato){                                                    
-          $platourl=$crul($plato->va_nombre, array('suffix' =>$plato->in_id));
+          $platourl=$crul($limpiando($plato->va_nombre), array('suffix' =>$plato->in_id));
           $sm->addUrl($baseUrl . '/plato/' . $platourl);
         } 
         

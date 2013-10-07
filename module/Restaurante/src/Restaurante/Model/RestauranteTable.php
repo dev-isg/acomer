@@ -531,7 +531,9 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
                                        ->values(array('Ta_local_in_id'=>$idlocal,'Ta_plato_in_id'=>($idplato-$i)));
                                $selectString3 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insertar);
                                $adapter=$this->tableGateway->getAdapter();
-                               $result = $adapter->query($selectString3, $adapter::QUERY_MODE_EXECUTE);}
+                               $result = $adapter->query($selectString3, $adapter::QUERY_MODE_EXECUTE);
+              $this->getPlatosTable()->cromSolr(($idplato-$i),'');}
+                   
      }
     
     public function tipodeplato($id)

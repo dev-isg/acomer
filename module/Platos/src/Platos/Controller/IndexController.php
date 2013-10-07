@@ -130,7 +130,8 @@ class IndexController extends AbstractActionController {
                         $select = $sql->select()
                         ->from('ta_local')
                        ->join(array('tl'=>'ta_plato_has_ta_local'), 'ta_local.in_id = tl.Ta_local_in_id',array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(tl.Ta_plato_in_id)')), 'left')   
-                        ->where(array('ta_local.in_id'=>$local));   
+                        ->where(array('ta_local.in_id'=>$local))
+                                ->group('ta_local.in_id');   
                         $selectString = $sql->getSqlStringForSqlObject($select); 
                         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
                         $plat =$results;
@@ -326,7 +327,7 @@ class IndexController extends AbstractActionController {
         $id = (int) $this->params()->fromRoute('in_id', 0);
         $platicos =  $this->platicos($id)->toArray();
        $comeya =$platicos[0]['va_imagen'];
-       $va_nombre = 'prueba';//$this->params()->fromRoute('va_nombre',0);
+       $va_nombre = 'prueba';
         $idlocal=(int) $this->params()->fromRoute('id_pa', 0);
      if (!$id) {
            return $this->redirect()->toUrl($this->
@@ -344,17 +345,7 @@ class IndexController extends AbstractActionController {
         }
       $adpter=$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $form  = new PlatosForm($adpter,$idlocal);
-        
         $form->get('va_imagen')->setValue($comeya);
-        
-    //  $platotipo =  $this->tipo_plato($restaurante->Ta_tipo_plato_in_id)->toArray();
-       //var_dump($platotipo[0]['va_nombre']);exit;
-//        $comidas =  $this->comidas()->toArray();
-//        $com = array();
-//        foreach($comidas as $y){
-//            $com[$y['in_id']] = $y['va_nombre_tipo'];
-//        }
-
         /////////////////////PROMOCIONES////////////////////
        // $form->get('Ta_tipo_plato_in_id')->setOptions(array($platotipo[0]['in_id'] =>$platotipo[0]['va_nombre']  ));
         $form->bind($restaurante);
@@ -386,9 +377,7 @@ class IndexController extends AbstractActionController {
             $form->setData($data);
       
   if ($form->isValid()) {
-                //obtengo data de img
                 $nonFile = $request->getPost()->toArray();
-//                $File = $this->params()->fromFiles('va_imagen');
         if($File['name']!='')
           {
             $adapter = new \Zend\File\Transfer\Adapter\Http();
@@ -413,7 +402,8 @@ class IndexController extends AbstractActionController {
                         $select = $sql->select()
                         ->from('ta_local')
                        ->join(array('tl'=>'ta_plato_has_ta_local'), 'ta_local.in_id = tl.Ta_local_in_id',array('cantidad' => new \Zend\Db\Sql\Expression('COUNT(tl.Ta_plato_in_id)')), 'left')   
-                        ->where(array('ta_local.in_id'=>$idlocal));   
+                        ->where(array('ta_local.in_id'=>$idlocal))
+                                ->group('ta_local.in_id');   
                         $selectString = $sql->getSqlStringForSqlObject($select); 
                         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
                         $plat =$results;

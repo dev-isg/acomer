@@ -210,7 +210,7 @@ class PlatosTable {
         }
     }
 
-       public function cromSolr($id,$caso=null) {//echo 'ddd';exit;
+       public function cromSolr($id,$caso=null) {
             $adapter = $this->tableGateway->getAdapter();
             $sql = new Sql($adapter);
             $selecttot = $sql->select()
@@ -251,8 +251,11 @@ class PlatosTable {
             $document->tipo_comida = $plato[0]['nombre_tipo_comida'];
             $document->en_destaque = $plato[0]['en_destaque'];
             $document->va_telefono = $plato[0]['telefono'];
-            $document->latitud = $plato[0]['latitud'];
-            $document->longitud = $plato[0]['longitud'];
+            if($plato[0]['latitud']==null or $plato[0]['longitud']==null)
+            {$document->latitud = '1';
+            $document->longitud = '1';} else
+            {$document->latitud = $plato[0]['latitud'];
+            $document->longitud = $plato[0]['longitud'];}
             $document->departamento = $plato[0]['departamento'];
             foreach ($tag as $resultado)
             {$document->setMultiValue('tag',$resultado['tag']);  }
