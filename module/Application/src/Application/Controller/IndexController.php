@@ -1005,7 +1005,6 @@ public function __construct()
             $list = 1000;
             $fd = array(
                 'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' . strtoupper($distrito),
-                //'sort' => 'en_destaque desc',
                 'fl' => 'id,latitud,longitud,tx_descripcion,va_imagen,restaurante_estado,restaurante,name,plato_tipo,distrito',
                 'wt' => 'json'
             );
@@ -1029,6 +1028,8 @@ public function __construct()
             $palabraBuscar = isset($plato) ? $plato : false;
             $fd = array(
                 'fq' => 'en_estado:activo AND restaurant_estado:activo AND departamento:' . strtoupper($distrito),
+                'fl' => 'id,latitud,longitud,tx_descripcion,va_imagen,restaurante_estado,restaurante,name,plato_tipo,distrito',
+                'wt' => 'json'
             );
             
             if ($palabraBuscar) {
@@ -1050,6 +1051,8 @@ public function __construct()
             $palabraBuscar = isset($plato) ? $plato : false;
             $fd = array(
                 'fq' => 'en_estado:activo AND restaurant_estado:activo ',
+                'fl' => 'id,latitud,longitud,tx_descripcion,va_imagen,restaurante_estado,restaurante,name,plato_tipo,distrito',
+                'wt' => 'json'
             );
             
             if ($palabraBuscar) {
