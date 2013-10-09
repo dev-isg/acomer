@@ -5,1288 +5,883 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-	<loc>http://192.168.1.36:8080/plato/ensaladas-8</loc>
+	<loc>http://192.168.1.34:8080/plato/aguaymanto-cafe-restaurante-y-terraza-ensaladas-8</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/con-pescado-teriyaki-langostinos-al-panko-sobre-causitas-9</loc>
+	<loc>http://192.168.1.34:8080/plato/aioli-con-pescado-teriyaki-langostinos-al-panko-sobre-causitas-9</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/menu-bento-10</loc>
+	<loc>http://192.168.1.34:8080/plato/aka-tonbo-sushi-bar-karaoke-menu-bento-10</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/bife-de-chorizo-con-papa-soufle--11</loc>
+	<loc>http://192.168.1.34:8080/plato/al-asador-bife-de-chorizo-con-papa-soufle--11</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-12</loc>
+	<loc>http://192.168.1.34:8080/plato/altamar-ceviche-altamar--14</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-13</loc>
+	<loc>http://192.168.1.34:8080/plato/andiamo-trattoria-carpaccio-de-pulpo-agnolotti-de-pato-en-salsa-de-hongos-17</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-altamar--14</loc>
+	<loc>http://192.168.1.34:8080/plato/antica-pizzeria-spaghetti-gamberetti--18</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-15</loc>
+	<loc>http://192.168.1.34:8080/plato/aromas-peruanos-lomo-saltado-aromas-peruanos--21</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-16</loc>
+	<loc>http://192.168.1.34:8080/plato/asakusa-sushi-bar-restaurant-barra-libre-de-makis--23</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/carpaccio-de-pulpo-agnolotti-de-pato-en-salsa-de-hongos-17</loc>
+	<loc>http://192.168.1.34:8080/plato/balthazar-quiches-ensaladas-pasteles-sandwiches-especiales-25</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/spaghetti-gamberetti--18</loc>
+	<loc>http://192.168.1.34:8080/plato/blumar-tacu-tacu-blue--27</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-19</loc>
+	<loc>http://192.168.1.34:8080/plato/brujas-de-cachiche-lomo-saltado--30</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-20</loc>
+	<loc>http://192.168.1.34:8080/plato/buffet-internacional-mandarin-arroz-chaufa-al-estilo-mandarin--31</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado-aromas-peruanos--21</loc>
+	<loc>http://192.168.1.34:8080/plato/cafe-21-lomo-saltado--33</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-22</loc>
+	<loc>http://192.168.1.34:8080/plato/cafe-attika-bocaditos-dulces-y-salados-griegos--34</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/barra-libre-de-makis--23</loc>
+	<loc>http://192.168.1.34:8080/plato/caja-china-criolla-restobar-lechon-crocante-preparado-en-caja-china--40</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-24</loc>
+	<loc>http://192.168.1.34:8080/plato/cala-restaurante-ceviche-cala--41</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/quiches-ensaladas-pasteles-sandwiches-especiales-25</loc>
+	<loc>http://192.168.1.34:8080/plato/canta-rana-panzotti-italia-90-42</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/prime-rib--26</loc>
+	<loc>http://192.168.1.34:8080/plato/caplina-osobuco-con-risotto-a-la-chiclayana-43</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/tacu-tacu-blue--27</loc>
+	<loc>http://192.168.1.34:8080/plato/caravana-pollo-a-la-brasa-44</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/platos-de-estacion--28</loc>
+	<loc>http://192.168.1.34:8080/plato/cebicheria-piscis-ceviche--45</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado--29</loc>
+	<loc>http://192.168.1.34:8080/plato/chami-chorrillos-piqueo-criollo--47</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado--30</loc>
+	<loc>http://192.168.1.34:8080/plato/characato-de-oro-chupe-de-camarones-48</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/arroz-chaufa-al-estilo-mandarin--31</loc>
+	<loc>http://192.168.1.34:8080/plato/chepita-royal-seco-de-cabrito-49</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-32</loc>
+	<loc>http://192.168.1.34:8080/plato/chez-eladio-camarones-a-la-plancha--50</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado--33</loc>
+	<loc>http://192.168.1.34:8080/plato/chifa-titi-arroz-chaufa-53</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/bocaditos-dulces-y-salados-griegos--34</loc>
+	<loc>http://192.168.1.34:8080/plato/corazon-criollo-anticuchos-y-parrillas-peruanas-56</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-35</loc>
+	<loc>http://192.168.1.34:8080/plato/costa-verde-lomo-saltado-don-raul--58</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-36</loc>
+	<loc>http://192.168.1.34:8080/plato/costanera-700-chita-a-la-sal--59</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-37</loc>
+	<loc>http://192.168.1.34:8080/plato/crepes-waffles-crepe-de-aji-de-gallina--60</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/cafe-colombaiano--38</loc>
+	<loc>http://192.168.1.34:8080/plato/cuarto-y-mitad-parrilla-cuarto-y-mitad--61</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-39</loc>
+	<loc>http://192.168.1.34:8080/plato/culantro-y-perejil-camarones-a-la-roca--62</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lechon-crocante-preparado-en-caja-china--40</loc>
+	<loc>http://192.168.1.34:8080/plato/delfino-mar-la-ronda-tres-sabores--64</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-cala--41</loc>
+	<loc>http://192.168.1.34:8080/plato/delicass-milanesa-a-la-bolognesa--65</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/panzotti-italia-90-42</loc>
+	<loc>http://192.168.1.34:8080/plato/don-fernando-restaurante-arroz-con-pato-cabrito-mero--66</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/osobuco-con-risotto-a-la-chiclayana-43</loc>
+	<loc>http://192.168.1.34:8080/plato/donde-walter-pollo-a-la-lena--69</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pollo-a-la-brasa-44</loc>
+	<loc>http://192.168.1.34:8080/plato/dona-julia-anticuchos-de-corazon-70</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ceviche--45</loc>
+	<loc>http://192.168.1.34:8080/plato/el-550-kriollo-gourmet-pulpito-parrillero-al-chimichurri-con-majado-de-papa-huayro-y-choclito-a-la-74</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/centolla-peruana-46</loc>
+	<loc>http://192.168.1.34:8080/plato/el-aguajal-chaufa-amazonico-75</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/piqueo-criollo--47</loc>
+	<loc>http://192.168.1.34:8080/plato/el-encuentro-otani-tallarin-saltado-con-mariscos-78</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/chupe-de-camarones-48</loc>
+	<loc>http://192.168.1.34:8080/plato/el-hawaiano-el-ceviche-de-la-casa--80</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/seco-de-cabrito-49</loc>
+	<loc>http://192.168.1.34:8080/plato/el-hornero-carne-americana-a-la-parrilla--81</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/camarones-a-la-plancha--50</loc>
+	<loc>http://192.168.1.34:8080/plato/el-huarike-ceviche-sushi-bar-atun-al-estilo-huarike--82</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-51</loc>
+	<loc>http://192.168.1.34:8080/plato/el-italiano-osobuco-con-tortellini-de-riccota-a-la-guissepe--83</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/especialidades-del-dia--52</loc>
+	<loc>http://192.168.1.34:8080/plato/el-merlin-de-cabo-blanco-tacu-tacu-huancainero--86</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/arroz-chaufa-53</loc>
+	<loc>http://192.168.1.34:8080/plato/el-meson-de-surco-sopa-surcana-87</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/fajitas-54</loc>
+	<loc>http://192.168.1.34:8080/plato/el-olivar-restaurant-bar-buffet-de-comida-88</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-55</loc>
+	<loc>http://192.168.1.34:8080/plato/el-parrillon-de-pablo-profumo-pamplona-de-lomo-pamplona-de-pollo-bife-charrua-89</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/anticuchos-y-parrillas-peruanas-56</loc>
+	<loc>http://192.168.1.34:8080/plato/el-pescadito-azul-chinguirito-causa-tipo-norte-tortilla-de-raya-90</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/entrana--57</loc>
+	<loc>http://192.168.1.34:8080/plato/el-pez-on-piqueo-marino-91</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado-don-raul--58</loc>
+	<loc>http://192.168.1.34:8080/plato/el-rinconcito-arequipeno-chupe-de-camarones--95</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/chita-a-la-sal--59</loc>
+	<loc>http://192.168.1.34:8080/plato/el-rocoto-rocoto-relleno-con-pastel-de-papa--96</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/crepe-de-aji-de-gallina--60</loc>
+	<loc>http://192.168.1.34:8080/plato/el-senorio-de-sulco-atun-a-la-parrilla-con-rissoto-y-aji-mirasol--97</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/parrilla-cuarto-y-mitad--61</loc>
+	<loc>http://192.168.1.34:8080/plato/el-shambar-shambar-piqueo-criollo-98</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/camarones-a-la-roca--62</loc>
+	<loc>http://192.168.1.34:8080/plato/el-taco-naco-los-tacos-al-pastor--100</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-63</loc>
+	<loc>http://192.168.1.34:8080/plato/exquisipez-pescado-oriental-arroz-exquisipez-103</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/la-ronda-tres-sabores--64</loc>
+	<loc>http://192.168.1.34:8080/plato/favola-ristorante-ravioles-de-cola--104</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/milanesa-a-la-bolognesa--65</loc>
+	<loc>http://192.168.1.34:8080/plato/fiamma-parrilla-pasta-lomo-fiamma--105</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/arroz-con-pato-cabrito-mero--66</loc>
+	<loc>http://192.168.1.34:8080/plato/francesco-restaurant-lomo-marino-107</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-67</loc>
+	<loc>http://192.168.1.34:8080/plato/gol-marino-ceviche-gol-marino--110</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-68</loc>
+	<loc>http://192.168.1.34:8080/plato/green-restaurant-rissoto-de-huancaina-con-lomo-saltado--112</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pollo-a-la-lena--69</loc>
+	<loc>http://192.168.1.34:8080/plato/grill-conquistadores-201-pollo-a-la-brasa-lomo-a-la-parrilla-lomo-saltado--113</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/anticuchos-de-corazon-70</loc>
+	<loc>http://192.168.1.34:8080/plato/haiti-sopa-criolla-el-lomo-saltado--114</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/fettuccini-con-lomo-saltado--71</loc>
+	<loc>http://192.168.1.34:8080/plato/herve-salmon-en-parrillado--116</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-72</loc>
+	<loc>http://192.168.1.34:8080/plato/ibuki-sushi-bar-sushi-118</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-73</loc>
+	<loc>http://192.168.1.34:8080/plato/il-postino-canilla-de-osobuco-con-polenta--120</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pulpito-parrillero-al-chimichurri-con-majado-de-papa-huayro-y-choclito-a-la-74</loc>
+	<loc>http://192.168.1.34:8080/plato/junius-buffet-criollo--123</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/chaufa-amazonico-75</loc>
+	<loc>http://192.168.1.34:8080/plato/jw-sushi-ceviche-lounge-jw-marriott-hotel-lima-sushi-124</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-76</loc>
+	<loc>http://192.168.1.34:8080/plato/kalika-restaurant-lomo-saltado--125</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-77</loc>
+	<loc>http://192.168.1.34:8080/plato/kam-mey-my-tallarin-kam-mey-my--126</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/tallarin-saltado-con-mariscos-78</loc>
+	<loc>http://192.168.1.34:8080/plato/kasamama-buffet-criollo-buffet-criollo--128</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/plato-gran-cajamarquez--79</loc>
+	<loc>http://192.168.1.34:8080/plato/kaypi-restaurante-rissotto-de-hongos-setas-y-portobellos-con-medallon-de-lomo-en-salsa-demi-130</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-ceviche-de-la-casa--80</loc>
+	<loc>http://192.168.1.34:8080/plato/la-baguette-paniers-de-aji-de-gallina--135</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/carne-americana-a-la-parrilla--81</loc>
+	<loc>http://192.168.1.34:8080/plato/la-bistecca-pasta-grill-salteado-mar-y-tierra--136</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/atun-al-estilo-huarike--82</loc>
+	<loc>http://192.168.1.34:8080/plato/la-casa-del-alfajor-s-a-c--alfajores-de-maicena-de-almendra-de-miel-de-chocolate-de-harina-manzana--138</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/osobuco-con-tortellini-de-riccota-a-la-guissepe--83</loc>
+	<loc>http://192.168.1.34:8080/plato/la-gloria-canilla-de-cordero--144</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-84</loc>
+	<loc>http://192.168.1.34:8080/plato/la-linterna-fettucini-147</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-norteno--85</loc>
+	<loc>http://192.168.1.34:8080/plato/la-miga-estofado-de-asado-de-tira--149</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/tacu-tacu-huancainero--86</loc>
+	<loc>http://192.168.1.34:8080/plato/la-piazzetta-osobuco-con-fetuccini-en-manquilla-y-salvia--151</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/sopa-surcana-87</loc>
+	<loc>http://192.168.1.34:8080/plato/la-romana-pizza-153</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/buffet-de-comida-88</loc>
+	<loc>http://192.168.1.34:8080/plato/la-rosa-nautica-restaurante-corvina-rosa-nautica--155</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pamplona-de-lomo-pamplona-de-pollo-bife-charrua-89</loc>
+	<loc>http://192.168.1.34:8080/plato/la-trattoria-di-mambrino-risotto-criollo--157</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/chinguirito-causa-tipo-norte-tortilla-de-raya-90</loc>
+	<loc>http://192.168.1.34:8080/plato/la-traviata-risotto-de-langostino--158</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/piqueo-marino-91</loc>
+	<loc>http://192.168.1.34:8080/plato/la-vaca-loca-rosenda-ojo-de-bife--160</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/comida-regional-de-la-sierra--92</loc>
+	<loc>http://192.168.1.34:8080/plato/la-vida-misma-ropa-vieja-161</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-cebiche-tsunami--93</loc>
+	<loc>http://192.168.1.34:8080/plato/la-vista-los-buffets-162</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/frejoles-con-seco--94</loc>
+	<loc>http://192.168.1.34:8080/plato/lartisan-patisserie-y-cafe-lomo-anticuchero-163</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/chupe-de-camarones--95</loc>
+	<loc>http://192.168.1.34:8080/plato/las-lenas-pollo-a-la-brasa-bebe--165</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/rocoto-relleno-con-pastel-de-papa--96</loc>
+	<loc>http://192.168.1.34:8080/plato/lococino-restobar-lomo-saltado-tacu-tacu-con-diferentes-acompanamientos--168</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/atun-a-la-parrilla-con-rissoto-y-aji-mirasol--97</loc>
+	<loc>http://192.168.1.34:8080/plato/long-horn-lomo-fino-con-fetuccini-al-alfredo-169</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/shambar-piqueo-criollo-98</loc>
+	<loc>http://192.168.1.34:8080/plato/los-cantaritos-jalea-nortena--170</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-99</loc>
+	<loc>http://192.168.1.34:8080/plato/los-piuranos-ceviche-a-base-de-mero--172</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/los-tacos-al-pastor--100</loc>
+	<loc>http://192.168.1.34:8080/plato/macobo-s-sandwich-de-pechuga-de-pavo-al-cilindro--173</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-101</loc>
+	<loc>http://192.168.1.34:8080/plato/magma-sushi-lounge-tabla-lava-o-tabla-manto-174</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado-y-arroz-con-pato-102</loc>
+	<loc>http://192.168.1.34:8080/plato/majariscos-cebiche-mixto-175</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pescado-oriental-arroz-exquisipez-103</loc>
+	<loc>http://192.168.1.34:8080/plato/makoto-sushi-bar-barco-fusion-sushi-roll--176</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ravioles-de-cola--104</loc>
+	<loc>http://192.168.1.34:8080/plato/malabar-paiche-en-costra-de-macambo-cacao-con-salsa-de-chorizo-y-pure-de-aguaje--177</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-fiamma--105</loc>
+	<loc>http://192.168.1.34:8080/plato/mama-raquel-lomo-saltado--178</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-106</loc>
+	<loc>http://192.168.1.34:8080/plato/manolo-churros-de-manjar-chocolate-y-crema--180</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-marino-107</loc>
+	<loc>http://192.168.1.34:8080/plato/matsuei-sushi-bar-tiradito-matsuei--182</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/estractos-yogurt-proviotico-smoothie-108</loc>
+	<loc>http://192.168.1.34:8080/plato/mesa-de-piedra-pachamanca-andina-parrilla-campesina-rocoto-relleno-184</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-109</loc>
+	<loc>http://192.168.1.34:8080/plato/mr-sushi-preguntar-por-la-tabla-de-los-makis-del-dia--187</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-gol-marino--110</loc>
+	<loc>http://192.168.1.34:8080/plato/news-cafe-lomo-saltado-188</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-111</loc>
+	<loc>http://192.168.1.34:8080/plato/niqei-krispy-roll-atakutado--189</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/rissoto-de-huancaina-con-lomo-saltado--112</loc>
+	<loc>http://192.168.1.34:8080/plato/nonna-anna-tiramisu--190</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pollo-a-la-brasa-lomo-a-la-parrilla-lomo-saltado--113</loc>
+	<loc>http://192.168.1.34:8080/plato/oceanus-wine-bar-restaurant-el-salmon-al-miso--191</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/sopa-criolla-el-lomo-saltado--114</loc>
+	<loc>http://192.168.1.34:8080/plato/pak-fok-pato-pequines--193</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-acevichado-maki--115</loc>
+	<loc>http://192.168.1.34:8080/plato/paklla-restaurant-pescado-a-la-porccina--194</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/salmon-en-parrillado--116</loc>
+	<loc>http://192.168.1.34:8080/plato/palachinke-panqueque-salado-n-10-de-queso-pollo-tocino-y-pimiento--195</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado--117</loc>
+	<loc>http://192.168.1.34:8080/plato/pappa-s-pollo-a-la-brasa-pappas--196</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/sushi-118</loc>
+	<loc>http://192.168.1.34:8080/plato/pardo-s-chicken-pollo-a-la-brasa-197</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/tortellini-a-la-crema--119</loc>
+	<loc>http://192.168.1.34:8080/plato/parque-molle-buffet-198</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/canilla-de-osobuco-con-polenta--120</loc>
+	<loc>http://192.168.1.34:8080/plato/pasadiso-fettuccini-a-la-huancaina-con-lomo-al-jugo--199</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-121</loc>
+	<loc>http://192.168.1.34:8080/plato/pastificio-ligure-bodega-y-panaderia-lasagna-ligure--200</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-122</loc>
+	<loc>http://192.168.1.34:8080/plato/patagonia-restaurante-el-porteno--201</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/buffet-criollo--123</loc>
+	<loc>http://192.168.1.34:8080/plato/perroquet-restaurant-chita-con-camarones--202</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/sushi-124</loc>
+	<loc>http://192.168.1.34:8080/plato/pescados-capitales-ceviche-ghandi-203</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado--125</loc>
+	<loc>http://192.168.1.34:8080/plato/pescatora-tacu-tacu-pescatora-204</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/tallarin-kam-mey-my--126</loc>
+	<loc>http://192.168.1.34:8080/plato/piacere-noquis-gratinados-con-prosciutto--205</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-de-lenguado--127</loc>
+	<loc>http://192.168.1.34:8080/plato/piqueo-trujillano-arroz-con-pato-206</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/buffet-criollo--128</loc>
+	<loc>http://192.168.1.34:8080/plato/polo-marino-causa-de-centolla-207</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/tacu-tacu-reventon--129</loc>
+	<loc>http://192.168.1.34:8080/plato/primavera-trujillana-cabrito-de-leche--208</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/rissotto-de-hongos-setas-y-portobellos-con-medallon-de-lomo-en-salsa-demi-130</loc>
+	<loc>http://192.168.1.34:8080/plato/puerto-mancora-tacu-tacu-del-diego--209</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-131</loc>
+	<loc>http://192.168.1.34:8080/plato/puesto-33-ravioles-rellenos-de-camote-con-lomo-parihuela-seca-homenaje-al-tallarin-210</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-132</loc>
+	<loc>http://192.168.1.34:8080/plato/puntarenas-ceviches--212</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-133</loc>
+	<loc>http://192.168.1.34:8080/plato/puro-peru-lenguado-a-lo-peru-213</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-134</loc>
+	<loc>http://192.168.1.34:8080/plato/quimera-salmon-confitado--216</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/paniers-de-aji-de-gallina--135</loc>
+	<loc>http://192.168.1.34:8080/plato/rafael-conchas-a-la-parrilla--217</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/salteado-mar-y-tierra--136</loc>
+	<loc>http://192.168.1.34:8080/plato/recreo-el-trebol-de-santa-clara-lechon-al-horno--218</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-137</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurant-cevicheria-brisas-del-pacifico-ceviche-arroz-con-mariscos-chicharron-de-pesacdo-y-pollo-219</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/alfajores-de-maicena-de-almendra-de-miel-de-chocolate-de-harina-manzana--138</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurant-cevicheria-d-mar-tacu-tacu-a-lo-macho-c-brochetas--220</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-139</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurant-escuela-don-ignacio-lomo-saltado--221</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/la-paella--140</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurant-fuji-fuji-salad-kaisen-salad-yakitori-maki-sushi-variedad-de-rolls-222</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-141</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurant-sonia-el-ceviche--224</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/antipasto-suizo-del-chef--142</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurant-suizo-choro-al-suizo--225</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-143</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurante-costa-azul-chita-al-ajo--226</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/canilla-de-cordero--144</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurante-la-red-cebiche-mixto--228</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lechon-mamon--145</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurante-nautika-ceviche-de-conchas-negras--229</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-146</loc>
+	<loc>http://192.168.1.34:8080/plato/rincon-cervecero-pickeo-pachamanquero-piqueo-cervecero-232</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/fettucini-147</loc>
+	<loc>http://192.168.1.34:8080/plato/rincon-gaucho-parrillada-1-140-kg-233</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-148</loc>
+	<loc>http://192.168.1.34:8080/plato/rinconcito-ferrenafano-seco-de-cabrito--234</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/estofado-de-asado-de-tira--149</loc>
+	<loc>http://192.168.1.34:8080/plato/ristorante-fratello-asado-tira-al-merlot-con-gnocchis--235</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-150</loc>
+	<loc>http://192.168.1.34:8080/plato/rodrigo-pulpo-a-la-parrilla--236</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/osobuco-con-fetuccini-en-manquilla-y-salvia--151</loc>
+	<loc>http://192.168.1.34:8080/plato/salon-capon-el-pato-pekines--239</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/brochetas-anticucheras--152</loc>
+	<loc>http://192.168.1.34:8080/plato/san-ceferino-osobuco-al-estilo-italiano--245</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pizza-153</loc>
+	<loc>http://192.168.1.34:8080/plato/santo-pez-saltado-santo-pecino-248</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/emince-zurich--154</loc>
+	<loc>http://192.168.1.34:8080/plato/scena-restaurante-agujas-de-lomo--249</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/corvina-rosa-nautica--155</loc>
+	<loc>http://192.168.1.34:8080/plato/sentori-sushi-sushi-251</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/cuadril--156</loc>
+	<loc>http://192.168.1.34:8080/plato/taiken-sushi-lounge-fetuccini-taiken-lomo-saltado-taiken-sakura-ribs-259</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/risotto-criollo--157</loc>
+	<loc>http://192.168.1.34:8080/plato/tony-roma-costillas-de-cerdo-a-la-parrilla-con-salsa-bbq--262</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/risotto-de-langostino--158</loc>
+	<loc>http://192.168.1.34:8080/plato/toshiro-s-sushi-bar-concha-con-maca--263</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-159</loc>
+	<loc>http://192.168.1.34:8080/plato/tradiciones-arequipenas-cuy-chactado-rocoto-relleno-costillar-dorado-264</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ojo-de-bife--160</loc>
+	<loc>http://192.168.1.34:8080/plato/trattoria-dei-prati-el-osobuco--265</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ropa-vieja-161</loc>
+	<loc>http://192.168.1.34:8080/plato/trattoria-italia-poquer-de-pasta--266</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/los-buffets-162</loc>
+	<loc>http://192.168.1.34:8080/plato/valentino-rissoto-de-carnaroli-con-cava-brut-azafran-y-camarones--268</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-anticuchero-163</loc>
+	<loc>http://192.168.1.34:8080/plato/vivaldi-langosta-con-esparragos--269</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/cebiche-las-tres-canas--164</loc>
+	<loc>http://192.168.1.34:8080/plato/zen-sushi-bar-zen-sashimi--271</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pollo-a-la-brasa-bebe--165</loc>
+	<loc>http://192.168.1.34:8080/plato/la-kaleta-lomo-saltado-272</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-166</loc>
+	<loc>http://192.168.1.34:8080/plato/la-kaleta-sancochado-273</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-167</loc>
+	<loc>http://192.168.1.34:8080/plato/la-kaleta-makis-274</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado-tacu-tacu-con-diferentes-acompanamientos--168</loc>
+	<loc>http://192.168.1.34:8080/plato/la-kaleta-trebol-caliente-275</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-fino-con-fetuccini-al-alfredo-169</loc>
+	<loc>http://192.168.1.34:8080/plato/la-kaleta-trebol-frio-276</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/jalea-nortena--170</loc>
+	<loc>http://192.168.1.34:8080/plato/tierramar-restaurant-ceviche-277</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/mushame-de-atun--171</loc>
+	<loc>http://192.168.1.34:8080/plato/tierramar-restaurant-parrilla-tierramar-279</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-a-base-de-mero--172</loc>
+	<loc>http://192.168.1.34:8080/plato/tierramar-restaurant-caldo-de-gallina-281</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/sandwich-de-pechuga-de-pavo-al-cilindro--173</loc>
+	<loc>http://192.168.1.34:8080/plato/relleno-gourmet-chancho-al-cilindro-282</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/tabla-lava-o-tabla-manto-174</loc>
+	<loc>http://192.168.1.34:8080/plato/relleno-gourmet-arroz-con-pollo-283</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/cebiche-mixto-175</loc>
+	<loc>http://192.168.1.34:8080/plato/relleno-gourmet-espaguetis-a-la-huancaina-con-estofado-a-la-antigua-284</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/barco-fusion-sushi-roll--176</loc>
+	<loc>http://192.168.1.34:8080/plato/relleno-gourmet-brazuelo-de-chancho-deshuesado-al-lomo-con-frejoles-285</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/paiche-en-costra-de-macambo-cacao-con-salsa-de-chorizo-y-pure-de-aguaje--177</loc>
+	<loc>http://192.168.1.34:8080/plato/relleno-gourmet-tallarin-verde-con-medallones-de-pollo-en-salsa-cuatro-quesos-286</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado--178</loc>
+	<loc>http://192.168.1.34:8080/plato/trattoria-san-ambrosio-ensalada-griega-287</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado-179</loc>
+	<loc>http://192.168.1.34:8080/plato/trattoria-san-ambrosio-ensalada-hawaina-288</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/churros-de-manjar-chocolate-y-crema--180</loc>
+	<loc>http://192.168.1.34:8080/plato/trattoria-san-ambrosio-ensalada-campestre-289</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ckicken-pika-masala--181</loc>
+	<loc>http://192.168.1.34:8080/plato/trattoria-san-ambrosio-menu-italiano-del-dia-290</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/tiradito-matsuei--182</loc>
+	<loc>http://192.168.1.34:8080/plato/trattoria-san-ambrosio-spaguetti-a-la-bolognesa-con-albondigas-de-carne-de-res-291</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-183</loc>
+	<loc>http://192.168.1.34:8080/plato/don-jama-lomo-saltado-292</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pachamanca-andina-parrilla-campesina-rocoto-relleno-184</loc>
+	<loc>http://192.168.1.34:8080/plato/don-jama-arroz-con-pato-293</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-185</loc>
+	<loc>http://192.168.1.34:8080/plato/don-jama-cuy-don-jama-294</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-186</loc>
+	<loc>http://192.168.1.34:8080/plato/don-jama-arroz-con-mariscos-295</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/preguntar-por-la-tabla-de-los-makis-del-dia--187</loc>
+	<loc>http://192.168.1.34:8080/plato/don-jama-ceviche-don-jama-296</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado-188</loc>
+	<loc>http://192.168.1.34:8080/plato/sanka-osobuco-con-fetuccini-a-lo-alfredo-297</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/krispy-roll-atakutado--189</loc>
+	<loc>http://192.168.1.34:8080/plato/sanka-lomo-sanka-con-langostino-298</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/tiramisu--190</loc>
+	<loc>http://192.168.1.34:8080/plato/sanka-causa-de-lomo-saltado-299</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-salmon-al-miso--191</loc>
+	<loc>http://192.168.1.34:8080/plato/sanka-trucha-gratinada-300</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-192</loc>
+	<loc>http://192.168.1.34:8080/plato/sanka-pastel-de-choclo-301</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pato-pequines--193</loc>
+	<loc>http://192.168.1.34:8080/plato/pescados-y-mariscos-el-silencio-ceviche-de-pescado-302</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pescado-a-la-porccina--194</loc>
+	<loc>http://192.168.1.34:8080/plato/pescados-y-mariscos-el-silencio-arroz-con-mariscos-303</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/panqueque-salado-n-10-de-queso-pollo-tocino-y-pimiento--195</loc>
+	<loc>http://192.168.1.34:8080/plato/pescados-y-mariscos-el-silencio-parihuela-304</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pollo-a-la-brasa-pappas--196</loc>
+	<loc>http://192.168.1.34:8080/plato/pescados-y-mariscos-el-silencio-jalea-mixta-305</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pollo-a-la-brasa-197</loc>
+	<loc>http://192.168.1.34:8080/plato/torvile-restaurant-spaghetti-al-pesto-306</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/buffet-198</loc>
+	<loc>http://192.168.1.34:8080/plato/torvile-restaurant-spaghetti-a-la-florentina-307</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/fettuccini-a-la-huancaina-con-lomo-al-jugo--199</loc>
+	<loc>http://192.168.1.34:8080/plato/torvile-restaurant-risotto-a-la-huancaina-308</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lasagna-ligure--200</loc>
+	<loc>http://192.168.1.34:8080/plato/torvile-restaurant-arroz-tapado-309</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-porteno--201</loc>
+	<loc>http://192.168.1.34:8080/plato/torvile-restaurant-lasagna-de-carne-310</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/chita-con-camarones--202</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurante-hanna-costillar-a-la-bbq-312</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-ghandi-203</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurante-hanna-falafel-313</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/tacu-tacu-pescatora-204</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurante-hanna-piqueo-arabe-314</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/noquis-gratinados-con-prosciutto--205</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurante-hanna-hummus-315</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/arroz-con-pato-206</loc>
+	<loc>http://192.168.1.34:8080/plato/puerto-med-causa-med-316</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/causa-de-centolla-207</loc>
+	<loc>http://192.168.1.34:8080/plato/puerto-med-achorado-317</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/cabrito-de-leche--208</loc>
+	<loc>http://192.168.1.34:8080/plato/puerto-med-jalea-med-318</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/tacu-tacu-del-diego--209</loc>
+	<loc>http://192.168.1.34:8080/plato/puerto-med-piu-mare-319</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ravioles-rellenos-de-camote-con-lomo-parihuela-seca-homenaje-al-tallarin-210</loc>
+	<loc>http://192.168.1.34:8080/plato/la-cocina-de-caro-parrilla-diplomatica-320</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-211</loc>
+	<loc>http://192.168.1.34:8080/plato/la-cocina-de-caro-osobucco-al-vino-tinto-321</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ceviches--212</loc>
+	<loc>http://192.168.1.34:8080/plato/la-cocina-de-caro-costillas-bbq-322</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lenguado-a-lo-peru-213</loc>
+	<loc>http://192.168.1.34:8080/plato/la-cocina-de-caro-bife-angosto-angus-323</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-214</loc>
+	<loc>http://192.168.1.34:8080/plato/sin-reservas-lomo-sin-reservas-324</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-215</loc>
+	<loc>http://192.168.1.34:8080/plato/sin-reservas-lomo-en-salsa-huancaina-325</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/salmon-confitado--216</loc>
+	<loc>http://192.168.1.34:8080/plato/sin-reservas-bistec-apanado-326</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/conchas-a-la-parrilla--217</loc>
+	<loc>http://192.168.1.34:8080/plato/sin-reservas-arroz-con-pato-327</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lechon-al-horno--218</loc>
+	<loc>http://192.168.1.34:8080/plato/sin-reservas-cabrito-a-la-nortena-328</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-arroz-con-mariscos-chicharron-de-pesacdo-y-pollo-219</loc>
+	<loc>http://192.168.1.34:8080/plato/tres-joyas-lomo-saltado-al-pisco-330</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/tacu-tacu-a-lo-macho-c-brochetas--220</loc>
+	<loc>http://192.168.1.34:8080/plato/tres-joyas-tacu-tacu-con-lomo-saltado-331</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado--221</loc>
+	<loc>http://192.168.1.34:8080/plato/tres-joyas-parihuela-332</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/fuji-salad-kaisen-salad-yakitori-maki-sushi-variedad-de-rolls-222</loc>
+	<loc>http://192.168.1.34:8080/plato/tres-joyas-jalea-acevichada-333</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-223</loc>
+	<loc>http://192.168.1.34:8080/plato/mozza-pizza-fettucini-en-salsa-huancaina-con-lomo-saltado-334</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-ceviche--224</loc>
+	<loc>http://192.168.1.34:8080/plato/mozza-pizza-lasagna-a-la-bolognesa-335</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/choro-al-suizo--225</loc>
+	<loc>http://192.168.1.34:8080/plato/mozza-pizza-pizza-internacional-336</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/chita-al-ajo--226</loc>
+	<loc>http://192.168.1.34:8080/plato/mozza-pizza-pizza-choripollo-337</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia--227</loc>
+	<loc>http://192.168.1.34:8080/plato/mozza-pizza-pizza-tocino-tropical-338</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/cebiche-mixto--228</loc>
+	<loc>http://192.168.1.34:8080/plato/islandia-triple-islandia-339</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-de-conchas-negras--229</loc>
+	<loc>http://192.168.1.34:8080/plato/islandia-piqueo-criollo-340</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/costillas-de-cerdo-en-horno-de-barro-a-la-lena--230</loc>
+	<loc>http://192.168.1.34:8080/plato/islandia-matrimonio-islandia-341</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pachamanca-fines-de-semana--231</loc>
+	<loc>http://192.168.1.34:8080/plato/islandia-combinado-mixto-342</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pickeo-pachamanquero-piqueo-cervecero-232</loc>
+	<loc>http://192.168.1.34:8080/plato/islandia-combinado-caliente-343</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/parrillada-1-140-kg-233</loc>
+	<loc>http://192.168.1.34:8080/plato/la-vida-misma-croquetas-del-dia-344</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/seco-de-cabrito--234</loc>
+	<loc>http://192.168.1.34:8080/plato/la-vida-misma-picadillo-a-la-habanera-345</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/asado-tira-al-merlot-con-gnocchis--235</loc>
+	<loc>http://192.168.1.34:8080/plato/la-vida-misma-rabo-encendido-346</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/pulpo-a-la-parrilla--236</loc>
+	<loc>http://192.168.1.34:8080/plato/la-vida-misma-pierna-de-cerdo-asada-a-la-criolla-347</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-237</loc>
+	<loc>http://192.168.1.34:8080/plato/mamila-cafe-lomo-saltado-348</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ceviches-al-wok-rissottos-chiclayanos-jaleas-ramen-a-cecina-238</loc>
+	<loc>http://192.168.1.34:8080/plato/mamila-cafe-milanesa-de-pollo-349</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-pato-pekines--239</loc>
+	<loc>http://192.168.1.34:8080/plato/mamila-cafe-shawarma-350</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-240</loc>
+	<loc>http://192.168.1.34:8080/plato/mamila-cafe-pollo-le-cordon-bleu-351</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-241</loc>
+	<loc>http://192.168.1.34:8080/plato/mamila-cafe-parrilla-mamila-352</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-242</loc>
+	<loc>http://192.168.1.34:8080/plato/majariscos-chaufa-de-cecina-con-langostinos-353</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-243</loc>
+	<loc>http://192.168.1.34:8080/plato/majariscos-tequenos-de-aji-de-gallina-con-langostino-354</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-244</loc>
+	<loc>http://192.168.1.34:8080/plato/majariscos-causa-acevichada-con-chicharroncito-de-pescado-y-salsa-de-maracuya-355</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/osobuco-al-estilo-italiano--245</loc>
+	<loc>http://192.168.1.34:8080/plato/majariscos-tacu-tacu-de-mariscos-356</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-246</loc>
+	<loc>http://192.168.1.34:8080/plato/pescados-y-mariscos-el-silencio-arroz-chaufa-con-mariscos-357</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/chicharron-247</loc>
+	<loc>http://192.168.1.34:8080/plato/el-kapallaq-restaurant-arroz-tapado-de-cangrejos-362</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/saltado-santo-pecino-248</loc>
+	<loc>http://192.168.1.34:8080/plato/el-kapallaq-restaurant-chupe-de-pescado-363</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/agujas-de-lomo--249</loc>
+	<loc>http://192.168.1.34:8080/plato/la-preferida-arroz-a-la-preferida-364</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-250</loc>
+	<loc>http://192.168.1.34:8080/plato/la-preferida-piqueo-marino-365</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/sushi-251</loc>
+	<loc>http://192.168.1.34:8080/plato/punta-sal-pasta-corta-mar-y-tierra-a-la-crema-de-aji-amarillo-366</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-252</loc>
+	<loc>http://192.168.1.34:8080/plato/punta-sal-ceviche-lazaro-367</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-pat-thi--253</loc>
+	<loc>http://192.168.1.34:8080/plato/el-rincon-que-no-conoces-aji-de-gallina-368</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-254</loc>
+	<loc>http://192.168.1.34:8080/plato/edo-sushi-bar-acevichado-maki-369</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-255</loc>
+	<loc>http://192.168.1.34:8080/plato/edo-sushi-bar-shogun-maki-370</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-256</loc>
+	<loc>http://192.168.1.34:8080/plato/hanzo-fried-roll-371</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-257</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurant-oriental-wa-lok-bolitas-de-langostinos-con-fruta-372</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-258</loc>
+	<loc>http://192.168.1.34:8080/plato/granja-azul-pollo-bebe-a-la-lena-con-papas-fritas-373</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/fetuccini-taiken-lomo-saltado-taiken-sakura-ribs-259</loc>
+	<loc>http://192.168.1.34:8080/plato/sangucheria-la-lucha-lechon-a-la-lena-374</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-260</loc>
+	<loc>http://192.168.1.34:8080/plato/el-rocoto-chupe-de-camarones-375</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-261</loc>
+	<loc>http://192.168.1.34:8080/plato/culantro-y-perejil-costillar-dorado-de-cordero-376</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/costillas-de-cerdo-a-la-parrilla-con-salsa-bbq--262</loc>
+	<loc>http://192.168.1.34:8080/plato/culantro-y-perejil-rocoto-arequipeno-377</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/concha-con-maca--263</loc>
+	<loc>http://192.168.1.34:8080/plato/el-aguajal-fetuccine-con-cecina-en-salsa-de-cocona-378</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/cuy-chactado-rocoto-relleno-costillar-dorado-264</loc>
+	<loc>http://192.168.1.34:8080/plato/puro-peru-ceviche-puro-peru-379</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-osobuco--265</loc>
+	<loc>http://192.168.1.34:8080/plato/puro-peru-cabrito-a-la-nortena-380</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/poquer-de-pasta--266</loc>
+	<loc>http://192.168.1.34:8080/plato/puro-peru-buffet-gourmet-382</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-267</loc>
+	<loc>http://192.168.1.34:8080/plato/canta-rana-lomo-con-langostinos-al-ajillo-384</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/rissoto-de-carnaroli-con-cava-brut-azafran-y-camarones--268</loc>
+	<loc>http://192.168.1.34:8080/plato/canta-rana-ceviche-apaltado-386</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/langosta-con-esparragos--269</loc>
+	<loc>http://192.168.1.34:8080/plato/canta-rana-tacu-tacu-con-picante-de-camarones-388</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/el-plato-del-dia-270</loc>
+	<loc>http://192.168.1.34:8080/plato/canta-rana-calamares-a-la-silva-390</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/zen-sashimi--271</loc>
+	<loc>http://192.168.1.34:8080/plato/songoro-cosongo-anticuchos-392</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado-272</loc>
+	<loc>http://192.168.1.34:8080/plato/songoro-cosongo-lomo-saltado-394</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/sancochado-273</loc>
+	<loc>http://192.168.1.34:8080/plato/songoro-cosongo-fuente-fria-396</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/makis-274</loc>
+	<loc>http://192.168.1.34:8080/plato/songoro-cosongo-ceviche-398</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/trebol-caliente-275</loc>
+	<loc>http://192.168.1.34:8080/plato/songoro-cosongo-fuente-caliente-400</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/trebol-frio-276</loc>
+	<loc>http://192.168.1.34:8080/plato/puro-peru-lomo-saltado-402</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-277</loc>
+	<loc>http://192.168.1.34:8080/plato/recreo-el-trebol-de-santa-clara-pollo-al-limon-403</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/saltado-tierramar-278</loc>
+	<loc>http://192.168.1.34:8080/plato/recreo-el-trebol-de-santa-clara-ceviche-de-champignones-404</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/parrilla-tierramar-279</loc>
+	<loc>http://192.168.1.34:8080/plato/chepita-royal-arroz-con-pato-405</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/bucatini-a-la-huancaina-con-lomito-al-horno-280</loc>
+	<loc>http://192.168.1.34:8080/plato/chepita-royal-chinguirito-406</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/caldo-de-gallina-281</loc>
+	<loc>http://192.168.1.34:8080/plato/costa-verde-conchitas-a-la-parmesana-407</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/chancho-al-cilindro-282</loc>
+	<loc>http://192.168.1.34:8080/plato/chifa-titi-tallarin-saltado-de-cerdo-408</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/arroz-con-pollo-283</loc>
+	<loc>http://192.168.1.34:8080/plato/chifa-titi-pato-al-sillao-409</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/espaguetis-a-la-huancaina-con-estofado-a-la-antigua-284</loc>
+	<loc>http://192.168.1.34:8080/plato/chifa-titi-wantan-frito-410</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/brazuelo-de-chancho-deshuesado-al-lomo-con-frejoles-285</loc>
+	<loc>http://192.168.1.34:8080/plato/el-encuentro-otani-picante-de-mariscos-411</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/tallarin-verde-con-medallones-de-pollo-en-salsa-cuatro-quesos-286</loc>
+	<loc>http://192.168.1.34:8080/plato/senorio-criollo-huatia-surcana-412</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ensalada-griega-287</loc>
+	<loc>http://192.168.1.34:8080/plato/senorio-criollo-merluza-china-413</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ensalada-hawaina-288</loc>
+	<loc>http://192.168.1.34:8080/plato/senorio-criollo-plato-de-prueba-para-el-solar-414</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ensalada-campestre-289</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurante-el-buen-pastor-chinguirito-a-la-nortenia-424</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/menu-italiano-del-dia-290</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurante-el-buen-pastor-estoveche-a-la-jama-425</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/spaguetti-a-la-bolognesa-con-albondigas-de-carne-de-res-291</loc>
+	<loc>http://192.168.1.34:8080/plato/mala-hierva-sana-flan-de-maracuya-426</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado-292</loc>
+	<loc>http://192.168.1.34:8080/plato/lima-relegadaaaaaaaa-estoveche-428</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/arroz-con-pato-293</loc>
+	<loc>http://192.168.1.34:8080/plato/lima-relegadaaaaaaaa-peldurini-429</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/cuy-don-jama-294</loc>
+	<loc>http://192.168.1.34:8080/plato/mala-hierva-buena-salmon-434</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/arroz-con-mariscos-295</loc>
+	<loc>http://192.168.1.34:8080/plato/mala-hierva-buena-ferchulnis-435</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-don-jama-296</loc>
+	<loc>http://192.168.1.34:8080/plato/mi-restaurante-test-de-lucho-444</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/osobuco-con-fetuccini-a-lo-alfredo-297</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurante-taurina-platicodesss-445</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/lomo-sanka-con-langostino-298</loc>
+	<loc>http://192.168.1.34:8080/plato/restaurante-taurina-platocinarino-446</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/causa-de-lomo-saltado-299</loc>
+	<loc>http://192.168.1.34:8080/plato/marrrr-add-rgrg-448</loc>
 </url>
 <url>
-	<loc>http://192.168.1.36:8080/plato/trucha-gratinada-300</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/pastel-de-choclo-301</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-de-pescado-302</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/arroz-con-mariscos-303</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/parihuela-304</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/jalea-mixta-305</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/spaghetti-al-pesto-306</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/spaghetti-a-la-florentina-307</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/risotto-a-la-huancaina-308</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/arroz-tapado-309</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/lasagna-de-carne-310</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/shawerma-de-pollo-311</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/costillar-a-la-bbq-312</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/falafel-313</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/piqueo-arabe-314</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/hummus-315</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/causa-med-316</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/achorado-317</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/jalea-med-318</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/piu-mare-319</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/parrilla-diplomatica-320</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/osobucco-al-vino-tinto-321</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/costillas-bbq-322</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/bife-angosto-angus-323</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/lomo-sin-reservas-324</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/lomo-en-salsa-huancaina-325</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/bistec-apanado-326</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/arroz-con-pato-327</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/cabrito-a-la-nortena-328</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-de-pescado-329</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado-al-pisco-330</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/tacu-tacu-con-lomo-saltado-331</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/parihuela-332</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/jalea-acevichada-333</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/fettucini-en-salsa-huancaina-con-lomo-saltado-334</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/lasagna-a-la-bolognesa-335</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/pizza-internacional-336</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/pizza-choripollo-337</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/pizza-tocino-tropical-338</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/triple-islandia-339</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/piqueo-criollo-340</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/matrimonio-islandia-341</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/combinado-mixto-342</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/combinado-caliente-343</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/croquetas-del-dia-344</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/picadillo-a-la-habanera-345</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/rabo-encendido-346</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/pierna-de-cerdo-asada-a-la-criolla-347</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado-348</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/milanesa-de-pollo-349</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/shawarma-350</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/pollo-le-cordon-bleu-351</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/parrilla-mamila-352</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/chaufa-de-cecina-con-langostinos-353</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/tequenos-de-aji-de-gallina-con-langostino-354</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/causa-acevichada-con-chicharroncito-de-pescado-y-salsa-de-maracuya-355</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/tacu-tacu-de-mariscos-356</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/arroz-chaufa-con-mariscos-357</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/arroz-con-mariscos-358</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/chicharron-de-pollo-359</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/plato-a-360</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/plato-prueba-2-361</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/arroz-tapado-de-cangrejos-362</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/chupe-de-pescado-363</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/arroz-a-la-preferida-364</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/piqueo-marino-365</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/pasta-corta-mar-y-tierra-a-la-crema-de-aji-amarillo-366</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-lazaro-367</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/aji-de-gallina-368</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/acevichado-maki-369</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/shogun-maki-370</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/fried-roll-371</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/bolitas-de-langostinos-con-fruta-372</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/pollo-bebe-a-la-lena-con-papas-fritas-373</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/lechon-a-la-lena-374</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/chupe-de-camarones-375</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/costillar-dorado-de-cordero-376</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/rocoto-arequipeno-377</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/fetuccine-con-cecina-en-salsa-de-cocona-378</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-puro-peru-379</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/cabrito-a-la-nortena-380</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/buffet-gourmet-381</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/buffet-gourmet-382</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/lomo-con-langostino-al-ajillo-383</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/lomo-con-langostinos-al-ajillo-384</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-apaltado-385</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-apaltado-386</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/tacu-tacu-con-picante-de-camarones-387</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/tacu-tacu-con-picante-de-camarones-388</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/calamares-a-la-silva-389</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/calamares-a-la-silva-390</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/anticuchos-391</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/anticuchos-392</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado-393</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado-394</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/fuente-fria-395</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/fuente-fria-396</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-397</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-398</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/fuente-caliente-399</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/fuente-caliente-400</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado-401</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/lomo-saltado-402</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/pollo-al-limon-403</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/ceviche-de-champignones-404</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/arroz-con-pato-405</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/chinguirito-406</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/conchitas-a-la-parmesana-407</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/tallarin-saltado-de-cerdo-408</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/pato-al-sillao-409</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/wantan-frito-410</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/picante-de-mariscos-411</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/huatia-surcana-412</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/merluza-china-413</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/plato-de-prueba-para-el-solar-414</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/chinguirito-a-la-nortenia-424</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/estoveche-a-la-jama-425</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/flan-de-maracuya-426</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/flan-de-melocoton-427</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/estoveche-428</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/peldurini-429</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/permarada-430</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/estufa-de-salmon-431</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/dos-432</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/uno-433</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/salmon-434</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/ferchulnis-435</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/wwdxwdwcwf-436</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/dvrrvrvr-437</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/efefef-438</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/dvevevevfevef-439</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/btbvdf-440</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/fvrfvhtg-441</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/dddddddede-442</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/sfefef-443</loc>
-</url>
-<url>
-	<loc>http://192.168.1.36:8080/plato/test-de-lucho-444</loc>
+	<loc>http://192.168.1.34:8080/plato/mamacona-mamaconasss-449</loc>
 </url>
 
 </urlset>

@@ -322,7 +322,7 @@ class IndexController extends AbstractActionController
             $authAdapter = new AuthAdapter($dbAdapter);
               
             // configure auth adapter
-            $authAdapter->setTableName('Ta_usuario')
+            $authAdapter->setTableName('ta_usuario')
                     ->setIdentityColumn('va_nombre')
                     ->setCredentialColumn('va_contrasenia');
 

@@ -130,7 +130,7 @@ class Restaurante implements InputFilterAwareInterface
                     ),
                     array(
                         'name'    => 'filesize',
-                        'options' =>  array('max' => 204800),
+                        'options' =>  array('min' =>20,'max' => 204800),
                     ),
                   ),
                ))

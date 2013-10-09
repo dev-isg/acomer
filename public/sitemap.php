@@ -163,13 +163,19 @@ $sm->sitemapIndexFileName = 'sitemap_index.xml';
 $sm->sitemapFileName = 'platos'.str_pad($avisoSitemapCount,2,'0',STR_PAD_LEFT).'_sitemap.xml';
 $sm->init();
 
-    $platos=$adapter->query('SELECT in_id,va_nombre FROM ta_plato',$adapter::QUERY_MODE_EXECUTE);
+    $platos=$adapter->query('SELECT ta_plato.in_id,ta_plato.va_nombre,tr.va_nombre AS restaurante 
+                FROM ta_plato
+                LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id` 
+                LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
+                LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
+                WHERE   ta_plato.en_estado=1  AND tr.en_estado=1
+                GROUP BY in_id',$adapter::QUERY_MODE_EXECUTE);
     include APPLICATION_PATH.'/module/Application/src/Application/View/Helper/CanonicalUrl.php';
     include APPLICATION_PATH.'/module/Application/src/Application/View/Helper/Canonical.php';
     $crul=new Application\View\Helper\CanonicalUrl();
     $limpiando=new Application\View\Helper\Canonical();
       foreach($platos as $plato){                                                    
-          $platourl=$crul($limpiando($plato->va_nombre), array('suffix' =>$plato->in_id));
+          $platourl=$crul($limpiando($plato->restaurante), array('plato' =>$limpiando($plato->va_nombre),'suffix' =>$plato->in_id));
           $sm->addUrl($baseUrl . '/plato/' . $platourl);
         } 
         

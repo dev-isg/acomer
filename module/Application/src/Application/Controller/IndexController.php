@@ -625,7 +625,7 @@ public function __construct()
             }
         }
         
-        $busquedatitle=$valores.':'.implode(",",$arrpl).':'.implode(",",$arrest).'| Lista del Sabor';
+        $busquedatitle=$valores.':'.implode(",",$arrpl).':'.implode(",",$arrest).' │ ';
         
          $this->layout()->description=$busquedatitle;
         
@@ -639,6 +639,7 @@ public function __construct()
                 $listadeseg[] = $listatot[$key];
             }
         }
+        $menus = $this->menu();
     //$paginador = $resultados->response->docs;
         $view->setVariables(array(
             'total' => $total,
@@ -655,6 +656,7 @@ public function __construct()
             'start'=> $start,
             'end' =>$end,
             'plat'=>$plato,
+            'menus'=>$menus,
             'masdestacados'=>$consultafinal
         )); // ,'error'=>$error
         return $view;

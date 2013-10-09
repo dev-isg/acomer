@@ -678,7 +678,9 @@ class IndexController extends AbstractActionController {
         $datos =$this->params()->fromRoute();  
         $urlerror =  $datos['nombre'];
         $nombre = explode('-', $datos['nombre']); 
+        
         $id = array_pop($nombre);
+       // var_dump($id);exit;
         if(!$this->getPlatosTable()->getPlato($id)){
             $this->redirect()->toUrl('/');
         }       
@@ -786,13 +788,13 @@ class IndexController extends AbstractActionController {
                 trim($listarecomendacion[0]['tx_descripcion']).':'.
                 trim($listarecomendacion[0]['tipo_plato_nombre']).':'.
                 trim($listarecomendacion[0]['restaurant_nombre']).':'.
-                trim($listarecomendacion[0]['distrito']).'|Lista del Sabor';
-      
+                trim($listarecomendacion[0]['distrito']).' │ ';
+      $menu = $this->menu();
        $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id,
              'listatitle'=>$listatitle, 'masplatos' => $resultados
-             ,'listades' => $consulta));
+             ,'listades' => $consulta,'menus'=>$menu));
         
         return $view;
     }
@@ -868,5 +870,18 @@ class IndexController extends AbstractActionController {
             {$this->getPlatosTable()->cromSolr($result['in_id'],'');  }
            echo 'cron finalizado';exit;
         }  
+ public function menu()
+    {
+        $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+                ->from('ta_menu')
+  ->where(array('en_estado'=>'activo'))
+                ->order('in_orden ASC');
+        $selectString = $sql->getSqlStringForSqlObject($select);
+        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+         return $results->toArray();
+    }
 
 }

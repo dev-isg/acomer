@@ -69,14 +69,75 @@ class CanonicalUrl extends AbstractHelper
             "U",
             "U"
         );
+     $plato=$this->plato($options['plato']);
         if (!isset($options['spaceChar'])) $options['spaceChar'] = '-';
         $st = str_replace($replace, $change, $str);
         $canonical = str_replace(" ", $options['spaceChar'], strtolower($st));
         if (isset($options['prefix']))
             $canonical = $options['prefix'] . $options['spaceChar'] . $canonical;
         if (isset($options['suffix']))
-            $canonical = $canonical . $options['spaceChar'] . $options['suffix'];
+            $canonical = $canonical . $options['spaceChar'] .$plato.'-'.$options['suffix'];
 
         return $canonical;
     }
+    
+    
+    public function plato($url,$options = null)
+    {
+        $pattern = '/[^a-zA-Z0-9]/u';
+        $str = preg_replace('/\s\s+/', ' ', preg_replace($pattern, ' ', $url));
+        $replace = array(
+            "á",
+            "à",
+            "é",
+            "è",
+            "í",
+            "ì",
+            "ó",
+            "ò",
+            "ú",
+            "ù",
+            "ñ",
+            "Ñ",
+            "Á",
+            "À",
+            "É",
+            "È",
+            "Í",
+            "Ì",
+            "Ó",
+            "Ò",
+            "Ú",
+            "Ù"
+        );
+        $change = array(
+            "a",
+            "a",
+            "e",
+            "e",
+            "i",
+            "i",
+            "o",
+            "o",
+            "u",
+            "u",
+            "n",
+            "N",
+            "A",
+            "A",
+            "E",
+            "E",
+            "I",
+            "I",
+            "O",
+            "O",
+            "U",
+            "U"
+        );  
+        if (!isset($options['spaceChar'])) $options['spaceChar'] = '-';
+        $st = str_replace($replace, $change, $str);
+        $canonical = str_replace(" ", $options['spaceChar'], strtolower($st));
+        return $canonical;
+    }
+    
 }

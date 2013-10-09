@@ -58,12 +58,12 @@
     <meta property="og:url"	content="<?php $url=(!$this->url)?$this->host('ruta'):$this->url; echo $url;?>" /> 
     <link	href="<?php echo $this->host('ruta')?>/img/favicon.ico?v<?php echo $this->host('version')?>"	rel="shortcut icon" type="image/x-icon" />
     <!--<script src="<?php echo $this->host('ruta')?>/js/head.load.min.js"></script>-->
-    <script	src="<?php echo $this->host('ruta')?>/js/modernizr.js?v<?php echo $this->host('version')?>"></script>
-    <script	src="<?php echo $this->host('ruta')?>/js/lib/jquery-1.8.3.min.js?v<?php echo $this->host('version')?>"></script>
-    <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/jquery.mockjax.js"></script>
-    <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/jquery.autocomplete.js"></script>
     <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css?v'.$this->host('version'))->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')?>
     <link href="<?php echo $this->host('ruta')?>/css/jquery-ui-auto.css" media="screen" rel="stylesheet" type="text/css">
+    <script	src="//cdn.jsdelivr.net/modernizr/2.6.2/modernizr.min.js"></script>
+    <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/jquery.mockjax.js"></script>
+    <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/jquery.autocomplete.js"></script>
   </head>
 
 <body class="lista-<?php echo $this->clase; ?>">

@@ -582,6 +582,13 @@ background: url(../../img/back-detalle.png) repeat;
   height: 23px;
   float: left;
 }
+#esconder2 .sub1{
+  margin-top: 0px;
+  width: 100%;
+  padding: 0.9em 0px;
+  height: 23px;
+  float: left;
+}
 .mistura_etiqueta{
   background: url(/img/bann/img-resultados-mis.png) no-repeat!important;
 }
@@ -2504,7 +2511,17 @@ p.ver_mistura a{
 #autocompletaLoad{
 
 }
-
+.jh{
+  background: none!important;
+  margin-top: 10px;
+}
+.jh h2{
+  margin-bottom: 0;
+}
+.jh h2 a{
+  color: #ff8400;
+  text-decoration: underline;
+}
 
 
 /* image replacement */
