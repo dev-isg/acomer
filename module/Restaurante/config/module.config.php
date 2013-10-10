@@ -28,7 +28,7 @@ return array(
                     'default' => array( //'default' => array( 
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    =>'/[:controller[/:action[/:in_id/:va_nombre]]]',
+                            'route'    =>'/[:controller[/:action[/:in_id]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',                          
