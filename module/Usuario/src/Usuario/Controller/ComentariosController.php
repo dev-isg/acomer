@@ -185,4 +185,8 @@ class ComentariosController extends AbstractActionController
            'puntaje' =>$this-> puntaje()
         );*/
     }
+ 
+    
+    
+    
 }

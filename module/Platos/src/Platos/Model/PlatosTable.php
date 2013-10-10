@@ -686,7 +686,21 @@ public function guardarplatoregistro($dataregistro) {
                 ->query("SELECT`ch_distrito` FROM ta_ubigeo WHERE ch_provincia ='lima'", $adapter::QUERY_MODE_EXECUTE);
         return $primer;
     }
-
+ public function comen ($id)
+         {
+      $adapter2=$this->tableGateway->getAdapter();
+        $promselect=$this->tableGateway->getAdapter()
+                ->query('SELECT SUM(ta_puntaje_in_id)AS SumaPuntaje ,COUNT(ta_comentario.in_id ) AS NumeroComentarios,
+                    ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS TotPuntaje
+                    FROM ta_comentario
+                    where  ta_comentario.ta_plato_in_id='.$id, $adapter2::QUERY_MODE_EXECUTE);
+                        $prom=$promselect->toArray();
+              $update = $this->tableGateway->getSql()->update()->table('ta_plato')
+                        ->set(array('Ta_puntaje_in_id'=>$prom[0]['TotPuntaje']))
+                        ->where(array('in_id'=>$id));
+                $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
+                $statementup->execute();
+           }
 }
 ?>
 

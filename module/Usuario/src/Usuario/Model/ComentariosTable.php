@@ -96,6 +96,9 @@ class ComentariosTable
                 $this->cromSolar($coment['Ta_plato_in_id'],'');        
     }
 
+                
+                
+                
      public function cromSolar($id,$caso=null) {//echo 'ddd';exit;
             $adapter = $this->tableGateway->getAdapter();
             $sql = new Sql($adapter);

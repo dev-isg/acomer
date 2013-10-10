@@ -850,7 +850,8 @@ class IndexController extends AbstractActionController {
           echo 'cron finalizado eliminar';exit;
         }
     }
-    
+       
+   
       public function cronsolarAction()
         {
         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
@@ -867,7 +868,9 @@ class IndexController extends AbstractActionController {
             $resul = $adapter->query($selectS, $adapter::QUERY_MODE_EXECUTE);
             $plato=$resul->toArray();
            foreach ($plato as $result)     
-            {$this->getPlatosTable()->cromSolr($result['in_id'],1); }
+            {$this->getPlatosTable()->cromSolr($result['in_id'],1); 
+             $this->getPlatosTable()->comen($result['in_id']);
+            }
            echo 'cron finalizado';exit;
         }  
  public function menu()
