@@ -4595,3 +4595,64 @@ makis ,
 La Kaleta , LIMA
 makis , 
 chicharrones , 
+chicharron , SAN BORJA
+La Vida Misma  , 
+mistura , 
+mistura , 
+chicharrones , 
+lomo saltado , 
+ceviche , 
+parrilla , 
+makis , 
+anticuchos , 
+pollo a la brasa , 
+mistura , 
+chicharrones , 
+lomo saltado , 
+ceviche , 
+parrilla , 
+makis , 
+SANKA , LIMA
+makis , 
+makis , 
+SANKA , LIMA
+SANKA , LIMA
+chicharron , LIMA
+chicharron , LIMA
+lima , LIMA
+SANKA , LIMA
+SANKA , LIMA
+SANKA , 
+sanka , LIMA
+sanka , LIMA
+sanka , LIMA
+sanka , LIMA
+sanka , LIMA
+sanka , LIMA
+sanka , LIMA
+sanka , LIMA
+ceviche , 
+makis , 
+anticuchos , 
+mistura , 
+chicharrones , 
+lomo saltado , 
+ceviche , 
+parrilla , 
+makis , 
+anticuchos , 
+pollo a la brasa , 
+chicharrones , 
+SANKA , LIMA
+ceviche , 
+pollo a la brasa , 
+Relleno Gourmet , LIMA
+pollo a la brasa , 
+pollo a la brasa , 
+SANKA , LIMA
+SANKA , LIMA
+SANKA , LIMA
+sanka , 
+pollo a la brasa , 
+anticuchos , 
+makis , 
