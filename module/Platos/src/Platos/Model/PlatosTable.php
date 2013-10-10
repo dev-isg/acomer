@@ -257,18 +257,16 @@ class PlatosTable {
             {$document->latitud = $plato[0]['latitud'];
             $document->longitud = $plato[0]['longitud'];}
             $document->departamento = $plato[0]['departamento'];
-            foreach ($tag as $resultado)
-            {$document->setMultiValue('tag',$resultado['tag']);  }
+            if(count($tag)>0)
+            { foreach ($tag as $resultado)
+            {$document->setMultiValue('tag',$resultado['tag']);}}
             $document->distrito = $plato[0]['distrito'];
             $document->va_imagen = $plato[0]['va_imagen'];
             $document->comentarios = $plato[0]['cantidad'];
             $document->restaurant_estado = $plato[0]['restaurant_estado'];
             $document->puntuacion = $plato[0]['Ta_puntaje_in_id']; 
             $solr->addDocument($document);
-            $solr->commit();
-            $solr->optimize();
-           
-         
+            $solr->commit(); 
         }
     }
 

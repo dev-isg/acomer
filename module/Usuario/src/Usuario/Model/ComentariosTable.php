@@ -149,9 +149,6 @@ class ComentariosTable
             $document->puntuacion = $plato[0]['Ta_puntaje_in_id']; 
             $solr->addDocument($document);
             $solr->commit();
-            $solr->optimize();
-           
-         
         }
     }
      public function estadoComentario($id,$estado){
