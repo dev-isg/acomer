@@ -69,7 +69,7 @@ class CanonicalUrl extends AbstractHelper
             "U",
             "U"
         );
-     $plato=$this->plato($options['plato']);
+      $plato=$this->plato($options['plato']);
         if (!isset($options['spaceChar'])) $options['spaceChar'] = '-';
         $st = str_replace($replace, $change, $str);
         $canonical = str_replace(" ", $options['spaceChar'], strtolower($st));
