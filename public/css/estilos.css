@@ -1569,6 +1569,9 @@ ul.servicios-desc{
 .list-desc-p .left-resultado{
   width: 100%;
 }
+#content-menu-list{
+  float: left;
+}
 ul.servicios-desc li{
   background: url(../img/phone.png) no-repeat left center;
   color: #7b7b7b;

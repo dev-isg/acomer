@@ -256,6 +256,7 @@ return array(
             'host' => 'Application\View\Helper\Host',
             'canonicalUrl' => 'Application\View\Helper\CanonicalUrl',
              'canonical' => 'Application\View\Helper\Canonical',
+            'canonical2' => 'Application\View\Helper\Canonical2',
         )
     )
 

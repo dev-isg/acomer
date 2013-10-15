@@ -64,6 +64,8 @@
     <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/jquery.mockjax.js"></script>
     <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/infinity-scroll/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/infinity-scroll/jquery.infinitescroll.min.js"></script>
   </head>
 
 <body class="lista-<?php echo $this->clase; ?>">
@@ -314,15 +316,15 @@
                   if($valor[0]=='restaurante:')
                    {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
                    elseif ($valor[0]=='name:')   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
-                elseif ($valor[0]=='tag:') {echo $valor[1];}
+                   elseif ($valor[0]=='tag:') {echo $valor[1];}
                    else{echo $_GET['q'];};}
-                  else{      $valor = explode(" ",$_COOKIE['q']);
+                   else{ $valor = explode(" ",$_COOKIE['q']);
                             if($valor[0]=='restaurante:')
                      {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
                      elseif ($valor[0]=='name:')   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
                      elseif ($valor[0]=='tag:') {echo $valor[1];}
-                     else{echo $_COOKIE['q'];};}
-                      ?>"
+                     else{echo $_COOKIE['q'];};
+                     }?>"
 								placeholder="Ingrese el plato" required="required" /> <em>Ejm:
 								lomo saltado</em>
 						</p>

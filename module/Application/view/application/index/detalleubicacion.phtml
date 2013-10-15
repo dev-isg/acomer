@@ -47,15 +47,16 @@ if((count($this->general)>0))
            </div>-->
           <?php
           echo $this->form()->closeTag(); ?>
-        </div>    
+        </div>   
+        <div id="content-menu-list"> 
         <?php foreach ($this->general as $doc) : ?>
            
 <?php 
-           
-           if($doc->en_destaque=='si'){   ?>
-           <div class="plato_h destacado-plato">
+        
+           if($doc->en_destaque=='si'){  ?>
+           <div class="plato_h plato_h_list destacado-plato">
            <?php  } else { ?>
-           <div class="plato_h">
+           <div class="plato_h plato_h_list">
             <?php  } ?>
                    <input type="hidden" name="pun" data-id="<?php echo htmlspecialchars($doc->id, ENT_QUOTES, 'utf-8'); ?>"value="<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>">
                    <div class="lateral" >                    
@@ -93,45 +94,37 @@ if((count($this->general)>0))
                     </div>
 
                 </div>
-                  <?php endforeach; ?> 
-            <div id="pagina">
-                    <div class="pagination ">
-                       <ul>
-         <?php if($this->total){
-             $pagina = $_GET['page'];
-           if (!$pagina) {  echo '';  
-           }    else{ if($pagina-1>=0 ){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina-1?>" >«Anterior</a></li> <?php } }
-           if ($this->total % 10 == 0)
-          {{for($i=0;$i<=$this->total-1;$i+=10)
-             { ?>  <li <?php if(((int)($i/10))==$_GET['page']){echo 'class="active"';} ?>>
-                 <a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo (int)($i/10)?>" ><?php echo ((int)($i/10)+1)?></a></li><?php  }  }        }
-             else{{for($i=0;$i<=$this->total;$i+=10)
-             { ?>  <li <?php if(((int)($i/10))==$_GET['page']){echo 'class="active"';} ?>><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo (int)($i/10)?>" ><?php echo ((int)($i/10)+1)?></a></li><?php  } 
-             } }
-            if ($this->total % 10 == 0){ 
-             if (!$pagina and $this->total-1>10) { 
-             $pagina =0;  
-            if($pagina+1<=$this->total-1){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
-         }   elseif($pagina and $this->total-1>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10-1)){?> <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> <?php }     
-        }else{echo '';}
-            }
-            else{ if (!$pagina and $this->total>10) {
-              $pagina =0;  
-              if($pagina+1<=$this->total){?> 
-                <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plat?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> 
-              <?php }
-              } elseif($pagina and $this->total>10){
-                $pagina = $_GET['page'];
-                if($pagina+1<=(int)($this->total/10)){?>
-                  <li ><a href="buscar-por-distrito?distrito=<?php echo $this->distrito ?>&q=<?php echo $this->plato?>&page=<?php echo $pagina+1;?>" >Siguiente»</a></li> 
-                <?php }
-                }else{echo '';}
-              }
-            }?> 
-          </ul>
-        </div> 
-      </div> 
-      </div>            
+                
+          <?php endforeach; ?>  
+    </div>  
+    <div class="pagination" role="navigation" style="display:none;">
+                    
+       <?php if($this->total){
+           $pagina = $_GET['page'];
+         if (!$pagina) {  echo '';  
+         }    else{ if($pagina-1>=0 ){?> <?php } }
+         if ($this->total % 10 == 0)
+        {{for($i=0;$i<=$this->total-1;$i+=10)
+           { if((int)(($i/10)+1)!=1) {?>  
+               <a href="buscar-por-distrito?distrito=<?php echo $this->canonical2($this->distrito) ?>&q=<?php echo  $this->canonical2($this->plat)?>&page=<?php echo (int)(($i/10)+1)?>" ><?php echo ((int)($i/10)+1)?></a><?php
+            
+               } else {?> <span>1</span> <?php }} }}
+           else{{for($i=0;$i<=$this->total;$i+=10)
+           { if((int)(($i/10)+1)!=1) {?> 
+               <a href="buscar-por-distrito?distrito=<?php echo $this->canonical2($this->distrito)?>&q=<?php echo  $this->canonical2($this->plat)?>&page=<?php echo (int)(($i/10)+1)?>" ><?php echo ((int)($i/10)+1)?></a><?php
+            }else {?> <span>1</span> <?php } }} }
+          if ($this->total % 10 == 1){ 
+           if (!$pagina and $this->total-1>10) { 
+           $pagina =1;  
+          if($pagina+1<=$this->total-1){?> <?php }     
+       }   elseif($pagina and $this->total-1>10){ $pagina = $_GET['page'];   if($pagina+1<=(int)($this->total/10-1)){?> <?php }     
+      }else{echo '';}
+          }
+ 
+          }?> 
+       
+    </div>
+
       <div id="mapa-buscador" style="display:none;">
         <div class="regresar regr">
           <div class="return">
@@ -141,7 +134,14 @@ if((count($this->general)>0))
      </div>
   <?php } else {?>
   <div class="descrip-product">
-    <div id="error-mensaje">       
+    <div class="content-menu-home" style="position:fixed;top:0;">
+      <ul>
+        <?php foreach ($this->menus  as $menus) : ?>
+          <li><a href="<?php echo $this->host('ruta')?><?php echo $menus['va_url'] ?>"><?php echo $menus['va_nombre'] ?></a></li>          
+        <?php endforeach; ?>
+      </ul>
+    </div>
+    <div id="error-mensaje" style="margin-top:55px;">       
       <p class="mensaje">"Lamentamos no haber encontrado lo que estabas buscando pero tenemos muchas mas opciones para ti."</p>
       <p class="mensaje2">También tenemos una opción para que nos escribas si deseas registrar un nuevo plato.</p> 
     </div>
@@ -221,6 +221,17 @@ if((count($this->general)>0))
 <?php
 }                   
 ?> 
+
+<script type="text/javascript">
+  $(function(){
+    $('#content-menu-list').infinitescroll({
+      navSelector  : ".pagination",
+      nextSelector : ".pagination a",
+      itemSelector : ".plato_h_list"
+    });
+  });
+</script>
+
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>  
 <script src="<?php echo $this->basePath()?>/js/vendor/gmaps.min.js"></script> 
   

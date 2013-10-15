@@ -252,6 +252,13 @@ padding: 10px 0 0;
 color: white;
 font-size: 0.9em;
 }
+.over-promocion{
+  height: 200px;
+  overflow-y:scroll;
+}
+.over-promocion input{
+  margin-right: 5px;
+}
 
 @media only screen and (max-width: 767px){
 

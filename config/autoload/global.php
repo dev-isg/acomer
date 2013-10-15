@@ -14,23 +14,23 @@ return array(
         'driver' => 'Pdo',
         'username' => 'root',
         'password' => '',
-        'dsn' => 'mysql:dbname=listadelsabor2;host=localhost',
+        'dsn' => 'mysql:dbname=listadelsabor3;host=localhost',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         )
     ),
     'solr' => array(
-        'host' => '192.168.1.34',
+        'host' => '192.168.1.36',
         'port' => '8983',
         'folder' => '/solr'
     ),
    
     'host' => array(
-        'base' => 'http://192.168.1.34:8080',
-        'static' => 'http://192.168.1.34:8080',
-        'images' => 'http://192.168.1.34:8080/imagenes',
-        'img'=>'http://192.168.1.34:8080/img',
-        'ruta' => 'http://192.168.1.34:8080',
+        'base' => 'http://192.168.1.36:8080',
+        'static' => 'http://192.168.1.36:8080',
+        'images' => 'http://192.168.1.36:8080/imagenes',
+        'img'=>'http://192.168.1.36:8080/img',
+        'ruta' => 'http://192.168.1.36:8080',
         'version'=>1,
     ),
 

@@ -256,7 +256,7 @@ public function __construct()
                 $distrits = '"'.$distrito.'"';
                 if($paginas=='')
                  {$start = 0;}
-               else{$start=$paginas*10;}
+                  else{$start=($paginas-1)*10;}
                 $resultados = false;
                 $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
                 $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
@@ -344,7 +344,7 @@ public function __construct()
                 $limite = 10;
                 if($paginas=='')
                  {$start = 0;}
-               else{$start=$paginas*10;}
+               else{$start=($paginas-1)*10;}
                 $resultados = false;
                 $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
                 $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
@@ -430,7 +430,7 @@ public function __construct()
                 $limite = 10;
                 if($paginas=='')
                  {$start = 0;}
-               else{$start=$paginas*10;}
+                  else{$start=($paginas-1)*10;}
                 $resultados = false;
                 $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
                 $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
@@ -707,7 +707,7 @@ public function __construct()
        {$limite = 10;
                 if($paginas=='')
                  {$start = 0;}
-               else{$start=$paginas*10;}
+               else{$start=($paginas-1)*10;}
         $resultados = false;
       $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
        $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
@@ -737,7 +737,7 @@ public function __construct()
          $limite = 10;
                 if($paginas=='')
                  {$start = 0;}
-               else{$start=$paginas*10;}
+                  else{$start=($paginas-1)*10;}
         $resultados = false;
        $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
        $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
