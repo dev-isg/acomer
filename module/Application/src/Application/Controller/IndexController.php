@@ -545,9 +545,11 @@ public function __construct()
                     $inicio = $start+1;    
                   }  
         if ($total <= 10) {
-             $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
+           //  $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
+             $mostrar =  $total . ' resultados';
         } else {
-            $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
+          //  $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
+            $mostrar =  $total . ' resultados';
         }
         $arrpl=array();
         $arrest=array();
@@ -801,9 +803,11 @@ public function __construct()
                     $inicio = $start+1;    
                   }  
         if ($total <= 10) {
-             $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
+             //$mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
+             $mostrar = $total . ' resultados';
         } else {
-            $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
+           // $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
+            $mostrar = $total . ' resultados';
         }
         $listatot = $this->getConfigTable()->cantComentxPlato();
         $listatot = $listatot->toArray();
