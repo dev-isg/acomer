@@ -2,9 +2,9 @@
 namespace Restaurante\Form;
 
 use Zend\Form\Form;
-class MenuForm extends Form
+class TagForm extends Form
 {
-    public function __construct($name = null)
+     public function __construct($name = null)
     {
         // we want to ignore the name passed
         parent::__construct('menu');
@@ -23,43 +23,18 @@ class MenuForm extends Form
             'type' => 'Text',
           
             'options' => array(
-                'label' => 'Nombre de la pestania :',          
+                'label' => 'Nombre del Tag :',          
             ),
             'attributes' => array(               
                 'class' => 'span10  ',
                 'id'   => 'va_nombre',
-                'placeholder'=>'Ingrese el nombre de la pestania'
+                'placeholder'=>'Ingrese el nombre del Tag'
             ),
         ));
         
+    
+         
          $this->add(array(
-            'name' => 'in_orden',
-            'type' => 'Text',
-          
-            'options' => array(
-                'label' => 'Ingrese el orden a mostrar :',          
-            ),
-            'attributes' => array(               
-                'class' => 'span3  ',
-                'id'   => 'in_orden',
-                'placeholder'=>'Orden'
-            ),
-        ));
-      $this->add(array(
-            'name' => 'va_url',
-            'type' => 'Text',
-          
-            'options' => array(
-                'label' => 'Ruta de la Url :',          
-            ),
-            'attributes' => array(               
-                'class' => 'span14 ',
-                'id'   => 'va_nombre',
-                'placeholder'=>'Ingrese la url'
-            ),
-        ));
-      
-      $this->add(array(
             'name' => 'va_imagen',
             'type' => 'File',          
              'validators' => array(
@@ -83,6 +58,8 @@ class MenuForm extends Form
                 'label' => 'Agregar Imagen : ',
             ),
         ));
+         
+        
        
         $this->add(array(
             'name' => 'submit',

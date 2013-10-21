@@ -47,37 +47,27 @@ class ComentariosTable
          
            $cliente=array(
                     'va_nombre_cliente'=>$coment['va_nombre'],
-                    'va_email'=>$coment['va_email'],         
-                );
-           $insert = $this->tableGateway->getSql()->insert()->into('ta_cliente')
+                    'va_email'=>$coment['va_email'],);
+           
+            $insert = $this->tableGateway->getSql()->insert()->into('ta_cliente')
                     ->values($cliente);
             $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
             
             $statement->execute();    
-//            $selectString2 = $this->tableGateway->getSql()->getSqlStringForSqlObject($insert);
-//            $adapter=$this->tableGateway->getAdapter();
-//            $result = $adapter->query($selectString2, $adapter::QUERY_MODE_EXECUTE);
-            $idcliente=$this->tableGateway->getAdapter()->getDriver()->getLastGeneratedValue();//$this->tableGateway->getLastInsertValue();
-//          var_dump($idcliente);Exit;
-            
-            
-//           date_default_timezone_set('UTC');
+            $idcliente=$this->tableGateway->getAdapter()->getDriver()->getLastGeneratedValue();
             $comentario = array(
             'tx_descripcion' => $coment['tx_descripcion'],
             'Ta_plato_in_id' => $coment['Ta_plato_in_id'],
-            'Ta_cliente_in_id' => $idcliente,//$coment->Ta_cliente_in_id,
+            'Ta_cliente_in_id' => $idcliente,
             'Ta_puntaje_in_id' => $coment['Ta_puntaje_in_id'],
-                'Ta_plato_in_id'=>$coment['Ta_plato_in_id'],
-                'da_fecha'=>  $fecha = date("Y-m-d h:m:s")//date('Y-m-dTH:i:s.uZ')//'2013-12-12'
-                );
-           
+                'da_fecha'=>  $fecha = date("Y-m-d h:m:s")
+                ); 
          $id = (int) $coment['in_id'];
             if ($id == 0) {            
            $insertcoment= $this->tableGateway->getSql()->insert()->into('ta_comentario')
                     ->values($comentario);
             $statement2 = $this->tableGateway->getSql()->prepareStatementForSqlObject($insertcoment);
             $statement2->execute();  
-//                $cookie->id=$coment['Ta_plato_in_id'];
              }
              
                     $adapter2=$this->tableGateway->getAdapter();
@@ -93,12 +83,11 @@ class ComentariosTable
                         ->where(array('ta_plato.in_id'=>$coment['Ta_plato_in_id']));//$prom[0]['in_id']
                 $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
                 $statementup->execute();
-                $this->cromSolar($coment['Ta_plato_in_id'],'');        
+                $this->cromSolar($coment['Ta_plato_in_id'],'');  
+    
+             
     }
-
-                
-                
-                
+       
      public function cromSolar($id,$caso=null) {//echo 'ddd';exit;
             $adapter = $this->tableGateway->getAdapter();
             $sql = new Sql($adapter);
@@ -238,5 +227,6 @@ class ComentariosTable
                 $statementup->execute();
                
          }
-    
+         
+
 }

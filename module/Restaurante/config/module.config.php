@@ -90,6 +90,17 @@ return array(
                     
                 )
             ),
+             'editartag' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/editar-tag[/:id]',
+                    'defaults' => array(
+                        'controller' => 'Restaurante\Controller\Index',
+                        'action' => 'editartag'
+                    )
+                    
+                )
+            ),
         ),
     ),
     'view_manager' => array(

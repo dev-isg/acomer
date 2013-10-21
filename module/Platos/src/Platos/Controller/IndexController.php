@@ -175,7 +175,7 @@ class IndexController extends AbstractActionController {
 
                    
                    
-                       $destaque = imagecreatetruecolor($destacadox, $destacadoy);
+                      $destaque = imagecreatetruecolor($destacadox, $destacadoy);
                       $generale = imagecreatetruecolor($generalx, $generaly);
                       // imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
                         imagecopyresized($destaque, $viejaimagen, 0, 0, 0, 0, $destacadox, $destacadoy,$ancho, $alto);
@@ -672,20 +672,43 @@ class IndexController extends AbstractActionController {
                   
              return $resultados->response->docs;     
     }
-    public function verplatosAction() {
-
-        $view = new ViewModel();
+    public function verplatosAction() 
+      { $view = new ViewModel();
+                if($_GET['callback'] )
+                {  
+                    header('Content-type: application/x-javascript');
+                    header("Status: 200");
+                       $idplato = (int) $this->params()->fromQuery('id');    
+                       $nombre = $this->params()->fromQuery('va_nombre');
+                       $email = $this->params()->fromQuery('va_email');
+                       $comentario = $this->params()->fromQuery('tx_descripcion');
+                       $puntaje  = (int) $this->params()->fromQuery('Ta_puntaje_in_id');
+                       $validar = explode('http://', $comentario);
+                       if(count($validar)==2)
+                       {$result = array('resultado'=>false);
+                                echo "jsonpCallback(".json_encode($result).")"; }
+                       else{$comentario =$comentario;
+                       $envia = array('Ta_plato_in_id'=> $idplato,
+                                       'va_nombre'=>$nombre,
+                                       'va_email'=>$email,
+                                       'tx_descripcion'=>$comentario,
+                                       'Ta_puntaje_in_id'=>$puntaje);
+                         $this->getComentariosTable()->agregarComentario($envia);
+                                $result = array('resultado'=>true);
+                                echo "jsonpCallback(".json_encode($result).")"; }
+                                exit();
+                                $view->setTerminal(true);
+                                return $view;     
+               }
         $datos =$this->params()->fromRoute();  
         $urlerror =  $datos['nombre'];
         $nombre = explode('-', $datos['nombre']); 
-        
         $id = array_pop($nombre);
-       // var_dump($id);exit;
         if(!$this->getPlatosTable()->getPlato($id)){
             $this->redirect()->toUrl('/');
         }       
           $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray(); 
-        
+
           $texto = 'restaurante:"'.$listarecomendacion[0]['restaurant_nombre'].'"'; 
                 $limit = 10;
                 $palabraBuscar = isset($texto) ? $texto : false;
@@ -754,11 +777,11 @@ class IndexController extends AbstractActionController {
                 $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
                 $datos['va_nombre'] = htmlspecialchars($datos['va_nombre']);
                 $datos['va_email'] = htmlspecialchars($datos['va_email']);
-               $validar = explode('http://', $datos['tx_descripcion']);
-               if(count($validar)==2){
-               return $this->redirect()->toUrl('/plato/'.$urlerror.'?m=1');}
-               else {
-               $form->setData($datos);
+                $validar = explode('http://', $datos['tx_descripcion']);
+                if(count($validar)==2){
+                return $this->redirect()->toUrl('/plato/'.$urlerror.'?m=1');}
+                else {
+                $form->setData($datos);
                 if ($form->isValid()) {
                     setcookie('va_nombre',$datos['va_nombre']);
                     setcookie('va_email',$datos['va_email']);
@@ -773,7 +796,6 @@ class IndexController extends AbstractActionController {
                 }
             }
         } 
-        
         $this->layout()->clase = 'Detalle';
         $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
@@ -793,7 +815,7 @@ class IndexController extends AbstractActionController {
        $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id,
-             'listatitle'=>$listatitle, 'masplatos' => $resultados
+            'listatitle'=>$listatitle, 'masplatos' => $resultados
              ,'listades' => $consulta,'menus'=>$menu));
         
         return $view;

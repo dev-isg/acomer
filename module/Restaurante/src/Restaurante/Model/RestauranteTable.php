@@ -239,11 +239,11 @@ class RestauranteTable
     }
 
     
-    public function ubigeototal($id)
+    public function ubigeototal()
      {
       $datos=$this->tableGateway->getAdapter()->query("
     SELECT `ta_ubigeo`.`ch_distrito` AS `ch_distrito`, `ta_ubigeo`.`ch_provincia` AS `ch_provincia`, `ta_ubigeo`.`ch_departamento` AS `ch_departamento` FROM `ta_ubigeo` LEFT JOIN `ta_local` ON `ta_ubigeo`.`in_id` = `ta_local`.`ta_ubigeo_in_id`
-     WHERE ta_local.ta_ubigeo_in_id!='' AND `ta_ubigeo`.`ch_distrito` LIKE '%$id%' OR `ta_ubigeo`.`ch_distrito`='LIMA' GROUP BY `ta_ubigeo`.`ch_distrito`")->execute();
+     WHERE ta_local.ta_ubigeo_in_id!=''  OR `ta_ubigeo`.`ch_distrito`='LIMA' GROUP BY `ta_ubigeo`.`ch_distrito`")->execute();
                 $returnArray=array();
         foreach ($datos as $result) {
             if($result['ch_distrito']=='LIMA')
@@ -269,14 +269,17 @@ class RestauranteTable
       public function medio($id){
         
         $datos=$this->tableGateway->getAdapter()->query("SELECT `f`.*, `b`.`va_nombre` AS `va_nombre` FROM `ta_restaurante_has_ta_medio_pago` AS `f` 
-INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHERE `f`.`Ta_restaurante_in_id` = $id ")->execute();
+ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHERE `f`.`Ta_restaurante_in_id` = $id ")->execute();
                 $returnArray=array();
         foreach ($datos as $result) {
             $returnArray[] = $result;
         }
+        
         return  $returnArray;
         
     }
+    
+
     
        public function ubigeototal2($id)
      {
@@ -286,13 +289,14 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
          
         return  $datos;  
   }
-    public function guardarMenu($menu)
+    public function guardarMenu($menu,$imagen)
     {
          $data = array(
             'va_nombre' => $menu->va_nombre, 
             'va_url' => $menu->va_url,
                'in_orden' => $menu->in_orden,
-             'en_estado'=>'activo'
+             'va_imagen'=>$imagen,
+             'en_estado'=>'activo'   
         );
               $adapter = $this->tableGateway->getAdapter();
               $sql = new Sql($adapter);
@@ -321,7 +325,21 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
             $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
     return $adapter;
     }
-    
+    public function guardarTag($tag,$imagen)
+    {
+         $data = array(
+            'va_nombre' => $tag->va_nombre, 
+            'va_imagen' => $imagen,
+        );
+              $adapter = $this->tableGateway->getAdapter();
+              $sql = new Sql($adapter);
+              $selecttot = $sql->insert()
+                      ->into('ta_tag')
+                      ->values($data);
+              $selectString = $sql->getSqlStringForSqlObject($selecttot);
+            $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+    return $adapter;
+    }
      public function estadomenu($id,$estado){
                 $data = array(
             'en_estado' => $estado );    
@@ -353,11 +371,12 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
                         return $result;
     } 
 
-   public function editaMenu($menu)
+   public function editaMenu($menu,$imagen)
     {
        $data = array(
             'va_nombre' => $menu->va_nombre, 
             'va_url' => $menu->va_url,
+           'va_imagen'=>$imagen,
            'in_orden' => $menu->in_orden  );
         $update = $this->tableGateway->getSql()->update()->table('ta_menu')
                         ->set($data)
@@ -386,6 +405,7 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
             $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);     
             return $result;
     }
+     
       public function editaBanner($banner,$imagen)
     {
        $data = array(
@@ -396,6 +416,17 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
         $update = $this->tableGateway->getSql()->update()->table('ta_banner')
                         ->set($data)
                         ->where(array('in_id'=>$banner->in_id));//$prom[0]['in_id']
+                $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
+                $statementup->execute();
+    }
+      public function editartag($tag,$imagen)
+    {
+       $data = array(
+            'va_nombre' => $tag->va_nombre, 
+            'va_imagen' => $imagen );
+        $update = $this->tableGateway->getSql()->update()->table('ta_tag')
+                        ->set($data)
+                        ->where(array('in_id'=>$tag->in_id));//$prom[0]['in_id']
                 $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
                 $statementup->execute();
     }
@@ -431,6 +462,21 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
              $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);
              return $result;
     }
+    
+    public function comentariosPlatos($idplato) {
+         $adapter = $this->tableGateway->getAdapter();
+        $sql = new Sql($adapter);
+        $selecttot = $sql->select()->columns(array())
+                ->from(array('t' => 'ta_plato'))
+                ->join(array('tc' => 'ta_comentario'), 'tc.ta_plato_in_id=t.in_id', array('tx_descripcion', 'ta_puntaje_in_id'), 'left')
+                ->join(array('tcli' => 'ta_cliente'), 'tcli.in_id=tc.ta_cliente_in_id', array('va_nombre_cliente', 'va_email'), 'left')
+                ->where(array('t.in_id' => $idplato,'tc.en_estado'=>'aprobado'))
+                ->order('tc.in_id DESC');
+        $selectString = $sql->getSqlStringForSqlObject($selecttot);
+        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        return $results->toArray();
+    }
+      
      public function estadoRegistro($id,$estado){
             $data = array(
             'en_estado' => $estado );    
@@ -449,6 +495,25 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
              $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
              $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);
              return $result->buffer();
+    }
+     public function listartag()
+    {    
+            $adapter=$this->tableGateway->getAdapter();
+             $sql = new Sql($adapter);      
+             $idubigeo=$sql->select()->from('ta_tag');
+             $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
+             $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);
+             return $result->buffer();
+    }
+     public function buscarTag($id)
+    {
+      $adapter=$this->tableGateway->getAdapter();
+             $sql = new Sql($adapter);      
+          $idubigeo=$sql->select()->from('ta_tag')
+                 ->where(array('in_id'=>$id));
+          $selectString0 = $this->tableGateway->getSql()->getSqlStringForSqlObject($idubigeo);
+            $result = $adapter->query($selectString0, $adapter::QUERY_MODE_EXECUTE);     
+            return $result;
     }
     
          public function guardarRestauranteRegistro($restaurante,$platos,$tipoplato)
@@ -566,6 +631,57 @@ INNER JOIN `ta_medio_pago` AS `b` ON `f`.`Ta_medio_pago_in_id` = `b`.`in_id` WHE
                         $result = $adapter->query($selectStri, $adapter::QUERY_MODE_EXECUTE); 
                         return $result; 
                }
+               
+               
+      public function menusMovil()
+       {
+             $datos=$this->tableGateway->getAdapter()
+                     ->query("SELECT va_nombre,va_imagen,va_url  FROM `ta_menu` WHERE in_id!=10 AND en_estado=1 ORDER BY in_orden ASC ")
+                     ->execute();
+             $returnArray=array();
+             foreach ($datos as $result) 
+              {$returnArray[] = $result;}
+               return  $returnArray;
+       }
+    
+      public function comidasMovil()
+        {
+          $datos=$this->tableGateway->getAdapter()
+               ->query("SELECT tag.in_id AS id_tag,tag.va_imagen AS imagen,COUNT(ttag.ta_plato_in_id) AS NumeroResultados ,tag.va_nombre AS nombre_tag
+                FROM ta_plato
+                LEFT JOIN `ta_plato_has_ta_tag` AS `ttag` ON `ta_plato`.`in_id` = `ttag`.`ta_plato_in_id`
+                LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id`
+                LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
+                LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
+                LEFT JOIN `ta_tag` AS `tag` ON `tag`.`in_id` = `ttag`.`ta_tag_in_id` WHERE  ta_plato.en_estado=1 AND tr.en_estado=1  AND tag.va_nombre IS NOT NULL  
+                 GROUP BY tag.in_id ORDER BY tag.va_nombre ASC")
+                 ->execute();
+                 $returnArray=array();
+                  foreach ($datos as $result)
+                  {$returnArray[] = $result;}
+                  return  $returnArray;    
+         }
+        
+     public function platosMovil($id)
+       {
+          $datos=$this->tableGateway->getAdapter()
+                ->query("SELECT ta_plato.*,ta_plato.Ta_tipo_plato_in_id AS Comentarios,tr.va_nombre AS restaurant_nombre ,COUNT(ta_comentario.in_id ) AS NumeroComentarios
+                ,tu.ch_distrito AS Distrito,tu.ch_departamento AS Departamento,tl.va_telefono AS telefono,tl.va_direccion AS direccion
+                FROM ta_plato
+                LEFT JOIN  ta_comentario ON ta_plato.in_id = ta_comentario.ta_plato_in_id
+                LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id`
+                LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id` 
+                LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
+                LEFT JOIN `ta_ubigeo` AS `tu` ON `tu`.`in_id` = `tl`.`ta_ubigeo_in_id`
+                LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
+                WHERE  ta_plato.en_estado=1  AND tr.va_nombre IS NOT NULL  AND ta_plato.in_id=$id AND tr.en_estado=1
+                GROUP BY in_id  ")
+                ->execute();
+                $returnArray=array();
+                foreach ($datos as $result) 
+                {$returnArray[] = $result; }
+              return  $returnArray;
+      }
     
 
 }

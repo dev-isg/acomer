@@ -17,7 +17,7 @@ if((count($this->general)>0))
         </ul>
       </div>
 
-        <?php if($this->plato=='mistura') {?>
+        <?php if(ucwords($this->plato)=='mistura' or ucwords($this->plato)=='Mistura') {?>
         <div class="sub mistura_etiqueta" style="margin-top:30px;">
           <span style="padding-left: 10px;color:white;font-weight: bold;"><?php echo  ucwords($this->plato).' 2013'; ?></span>
         </div> 
@@ -51,8 +51,7 @@ if((count($this->general)>0))
         <div id="content-menu-list"> 
         <?php foreach ($this->general as $doc) : ?>
            
-<?php 
-        
+        <?php 
            if($doc->en_destaque=='si'){  ?>
            <div class="plato_h plato_h_list destacado-plato">
            <?php  } else { ?>
@@ -96,7 +95,8 @@ if((count($this->general)>0))
                 </div>
                 
           <?php endforeach; ?>  
-    </div>  
+    </div>
+  </div> 
     <div class="pagination" role="navigation" style="display:none;">
                     
        <?php if($this->total){

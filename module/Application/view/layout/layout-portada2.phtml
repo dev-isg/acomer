@@ -109,17 +109,17 @@
     if ($detect1->isAndroidOS()) {
         ?>
         <style>
-        html. body{
+        html.body{
           position: relative;
         }
         .content-menu-home{
           width: 100%!important;
         }
           .content-sidebar{
-            top: 0%;
+            /*top: 0%;
             bottom: 100%;
             height: 100%!important;
-            position: absolute!important;
+            position: absolute!important;*/
           }
           .title-home-listado h1 {
           	margin: 0 !important;
@@ -166,7 +166,7 @@
       <?php
     require_once './vendor/Classes/Mobile_Detect.php';
     $detect3 = new Mobile_Detect();
-    if ($detect3->isTablet()) {
+    if ($detect3->isTablet()){
         ?>
         <div class="content-sidebar">
           <div class="contenido-busqueda">
@@ -257,7 +257,6 @@
             </div>
             </div><!--Fin del sidebar-->
         </div>
-
       <?php }else{?>
       <div class="publi_der">
         <script type="text/javascript"><!--
