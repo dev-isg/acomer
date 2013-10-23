@@ -47,16 +47,7 @@ class ClientesTable
         return $resultSet->current();
     }
     
-     public function usuario1($correo)
-    {
-        $adapter = $this->tableGateway->getAdapter();
-        $sql = new Sql($adapter);
-        $selecttot = $sql->select()->from('ta_cliente')
-                ->where(array('va_email'=>$correo));
-        $selectString = $sql->getSqlStringForSqlObject($selecttot);
-        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-        return $resultSet->toArray();
-    }
+    
      public function cambiarestado($id)
     {
         $adapter = $this->tableGateway->getAdapter();
@@ -113,12 +104,22 @@ class ClientesTable
     }
     
     
-     public function usuariocorreo($idface)
+//     public function usuariocorreo($idface)
+//    {
+//        $adapter = $this->tableGateway->getAdapter();
+//        $sql = new Sql($adapter);
+//        $selecttot = $sql->select()->from('ta_cliente')
+//                ->where(array('id_facebook'=>$idface));
+//        $selectString = $sql->getSqlStringForSqlObject($selecttot);
+//        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//        return $resultSet->toArray();
+//    }
+     public function usuario1($correo)
     {
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
         $selecttot = $sql->select()->from('ta_cliente')
-                ->where(array('va_email'=>$idface));
+                ->where(array('va_email'=>$correo));
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet->toArray();
