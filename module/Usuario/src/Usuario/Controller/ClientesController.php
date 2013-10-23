@@ -585,13 +585,10 @@ public function getAuthService() {
                          $logoutUrl = $facebook->getLogoutUrl();
                          $id_facebook = $user_profile['id'];
                          $name = $user_profile['name'];
-                         $link = $user_profile['link'];
+                      
                          $email = $user_profile['email'];
                          $naitik = $facebook->api('/naitik');
-                          $generoface = $user_profile['gender'];
-                         if($generoface=='male')
-                          {$genero=='masculino';}
-                     else{$genero=='femenino';}
+                          
                        if($user_profile==''){}
                        else
                         { $id_face=$this->getClientesTable()->usuario1($email);  
