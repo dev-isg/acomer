@@ -94,6 +94,7 @@ public function __construct()
         $this->layout()->clase = 'Home';
         $menus = $this->menu();
         $banner = $this->banner();
+        var_dump($user);exit;
         $view->setVariables(array(
             'promociones'=>$paginator,
             'clase' => 'Home',
