@@ -597,17 +597,17 @@ public function getAuthService() {
              catch (FacebookApiException $e) {
                            error_log($e);
                            $user = null; } }
-                       if ($user) {
+            if ($user) {
                          $logoutUrl = $facebook->getLogoutUrl();
-                       
                          $id_facebook = $user_profile['id'];
                          $name = $user_profile['name'];
-                           var_dump($name);exit;
                          $email = $user_profile['email'];
                          $naitik = $facebook->api('/naitik');
-                       if($user_profile==''){}
-                       else
-                        { $id_face=$this->getClientesTable()->usuariocorreo($email);  
+//                       if($user_profile==''){}
+//                       else
+//                        {   
+                       var_dump($email);exit;
+                        $id_face=$this->getClientesTable()->usuariocorreo($email);  
                          if(count($id_face)>0)
                          {   $correo = $id_face[0]['va_email'];
                          if($id_face[0]['id_facebook']=='')  
@@ -620,7 +620,7 @@ public function getAuthService() {
                               $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
                               AuthController::sessionfacebook($email,$id_facebook); }
                            //  return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
-                                 }
+                              //   }
                              
                           //  return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');  
                              } 
