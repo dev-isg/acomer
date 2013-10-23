@@ -588,7 +588,7 @@ public function getAuthService() {
                          $name = $user_profile['name'];
                          $email = $user_profile['email'];
                          //$naitik = $facebook->api('/naitik');   
-                         var_dump($email);exit;
+                        // var_dump($email);exit;
                          $id_face=$this->getClientesTable()->usuario1($email); 
                          if(count($id_face)>0)
                          {   $correo = $id_face[0]['va_email'];
