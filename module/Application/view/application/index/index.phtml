@@ -20,6 +20,7 @@
 
         </ul>
           <?php  }else {?><ul>
+          <li><?php echo 'Hola '.$this->session->va_nombre_cliente  ?></li>
           <li><a href="auth//logout" role="button" data-toggle="modal">Salir</a></li>
         </ul><?php  }?>
       </div>
@@ -179,19 +180,19 @@
        <?php }  ?>  
        
       </div>
-      <div class="span6">
+      <div class="span6 decs-f">
         <p>Ingresa los siguientes datos</p>
-        <form class="form-login" action="">
+        <form class="form-login" method="post" id="form-login" action="auth//authenticate">
           <fieldset>
             <div class="form-group">
               <span class="input-icon">
-                <input type="text" class="form-control" name="username" placeholder="Username">
+                <input type="text" class="form-control" name="va_email" placeholder="Correo electronico">
                 <i class="icon-user"></i> 
               </span>
             </div>
             <div class="form-group">
               <span class="input-icon">
-                <input type="password" class="form-control password" name="password" placeholder="Password">
+                <input type="password" class="form-control password" name="va_contrasena" placeholder="Contraseña">
                 <i class="icon-lock"></i>
               </span>
             </div>
@@ -205,11 +206,8 @@
       </div>
     </div>
   </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Save changes</button>
-  </div>
 </div>
+<script src="<?php echo $this->host('ruta')?>/js/vendor/jquery.validate.min.js?v<?php echo $this->host('version')?>"></script>
 
 <script type="text/javascript">
   $(document).ready(function(){ 
@@ -218,6 +216,28 @@
       continuous: true,
       speed: 800,
       pause: 5000
+    });
+
+    $("#form-login").validate({
+      rules: {
+        va_email: {
+          required: true,
+          email: true
+        },
+        va_contrasena: {
+          required: true,          
+        }
+      },
+      errorElement: "em",
+      messages: {
+        va_email: {
+          required: "Ingrese correo electronico", 
+          email: "Ingrese correo válido"
+        }, 
+        va_contrasena: {
+          required: "Ingrese una contraseña"
+        }
+      }
     });
 
     var windw = this;

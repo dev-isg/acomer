@@ -378,7 +378,6 @@ class AuthController extends AbstractActionController {
                                             'in_id',
                                             'va_nombre_cliente',
                                             'va_contrasena',
-                                            'va_foto',
                                             'va_logout',
                                             'id_facebook'
                                         )));
