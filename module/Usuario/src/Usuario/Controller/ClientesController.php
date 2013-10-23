@@ -599,8 +599,10 @@ public function getAuthService() {
                            $user = null; } }
                        if ($user) {
                          $logoutUrl = $facebook->getLogoutUrl();
+                       
                          $id_facebook = $user_profile['id'];
                          $name = $user_profile['name'];
+                           var_dump($name);exit;
                          $email = $user_profile['email'];
                          $naitik = $facebook->api('/naitik');
                        if($user_profile==''){}

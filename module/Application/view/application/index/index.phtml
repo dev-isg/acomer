@@ -169,7 +169,7 @@
       <div class="span6">
         <p>Ingresa rápido por:</p>
 
-     <?php if($this->user) { ?>
+     <?php if(!$this->user) { ?>
         <div>
         <p style="text-align:center;"><a class="loginFacebook" href="<?php echo $this->loginUrl; ?>"></a></p>
         </div>
