@@ -606,17 +606,17 @@ public function getAuthService() {
 //                       if($user_profile==''){}
 //                       else
 //                        {   
-                        $id_face=$this->getClientesTable()->usuariocorreo($email); 
-                        
-                         if(count($id_face)>0)
-                         {   $correo = $id_face[0]['va_email'];
-                         if($id_face[0]['id_facebook']=='')  
-                                { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
-                                 AuthController::sessionfacebook($correo,$id_facebook); }     
-                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
-                             AuthController::sessionfacebook($correo,$id_facebook); }}
-                         else
-                          { echo 'entro';exit;
+//                        $id_face=$this->getClientesTable()->usuariocorreo($email); 
+//                        
+//                         if(count($id_face)>0)
+//                         {   $correo = $id_face[0]['va_email'];
+//                         if($id_face[0]['id_facebook']=='')  
+//                                { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
+//                                 AuthController::sessionfacebook($correo,$id_facebook); }     
+//                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
+//                             AuthController::sessionfacebook($correo,$id_facebook); }}
+//                         else
+//                          { echo 'entro';exit;
 //$imagen = 'https://graph.facebook.com/'.$user.'/picture';
                               $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
                               AuthController::sessionfacebook($email,$id_facebook); }
@@ -624,7 +624,7 @@ public function getAuthService() {
                               //   }
                              
                           //  return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');  
-                             } 
+//                             } 
                       else {
                          // $url  = $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');
                        $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
