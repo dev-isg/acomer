@@ -2530,10 +2530,7 @@ span.input-help {
   display: block;
   position: relative;
 }
-.form-login .input-icon > input {
-  padding-left: 25px;
-  padding-right: 6px;
-}
+
 .form-login textarea, 
 .form-login input[type="text"], 
 .form-login input[type="password"], 
@@ -2560,6 +2557,9 @@ span.input-help {
   transition-duration: 0.1s;
   box-shadow: none;
 }
+.form-control{
+  width: 100%;
+}
 .form-login .input-icon > [class*="icon-"], 
 .form-login .input-icon > [class*="clip-"] {
   bottom: 0;
@@ -2572,6 +2572,10 @@ span.input-help {
   position: absolute;
   top: 0;
   z-index: 2;
+}
+.form-login .input-icon > input {
+  padding-left: 25px;
+  padding-right: 6px;
 }
 /*#plato-verdura-wok { background-image:url(../img/bann/ceviche-e.png); }*/
 

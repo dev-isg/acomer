@@ -118,7 +118,7 @@ class ClientesTable
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
         $selecttot = $sql->select()->from('ta_cliente')
-                ->where(array('id_facebook'=>$idface));
+                ->where(array('va_email'=>$idface));
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet->toArray();

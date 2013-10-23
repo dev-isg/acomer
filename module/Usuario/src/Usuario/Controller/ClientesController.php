@@ -610,7 +610,7 @@ public function getAuthService() {
 //                     else{$genero=='femenino';}
                        if($user_profile==''){}
                        else
-                        { $id_face=$this->getClientesTable()->usuariocorreo($id_facebook);  
+                        { $id_face=$this->getClientesTable()->usuariocorreo($email);  
                          if(count($id_face)>0)
                          {   $correo = $id_face[0]['va_email'];
                          if($id_face[0]['id_facebook']=='')  
