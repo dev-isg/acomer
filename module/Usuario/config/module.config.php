@@ -4,6 +4,7 @@ return array(
         'invokables' => array(
             'Usuario\Controller\Index' => 'Usuario\Controller\IndexController',
             'Usuario\Controller\Comentarios' => 'Usuario\Controller\ComentariosController',
+            'Usuario\Controller\Cliente' => 'Usuario\Controller\ClienteController',
             'Usuario\Controller\Clientes' => 'Usuario\Controller\ClientesController',
 
             
@@ -52,6 +53,18 @@ return array(
                     ),
                 ),
             ),
+            
+            'registrarse' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/registrarse',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Usuario\Controller',
+                        'controller' => 'Clientes',
+                        'action' => 'agregarcliente'
+                    )
+                )
+            ), 
         ),
     ),
     'view_manager' => array(
@@ -76,6 +89,7 @@ return array(
             'index' => 'layout/layout-administrador',
             'comentarios' => 'layout/layout-administrador',
             'login' => 'layout/layout-administrador',
+            'clientes' => 'layout/layout-portada2',
             
         ) 
     )

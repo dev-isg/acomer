@@ -1,6 +1,6 @@
     <div class="span12">
     <div class="control-group"> 
-            <form name='form_busqueda'class="form-search" action='/usuario/clientes/clientes' method ="post">
+            <form name='form_busqueda'class="form-search" action='/usuario/cliente/clientes' method ="post">
                     <div class="control-group">
                     <label class="ra radio">Buscar:
                     <input type='text' name='texto' id="texto" placeholder="Nombre,Email" />
@@ -32,9 +32,9 @@
 <?php endforeach; ?>
       
 </table>
-    <?php echo (count($this->clientes)> 0)?$this->paginationControl($this->clientes, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/usuario/clientes/clientes?')):""; ?>
+    <?php echo (count($this->clientes)> 0)?$this->paginationControl($this->clientes, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/usuario/cliente/clientes?')):""; ?>
 </div>
 </div>
 <div class="span10" style="padding: 10px 0;">
-    <a href='/usuario/clientes/exportarexcel' class="btn" >Exportar Datos </a>
+    <a href='/usuario/cliente/exportarexcel' class="btn" >Exportar Datos </a>
 </div>   

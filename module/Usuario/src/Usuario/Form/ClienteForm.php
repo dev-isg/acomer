@@ -3,7 +3,9 @@ namespace Usuario\Form;
 
 use Zend\Form\Form;
 use Usuario\Controller\IndexController;
-
+use Zend\Db\Adapter\AdapterInterface;
+use Zend\ServiceManager\ServiceManager;
+use Zend\ServiceManager\ServiceManagerAwareInterface;
 
 class ClienteForm extends Form
 {

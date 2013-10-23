@@ -1,148 +1,584 @@
 <?php
 
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/ZendSkeletonModule for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
+
 namespace Usuario\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
-use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
-//use Usuario\Model\Usuario;          // <-- Add this import
-use Usuario\Form\ClienteForm;       // <-- Add this import
-use Usuario\Model\UsuarioTable;
+use Usuario\Model\Usuario;
+use SanAuth\Controller\AuthController; 
+use Zend\Session\Container;
+
+use Usuario\Model\ClientesTable;
+use Usuario\Model\Clientes;
+use Usuario\Form\ClientesForm;
+use Zend\Form\Element;
+use Zend\Validator\File\Size;
+use Zend\Http\Header\Cookie;
+use Zend\Http\Header;
 use Zend\Db\Sql\Sql;
-use Zend\Db\Adapter\Adapter;
-use PHPExcel;
-use PHPExcel\Reader\Excel5;
-
-
+use Zend\Mail\Message;
+//use Grupo\Controller\IndexController;
 
 class ClientesController extends AbstractActionController {
 
     protected $clientesTable;
+    static $usuarioTableStatic;
+    protected $ruta;
+    static $rutaStatic;
+    static $rutaStatic2;
+    static $rutaStatic3;
+    protected $_options;
+   protected $storage;
+    protected $authservice;
 
-    public function clientesAction() {
-        $consulta = $this->params()->fromPost('texto');
-        $clientes = $this->getTableClientes()->getCliente();
+    public function __construct() {
+        $this->_options = new \Zend\Config\Config(include APPLICATION_PATH . '/config/autoload/global.php');     
+    }
+
+    public function indexAction() {
         
-        $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($clientes));
-         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(10);
-
         
-        if ($this->getRequest()->isPost()) {
-            
-            $clientes = $this->getTableClientes()->getCliente($consulta);
-        $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($clientes));
-         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-         $paginator->setItemCountPerPage(10);
-
-        }
-                return new ViewModel(array(
-                    'clientes' => $paginator,
-                ));
-
 
     }
-    public function agregarclientesAction(){
-        $form = new ClienteForm();
-         $form->get('submit')->setValue('Agregar');
-        $request = $this->getRequest();
-        
-        if ($request->isPost()) {
-//            $album = new Album();
-//            $form->setInputFilter($album->getInputFilter());
-//            $form->setData($request->getPost());
-            $datos=$this->getRequest()->getPost()->toArray();
-//            var_dump($datos);exit;
-            $form->setData($datos);
-//            var_dump($form->isValid($datos));
-            if ($form->isValid($datos)) {
-//                $album->exchangeArray($form->getData());
-               
-                $this->getTableClientes()->addCliente($datos); 
-           
-//                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos'); 
+
+    public function agregarclienteAction() {
+        $view =new ViewModel();
+        $this->layout('layout/layout-portada2');
+        $form = new ClientesForm();
+        $form->get('submit')->setValue('Crear Usuario');
+        $request = $this->getRequest(); 
+        if ($request->isPost()){ 
+            $clientes = new Clientes();
+           $form->setInputFilter($clientes->getInputFilter());
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $clientes->exchangeArray($form->getData());
+                $correo=$this->getClientesTable()->verificaCorreo($request->getPost('va_email'));
+                if($correo===false){
+                        $this->getClientesTable()->guardarClientes($clientes, md5($clientes->va_nombre_cliente));
+                        $this->correo($clientes->va_email, $clientes->va_nombre_cliente, md5($clientes->va_nombre_cliente));
+                        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/registrarse?m=1');
+              }else{
+                  $mensaje = 'El correo electrónico ' . $request->getPost('va_email') . ' ya esta asociado a un usuario';
+              }
+            } else {
+                foreach ($form->getInputFilter()->getInvalidInput() as $error) {
+                      print_r($error->getMessages());
+                }
             }
         }
-        return array('form' => $form);
-        
+          $view->setVariables(array(
+            'form' => $form,
+            'mensaje' => $mensaje,
+//            'user' => $user,
+//            'loginUrl'  =>$loginUrl,   
+        ));
+         return $view;
    
     }
 
-    public function excelAction() {
-//       $view =new ViewModel();
-//       $view->setTerminal(true);
-       
-//        $clientes = $this->getTableClientes()->getCliente();
-//       $lista=$clientes->toArray(); 
-
-        if (PHP_SAPI == 'cli')
-            die('This example should only be run from a Web Browser');
-        require './vendor/Classes/PHPExcel.php';
-        include './vendor/Classes/PHPExcel/Writer/Excel2007.php';
-
-// Create new PHPExcel object
-        $objPHPExcel = new \PHPExcel();
-
-// Set document properties
-//        $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
-//                ->setLastModifiedBy("Maarten Balliauw")
-//                ->setTitle("Office 2007 XLSX Test Document")
-//                ->setSubject("Office 2007 XLSX Test Document")
-//                ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
-//                ->setKeywords("office 2007 openxml php")
-//                ->setCategory("Test result file");
-        
-// Add some data
-//        $cont=1;
-//        for($i=0;$i<count($lista);$i++,$cont++){
-//                    $objPHPExcel->setActiveSheetIndex(0)
-//                ->setCellValue('A'.$cont,$lista[$i]['in_id'])
-//                ->setCellValue('B'.$cont,$lista[$i]['va_nombre_cliente'])
-//                ->setCellValue('C'.$cont,$lista[$i]['va_email']);
+    
+    
+    
+    
+    
+    public function grupoparticipoAction() {
+        $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
+        $renderer->inlineScript()->prependFile($this->_options->host->base . '/js/main.js')
+        ->prependFile($this->_options->host->base . '/js/masonry/post-like.js')
+        ->prependFile($this->_options->host->base . '/js/masonry/superfish.js')
+        ->prependFile($this->_options->host->base . '/js/masonry/prettify.js')
+        ->prependFile($this->_options->host->base . '/js/masonry/retina.js')
+        ->prependFile($this->_options->host->base . '/js/masonry/jquery.masonry.min.js')
+        ->prependFile($this->_options->host->base . '/js/masonry/jquery.infinitescroll.min.js')
+        ->prependFile($this->_options->host->base . '/js/masonry/custom.js');
+        $categoria = $this->getGrupoTable()->tipoCategoria();
+        $this->layout()->categorias = $categoria;
+        if($_COOKIE['tipo'] or $_GET['tipo'] or $_GET['valor'])
+         { if($_COOKIE['tipo']=='Eventos' or $_GET['tipo']=='Eventos' or $_GET['valor']=='Eventos')
+         {  $this->layout()->active1='active';}
+         else{$this->layout()->active='active';}
+         }
+          else{$this->layout()->active='active';}
+        $id = $this->params()->fromQuery('id');
+        $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $id = $storage->read()->in_id; // $this->params()->fromQuery('id');
+        $valor = $this->headerAction($id);
+        $usuariosgrupos = $this->getUsuarioTable()->usuariosgrupos($id);
+        if(count($usuariosgrupos)==0)
+        {$mensaje= 'Aún no participas en ningún grupo, ¿qué esperas para participar en uno?';}
+//       $categorias = $this->getUsuarioTable()
+//                        ->categoriasunicas($id)->toArray();
+//        for ($i = 0; $i < count($categorias); $i++) {
+//            $otrosgrupos = $this->getUsuarioTable()->grupossimilares($categorias[$i]['idcategoria'], $categorias[$i]['id']);
 //        }
-     
-        $objPHPExcel->getActiveSheet()->setTitle('Simple');
-
-// Set active sheet index to the first sheet, so Excel opens this as the first sheet
-        $objPHPExcel->setActiveSheetIndex(0);
-
-// Redirect output to a client’s web browser (Excel2007)
-header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-header("Content-Disposition: attachment;filename=\"01simple.xlsx\"");
-header("Cache-Control: max-age=0");
-
-
-        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-        $objWriter->save('01simple.xlsx'); 
-//        $objWriter->save('php://output');
-        echo file_get_contents('01simple.xlsx');
         
-        exit;
-        exit;
-         
+            $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($usuariosgrupos));
+            $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
+            $paginator->setItemCountPerPage(12);
+        return array(
+            'grupo' => $valor,
+            'grupospertenece' => $paginator,
+            //'otrosgrupos' => $otrosgrupos,
+            'mensaje'=>$mensaje
+        );
+    }
+
+    public function misgruposAction() {
+        $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
+        $renderer->inlineScript()->prependFile($this->_options->host->base . '/js/main.js')
+        ->prependFile($this->_options->host->base . '/js/masonry/post-like.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/superfish.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/prettify.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/retina.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/jquery.masonry.min.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/jquery.infinitescroll.min.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/custom.js');
+
+        $categorias = $this->getGrupoTable()->tipoCategoria();
+        $this->layout()->categorias = $categorias;
+        if($_COOKIE['tipo'] or $_GET['tipo'] or $_GET['valor'])
+         { if($_COOKIE['tipo']=='Eventos' or $_GET['tipo']=='Eventos' or $_GET['valor']=='Eventos')
+         {  $this->layout()->active1='active';}
+         else{$this->layout()->active='active';}
+         }
+          else{$this->layout()->active='active';}
+        $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
+        $renderer->inlineScript()->prependFile($this->_options->host->base . '/js/main.js');
+        $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $id = $storage->read()->in_id;
+        $misgrupos = $this->getGrupoTable()->misgrupos($id);
+          if(count($misgrupos)==0)
+        {$mensaje= 'Aún no has creado ningún grupo, ¿qué esperas para crear uno?';}
+        $valor = $this->headerAction($id);
+         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($misgrupos));
+            $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
+            $paginator->setItemCountPerPage(12); 
+        return array(
+            'grupo' => $valor,
+            'misgrupos' => $paginator,
+            'mensaje' =>$mensaje
+        );
     }
     
-      public function exportarexcelAction() {
-        $clientes = $this->getTableClientes()->getCliente();
-        $view =new ViewModel();
-        $view->setTerminal(true);
-        $view->setVariables(array('clientes' => $clientes));
-        return $view;
-   
-//               return new ViewModel(array(
-//                    'clientes' => $clientes,
-//                ));
-                
-      }
+  public function eventosparticipoAction()
+    {
+        $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
+        $renderer->inlineScript()
+        ->prependFile($this->_options->host->base . '/js/main.js')
+        ->prependFile($this->_options->host->base . '/js/masonry/post-like.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/superfish.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/prettify.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/retina.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/jquery.masonry.min.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/jquery.infinitescroll.min.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/custom.js');
+        $categorias = $this->getGrupoTable()->tipoCategoria();
+        $this->layout()->categorias = $categorias;
+        if($_COOKIE['tipo'] or $_GET['tipo'] or $_GET['valor'])
+         { if($_COOKIE['tipo']=='Eventos' or $_GET['tipo']=='Eventos' or $_GET['valor']=='Eventos')
+         {  $this->layout()->active1='active';}
+         else{$this->layout()->active='active';}
+         }
+          else{$this->layout()->active='active';}
+//        $id = $this->params()->fromQuery('id');
+        $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $id = $storage->read()->in_id;
 
-    public function getTableClientes() {
-        if (!$this->clientesTable) {
+         $eventosusuario = $this->getEventoTable()->usuarioseventos($id);
+         if(count($eventosusuario)==0)
+        {$mensaje= 'Aún no participas en ningún evento, ¿qué esperas para participar en  uno?';}
+//         $index=new \Usuario\Controller\IndexController();
+        $valor = $this->headerAction($id);
+           $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($eventosusuario));
+            $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
+            $paginator->setItemCountPerPage(12);     
+        return array(
+            'grupo' => $valor,
+            'eventos'=>$paginator,
+            'mensaje' =>$mensaje
+        );
+    }
+    
+        public function miseventosAction()
+    {   
+            
+         
+        $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
+        $renderer->inlineScript()
+        ->prependFile($this->_options->host->base . '/js/main.js')
+        ->prependFile($this->_options->host->base . '/js/masonry/post-like.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/superfish.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/prettify.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/retina.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/jquery.masonry.min.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/jquery.infinitescroll.min.js')
+                ->prependFile($this->_options->host->base . '/js/masonry/custom.js');
+        $categorias = $this->getGrupoTable()->tipoCategoria();
+        $this->layout()->categorias = $categorias;
+        if($_COOKIE['tipo'] or $_GET['tipo'] or $_GET['valor'])
+         { if($_COOKIE['tipo']=='Eventos' or $_GET['tipo']=='Eventos' or $_GET['valor']=='Eventos')
+         {  $this->layout()->active1='active';}
+         else{$this->layout()->active='active';}
+         }
+          else{$this->layout()->active='active';}
+        $id = $this->params()->fromQuery('id');
+        $storage = new \Zend\Authentication\Storage\Session('Auth');
+//           var_dump($storage->read()->va_imagen);exit;
+        $id = $storage->read()->in_id;
+        $miseventos = $this->getEventoTable()->miseventos($id);
+        if(count($miseventos)==0)
+        {$mensaje= 'Aún no has creado ningún evento, ¿qué esperas para crear uno?';}
+        $valor = $this->headerAction($id);
+        $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($miseventos));
+            $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
+            $paginator->setItemCountPerPage(12); 
+        
+        return array
+      (
+            'grupo' => $valor,
+        'miseventos'=> $paginator,
+            'mensaje' =>$mensaje
+       );
+    }
+
+    public function correo($correo, $usuario, $valor) {
+        $message = new Message();
+        $message->addTo($correo, $usuario)
+                ->setFrom('listadelsabor@innovationssystems.com', 'listadelsabor.com')
+                ->setSubject('Confirmación de Registro en Listadelsabor.com');
+        $bodyHtml = '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+                                               <head>
+                                               <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+                                               </head>
+                                               <body>
+                                                    <div style="color: #7D7D7D"><br />
+                                                     Hola  <strong style="color:#133088; font-weight: bold;">' . $usuario . ',</strong><br /><br />
+                                        Tu cuenta en <a href="' .self::$rutaStatic3. '">listadelsabor.com</a> está casi lista para usar.<br /><br />
+                                        Activa tu cuenta haciendo <a href="' .self::$rutaStatic3. '/auth?token=' . $valor . ' ">"click aqui"</a> <br /><br />
+                                        O copia la siguiente dirección en tu navegador:<br /><br />
+                                        <a href="' .self::$rutaStatic3. '/auth?token=' . $valor . ' ">' .self::$rutaStatic3. '/auth?token=' . $valor . '</a>
+                                        <br /><br /><br />
+                                        <a href="'.self::$rutaStatic3.'"><img src="'.self::$rutaStatic2.'/juntate.png" title="listadelsabor.pe"/></a>
+                                         
+                                                     </div>
+                                               </body>
+                                               </html>';
+        $bodyPart = new \Zend\Mime\Message();
+        $bodyMessage = new \Zend\Mime\Part($bodyHtml);
+        $bodyMessage->type = 'text/html';
+        $bodyPart->setParts(array(
+            $bodyMessage
+        ));
+        $message->setBody($bodyPart);
+        $message->setEncoding('UTF-8');
+
+        $transport = $this->getServiceLocator()->get('mail.transport');
+        $transport->send($message);
+    }
+public function getAuthService() {
+        if (!$this->authservice) {
+            $this->authservice = $this->getServiceLocator()->get('AuthService');
+        }
+
+        return $this->authservice;
+    }
+
+    public function getSessionStorage() {
+        if (!$this->storage) {
+            $this->storage = $this->getServiceLocator()->get('SanAuth\Model\MyAuthStorage');
+        }
+
+        return $this->storage;
+    }
+         
+     
+    
+       public function jsonpaisAction(){
+        $ubigeo=$this->getUsuarioTable()->getPais();
+        echo Json::encode($ubigeo);
+        exit();
+      }
+    
+        public function jsonciudadAction(){
+        $idpais=$this->params()->fromQuery('code');
+        if($idpais=='PER')
+        { $ubigeo=$this->getUsuarioTable()->getCiudadPeru();}
+        else
+        { 
+            $ubigeo=$this->getUsuarioTable()->getCiudad($idpais);
+        }
+        //$ubigeo=$this->getUsuarioTable()->getCiudad($idpais);
+        echo Json::encode($ubigeo);
+        exit();
+    }
+    
+    
+    public function editarusuarioAction() {
+
+        $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $session = $storage->read();
+        $categorias = $this->getGrupoTable()->tipoCategoria();
+        $this->layout()->categorias = $categorias;
+
+        if ($_COOKIE['tipo'] or $_GET['tipo'] or $_GET['valor']) {
+            if ($_COOKIE['tipo'] == 'Eventos' or $_GET['tipo'] == 'Eventos' or $_GET['valor'] == 'Eventos') {
+                $this->layout()->active1 = 'active';
+            } else {
+                $this->layout()->active = 'active';
+            }
+        } else {
+            $this->layout()->active = 'active';
+        }
+        //   $this->layout()->active='active';
+        $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
+        $renderer->inlineScript()
+                ->setScript('actualizarDatos();if($("#editarusuario").length){valactualizar("#editarusuario");};')
+                ->prependFile($this->_options->host->base . '/js/main.js')
+                ->prependFile($this->_options->host->base . '/js/bootstrap-fileupload/bootstrap-fileupload.min.js')
+                ->prependFile($this->_options->host->base . '/js/jquery.validate.min.js');
+
+        $id = $storage->read()->in_id; //(int) $this->params()->fromRoute('in_id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('usuario', array(
+                        'action' => 'agregarusuario'
+                    ));
+        }
+
+        try {
+            $usuario = $this->getUsuarioTable()->getUsuario($id);
+        } catch (\Exception $ex) {
+            return $this->redirect()->toRoute('usuario', array(
+                        'action' => 'index'
+                    ));
+        }
+        $header = $this->headerAction($id);
+        $adpter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $form = new UsuarioForm(null, $adpter);
+        if ($usuario->va_pais != null) {
+            $ubige = $this->getUsuarioTable()->getPais($usuario->va_pais);
+            // var_dump($ubige);exit;
+            $array = array();
+            foreach ($ubige as $y) {
+                $array[$y['ID']] = $y['Name'];
+            }
+            $ciudads = $this->getUsuarioTable()->getUsuariociudad($id)->toArray();
+            if ($ciudads[0]['va_pais'] == 'PER') {
+                $ciudad = $this->getUsuarioTable()->getCiudadPeru($ciudads[0]['ta_ubigeo_in_id']);
+            } else {
+                $ciudad = $this->getUsuarioTable()->getCiudad('', $ciudads[0]['ta_ubigeo_in_id']);
+            }
+
+            $form->get('va_pais')->setValue($array);
+            //$form->get('ta_ubigeo_in_id')->setValueOptions($arra); 
+        }
+        $form->bind($usuario);
+        $form->get('submit')->setAttribute('value', 'Actualizar');
+
+        //formulario para la notificacion
+        $formNotif = new NotificacionForm();
+        $formNotif->get('submit')->setAttribute('value', 'Guardar');
+        //populate elementos del check
+        $not = $this->getGrupoTable()->getNotifiacionesxUsuario($storage->read()->in_id)->toArray();
+        $aux = array();
+        foreach ($not as $value) {
+            $aux[$value['ta_notificacion_in_id']] = $value['ta_notificacion_in_id'];
+            $formNotif->get('tipo_notificacion')->setAttribute('value', $aux);
+        }
+        //populate elemento del multi select categoria
+        $catg = $this->getUsuarioTable()->getCategoriaxUsuario($storage->read()->in_id)->toArray();
+        $aux_categ = array();
+        foreach ($catg as $valuec) {
+            $aux_categ[$valuec['ta_categoria_in_id']] = $valuec['ta_categoria_in_id'];
+            $form->get('select2')->setAttribute('value', $aux_categ);
+        }
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $datos = $this->request->getPost();
+            // var_dump($usuario);exit;
+            $File = $this->params()->fromFiles('va_foto');
+
+
+            $nonFile = $this->params()->fromPost('va_nombre');
+            if ($File['name'] != '') {
+                require './vendor/Classes/Filter/Alnum.php';
+                $imf = $File['name'];
+                $info = pathinfo($File['name']);
+                $valor = uniqid();
+                $nom = $nonFile;
+                $imf2 = $valor . '.' . $info['extension'];
+                $filter = new \Filter_Alnum();
+                $filtered = $filter->filter($nom);
+                $imagen = $filtered . '-' . $imf2;
+            } else {
+
+                $idusuario = $this->getUsuarioTable()->getUsuario($id);
+                $imagen = $idusuario->va_foto;
+            }
+            $dato = array_merge_recursive($this->getRequest()
+                            ->getPost()
+                            ->toArray(), $this->getRequest()
+                            ->getFiles()
+                            ->toArray());
+
+            $form->setInputFilter($usuario->getInputFilter());
+            $form->setData($dato);
+            //var_dump($usuario->va_contrasena);exit;
+            if ($form->isValid()) {
+                $catg_ingresada = $this->params()->fromPost('select2');
+                if ($this->params()->fromPost('va_contrasena') == '') {
+                    $dataa = $this->getUsuarioTable()->getUsuario($id);
+                    $pass = $dataa->va_contrasena;
+                    $nombre = $this->params()->fromPost('va_nombre');
+                    if ($File['name'] != '') {
+                        if ($this->redimensionarFoto($File, $nonFile, $imagen, $id)) {
+                            $this->getUsuarioTable()->guardarUsuario($usuario, $imagen, '', $pass, $catg_ingresada, $datos->ta_ubigeo_in_id);
+                            $obj = $storage->read();
+                            $obj->va_foto = $imagen;
+                            $obj->va_nombre = $nombre;
+                            $storage->write($obj);
+                            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/micuenta?m=1');
+                        } else {
+                            echo 'problemas con el redimensionamiento';
+                            exit();
+                        }
+                    } else {
+                        $this->getUsuarioTable()->guardarUsuario($usuario, $imagen, '', $pass, $catg_ingresada, $datos->ta_ubigeo_in_id);
+                        $obj = $storage->read();
+                        $obj->va_foto = $imagen;
+                        $obj->va_nombre = $nombre;
+                        $storage->write($obj);
+
+                        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/micuenta?m=1');
+                    }
+                } else {
+
+                    if ($File['name'] != '') {//echo 'mamaya';exit;
+                        if ($this->redimensionarFoto($File, $nonFile, $imagen, $id)) {
+                            $this->getUsuarioTable()->guardarUsuario($usuario, $imagen, null, null, $catg_ingresada, $datos->ta_ubigeo_in_id);
+                            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/micuenta?m=1');
+                        } else {
+                            echo 'problemas con el redimensionamiento';
+                            exit();
+                        }
+                    } else {
+                        $this->getUsuarioTable()->guardarUsuario($usuario, $imagen, null, null, $catg_ingresada, $datos->ta_ubigeo_in_id);
+
+                        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/micuenta?m=1');
+                    }
+                }
+            } else {
+                foreach ($form->getInputFilter()->getInvalidInput() as $error) {
+                    // print_r($error->getMessages());
+                    print_r($error->getName());
+                }
+            }
+        }
+        
+       $categ = $this->getGrupoTable()->tipoCategoria();
+        return array(
+            'in_id' => $id,
+            'form' => $form,
+            'usuario' => $usuario,
+            'valor' => $header,
+            'formnotif' => $formNotif,
+            'session'  =>$session,
+            'catego'=>$categ,
+            'nameCiudad'=>$ciudad[0]['Name'],
+             'nameID'=>$ciudad[0]['ID'],
+        );
+    }
+    
+    public function verusuarioAction(){
+                $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
+        $renderer->inlineScript()
+        ->setScript('$(document).ready(function(){valUsuario();});')
+            ->prependFile($this->_options->host->base . '/js/main.js');
+        $id=$this->params()->fromRoute('in_id');//298
+        $usuario=$this->getUsuarioTable()->getUsuario($id);
+        $intereses=$this->getUsuarioTable()->getIntereses($id);
+        $ubige=$this->getUsuarioTable()->getPais($usuario->va_pais);
+        $usuario->va_pais=$ubige[0]['Name'];
+        $ciudads = $this->getUsuarioTable()->getUsuariociudad($id)->toArray();
+        if($ciudads[0]['va_pais']=='PER')
+        { $ciudad=$this->getUsuarioTable()->getCiudadPeru($ciudads[0]['ta_ubigeo_in_id']);}
+        else
+        { $ciudad=$this->getUsuarioTable()->getCiudad('',$ciudads[0]['ta_ubigeo_in_id']); }
+        
+        
+        
+         $usuario->ta_ubigeo_in_id=$y['Name'];     
+        $usergroup=$this->getUsuarioTable()->UsuariosGrupo($id);
+        return array('usuario'=>$usuario,'ciudad'=>$ciudad[0]['Name'],'mienbros'=>$usergroup,'intereses'=>$intereses);
+    }
+
+    public function notificarAction() {
+        $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+//             $formNotif->setData($request->getPost());
+//             if($formNotif->isValid()){
+            $data = $request->getPost('tipo_notificacion');
+            $this->getGrupoTable()->updateNotificacion($data, $storage->read()->in_id);
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/usuario/index/editarusuario');
+//             }
+        }
+
+        return array();
+    }
+//    public function getServicio(){
+//        $config=$this->getServiceLocator()->get('Config');  
+//        self::$rutaStatic=$config['host']['images'];
+//    }
+
+  
+    
+    
+
+    public function fooAction() {
+        // This shows the :controller and :action parameters in default route
+        // are working when you browse to /module-specific-root/skeleton/foo
+        return array();
+    }
+
+
+        public function getClientesTable()
+    {
+        if (! $this->clientesTable) {
             $sm = $this->getServiceLocator();
-            $this->clientesTable = $sm->get('Usuario\Model\Cliente');
+            $this->clientesTable = $sm->get('Usuario\Model\ClientesTable');
+             $config=$sm->get('Config');
+            self::$rutaStatic=$config['host']['images'];
+            self::$rutaStatic2=$config['host']['img'];
+            self::$rutaStatic3=$config['host']['ruta'];
         }
         return $this->clientesTable;
     }
 
+    
+    
+     public function getGrupoTable() {
+        if (!$this->grupoTable) {
+            $sm = $this->getServiceLocator();
+            $this->grupoTable = $sm->get('Grupo\Model\GrupoTable');
+            $config=$sm->get('Config');  
+            self::$rutaStatic=$config['host']['images'];
+            self::$rutaStatic2=$config['host']['img'];
+            self::$rutaStatic3=$config['host']['ruta'];
+            
+        }
+        return $this->grupoTable;
+    }
+   
 }

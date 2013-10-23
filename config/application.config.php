@@ -7,6 +7,7 @@ return array(
         'Restaurante',
         'Admin',
         'Local',
+        'SanAuth',
         'Platos',
         'Classes'
 

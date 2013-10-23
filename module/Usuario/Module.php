@@ -17,10 +17,10 @@ use Usuario\Model\UsuarioTable;
 
 use Usuario\Model\Cliente;
 
-
+use Usuario\Model\Clientes;
 use Usuario\Model\Comentarios;
 use Usuario\Model\ComentariosTable;
-
+use Usuario\Model\ClientesTable;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
@@ -83,6 +83,17 @@ class Module implements AutoloaderProviderInterface
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Comentarios());
                     return new TableGateway('ta_comentario', $dbAdapte, null, $resultSetPrototype);
+                },
+                      'Usuario\Model\ClientesTable' =>  function($sm) {
+                    $tableGateway = $sm->get('ClientesTableGateway');
+                    $table = new Model\ClientesTable($tableGateway);
+                    return $table;
+                },
+                'ClientesTableGateway' => function ($sm) {
+                    $dbAdapte = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Clientes());
+                    return new TableGateway('ta_cliente', $dbAdapte, null, $resultSetPrototype);
                 },
 
             ),

@@ -47,6 +47,7 @@ public function __construct()
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
         $mistura=$this->getConfigTable()->platoslistadelsabor();
+       
         $page2 = (int) $this->params()->fromQuery('page', 1);
             $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($mistura));
         $paginator->setCurrentPageNumber($page2);

@@ -779,7 +779,7 @@ class IndexController extends AbstractActionController {
                 $datos['va_email'] = htmlspecialchars($datos['va_email']);
                 $validar = explode('http://', $datos['tx_descripcion']);
                 if(count($validar)==2){
-                return $this->redirect()->toUrl('/plato/'.$urlerror.'?m=1');}
+                return $this->redirect()->toUrl('/plato/restaurante/'.$urlerror.'?m=1');}
                 else {
                 $form->setData($datos);
                 if ($form->isValid()) {
@@ -791,7 +791,7 @@ class IndexController extends AbstractActionController {
                     setcookie('email',$datos['va_email']);
                     $form->setData(array('va_nombre' => '', 'va_email' => '', 'tx_descripcion' => '')); 
                     $datos =$this->params()->fromRoute();               
-                    $this->redirect()->toUrl('/plato/'.$datos['nombre']);
+                    $this->redirect()->toUrl('/plato/restaurante/'.$datos['nombre']);
                   }
                 }
             }
@@ -805,13 +805,13 @@ class IndexController extends AbstractActionController {
         $this->layout()->title=$listarecomendacion[0]['va_nombre'];   
         $this->layout()->image=$listarecomendacion[0]['va_imagen']=='platos-default.png'?$config['host']['images']. '/defecto/' . $listarecomendacion[0]['va_imagen']:$config['host']['images'] . '/plato/principal/' . $listarecomendacion[0]['va_imagen'];
         $this->layout()->description=trim($listarecomendacion[0]['restaurant_nombre']).'-'.trim($listarecomendacion[0]['tx_descripcion']).'-'.trim($listarecomendacion[0]['va_direccion']).'-'.trim($listarecomendacion[0]['va_direccion_referencia'].'-('.trim($listarecomendacion[0]['distrito']).')- teléfono:'.trim($listarecomendacion[0]['va_telefono']));
-        $this->layout()->url=$config['host']['ruta'].'/plato/'.$datos['nombre'];
+        $this->layout()->url=$config['host']['ruta'].'/plato/restaurante/'.$datos['nombre'];
         $listatitle=trim($listarecomendacion[0]['va_nombre']).':'.
                 trim($listarecomendacion[0]['tx_descripcion']).':'.
                 trim($listarecomendacion[0]['tipo_plato_nombre']).':'.
                 trim($listarecomendacion[0]['restaurant_nombre']).':'.
                 trim($listarecomendacion[0]['distrito']).' │ ';
-      $menu = $this->menu();
+       $menu = $this->menu();
        $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 'formu' => $formu,
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id,

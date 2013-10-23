@@ -1,0 +1,459 @@
+<?php echo $this->doctype(); ?>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="es-ES" prefix="og: http://ogp.me/ns#">
+<!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  
+    <?php if ($this->titleplato) {
+            echo $this->headTitle('Comida Criolla,Comida de la selva,Comida peruana,Comida italiana,Comida rapida,Comida china,' . $this->titleplato . 'Pollo a la brasa,
+        Ceviche,Olluquito con charqui,Picante de cuy,Causa rellena,Lomo saltado,Aji de gallina,Rocoto relleno,Papa a la huancaina,
+        Anticuchos,Cebiche,Arroz con Pollo,Ocopa,Arroz con pato,Carapulcra,Olluquito,Arroz Chaufa,Chicharron,Chicharron de pescado,Lista del Sabor - El Primer Portal donde encontrarás los mejores platos de la gastronomía hecha en el Perú. | Lista del Sabor');
+        } else {
+            echo $this->headTitle('Guía completa de los mejores platos y restaurantes de Lima y de Perú │Lista del Sabor');
+        }
+        ?>  
+        <meta name="viewport" content="width=device-width">
+        <meta NAME="author" CONTENT="innovations systems group">
+        <meta NAME="subject" CONTENT="restaurantes, restoranes, restorantes, platos">
+        <meta NAME="Keywords" CONTENT="Comidas peruanas,Comida criolla,Andina,Gastronomía peruana,Restaurantes en lima,Comida peruana,Platos típicos del peru,Comida china,Comidas tipicas de la selva,Comida italiana,Comida rapida,Arroz con mariscos,Cocina peruana,Ensaladas,Sushi,Comidas rapidas,Comida saludable,Comidas de la sierra,Parrilada,Pastas,Pizzas,Pollo a la brasa,Sushi,Makis,Cocina,Restaurante,Gastronomia,Cocina peruana,Comidas,Comida vegetariana,Platos tipicos,Platos tipicos del peru,Cevicheria,Chicharron,Chicharron de pescado, restaurantes en lima, restaurantes lima, guia de restaurantes, de gusta lima, degusta, listadelsabor, lista del sabor, restaurante, restorantes, restoranes, huariques, huariques lima, sitios para comer lima, restaurantes top lima, lujo lima, los mejores restaurantes de lima, gastronomia en lima, de gastronomia, de cocina peruana, de cocina peru, gastronomia peru, restaurantes peruanos, tipo de comida, tipo de platos, no son recetas, directorio de restaurantes, directorio">
+        <meta property="fb:admins" content="100004562103050" />
+        <meta name="msapplication-TileImage" content="<?php echo $this->host('ruta') ?>/img/logo-face.png" />
+        <meta name="description" content="
+            <?php if($this->description){
+                echo $this->description;
+            }else{
+               echo 'Miles de usuarios confían en la mejor guía completa de restaurantes de lima y Perú. Desde huariques hasta restaurantes de reconocida fama y calidad';
+            }
+        ?>" />
+        <meta NAME="Classification" CONTENT="Lista del Sabor - El Primer Portal donde 
+                encontrarás los mejores platos de la 
+                gastronomía hecha en el Perú. Encontrarás los 
+                platos más buscados y mejor 
+                recomendados en el Perú,su descripción y 
+                los restaurantes que lo venden y su valoración por los comensales.
+                Miles de usuarios ya confían en la mejor guía completa de restaurantes 
+                de lima y de Perú. Desde huariques hasta restaurantes de reconocida fama
+                y calidad.No son recetas, pero si lugares donde se vende la mejor comida
+                en el peru.">
+        <meta NAME="Geography" CONTENT="lima, peru">
+        <meta NAME="Language" CONTENT="spanish, español, castellano">
+        <meta HTTP-EQUIV="Expires" CONTENT="never">
+        <meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="PUBLIC">
+        <meta NAME="Copyright" CONTENT="innovations systems group">
+        <meta NAME="Publisher" CONTENT="innovations systems group">
+        <meta NAME="Revisit-After" CONTENT="5 days">
+        <meta NAME="distribution" CONTENT="Global">
+        <meta NAME="Robots" CONTENT="INDEX,FOLLOW">
+        <meta NAME="city" CONTENT="lima, peru">
+        <meta NAME="country" CONTENT="PERU">
+    <meta property="og:title"	content="<?php  $titulo=(!$this->title)?'Lista del Sabor':$this->title.':Lista del Sabor' ; echo $titulo; ?>" />
+    <meta property="og:image"	content="<?php $imagen=(!$this->image)?$this->host('ruta').'/img/logo-face.png':$this->image ; echo $imagen; ?>" />
+    <meta property="og:site_name" content="Lista del Sabor" />
+    <meta property="og:description"	content="<?php $descrip=(!$this->description)?'Lista del Sabor - El Primer Portal donde encontrarás los mejores platos de la gastronomía hecha en el Perú. Encontrarás los platos más buscados y mejor recomendados en el Perú,su descripción y los restaurantes que lo venden y su valoración por los comensales':$this->description ; echo $descrip; ?>" />
+    <meta property="og:url"	content="<?php $url=(!$this->url)?$this->host('ruta'):$this->url; echo $url;?>" /> 
+    <link	href="<?php echo $this->host('ruta')?>/img/favicon.ico?v<?php echo $this->host('version')?>"	rel="shortcut icon" type="image/x-icon" />
+    <!--<script src="<?php echo $this->host('ruta')?>/js/head.load.min.js"></script>-->
+    <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilos.css?v'.$this->host('version'))->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')?>
+    <link href="<?php echo $this->host('ruta')?>/css/jquery-ui-auto.css" media="screen" rel="stylesheet" type="text/css">
+    <script	src="//cdn.jsdelivr.net/modernizr/2.6.2/modernizr.min.js"></script>
+    <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/jquery.mockjax.js"></script>
+    <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/infinity-scroll/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/infinity-scroll/jquery.infinitescroll.min.js"></script>
+  </head>
+
+<body class="lista-<?php echo $this->clase; ?>">
+	<script>
+      var urlJson = "<?php echo $this->host('ruta')?>";
+    </script>
+    <?php
+    require_once'./vendor/Classes/Mobile_Detect.php';
+    $detect = new Mobile_Detect();
+    if ($detect->isiPad()) {
+        ?>
+        <style type="text/css">
+          .plato_r span {
+          	font-size: 12px !important;
+          }
+
+          .font-desc-c {
+          	font-size: 12px;
+          	line-height: 16px;
+          }
+
+          .nom_res {
+          	font-size: 12px;
+          }
+
+          .details h4 {
+          	line-height: 14px;
+          }
+          .content-menu-home{
+            width: 100%!important;
+          }
+          #nextBtn, #slider1next{
+            left: 94%!important;
+          }
+        </style>
+    <?php }?>
+
+    <?php
+   require_once './vendor/Classes/Mobile_Detect.php';
+    $detect1 = new Mobile_Detect();
+    if ($detect1->isAndroidOS()) {
+        ?>
+        <style>
+        html.body{
+          position: relative;
+        }
+        .content-menu-home{
+          width: 100%!important;
+        }
+          .content-sidebar{
+            /*top: 0%;
+            bottom: 100%;
+            height: 100%!important;
+            position: absolute!important;*/
+          }
+          .title-home-listado h1 {
+          	margin: 0 !important;
+          }
+
+          .contenido-busqueda {
+          	position: relative !important;
+          }
+          .content-sidebar-ho {
+          	margin-top: 0;
+          	padding-top: 40px;
+          }
+          .content-sidebar-ho {
+          	margin-top: 0;
+          }
+          .title-home-listado h1 {
+          	margin: 0;
+          	padding-top: 80px;
+          }
+
+          .contenido-busqueda {
+          	width: 100%;
+          }
+        @media ( max-width : 480px) {
+        	.title-home-listado h1 {
+        		padding-top: 0;
+        	}
+        }
+      </style>      
+        
+      <?php } ?>
+
+    <!--<div class="contenido">-->
+    <?php 
+    if ($detect1->isAndroidOS()){
+
+    }elseif($detect->isiPad()){
+
+    }else{ ?>
+      <img src="/img/main-bg.jpg" class="bg" />
+    <?php }?>
+
+	<div class="container cont-home">
+      <?php
+    require_once './vendor/Classes/Mobile_Detect.php';
+    $detect3 = new Mobile_Detect();
+    if ($detect3->isTablet()){
+        ?>
+        <div class="content-sidebar">
+          <div class="contenido-busqueda">
+            <div class="content-sidebar-ho">
+            <a class="title-home-listado" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
+              <h1>
+                <img src="<?php echo $this->host('ruta')?>/img/logo.png?v<?php echo $this->host('version')?>" alt="logo">
+              </h1>
+            </a>
+            <span class="logan-1" style="font-size: 3.1em;text-align: right;">-</span> 
+            <span class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span> 
+            <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
+            <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
+
+            <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar-por-distrito">   <p>
+                  <input id="mealQ" name="q"  type="text" onclick="this.value=''" value="<?php 
+                  if($_GET['q']) 
+                  {$valor = explode(" ",$_GET['q']);
+                  if($valor[0]=='restaurante:')
+                   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                elseif ($valor[0]=='tag:') {echo $valor[1];}
+                   elseif ($valor[0]=='name:')   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                   else{echo $_GET['q'];};}
+                  else{      $valor = explode(" ",$_COOKIE['q']);
+                            if($valor[0]=='restaurante:')
+                     {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                     elseif ($valor[0]=='name:')   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                     elseif ($valor[0]=='tag:') {echo $valor[1];}
+                     else{echo $_COOKIE['q'];};}
+                      ?>"     placeholder="Ingrese el plato"  required="required"/>
+                  <em>Ejm: lomo saltado</em>
+                </p>
+                <p>
+			            <input id="disctQ" name="distrito" type="text" onclick="this.value=''" value="<?php 
+                if($_GET['distrito']) {echo $_GET['distrito']; } elseif($_COOKIE['distrito']){   echo $_COOKIE['distrito']; }else {echo 'LIMA';}?>">
+                  <em>Ejm: Miraflores, lince, San Isidro</em>
+                </p>
+                <p style="margin-top:5px;">
+                  <input type="submit"  class="btn btn-warning btn-soli" value="Buscar"/>
+                </p>
+              </form>  
+              <div class="final">
+                  <img src="<?php echo $this->host('ruta')?>/img/responsive.png?v<?php echo $this->host('version')?>" alt="" style="padding: 37px 10px;">
+                </div>
+            </div>
+            </div><!--Fin del sidebar-->
+        </div>
+      <?php }elseif($detect3->isMobile()){ ?>
+        <div class="content-sidebar menor-mobile" style="display:block;">
+          <div class="contenido-busqueda">
+            <div class="content-sidebar-ho">
+              <a class="title-home-listado portrait" href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
+                <h1 class="title-si">
+                  Listadelsabor.com
+                </h1>
+              </a>
+              <span class="logan-1" style="font-size: 3.1em;text-align: right;">-</span> 
+              <span class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span> 
+              <span class="logan-1" style="font-size: 3.1em;  text-align: right;">-</span>
+              <div class="fec"><img src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>" alt=""></div>
+
+              <form  accept-charset="utf-8" method ="get" class="form-horizontal" id="search" action="<?php echo $this->host('ruta')?>/buscar">
+                <p>
+                  <input id="q" name="q"  type="text" onclick="this.value=''" value="<?php 
+                                                                 if($_GET['q']) 
+                  {$valor = explode(" ",$_GET['q']);
+                  if($valor[0]=='restaurante:')
+                   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                elseif ($valor[0]=='tag:') {echo $valor[1];}
+                elseif ($valor[0]=='name:')   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                   else{echo $_GET['q'];};}
+                  else{      $valor = explode(" ",$_COOKIE['q']);
+                            if($valor[0]=='restaurante:')
+                     {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                     elseif ($valor[0]=='name:')   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                     elseif ($valor[0]=='tag:') {echo $valor[1];}
+                     else{echo $_COOKIE['q'];};}
+                      ?>"     placeholder="Ingrese el plato"  required="required"/>
+                  <input type="submit"  class="verlistado" value="Buscar"/>
+                </p>
+                <p>
+                  <em>Ejm: ceviche en miraflores</em>
+                </p>
+              </form>  
+              <div class="final">
+                <img src="<?php echo $this->host('ruta')?>/img/responsive.png?v<?php echo $this->host('version')?>" alt="" style="padding: 37px 10px;">
+              </div>
+            </div>
+            </div><!--Fin del sidebar-->
+        </div>
+      <?php }else{?>
+      <div class="publi_der">
+        <script type="text/javascript"><!--
+          google_ad_client = "ca-pub-9496719136826499";
+          /* Lista del Sabor */
+          google_ad_slot = "8003997249";
+          google_ad_width = 160;
+          google_ad_height = 600;
+          //-->
+          </script>
+          <script type="text/javascript"
+          src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+          </script>
+      </div>
+      <div class="publi-rascacielosIzq">
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-9496719136826499";
+        /* Lista del Sabor */
+        google_ad_slot = "8003997249";
+        google_ad_width = 160;
+        google_ad_height = 600;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+      </div>
+      <div class="content-sidebar">
+			<div class="contenido-busqueda">
+				<div class="content-sidebar-ho">
+					<a class="title-home-listado"
+						href="<?php echo $this->host('ruta')?>" title="Listado del Sabor">
+						<h1>
+							<img
+								src="<?php echo $this->host('ruta')?>/img/logo.png?v<?php echo $this->host('version')?>"
+								alt="logo">
+						</h1>
+					</a> <span class="logan-1"
+						style="font-size: 3.1em; text-align: right;">-</span> <span
+						class="logan" style="width: 54%;">..y hoy, ¿qué se te antoja?</span>
+					<span class="logan-1" style="font-size: 3.1em; text-align: right;">-</span>
+					<div class="fec">
+						<img
+							src="<?php echo $this->host('ruta')?>/img/flecha-1.png?v<?php echo $this->host('version')?>"
+							alt="">
+					</div>
+ 
+					<form accept-charset="utf-8" method="get" class="form-horizontal"
+						id="search"
+						action="<?php echo $this->host('ruta')?>/buscar-por-distrito">
+						<p>
+							<input id="mealQ" name="q" type="text" onclick="this.value=''"
+								value="<?php 
+                     if($_GET['q']) 
+                  {$valor = explode(" ",$_GET['q']);
+                  if($valor[0]=='restaurante:')
+                   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                   elseif ($valor[0]=='name:')   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                   elseif ($valor[0]=='tag:') {echo $valor[1];}
+                   else{echo $_GET['q'];};}
+                   else{ $valor = explode(" ",$_COOKIE['q']);
+                            if($valor[0]=='restaurante:')
+                     {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                     elseif ($valor[0]=='name:')   {echo $valor[1].' '.$valor[2].' '.$valor[3].' '.$valor[4];}
+                     elseif ($valor[0]=='tag:') {echo $valor[1];}
+                     else{echo $_COOKIE['q'];};
+                     }?>"
+								placeholder="Ingrese el plato" required="required" /> <em>Ejm:
+								lomo saltado</em>
+						</p>
+						<p id="autocompletaLoad">
+			         <input id="disctQ" name="distrito" type="text" onclick="this.value=''" value="<?php 
+                if($_GET['distrito']) {echo $_GET['distrito']; } elseif($_COOKIE['distrito']){   echo $_COOKIE['distrito']; }else {echo 'LIMA';}?>">
+                <input type="hidden" name="country" id="autocomplete-ajax-x" disabled="disabled" style="color: #CCC; position: absolute; background: transparent; z-index: 1;">
+                <em>Ejm: Miraflores, lince, San Isidro</em>
+            </p>
+						<p style="margin-top: 5px;">
+							<input type="submit" class="btn btn-warning btn-soli"
+								value="Buscar"/>
+						</p>
+					</form>
+					<div class="final">
+						<img
+							src="<?php echo $this->host('ruta')?>/img/responsive.png?v<?php echo $this->host('version')?>"
+							alt="" style="padding: 37px 10px;">
+					</div>
+				</div>
+			</div>
+			<!--Fin del sidebar-->
+		</div>
+      <?php }?>
+
+      <div class="contenido-plato">         
+        <?php echo $this->content; ?>
+       
+       <!--  <div class="subir">
+          <a href="#top"><img src="<?php echo $this->host('static')?>/img/scroll-top.png" alt=""></a>
+        </div> -->
+			<!--  <div class="arrow">
+            <img src="<?php echo $this->host('static')?>/img/flechamenu.png" alt="">
+        </div> -->
+
+        
+      </div>
+
+    <div class="footer">
+          <nav class="fo">
+            <ul class="fa">
+              <li>
+                <a href="<?php echo $this->host('ruta')?>/nosotros">Nosotros</a>
+              </li>
+              <li>
+                <a href="<?php echo $this->host('ruta')?>/terminos">Términos y condiciones</a>
+              </li>
+              <li>
+                <div class="ups-crap btn-group dropup">
+                  <button class="ups-dev dropdown-toggle" data-toggle="dropdown">Contáctenos<span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="<?php echo $this->host('ruta')?>/solicita">Solicite su publicación</a></li>
+                    <li><a href="<?php echo $this->host('ruta')?>/contactenos">Escríbenos</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <div class="ups-crap btn-group dropup">
+                  <button class="ups-dev dropdown-toggle" data-toggle="dropdown">Más buscados<span class="caret"></span></button>
+                  <?php
+              //     require_once './vendor/Classes/Mobile_Detect.php';
+                  $detect5 = new Mobile_Detect;
+                  if ($detect5->isTablet()) {?>
+                    <ul class="dropdown-menu">
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=ceviche">Ceviche</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=lomo saltado">Lomo saltado</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=makis">Makis</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=anticuchos">Anticuchos</a></li>
+                    </ul>
+                  <?php }elseif($detect5->isMobile()){?>
+                    <ul class="dropdown-menu">
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar?q=ceviche">Ceviche</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar?q=lomo saltado">Lomo saltado</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar?q=makis">Makis</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar?q=anticuchos">Anticuchos</a></li>
+                    </ul>
+                  <?php }else{?>
+                    <ul class="dropdown-menu">
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=ceviche">Ceviche</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=lomo saltado">Lomo saltado</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=makis">Makis</a></li>
+                      <li><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=anticuchos">Anticuchos</a></li>
+                    </ul>
+                  <?php }?>
+                  
+                </div><!-- /btn-group -->
+              </li>
+            </ul>
+          </nav>
+      <footer class="footer-ie8">
+        <p>
+          Desarrollado por <a href="http://www.innovationssystems.com" title="Innovations systems group" target="_blank">Innovations systems group</a> - Derechos Reservados
+        </p>
+      </footer>
+    </div>
+</div>
+  <script src="<?php echo $this->host('ruta')?>/js/vendor/jquery.placeholder.min.js?v<?php echo $this->host('version')?>"></script>   
+  
+  <!--<script src="<?php echo $this->host('ruta')?>/js/jquery.flexslider.js"></script>
+  <script src="<?php echo $this->host('ruta')?>/js/main1.js"></script>-->
+
+  <?php
+//     require_once './vendor/Classes/Mobile_Detect.php';
+    $detect4 = new Mobile_Detect;
+    if ($detect4->isTablet()) {?>
+      <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/acomer.provincias.js"></script>
+      <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js?v<?php echo $this->host('version')?>"></script>
+    <?php }elseif($detect4->isMobile()){?>
+      <script src="<?php echo $this->host('ruta')?>/js/aplicacion-mobile.js?v<?php echo $this->host('version')?>"></script>
+    <?php }else{?>
+      <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/acomer.provincias.js"></script>
+      <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js?v<?php echo $this->host('version')?>"></script>
+    <?php }?>
+
+  <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/bootstrap-dropdown.js?v<?php echo $this->host('version')?>"></script>
+
+
+    <script>
+      (function(i,s,o,g,r,a,m){
+        i['GoogleAnalyticsObject']=r;
+        i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)
+        },
+        i[r].l=1*new Date();
+        a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-43174174-1', 'listadelsabor.com');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

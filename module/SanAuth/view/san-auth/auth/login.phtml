@@ -1,0 +1,94 @@
+
+<script type="text/javascript" src="<?php echo $this->host('base');?>/js/jquery.validate.min.js"></script>
+
+        <?php if($this->mensaje){ ?>
+        <div class="row-fluid">
+            <div class="alert alert-success alert-margin alert-message">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <?php  echo $this->mensaje;?>
+            </div>
+        </div><?php } ?>
+        <?php if ($this->messages) { ?>
+            <?php foreach ($this->messages as $message) { ?>
+                <div class="row-fluid">
+                    <div class="alert alert-success alert-margin alert-message">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <?php echo $message; ?>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php } ?>
+        <div class="">
+            <div class="">
+                <h3>Iniciar sesión</h3>
+                <?php
+                $form = $this->form;
+//                $form->setAttributes(array(
+//                    'action' => '/auth',
+//                    'method' => 'post',
+//
+//                ));
+
+                $form->setAttribute('action', $this->url(
+                    'login/process',
+                    array(
+                           'action'     => 'authenticate',//'login'//
+                    )
+                ));   
+                $form->setAttribute('id', 'usarioAut');      
+                $form->setAttribute('class','form-horizontal');
+                $form->prepare();
+                echo $this->form()->openTag($form);?>
+
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail">Email:</label>
+                    <div class="controls">
+                        <?php  echo $this->formRow($form->get('va_email'));?>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputPassword">Contraseña:</label>
+                    <div class="controls">
+                        <?php echo $this->formRow($form->get('va_contrasena'));?>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <?php  echo $this->formsubmit($form->get('submit'));?>
+                    </div>
+                </div>
+                <?php echo $this->form()->closeTag(); ?>
+            </div>
+        </div>          
+  
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".alert-message").alert();
+        window.setTimeout(function() { $(".alert-message").alert('close'); }, 15000);
+
+        $("#usarioAut").validate({
+            rules: {
+              va_email: {
+                required: true,
+                email: true
+              },
+              va_contrasena:{
+                required : true,
+                minlength: 8
+              }
+            },
+            messages:{
+              va_email:{
+                required:"Por favor ingresa su Email",
+                email: "Por favor ingrese su correo valido"
+                //,remote: "Correo incorrecto"
+              },
+              va_contrasena: {
+                required : "Por favor ingrese su contraseña",
+                minlength:"Por favor ingresa una contraseña de 8 caracteres a mas"
+                //,remote: "Contraseña inválida"
+              }
+            }
+          });
+    });
+</script>

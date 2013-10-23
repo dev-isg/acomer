@@ -175,8 +175,8 @@ $sm->init();
     $crul=new Application\View\Helper\CanonicalUrl();
     $limpiando=new Application\View\Helper\Canonical();
       foreach($platos as $plato){                                                    
-          $platourl=$crul($limpiando($plato->restaurante), array('plato' =>$limpiando($plato->va_nombre),'suffix' =>$plato->in_id));
-          $sm->addUrl($baseUrl . '/plato/' . $platourl);
+          $platourl=$crul($limpiando($plato->va_nombre), array('suffix' =>$plato->in_id));
+          $sm->addUrl($baseUrl . '/plato/restaurante/' . $platourl);
         }   
 $sm->updateRobots();
 $result = $sm->send();

@@ -89,7 +89,8 @@
     </div>
     <div class="recomendados-platos primer-home" style="padding-bottom: 90px;">
       <ul id="contenedor-pl">
-        <?php  foreach ($this->promociones  as $promo) {
+        <?php  foreach ($this->promociones  as $promo){
+          
           if(strlen($promo['va_nombre'])>27){
            $strnom=trim(substr($promo['va_nombre'], 0, 24));
             $strnom.='...';
@@ -97,7 +98,7 @@
           <li class="elemento-pl">
             <div class="plato_r">
               <div class="mosaic-block cover">
-                <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($promo['restaurant_nombre']), array('plato' => $this->canonical($promo['va_nombre']),'suffix' => $promo['in_id']));?>" class="mosaic-backdrop" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>">
+                <a href="/plato/restaurante/<?php echo $this->canonicalUrl($this->canonical($promo['va_nombre']), array('suffix' => $promo['id']));?>" class="mosaic-backdrop" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>">
                   <div class="mosaic-overlay">
                     <span><?php echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></span>
                     <img src="<?php if ($promo['va_imagen']=='platos-default.png')
@@ -106,33 +107,19 @@
                         {echo $this->host('images') . '/plato/destacado/' . htmlspecialchars($promo['va_imagen'], ENT_QUOTES, 'utf-8');} ?>" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>" class="img-plato">
                   </div>
                 </a>
-                <!--<a href="/plato/<?php echo $this->canonicalUrl($this->canonical($promo['restaurant_nombre']), array('plato' =>$this->canonical($promo['va_nombre']),'suffix' => $promo['in_id']));?>" class="mosaic-backdrop" title="<?php echo $promo['va_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>">
-                  <div class="details">
-                    <h4>
-                      <?php
-                      echo htmlspecialchars($strnom, ENT_QUOTES, 'utf-8'); ?></h4>
-                      <p class="title-details" style="font-weight: bold;">Descripción</p>
-                      <p class="desc-plato font-desc-c"> <?php 
-                      if(strlen($promo['tx_descripcion'])>100){
-                       $str=trim(substr($promo['tx_descripcion'], 0, 97));
-                        $str.='...';
-                       }else {$str=$promo['tx_descripcion'];}
-                      echo htmlspecialchars($str, ENT_QUOTES, 'utf-8'); ?> </p>
-                  </div>
-                </a>-->
               </div>
               <div class="foo">
                 <div class="pt">
                   <p class="com">
                     <?php echo $promo['NumeroComentarios'] ?>  
-                    <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($promo['restaurant_nombre']), array('plato' => $this->canonical($promo['va_nombre']),'suffix' => $promo['in_id']));?>" title="ver todos los comentarios" alt="<?php echo $promo['va_nombre'];?>"><i class="icon-comment"></i></a>
+                    <a href="/plato/restaurante/<?php echo $this->canonicalUrl($this->canonical($promo['va_nombre']), array('suffix' => $promo['id']));?>" title="ver todos los comentarios" alt="<?php echo $promo['va_nombre'];?>"><i class="icon-comment"></i></a>
                     </p>
                   <div class="punt">
                     <div class="puntuaciones c<?php echo $promo['Ta_puntaje_in_id'];?>"></div>
                   </div>
                 </div>
                 <p class="nom_res">
-                  <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($promo['restaurant_nombre']), array('plato' =>$this->canonical($promo['va_nombre']),'suffix' => $promo['in_id']));?>" title="<?php echo $promo['restaurant_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>"><?php 
+                  <a href="/plato/restaurante/<?php echo $this->canonicalUrl($this->canonical($promo['va_nombre']), array('suffix' => $promo['id']));?>" title="<?php echo $promo['restaurant_nombre'];?>" alt="<?php echo $promo['va_nombre'];?>"><?php 
                      if(strlen($promo['restaurant_nombre'])>29){
                      $strres=trim(substr($promo['restaurant_nombre'], 0, 26));
                       $strres.='...';
