@@ -146,7 +146,8 @@ public function idfacebook2($id,$logout)
     }
     
      public function insertarusuariofacebbok($nombre,$email,$idfacebook,$logout)
-    {   echo 'entro';exit;$contrasena = sha1($idfacebook) ;
+    {   
+      $contrasena = sha1($idfacebook) ;
          $fecha = date("Y-m-d h:m:s");  
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);

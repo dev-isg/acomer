@@ -566,7 +566,7 @@ public function getAuthService() {
         return $this->clientesTable;
     }
  
-    public  function facebook()       
+   public  function facebook()       
    {  
     require './vendor/facebook/facebook.php';
                $facebook = new \Facebook(array(
@@ -577,34 +577,42 @@ public function getAuthService() {
                    ));
             $user = $facebook->getUser();
             if ($user) {
-             try { $user_profile = $facebook->api('/me');            
-             } 
+             try { $user_profile = $facebook->api('/me'); } 
              catch (FacebookApiException $e) {
                            error_log($e);
                            $user = null; } }
-            if ($user) {
+                       if ($user) {
                          $logoutUrl = $facebook->getLogoutUrl();
                          $id_facebook = $user_profile['id'];
                          $name = $user_profile['name'];
+                         $link = $user_profile['link'];
                          $email = $user_profile['email'];
-                         //$naitik = $facebook->api('/naitik');   
-                   
-                         $id_face=$this->getClientesTable()->usuario1($email); 
-                         var_dump(count($id_face));exit;
+                         $naitik = $facebook->api('/naitik');
+                          $generoface = $user_profile['gender'];
+                         if($generoface=='male')
+                          {$genero=='masculino';}
+                     else{$genero=='femenino';}
+                       if($user_profile==''){}
+                       else
+                        { $id_face=$this->getClientesTable()->usuario1($email);  
                          if(count($id_face)>0)
                          {   $correo = $id_face[0]['va_email'];
                          if($id_face[0]['id_facebook']=='')  
                                 { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
-                                 AuthController::sessionfacebook($correo,$id_facebook);}     
+                                 AuthController::sessionfacebook($correo,$id_facebook); }     
                          else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
-                             AuthController::sessionfacebook($correo,$id_facebook); } 
-                             }
+                             AuthController::sessionfacebook($correo,$id_facebook); }}
                          else
-                          { 
+                          { //$imagen = 'https://graph.facebook.com/'.$user.'/picture';
                               $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
                               AuthController::sessionfacebook($email,$id_facebook); }
+                           //  return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
+                                 }
+                             
+                          //  return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');  
                              } 
                       else {
+                         // $url  = $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');
                        $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
                     'redirect_uri'=>$this->_options->host->ruta.'/'
                            ));   
@@ -612,11 +620,13 @@ public function getAuthService() {
                        }   
                      
                  return array(
+         //   'user_profile' => $user_profile,
             'user' => $user,
             'logoutUrl'  =>$logoutUrl,
             'loginUrl' => $loginUrl,
+          //  'naitik' =>$naitik 
         );
-    
+      return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
     }
     
     
