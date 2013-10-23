@@ -115,7 +115,7 @@ class ClientesTable
 //        return $resultSet->toArray();
 //    }
      public function usuario1($correo)
-    {
+    {echo 'entro';exit;
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
         $selecttot = $sql->select()->from('ta_cliente')
