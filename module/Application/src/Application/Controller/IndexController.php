@@ -53,6 +53,14 @@ public function __construct()
                     $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
                     $activo=$participa->en_estado;//=='activo'?true:false;
                 }    
+        if (!isset($session)) {
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
+        $this->layout()->login = $facebook['loginUrl'];
+        $this->layout()->user = $facebook['user']; 
+        $loginUrl = $facebook['loginUrl'];
+        $user = $facebook['user']; }
+        
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
         $mistura=$this->getConfigTable()->platoslistadelsabor();
@@ -92,7 +100,9 @@ public function __construct()
               'urlac' => $urlf,
             'menus'=>$menus,
             'banner'=>$banner,
-            'session'=>$session
+            'session'=>$session,
+            'user' => $user,
+            'loginUrl'  =>$loginUrl, 
         ));
         return $view;
     }
@@ -1397,4 +1407,6 @@ public function __construct()
         }
         return $this->restauranteTable;
     }
+    
+    
 }

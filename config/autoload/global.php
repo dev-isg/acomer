@@ -41,6 +41,11 @@ return array(
        'ruta' => 'http://dev.listadelsabor.com',
         'version'=>1,
     ),
+    
+    'facebook' => array(
+        'appId' => '750432834973806',
+        'secret' => '2e07ad7ea83185f20da1ca546fee0720'
+    ),
     'upload' => array(
         'images' => APPLICATION_PATH . '/public/imagenes'
     ),

@@ -2523,6 +2523,55 @@ p.ver_mistura a{
   background: url(../img/login.png) no-repeat;
   width: 150px;
   height: 30px;
+  margin-left: 52px;
+}
+span.input-icon, 
+span.input-help {
+  display: block;
+  position: relative;
+}
+.form-login .input-icon > input {
+  padding-left: 25px;
+  padding-right: 6px;
+}
+.form-login textarea, 
+.form-login input[type="text"], 
+.form-login input[type="password"], 
+.form-login input[type="datetime"], 
+.form-login input[type="datetime-local"], 
+.form-login input[type="date"], 
+.form-login input[type="month"], 
+.form-login input[type="time"], 
+.form-login input[type="week"], 
+.form-login input[type="number"], 
+.form-login input[type="email"], 
+.form-login input[type="url"], 
+.form-login input[type="search"], 
+.form-login input[type="tel"], 
+.form-login input[type="color"] {
+  background-color: #FFFFFF;
+  border: 1px solid #D5D5D5;
+  border-radius: 0 0 0 0 !important;
+  color: #858585;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.2;
+  padding: 5px 4px;
+  transition-duration: 0.1s;
+  box-shadow: none;
+}
+.form-login .input-icon > [class*="icon-"], 
+.form-login .input-icon > [class*="clip-"] {
+  bottom: 0;
+  color: #909090;
+  display: inline-block;
+  font-size: 14px;
+  left: 5px;
+  line-height: 35px;
+  padding: 0 3px;
+  position: absolute;
+  top: 0;
+  z-index: 2;
 }
 /*#plato-verdura-wok { background-image:url(../img/bann/ceviche-e.png); }*/
 
