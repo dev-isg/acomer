@@ -228,6 +228,10 @@
               
                <?if ($session) { ?>
               <div class="agregar-comentario-desc" style="display:none;">
+                  <p><?php echo $this->session->va_nombre_cliente;  ?></p>
+                  <p><?php echo $this->session->in_id;  ?></p>
+                  <p><?php echo $this->session->va_email;  ?></p>
+                  
                 <?php
                 $title = 'Agregar nuevo comentario';
                 $this->headTitle($this->listatitle);

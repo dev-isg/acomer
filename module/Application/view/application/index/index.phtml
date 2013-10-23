@@ -12,11 +12,15 @@
     </section>-->
     <section id="paso-tres" style="margin-top: 0px;margin-bottom:10px;">
       <div class="iniciar-session">
+          <?php  if (!$session){?>
         <ul>
           <li><a href="#modalSession" role="button" data-toggle="modal">Ingresa</a></li>
           <li>ó</li>
           <li><a href="/registrarse">Registrarse</a></li>
         </ul>
+          <?php  }else {?><ul>
+          <li><a href="auth//logout" role="button" data-toggle="modal">Salir</a></li>
+        </ul><?php  }?>
       </div>
       <div class="nav-banner">
         <ul class="dep-home" style="float:left;">
@@ -30,6 +34,7 @@
               <p>Encuentra</p>
             </div>
           </li>
+         
           <li>
             <div class="paso3 paso">
               <p>Comenta</p>

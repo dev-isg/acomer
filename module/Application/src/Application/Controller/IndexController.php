@@ -17,12 +17,14 @@ use Application\Form\Solicita;
 use Application\Form\Registro;
 use Application\Form\Registroplato;
 use Application\Form\Contactenos;
+use SanAuth\Controller\AuthController; 
 // use Application\Model\Entity\Procesa;
 use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
 use Application\Model\Entity\Album;
 use Zend\Mail\Message;
 use Zend\Http\Request;
+use Usuario\Model\ClientesTable;
 use Zend\Mail\Transport\Sendmail as SendmailTransport;
 // use Zend\I18n\Filter\Alnum;
 // use Zend\View\Helper\HeadTitle;
@@ -36,6 +38,7 @@ class IndexController extends AbstractActionController
 
     protected $configTable;
     protected $restauranteTable;
+    protected $clientesTable;
     public $dbAdapter;
 public function __construct()
 	{
@@ -44,6 +47,12 @@ public function __construct()
     public function indexAction()
     {
              $view = new ViewModel();
+         $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $session=$storage->read();
+        if ($session) {           
+                    $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
+                    $activo=$participa->en_estado;//=='activo'?true:false;
+                }    
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
         $mistura=$this->getConfigTable()->platoslistadelsabor();
@@ -82,7 +91,8 @@ public function __construct()
             'clase' => 'Home',
               'urlac' => $urlf,
             'menus'=>$menus,
-            'banner'=>$banner
+            'banner'=>$banner,
+            'session'=>$session
         ));
         return $view;
     }
@@ -542,6 +552,7 @@ public function __construct()
             'start'=> $start,
             'end' =>$end,
             'plat'=>$plato,
+            'session'=>$session,
             'menus'=>$menus,
             'masdestacados'=>$consultafinal
         ));
@@ -1371,7 +1382,13 @@ public function __construct()
         // $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Terminos';
     }
-    
+      public function getClientesTable() {
+        if (!$this->clientesTable) {
+            $sm = $this->getServiceLocator();
+            $this->clientesTable = $sm->get('Usuario\Model\ClientesTable');
+        }
+        return $this->clientesTable;
+    }
     
       public function getRestauranteTable() {
         if (!$this->restauranteTable) {

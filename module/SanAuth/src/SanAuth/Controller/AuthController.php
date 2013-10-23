@@ -23,7 +23,6 @@ class AuthController extends AbstractActionController {
     protected $storage;
     protected $authservice;
     protected $clientesTable;
-    protected $grupoTable;
 
     
     public function __construct() {
@@ -129,8 +128,6 @@ class AuthController extends AbstractActionController {
                         $arrurl = explode('/', $urlorigen);
                         $id = end($arrurl);
                        
-                          return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
-                       
                         $storage = $this->getAuthService()->getStorage();
                         $storage->write($this->getServiceLocator()
                                         ->get('TableAuthService')
@@ -142,6 +139,7 @@ class AuthController extends AbstractActionController {
                                             'va_logout',
                                             'id_facebook'
                                         )));
+                         return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
                         if ($id) {
                             return $this->redirect()->toRoute($redirect, array('in_id' => $id));
                         } else {
@@ -378,9 +376,8 @@ class AuthController extends AbstractActionController {
                                         ->get('TableAuthService')
                                         ->getResultRowObject(array(
                                             'in_id',
-                                            'va_nombre',
+                                            'va_nombre_cliente',
                                             'va_contrasena',
-                                            'va_email',
                                             'va_foto',
                                             'va_logout',
                                             'id_facebook'

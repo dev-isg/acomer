@@ -131,7 +131,7 @@ class ClientesTable
         $sql = new Sql($adapter);
         $selecttot = $sql->select()
         ->from('ta_cliente')
-        ->where(array('va_email'=>$iduser));
+        ->where(array('in_id'=>$iduser));
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet->current();

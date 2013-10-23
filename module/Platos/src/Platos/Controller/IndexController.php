@@ -703,6 +703,13 @@ class IndexController extends AbstractActionController {
                                 $view->setTerminal(true);
                                 return $view;     
                }
+               
+        $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $session=$storage->read();
+        if ($session) {           
+                    $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
+                    $activo=$participa->en_estado;//=='activo'?true:false;
+                }
         $datos =$this->params()->fromRoute();  
         $urlerror =  $datos['nombre'];
         $nombre = explode('-', $datos['nombre']); 
@@ -763,16 +770,6 @@ class IndexController extends AbstractActionController {
                     $resultados =$results->response->docs;
                     }   }
                   else{  $resultados =$results->response->docs;}
-                  
-                  
-        $storage = new \Zend\Authentication\Storage\Session('Auth');
-        $session=$storage->read();
-      
-        if ($session) {           
-                    $participa=$this->getClientesTable()->compruebarUsuariox($session);
-                    $activo=$participa->en_estado;//=='activo'?true:false;
-               //  var_dump($participa->va_nombre_cliente);exit;
-                }
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
