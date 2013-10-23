@@ -136,7 +136,7 @@ class AuthController extends AbstractActionController {
                                         ->get('TableAuthService')
                                         ->getResultRowObject(array(
                                             'in_id',
-                                            'va_nombre',
+                                            'va_nombre_cliente',
                                             'va_contrasena',
                                             'va_email',
                                             'va_logout',
@@ -193,11 +193,10 @@ class AuthController extends AbstractActionController {
                         $storage->write($this->getServiceLocator()
                                         ->get('TableAuthService')
                                         ->getResultRowObject(array(
-                                            'in_id',
-                                            'va_nombre',
+                                           'in_id',
+                                            'va_nombre_cliente',
                                             'va_contrasena',
                                             'va_email',
-                                            'va_foto',
                                             'va_logout',
                                             'id_facebook'
                                         )));

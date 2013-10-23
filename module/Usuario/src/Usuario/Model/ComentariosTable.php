@@ -43,22 +43,24 @@ class ComentariosTable
     /*
      * agregar y registrar el comentario posiblemente se mueva
      */
-    public function agregarComentario($coment){
+    public function agregarComentario($coment,$id){
          
-           $cliente=array(
-                    'va_nombre_cliente'=>$coment['va_nombre'],
-                    'va_email'=>$coment['va_email'],);
-           
-            $insert = $this->tableGateway->getSql()->insert()->into('ta_cliente')
-                    ->values($cliente);
-            $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
-            
-            $statement->execute();    
-            $idcliente=$this->tableGateway->getAdapter()->getDriver()->getLastGeneratedValue();
+//           $cliente=array(
+//                    'va_nombre_cliente'=>$coment['va_nombre'],
+//                    'va_email'=>$coment['va_email'],
+//                    'en_estado'=>'desactivo',
+//               );
+//           
+//            $insert = $this->tableGateway->getSql()->insert()->into('ta_cliente')
+//                    ->values($cliente);
+//            $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
+//            
+//            $statement->execute();    
+//            $idcliente=$this->tableGateway->getAdapter()->getDriver()->getLastGeneratedValue();
             $comentario = array(
             'tx_descripcion' => $coment['tx_descripcion'],
             'Ta_plato_in_id' => $coment['Ta_plato_in_id'],
-            'Ta_cliente_in_id' => $idcliente,
+            'Ta_cliente_in_id' => $id,
             'Ta_puntaje_in_id' => $coment['Ta_puntaje_in_id'],
                 'da_fecha'=>  $fecha = date("Y-m-d h:m:s")
                 ); 

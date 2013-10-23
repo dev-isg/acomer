@@ -1,66 +1,122 @@
-<?php if ($_GET['m']==1) { ?> <div class="row-fluid">
+<div class="content-left">
+  <div class="descrip-product">
+    <div class="contenido-static">
+      <h2>REGISTRARSE</h2>
+
+      <?php if ($_GET['m']==1) { ?> <div class="row-fluid">
       <div class="alert alert-margin alert-message">
         <button type="button" class="close" data-dismiss="alert">×</button>
         <?php  echo 'Tu cuenta está casi lista para usarse, solo tienes que activarla desde tu correo electrónico'; ?>
       </div>
     </div> <?php } ?>
-<?php if($this->mensaje){?>
+    <?php if($this->mensaje){?>
     <div class="row-fluid">
       <div class="alert alert-margin alert-message">
         <button type="button" class="close" data-dismiss="alert">×</button>
         <?php  echo $this->mensaje; ?>
       </div>
     </div>
-   <?php } ?>
+    <?php } ?>
         <?php
           $form = $this->form;
           $form->setAttributes(array(
            'action' => $this->url.'/registrarse',
            'method' => 'post',
-           'class'=>'span12 form-crear-usuario',
+           'class'=>'form-horizontal',
            'id'=>'registro'
           ));
           $form->prepare();
           echo $this->form()->openTag($form);
         ?>
-
-          <div >
           <?php echo $this->formHidden($form->get('in_id'));?>
-          <span>(<strong> * </strong>) Por favor complete los campos requeridos</span>
-            <p>
-            <label for=""><strong> * </strong>Nombre Completo</label>
-            <?php echo $this->formRow($form->get('va_nombre_cliente'));?>
-            </p>
-            <p>
-            <label for=""><strong> * </strong>Correo Electrónico</label>
-            <?php echo $this->formRow($form->get('va_email'));?>
-            </p>
-            <p>
-            <label for=""><strong> * </strong>Contraseña</label>
-            <?php echo $this->formRow($form->get('va_contrasena'));?>
-            </p>
-            <p>
-            <label for=""><strong> * </strong>Confirmar contraseña</label>
-            <?php echo $this->formRow($form->get('verificar_contrasena'));?>
-            </p>
-            
-            <p>
-            <label for=""><strong> * </strong>notificaciones</label>
-            <?php echo $this->formRow($form->get('va_notificacion'));?>
-            </p>
-            <?php echo $this->formSubmit($form->get('submit'));?>
-        </div>
-      
+          <p style="margin-bottom:15px;">(<strong> * </strong>) Por favor complete los campos requeridos</p>
+
+          <div class="control-group">
+            <label class="control-label" for="inputName">Nombre Completo: *</label>
+            <div class="controls">
+              <?php echo $this->formRow($form->get('va_nombre_cliente'));?>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputName">Correo Electrónico: *</label>
+            <div class="controls">
+              <?php echo $this->formRow($form->get('va_email'));?>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputName">Contraseña: *</label>
+            <div class="controls">
+              <?php echo $this->formRow($form->get('va_contrasena'));?>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputName">Confirmar contraseña: *</label>
+            <div class="controls">
+              <?php echo $this->formRow($form->get('verificar_contrasena'));?>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputName"></label>
+            <div class="controls">
+              <label class="checkbox">
+                <?php echo $this->formRow($form->get('va_notificacion'));?> Recibir notificaciones
+              </label>
+              
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputName"></label>
+            <div class="controls">
+              <?php echo $this->formSubmit($form->get('submit'));?>
+            </div>
+          </div>
         <?php echo $this->form()->closeTag();?>
-          
-          
+    </div>
+  </div>
+</div>
+<script src="<?php echo $this->host('ruta')?>/js/vendor/jquery.validate.min.js?v<?php echo $this->host('version')?>"></script>
 
-    
 
-   
+
 <script type="text/javascript">
   $(document).ready(function(){
-    $(".alert-message").alert();
-    window.setTimeout(function() { $(".alert-message").alert('close'); }, 15000);
+    //$(".alert-message").alert();
+    //window.setTimeout(function() { $(".alert-message").alert('close'); }, 15000);
+
+    $("#registro").validate({
+      rules: {
+        va_nombre_cliente: {
+          required: true
+        },
+        va_email: {
+          required: true,
+          email: true
+        },
+        va_contrasena: {
+          required: true
+        },
+        verificar_contrasena:{
+          required:true,
+          equalTo: '#va_contrasena'
+        }
+      },
+      errorElement: "em",
+      messages: {
+        va_nombre_cliente: "Por favor ingrese su nombre completo", 
+        va_email: {
+          required: "Por favor ingrese su correo electrónico",
+          email: "Por favor ingrese un correo válido"
+        },
+        va_contrasena: {
+          required: 'Por favor ingrese una contraseña'
+        },
+        verificar_contrasena: {
+          required: 'Por favor ingrese una contraseña',
+          equalTo: "Por favor ingrese la misma contraseña"
+        }
+      }
+    });
+
   });
+    
 </script>

@@ -28,7 +28,7 @@ class ClientesForm extends Form
             'name' => 'va_nombre_cliente',
             'type' => 'Text',
             'attributes' => array(
-                'class' => 'span5',
+                'id' => 'va_nombre_cliente',
                 'placeholder' => 'Ingrese el nombre de usario…'
             ),
         ));
@@ -42,21 +42,20 @@ class ClientesForm extends Form
 //            ),
             'attributes' => array(
                 'id' => 'va_contrasena',
-                'class' => 'span5',
                 'placeholder' => 'Ingrese la contraseña…'
             ),
         ));
         
         $this->add(array(
-    'type' => 'Checkbox',
-    'name' => 'va_notificacion',
-    'options' => array(
-        'label' => 'Recibir Notificaciones?',
-        'use_hidden_element' => true,
-        'checked_value' => 'si',
-        'unchecked_value' => 'no'
-    )
-));
+            'type' => 'Checkbox',
+            'name' => 'va_notificacion',
+            'options' => array(
+                
+                'use_hidden_element' => true,
+                'checked_value' => 'si',
+                'unchecked_value' => 'no'
+            )
+        ));
 
         $this->add(array(
             'name' => 'verificar_contrasena',
@@ -65,7 +64,7 @@ class ClientesForm extends Form
                 'label' => '',
             ),
             'attributes' => array(
-                'class' => 'span5',
+                'id' => 'verificar_contrasena',                
                 'placeholder' => 'Confirme la contraseña…'
             ),
         ));
@@ -73,13 +72,9 @@ class ClientesForm extends Form
             $this->add(array(
             'name' => 'va_email',
             'type' => 'Email',
-            'attributes' => array(               
-                'class' => 'span5',
+            'attributes' => array(
                 'id'   => 'va_email',
                 'placeholder'=>'Ingrese su Correo'
-            ),
-            'options' => array(
-                'label' => 'Correo',
             ),
             'validators' => array( 
                 array( 
@@ -93,7 +88,7 @@ class ClientesForm extends Form
             )         
         ));
         
-                $this->add(array(
+        $this->add(array(
             'name' => 'submit',
             'type' => 'Submit',
             'attributes' => array(

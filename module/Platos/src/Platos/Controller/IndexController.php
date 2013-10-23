@@ -16,6 +16,7 @@ use Zend\Http\Request;
 use Zend\Json\Json;
 use Platos\Model\Platos;
 use Platos\Model\PlatosTable;
+use Usuario\Model\ClientesTable;
 use Platos\Form\PlatosForm;
 use Application\Form\Formularios;
 use Zend\Form\Element;
@@ -23,12 +24,14 @@ use Zend\Validator\File\Size;
 use Zend\Http\Header\Cookie;
 use Zend\Http\Header;
 use Zend\Db\Sql\Sql;
+use SanAuth\Controller\AuthController; 
 
 class IndexController extends AbstractActionController {
 
     protected $platosTable;
     protected $configTable;
     protected $comentariosTable;
+    protected $clientesTable;
     protected $_options;
 	public function __construct()
 	{
@@ -760,36 +763,47 @@ class IndexController extends AbstractActionController {
                     $resultados =$results->response->docs;
                     }   }
                   else{  $resultados =$results->response->docs;}
-
+                  
+                  
+        $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $session=$storage->read();
+      
+        if ($session) {           
+                    $participa=$this->getClientesTable()->compruebarUsuariox($session);
+                    $activo=$participa->en_estado;//=='activo'?true:false;
+               //  var_dump($participa->va_nombre_cliente);exit;
+                }
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
         $form = new \Usuario\Form\ComentariosForm();
-        if($_COOKIE['va_nombre']and $_COOKIE['va_email'] )
-       {$form->get('va_nombre')->setValue($_COOKIE['va_nombre']);
-        $form->get('va_email')->setValue($_COOKIE['va_email']);}
+//        if($_COOKIE['va_nombre']and $_COOKIE['va_email'] )
+//       {$form->get('va_nombre')->setValue($_COOKIE['va_nombre']);
+//        $form->get('va_email')->setValue($_COOKIE['va_email']);}
         $form->get('submit')->setValue('Agregar');
         $request = $this->getRequest();
         if ($request->isPost()) {
-            if (!isset($_COOKIE['id' . $id])) {
+            if ($session) {
                 $datos = $this->getRequest()->getPost()->toArray();
+ //var_dump($datos);exit;
                 $datos['Ta_plato_in_id'] = $id;
+                                //var_dump($session->in_id);exit;
                 $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
-                $datos['va_nombre'] = htmlspecialchars($datos['va_nombre']);
-                $datos['va_email'] = htmlspecialchars($datos['va_email']);
+//                $datos['va_nombre'] = htmlspecialchars($datos['va_nombre']);
+//                $datos['va_email'] = htmlspecialchars($datos['va_email']);
                 $validar = explode('http://', $datos['tx_descripcion']);
                 if(count($validar)==2){
                 return $this->redirect()->toUrl('/plato/restaurante/'.$urlerror.'?m=1');}
                 else {
                 $form->setData($datos);
-                if ($form->isValid()) {
-                    setcookie('va_nombre',$datos['va_nombre']);
-                    setcookie('va_email',$datos['va_email']);
-                    $this->getComentariosTable()->agregarComentario($form->getData());
-                    setcookie('id' . $id, 1);
-                    setcookie('nombre',$datos['va_nombre']);
-                    setcookie('email',$datos['va_email']);
-                    $form->setData(array('va_nombre' => '', 'va_email' => '', 'tx_descripcion' => '')); 
+                if (!$form->isValid()) {
+//                    setcookie('va_nombre',$datos['va_nombre']);
+//                    setcookie('va_email',$datos['va_email']);
+                    $this->getComentariosTable()->agregarComentario($form->getData(),$participa->in_id);
+//                    setcookie('id' . $id, 1);
+//                    setcookie('nombre',$datos['va_nombre']);
+//                    setcookie('email',$datos['va_email']);
+//                    $form->setData(array('va_nombre' => '', 'va_email' => '', 'tx_descripcion' => '')); 
                     $datos =$this->params()->fromRoute();               
                     $this->redirect()->toUrl('/plato/restaurante/'.$datos['nombre']);
                   }
@@ -816,7 +830,8 @@ class IndexController extends AbstractActionController {
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id,
             'listatitle'=>$listatitle, 'masplatos' => $resultados
-             ,'listades' => $consulta,'menus'=>$menu));
+             ,'listades' => $consulta,'menus'=>$menu,'session'=>$session,
+            'participa'=>$activo,));
         
         return $view;
     }
@@ -852,6 +867,14 @@ class IndexController extends AbstractActionController {
         }
         return $this->platosTable;
     }
+    public function getClientesTable() {
+        if (!$this->clientesTable) {
+            $sm = $this->getServiceLocator();
+            $this->clientesTable = $sm->get('Usuario\Model\ClientesTable');
+        }
+        return $this->clientesTable;
+    }
+
 
     public function getCount($val) {
 

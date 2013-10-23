@@ -34,7 +34,7 @@ class PruebaController extends AbstractActionController {
         $result = $adapter->authenticate();
         if ($result->isValid()) {
             $storage = $adapter->getStorage();
-            $storage->write($authService->getResultRowObject(array('in_id','va_nombre', 'va_contrasena','va_email')));
+            $storage->write($authService->getResultRowObject(array('in_id','va_nombre_cliente', 'va_contrasena','va_email')));
         }
     }
 

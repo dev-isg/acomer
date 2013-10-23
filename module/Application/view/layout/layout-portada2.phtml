@@ -429,16 +429,18 @@
 //     require_once './vendor/Classes/Mobile_Detect.php';
     $detect4 = new Mobile_Detect;
     if ($detect4->isTablet()) {?>
+      <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/bootstrap-modal.js"></script>
       <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/acomer.provincias.js"></script>
       <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js?v<?php echo $this->host('version')?>"></script>
     <?php }elseif($detect4->isMobile()){?>
       <script src="<?php echo $this->host('ruta')?>/js/aplicacion-mobile.js?v<?php echo $this->host('version')?>"></script>
     <?php }else{?>
+      <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/bootstrap-modal.js"></script>
       <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/acomer.provincias.js"></script>
       <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js?v<?php echo $this->host('version')?>"></script>
     <?php }?>
 
-  <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/bootstrap-dropdown.js?v<?php echo $this->host('version')?>"></script>
+    <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/bootstrap-dropdown.js?v<?php echo $this->host('version')?>"></script>
 
 
     <script>

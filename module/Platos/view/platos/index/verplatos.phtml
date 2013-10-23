@@ -224,6 +224,9 @@
                   <a href="#" class="btn btn-warning agregar-coment-1">Agregar comentario</a>
           
               </div>
+              
+              
+               <?if ($session) { ?>
               <div class="agregar-comentario-desc" style="display:none;">
                 <?php
                 $title = 'Agregar nuevo comentario';
@@ -247,8 +250,8 @@
                     
                     echo $this->formHidden($form->get('Ta_plato_in_id'));
                     ?>
-                    <div class="control-group"><?php echo $this->formRow($form->get('va_nombre')); ?></div>
-                    <div class="control-group"><?php echo $this->formRow($form->get('va_email')); ?></div>
+                    <!--<div class="control-group"><?php //echo $this->formRow($form->get('va_nombre')); ?></div>
+                    <div class="control-group"><?php //echo $this->formRow($form->get('va_email')); ?></div>-->
                     <div class="control-group">
                       <label style="color:#444;">Valoración:</label>
                       <p id="star"></p>
@@ -262,6 +265,10 @@
                       <?php echo $this->form()->closeTag(); ?>
                   </div>
               </div>
+              
+               <?php  } ?>
+              
+              
                   <?php if($_GET['m']==1)  {?>
                     <h4>El comentario no puede contener Urls.</h4> 
                   <?php } ?>

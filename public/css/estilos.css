@@ -2484,6 +2484,40 @@ p.ver_mistura a{
 #slider{
   height: 210px!important;
 }
+
+/*Banner de registro*/
+.iniciar-session{
+  width: 100%;
+  height: 25px;
+}
+  .iniciar-session ul{
+    list-style: none;
+    overflow: hidden;
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 0;
+    margin-left: 0;
+  }
+    .iniciar-session ul li{
+      float: left;
+      margin-left: 10px;
+      line-height: 25px;
+      font-size: 13px;
+    }
+    .iniciar-session ul li:first-child{
+      margin-left: 0;
+    }
+    .iniciar-session ul li a{
+      font-size: 13px;
+    }
+#modalSession h3{
+  font-size: 18px;
+  line-height: 20px;
+}
+#modalSession p{
+  font-size: 12px;
+  text-align: center;
+}
 /*#plato-verdura-wok { background-image:url(../img/bann/ceviche-e.png); }*/
 
 /*#btn-continua2 { width:200px; height:93px; position:absolute; background-image:url(../img/btn-continuar.png); background-repeat:no-repeat; margin-top:525px; margin-left:451px; display:none; cursor:pointer;}*/

@@ -125,6 +125,19 @@ class ClientesTable
         return $resultSet->toArray();
     }
    
+    public function compruebarUsuariox($iduser){
+        
+        $adapter = $this->tableGateway->getAdapter();
+        $sql = new Sql($adapter);
+        $selecttot = $sql->select()
+        ->from('ta_cliente')
+        ->where(array('va_email'=>$iduser));
+        $selectString = $sql->getSqlStringForSqlObject($selecttot);
+        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        return $resultSet->current();
+    
+    }
+    
     private function cargaAtributos($usuario=array())
     {
         $this->nombre=$usuario["va_apellidos"];
