@@ -606,8 +606,8 @@ public function getAuthService() {
 //                       if($user_profile==''){}
 //                       else
 //                        {   
-                       var_dump($email);exit;
-                        $id_face=$this->getClientesTable()->usuariocorreo($email);  
+                        $id_face=$this->getClientesTable()->usuariocorreo($email); 
+                        
                          if(count($id_face)>0)
                          {   $correo = $id_face[0]['va_email'];
                          if($id_face[0]['id_facebook']=='')  
@@ -616,7 +616,8 @@ public function getAuthService() {
                          else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
                              AuthController::sessionfacebook($correo,$id_facebook); }}
                          else
-                          { //$imagen = 'https://graph.facebook.com/'.$user.'/picture';
+                          { echo 'entro';exit;
+//$imagen = 'https://graph.facebook.com/'.$user.'/picture';
                               $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
                               AuthController::sessionfacebook($email,$id_facebook); }
                            //  return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
