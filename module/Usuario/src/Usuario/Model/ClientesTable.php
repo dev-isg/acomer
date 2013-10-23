@@ -121,6 +121,7 @@ class ClientesTable
                 ->where(array('va_email'=>$idface));
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        var_dump($resultSet);exit;
         return $resultSet->toArray();
     }
      public function idfacebook($id,$idfacebook,$logout)
