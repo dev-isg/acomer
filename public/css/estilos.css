@@ -2518,6 +2518,12 @@ p.ver_mistura a{
   font-size: 12px;
   text-align: center;
 }
+.loginFacebook{
+  display: block;
+  background: url(../img/login.png) no-repeat;
+  width: 150px;
+  height: 30px;
+}
 /*#plato-verdura-wok { background-image:url(../img/bann/ceviche-e.png); }*/
 
 /*#btn-continua2 { width:200px; height:93px; position:absolute; background-image:url(../img/btn-continuar.png); background-repeat:no-repeat; margin-top:525px; margin-left:451px; display:none; cursor:pointer;}*/
