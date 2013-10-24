@@ -63,7 +63,7 @@ public function __construct()
         
         
         if($facebook['logoutUrl']){
-                        var_dump($facebook['logoutUrl']);exit;}
+                       return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');}
         }
         
         $comidas = $this->joinAction()->toArray();
