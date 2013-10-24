@@ -581,7 +581,7 @@ public function getAuthService() {
              catch (FacebookApiException $e) {
                            error_log($e);
                            $user = null; } }
-                      if (!empty($user)) {
+                      if ($user) {
                          $logoutUrl = $facebook->getLogoutUrl();
                          $id_facebook = $user_profile['id'];
                          $name = $user_profile['name'];
@@ -589,6 +589,7 @@ public function getAuthService() {
                          $naitik = $facebook->api('/naitik');
                    
                         $id_face=$this->getClientesTable()->usuario1($email);  
+                        var_dump(count($id_face));exit;
                          if(count($id_face)>0)
                          {   $correo = $id_face[0]['va_email'];
                          if($id_face[0]['id_facebook']=='')  
