@@ -59,6 +59,29 @@ class ClientesTable
                    $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
     }
     
+    
+    
+     public function usuario2($correo)
+    {
+        $adapter = $this->tableGateway->getAdapter();
+        $sql = new Sql($adapter);
+        $selecttot = $sql->select()->from('ta_cliente')
+                ->where(array('va_email'=>$correo));
+        $selectString = $sql->getSqlStringForSqlObject($selecttot);
+        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        return $resultSet->toArray();
+    }
+    
+    
+       public function usuario1($correo) 
+    { 
+        $sqlSelect = $this->tableGateway->getSql() 
+                          ->select()->columns(array('in_id', 'va_nombre_cliente', 'va_email',
+                              'va_contrasena','en_estado'))
+                ->where(array('va_email'=>$correo)); 
+        
+        return $this->tableGateway->select($sqlSelect); 
+    }
     public function guardarClientes(Clientes $clientes,$valor=null)
     {  
         $data = array(
@@ -114,16 +137,7 @@ class ClientesTable
 //        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
 //        return $resultSet->toArray();
 //    }
-     public function usuario1($correo)
-    {
-        $adapter = $this->tableGateway->getAdapter();
-        $sql = new Sql($adapter);
-        $selecttot = $sql->select()->from('ta_cliente')
-                ->where(array('va_email'=>$correo));
-        $selectString = $sql->getSqlStringForSqlObject($selecttot);
-        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-        return $resultSet->toArray();
-    }
+    
      public function idfacebook($id,$idfacebook,$logout)
     {
         $adapter = $this->tableGateway->getAdapter();
