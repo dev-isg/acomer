@@ -59,7 +59,12 @@ public function __construct()
         $this->layout()->login = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         $loginUrl = $facebook['loginUrl'];
-        $user = $facebook['user']; }
+        $user = $facebook['user'];
+        
+        
+        if($facebook['logoutUrl']){
+                        var_dump($facebook['logoutUrl']);exit;}
+        }
         
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;

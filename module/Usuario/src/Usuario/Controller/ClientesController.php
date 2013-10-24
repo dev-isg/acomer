@@ -585,10 +585,10 @@ public function getAuthService() {
                          $logoutUrl = $facebook->getLogoutUrl();
                          $id_facebook = $user_profile['id'];
                          $name = $user_profile['name'];
-//                      
-//                         $email = $user_profile['email'];
-//                         $naitik = $facebook->api('/naitik');
-//                          
+                      
+                         $email = $user_profile['email'];
+                         $naitik = $facebook->api('/naitik');
+                          
 //                       if($user_profile==''){}
 //                       else
 //                        { $id_face=$this->getClientesTable()->usuario1($email);  
@@ -606,7 +606,7 @@ public function getAuthService() {
 //                           //  return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
 //                                 }
                              
-                           return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');  
+                          //  return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');  
                              } 
                       else {
                          // $url  = $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');
