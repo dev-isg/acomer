@@ -577,7 +577,17 @@ public function getAuthService() {
                    ));
             $user = $facebook->getUser();
             if ($user) {
-             try { $user_profile = $facebook->api('/me'); } 
+             try { $user_profile = $facebook->api('/me');
+              $logoutUrl = $facebook->getLogoutUrl();
+                         $id_facebook = $user_profile['id'];
+                         $name = $user_profile['name'];
+                         $email = $user_profile['email'];
+                         $naitik = $facebook->api('/naitik');
+                         $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
+                         AuthController::sessionfacebook($email,$id_facebook);
+             
+             
+             } 
              catch (FacebookApiException $e) {
                            error_log($e);
                            $user = null; } }

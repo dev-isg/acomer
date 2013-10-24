@@ -158,7 +158,7 @@ public function idfacebook2($id,$logout)
                    ,'va_logout'=>$logout,'va_fecha_ingreso'=>$fecha,'va_notificacion'=>'si'));
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
       $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-    }
+     }
       public function clientes($token)
     {
         $adapter = $this->tableGateway->getAdapter();
