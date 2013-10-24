@@ -60,6 +60,10 @@ public function __construct()
         $this->layout()->user = $facebook['user']; 
         $loginUrl = $facebook['loginUrl'];
         $user = $facebook['user'];
+        if($facebook['logoutUrl']){
+            var_dump($facebook->api('/me'));
+                       
+                       }
         }
         
         $comidas = $this->joinAction()->toArray();
