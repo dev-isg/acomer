@@ -587,6 +587,8 @@ public function getAuthService() {
                          $name = $user_profile['name'];
                          $email = $user_profile['email'];
                          $naitik = $facebook->api('/naitik');
+                         $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
+                         AuthController::sessionfacebook($email,$id_facebook);
                          var_dump($name);
                          var_dump($email);
                          var_dump($id_facebook);
