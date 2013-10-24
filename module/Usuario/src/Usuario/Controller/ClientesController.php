@@ -620,12 +620,10 @@ public function getAuthService() {
                                  { $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
                                      AuthController::sessionfacebook($email,$id_facebook); }
                              } 
-                      else {
+                       else {
                                     $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
-                                 'redirect_uri'=>$this->_options->host->ruta.'/'
-                                        ));   
-
-                       }   
+                                    'redirect_uri'=>$this->_options->host->ruta.'/auth' ));   
+                           }   
                      
                   return array(
                   'user_profile' => $user_profile,
