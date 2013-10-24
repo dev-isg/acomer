@@ -65,6 +65,17 @@ return array(
                     )
                 )
             ), 
+             'pruebadefacebook' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/pruebadefacebook',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Usuario\Controller',
+                        'controller' => 'Clientes',
+                        'action' => 'pruebadefacebook'
+                    )
+                )
+            ), 
         ),
     ),
     'view_manager' => array(

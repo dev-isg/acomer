@@ -61,7 +61,7 @@ class ClientesTable
     
     
     
-     public function usuario2($correo)
+     public function usuario1($correo)
     {
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
@@ -73,15 +73,15 @@ class ClientesTable
     }
     
     
-       public function usuario1($correo) 
-    { 
-        $sqlSelect = $this->tableGateway->getSql() 
-                          ->select()->columns(array('in_id', 'va_nombre_cliente', 'va_email',
-                              'va_contrasena','en_estado'))
-                ->where(array('va_email'=>$correo)); 
-        
-        return $this->tableGateway->select($sqlSelect); 
-    }
+//       public function usuario25($correo) 
+//    { 
+//        $sqlSelect = $this->tableGateway->getSql() 
+//                          ->select()->columns(array('in_id', 'va_nombre_cliente', 'va_email',
+//                              'va_contrasena','en_estado'))
+//                ->where(array('va_email'=>$correo)); 
+//        
+//        return $this->tableGateway->select($sqlSelect); 
+//    }
     public function guardarClientes(Clientes $clientes,$valor=null)
     {  
         $data = array(

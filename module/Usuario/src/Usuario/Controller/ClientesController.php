@@ -567,14 +567,14 @@ public function getAuthService() {
     }
  public function  pruebadefacebookAction()
     
- {echo 'nos';exit;
+ {
                                $logoutUrl=454561;
                                 $id_facebook = 1232263;
-                                $name ='josmel';
-                                $email = 'fermin159453@yopmail.com';
+                                $name ='josmel noel yu';
+                                $email = 'fermin159496@yopmail.com';
                               
                                 $id_face=$this->getClientesTable()->usuario1($email); 
-                                var_dump(count($id_face));exit;
+                             //   var_dump(count($id_face));exit;
                                 if(count($id_face)>0)
                                 {   $correo = $id_face[0]['va_email'];
                                 if($id_face[0]['id_facebook']=='')  
@@ -609,7 +609,6 @@ public function getAuthService() {
                                 $email = $user_profile['email'];
                                 $naitik = $facebook->api('/naitik');
                                 $id_face=$this->getClientesTable()->usuario1($email); 
-                                var_dump(count($id_face));exit;
                                 if(count($id_face)>0)
                                 {   $correo = $id_face[0]['va_email'];
                                 if($id_face[0]['id_facebook']=='')  
