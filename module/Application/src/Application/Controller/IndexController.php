@@ -55,15 +55,11 @@ public function __construct()
                 }    
         if (!isset($session)) {
         $face = new \Usuario\Controller\ClientesController();
-        $facebook = $face->facebook();
+        $facebook = $face->facebookAction();
         $this->layout()->login = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         $loginUrl = $facebook['loginUrl'];
         $user = $facebook['user'];
-        
-        
-        if($facebook['logoutUrl']){
-                       return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');}
         }
         
         $comidas = $this->joinAction()->toArray();
