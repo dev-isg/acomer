@@ -24,7 +24,7 @@ return array(
         'port' => '8983',
         'folder' => '/solr'
     ),
-   
+//   
 //    'host' => array(
 //        'base' => 'http://192.168.1.36:8080',
 //        'static' => 'http://192.168.1.36:8080',

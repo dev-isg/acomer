@@ -566,7 +566,7 @@ public function getAuthService() {
         return $this->clientesTable;
     }
  
-   public  function facebookAction()       
+   public  function facebook()       
    {  
     require './vendor/facebook/facebook.php';
                $facebook = new \Facebook(array(
@@ -585,46 +585,41 @@ public function getAuthService() {
                          $logoutUrl = $facebook->getLogoutUrl();
                          $id_facebook = $user_profile['id'];
                          $name = $user_profile['name'];
-                      
                          $email = $user_profile['email'];
-//                         $naitik = $facebook->api('/naitik');
-//                          
-//                       if($user_profile==''){}
-//                       else
-//                        { $id_face=$this->getClientesTable()->usuario1($email);  
-//                         if(count($id_face)>0)
-//                         {   $correo = $id_face[0]['va_email'];
-//                         if($id_face[0]['id_facebook']=='')  
-//                                { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
-//                                 AuthController::sessionfacebook($correo,$id_facebook); }     
-//                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
-//                             AuthController::sessionfacebook($correo,$id_facebook); }}
-//                         else
-//                          { //$imagen = 'https://graph.facebook.com/'.$user.'/picture';
-//                              $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
-//                              AuthController::sessionfacebook($email,$id_facebook); }
-//                           //  return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
-//                                 }
-                             
-                          //  return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');  
+                         $naitik = $facebook->api('/naitik');
+                         var_dump($naitik);exit;
+                       if($user_profile==''){}
+                       else
+                        { $id_face=$this->getClientesTable()->usuario1($email);  
+                         if(count($id_face)>0)
+                         {   $correo = $id_face[0]['va_email'];
+                         if($id_face[0]['id_facebook']=='')  
+                                { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
+                                 AuthController::sessionfacebook($correo,$id_facebook); }     
+                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
+                             AuthController::sessionfacebook($correo,$id_facebook); }}
+                         else
+                          { 
+                              $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
+                              AuthController::sessionfacebook($email,$id_facebook); }
+                                 }
                              } 
                       else {
-                         // $url  = $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');
                        $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
                     'redirect_uri'=>$this->_options->host->ruta.'/'
                            ));   
 
                        }   
                      
-                 return array(
-         'user_profile' => $user_profile,
-            'user' => $user,
-            'logoutUrl'  =>$logoutUrl,
-            'loginUrl' => $loginUrl,
-             'id_facebook'=>$id_facebook,
-             'name'=>$name,
-             'email'=>$email
-          //  'naitik' =>$naitik 
+                  return array(
+                  'user_profile' => $user_profile,
+                  'user' => $user,
+                  'logoutUrl'  =>$logoutUrl,
+                  'loginUrl' => $loginUrl,
+                  'id_facebook'=>$id_facebook,
+                  'name'=>$name,
+                  'email'=>$email
+         
         );
       return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
     }
