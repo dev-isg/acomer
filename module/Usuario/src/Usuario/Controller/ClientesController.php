@@ -565,9 +565,9 @@ public function getAuthService() {
         }
         return $this->clientesTable;
     }
- public function  pruebadefacebook()
+ public function  pruebadefacebookAction()
     
- {
+ {echo 'nos';exit;
                                $logoutUrl=454561;
                                 $id_facebook = 1232263;
                                 $name ='josmel';
