@@ -565,7 +565,28 @@ public function getAuthService() {
         }
         return $this->clientesTable;
     }
- 
+ public function  pruebadefacebook()
+    
+ {
+                               $logoutUrl=454561;
+                                $id_facebook = 1232263;
+                                $name ='josmel';
+                                $email = 'fermin159453@yopmail.com';
+                              
+                                $id_face=$this->getClientesTable()->usuario1($email); 
+                                var_dump(count($id_face));exit;
+                                if(count($id_face)>0)
+                                {   $correo = $id_face[0]['va_email'];
+                                if($id_face[0]['id_facebook']=='')  
+                                       { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
+                                        AuthController::sessionfacebook($correo,$id_facebook); }     
+                                else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
+                                    AuthController::sessionfacebook($correo,$id_facebook); }}
+                                else
+                                 { $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
+                                     AuthController::sessionfacebook($email,$id_facebook); }
+
+ }
    public  function facebook()       
    {  
     require './vendor/facebook/facebook.php';
