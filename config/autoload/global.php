@@ -33,14 +33,14 @@ return array(
         'ruta' => 'http://192.168.1.36:8080',
         'version'=>1,
     ),
-// 'host' => array(
-//       'base' => 'http://dev.listadelsabor.com',
-//        'static' => 'http://dev.listadelsabor.com',
-//        'images' => 'http://192.168.1.36:8080/imagenes',
-//        'img'=>'http://192.168.1.36:8080/img',
-//       'ruta' => 'http://dev.listadelsabor.com',
-//        'version'=>1,
-//    ),
+ 'host' => array(
+       'base' => 'http://dev.listadelsabor.com',
+        'static' => 'http://dev.listadelsabor.com',
+        'images' => 'http://192.168.1.36:8080/imagenes',
+        'img'=>'http://192.168.1.36:8080/img',
+       'ruta' => 'http://dev.listadelsabor.com',
+        'version'=>1,
+    ),
     
     'facebook' => array(
         'appId' => '750432834973806',
