@@ -56,7 +56,7 @@ public function __construct()
 //        $loginUrl = $facebook['loginUrl'];
 //        $user = $facebook['user'];
         if($facebook['name']){
-                   $ddd =$facebook['name'];}
+                   $ddd =$facebook['user'];}
         }
         
         $comidas = $this->joinAction()->toArray();
