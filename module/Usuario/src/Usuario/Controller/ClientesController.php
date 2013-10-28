@@ -550,6 +550,8 @@ public function getAuthService() {
     }
     
   
+    
+   
    public  function facebook()       
    {  
     require './vendor/facebook/facebook.php';
@@ -607,7 +609,28 @@ public function getAuthService() {
       return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
     }
 
-
+  public function logueoface($id_facebook,$logoutUrl,$name,$email)
+    {
+      
+      
+                           $id_face=$this->getComentariosTable()->usuarioface($id_facebook);  
+                         if(count($id_face)>0)
+                         {   $correo = $id_face[0]['va_email'];
+                         if($id_face[0]['id_facebook']=='')  
+                                { $this->getComentariosTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
+                                 AuthController::sessionfacebook($correo,$id_facebook); }     
+                         else{$this->getComentariosTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
+                             AuthController::sessionfacebook($correo,$id_facebook); }}
+                         else
+                          { 
+                              $this->getComentariosTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
+                              AuthController::sessionfacebook($email,$id_facebook); }
+         
+              
+    }
+    
+    
+    
         public function getClientesTable()
     {
         if (! $this->clientesTable) {
