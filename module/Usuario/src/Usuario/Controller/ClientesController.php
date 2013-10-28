@@ -611,6 +611,11 @@ public function getAuthService() {
 
   public function logueoface($id_facebook,$logoutUrl,$name,$email)
     {
+      
+      var_dump($id_facebook);
+     var_dump($logoutUrl);
+     var_dump($name);var_dump($email);
+     
       echo'entratseee';exit;
       
                            $id_face=$this->getComentariosTable()->usuarioface($id_facebook);  
