@@ -407,7 +407,7 @@ public  function facebook()
                          $name = $user_profile['name'];
                          $email = $user_profile['email'];
                          $naitik = $facebook->api('/naitik');
-                        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
+                        echo 'estaossss';exit;
 //                       if($user_profile==''){}
 //                       else
 //                        { 
