@@ -28,6 +28,7 @@ return array(
         'appId' => '750432834973806',
         'secret' => '2e07ad7ea83185f20da1ca546fee0720'
     ),
+    
 //'host' => array(
 //    'base' => 'http://192.168.1.36:8080',
 //    'static' => 'http://192.168.1.36:8080',

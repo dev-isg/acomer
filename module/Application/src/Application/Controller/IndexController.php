@@ -231,7 +231,7 @@ public function __construct()
          $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
          if (!isset($session)) {
-        $face = new \Usuario\Controller\ClientesController();
+        $face = new \Usuario\Controller\IndexController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
