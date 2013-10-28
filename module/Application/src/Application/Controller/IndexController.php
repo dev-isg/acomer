@@ -54,7 +54,7 @@ public function __construct()
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
 //        $loginUrl = $facebook['loginUrl'];
-      $user = $facebook['user'];
+      $user = $facebook['email'];
         if($facebook['name']){
                    $ddd =$facebook['user'];}
         }
