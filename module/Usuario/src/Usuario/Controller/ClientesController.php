@@ -610,6 +610,7 @@ public function getAuthService() {
                            error_log($e);
                            $user = null; } }
                       if ($user) {
+                                                    echo 'entro';exit;
                                 $logoutUrl = $facebook->getLogoutUrl();
                                 $id_facebook = $user_profile['id'];
                                 $name = $user_profile['name'];
