@@ -22,6 +22,7 @@ class IndexController extends AbstractActionController
   protected $usuarioTable;
   public $dbAdapter;
   protected $clientesTable;
+  protected $_options;
   
   public function __construct() {
         $this->_options = new \Zend\Config\Config(include APPLICATION_PATH . '/config/autoload/global.php');     
@@ -411,18 +412,18 @@ public  function facebook()
                        if($user_profile==''){}
                        else
                         { 
-                                $id_face=$this->getUsuarioTable()->usuarioface($id_facebook);  
+                                $id_face=$this->getUsuarioTable()->usuarioface3($id_facebook);  
                               if(count($id_face)>0)
                                  {   $correo = $id_face[0]['va_email'];
                                  if($id_face[0]['id_facebook']=='')  
-                                        { $this->getUsuarioTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
+                                        { $this->getUsuarioTable()->idfacebook3($id_face[0]['in_id'],$id_facebook,$logoutUrl);
                                          AuthController::sessionfacebook($correo,$id_facebook); }     
-                                 else{$this->getUsuarioTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
+                                 else{$this->getUsuarioTable()->idfacebook3($id_face[0]['in_id'],$logoutUrl);
                                      AuthController::sessionfacebook($correo,$id_facebook); } 
                                 }
                            else
                                {    
-                                   $this->getUsuarioTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
+                                   $this->getUsuarioTable()->insertarusuariofacebbok3($name,$email,$id_facebook,$logoutUrl); 
                                    AuthController::sessionfacebook($email,$id_facebook);
                                }
  

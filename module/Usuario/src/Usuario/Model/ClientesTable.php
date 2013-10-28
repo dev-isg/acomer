@@ -206,7 +206,7 @@ class ClientesTable
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
                    $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
     }
-public function idfacebook2($id,$logout)
+public function idfacebook3($id,$logout)
     {
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);

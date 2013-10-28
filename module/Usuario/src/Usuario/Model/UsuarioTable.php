@@ -392,7 +392,7 @@ public function guardarUsuario( $usuario)
         }
         return $row;  
     }
-   public function usuarioface($id_face)
+   public function usuarioface3($id_face)
     {
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
@@ -402,7 +402,7 @@ public function guardarUsuario( $usuario)
         $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet->toArray();
     }
-        public function idfacebook($id,$idfacebook,$logout)
+        public function idfacebook3($id,$idfacebook,$logout)
     {
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
@@ -422,7 +422,7 @@ public function guardarUsuario( $usuario)
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
                    $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
     }
-      public function insertarusuariofacebbok($nombre,$email,$idfacebook,$logout)
+      public function insertarusuariofacebbok3($nombre,$email,$idfacebook,$logout)
     {   
       $contrasena = sha1($idfacebook) ;
          $fecha = date("Y-m-d h:m:s");  
