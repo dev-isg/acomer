@@ -447,10 +447,10 @@ public  function facebook()
         );
       return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
     }
-  public function getTableClientes() {
+  public function getClientesTable() {
         if (!$this->clientesTable) {
             $sm = $this->getServiceLocator();
-            $this->clientesTable = $sm->get('Usuario\Model\Clientes');
+            $this->clientesTable = $sm->get('Usuario\Model\ClientesTable');
         }
         return $this->clientesTable;
     }
