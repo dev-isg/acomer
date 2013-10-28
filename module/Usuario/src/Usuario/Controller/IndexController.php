@@ -22,6 +22,10 @@ class IndexController extends AbstractActionController
   protected $usuarioTable;
   public $dbAdapter;
   protected $clientesTable;
+  
+  public function __construct() {
+        $this->_options = new \Zend\Config\Config(include APPLICATION_PATH . '/config/autoload/global.php');     
+    }
     public function indexAction() {
                 $auth = new \Zend\Authentication\AuthenticationService();
         if (!$auth->hasIdentity()) {
