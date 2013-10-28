@@ -565,7 +565,7 @@ public function getAuthService() {
              catch (FacebookApiException $e) {
                            error_log($e);
                            $user = null; } }
-                       if ($user) {
+                       if ($user) {echo 'entraste';exit;
                          $logoutUrl = $facebook->getLogoutUrl();
                          $id_facebook = $user_profile['id'];
                          $name = $user_profile['name'];
