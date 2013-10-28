@@ -556,57 +556,8 @@ public function getAuthService() {
         );
     }
     
-    public function verusuarioAction(){
-                $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
-        $renderer->inlineScript()
-        ->setScript('$(document).ready(function(){valUsuario();});')
-            ->prependFile($this->_options->host->base . '/js/main.js');
-        $id=$this->params()->fromRoute('in_id');//298
-        $usuario=$this->getUsuarioTable()->getUsuario($id);
-        $intereses=$this->getUsuarioTable()->getIntereses($id);
-        $ubige=$this->getUsuarioTable()->getPais($usuario->va_pais);
-        $usuario->va_pais=$ubige[0]['Name'];
-        $ciudads = $this->getUsuarioTable()->getUsuariociudad($id)->toArray();
-        if($ciudads[0]['va_pais']=='PER')
-        { $ciudad=$this->getUsuarioTable()->getCiudadPeru($ciudads[0]['ta_ubigeo_in_id']);}
-        else
-        { $ciudad=$this->getUsuarioTable()->getCiudad('',$ciudads[0]['ta_ubigeo_in_id']); }
-        
-        
-        
-         $usuario->ta_ubigeo_in_id=$y['Name'];     
-        $usergroup=$this->getUsuarioTable()->UsuariosGrupo($id);
-        return array('usuario'=>$usuario,'ciudad'=>$ciudad[0]['Name'],'mienbros'=>$usergroup,'intereses'=>$intereses);
-    }
-
-    public function notificarAction() {
-        $storage = new \Zend\Authentication\Storage\Session('Auth');
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-//             $formNotif->setData($request->getPost());
-//             if($formNotif->isValid()){
-            $data = $request->getPost('tipo_notificacion');
-            $this->getGrupoTable()->updateNotificacion($data, $storage->read()->in_id);
-            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/usuario/index/editarusuario');
-//             }
-        }
-
-        return array();
-    }
-//    public function getServicio(){
-//        $config=$this->getServiceLocator()->get('Config');  
-//        self::$rutaStatic=$config['host']['images'];
-//    }
-
   
     
-    
-
-    public function fooAction() {
-        // This shows the :controller and :action parameters in default route
-        // are working when you browse to /module-specific-root/skeleton/foo
-        return array();
-    }
 
 
         public function getClientesTable()
