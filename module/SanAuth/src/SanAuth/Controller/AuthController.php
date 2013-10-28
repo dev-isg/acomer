@@ -405,7 +405,7 @@ class AuthController extends AbstractActionController {
                                                     o copiar la siguiente url en su navegador:<br /><br />' . $config['host']['base'] . '/?value=' . utf8_decode($results) .'          
                                                      </div>
                                                      <br /><br /><br />
-                                                     <img src="'.$config['host']['img'].'/juntate.png" title="juntate.pe"/>
+                                                     <img src="'.$config['host']['img'].'/img/logo.png" title="listadelsabor.com"/>
                                                </body>
                                                </html>';
 
@@ -539,6 +539,9 @@ class AuthController extends AbstractActionController {
         return $view;
     }
 
+    
+   
+
     public function getClientesTable() {
         if (!$this->clientesTable) {
             $sm = $this->getServiceLocator();
@@ -546,13 +549,6 @@ class AuthController extends AbstractActionController {
         }
         return $this->clientesTable;
     }
-    public function getGrupoTable()
-    {
-        if (! $this->grupoTable) {
-            $sm = $this->getServiceLocator();
-            $this->grupoTable = $sm->get('Grupo\Model\GrupoTable');
-        }
-        return $this->grupoTable;
-    }
+ 
 
 }

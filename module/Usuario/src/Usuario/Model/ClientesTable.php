@@ -10,6 +10,7 @@ use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Platform;
+use SanAuth\Controller\AuthController; 
 
 
 
@@ -655,7 +656,12 @@ public function guardarUsuario( $usuario)
                  'Ta_cliente_in_id' => $idcliente,
                  'Ta_puntaje_in_id' => $coment['Ta_puntaje_in_id'],
                  'da_fecha'=>  $fecha = date("Y-m-d h:m:s")
-                     ); 
+               ); 
+                  
+      
+            //  $this->correomovill($coment['va_email'],$coment['va_nombre']);
+
+                 
            }
            else{  
                $comentario = array(
@@ -689,14 +695,10 @@ public function guardarUsuario( $usuario)
                         ->set(array('Ta_puntaje_in_id'=>$prom[0]['TotPuntaje']))
                         ->where(array('ta_plato.in_id'=>$coment['Ta_plato_in_id']));//$prom[0]['in_id']
                 $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
-                $statementup->execute();
-
-//
-//     echo 's';exit;
-             
+                $statementup->execute();         
     }
     
-    
+   
     
     
 

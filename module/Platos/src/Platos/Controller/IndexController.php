@@ -17,6 +17,7 @@ use Zend\Json\Json;
 use Platos\Model\Platos;
 use Platos\Model\PlatosTable;
 use Usuario\Model\ClientesTable;
+use Usuario\Controller\ClientesController;
 use Platos\Form\PlatosForm;
 use Application\Form\Formularios;
 use Zend\Form\Element;
@@ -687,7 +688,15 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                                        'va_email'=>$email,
                                        'tx_descripcion'=>$comentario,
                                        'Ta_puntaje_in_id'=>$puntaje);
-                         $this->getClientesTable()->agregarComentariomovil($envia);
+                       
+                         $cantidad=$this->getClientesTable()->usuario1($email);
+                         if(count($cantidad)==0)
+                          {$this->getClientesTable()->agregarComentariomovil($envia);
+//                          $results = $this->getClientesTable()->generarPassword($email);
+//                          $usuario = $this->getClientesTable()->getUsuarioxEmail($email);
+                           ClientesController::correomovill($email,$nombre); }
+                           else{$this->getClientesTable()->agregarComentariomovil($envia);}
+                          
                          $this->getPlatosTable()->cromSolr($idplato,'');  
                                 $result = array('resultado'=>true);
                                 echo "jsonpCallback(".json_encode($result).")"; }
@@ -702,6 +711,12 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                     $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
                     $activo=$participa->en_estado;//=='activo'?true:false;
                 }
+         if (!isset($session)) {
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
+        $this->layout()->loginUrl = $facebook['loginUrl'];
+        $this->layout()->user = $facebook['user']; 
+        }
         $datos =$this->params()->fromRoute();  
         $urlerror =  $datos['nombre'];
         $nombre = explode('-', $datos['nombre']); 

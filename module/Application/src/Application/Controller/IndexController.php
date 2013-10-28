@@ -47,11 +47,7 @@ public function __construct()
     {
              $view = new ViewModel();
          $storage = new \Zend\Authentication\Storage\Session('Auth');
-        $session=$storage->read();
-        if ($session) {           
-                    $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
-                    $activo=$participa->en_estado;//=='activo'?true:false;
-                }    
+        $session=$storage->read();  
         if (!isset($session)) {
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
@@ -234,10 +230,12 @@ public function __construct()
         $request = $this->getRequest();
          $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
-        if ($session){           
-                    $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
-                    $activo=$participa->en_estado;//=='activo'?true:false;
-                }
+         if (!isset($session)) {
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
+        $this->layout()->loginUrl = $facebook['loginUrl'];
+        $this->layout()->user = $facebook['user']; 
+        }
         $this->layout()->clase = 'buscar-distrito';
         if ($request->isGet()) {
             $datos = $this->request->getQuery();
@@ -1147,6 +1145,13 @@ public function __construct()
     {
         $view = new ViewModel();
         $comidas = $this->joinAction()->toArray();
+        $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $session=$storage->read(); 
+         if (!isset($session)) {
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
+        $this->layout()->loginUrl = $facebook['loginUrl'];
+        $this->layout()->user = $facebook['user']; }
         $this->layout()->comidas = $comidas;
         // $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Nosotros';
@@ -1158,8 +1163,14 @@ public function __construct()
     {
         $view = new ViewModel();
         $comidas = $this->joinAction()->toArray();
+        $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $session=$storage->read(); 
+         if (!isset($session)) {
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
+        $this->layout()->loginUrl = $facebook['loginUrl'];
+        $this->layout()->user = $facebook['user']; }
         $this->layout()->comidas = $comidas;
-        // $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Solicita';
         $form = new Solicita("form");
         $request = $this->getRequest();
@@ -1241,8 +1252,13 @@ public function __construct()
         $view = new ViewModel();
        $this->layout()->clase = 'Solicita';
         $form = new Registro("form");
-        
-       // var_dump($form);exit;
+      $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $session=$storage->read(); 
+         if (!isset($session)) {
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
+        $this->layout()->loginUrl = $facebook['loginUrl'];
+        $this->layout()->user = $facebook['user']; }
         $comidas =  $this->comidas()->toArray();
         $com = array();
         foreach($comidas as $y){
@@ -1325,13 +1341,18 @@ public function __construct()
     {
         $view = new ViewModel();
         $comidas = $this->joinAction()->toArray();
+        $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $session=$storage->read(); 
+         if (!isset($session)) {
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
+        $this->layout()->loginUrl = $facebook['loginUrl'];
+        $this->layout()->user = $facebook['user']; }
         $this->layout()->comidas = $comidas;
         $this->layout()->clase = 'Solicita';
         $form = new Contactenos("form");
         $request = $this->getRequest();
-        
-        if ($request->isPost()) {
-            
+        if ($request->isPost()) {         
             $datos = array();
             $datos['nombre'] = htmlspecialchars($this->params()->fromPost('nombre', 0));
             $datos['email'] = htmlspecialchars($this->params()->fromPost('email', 0));
@@ -1395,10 +1416,16 @@ public function __construct()
     {
         $view = new ViewModel();
         $comidas = $this->joinAction()->toArray();
+        $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $session=$storage->read(); 
+         if (!isset($session)) {
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
+        $this->layout()->loginUrl = $facebook['loginUrl'];
+        $this->layout()->user = $facebook['user']; }
         $this->layout()->comidas = $comidas;
         // $this->layout('layout/layout-portada');
-        $this->layout()->clase = 'Terminos';
-    }
+        $this->layout()->clase = 'Terminos';}
       public function getClientesTable() {
         if (!$this->clientesTable) {
             $sm = $this->getServiceLocator();

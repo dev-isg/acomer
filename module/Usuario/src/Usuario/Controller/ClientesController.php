@@ -267,6 +267,47 @@ class ClientesController extends AbstractActionController {
        );
     }
 
+
+    
+     public function correomovill($mail,$usuario) {
+
+        $results = $this->getClientesTable()->generarPassword($mail);
+                    $usuario = $this->getClientesTable()->getUsuarioxEmail($mail);
+ 
+                    $config = $this->getServiceLocator()->get('Config');
+                    $bodyHtml = '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+                                               <head>
+                                               <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+                                               </head>
+                                               <body>
+                                                    <div style="color: #7D7D7D"><br />
+                                                    Hola '.ucwords($usuario->va_nombre_cliente).',<br /><br />  
+                                                    Para recuperar tu contraseña debes hacer <a href="' . $config['host']['base'] . '/?value=' . utf8_decode($results) . '">Clic Aquí</a><br /><br /> 
+                                                    o copiar la siguiente url en su navegador:<br /><br />' . $config['host']['base'] . '/?value=' . utf8_decode($results) .'          
+                                                     </div>
+                                                     <br /><br /><br />
+                                                     <img src="'.$config['host']['img'].'/img/logo.png" title="listadelsabor.com"/>
+                                               </body>
+                                               </html>';
+
+                    $message = new Message();
+                    $message->addTo($mail)
+                            ->addFrom('listadelsabor@innovationssystems.com', 'listadelsabor.com')
+                            ->setSubject('Recuperación de contraseña');
+                    $bodyPart = new \Zend\Mime\Message();
+                    $bodyMessage = new \Zend\Mime\Part($bodyHtml);
+                    $bodyMessage->type = 'text/html';
+                    $bodyPart->setParts(array(
+                        $bodyMessage
+                    ));
+                    $message->setBody($bodyPart);
+                    $message->setEncoding('UTF-8');
+
+                    $transport = $this->getServiceLocator()->get('mail.transport'); // new SendmailTransport();//$this->getServiceLocator('mail.transport')
+                    $transport->send($message);
+        
+        }
+    
     public function correo($correo, $usuario, $valor) {
         $message = new Message();
         $message->addTo($correo, $usuario)
