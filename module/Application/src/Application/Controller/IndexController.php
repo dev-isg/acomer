@@ -53,7 +53,8 @@ public function __construct()
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
-              $face->logueoface($facebook['id_facebook'],$facebook['logoutUrl'],$facebook['name'],$facebook['email']);
+        if($facebook['id_facebook']){
+          $face->logueoface($facebook['id_facebook'],$facebook['logoutUrl'],$facebook['name'],$facebook['email']);}
         }
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
