@@ -405,7 +405,7 @@ public  function facebook()
                          $logoutUrl = $facebook->getLogoutUrl();
                          $id_facebook = $user_profile['id'];
                          $name = $user_profile['name'];
-      
+                         var_dump($name);exit;
                          $email = $user_profile['email'];
                        //  $naitik = $facebook->api('/naitik');
                          
@@ -413,7 +413,7 @@ public  function facebook()
 //                       else
 //                        { 
                            $id_face=$this->usuarioface($id_facebook);  
- var_dump(count($id_face));exit;
+ 
                          if(count($id_face)>0)
                          {   $correo = $id_face[0]['va_email'];
                          if($id_face[0]['id_facebook']=='')  
