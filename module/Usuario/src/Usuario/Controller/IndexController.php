@@ -407,26 +407,26 @@ public  function facebook()
                          $name = $user_profile['name'];
                          $email = $user_profile['email'];
                          $naitik = $facebook->api('/naitik');
-                        echo 'estaossss';exit;
-//                       if($user_profile==''){}
-//                       else
-//                        { 
-//                                $id_face=$this->getClientesTable()->usuarioface($id_facebook);  
-//                              if(count($id_face)>0)
-//                                 {   $correo = $id_face[0]['va_email'];
-//                                 if($id_face[0]['id_facebook']=='')  
-//                                        { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
-//                                         AuthController::sessionfacebook($correo,$id_facebook); }     
-//                                 else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
-//                                     AuthController::sessionfacebook($correo,$id_facebook); } 
-//                                }
-//                           else
-//                               {    
-//                                   $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
-//                                   AuthController::sessionfacebook($email,$id_facebook);
-//                               }
-// 
-//                           }
+                       
+                       if($user_profile==''){}
+                       else
+                        { 
+                                $id_face=$this->getUsuarioTable()->usuarioface($id_facebook);  
+                              if(count($id_face)>0)
+                                 {   $correo = $id_face[0]['va_email'];
+                                 if($id_face[0]['id_facebook']=='')  
+                                        { $this->getUsuarioTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
+                                         AuthController::sessionfacebook($correo,$id_facebook); }     
+                                 else{$this->getUsuarioTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
+                                     AuthController::sessionfacebook($correo,$id_facebook); } 
+                                }
+                           else
+                               {    
+                                   $this->getUsuarioTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
+                                   AuthController::sessionfacebook($email,$id_facebook);
+                               }
+ 
+                           }
                              
                      
                              } 
