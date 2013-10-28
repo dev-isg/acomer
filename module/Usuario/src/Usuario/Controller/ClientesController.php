@@ -565,21 +565,15 @@ public function getAuthService() {
              catch (FacebookApiException $e) {
                            error_log($e);
                            $user = null; } }
-                       if ($user) {echo 'entraste';exit;
+                       if ($user) {
                          $logoutUrl = $facebook->getLogoutUrl();
                          $id_facebook = $user_profile['id'];
                          $name = $user_profile['name'];
-                         $link = $user_profile['link'];
                          $email = $user_profile['email'];
                          $naitik = $facebook->api('/naitik');
-                          $generoface = $user_profile['gender'];
-                         if($generoface=='male')
-                          {$genero=='masculino';}
-                     else{$genero=='femenino';}
                        if($user_profile==''){}
                        else
                         { $id_face=$this->getComentariosTable()->usuarioface($id_facebook);  
- 
                          if(count($id_face)>0)
                          {   $correo = $id_face[0]['va_email'];
                          if($id_face[0]['id_facebook']=='')  
