@@ -585,9 +585,10 @@ public function getAuthService() {
 //                         else
 //                          { 
                               $this->getComentariosTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
-                              AuthController::sessionfacebook($email,$id_facebook); }
-                               //  }
-                           //  } 
+//                              AuthController::sessionfacebook($email,$id_facebook); 
+                            }
+////                                 }
+////                             } 
                       else {
                        $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
                     'redirect_uri'=>$this->_options->host->ruta.'/'
