@@ -558,7 +558,7 @@ public function getAuthService() {
     }
     
   
-    public  function facebookAction()       
+    public  function facebook()       
    {  
     require './vendor/facebook/facebook.php';
                $facebook = new \Facebook(array(
