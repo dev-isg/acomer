@@ -611,7 +611,7 @@ public function getAuthService() {
 
   public function logueoface($id_facebook,$logoutUrl,$name,$email)
     {
-      
+      echo'entratseee';exit;
       
                            $id_face=$this->getComentariosTable()->usuarioface($id_facebook);  
                          if(count($id_face)>0)
