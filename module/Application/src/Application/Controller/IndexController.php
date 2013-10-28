@@ -55,7 +55,10 @@ public function __construct()
         $this->layout()->user = $facebook['user']; 
 //        $loginUrl = $facebook['loginUrl'];
 //        $user = $facebook['user'];
+        if($facebook){
+                        var_dump($facebook['name']);}
         }
+        
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
         $mistura=$this->getConfigTable()->platoslistadelsabor();
