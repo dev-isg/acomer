@@ -450,7 +450,7 @@ public  function facebook()
   public function getTableClientes() {
         if (!$this->clientesTable) {
             $sm = $this->getServiceLocator();
-            $this->clientesTable = $sm->get('Usuario\Model\Cliente');
+            $this->clientesTable = $sm->get('Usuario\Model\Clientes');
         }
         return $this->clientesTable;
     }
