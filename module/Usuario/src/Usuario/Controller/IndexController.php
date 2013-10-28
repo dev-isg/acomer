@@ -407,11 +407,12 @@ public  function facebook()
                          $name = $user_profile['name'];
       
                          $email = $user_profile['email'];
-                         $naitik = $facebook->api('/naitik');
+                       //  $naitik = $facebook->api('/naitik');
                          
-                       if($user_profile==''){}
-                       else
-                        { $id_face=$this->usuarioface($id_facebook);  
+//                       if($user_profile==''){}
+//                       else
+//                        { 
+                           $id_face=$this->usuarioface($id_facebook);  
  var_dump(count($id_face));exit;
                          if(count($id_face)>0)
                          {   $correo = $id_face[0]['va_email'];
@@ -421,11 +422,11 @@ public  function facebook()
                          else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
                              AuthController::sessionfacebook($correo,$id_facebook); }}
                          else
-                          {    echo 'entro';exit;
+                          {    
                               $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
                               AuthController::sessionfacebook($email,$id_facebook); }
  
-                                 }
+                            //  }
                              
                      
                              } 
