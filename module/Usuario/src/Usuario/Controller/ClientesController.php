@@ -609,47 +609,51 @@ public function getAuthService() {
              catch (FacebookApiException $e) {
                            error_log($e);
                            $user = null; } }
-                      if ($user) {
-                                  $id_face=$this->getClientesTable()->usuarioface(151554545); 
-                                  var_dump(count($id_face));exit;
-                                $logoutUrl = $facebook->getLogoutUrl();
-                                $id_facebook = $user_profile['id'];
-                                $name = $user_profile['name'];
-                                $email = $user_profile['email'];
-                                $naitik = $facebook->api('/naitik');
-                            
-                                var_dump($email);
-                             //   var_dump($id_face);
-                                           var_dump($name);exit;
-//                                if(count($id_face)>0)
-//                                {   $correo = $id_face[0]['va_email'];
-//                                if($id_face[0]['id_facebook']=='')  
-//                                       { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
-//                                        AuthController::sessionfacebook($correo,$id_facebook); }     
-//                                else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
-//                                    AuthController::sessionfacebook($correo,$id_facebook); }}
-//                                else
-//                                 { $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
-//                                     AuthController::sessionfacebook($email,$id_facebook); }
-                             } 
-                       else {
-                                    $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
-                                    'redirect_uri'=>$this->_options->host->ruta.'/' ));   
-                           }   
+                       if ($user) {
+                         $logoutUrl = $facebook->getLogoutUrl();
+                         $id_facebook = $user_profile['id'];
+                         $name = $user_profile['name'];
+      
+                         $email = $user_profile['email'];
+                         $naitik = $facebook->api('/naitik');
+                         
+                       if($user_profile==''){}
+                       else
+                        { $id_face=$this->getClientesTable()->usuariocorreo($id_facebook);  
+ 
+                         if(count($id_face)>0)
+                         {   $correo = $id_face[0]['va_email'];
+                         if($id_face[0]['id_facebook']=='')  
+                                { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
+                                 AuthController::sessionfacebook($correo,$id_facebook); }     
+                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
+                             AuthController::sessionfacebook($correo,$id_facebook); }}
+                         else
+                          { 
+                              $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
+                              AuthController::sessionfacebook($email,$id_facebook); }
+ 
+                                 }
+                             
                      
-                  return array(
-                  'user_profile' => $user_profile,
-                  'user' => $user,
-                  'logoutUrl'  =>$logoutUrl,
-                  'loginUrl' => $loginUrl,
-                  'id_facebook'=>$id_facebook,
-                  'name'=>$name,
-                  'email'=>$email
-         
+                             } 
+                      else {
+               
+                       $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
+                    'redirect_uri'=>$this->_options->host->ruta.'/'
+                           ));   
+
+                       }   
+                     
+                 return array(
+        
+            'user' => $user,
+            'logoutUrl'  =>$logoutUrl,
+            'loginUrl' => $loginUrl,
+        
         );
       return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
     }
-    
     
     
    
