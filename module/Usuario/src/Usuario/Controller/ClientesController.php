@@ -39,7 +39,7 @@ class ClientesController extends AbstractActionController {
     static $rutaStatic;
     static $rutaStatic2;
     static $rutaStatic3;
-  //  protected $_options;
+ protected $comentariosTable;
    protected $storage;
     protected $authservice;
 
@@ -578,18 +578,18 @@ public function getAuthService() {
                      else{$genero=='femenino';}
                        if($user_profile==''){}
                        else
-                        { $id_face=$this->getClientesTable()->usuarioface($id_facebook);  
+                        { $id_face=$this->getComentariosTable()->usuarioface($id_facebook);  
  
                          if(count($id_face)>0)
                          {   $correo = $id_face[0]['va_email'];
                          if($id_face[0]['id_facebook']=='')  
-                                { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
+                                { $this->getComentariosTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
                                  AuthController::sessionfacebook($correo,$id_facebook); }     
-                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
+                         else{$this->getComentariosTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
                              AuthController::sessionfacebook($correo,$id_facebook); }}
                          else
                           { 
-                              $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
+                              $this->getComentariosTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
                               AuthController::sessionfacebook($email,$id_facebook); }
                                  }
                              } 
@@ -613,7 +613,7 @@ public function getAuthService() {
     {
         if (! $this->clientesTable) {
             $sm = $this->getServiceLocator();
-            $this->clientesTable = $sm->get('Usuario\Model\Clientes');
+            $this->clientesTable = $sm->get('Usuario\Model\ClientesTable');
              $config=$sm->get('Config');
             self::$rutaStatic=$config['host']['images'];
             self::$rutaStatic2=$config['host']['img'];
@@ -622,6 +622,12 @@ public function getAuthService() {
         return $this->clientesTable;
     }
  
-    
+     public function getComentariosTable() {
+        if (!$this->comentariosTable) {
+            $s = $this->getServiceLocator();
+            $this->comentariosTable = $s->get('Usuario\Model\ComentariosTable');
+        }
+        return $this->comentariosTable;
+    }
    
 }
