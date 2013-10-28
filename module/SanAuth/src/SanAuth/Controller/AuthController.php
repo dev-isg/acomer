@@ -335,10 +335,10 @@ class AuthController extends AbstractActionController {
                                             'id_facebook'
                                         )));
                        
-                    }return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');
+                    }
                     } 
-               
-                else{return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/auth');}
+                
+                else{return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');}
               
             
 //            echo $id;
