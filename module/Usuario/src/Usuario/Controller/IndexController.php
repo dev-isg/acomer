@@ -385,7 +385,7 @@ class IndexController extends AbstractActionController
 //        return $this->redirect()->toRoute('user');
     }
 
-
+  
 public  function facebook()       
    {  
     require './vendor/facebook/facebook.php';
@@ -411,8 +411,8 @@ public  function facebook()
                          
                        if($user_profile==''){}
                        else
-                        { $id_face=$this->getClientesTable()->usuarioface($id_facebook);  
- 
+                        { $id_face=$this->usuarioface($id_facebook);  
+ var_dump(count($id_face));exit;
                          if(count($id_face)>0)
                          {   $correo = $id_face[0]['va_email'];
                          if($id_face[0]['id_facebook']=='')  
@@ -453,4 +453,28 @@ public  function facebook()
         }
         return $this->clientesTable;
     }
+    
+//     public function usuarioface($id_face)
+//    {
+//        $adapter = $this->tableGateway->getAdapter();
+//        $sql = new Sql($adapter);
+//        $selecttot = $sql->select()->from('ta_cliente')
+//                ->where(array('id_facebook'=>$id_face));
+//        $selectString = $sql->getSqlStringForSqlObject($selecttot);
+//        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//        return $resultSet->toArray();
+//    }
+//    
+    
+    public function usuarioface($id_face)
+    {   $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+            ->from('ta_cliente')
+                ->where(array('id_facebook'=>$id_face));
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            return $results->toArray();       
+     }
 }
