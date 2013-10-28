@@ -610,13 +610,14 @@ public function getAuthService() {
                            error_log($e);
                            $user = null; } }
                       if ($user) {
-                                                    echo 'entro';exit;
+                                  $id_face=$this->getClientesTable()->usuarioface(151554545); 
+                                  var_dump(count($id_face));exit;
                                 $logoutUrl = $facebook->getLogoutUrl();
                                 $id_facebook = $user_profile['id'];
                                 $name = $user_profile['name'];
                                 $email = $user_profile['email'];
                                 $naitik = $facebook->api('/naitik');
-                                $id_face=$this->getClientesTable()->usuarioface($id_facebook); 
+                            
                                 var_dump($email);
                              //   var_dump($id_face);
                                            var_dump($name);exit;
