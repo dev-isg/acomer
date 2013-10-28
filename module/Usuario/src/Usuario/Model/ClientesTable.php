@@ -142,7 +142,16 @@ class ClientesTable
     }
     
     
-    
+       public function usuarioface($id_face)
+    {
+        $adapter = $this->tableGateway->getAdapter();
+        $sql = new Sql($adapter);
+        $selecttot = $sql->select()->from('ta_cliente')
+                ->where(array('id_facebook'=>$id_face));
+        $selectString = $sql->getSqlStringForSqlObject($selecttot);
+        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        return $resultSet->toArray();
+    }
    
     
     
