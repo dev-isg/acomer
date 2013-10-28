@@ -678,7 +678,7 @@ public function getAuthService() {
                              } 
                        else {
                                     $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
-                                    'redirect_uri'=>$this->_options->host->ruta.'/auth' ));   
+                                    'redirect_uri'=>$this->_options->host->ruta.'/' ));   
                            }   
                      
                   return array(
