@@ -56,7 +56,7 @@ public function __construct()
 //        $loginUrl = $facebook['loginUrl'];
 //        $user = $facebook['user'];
         if($facebook['name']){
-                        var_dump($facebook['name']);exit;}
+                   $ddd =$facebook['name'];}
         }
         
         $comidas = $this->joinAction()->toArray();
@@ -101,6 +101,7 @@ public function __construct()
             'session'=>$session,
             'user' => $user,
             'loginUrl'  =>$loginUrl, 
+            'w'=>$ddd
         ));
         return $view;
     }
