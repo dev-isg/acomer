@@ -407,7 +407,7 @@ public  function facebook()
                          
                        if($user_profile==''){}
                        else
-                        { $id_face=$this->getClientesTable()->usuariocorreo($id_facebook);  
+                        { $id_face=$this->getClientesTable()->usuarioface($id_facebook);  
  
                          if(count($id_face)>0)
                          {   $correo = $id_face[0]['va_email'];
