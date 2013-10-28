@@ -11,6 +11,7 @@ use Zend\Json\Json;
 use Usuario\Form\ClienteForm;       // <-- Add this import
 use Usuario\Model\UsuarioTable;
 use Zend\Db\Sql\Sql;
+use SanAuth\Controller\AuthController; 
 use Zend\Db\Adapter\Adapter;
 use PHPExcel;
 use PHPExcel\Reader\Excel5;
