@@ -613,7 +613,7 @@ public function getAuthService() {
     {
         if (! $this->clientesTable) {
             $sm = $this->getServiceLocator();
-            $this->clientesTable = $sm->get('Usuario\Model\ClientesTable');
+            $this->clientesTable = $sm->get('Usuario\Model\Clientes');
              $config=$sm->get('Config');
             self::$rutaStatic=$config['host']['images'];
             self::$rutaStatic2=$config['host']['img'];
