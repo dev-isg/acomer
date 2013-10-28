@@ -176,26 +176,26 @@ class ClientesTable
             $data['va_fecha_ingreso'] = date("Y-m-d H:i:s");
            $clientes = $this->tableGateway->insert($data);
         } else { 
-            if ($this->getUsuario($id)) {
-                 $this->updateCategoria($catg_ingresada, $id);
-                if ($pass == '') {
-                    $data['va_estado'] = 'activo';
-                    $data['va_verificacion'] = '';
-                    $this->tableGateway->update($data, array(
-                        'in_id' => $id));
-                } else {
-                       $data['va_pais'] = $usuario->va_pais;
-                   $data['ta_ubigeo_in_id']=$ciudad;
-                    $data['va_contrasena'] = $pass;
-                    $data['va_verificacion'] = '';
-                    $data['va_estado'] = 'activo';
-
-                    $this->tableGateway->update($data, array(
-                        'in_id' => $id));
-                }
-            } else {
-                throw new \Exception('no existe el usuario');
-            }
+//            if ($this->getUsuario($id)) {
+//                 $this->updateCategoria($catg_ingresada, $id);
+//                if ($pass == '') {
+//                    $data['va_estado'] = 'activo';
+//                    $data['va_verificacion'] = '';
+//                    $this->tableGateway->update($data, array(
+//                        'in_id' => $id));
+//                } else {
+//                       $data['va_pais'] = $usuario->va_pais;
+//                   $data['ta_ubigeo_in_id']=$ciudad;
+//                    $data['va_contrasena'] = $pass;
+//                    $data['va_verificacion'] = '';
+//                    $data['va_estado'] = 'activo';
+//
+//                    $this->tableGateway->update($data, array(
+//                        'in_id' => $id));
+//                }
+//            } else {
+//                throw new \Exception('no existe el usuario');
+//            }
         }
     }
     
