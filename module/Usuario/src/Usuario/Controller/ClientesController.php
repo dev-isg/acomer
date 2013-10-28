@@ -616,17 +616,18 @@ public function getAuthService() {
                                 $email = $user_profile['email'];
                                 $naitik = $facebook->api('/naitik');
                                 $id_face=$this->getClientesTable()->usuarioface($id_facebook); 
-                                var_dump($id_face);exit;
-                                if(count($id_face)>0)
-                                {   $correo = $id_face[0]['va_email'];
-                                if($id_face[0]['id_facebook']=='')  
-                                       { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
-                                        AuthController::sessionfacebook($correo,$id_facebook); }     
-                                else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
-                                    AuthController::sessionfacebook($correo,$id_facebook); }}
-                                else
-                                 { $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
-                                     AuthController::sessionfacebook($email,$id_facebook); }
+                                var_dump($naitik);exit;
+//                                var_dump($id_face);exit;
+//                                if(count($id_face)>0)
+//                                {   $correo = $id_face[0]['va_email'];
+//                                if($id_face[0]['id_facebook']=='')  
+//                                       { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
+//                                        AuthController::sessionfacebook($correo,$id_facebook); }     
+//                                else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
+//                                    AuthController::sessionfacebook($correo,$id_facebook); }}
+//                                else
+//                                 { $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
+//                                     AuthController::sessionfacebook($email,$id_facebook); }
                              } 
                        else {
                                     $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
