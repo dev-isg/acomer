@@ -387,67 +387,7 @@ class IndexController extends AbstractActionController
     }
 
   
-public  function facebook()       
-   {  
-    require './vendor/facebook/facebook.php';
-               $facebook = new \Facebook(array(
-                 'appId'  => $this->_options->facebook->appId,
-                 'secret' => $this->_options->facebook->secret,
-                 'cookie' => false ,
-                 'scope'  => 'email,publish_stream'
-                   ));
-            $user = $facebook->getUser();
-            if ($user) {
-             try { $user_profile = $facebook->api('/me'); } 
-             catch (FacebookApiException $e) {
-                           error_log($e);
-                           $user = null; } }
-                       if ($user) {
-                         $logoutUrl = $facebook->getLogoutUrl();
-                         $id_facebook = $user_profile['id'];
-                         $name = $user_profile['name'];
-                         $email = $user_profile['email'];
-                         $naitik = $facebook->api('/naitik');
-                       
-                       if($user_profile==''){}
-                       else
-                        { 
-                                $id_face=$this->getUsuarioTable()->usuarioface3($id_facebook);  
-                              if(count($id_face)>0)
-                                 {   $correo = $id_face[0]['va_email'];
-                                 if($id_face[0]['id_facebook']=='')  
-                                        { $this->getUsuarioTable()->idfacebook3($id_face[0]['in_id'],$id_facebook,$logoutUrl);
-                                         AuthController::sessionfacebook($correo,$id_facebook); }     
-                                 else{$this->getUsuarioTable()->idfacebook3($id_face[0]['in_id'],$logoutUrl);
-                                     AuthController::sessionfacebook($correo,$id_facebook); } 
-                                }
-                           else
-                               {    
-                                   $this->getUsuarioTable()->insertarusuariofacebbok3($name,$email,$id_facebook,$logoutUrl); 
-                                   AuthController::sessionfacebook($email,$id_facebook);
-                               }
- 
-                           }
-                             
-                     
-                             } 
-                      else {
-               
-                       $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
-                 //   'redirect_uri'=>$this->_options->host->ruta.'/'
-                           ));   
 
-                       }   
-                     
-                 return array(
-        
-            'user' => $user,
-            'logoutUrl'  =>$logoutUrl,
-            'loginUrl' => $loginUrl,
-        
-        );
-      return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
-    }
   public function getClientesTable() {
         if (!$this->clientesTable) {
             $sm = $this->getServiceLocator();
@@ -456,16 +396,5 @@ public  function facebook()
         return $this->clientesTable;
     }
     
-//     public function usuarioface($id_face)
-//    {
-//        $adapter = $this->tableGateway->getAdapter();
-//        $sql = new Sql($adapter);
-//        $selecttot = $sql->select()->from('ta_cliente')
-//                ->where(array('id_facebook'=>$id_face));
-//        $selectString = $sql->getSqlStringForSqlObject($selecttot);
-//        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-//        return $resultSet->toArray();
-//    }
-//    
-  
+
 }
