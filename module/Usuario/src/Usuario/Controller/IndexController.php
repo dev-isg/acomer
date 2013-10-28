@@ -407,6 +407,18 @@ public  function facebook()
                          $name = $user_profile['name'];
                         // var_dump($name);exit;
                          $email = $user_profile['email'];
+                         
+         $this->dbAdapter =$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+            ->from('ta_cliente')
+                ->where(array('id_facebook'=>$id_facebook));
+            $selectString = $sql->getSqlStringForSqlObject($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            $dd= $results->toArray();
+            var_dump(count($dd));exit;
+            
                      $this->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
                               AuthController::sessionfacebook($email,$id_facebook);
                        //  $naitik = $facebook->api('/naitik');
