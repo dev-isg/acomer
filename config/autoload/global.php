@@ -29,15 +29,17 @@ return array(
         'secret' => '2e07ad7ea83185f20da1ca546fee0720'
     ),
     
-//'host' => array(
-//    'base' => 'http://192.168.1.36:8080',
-//    'static' => 'http://192.168.1.36:8080',
-//    'images' => 'http://192.168.1.36:8080/imagenes',
-//    'img'=>'http://192.168.1.36:8080/img',
-//    'ruta' => 'http://192.168.1.36:8080',
-//    'version'=>1,
-//),
- 'host' => array(
+    //'host' => array(
+    //    'base' => 'http://192.168.1.36:8080',
+    //    'static' => 'http://192.168.1.36:8080',
+    //    'images' => 'http://192.168.1.36:8080/imagenes',
+    //    'img'=>'http://192.168.1.36:8080/img',
+    //    'ruta' => 'http://192.168.1.36:8080',
+    //    'version'=>1,
+    //),
+
+    
+    'host' => array(
        'base' => 'http://dev.listadelsabor.com',
         'static' => 'http://dev.listadelsabor.com',
         'images' => 'http://192.168.1.36:8080/imagenes',
@@ -45,7 +47,7 @@ return array(
        'ruta' => 'http://dev.listadelsabor.com',
         'version'=>1,
     ),
-    
+  
    
     'upload' => array(
         'images' => APPLICATION_PATH . '/public/imagenes'

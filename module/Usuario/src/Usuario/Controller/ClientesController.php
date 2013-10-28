@@ -39,7 +39,7 @@ class ClientesController extends AbstractActionController {
     static $rutaStatic;
     static $rutaStatic2;
     static $rutaStatic3;
-    protected $_options;
+  //  protected $_options;
    protected $storage;
     protected $authservice;
 
@@ -47,15 +47,7 @@ class ClientesController extends AbstractActionController {
         $this->_options = new \Zend\Config\Config(include APPLICATION_PATH . '/config/autoload/global.php');     
     }
 
-    public function indexAction() {
-        
-        
 
-    }
-    
-    public function tramitecambio()
-    {}
-    
     public function agregarclienteAction() {
         $view =new ViewModel();
         $this->layout('layout/layout-portada2');
@@ -63,7 +55,7 @@ class ClientesController extends AbstractActionController {
         $form->get('submit')->setValue('Crear Usuario');
         $request = $this->getRequest(); 
         if ($request->isPost()){ 
-            $clientes = new Clientes();
+            $clientes = new Clieentes();
            $form->setInputFilter($clientes->getInputFilter());
             $form->setData($request->getPost());
             if (!$form->isValid()) {
@@ -558,7 +550,7 @@ public function getAuthService() {
     }
     
   
-    public  function facebook()       
+   public  function facebook()       
    {  
     require './vendor/facebook/facebook.php';
                $facebook = new \Facebook(array(
@@ -577,33 +569,31 @@ public function getAuthService() {
                          $logoutUrl = $facebook->getLogoutUrl();
                          $id_facebook = $user_profile['id'];
                          $name = $user_profile['name'];
+                         $link = $user_profile['link'];
                          $email = $user_profile['email'];
                          $naitik = $facebook->api('/naitik');
-                       
+                          $generoface = $user_profile['gender'];
+                         if($generoface=='male')
+                          {$genero=='masculino';}
+                     else{$genero=='femenino';}
                        if($user_profile==''){}
                        else
-                        { 
-                                $id_face=$this->getClientesTable()->usuarioface($id_facebook);  
-                              if(count($id_face)>0)
-                                 {   $correo = $id_face[0]['va_email'];
-                                 if($id_face[0]['id_facebook']=='')  
-                                        { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
-                                         AuthController::sessionfacebook($correo,$id_facebook); }     
-                                 else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
-                                     AuthController::sessionfacebook($correo,$id_facebook); } 
-                                }
-                           else
-                               {    
-                                   $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
-                                   AuthController::sessionfacebook($email,$id_facebook);
-                               }
+                        { $id_face=$this->getClientesTable()->usuarioface($id_facebook);  
  
-                           }
-                             
-                     
+                         if(count($id_face)>0)
+                         {   $correo = $id_face[0]['va_email'];
+                         if($id_face[0]['id_facebook']=='')  
+                                { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
+                                 AuthController::sessionfacebook($correo,$id_facebook); }     
+                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
+                             AuthController::sessionfacebook($correo,$id_facebook); }}
+                         else
+                          { 
+                              $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
+                              AuthController::sessionfacebook($email,$id_facebook); }
+                                 }
                              } 
                       else {
-               
                        $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
                     'redirect_uri'=>$this->_options->host->ruta.'/'
                            ));   
@@ -611,11 +601,9 @@ public function getAuthService() {
                        }   
                      
                  return array(
-        
             'user' => $user,
             'logoutUrl'  =>$logoutUrl,
             'loginUrl' => $loginUrl,
-        
         );
       return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
     }

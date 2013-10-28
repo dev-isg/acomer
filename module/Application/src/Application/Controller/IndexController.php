@@ -45,18 +45,17 @@ public function __construct()
 	}
     public function indexAction()
     {
-             $view = new ViewModel();
-         $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $view = new ViewModel();
+        $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();  
         if (!isset($session)) {
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
-        $loginUrl = $facebook['loginUrl'];
-        $user = $facebook['user'];
+//        $loginUrl = $facebook['loginUrl'];
+//        $user = $facebook['user'];
         }
-        
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
         $mistura=$this->getConfigTable()->platoslistadelsabor();
