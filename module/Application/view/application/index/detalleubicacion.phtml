@@ -8,8 +8,13 @@ $this->headTitle($this->busquedatitle);
 if((count($this->general)>0))                       
   {
 ?>
-     <div id="esconder2">
-      <div class="content-menu-home" style="position:fixed;top:0;">
+    <div id="esconder2">
+        <?php if ($session) { ?>
+      <div class="content-menu-home" style="position:fixed;top:25px;">
+          <?php } else {  ?>
+          <div class="content-menu-home" style="position:fixed;top:0px;"> 
+          <?php  } ?>
+          
         <ul>
           <?php foreach ($this->menus  as $menus) : ?>
             <li><a href="<?php echo $this->host('ruta')?><?php echo $menus['va_url'] ?>"><?php echo $menus['va_nombre'] ?></a></li>          
@@ -230,6 +235,25 @@ if((count($this->general)>0))
       itemSelector : ".plato_h_list"
     });
   });
+  var windw = this;
+    $.fn.followTo = function (pos) {
+      var $this = this,
+      $window = $(windw);
+      $window.scroll(function(e){
+        if ($window.scrollTop() > pos) {
+          $this.css({
+            position: 'fixed',
+            top: 0
+          });
+        } else {
+          $this.css({
+            position: 'relative',
+            top: 0
+          });
+        }
+      });
+    };
+  $('.content-menu-home').followTo(250);
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>  

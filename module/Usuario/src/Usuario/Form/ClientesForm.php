@@ -12,7 +12,7 @@ class ClientesForm extends Form
     public function __construct($name = null)
     {
         // we want to ignore the name passed
-        parent::__construct('clientes');
+        parent::__construct('RegistroUser');
         $this->setAttribute('method', 'post');
         
         
@@ -29,6 +29,7 @@ class ClientesForm extends Form
             'type' => 'Text',
             'attributes' => array(
                 'id' => 'va_nombre_cliente',
+                'class' => 'form-control',
                 'placeholder' => 'Ingrese el nombre de usario…'
             ),
         ));
@@ -92,9 +93,9 @@ class ClientesForm extends Form
             'name' => 'submit',
             'type' => 'Submit',
             'attributes' => array(
-                'value' => 'Go',
-                'class' => 'btn btn-success',
-                'id' => 'submitbutton',
+                'value' => 'Registrarme',
+                'class' => 'btn btn-bricky pull-right btnRegisU',
+                'id' => 'submitbutton'
             ),
         ));
       

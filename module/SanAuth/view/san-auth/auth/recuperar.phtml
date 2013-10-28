@@ -1,6 +1,5 @@
 <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/jquery.validate.min.js"></script>
-<div class="main-container">
-	<div class="container">
+
         <?php if($this->mensaje[0]){?>
         <div class="row-fluid">
         	<div class="alert alert-success alert-message" style="margin-bottom:0;margin-top:20px;">
@@ -14,7 +13,7 @@
 			<?php 
 			$form = $this->form;
 			$form->setAttributes(array(
-			    'action' => $this->url.'/cambio-contrasena?token='.$this->password,
+			    'action' => $this->url.'/cambio-contrasena?value='.$this->password,
 			    'method' => 'post',
 			    'class'=>'span12 form-crear-usuario',
 			    'id'=>'registro'
@@ -23,7 +22,7 @@
 			echo $this->form()->openTag($form);
 			
 			?>
-					<h3>Ingrese su nueva contraseña</h3>
+					<h3>Nueva clave ListaDelSabor</h3>
 					<div class="row-fluid">
 						<label for="pass">Contraseña:</label>
 						<?php echo $this->formrow($form->get('va_contrasena'))?>
@@ -38,8 +37,7 @@
 		            <?php echo $this->form()->closeTag();?>
 			</div>
 		</div>
-	</div>
-</div>
+
 
 <script type="text/javascript">
 	$(document).ready(function(){

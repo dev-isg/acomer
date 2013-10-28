@@ -43,54 +43,9 @@ class ComentariosTable
     /*
      * agregar y registrar el comentario posiblemente se mueva
      */
-    public function agregarComentario($coment,$id){
-         
-//           $cliente=array(
-//                    'va_nombre_cliente'=>$coment['va_nombre'],
-//                    'va_email'=>$coment['va_email'],
-//                    'en_estado'=>'desactivo',
-//               );
-//           
-//            $insert = $this->tableGateway->getSql()->insert()->into('ta_cliente')
-//                    ->values($cliente);
-//            $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
-//            
-//            $statement->execute();    
-//            $idcliente=$this->tableGateway->getAdapter()->getDriver()->getLastGeneratedValue();
-            $comentario = array(
-            'tx_descripcion' => $coment['tx_descripcion'],
-            'Ta_plato_in_id' => $coment['Ta_plato_in_id'],
-            'Ta_cliente_in_id' => $id,
-            'Ta_puntaje_in_id' => $coment['Ta_puntaje_in_id'],
-                'da_fecha'=>  $fecha = date("Y-m-d h:m:s")
-                ); 
-         $id = (int) $coment['in_id'];
-            if ($id == 0) {            
-           $insertcoment= $this->tableGateway->getSql()->insert()->into('ta_comentario')
-                    ->values($comentario);
-            $statement2 = $this->tableGateway->getSql()->prepareStatementForSqlObject($insertcoment);
-            $statement2->execute();  
-             }
-             
-                    $adapter2=$this->tableGateway->getAdapter();
-        $promselect=$this->tableGateway->getAdapter()
-                ->query('SELECT SUM(ta_puntaje_in_id)AS SumaPuntaje ,COUNT(ta_comentario.in_id ) AS NumeroComentarios,
-                    ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS TotPuntaje
-                    FROM ta_comentario
-                    where  ta_comentario.ta_plato_in_id='.$coment['Ta_plato_in_id'], $adapter2::QUERY_MODE_EXECUTE);
-                        $prom=$promselect->toArray();
-             
-              $update = $this->tableGateway->getSql()->update()->table('ta_plato')
-                        ->set(array('Ta_puntaje_in_id'=>$prom[0]['TotPuntaje']))
-                        ->where(array('ta_plato.in_id'=>$coment['Ta_plato_in_id']));//$prom[0]['in_id']
-                $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
-                $statementup->execute();
-                $this->cromSolar($coment['Ta_plato_in_id'],'');  
-    
-             
-    }
+  
        
-     public function cromSolar($id,$caso=null) {//echo 'ddd';exit;
+     public function cromSolar($id,$caso=null) {
             $adapter = $this->tableGateway->getAdapter();
             $sql = new Sql($adapter);
             $selecttot = $sql->select()
@@ -144,6 +99,7 @@ class ComentariosTable
             $solr->addDocument($document);
             $solr->commit();
         }
+     
     }
      public function estadoComentario($id,$estado){
                 $data = array(
@@ -229,6 +185,54 @@ class ComentariosTable
                 $statementup->execute();
                
          }
+         
+         
+           public function agregarComentario($coment,$id){
+         
+//           $cliente=array(
+//                    'va_nombre_cliente'=>$coment['va_nombre'],
+//                    'va_email'=>$coment['va_email'],
+//                    'en_estado'=>'desactivo',
+//               );
+//           
+//            $insert = $this->tableGateway->getSql()->insert()->into('ta_cliente')
+//                    ->values($cliente);
+//            $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
+//            
+//            $statement->execute();    
+//            $idcliente=$this->tableGateway->getAdapter()->getDriver()->getLastGeneratedValue();
+            $comentario = array(
+            'tx_descripcion' => $coment['tx_descripcion'],
+            'Ta_plato_in_id' => $coment['Ta_plato_in_id'],
+            'Ta_cliente_in_id' => $id,
+            'Ta_puntaje_in_id' => $coment['Ta_puntaje_in_id'],
+                'da_fecha'=>  $fecha = date("Y-m-d h:m:s")
+                ); 
+         $id = (int) $coment['in_id'];
+            if ($id == 0) {            
+           $insertcoment= $this->tableGateway->getSql()->insert()->into('ta_comentario')
+                    ->values($comentario);
+            $statement2 = $this->tableGateway->getSql()->prepareStatementForSqlObject($insertcoment);
+            $statement2->execute();  
+             }
+             
+                    $adapter2=$this->tableGateway->getAdapter();
+        $promselect=$this->tableGateway->getAdapter()
+                ->query('SELECT SUM(ta_puntaje_in_id)AS SumaPuntaje ,COUNT(ta_comentario.in_id ) AS NumeroComentarios,
+                    ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS TotPuntaje
+                    FROM ta_comentario
+                    where  ta_comentario.ta_plato_in_id='.$coment['Ta_plato_in_id'], $adapter2::QUERY_MODE_EXECUTE);
+                        $prom=$promselect->toArray();
+             
+              $update = $this->tableGateway->getSql()->update()->table('ta_plato')
+                        ->set(array('Ta_puntaje_in_id'=>$prom[0]['TotPuntaje']))
+                        ->where(array('ta_plato.in_id'=>$coment['Ta_plato_in_id']));//$prom[0]['in_id']
+                $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
+                $statementup->execute();
+                $this->cromSolar($coment['Ta_plato_in_id'],'');  
+    
+             
+    }
          
 
 }

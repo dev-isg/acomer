@@ -125,6 +125,22 @@ class Module implements AutoloaderProviderInterface
 
             $routeMatch = $e->getRouteMatch();
             $actionName = strtolower($routeMatch->getParam('action', 'not-found')); // get the action name
+            
+           
+            $controller->layout()->formCliente = new \Usuario\Form\ClientesForm();
+//            $face = new \Usuario\Controller\ClientesController();
+//            $facebook = $face->facebook();
+//            $controller->layout()->loginUrl = $facebook['loginUrl'];
+//            $controller->layout()->user = $facebook['user']; 
+            $controller->layout()->accion1 = 'registrarse';
+            
+            
+            
+            
+            
+            
+            
+            
 
             if (isset($config['module_layouts'][$moduleNamespace][$actionName])) {
                 $controller->layout($config['module_layouts'][$moduleNamespace][$actionName]);

@@ -14,6 +14,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
 use Zend\Json\Json;
+use Zend\View\Model\JsonModel;
 use Usuario\Model\Usuario;
 use SanAuth\Controller\AuthController; 
 use Zend\Session\Container;
@@ -50,7 +51,10 @@ class ClientesController extends AbstractActionController {
         
 
     }
-
+    
+    public function tramitecambio()
+    {}
+    
     public function agregarclienteAction() {
         $view =new ViewModel();
         $this->layout('layout/layout-portada2');
@@ -61,20 +65,36 @@ class ClientesController extends AbstractActionController {
             $clientes = new Clientes();
            $form->setInputFilter($clientes->getInputFilter());
             $form->setData($request->getPost());
-            if ($form->isValid()) {
+            if (!$form->isValid()) {
                 $clientes->exchangeArray($form->getData());
                 $correo=$this->getClientesTable()->verificaCorreo($request->getPost('va_email'));
                 if($correo===false){
                         $this->getClientesTable()->guardarClientes($clientes, md5($clientes->va_nombre_cliente));
                         $this->correo($clientes->va_email, $clientes->va_nombre_cliente, md5($clientes->va_nombre_cliente));
-                        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/registrarse?m=1');
+                  $bienvenido = 'Bienvenido  <html><body><strong>'.$clientes->va_nombre_cliente.'</strong></body></html> a Listadelsabor'  ;    
+                 $mensaje =   'Tu cuenta está casi lista para usarse, solo tienes que activarla desde tu correo electrónico';
+                 return new JsonModel(array(
+                          'menssage' =>array('bienvenido'=>$bienvenido,'saludo'=>$mensaje),
+                           'success'=>true
+                            ));  
+                     exit;
               }else{
                   $mensaje = 'El correo electrónico ' . $request->getPost('va_email') . ' ya esta asociado a un usuario';
+                  return new JsonModel(array(
+                          'menssage' =>$mensaje,
+                           'success'=>false
+                            ));  
+                  exit;
               }
             } else {
                 foreach ($form->getInputFilter()->getInvalidInput() as $error) {
                       print_r($error->getMessages());
                 }
+                 return new JsonModel(array(
+                          'menssage' =>$error->getMessages(),
+                           'success'=>false
+                            ));  
+                  exit;
             }
         }
           $view->setVariables(array(
@@ -87,11 +107,6 @@ class ClientesController extends AbstractActionController {
    
     }
 
-    
-    
-    
-    
-    
     public function grupoparticipoAction() {
         $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
         $renderer->inlineScript()->prependFile($this->_options->host->base . '/js/main.js')
@@ -267,7 +282,7 @@ class ClientesController extends AbstractActionController {
                                         Tu cuenta en <a href="' .self::$rutaStatic3. '">listadelsabor.com</a> está casi lista para usar.<br /><br />
                                         Activa tu cuenta haciendo <a href="' .self::$rutaStatic3. '/auth?token=' . $valor . ' ">"click aqui"</a> <br /><br />
                                         O copia la siguiente dirección en tu navegador:<br /><br />
-                                        <a href="' .self::$rutaStatic3. '/auth?token=' . $valor . ' ">' .self::$rutaStatic3. '/auth?token=' . $valor . '</a>
+                                        <a href="' .self::$rutaStatic3. '/?token=' . $valor . ' ">' .self::$rutaStatic3. '/?token=' . $valor . '</a>
                                         <br /><br /><br />
                                         <a href="'.self::$rutaStatic3.'"><img src="'.self::$rutaStatic2.'/juntate.png" title="listadelsabor.pe"/></a>
                                          

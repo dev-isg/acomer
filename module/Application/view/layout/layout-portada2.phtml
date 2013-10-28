@@ -67,6 +67,7 @@
     <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/jquery.autocomplete.js"></script>
     <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/infinity-scroll/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/infinity-scroll/jquery.infinitescroll.min.js"></script>
+    <script src="<?php echo $this->host('ruta')?>/js/vendor/jquery.validate.min.js?v<?php echo $this->host('version')?>"></script>
   </head>
 
 <body class="lista-<?php echo $this->clase; ?>">
@@ -350,18 +351,31 @@
 		</div>
       <?php }?>
 
-      <div class="contenido-plato">         
+    <div class="contenido-plato">
+      <div class="content-left">
+        <div class="iniciar-session">
+          <?php  if (!$session){?>
+          <ul>
+            <li><a href="#modalSession" role="button" data-toggle="modal">Ingresa</a></li>
+            <li>ó</li>
+            <li><a href="#modalRegister" role="button" data-toggle="modal">Registrarse</a></li>
+
+          </ul>
+            <?php  }else {?><ul>
+            <li><?php echo 'Hola '.$this->session->va_nombre_cliente  ?></li>
+            <li><a role="button" data-toggle="modal" href="<?php echo $this->url('login/process', array('action'=>'logout')); ?> ">Cerrar sesión</a></li>
+          
+          </ul><?php  }?>
+        </div>
         <?php echo $this->content; ?>
-       
-       <!--  <div class="subir">
+      </div>    
+      <!--  <div class="subir">
           <a href="#top"><img src="<?php echo $this->host('static')?>/img/scroll-top.png" alt=""></a>
         </div> -->
-			<!--  <div class="arrow">
+  		<!--  <div class="arrow">
             <img src="<?php echo $this->host('static')?>/img/flechamenu.png" alt="">
-        </div> -->
-
-        
-      </div>
+      </div> -->
+    </div>
 
     <div class="footer">
           <nav class="fo">
@@ -420,7 +434,236 @@
         </p>
       </footer>
     </div>
+
+    <div id="modalSession" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Ingresa a tu cuenta</h3>
+      </div>
+      <div class="modal-body modalAlert">
+        <div class="row-fluid">
+          <div class="span6">
+            <p>Ingresa rápido por:</p>
+
+         <?php if(!$this->user) { ?>
+            <div>
+            <p style="text-align:center;"><a class="loginFacebook" href="<?php echo $this->loginUrl; ?>"></a></p>
+            </div>
+          <?php } else { ?> 
+            <div>
+             <p style="text-align:center;"><a class="loginFacebook" href="<?php echo $this->loginUrl; ?>"></a></p>
+            </div>
+           <?php }  ?>  
+           
+          </div>
+          <div class="span6 decs-f">
+            <p>Ingresa los siguientes datos</p>
+                <?php
+            $form = $this->form;
+            $form->setAttributes(array(
+             // 'action' =>$this->accion,
+              'class' => 'form-login',
+            ));
+            $form->prepare();
+            echo $this->form()->openTag($form);
+            ?>
+              <div class="form-group">
+                <span class="input-icon">
+               <?php echo $this->formRow($form->get('va_email'));?>
+                  <i class="icon-user"></i> 
+                </span>
+              </div>
+              <div class="form-group">
+                <span class="input-icon">
+                  <?php  echo $this->formRow($form->get('va_contrasena'));?>
+                  <i class="icon-lock"></i>
+                </span>
+              </div>
+              <div class="form-group">
+                <?php  echo $this->formSubmit($form->get('submit'));?>
+              </div>
+            <?php  echo $this->form()->closeTag(); ?>
+          </div>
+          <a href="#" class="recContrasenia">Olvidé mi contraseña</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalRecuperar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Recuperar contraseña</h3>
+      </div>
+      <div class="modal-body modalAlertEmail">
+        <div class="row-fluid">
+          <p style="font-family:arial;font-size:13px;">
+            Introduzca su dirección de correo electrónico para restablecer su contraseña.
+          </p>
+          
+           <?php
+            $form2 = $this->formCambio;
+            $form2->setAttributes(array(
+              //  'action' =>$this->accion3,
+         'class' => 'form-login',
+            ));
+            $form2->prepare();
+            echo $this->form()->openTag($form2);
+            ?>
+            <fieldset>
+              <div class="form-group">
+                <span class="input-icon">
+                  <?php echo $this->formRow($form2->get('va_email'));?>
+                  <i class="icon-envelope-alt"></i> 
+                </span>
+              </div>
+              <div class="form-group" style="margin-top:10px;">
+                <button class="btn btn-light-grey go-back">
+                  Atras
+                </button>
+                  <?php echo $this->formSubmit($form2->get('submit'));?> 
+              </div>
+            </fieldset>
+          <?php  echo $this->form()->closeTag(); ?>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalRecuperarContr" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Ingrese su nueva contraseña</h3>
+      </div>
+      <div class="modal-body recuperarConM">
+        <div class="row-fluid">
+            <?php
+            $form3 = $this->formActualizar;
+            $form3->setAttributes(array(
+                //'action' =>$this->accion1,
+                'class' => 'form-login',
+                'id'=>'RecuperarCo'
+            ));
+            $form3->prepare();
+            echo $this->form()->openTag($form3);
+            ?>            
+            <div class="form-group">
+              <label class="lbEt">Contraseña: *</label>
+              <span class="input-icon">
+            <?php echo $this->formrow($form3->get('va_contrasena'))?>
+                <i class="icon-lock"></i>
+              </span>
+            </div>
+            <div class="form-group">
+              <label class="lbEt">Confirmar contraseña: *</label>
+              <span class="input-icon">
+             <?php echo $this->formrow($form3->get('verificar_contrasena'))?>
+                <i class="icon-lock"></i>
+              </span>
+            </div>
+            <div class="form-group">
+               <?php echo $this->formSubmit($form3->get('submit'));?>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalRecuperarObsoleto" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header" style="border-bottom:0;">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body recuperarConO">
+
+      </div>
+    </div>
+    <div id="modalRecuperarRegistro" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header" style="border-bottom:0;">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body recuperarConR">
+
+      </div>
+    </div>
+
+    <div id="modalRegister" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Se miembro de listadelsabor.com</h3>
+      </div>
+      <div class="modal-body">
+        <div class="row-fluid">
+          <div class="span6">
+            <p>Regístrate a través de:</p>
+
+         <?php if(!$this->user) { ?>
+            <div>
+            <p style="text-align:center;"><a class="loginFacebook" href="<?php echo $this->loginUrl; ?>"></a></p>
+            </div>
+          <?php } else { ?> 
+            <div>
+             <p style="text-align:center;"><a class="loginFacebook" href="<?php echo $this->loginUrl; ?>"></a></p>
+            </div>
+           <?php }  ?>  
+          </div>
+          <div class="span6 decs-f">
+            <p>Crea una cuenta nueva:</p>
+            <?php
+            $form1 = $this->formCliente;
+            $form1->setAttributes(array(
+                'action' =>$this->accion1,
+                'class' => 'form-register',
+            ));
+            $form1->prepare();
+            echo $this->form()->openTag($form1);
+            ?>
+              <fieldset>
+                <div class="form-group">
+                  <label class="lbEt">Nombre completo: *</label>
+                  <span class="input-icon">
+                    <?php  echo $this->formRow($form1->get('va_nombre_cliente'));?> 
+                    <i class="icon-user"></i>
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label class="lbEt">Correo electrónico: *</label>
+                  <span class="input-icon">
+                      <?php  echo $this->formRow($form1->get('va_email'));?> 
+                    <i class="icon-envelope-alt"></i>
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label class="lbEt">Contraseña: *</label>
+                  <span class="input-icon">
+                    <?php  echo $this->formRow($form1->get('va_contrasena'));?> 
+                    <i class="icon-lock"></i>
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label class="lbEt">Confirmar contraseña: *</label>
+                  <span class="input-icon">
+                  <?php  echo $this->formRow($form1->get('verificar_contrasena'));?> 
+                    <i class="icon-lock"></i>
+                  </span>
+                </div>
+                <div class="form-group">
+                  <span class="input-icon">
+                    <label class="checkbox">
+                     <?php  echo $this->formRow($form1->get('va_notificacion'));?>   
+                      Recibir notificaciones
+                    </label>
+                  </span>
+                </div>
+                <div class="form-group">
+                 <?php  echo $this->formSubmit($form1->get('submit'));?>
+                </div>
+              </fieldset>
+           <?php  echo $this->form()->closeTag(); ?>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </div>
+
   <script src="<?php echo $this->host('ruta')?>/js/vendor/jquery.placeholder.min.js?v<?php echo $this->host('version')?>"></script>   
   
   <!--<script src="<?php echo $this->host('ruta')?>/js/jquery.flexslider.js"></script>
@@ -433,16 +676,71 @@
       <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/bootstrap-modal.js"></script>
       <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/acomer.provincias.js"></script>
       <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js?v<?php echo $this->host('version')?>"></script>
+      <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/login.js?v<?php echo $this->host('version')?>"></script>
+
     <?php }elseif($detect4->isMobile()){?>
       <script src="<?php echo $this->host('ruta')?>/js/aplicacion-mobile.js?v<?php echo $this->host('version')?>"></script>
+
     <?php }else{?>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          //http://192.168.1.36:8080/?token=37a62352b94df46a71bf506f5f7eaa7f 
+          var pathname = $(location).attr('href');
+          var t = pathname.split('=');
+          //alert(t[0]);
+          var datoOne = t[0]+'=';
+          var datoTwo = t[1];
+          var urlM = urlJson + '/?token=';
+          if(datoOne === urlM){            
+            $('#modalSession').modal('show');
+            $.ajax({
+              type:"GET",
+              url: urlJson+'/auth', 
+              data: {token: datoTwo},          
+              success: function(data){
+                var htmlAlert = '<div class="alert alert-success alert-font alert-se">'+data.menssage+'</div>';
+                $(".modalAlert").prepend(htmlAlert);
+              }
+            });
+          }else{
+
+          }
+
+          var urlRecu = urlJson + '/?value=';
+          if(datoOne === urlRecu){
+            $.ajax({
+              type:"GET",
+              url: urlJson+'/comprovar-value', 
+              data: {value: datoTwo},          
+              success: function(data){
+                if(data.success === false){
+                  $(".alert-errorM").remove();
+                  $('#modalRecuperarObsoleto').modal('show');
+                  var htmlAlert = '<div class="alert alert-error alert-font alert-errorM">'+data.menssage+'</div>';
+                  $(".recuperarConO").prepend(htmlAlert);
+                }else{
+                  $(".alert-errorM").remove();
+                  $('#modalRecuperarContr').modal('show');
+                  $('#modalRecuperarContr').attr('data-token', datoTwo);
+                  var htmlAlert = '<div class="alert alert-font alert-errorM">'+data.menssage+'</div>';
+                  $(".recuperarConM").prepend(htmlAlert);
+                }
+                
+              }
+            });
+          }else{
+
+          }
+        });
+
+      </script>
       <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/bootstrap-modal.js"></script>
       <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/source/acomer.provincias.js"></script>
       <script src="<?php echo $this->host('ruta')?>/js/aplicacion.js?v<?php echo $this->host('version')?>"></script>
+      <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/login.js?v<?php echo $this->host('version')?>"></script>
     <?php }?>
 
     <script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/bootstrap-dropdown.js?v<?php echo $this->host('version')?>"></script>
-
 
     <script>
       (function(i,s,o,g,r,a,m){

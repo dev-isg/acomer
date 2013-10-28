@@ -18,7 +18,6 @@ use Application\Form\Registro;
 use Application\Form\Registroplato;
 use Application\Form\Contactenos;
 use SanAuth\Controller\AuthController; 
-// use Application\Model\Entity\Procesa;
 use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
 use Application\Model\Entity\Album;
@@ -56,7 +55,7 @@ public function __construct()
         if (!isset($session)) {
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
-        $this->layout()->login = $facebook['loginUrl'];
+        $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         $loginUrl = $facebook['loginUrl'];
         $user = $facebook['user'];
@@ -233,6 +232,12 @@ public function __construct()
     {
         $view = new ViewModel();
         $request = $this->getRequest();
+         $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $session=$storage->read();
+        if ($session){           
+                    $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
+                    $activo=$participa->en_estado;//=='activo'?true:false;
+                }
         $this->layout()->clase = 'buscar-distrito';
         if ($request->isGet()) {
             $datos = $this->request->getQuery();
@@ -565,7 +570,8 @@ public function __construct()
             'plat'=>$plato,
             'session'=>$session,
             'menus'=>$menus,
-            'masdestacados'=>$consultafinal
+            'masdestacados'=>$consultafinal,
+            'session'=>$session
         ));
         return $view;
     }

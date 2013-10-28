@@ -114,6 +114,17 @@ return array(
                     )
                 )
             ),
+            'comprovarvalue' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/comprovar-value',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'SanAuth\Controller',
+                        'controller' => 'Auth',
+                        'action' => 'comprovarvalue'
+                    )
+                )
+            ),
 
             'success' => array(
                 'type'    => 'Literal',

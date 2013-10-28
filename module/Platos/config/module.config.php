@@ -51,7 +51,7 @@ return array(
                         'action' => 'verplatos'
                     )
                 ),
-                            'may_terminate' => true,
+                 'may_terminate' => true,
                 'child_routes' => array(
                     'default' => array(
                         'type'    => 'Segment',
@@ -68,8 +68,18 @@ return array(
                     ),
                     
                 ),
-            ),            
-            
+            ),  
+              'verplatos2' => array(
+                'type' => 'Segment',
+                'options' => array(                   
+                   'route' => '/plato[/:nombre]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Platos\Controller',
+                        'controller' => 'Index',
+                        'action' => 'verplatos2'
+                    )
+                )
+            ), 
         ),
     ),
     'view_manager' => array(

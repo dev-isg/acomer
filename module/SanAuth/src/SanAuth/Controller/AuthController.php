@@ -65,20 +65,31 @@ class AuthController extends AbstractActionController {
                 ->prependFile($this->_options->host->base . '/js/main.js');
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session = $storage->read();
-//        if (!isset($session)) {
-//            $face = new \Grupo\Controller\IndexController();
-//            $facebook = $face->facebook();
-//            $this->layout()->login = $facebook['loginUrl'];
-//            $this->layout()->user = $facebook['user'];
-//        }
+        if (!isset($session)) {
+            $face = new \Usuario\Controller\ClientesController();
+            $facebook = $face->facebook();
+            $this->layout()->login = $facebook['loginUrl'];
+            $this->layout()->user = $facebook['user'];
+        }
         $token = $this->params()->fromQuery('token');
         if ($token) {
             $usuario = $this->getClientesTable()->clientes($token);
             if (count($usuario) > 0) {
                 $this->getClientesTable()->cambiarestado($usuario[0]['in_id']);
                 $mensaje = 'Bienvenido '.ucwords($usuario[0]['va_nombre_cliente']).'. Tu cuenta ya esta lista para usarse. ';
+                      return new JsonModel(array(
+                          'menssage' =>$mensaje,
+                           'success'=>true
+                            ));  
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
             } else {
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/auth');
+           $mensaje = 'Esta cuenta ya ha sido activada. Inicie Sesión. '; 
+                return new JsonModel(array(
+                          'menssage' =>$mensaje,
+                           'success'=>false
+                            ));
+                
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
             }
         }
         
@@ -120,7 +131,12 @@ class AuthController extends AbstractActionController {
                     $result = $this->getAuthService()->authenticate();
                     foreach ($result->getMessages() as $message) {
                         if($message){
-                            $this->flashmessenger()->addMessage('Usuario ó contraseña incorrecto');
+                           $this->flashmessenger()->addMessage('Usuario ó contraseña incorrecto');
+//                            return new JsonModel(array(
+//                            'menssage' =>$message,
+//                            'success'=>false
+//                            ));  
+//                            exit;
                         }                       
                     }
                     if ($result->isValid()) { 
@@ -146,6 +162,12 @@ class AuthController extends AbstractActionController {
                             return $this->redirect()->toRoute($redirect);
                         }
                     } else {
+                           return new JsonModel(array(
+                            'menssage' =>$message,
+                            'success'=>false
+                            ));  
+                            exit;
+                        
                         return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/auth');
                     }
                 }
@@ -177,12 +199,10 @@ class AuthController extends AbstractActionController {
                         $id = end($arrurl);
                         $accion = $request->getPost('accion');
                         $origen = $request->getPost('origen', 'evento');
-                        if ($accion == 'detalleevento') {
-                            $redirect = 'evento';
-                        } elseif ($accion == 'detallegrupo') {
-                            $redirect = 'detalle-grupo';
-                        } elseif ($accion == 'index' && $origen != 'ingresarPrin') {
-                            $redirect = 'elegir-grupo'; //'agregar-grupo';
+                        if ($accion == 'verplato') {
+                            $redirect = 'plato/restaurante';
+                        } elseif ($accion == 'detalleubicacion') {
+                            $redirect = 'busqueda-distrito';
                         } elseif ($accion == 'index' && $origen == 'ingresarPrin') {
                             $redirect = 'home';
                         }
@@ -202,92 +222,25 @@ class AuthController extends AbstractActionController {
                     if ($id) {
                       $success=true;
                      return new JsonModel(array('success'=>$success,'in_id'=>$id));
-//                       return $this->redirect()->toRoute($redirect, array('in_id' => $id));
                    } else {
                     $success=true;
                      return new JsonModel(array('success'=>$success));
-//                       return $this->redirect()->toRoute($redirect);
                    }
-
            }else{
+               $mensajes ='Usuario ó contraseña incorrecto';
                $success=false;
-               return new JsonModel(array('success'=>$success));
-//               switch ($result->getCode()) {
-//                    case Result::FAILURE_IDENTITY_NOT_FOUND:
-//                        /** do stuff for nonexistent identity * */
-//                        break;
-//
-//                    case Result::FAILURE_CREDENTIAL_INVALID:
-//                        /** do stuff for invalid credential * */
-//                        break;
-//
-//                    case Result::SUCCESS:
-//                        /** do stuff for successful authentication * */
-//                        break;
-//
-//                    default:
-//                        /** do stuff for other failure * */
-//                        break;
-//                }
+               return new JsonModel(array( 'menssage' =>$mensajes,'success'=>$success));
+
            }
         }
                 
     }
-    
-//    public function validarAction(){
-//       $request = $this->getRequest();
-//        if ($request->isPost()) {
-//                $correo = $this->params()->fromPost('va_email');
-//                $contrasena = sha1($this->params()->fromPost('va_contrasena'));  
-//                $usuario = $this->getUsuarioTable()->usuario1($correo);
-//
-//                if($usuario){
-//                    if ($usuario[0]['va_estado'] == 'activo') {
-//                        $result = $this->getAuthService()->authenticate(); 
-//                        
-////                        $password=$this->getUsuarioTable()->getUsuario($usuario[0]['in_id'])->va_contrasena;
-////                        if ($password) {
-////                            if($password===$contrasena){
-////                                return new JsonModel(array(
-////                                'success'=>true
-////                                ));
-////                            }else{
-////                               $mensaje='El correo no concide con la contrasena';
-////                               $result = new JsonModel(array(
-////                                'menssage' =>$mensaje,
-////                                'success'=>false
-////                                ));
-////                                return $result;
-////                            }
-////                        }else{
-////                                return new JsonModel(array(
-////                                'success'=>false
-////                                ));
-////                        }
-//                    }else{
-//                        $mensaje='El correo no se encuentra registrado';
-//                        $result = new JsonModel(array(
-//                                'menssage' =>$mensaje,
-//                                'success'=>false
-//                            ));
-//                         return $result;
-//                    }
-//            }else{
-//                    $mensaje='El correo no se encuentra registrado';
-//                      return new JsonModel(array(
-//                          'menssage' =>$mensaje,
-//                           'success'=>false
-//                            ));
-//                    
-//                }
-//        }
-//    }
-    
+
     public function validarcorreoAction(){
         $request = $this->getRequest();
         if ($request->isPost()) {
                 $correo = $this->params()->fromPost('va_email');     
-                $usuario = $this->getUsuarioTable()->usuario1($correo);
+                $usuario = $this->getClientesTable()->usuario1($correo);
                 if($usuario){
                      if ($usuario[0]['va_estado'] == 'activo') {
                             return new JsonModel(array(
@@ -320,7 +273,7 @@ class AuthController extends AbstractActionController {
                 $correo = $this->params()->fromPost('va_email');
                 $contrasena = sha1($this->params()->fromPost('va_contrasena'));  
                 $usuario = $this->getUsuarioTable()->usuario1($correo);
-                if ($usuario[0]['va_estado'] == 'activo') {
+                if ($usuario[0]['en_estado'] == 'activo') {
                     $password=$this->getUsuarioTable()->getUsuario($usuario[0]['in_id'])->va_contrasena;
                     if ($password) {
                         if($password===$contrasena){
@@ -417,13 +370,8 @@ class AuthController extends AbstractActionController {
     }
 
     public function changeemailAction() {
-        $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
-        $renderer->inlineScript()
-        ->setScript('$(document).ready(function(){valUsuario();});')
-        ->prependFile($this->_options->host->base . '/js/main.js')
-        ->prependFile($this->_options->host->base . '/js/jquery.validate.min.js');
-        $categorias =  $this->getGrupoTable()->tipoCategoria();
-        $this->layout()->categorias = $categorias;
+        $view =new ViewModel();
+        $this->layout('layout/layout-portada2');
         $request = $this->getRequest();
         $form = new PasswordForm();
         if ($request->isPost()) {
@@ -431,13 +379,17 @@ class AuthController extends AbstractActionController {
             if ($form->isValid()) {
                 $mail = $this->params()->fromPost('va_email');
                 try {
-                    $results = $this->getUsuarioTable()->generarPassword($mail);
-                    $usuario = $this->getUsuarioTable()->getUsuarioxEmail($mail);
+                    $results = $this->getClientesTable()->generarPassword($mail);
+                    $usuario = $this->getClientesTable()->getUsuarioxEmail($mail);
 //                    $mensajes='Este correo fue enviado con exito...';
                     $this->flashmessenger()->addMessage('Se le ha enviado un correo a la cuenta indicada, por favor seguir las instrucciones.');
+                
+                    
+                    
                 } catch (\Exception $e) {
 //                    $mensajes='Este correo no esta registrado...';
                     $this->flashmessenger()->addMessage('Este correo no esta registrado.');
+                    
                 }
 
                 if ($results) {
@@ -448,9 +400,9 @@ class AuthController extends AbstractActionController {
                                                </head>
                                                <body>
                                                     <div style="color: #7D7D7D"><br />
-                                                    Hola '.ucwords($usuario->va_nombre).',<br /><br />  
-                                                    Para recuperar tu contraseña debes hacer <a href="' . $config['host']['base'] . '/cambio-contrasena?token=' . utf8_decode($results) . '">Clic Aquí</a><br /><br /> 
-                                                    o copiar la siguiente url en su navegador:<br /><br />' . $config['host']['base'] . '/cambio-contrasena?token=' . utf8_decode($results) .'          
+                                                    Hola '.ucwords($usuario->va_nombre_cliente).',<br /><br />  
+                                                    Para recuperar tu contraseña debes hacer <a href="' . $config['host']['base'] . '/?value=' . utf8_decode($results) . '">Clic Aquí</a><br /><br /> 
+                                                    o copiar la siguiente url en su navegador:<br /><br />' . $config['host']['base'] . '/?value=' . utf8_decode($results) .'          
                                                      </div>
                                                      <br /><br /><br />
                                                      <img src="'.$config['host']['img'].'/juntate.png" title="juntate.pe"/>
@@ -459,7 +411,7 @@ class AuthController extends AbstractActionController {
 
                     $message = new Message();
                     $message->addTo($mail)
-                            ->addFrom('listadelsabor@innovationssystems.com', 'juntate.pe')
+                            ->addFrom('listadelsabor@innovationssystems.com', 'listadelsabor.com')
                             ->setSubject('Recuperación de contraseña');
                     $bodyPart = new \Zend\Mime\Message();
                     $bodyMessage = new \Zend\Mime\Part($bodyHtml);
@@ -476,54 +428,115 @@ class AuthController extends AbstractActionController {
                 
             return $this->redirect()->toUrl('/cambio');
             }
+            else{ 
+                foreach ($form->getInputFilter()->getInvalidInput() as $error)
+                {
+                 
+                    $mensajes = $error->getMessages();
+                     return new JsonModel(array(
+                          'menssage' =>$mensajes,
+                           'success'=>false
+                            ));
+                exit;
+                    }
+                    }
         }
         $flashMessenger = $this->flashMessenger();
         if ($flashMessenger->hasMessages()) {
             $mensajes = $flashMessenger->getMessages();
+                return new JsonModel(array(
+                          'menssage' =>$mensajes,
+                           'success'=>false
+                            ));
+                exit;
         }
         return array(
             'form' => $form,
             'mensaje' => $mensajes
         );
-        // $this->flashmessenger()->clearMessages();
+         return $view;
     }
 
+    
+    
+    public function comprovarvalueAction()
+            
+    {
+        $password = $this->params()->fromQuery('value');
+        $results = $this->getClientesTable()->consultarPassword($password);
+      //  var_dump($results->in_id);exit;
+        if($results)
+        {
+             $mensajes='Ingrese su nueva Contraseña.';
+                         return new JsonModel(array(
+                          'menssage' =>$mensajes,
+                           'success'=>true
+                            ));exit;   
+        }else                  
+            {
+           $mensajes='El token recibido no es válido o es obsoleto. Por favor verifique el enlace recibido en su correo.';
+                    return new JsonModel(array(
+                          'menssage' =>$mensajes,
+                           'success'=>false
+                            ));exit;                       
+                                
+            }  
+    }
     public function recuperarAction() {
-        $password = $this->params()->fromQuery('token');
+        $view =new ViewModel();
+        $this->layout('layout/layout-portada2');
+        $password = $this->params()->fromPost('value');
         $form = new UpdatepassForm();
-        $request = $this->getRequest();
+        $request = $this->getRequest();  
         $form->setData($request->getPost());
-
         if ($request->isPost()) {
             if ($form->isValid()) {
                 try {
-                    $results = $this->getUsuarioTable()->consultarPassword($password);
+                    $results = $this->getClientesTable()->consultarPassword($password);
                 } catch (\Exception $e) {
-                    $this->flashMessenger()->addMessage('Este contraseña temporal no existe...');
+                    $mensajes='El token recibido no es válido o es obsoleto. Por favor verifique el enlace recibido en su correo.';
+                    
+                    return new JsonModel(array(
+                          'menssage' =>$mensajes,
+                           'success'=>false
+                            ));
                 }
                 if ($results) {
 
                     $nuevopass = $this->params()->fromPost('va_contrasena');
-                    if ($this->getUsuarioTable()->cambiarPassword($nuevopass, $results->in_id)) {
-                        $this->flashmessenger()->addMessage('La contraseña se actualizo correctamente...');
+                   // echo 'eee';exit;
+                    if ($this->getClientesTable()->cambiarPassword($nuevopass, $results->in_id)) {
+                       $mensajes =  'La contraseña se actualizo correctamente...';
+             return new JsonModel(array(
+                          'menssage' =>$mensajes,
+                           'success'=>true
+                            ));
+                exit;
                         return $this->redirect()->toUrl('/auth');
                     } else {
-                        $this->flashmessenger()->addMessage('La contraseña se no se pudo actualizar correctamente...');
+                       $mensajes =   'La contraseña se no se pudo actualizar correctamente...';
+                        
+                         return new JsonModel(array(
+                          'menssage' =>$mensajes,
+                           'success'=>false
+                            ));
+                exit;
                     }
-                    return $this->redirect()->toUrl('/cambio-contrasena?token=' . $password);
+                    return $this->redirect()->toUrl('/cambio-contrasena?value=' . $password);
                 }
+               }
             }
-        }
-        
         $flashMessenger = $this->flashMessenger();
         if ($flashMessenger->hasMessages()) {
             $mensajes = $flashMessenger->getMessages();
         }
+                    
         return array(
             'form' => $form,
             'password' => $password,
             'mensaje' => $mensajes//$this->flashmessenger()->getMessages()
         );
+        return $view;
     }
 
     public function getClientesTable() {

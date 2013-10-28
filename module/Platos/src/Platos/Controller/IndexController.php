@@ -166,22 +166,19 @@ class IndexController extends AbstractActionController {
                   $filter   = new \Filter_Alnum();
                   $filtered = $filter->filter($nom);
                   $name = $filtered.'-'.$imf2;
-              $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/loguito.png');
+                $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/loguito.png');
                 $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
-                $nuevaimagen = $viejaimagen;
+               
                 $margen_dcho =340;
                 $margen_inf = 20;
                 $sx = imagesx($estampa);
                 $sy = imagesy($estampa);
-//                  $im = imagecreatefromjpeg('foto.jpeg');
-       imagecopy($nuevaimagen, $estampa, imagesx($nuevaimagen) - $sx - $margen_dcho, imagesy($nuevaimagen) - $sy - $margen_inf, 0, 0, imagesx($estampa), imagesy($estampa));
-
-                   
-                   
+ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), imagesy($estampa));      
+                     $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                       $destaque = imagecreatetruecolor($destacadox, $destacadoy);
                       $generale = imagecreatetruecolor($generalx, $generaly);
-                      // imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
-                        imagecopyresized($destaque, $viejaimagen, 0, 0, 0, 0, $destacadox, $destacadoy,$ancho, $alto);
+                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                       imagecopyresized($destaque, $viejaimagen, 0, 0, 0, 0, $destacadox, $destacadoy,$ancho, $alto);
                        imagecopyresized($generale, $viejaimagen, 0, 0, 0, 0, $generalx, $generaly,$ancho, $alto); 
                     if($platos[0]['cantidad']<=0)
                        {    mkdir($this->_options->upload->images . '/plato/principal/'.$array[0]['Ta_restaurante_in_id'].'/' , 0777); 
@@ -239,18 +236,15 @@ class IndexController extends AbstractActionController {
                    $name = $filtered.'-'.$imf2;
                     $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/loguito.png');
                 $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
-                $nuevaimagen = $viejaimagen;
+
                 $margen_dcho =340;
                 $margen_inf = 20;
                 $sx = imagesx($estampa);
                 $sy = imagesy($estampa);
-//                  $im = imagecreatefromjpeg('foto.jpeg');
-       imagecopy($nuevaimagen, $estampa, imagesx($nuevaimagen) - $sx - $margen_dcho, imagesy($nuevaimagen) - $sy - $margen_inf, 0, 0, imagesx($estampa), imagesy($estampa));
-
-                
-                      $destaque = imagecreatetruecolor($destacadox, $destacadoy);
+ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), imagesy($estampa));      
+                     $nuevaimagen = imagecreatetruecolor($anchura, $altura);         $destaque = imagecreatetruecolor($destacadox, $destacadoy);
                       $generale = imagecreatetruecolor($generalx, $generaly);
-                      // imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
                        imagecopyresized($destaque, $viejaimagen, 0, 0, 0, 0, $destacadox, $destacadoy,$ancho, $alto);
                        imagecopyresized($generale, $viejaimagen, 0, 0, 0, 0, $generalx, $generaly,$ancho, $alto);
                       if($platos[0]['cantidad']<=0)
@@ -469,19 +463,16 @@ class IndexController extends AbstractActionController {
                     
  $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/loguito.png');
                 $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
-                $nuevaimagen = $viejaimagen;
+         
                 $margen_dcho =340;
                 $margen_inf = 20;
                 $sx = imagesx($estampa);
                 $sy = imagesy($estampa);
-//                  $im = imagecreatefromjpeg('foto.jpeg');
-       imagecopy($nuevaimagen, $estampa, imagesx($nuevaimagen) - $sx - $margen_dcho, imagesy($nuevaimagen) - $sy - $margen_inf, 0, 0, imagesx($estampa), imagesy($estampa));
-
-                   
-                   
+imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), imagesy($estampa));      
+                     $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        $destaque = imagecreatetruecolor($destacadox, $destacadoy);
                       $generale = imagecreatetruecolor($generalx, $generaly);
-                      // imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                       imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
                         imagecopyresized($destaque, $viejaimagen, 0, 0, 0, 0, $destacadox, $destacadoy,$ancho, $alto);
                        imagecopyresized($generale, $viejaimagen, 0, 0, 0, 0, $generalx, $generaly,$ancho, $alto);                                  
                      $principal = $this->_options->upload->images . '/plato/principal/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;
@@ -533,19 +524,15 @@ class IndexController extends AbstractActionController {
                        
                        $estampa = imagecreatefrompng($this->_options->upload->images . '/defecto/loguito.png');
                 $viejaimagen=  imagecreatefromjpeg($File['tmp_name']);
-                $nuevaimagen = $viejaimagen;
                 $margen_dcho =340;
                 $margen_inf = 20;
                 $sx = imagesx($estampa);
                 $sy = imagesy($estampa);
-//                  $im = imagecreatefromjpeg('foto.jpeg');
-       imagecopy($nuevaimagen, $estampa, imagesx($nuevaimagen) - $sx - $margen_dcho, imagesy($nuevaimagen) - $sy - $margen_inf, 0, 0, imagesx($estampa), imagesy($estampa));
-
-                   
-                   
+imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), imagesy($estampa));      
+                     $nuevaimagen = imagecreatetruecolor($anchura, $altura);
                        $destaque = imagecreatetruecolor($destacadox, $destacadoy);
                       $generale = imagecreatetruecolor($generalx, $generaly);
-                      // imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
+                     imagecopyresized($nuevaimagen, $viejaimagen, 0, 0, 0, 0, $anchura, $altura, $ancho, $alto);
                         imagecopyresized($destaque, $viejaimagen, 0, 0, 0, 0, $destacadox, $destacadoy,$ancho, $alto);
                        imagecopyresized($generale, $viejaimagen, 0, 0, 0, 0, $generalx, $generaly,$ancho, $alto);                                      
                      $principal = $this->_options->upload->images . '/plato/principal/'.$array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' . $name;
@@ -675,8 +662,12 @@ class IndexController extends AbstractActionController {
                   
              return $resultados->response->docs;     
     }
+    
+      
     public function verplatosAction() 
-      { $view = new ViewModel();
+      {
+        
+        $view = new ViewModel();
                 if($_GET['callback'] )
                 {  
                     header('Content-type: application/x-javascript');
@@ -696,17 +687,18 @@ class IndexController extends AbstractActionController {
                                        'va_email'=>$email,
                                        'tx_descripcion'=>$comentario,
                                        'Ta_puntaje_in_id'=>$puntaje);
-                         $this->getComentariosTable()->agregarComentario($envia);
+                         $this->getClientesTable()->agregarComentariomovil($envia);
+                         $this->getPlatosTable()->cromSolr($idplato,'');  
                                 $result = array('resultado'=>true);
                                 echo "jsonpCallback(".json_encode($result).")"; }
                                 exit();
                                 $view->setTerminal(true);
                                 return $view;     
                }
-               
+  
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
-        if ($session) {           
+        if ($session){           
                     $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
                     $activo=$participa->en_estado;//=='activo'?true:false;
                 }
@@ -714,11 +706,9 @@ class IndexController extends AbstractActionController {
         $urlerror =  $datos['nombre'];
         $nombre = explode('-', $datos['nombre']); 
         $id = array_pop($nombre);
-        if(!$this->getPlatosTable()->getPlato($id)){
-            $this->redirect()->toUrl('/');
-        }       
           $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray(); 
-
+          if(count($listarecomendacion)<1)
+          {$this->redirect()->toUrl('/');}
           $texto = 'restaurante:"'.$listarecomendacion[0]['restaurant_nombre'].'"'; 
                 $limit = 10;
                 $palabraBuscar = isset($texto) ? $texto : false;
@@ -929,5 +919,7 @@ class IndexController extends AbstractActionController {
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
          return $results->toArray();
     }
-
+ public function verplatos2Action() 
+      {$datos =$this->params()->fromRoute(); 
+       $this->redirect()->toUrl('/plato/restaurante/'.$datos['nombre']); }
 }

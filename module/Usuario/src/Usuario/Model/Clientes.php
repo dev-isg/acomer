@@ -113,7 +113,7 @@ class Clientes
                         'name'    => 'StringLength',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'min'      => 8,
+                            'min'      => 6,
                             'max'      =>20 ,
                         ),
                     ),
@@ -126,7 +126,7 @@ class Clientes
                 'validators' => array( 
                     array( 
                         'name'    => 'StringLength', 
-                        'options' => array( 'min' => 8 ), 
+                        'options' => array( 'min' => 6 ), 
                     ), 
                     array( 
                         'name' => 'identical', 

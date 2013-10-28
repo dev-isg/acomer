@@ -5,6 +5,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Usuario\Controller\ClientesController ;
+use Usuario\Model\ComentariosTable ;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Adapter\Adapter;
@@ -34,8 +35,79 @@ class ClientesTable
         $this->tableGateway = $tableGateway;
       
     }
+    public function generarPassword($correo)
+    {
+        $mail = $this->getUsuarioxEmail($correo);
+        $expFormat = mktime(date("H"), date("i"), date("s"), date("m"), date("d") + 3, date("Y"));
+        $expDate = date("Y-m-d H:i:s", $expFormat);
+        $idgenerada = sha1(uniqid($mail->in_id . substr($mail->va_nombre_cliente, 0, 8) . substr($mail->va_email, 0, 8).date("Y-m-d H:i:s"), 0));
+        $data = array(
+            'va_recupera_contrasena' => $idgenerada,
+            'va_fecha_exp'=>$expDate
+        );
+        $this->tableGateway->update($data, array(
+            'in_id' => $mail->in_id
+        ));
+        
+        if (! $idgenerada) {
+            throw new \Exception("No se puede generar password $idgenerada");
+        }
+        return $idgenerada;
+    }
+      public function cambiarPassword($password, $iduser) {
+        $data = array(
+            'va_contrasena' => sha1($password),
+            'va_recupera_contrasena'=>''
+        );
+
+        $actualiza = $this->tableGateway->getSql()->update()->table('ta_cliente')
+                ->set($data)
+                ->where(array('in_id' => $iduser));
+        $selectStringNotifca = $this->tableGateway->getSql()->getSqlStringForSqlObject($actualiza);
+        $adapter1 = $this->tableGateway->getAdapter();
+        $row = $adapter1->query($selectStringNotifca, $adapter1::QUERY_MODE_EXECUTE);
+
+        if (!$row) {
+            return false;
+        }
+        $this->eliminaPass($iduser);
+        return true;
+    }
+     public function eliminaPass($iduser)
+    {
+        $data = array(
+            'va_recupera_contrasena' => null
+        );
+        $this->tableGateway->update($data,array('in_id'=>$iduser));
+    }
+
+    public function getUsuarioxEmail($email)
+    {
+        $row = $this->tableGateway->select(array(
+            'va_email' => $email
+        ));
+        $resul = $row->current();
+        
+        if (! $resul) {
+            throw new \Exception("Could not find row $email");
+        }
+        return $resul;
+    }
     
-    
+      public function consultarPassword($password)
+    {
+        $curDate = date("Y-m-d H:i:s");
+        $row = $this->tableGateway->select(array(
+            'va_recupera_contrasena' => $password,
+//             'va_fecha_exp'=>$curDate
+        ));
+        $resul = $row->current();
+        
+//        if (! $resul) {
+//            throw new \Exception("Could not find row $password");
+//        }
+        return $resul;
+    }
       public function verificaCorreo($correo)
     {
         $adapter = $this->tableGateway->getAdapter();
@@ -46,7 +118,16 @@ class ClientesTable
         $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet->current();
     }
-    
+      public function usuario1($correo)
+    {
+        $adapter = $this->tableGateway->getAdapter();
+        $sql = new Sql($adapter);
+        $selecttot = $sql->select()->from('ta_cliente')
+                ->where(array('va_email'=>$correo));
+        $selectString = $sql->getSqlStringForSqlObject($selecttot);
+        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        return $resultSet->toArray();
+    }
     
      public function cambiarestado($id)
     {
@@ -61,16 +142,7 @@ class ClientesTable
     
     
     
-     public function usuario1($correo)
-    {
-        $adapter = $this->tableGateway->getAdapter();
-        $sql = new Sql($adapter);
-        $selecttot = $sql->select()->from('ta_cliente')
-                ->where(array('va_email'=>$correo));
-        $selectString = $sql->getSqlStringForSqlObject($selecttot);
-        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-        return $resultSet->toArray();
-    }
+   
     
     
 //       public function usuario25($correo) 
@@ -559,5 +631,73 @@ public function guardarUsuario( $usuario)
         }
         return $row;  
     }
+    
+    
+          public function agregarComentariomovil($coment,$id){
+         
+           $cliente=array(
+                    'va_nombre_cliente'=>$coment['va_nombre'],
+                    'va_email'=>$coment['va_email'],
+                    'va_contrasena'=>sha1($coment['va_email']),
+                    'en_estado'=>'activo',
+               );
+           $cantidad=$this->usuario1($coment['va_email']);
+           if(count($cantidad)==0)
+           { 
+                    $insert = $this->tableGateway->getSql()->insert()->into('ta_cliente')
+                    ->values($cliente);
+                 $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
+                 $statement->execute();    
+                 $idcliente=$this->tableGateway->getAdapter()->getDriver()->getLastGeneratedValue();  
+                 $comentario = array(
+                 'tx_descripcion' => $coment['tx_descripcion'],
+                 'Ta_plato_in_id' => $coment['Ta_plato_in_id'],
+                 'Ta_cliente_in_id' => $idcliente,
+                 'Ta_puntaje_in_id' => $coment['Ta_puntaje_in_id'],
+                 'da_fecha'=>  $fecha = date("Y-m-d h:m:s")
+                     ); 
+           }
+           else{  
+               $comentario = array(
+                    'tx_descripcion' => $coment['tx_descripcion'],
+                    'Ta_plato_in_id' => $coment['Ta_plato_in_id'],
+                    'Ta_cliente_in_id' => $cantidad[0]['in_id'],
+                    'Ta_puntaje_in_id' => $coment['Ta_puntaje_in_id'],
+                   'da_fecha'=>  $fecha = date("Y-m-d h:m:s")
+                ); 
+             
+               }
+
+            
+         $id = (int) $coment['in_id'];
+            if ($id == 0) {            
+           $insertcoment= $this->tableGateway->getSql()->insert()->into('ta_comentario')
+                    ->values($comentario);
+            $statement2 = $this->tableGateway->getSql()->prepareStatementForSqlObject($insertcoment);
+            $statement2->execute();  
+             }
+             
+                    $adapter2=$this->tableGateway->getAdapter();
+                   $promselect=$this->tableGateway->getAdapter()
+                ->query('SELECT SUM(ta_puntaje_in_id)AS SumaPuntaje ,COUNT(ta_comentario.in_id ) AS NumeroComentarios,
+                    ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS TotPuntaje
+                    FROM ta_comentario
+                    where  ta_comentario.ta_plato_in_id='.$coment['Ta_plato_in_id'], $adapter2::QUERY_MODE_EXECUTE);
+                        $prom=$promselect->toArray();
+                       
+               $update = $this->tableGateway->getSql()->update()->table('ta_plato')
+                        ->set(array('Ta_puntaje_in_id'=>$prom[0]['TotPuntaje']))
+                        ->where(array('ta_plato.in_id'=>$coment['Ta_plato_in_id']));//$prom[0]['in_id']
+                $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
+                $statementup->execute();
+
+//
+//     echo 's';exit;
+             
+    }
+    
+    
+    
+    
 
 }

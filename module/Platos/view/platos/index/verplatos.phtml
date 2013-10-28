@@ -1,15 +1,15 @@
 <link rel="stylesheet" href="<?php echo $this->basePath()?>/css/jquery-ui.css?v<?php echo $this->host('version')?>">
 <link rel="stylesheet" href="<?php echo $this->basePath()?>/js/flexslider/flexslider.css" type="text/css"/>
 <div class="content-left">
-<a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a>
-      <div id="esconder">
+    <a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a>
+    <div id="esconder">
    		<div class="descrip-product">
         <?php
           require './vendor/Classes/Mobile_Detect.php';
           $detect4 = new Mobile_Detect();
           if ($detect4->isTablet()) {
              ?>
-            <div class="content-menu-home" style="position:fixed;top:0;">
+            <div class="content-menu-home" style="position:fixed;top:25px;">
               <ul>
                <?php 
                 foreach ($this->menus  as $menus) :
@@ -21,7 +21,7 @@
           <?php }elseif($detect4->isMobile()){?>   
             
           <?php } else {?> 
-            <div class="content-menu-home" style="position:fixed;top:0;">
+            <div class="content-menu-home" style="position:fixed;top:25px;">
               <ul>
                <?php 
                 foreach ($this->menus  as $menus) :
@@ -221,16 +221,20 @@
               <!--Comentarios-->
               <div class="top-coment">
                   <p><?php echo $this->cantidad; //$this->lista[0]['num']; //?> comentarios</p>
+                  <?php if ($session) { ?>  
                   <a href="#" class="btn btn-warning agregar-coment-1">Agregar comentario</a>
-          
+                  <?php  } else { ?>
+                   <a href="#modalSession" class="btn btn-warning agregar-coment-1" role="button" data-toggle="modal">Agregar comentario</a>
+                   
+                   <?php   }?>
               </div>
               
               
                <?if ($session) { ?>
               <div class="agregar-comentario-desc" style="display:none;">
-                  <p><?php echo $this->session->va_nombre_cliente;  ?></p>
+               <!--   <p><?php echo $this->session->va_nombre_cliente;  ?></p>
                   <p><?php echo $this->session->in_id;  ?></p>
-                  <p><?php echo $this->session->va_email;  ?></p>
+                  <p><?php echo $this->session->va_email;  ?></p>-->
                   
                 <?php
                 $title = 'Agregar nuevo comentario';
@@ -324,7 +328,7 @@
          
 </div>
 
-  <div id="mapa-buscador"></div>
+<div id="mapa-buscador"></div>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script> 
 <!--<script src="<?php echo $this->basePath()?>/js/jquery-ui.min.js?v<?php echo $this->host('version')?>"></script>-->
@@ -345,6 +349,28 @@
         $('body').removeClass('loading');
       }
     });
+  });
+
+  $(document).ready(function(){
+    var windw = this;
+    $.fn.followTo = function (pos) {
+      var $this = this,
+      $window = $(windw);
+      $window.scroll(function(e){
+        if ($window.scrollTop() > pos) {
+          $this.css({
+            position: 'fixed',
+            top: 0
+          });
+        } else {
+          $this.css({
+            position: 'relative',
+            top: 0
+          });
+        }
+      });
+    };
+    $('.content-menu-home').followTo(25);
   });
 </script>
 

@@ -9,15 +9,17 @@ class UserForm extends Form
 {
      public function __construct($name = null)
     {
-        parent::__construct('usuario');
+        parent::__construct('LoginUser');
         $this->setAttribute('method', 'post');
         $this->setAttribute('endtype', 'multipart/form-data');
+       
    
          $this->add(array(
             'name' => 'va_email',
-            'type' => 'Text',
-            'attributes' => array(               
+            'type' => 'email',
+            'attributes' => array(             
                 'id' => 'va_email',
+                'class' => 'form-control',
                 'placeholder'=>'Ingrese un correo valido…'
             )
         ));  
@@ -27,6 +29,7 @@ class UserForm extends Form
             'type' => 'Password',
             'attributes' => array(
                 'id'=>'inputPassword',
+                'class' => 'form-control',
                 'placeholder'=>'Ingrese la contraseña…'
             )
         ));
@@ -45,7 +48,7 @@ class UserForm extends Form
             'type' => 'Submit',
             'attributes' => array(
                 'value' => 'Ingresar',
-                'class' => 'btn btn-primary'
+                'class' => 'btn btn-bricky pull-right btnLoginIn'
             ),
         ));
         

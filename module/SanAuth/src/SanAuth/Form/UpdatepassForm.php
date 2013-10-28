@@ -10,7 +10,7 @@ class UpdatepassForm extends Form
 {
      public function __construct($name = null)
     {
-        parent::__construct('cambio');
+        parent::__construct('UpdatePass');
         $this->setAttribute('method', 'post');
         $this->setAttribute('endtype', 'multipart/form-data');
    
@@ -21,9 +21,9 @@ class UpdatepassForm extends Form
 //                'label' => 'Nombre de usario:',          
 //            ),
             'attributes' => array(               
-                'class' => 'span10',
-                'id' => 'va_contrasena',
-                'placeholder'=>'Ingrese su contraseña'
+                'class' => 'form-control',
+                'id' => 'inputPassword',
+                'placeholder'=>'Ingrese su nueva contraseña'
             ),
         ));  
          
@@ -35,9 +35,9 @@ class UpdatepassForm extends Form
                  'label' => '',
              ),
              'attributes' => array(
-                 'class' => 'span10',
+                 'class' => 'form-control',
                  'id' => 'verificar_contrasena',
-                 'placeholder'=>'Vuelva a ingresar su contraseña'
+                 'placeholder'=>'Confirme la contraseña…'
              ),
          ));
          
@@ -47,7 +47,7 @@ class UpdatepassForm extends Form
             'type' => 'Submit',
             'attributes' => array(
                 'value' => 'Cambiar',
-                'class' => 'btn btn-primary'
+                'class' => 'btn btn-bricky pull-right btnUpPass'
             ),
         ));
         $this->setInputFilter($this->validadores());
@@ -65,7 +65,7 @@ class UpdatepassForm extends Form
                     'name' => 'StringLength',
                     'options' => array(
                         'encoding' => 'UTF-8',
-                        'min'      => 8,
+                        'min'      => 6,
                         'max'      => 128,
                     ),
                 ),
@@ -79,7 +79,7 @@ class UpdatepassForm extends Form
             'validators' => array(
                 array(
                     'name'    => 'StringLength',
-                    'options' => array( 'min' => 8 ),
+                    'options' => array( 'min' => 6 ),
                 ),
                 array(
                     'name' => 'identical',

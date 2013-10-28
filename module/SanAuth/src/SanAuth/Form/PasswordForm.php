@@ -11,14 +11,16 @@ class PasswordForm extends Form
 {
      public function __construct($name = null)
     {
-        parent::__construct('cambio');
+        parent::__construct('CambiarPass');
         $this->setAttribute('method', 'post');
         
          $this->add(array(
             'name' => 'va_email',
-            'type' => 'Text',
+            'type' => 'email',
             'attributes' => array(               
-                'placeholder'=>'yourmail@email.com'
+                'placeholder'=>'yourmail@email.com',
+                'class'=>'form-control',
+                'id' => 'va_email'
             ),
         ));  
          
@@ -28,7 +30,8 @@ class PasswordForm extends Form
             'type' => 'Submit',
             'attributes' => array(
                 'value' => 'Enviar',
-                'class' => 'btn btn-primary'
+                'class' => 'btn btn-bricky pull-right btnEmailPass'
+                
             ),
         ));
         
