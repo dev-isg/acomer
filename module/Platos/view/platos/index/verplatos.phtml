@@ -9,7 +9,11 @@
           $detect4 = new Mobile_Detect();
           if ($detect4->isTablet()) {
              ?>
-            <div class="content-menu-home" style="position:fixed;top:0;">
+            <?php if ($session) { ?>
+      <div class="content-menu-home" style="position: relative; top: 0px;">
+          <?php } else {  ?>
+          <div class="content-menu-home" style="position: relative; top: 0px;"> 
+          <?php  } ?>
               <ul>
                <?php 
                 foreach ($this->menus  as $menus) :
@@ -21,7 +25,11 @@
           <?php }elseif($detect4->isMobile()){?>   
             
           <?php } else {?> 
-            <div class="content-menu-home" style="position:fixed;top:0;">
+            <?php if ($session) { ?>
+      <div class="content-menu-home" style="position: relative; top: 0px;">
+          <?php } else {  ?>
+          <div class="content-menu-home" style="position: relative; top: 0px;"> 
+          <?php  } ?>
               <ul>
                <?php 
                 foreach ($this->menus  as $menus) :
@@ -31,7 +39,6 @@
               </ul>
             </div>
          <?php }?> 
-        
    			
    			<div class="ficha-product">
    				<div class="ficha-img">
