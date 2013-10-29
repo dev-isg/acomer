@@ -39,7 +39,24 @@
             </div>
          <?php }?> 
         
-   	
+   			<div class="etiqueta-cat return-css">
+   				<div class="etiqueta-dev jh">
+            <?php
+              require './vendor/Classes/Mobile_Detect.php';
+              $detect3 = new Mobile_Detect();
+              if ($detect3->isTablet()) {
+                 ?>                 
+                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo ucwords($this->lista[0]['restaurant_nombre']);?></a></h2>
+               <?php }elseif($detect3->isMobile()){?>   
+                   <h2><a href="<?php echo $this->host('ruta')?>/buscar?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2>
+               <?php } else {?> 
+                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo ucwords($this->lista[0]['restaurant_nombre']);?></a></h2> 
+            <?php }?>
+   				</div>
+           <div class="return">
+              <a href="javascript:window.history.back();">Regresar</a>
+           </div>
+   			</div>
    			<div class="ficha-product">
    				<div class="ficha-img">
             <div class="flexslider carousel">
@@ -58,49 +75,7 @@
               </ul>
             </div>
    				</div>
-   				<div class="ficha-desc">
-            <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
-   					<div class="puntuaciones c<?php echo $this->lista[0]['Ta_puntaje_in_id'];?>"></div>
-   					<!--<p class="desc"><?php echo $this->lista[0]['tx_descripcion'];?></p>-->
-   					<?php if($this->lista[0]['va_precio']){?>
-              <p class="costo">Precio: <span><?php echo $this->lista[0]['va_precio'];?></span></p>
-   					  <!--<p class="precio"><?php echo $this->lista[0]['va_precio'];?></p>-->
-            <?php }?>
-            <h4>Dirección y teléfono</h4>
-            <ul class="ubi-lupa">
-               <li>
-                <div class="ubicancion"><?php echo $this->lista[0]['va_direccion'];?>-<?php echo $this->lista[0]['distrito'];?> (<?php echo $this->lista[0]['departamento'];?>)</div>
-               </li>
-            </ul>
-            <?php if($this->lista[0]['va_direccion_referencia']){?>
-              <!--<h4>Dirección de Referencia</h4>-->
-              <ul class="ubi-lupa">
-                <li>
-                  <div class="ubicancion1"><?php echo $this->lista[0]['va_direccion_referencia'];?></div>
-                </li>
-              </ul>
-               <?php } ?>                       
-              <!--<h4>Teléfono</h4>-->
-              <ul class="servicios-desc">
-                <li><?php echo $this->lista[0]['va_telefono'];?></li>
-              </ul>
-              <h4>Atención</h4>
-                <ul class="time">
-                  <li><span class="day"><?php echo $this->lista[0]['va_dia']; ?></span></li>
-                  <li><span class="hour"><?php echo $this->lista[0]['va_horario']; ?></span></li>
-                   <?php if($this->lista[0]['va_horario_opcional']){?>
-                  <li><span class="day">Horario Opcional</span></li>
-                  <li><span class="hour"><?php echo $this->lista[0]['va_horario_opcional']; ?></span></li>
-                  <?php } ?>
-                </ul>
-                <?php if($this->lista[0]['web']){?>
-                <h4>Página web</h4>
-                <ul class="time">
-                  <li><a class="link-web" href="<?php echo $this->lista[0]['web'];?>" target="_blank">Visíte su página</a></li>
-                </ul>
-                <?php }?>
-	        </div>
-   			</div>
+   			
    			<div class="content-coments">
    				<div class="coments-all">
               <div class="cont-accesorios">
