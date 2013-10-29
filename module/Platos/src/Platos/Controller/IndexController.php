@@ -812,7 +812,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
 //                    setcookie('va_nombre',$datos['va_nombre']);
 //                    setcookie('va_email',$datos['va_email']);
                     $this->getComentariosTable()->agregarComentario($form->getData(),$participa->in_id);
-                  //   $this->getPlatosTable()->cromSolar($id,''); 
+                     $this->getPlatosTable()->cromSolr($id,''); 
 //                    setcookie('id' . $id, 1);
 //                    setcookie('nombre',$datos['va_nombre']);
 //                    setcookie('email',$datos['va_email']);
