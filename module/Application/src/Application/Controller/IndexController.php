@@ -62,7 +62,7 @@ public function __construct()
                          if($id_face[0]['id_facebook']=='')  
                                 { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
                                $auth->sessionfacebook($correo,$facebook['id_facebook']); }     
-                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['id_facebook']);
+                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
                              $auth->sessionfacebook($correo,$facebook['id_facebook']); }}
                          else
                           { 
