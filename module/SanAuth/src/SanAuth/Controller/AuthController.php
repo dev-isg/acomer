@@ -308,7 +308,7 @@ class AuthController extends AbstractActionController {
 
     public function sessionfacebook($email,$pass)
     {  
-       
+       echo 'entrastee';exit;
                 $correo = $email;
                 $contrasena = $pass;
                 $this->getAuthService()
