@@ -417,18 +417,18 @@ public function getAuthService() {
       
       
       
-          $id_face=$this->getComentariosTable()->usuarioface($id_facebook);  
+          $id_face=$this->getClientesTable()->usuarioface($id_facebook);  
           var_dump(count($id_face));exit;
                          if(count($id_face)>0)
                          {   $correo = $id_face[0]['va_email'];
                          if($id_face[0]['id_facebook']=='')  
-                                { $this->getComentariosTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
+                                { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
                                  AuthController::sessionfacebook($correo,$id_facebook); }     
-                         else{$this->getComentariosTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
+                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
                              AuthController::sessionfacebook($correo,$id_facebook); }}
                          else
                           { 
-                              $this->getComentariosTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
+                              $this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
                               AuthController::sessionfacebook($email,$id_facebook); }
          
               

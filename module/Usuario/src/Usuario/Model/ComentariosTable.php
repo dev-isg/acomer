@@ -234,49 +234,49 @@ class ComentariosTable
              
     }
          
-    public function usuarioface($id_face)
-    {
-        $adapter = $this->tableGateway->getAdapter();
-        $sql = new Sql($adapter);
-        $selecttot = $sql->select()->from('ta_cliente')
-                ->where(array('id_facebook'=>$id_face));
-        $selectString = $sql->getSqlStringForSqlObject($selecttot);
-        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-        return $resultSet->toArray();
-    }
-     public function idfacebook($id,$idfacebook,$logout)
-    {
-        $adapter = $this->tableGateway->getAdapter();
-        $sql = new Sql($adapter);
-        $selecttot = $sql->update('ta_cliente')
-                ->set(array('id_facebook'=>$idfacebook,'va_logout'=>$logout))
-                ->where(array('in_id'=>$id));
-        $selectString = $sql->getSqlStringForSqlObject($selecttot);
-                   $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-    }
-public function idfacebook2($id,$logout)
-    {
-        $adapter = $this->tableGateway->getAdapter();
-        $sql = new Sql($adapter);
-        $selecttot = $sql->update('ta_cliente')
-                ->set(array('va_logout'=>$logout))
-                ->where(array('in_id'=>$id));
-        $selectString = $sql->getSqlStringForSqlObject($selecttot);
-                   $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-    }
-    
-     public function insertarusuariofacebbok($nombre,$email,$idfacebook,$logout)
-    {   
-      $contrasena = sha1($idfacebook) ;
-         $fecha = date("Y-m-d h:m:s");  
-        $adapter = $this->tableGateway->getAdapter();
-        $sql = new Sql($adapter);
-        $selecttot = $sql->insert()
-                ->into('ta_cliente')
-                ->values(array('va_nombre_cliente'=>$nombre,'va_email'=>$email,'id_facebook'=>$idfacebook,
-                    'en_estado'=>'activo','va_contrasena'=>$contrasena
-                   ,'va_logout'=>$logout,'va_fecha_ingreso'=>$fecha,'va_notificacion'=>'si'));
-        $selectString = $sql->getSqlStringForSqlObject($selecttot);
-      $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-     }
+//    public function usuarioface($id_face)
+//    {
+//        $adapter = $this->tableGateway->getAdapter();
+//        $sql = new Sql($adapter);
+//        $selecttot = $sql->select()->from('ta_cliente')
+//                ->where(array('id_facebook'=>$id_face));
+//        $selectString = $sql->getSqlStringForSqlObject($selecttot);
+//        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//        return $resultSet->toArray();
+//    }
+//     public function idfacebook($id,$idfacebook,$logout)
+//    {
+//        $adapter = $this->tableGateway->getAdapter();
+//        $sql = new Sql($adapter);
+//        $selecttot = $sql->update('ta_cliente')
+//                ->set(array('id_facebook'=>$idfacebook,'va_logout'=>$logout))
+//                ->where(array('in_id'=>$id));
+//        $selectString = $sql->getSqlStringForSqlObject($selecttot);
+//                   $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//    }
+//public function idfacebook2($id,$logout)
+//    {
+//        $adapter = $this->tableGateway->getAdapter();
+//        $sql = new Sql($adapter);
+//        $selecttot = $sql->update('ta_cliente')
+//                ->set(array('va_logout'=>$logout))
+//                ->where(array('in_id'=>$id));
+//        $selectString = $sql->getSqlStringForSqlObject($selecttot);
+//                   $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//    }
+//    
+//     public function insertarusuariofacebbok($nombre,$email,$idfacebook,$logout)
+//    {   
+//      $contrasena = sha1($idfacebook) ;
+//         $fecha = date("Y-m-d h:m:s");  
+//        $adapter = $this->tableGateway->getAdapter();
+//        $sql = new Sql($adapter);
+//        $selecttot = $sql->insert()
+//                ->into('ta_cliente')
+//                ->values(array('va_nombre_cliente'=>$nombre,'va_email'=>$email,'id_facebook'=>$idfacebook,
+//                    'en_estado'=>'activo','va_contrasena'=>$contrasena
+//                   ,'va_logout'=>$logout,'va_fecha_ingreso'=>$fecha,'va_notificacion'=>'si'));
+//        $selectString = $sql->getSqlStringForSqlObject($selecttot);
+//      $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+//     }
 }
