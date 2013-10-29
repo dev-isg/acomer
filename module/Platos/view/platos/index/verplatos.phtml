@@ -223,6 +223,8 @@
                 $title = 'Agregar nuevo comentario';
                 $this->headTitle($this->listatitle);
                 ?>
+                  
+                  <?php if(!isset($this->session)) { ?>
                   <div class="form-envio-men">
                     <?php
                     $form = $this->form;
@@ -254,7 +256,7 @@
                       <?php echo $this->form()->closeTag(); ?>
                   </div>
               </div>
-              
+              <?php  }?>
               
               
                   <?php if($_GET['m']==1)  {?>
