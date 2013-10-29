@@ -308,7 +308,7 @@ class AuthController extends AbstractActionController {
 
     public function sessionfacebook($email,$pass)
     {  
-       echo 'entrastee';exit;
+       
                 $correo = $email;
                 $contrasena = $pass;
                 $this->getAuthService()
@@ -317,7 +317,7 @@ class AuthController extends AbstractActionController {
                         ->setCredential($contrasena);
 
                 $usuario = $this->getClientesTable()->usuario1($correo);               
-                if ($usuario[0]['en_estado'] == 'activo') {
+                if ($usuario[0]['en_estado'] == 'activo') {echo 'entrastee';exit;
                     $result = $this->getAuthService()->authenticate();
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
