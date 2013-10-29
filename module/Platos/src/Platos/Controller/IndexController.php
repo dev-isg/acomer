@@ -700,7 +700,6 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                                 $view->setTerminal(true);
                                 return $view;     
                }
-        $this->layout('layout/layout-portada2');
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
         if ($session){           
@@ -789,6 +788,9 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
 //        if($_COOKIE['va_nombre']and $_COOKIE['va_email'] )
 //       {$form->get('va_nombre')->setValue($_COOKIE['va_nombre']);
 //        $form->get('va_email')->setValue($_COOKIE['va_email']);}
+        $canonical = new \Application\View\Helper\Canonical;
+        $canonicalurl = new \Application\View\Helper\CanonicalUrl;
+        $resta=$canonicalurl($canonical($listarecomendacion[0]['restaurant_nombre']));
         $form->get('submit')->setValue('Agregar');
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -802,7 +804,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
 //                $datos['va_email'] = htmlspecialchars($datos['va_email']);
                 $validar = explode('http://', $datos['tx_descripcion']);
                 if(count($validar)==2){
-                return $this->redirect()->toUrl('/plato/restaurante/'.$urlerror.'?m=1');}
+                return $this->redirect()->toUrl('/plato/'.$resta.'/'.$urlerror.'?m=1');}
                 else {
                 $form->setData($datos);
                 if (!$form->isValid()) {
@@ -814,14 +816,12 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
 //                    setcookie('email',$datos['va_email']);
 //                    $form->setData(array('va_nombre' => '', 'va_email' => '', 'tx_descripcion' => '')); 
                     $datos =$this->params()->fromRoute();               
-                    $this->redirect()->toUrl('/plato/restaurante/'.$datos['nombre']);
+                    $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']);
                   }
                 }
             }
         } 
-        $canonical = new \Application\View\Helper\Canonical;
-        $canonicalurl = new \Application\View\Helper\CanonicalUrl;
-        $resta=$canonicalurl($canonical($listarecomendacion[0]['restaurant_nombre']));
+        
         $this->layout()->clase = 'Detalle';
         $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
