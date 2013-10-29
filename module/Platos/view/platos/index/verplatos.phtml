@@ -211,7 +211,9 @@
                    
                    <?php   }?>
               </div>
+              <?if ($this->session) { ?>
               <div class="agregar-comentario-desc" style="display:none;">
+                  
                 <?php
                 $title = 'Agregar nuevo comentario';
                 $this->headTitle($this->listatitle);
@@ -221,7 +223,7 @@
                     $form = $this->form;
                     //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
                     $form->setAttributes(array(
-                        'action' => $this->url . '/plato/'.$this->urlnombre, //.'?id=' . $this->lista[0]['in_id'],
+                        'action' => $this->url . '/plato/restaurante/'.$this->urlnombre, //.'?id=' . $this->lista[0]['in_id'],
                         'method' => 'post',
                         'class' => 'form-horizontal'
                     ));
@@ -234,8 +236,8 @@
                     
                     echo $this->formHidden($form->get('Ta_plato_in_id'));
                     ?>
-                    <div class="control-group"><?php echo $this->formRow($form->get('va_nombre')); ?></div>
-                    <div class="control-group"><?php echo $this->formRow($form->get('va_email')); ?></div>
+                    <!--<div class="control-group"><?php //echo $this->formRow($form->get('va_nombre')); ?></div>
+                    <div class="control-group"><?php //echo $this->formRow($form->get('va_email')); ?></div>-->
                     <div class="control-group">
                       <label style="color:#444;">Valoración:</label>
                       <p id="star"></p>
@@ -249,6 +251,11 @@
                       <?php echo $this->form()->closeTag(); ?>
                   </div>
               </div>
+              
+               <?php  } ?>
+              
+              
+              
                   <?php if($_GET['m']==1)  {?>
                     <h4>El comentario no puede contener Urls.</h4> 
                   <?php } ?>
