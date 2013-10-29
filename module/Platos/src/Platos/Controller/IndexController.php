@@ -806,7 +806,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                 $form->setData($datos);
                 if (!$form->isValid()) {
                     $this->getComentariosTable()->agregarComentario($form->getData(),$participa->in_id);
-                    $this->getComentariosTable()->cromSolar($id,''); 
+                  //  $this->getComentariosTable()->cromSolar($id,''); 
                     $datos =$this->params()->fromRoute();               
                     $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']);
                   }
