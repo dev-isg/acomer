@@ -61,13 +61,13 @@ public function __construct()
                          {   $correo = $id_face[0]['va_email'];
                          if($id_face[0]['id_facebook']=='')  
                                 { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                               $auth->$this->sessionfacebook($correo,$facebook['id_facebook']); }     
+                               $auth->sessionfacebook($correo,$facebook['id_facebook']); }     
                          else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['id_facebook']);
-                             $auth->$this->sessionfacebook($correo,$facebook['id_facebook']); }}
+                             $auth->sessionfacebook($correo,$facebook['id_facebook']); }}
                          else
                           { 
                               $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['id_facebook']); 
-                             $auth->$this->sessionfacebook($facebook['email'],$facebook['id_facebook']); }
+                             $auth->sessionfacebook($facebook['email'],$facebook['id_facebook']); }
    
        }
         }
