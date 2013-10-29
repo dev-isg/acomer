@@ -224,7 +224,7 @@
                 $this->headTitle($this->listatitle);
                 ?>
                   
-                  <?php if(!isset($this->session)) { ?>
+                  <?php if(isset($this->session)) { ?>
                   <div class="form-envio-men">
                     <?php
                     $form = $this->form;
