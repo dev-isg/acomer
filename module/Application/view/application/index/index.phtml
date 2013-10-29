@@ -10,7 +10,7 @@
     <!--<section id="paso-dos">
       <div id="opacidad" style="display: block;"></div>
     </section>-->
-    <section id="paso-tres" style="margin-top: 0px;margin-bottom:10px;">
+    <section id="paso-tres" style="margin-top: 0px;margin-bottom:10px;float:left;">
       <!--<div class="nav-banner">
         <ul class="dep-home" style="float:left;">
           <li>
@@ -39,10 +39,9 @@
           foreach ($this->banner  as $banner) :
           ?>
           <?php if($banner['va_url']) {?>
-          <li><a href="<?php echo $this->host('ruta')?><?php echo $banner['va_url'] ?>"><img src="<?php echo $this->host('images')?>/banner/<?php echo $banner['va_imagen'] ?>" title="<?php echo $banner['va_nombre'] ?>" alt="Css Template Preview" /></a></li>         
+          <li><a href="<?php echo $this->host('ruta')?><?php echo $banner['va_url'] ?>"><img src="<?php echo $this->host('images')?>/banner/<?php echo $banner['va_imagen'] ?>" title="<?php echo $banner['va_nombre'] ?>" alt="banner restaurantes" /></a></li>         
               <?php  } else { ?>
-      <li><img src="<?php echo $this->host('images')?>/banner/<?php echo $banner['va_imagen'] ?>" title="<?php echo $banner['va_nombre'] ?>" alt="Css Template Preview" /></li>         
-               
+                <li><img src="<?php echo $this->host('images')?>/banner/<?php echo $banner['va_imagen'] ?>" title="<?php echo $banner['va_nombre'] ?>" alt="banner restaurantes" /></li>
               <?php  } ?>
          <?php endforeach; ?>     
           </ul>
