@@ -323,7 +323,7 @@ class AuthController extends AbstractActionController {
                         $this->flashmessenger()->addMessage($message);
                     }
 
-                    if ($result->isValid()) {                           
+                    if ($result->isValid()) {                        echo 's';  exit;                    
                         $storage = $this->getAuthService()->getStorage();
                         $storage->write($this->getServiceLocator()
                                         ->get('TableAuthService')
