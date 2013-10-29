@@ -54,7 +54,8 @@ public function __construct()
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
-//       $id_face=$this->getClientesTable()->usuarioface($id_facebook);  
+       $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
+       var_dump(count($id_face));exit;
 //        $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
 //        $adapter = $this->dbAdapter;
 //        $sql = new Sql($adapter);
