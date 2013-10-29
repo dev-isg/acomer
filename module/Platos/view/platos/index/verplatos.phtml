@@ -39,23 +39,7 @@
               </ul>
             </div>
          <?php }?> 
-          <div class="etiqueta-cat return-css">
-   				<div class="etiqueta-dev jh">
-            <?php
-              require './vendor/Classes/Mobile_Detect.php';
-              $detect3 = new Mobile_Detect();
-              if ($detect3->isTablet()) {
-                 ?>                 
-                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo ucwords($this->lista[0]['restaurant_nombre']);?></a></h2>
-               <?php }elseif($detect3->isMobile()){?>   
-                   <h2><a href="<?php echo $this->host('ruta')?>/buscar?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2>
-               <?php } else {?> 
-                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo ucwords($this->lista[0]['restaurant_nombre']);?></a></h2> 
-            <?php }?>
-   				</div>
-           <div class="return">
-              <a href="javascript:window.history.back();">Regresar</a>
-           </div>
+          
    			
    			<div class="ficha-product">
    				<div class="ficha-img">
