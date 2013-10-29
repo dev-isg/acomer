@@ -201,11 +201,11 @@ $(document).ready(function() {
                                 url: "/img/icomap.png"},
                                 title: j.restaurante,
                                 infoWindow: {
-                                    content: "<img src=" + urlJson + "/imagenes/defecto/" + j.va_imagen + " class='img-mapa'><p class='restaurante-map'><a href=/plato/restaurante/" + l + "-" + j.id + ">" + j.restaurante + "</a></p><p class='plato-map'>" + j.name + "</p><p class='txt-map'>" + c + "...</p><a class='a-map' href=/plato/restaurante/" + l + "-" + j.id + "> ver mas </a>"
+                                    content: "<img src=" + urlJson + "/imagenes/defecto/" + j.va_imagen + " class='img-mapa'><p class='restaurante-map'><a href=/plato/"+r+"/" + l + "-" + j.id + ">" + j.restaurante + "</a></p><p class='plato-map'>" + j.name + "</p><p class='txt-map'>" + c + "...</p><a class='a-map' href=/plato/"+r+"/" + l + "-" + j.id + "> ver mas </a>"
                                 }
                             });
                         }else{
-                            map.addMarker({lat: j.latitud,lng: j.longitud,icon: {size: new google.maps.Size(32, 37),url: "/img/icomap.png"},title: j.restaurante,infoWindow: {content: "<img src=" + urlJson + "/imagenes/plato/general/" + j.va_imagen + " class='img-mapa'><p class='restaurante-map'><a href=/plato/restaurante/" + l + "-" + j.id + ">" + j.restaurante + "</a></p><p class='plato-map'>" + j.name + "</p><p class='txt-map'>" + c + "...</p><a class='a-map' href=/plato/restaurante/" + l + "-" + j.id + "> ver mas </a>"}});
+                            map.addMarker({lat: j.latitud,lng: j.longitud,icon: {size: new google.maps.Size(32, 37),url: "/img/icomap.png"},title: j.restaurante,infoWindow: {content: "<img src=" + urlJson + "/imagenes/plato/general/" + j.va_imagen + " class='img-mapa'><p class='restaurante-map'><a href=/plato/"+r+"/" + l + "-" + j.id + ">" + j.restaurante + "</a></p><p class='plato-map'>" + j.name + "</p><p class='txt-map'>" + c + "...</p><a class='a-map' href=/plato/"+r+"/" + l + "-" + j.id + "> ver mas </a>"}});
                         }
                     
                     });
