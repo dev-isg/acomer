@@ -725,6 +725,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                          $this->layout()->face = $facebook['name'];  }  }  }
         $datos =$this->params()->fromRoute();  
         $urlerror =  $datos['nombre'];
+       // var_dump($urlerror);exit';'
         $nombre = explode('-', $datos['nombre']); 
         $id = array_pop($nombre);
           $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray(); 
@@ -818,6 +819,9 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                 }
             }
         } 
+        $canonical = new \Application\View\Helper\Canonical;
+        $canonicalurl = new \Application\View\Helper\CanonicalUrl;
+        $resta=$canonicalurl($canonical($listarecomendacion[0]['restaurant_nombre']));
         $this->layout()->clase = 'Detalle';
         $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
@@ -827,7 +831,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         $this->layout()->title=$listarecomendacion[0]['va_nombre'];   
         $this->layout()->image=$listarecomendacion[0]['va_imagen']=='platos-default.png'?$config['host']['images']. '/defecto/' . $listarecomendacion[0]['va_imagen']:$config['host']['images'] . '/plato/principal/' . $listarecomendacion[0]['va_imagen'];
         $this->layout()->description=trim($listarecomendacion[0]['restaurant_nombre']).'-'.trim($listarecomendacion[0]['tx_descripcion']).'-'.trim($listarecomendacion[0]['va_direccion']).'-'.trim($listarecomendacion[0]['va_direccion_referencia'].'-('.trim($listarecomendacion[0]['distrito']).')- teléfono:'.trim($listarecomendacion[0]['va_telefono']));
-        $this->layout()->url=$config['host']['ruta'].'/plato/restaurante/'.$datos['nombre'];
+        $this->layout()->url=$config['host']['ruta'].'/plato/'.$resta.'/'.$datos['nombre'];
         $listatitle=trim($listarecomendacion[0]['va_nombre']).':'.
                 trim($listarecomendacion[0]['tx_descripcion']).':'.
                 trim($listarecomendacion[0]['tipo_plato_nombre']).':'.
@@ -941,6 +945,14 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
          return $results->toArray();
     }
  public function verplatos2Action() 
-      {$datos =$this->params()->fromRoute(); 
-       $this->redirect()->toUrl('/plato/restaurante/'.$datos['nombre']); }
+      {
+       $datos =$this->params()->fromRoute();  
+       $nombre = explode('-', $datos['nombre']); 
+       $id = array_pop($nombre);
+       $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray(); 
+       $restaurante=$listarecomendacion[0]['restaurant_nombre'];
+       $canonical = new \Application\View\Helper\Canonical;
+       $canonicalurl = new \Application\View\Helper\CanonicalUrl;
+        $resta=$canonicalurl($canonical($restaurante));
+       $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']); }
 }

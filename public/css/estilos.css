@@ -2488,7 +2488,7 @@ p.ver_mistura a{
 /*Banner de registro*/
 .iniciar-session{
   width: 100%;
-  height: 25px;
+  height: 35px;
 }
   .iniciar-session ul{
     list-style: none;
@@ -2501,14 +2501,17 @@ p.ver_mistura a{
     .iniciar-session ul li{
       float: left;
       margin-left: 10px;
-      line-height: 25px;
+      line-height: 35px;
       font-size: 13px;
     }
     .iniciar-session ul li:first-child{
-      margin-left: 0;
+      
     }
     .iniciar-session ul li a{
       font-size: 13px;
+    }
+    .right.redes li a{
+      display: block;
     }
 #modalSession h3{
   font-size: 18px;

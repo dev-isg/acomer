@@ -45,7 +45,7 @@ return array(
         'plato' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/plato/restaurante[/:nombre]',
+                    'route' => '/plato[/:restaurante/:nombre]',
                     'defaults' => array(
                         'controller' => 'Platos\Controller\Index',
                         'action' => 'verplatos'
