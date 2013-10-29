@@ -249,7 +249,7 @@ public function __construct()
         $this->layout()->user = $facebook['user']; 
         if(session_status() === PHP_SESSION_ACTIVE){$this->layout()->face = $facebook['name'];}
         else{
-        if($facebook['id_facebook']){ 
+        if($facebook['id_facebook']){ echo 'mama';exit;
         $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  

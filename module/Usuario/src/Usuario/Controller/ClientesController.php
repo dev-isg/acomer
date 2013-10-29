@@ -367,7 +367,7 @@ public function getAuthService() {
                  'scope'  => 'email,publish_stream'
                    ));
           
-                $user = $facebook->getUser();
+            $user = $facebook->getUser();
             if ($user) {
              try { $user_profile = $facebook->api('/me'); } 
              catch (FacebookApiException $e) {
@@ -375,28 +375,20 @@ public function getAuthService() {
                            $user = null; } }
                        if ($user) {
                          $logoutUrl = $facebook->getLogoutUrl();
-                     
                          $id_facebook = $user_profile['id'];
                          $name = $user_profile['name'];
                          $email = $user_profile['email'];
-                         $naitik = $facebook->api('/naitik');
-                             } 
-                      else {
-                       $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
-                           ));  
-                       }    
-            
-                     
-                 return array(
+                         $naitik = $facebook->api('/naitik');  } 
+                      else {$loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',   ));   }      
+               return array(
               'user' => $user,
               'id_facebook'=> $id_facebook,     
               'logoutUrl'  =>$logoutUrl,
-                     'name'=>$name,
-                     'email'=>$email,
-                     
-            'loginUrl' => $loginUrl,
+              'name'=>$name,
+              'email'=>$email,      
+              'loginUrl' => $loginUrl,
         );
-      return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
+
     }
 
   public function logueoface($id_facebook,$logoutUrl,$name,$email)
