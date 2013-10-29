@@ -692,11 +692,8 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                          $cantidad=$this->getClientesTable()->usuario1($email);
                          if(count($cantidad)==0)
                           {$this->getClientesTable()->agregarComentariomovil($envia);
-//                          $results = $this->getClientesTable()->generarPassword($email);
-//                          $usuario = $this->getClientesTable()->getUsuarioxEmail($email);
                            ClientesController::correomovill($email,$nombre); }
-                           else{$this->getClientesTable()->agregarComentariomovil($envia);}
-                          
+                           else{$this->getClientesTable()->agregarComentariomovil($envia);}      
                          $this->getPlatosTable()->cromSolr($idplato,'');  
                                 $result = array('resultado'=>true);
                                 echo "jsonpCallback(".json_encode($result).")"; }
@@ -711,12 +708,14 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                     $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
                     $activo=$participa->en_estado;//=='activo'?true:false;
                 }
-        if (!isset($session)) {
+if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
+        session_start();
+        $_SESSION['face']=$facebook['name'];
         $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
@@ -725,7 +724,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                          else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
                          $this->layout()->face = $facebook['name']; }    }
                          else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-                         $this->layout()->face = $facebook['name']; } }}
+                         $this->layout()->face = $facebook['name'];  }  }  }
         $datos =$this->params()->fromRoute();  
         $urlerror =  $datos['nombre'];
         $nombre = explode('-', $datos['nombre']); 
