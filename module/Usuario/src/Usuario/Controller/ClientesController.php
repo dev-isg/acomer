@@ -359,14 +359,14 @@ public function getAuthService() {
    
    public  function facebook()       
    {  
-    require './vendor/facebook/facebook.php';
+         require './vendor/facebook/facebook.php';
                $facebook = new \Facebook(array(
                  'appId'  => $this->_options->facebook->appId,
                  'secret' => $this->_options->facebook->secret,
                  'cookie' => false ,
                  'scope'  => 'email,publish_stream'
                    ));
-            $user = $facebook->getUser();
+            if(!session_start()){$user = $facebook->getUser();
             if ($user) {
              try { $user_profile = $facebook->api('/me'); } 
              catch (FacebookApiException $e) {
@@ -379,34 +379,17 @@ public function getAuthService() {
                          $name = $user_profile['name'];
                          $email = $user_profile['email'];
                          $naitik = $facebook->api('/naitik');
-//                       if($user_profile==''){}
-//                       else
-//                        { 
-//                           $id_face=$this->getComentariosTable()->usuarioface($id_facebook);  
-//                         if(count($id_face)>0)
-//                         {   $correo = $id_face[0]['va_email'];
-//                         if($id_face[0]['id_facebook']=='')  
-//                                { $this->getComentariosTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
-//                                 AuthController::sessionfacebook($correo,$id_facebook); }     
-//                         else{$this->getComentariosTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
-//                             AuthController::sessionfacebook($correo,$id_facebook); }}
-//                         else
-//                          { 
-//                              $this->getComentariosTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl); 
-//                              AuthController::sessionfacebook($email,$id_facebook); }
-//                                 }
                              } 
                       else {
                        $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
-                   // 'redirect_uri'=>$this->_options->host->ruta.'/'
-                           ));   
-
-                       }   
+                           ));  
+                       }   } 
+            
                      
                  return array(
-            'user' => $user,
-             'id_facebook'=> $id_facebook,     
-            'logoutUrl'  =>$logoutUrl,
+              'user' => $user,
+              'id_facebook'=> $id_facebook,     
+              'logoutUrl'  =>$logoutUrl,
                      'name'=>$name,
                      'email'=>$email,
                      
