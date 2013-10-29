@@ -666,7 +666,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
     
       
     public function verplatosAction() 
-      { echo 'ddd';exit;
+      { 
         $view = new ViewModel();
                 if($_GET['callback'] )
                 {  
@@ -700,13 +700,13 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                                 $view->setTerminal(true);
                                 return $view;     
                }
-  
+        $this->layout('layout/layout-portada2');
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
         if ($session){           
                     $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
                     $activo=$participa->en_estado;}
-     if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
+        if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
