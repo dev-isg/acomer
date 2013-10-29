@@ -64,11 +64,11 @@ public function __construct()
                          else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['id_facebook']);
                              AuthController::sessionfacebook($correo,$facebook['id_facebook']); }}
                          else
-                          { echo 'no hay registro';exit;
+                          { 
                               $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['id_facebook']); 
                               AuthController::sessionfacebook($facebook['email'],$facebook['id_facebook']); }
    
-          $face->logueoface($facebook['id_facebook'],$facebook['id_facebook'],$facebook['name'],$facebook['email']);}
+       }
         }
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
