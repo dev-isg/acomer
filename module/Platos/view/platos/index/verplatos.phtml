@@ -1,18 +1,15 @@
 <link rel="stylesheet" href="<?php echo $this->basePath()?>/css/jquery-ui.css?v<?php echo $this->host('version')?>">
 <link rel="stylesheet" href="<?php echo $this->basePath()?>/js/flexslider/flexslider.css" type="text/css"/>
-    <a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a>
-    <div id="esconder">
+<div class="content-left">
+<a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a>
+      <div id="esconder">
    		<div class="descrip-product">
         <?php
           require './vendor/Classes/Mobile_Detect.php';
           $detect4 = new Mobile_Detect();
           if ($detect4->isTablet()) {
              ?>
-            <?php if ($session) { ?>
-      <div class="content-menu-home" style="position: relative; top: 0px;">
-          <?php } else {  ?>
-          <div class="content-menu-home" style="position: relative; top: 0px;"> 
-          <?php  } ?>
+            <div class="content-menu-home" style="position:fixed;top:0;">
               <ul>
                <?php 
                 foreach ($this->menus  as $menus) :
@@ -24,11 +21,7 @@
           <?php }elseif($detect4->isMobile()){?>   
             
           <?php } else {?> 
-            <?php if ($session) { ?>
-      <div class="content-menu-home" style="position: relative; top: 0px;">
-          <?php } else {  ?>
-          <div class="content-menu-home" style="position: relative; top: 0px;"> 
-          <?php  } ?>
+            <div class="content-menu-home" style="position:fixed;top:0;">
               <ul>
                <?php 
                 foreach ($this->menus  as $menus) :
@@ -39,24 +32,7 @@
             </div>
          <?php }?> 
         
-   			<div class="etiqueta-cat return-css">
-   				<div class="etiqueta-dev jh">
-            <?php
-              require './vendor/Classes/Mobile_Detect.php';
-              $detect3 = new Mobile_Detect();
-              if ($detect3->isTablet()) {
-                 ?>                 
-                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo ucwords($this->lista[0]['restaurant_nombre']);?></a></h2>
-               <?php }elseif($detect3->isMobile()){?>   
-                   <h2><a href="<?php echo $this->host('ruta')?>/buscar?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2>
-               <?php } else {?> 
-                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo ucwords($this->lista[0]['restaurant_nombre']);?></a></h2> 
-            <?php }?>
-   				</div>
-           <div class="return">
-              <a href="javascript:window.history.back();">Regresar</a>
-           </div>
-   			</div>
+   			
    			<div class="ficha-product">
    				<div class="ficha-img">
             <div class="flexslider carousel">
@@ -228,19 +204,14 @@
               <!--Comentarios-->
               <div class="top-coment">
                   <p><?php echo $this->cantidad; //$this->lista[0]['num']; //?> comentarios</p>
-                  <?php if ($session) { ?>  
+                  <?php if ($this->session) { ?>  
                   <a href="#" class="btn btn-warning agregar-coment-1">Agregar comentario</a>
                   <?php  } else { ?>
                    <a href="#modalSession" class="btn btn-warning agregar-coment-1" role="button" data-toggle="modal">Agregar comentario</a>
                    
                    <?php   }?>
               </div>
-              
-              
-             
               <div class="agregar-comentario-desc" style="display:none;">
-       
-                  
                 <?php
                 $title = 'Agregar nuevo comentario';
                 $this->headTitle($this->listatitle);
@@ -250,7 +221,7 @@
                     $form = $this->form;
                     //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
                     $form->setAttributes(array(
-                        'action' => $this->url . '/plato/restaurante/'.$this->urlnombre, //.'?id=' . $this->lista[0]['in_id'],
+                        'action' => $this->url . '/plato/'.$this->urlnombre, //.'?id=' . $this->lista[0]['in_id'],
                         'method' => 'post',
                         'class' => 'form-horizontal'
                     ));
@@ -263,8 +234,6 @@
                     
                     echo $this->formHidden($form->get('Ta_plato_in_id'));
                     ?>
-                    <!--<div class="control-group"><?php //echo $this->formRow($form->get('va_nombre')); ?></div>
-                    <div class="control-group"><?php //echo $this->formRow($form->get('va_email')); ?></div>-->
                     <div class="control-group">
                       <label style="color:#444;">Valoración:</label>
                       <p id="star"></p>
@@ -279,7 +248,6 @@
                   </div>
               </div>
               
-           
               
               
                   <?php if($_GET['m']==1)  {?>
@@ -333,8 +301,8 @@
          
 </div>
 
-<div id="mapa-buscador"></div>
-
+  <div id="mapa-buscador"></div>
+</div>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script> 
 <!--<script src="<?php echo $this->basePath()?>/js/jquery-ui.min.js?v<?php echo $this->host('version')?>"></script>-->
 <script src="<?php echo $this->basePath()?>/js/vendor/gmaps.min.js?v<?php echo $this->host('version')?>"></script>
@@ -354,28 +322,6 @@
         $('body').removeClass('loading');
       }
     });
-  });
-
-  $(document).ready(function(){
-    var windw = this;
-    $.fn.followTo = function (pos) {
-      var $this = this,
-      $window = $(windw);
-      $window.scroll(function(e){
-        if ($window.scrollTop() > pos) {
-          $this.css({
-            position: 'fixed',
-            top: 0
-          });
-        } else {
-          $this.css({
-            position: 'relative',
-            top: 0
-          });
-        }
-      });
-    };
-    $('.content-menu-home').followTo(25);
   });
 </script>
 
