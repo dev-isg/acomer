@@ -259,27 +259,18 @@ public function __construct()
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
         $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
-        //$auth = new \SanAuth\Controller\AuthController();
-        if(count($id_face)>0)
-                         { 
-            $this->$face->logueoface($facebook['id_facebook'],$facebook['logoutUrl'],$facebook['name'],$facebook['email']);
-            $correo = $id_face[0]['va_email'];
+                         if(count($id_face)>0)
+                         {  
+//                             $this->$face->logueoface($facebook['id_facebook'],$facebook['logoutUrl'],$facebook['name'],$facebook['email']);
+//                         $this->layout()->user = $facebook['user']; 
                          if($id_face[0]['id_facebook']=='')  
                           { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                              //$auth->sessionfacebook($correo,$facebook['id_facebook']);
-              
-                           }     
+                          $this->layout()->face = $facebook['name']; }     
                          else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-                             //$auth->sessionfacebook($correo,$facebook['id_facebook']);
-                             }
-                             
-                             }
-                         else
-                          {  $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']); 
-                            // $auth->sessionfacebook($facebook['email'],$facebook['id_facebook']); 
-                             
-                             }
-                       }  }
+                         $this->layout()->face = $facebook['name']; }    }
+                         else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
+                         $this->layout()->face = $facebook['name']; 
+                         }   }  }
         $this->layout()->clase = 'buscar-distrito';
         if ($request->isGet()) {
             $datos = $this->request->getQuery();
