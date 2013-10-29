@@ -59,7 +59,7 @@ public function __construct()
         $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
         $auth = new \SanAuth\Controller\AuthController();
         if(count($id_face)>0)
-                         { session_destroy();
+                         { 
             $this->$face->logueoface($facebook['id_facebook'],$facebook['logoutUrl'],$facebook['name'],$facebook['email']);
             $correo = $id_face[0]['va_email'];
                          if($id_face[0]['id_facebook']=='')  

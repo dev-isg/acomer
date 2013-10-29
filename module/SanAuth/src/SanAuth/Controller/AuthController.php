@@ -316,8 +316,8 @@ class AuthController extends AbstractActionController {
                         ->setIdentity($correo)
                         ->setCredential($contrasena);
 
-                $usuario = $this->getClientesTable()->usuario1($correo);               
-                if ($usuario[0]['en_estado'] == 'activo') {echo 'entrastee';exit;
+//                $usuario = $this->getClientesTable()->usuario1($correo);               
+//                if ($usuario[0]['en_estado'] == 'activo') {
                     $result = $this->getAuthService()->authenticate();
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
@@ -336,9 +336,9 @@ class AuthController extends AbstractActionController {
                                         )));
                        
                     }
-                    } 
-                
-                else{return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');}
+//                    } 
+//                
+//                else{return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');}
               
             
 //            echo $id;
