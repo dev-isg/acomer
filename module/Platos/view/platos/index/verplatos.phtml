@@ -1,1 +1,360 @@
-<?echo   'hola mundo'?>
+<link rel="stylesheet" href="<?php echo $this->basePath()?>/css/jquery-ui.css?v<?php echo $this->host('version')?>">
+<link rel="stylesheet" href="<?php echo $this->basePath()?>/js/flexslider/flexslider.css" type="text/css"/>
+    <a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a>
+    <div id="esconder">
+   		<div class="descrip-product">
+     
+        
+   			<div class="etiqueta-cat return-css">
+   				<div class="etiqueta-dev jh">
+            <?php
+              require './vendor/Classes/Mobile_Detect.php';
+              $detect3 = new Mobile_Detect();
+              if ($detect3->isTablet()) {
+                 ?>                 
+                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo ucwords($this->lista[0]['restaurant_nombre']);?></a></h2>
+               <?php }elseif($detect3->isMobile()){?>   
+                   <h2><a href="<?php echo $this->host('ruta')?>/buscar?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo $this->lista[0]['restaurant_nombre'];?></a></h2>
+               <?php } else {?> 
+                <h2><a href="<?php echo $this->host('ruta')?>/buscar-por-distrito?q=restaurante: <?php echo $this->lista[0]['restaurant_nombre'];?>" title="<?php echo $this->lista[0]['restaurant_nombre'];?>"><?php echo ucwords($this->lista[0]['restaurant_nombre']);?></a></h2> 
+            <?php }?>
+   				</div>
+           <div class="return">
+              <a href="javascript:window.history.back();">Regresar</a>
+           </div>
+   			</div>
+   			<div class="ficha-product">
+   				<div class="ficha-img">
+            <div class="flexslider carousel">
+              <ul class="slides">
+                <li>
+                  <img src="<?php if ($this->lista[0]['va_imagen']=='platos-default.png')
+                                            {echo $this->host('images') . '/defecto/' . $this->lista[0]['va_imagen'];}
+                                        else{echo $this->host('images') . '/plato/principal/' . $this->lista[0]['va_imagen'];}?>" title="<?php echo $this->lista[0]['va_nombre'];?>" alt="<?php echo $this->lista[0]['va_nombre'];?>" />
+                </li>
+                <li>
+                  <img src="<?php if($this->lista[0]['restaurant_img']=='default-img.jpg')
+                        {echo $this->host('images') . '/defecto/' . $this->lista[0]['restaurant_img'];}
+                        else
+                            {echo $this->host('images') . '/restaurante/principal/' . $this->lista[0]['restaurant_img'];}?>" title="<?php echo $this->lista[0]['restaurant_nombre']?>" alt="<?php echo $this->lista[0]['restaurant_nombre']?>">
+                </li>
+              </ul>
+            </div>
+   				</div>
+   				<div class="ficha-desc">
+            <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
+   					<div class="puntuaciones c<?php echo $this->lista[0]['Ta_puntaje_in_id'];?>"></div>
+   					<!--<p class="desc"><?php echo $this->lista[0]['tx_descripcion'];?></p>-->
+   					<?php if($this->lista[0]['va_precio']){?>
+              <p class="costo">Precio: <span><?php echo $this->lista[0]['va_precio'];?></span></p>
+   					  <!--<p class="precio"><?php echo $this->lista[0]['va_precio'];?></p>-->
+            <?php }?>
+            <h4>Dirección y teléfono</h4>
+            <ul class="ubi-lupa">
+               <li>
+                <div class="ubicancion"><?php echo $this->lista[0]['va_direccion'];?>-<?php echo $this->lista[0]['distrito'];?> (<?php echo $this->lista[0]['departamento'];?>)</div>
+               </li>
+            </ul>
+            <?php if($this->lista[0]['va_direccion_referencia']){?>
+              <!--<h4>Dirección de Referencia</h4>-->
+              <ul class="ubi-lupa">
+                <li>
+                  <div class="ubicancion1"><?php echo $this->lista[0]['va_direccion_referencia'];?></div>
+                </li>
+              </ul>
+               <?php } ?>                       
+              <!--<h4>Teléfono</h4>-->
+              <ul class="servicios-desc">
+                <li><?php echo $this->lista[0]['va_telefono'];?></li>
+              </ul>
+              <h4>Atención</h4>
+                <ul class="time">
+                  <li><span class="day"><?php echo $this->lista[0]['va_dia']; ?></span></li>
+                  <li><span class="hour"><?php echo $this->lista[0]['va_horario']; ?></span></li>
+                   <?php if($this->lista[0]['va_horario_opcional']){?>
+                  <li><span class="day">Horario Opcional</span></li>
+                  <li><span class="hour"><?php echo $this->lista[0]['va_horario_opcional']; ?></span></li>
+                  <?php } ?>
+                </ul>
+                <?php if($this->lista[0]['web']){?>
+                <h4>Página web</h4>
+                <ul class="time">
+                  <li><a class="link-web" href="<?php echo $this->lista[0]['web'];?>" target="_blank">Visíte su página</a></li>
+                </ul>
+                <?php }?>
+	        </div>
+   			</div>
+   			<div class="content-coments">
+   				<div class="coments-all">
+              <div class="cont-accesorios">
+                <h4 class="ubi-map">Mapa de ubicación <span></span></h4>
+                <div id="mapCont" class="map" data-lat="<?php echo $this->lista[0]['de_latitud']; ?>" data-lng="<?php echo $this->lista[0]['de_longitud']; ?>"></div>
+               <?php if(count($this->locales)>1){?>
+                <h4>Sucursales</h4>
+                <section class="list-suc">
+                    <ul class="ul-suc">
+                        <?php foreach ($this->locales as $local) : ?>
+                            <li class="li-suc"> 
+                                <a href="#" class="" data-lat="<?php echo $local->de_latitud ?>" data-lng="<?php echo $local->de_longitud ?>">
+                                    <header>                              
+                                        <h6 class="text-ellipsis"><?php echo $this->lista[0]['restaurant_nombre'];?></h6>
+                                        <span class="close-banch"></span>
+                                    </header>
+                                    <div class="descr">
+                                        <span class="house-icon"></span>
+                                        <ul>
+                                            <li class="text-ellipsis"><?php echo $local->va_direccion ?></li>
+                                            <li class="phone"><span class="text-ellipsis"><?php echo $local->distrito ?> (<?php echo $local->depa ?>)</span><em class="text-ellipsis"><?php echo $local->va_telefono ?></em></li>
+                                        </ul>
+                                    </div>
+                                </a>                                       
+                            </li>
+                        <?php endforeach; ?>
+
+                    </ul>
+                </section>
+                <?php }?>
+              </div>
+            </div>
+            
+            <div class="content-info">
+              <h4>Más Platos</h4> 
+                <div class="lista-plato-li recomendados-platos">
+                  <ul>
+                <?php foreach ($this->masplatos as $doc ) : ?>          
+                    <li>
+                        <div class="list-ver">
+                        <div class="list-img-p">
+                          <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($doc->restaurante))?>/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>">
+                            <img src="<?php if($doc->va_imagen=='platos-default.png')
+                                  { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
+                                  else
+                              {  echo $this->host('images') . '/plato/general/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" style="border:0;" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                          </a>
+                        </div>
+                        <div class="list-desc-p">
+                          <div class="left-resultado">
+                            <p class="nombre_r">
+                              <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($doc->restaurante))?>/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                              <?php 
+                                   if(strlen($doc->restaurante)>20){
+                                   $strres=trim(substr($doc->restaurante, 0, 19));
+                                    $strres.='..';
+                                   }else {$strres=$doc->restaurante;}
+                          echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?>
+                            </a> 
+                            </p>
+                            <p class="nom_plato"><?php echo $doc->name;?></p>
+                            <div class="punt" style="width:100%!important;text-align:left;">
+                              <div style="float:left!important;margin-left: 10px;" class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>"></div>
+                              <em><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i></em>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <?php endforeach; ?>   
+                      <?php foreach ($this->listades as $doc ) : ?>          
+                      <li>
+                        <div class="list-ver">
+                        <div class="list-img-p">
+                          <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($doc->restaurante))?>/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>">
+                            <img src="<?php if($doc->va_imagen=='platos-default.png')
+                                  { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
+                                  else
+                              {  echo $this->host('images') . '/plato/general/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" style="border:0;" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                          </a>
+                        </div>
+                        <div class="list-desc-p">
+                          <div class="left-resultado">
+                            <p class="nombre_r">
+                              <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($doc->restaurante))?>/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                              <?php 
+                                   if(strlen($doc->restaurante)>20){
+                                   $strres=trim(substr($doc->restaurantee, 0, 19));
+                                    $strres.='..';
+                                   }else {$strres=$doc->restaurante;}
+                          echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?>
+                            </a> 
+                            </p>
+                            <p class="nom_plato"><?php echo $doc->name;?></p>
+                            <div class="punt" style="width:100%!important;text-align:left;">
+                              <div style="float:left!important;margin-left: 10px;" class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>"></div>
+                              <em><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i></em>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                       </li>
+                    <?php endforeach; ?>    
+                  </ul>
+                </div>
+            </div>
+            <div class="coments-all coments-all-fin" id="verComentarios">
+              <!--Comentarios-->
+              <div class="top-coment">
+                  <p><?php echo $this->cantidad; //$this->lista[0]['num']; //?> comentarios</p>
+                  <?php if ($session) { ?>  
+                  <a href="#" class="btn btn-warning agregar-coment-1">Agregar comentario</a>
+                  <?php  } else { ?>
+                   <a href="#modalSession" class="btn btn-warning agregar-coment-1" role="button" data-toggle="modal">Agregar comentario</a>
+                   
+                   <?php   }?>
+              </div>
+              
+              
+               <?if ($session) { ?>
+              <div class="agregar-comentario-desc" style="display:none;">
+               <!--   <p><?php echo $this->session->va_nombre_cliente;  ?></p>
+                  <p><?php echo $this->session->in_id;  ?></p>
+                  <p><?php echo $this->session->va_email;  ?></p>-->
+                  
+                <?php
+                $title = 'Agregar nuevo comentario';
+                $this->headTitle($this->listatitle);
+                ?>
+                  <div class="form-envio-men">
+                    <?php
+                    $form = $this->form;
+                    //$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
+                    $form->setAttributes(array(
+                        'action' => $this->url . '/plato/restaurante/'.$this->urlnombre, //.'?id=' . $this->lista[0]['in_id'],
+                        'method' => 'post',
+                        'class' => 'form-horizontal'
+                    ));
+                    $form->prepare();
+
+                    echo $this->form()->openTag($form);
+                    ?><legend><?php echo $this->escapeHtml($title); ?></legend>
+                    <?php
+                    echo $this->formHidden($form->get('in_id'));
+                    
+                    echo $this->formHidden($form->get('Ta_plato_in_id'));
+                    ?>
+                    <!--<div class="control-group"><?php //echo $this->formRow($form->get('va_nombre')); ?></div>
+                    <div class="control-group"><?php //echo $this->formRow($form->get('va_email')); ?></div>-->
+                    <div class="control-group">
+                      <label style="color:#444;">Valoración:</label>
+                      <p id="star"></p>
+                      <label class="error-votos" style="display:none;">De una puntuación.</label>
+                      <?php echo $this->formHidden($form->get('Ta_puntaje_in_id'));?>
+                    </div>
+                    <div class="control-group"><?php echo $this->formRow($form->get('tx_descripcion'));?></div>
+                    <div class="control-group">
+                      <a href="#" class="btn btn-success btn-comentarioDev">Agregar</a>
+                    </div>
+                      <?php echo $this->form()->closeTag(); ?>
+                  </div>
+              </div>
+              
+               <?php  } ?>
+              
+              
+                  <?php if($_GET['m']==1)  {?>
+                    <h4>El comentario no puede contener Urls.</h4> 
+                  <?php } ?>
+              <div class="comentarios-one">
+                  <ul>
+                      <?php
+                      if ($this->lista[0]['Ta_puntaje_in_id'] != 0) {
+                          foreach ($this->comentarios as $comt) :
+                              ?>
+
+                              <li>
+                                  <div class="coment-li">
+                                      <div class="img-li">
+                                          <img src="<?php echo $this->host('static')?>/img/foto-carnet.jpg">
+                                      </div>
+                                      <div class="img-li-desc">
+                                          <div class="img-li-top">
+                                              <h4><?php  
+                                              if(strlen($comt->va_nombre_cliente)>15){
+                                              $str=trim(substr($comt->va_nombre_cliente, 0, 15));
+                                              $str.='...';
+                                              }else {$str=$comt->va_nombre_cliente;} 
+                                              echo $str;
+                                               ?></h4>
+                                                  <div class="puntuaciones c<?php echo $comt->ta_puntaje_in_id; ?>"></div>
+                                          </div>
+                                          <div class="img-li-bottom">
+                                              <p> <?php echo $comt->tx_descripcion ?></p> 
+                                          </div>
+                                      </div>
+                                  </div>
+                              </li>
+                              <?php
+                          endforeach;
+                      }
+                      ?>
+                  </ul>
+                  <?php echo (count($this->comentarios)>10)?$this->paginationControl($this->comentarios, 'Sliding', 'platos/index/paginador.phtml',array('variable'=>'/plato/'.$this->urlnombre.'?')):""; ?>
+
+              </div>
+              <!--Fin de comentarios-->
+            </div>
+                      
+                
+        </div>
+
+    </div>
+          
+         
+</div>
+
+<div id="mapa-buscador"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script> 
+<!--<script src="<?php echo $this->basePath()?>/js/jquery-ui.min.js?v<?php echo $this->host('version')?>"></script>-->
+<script src="<?php echo $this->basePath()?>/js/vendor/gmaps.min.js?v<?php echo $this->host('version')?>"></script>
+<script src="<?php echo $this->basePath()?>/js/vendor/jquery.validate.min.js?v<?php echo $this->host('version')?>"></script>
+<script src="<?php echo $this->basePath()?>/js/vendor/jquery.raty.min.js?v<?php echo $this->host('version')?>"></script>
+<script type="text/javascript" src="<?php echo $this->basePath()?>/js/flexslider/jquery.flexslider-min.js"></script>
+<script src="<?php echo $this->basePath()?>/js/verplatos.js?v<?php echo $this->host('version')?>"></script>
+
+<script type="text/javascript">
+  $(function(){
+    SyntaxHighlighter.all();
+  });
+  $(window).load(function(){
+    $('.flexslider').flexslider({
+      animation: "slide",
+      start: function(slider){
+        $('body').removeClass('loading');
+      }
+    });
+  });
+
+  $(document).ready(function(){
+    var windw = this;
+    $.fn.followTo = function (pos) {
+      var $this = this,
+      $window = $(windw);
+      $window.scroll(function(e){
+        if ($window.scrollTop() > pos) {
+          $this.css({
+            position: 'fixed',
+            top: 0
+          });
+        } else {
+          $this.css({
+            position: 'relative',
+            top: 0
+          });
+        }
+      });
+    };
+    $('.content-menu-home').followTo(25);
+  });
+</script>
+
+<!-- Syntax Highlighter -->
+<script type="text/javascript" src="<?php echo $this->basePath()?>/js/flexslider/shCore.js"></script>
+<script type="text/javascript" src="<?php echo $this->basePath()?>/js/flexslider/shBrushXml.js"></script>
+<script type="text/javascript" src="<?php echo $this->basePath()?>/js/flexslider/shBrushJScript.js"></script>
+
+<!-- Optional FlexSlider Additions -->
+<script src="<?php echo $this->basePath()?>/js/flexslider/jquery.easing.js"></script>
+<script src="<?php echo $this->basePath()?>/js/flexslider/jquery.mousewheel.js"></script>
+
+
+		
