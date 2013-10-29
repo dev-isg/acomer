@@ -252,6 +252,11 @@ public function __construct()
         $request = $this->getRequest();
          $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
+       if (!isset($session)) {
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
+        $this->layout()->loginUrl = $facebook['loginUrl'];
+        $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
         $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
         //$auth = new \SanAuth\Controller\AuthController();
