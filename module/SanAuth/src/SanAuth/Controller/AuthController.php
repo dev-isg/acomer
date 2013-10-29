@@ -311,8 +311,6 @@ class AuthController extends AbstractActionController {
        
                 $correo = $email;
                 $contrasena = $pass;
-                var_dump($correo);
-                var_dump($contrasena);exit;
                 $this->getAuthService()
                         ->getAdapter()
                         ->setIdentity($correo)

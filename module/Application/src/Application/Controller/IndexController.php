@@ -66,7 +66,7 @@ public function __construct()
                              $auth->sessionfacebook($correo,$facebook['id_facebook']); }}
                          else
                           { 
-                              $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['id_facebook']); 
+                              $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']); 
                              $auth->sessionfacebook($facebook['email'],$facebook['id_facebook']); }
    
                        }
