@@ -275,10 +275,12 @@ class ClientesController extends AbstractActionController {
                                                <body>
                                                     <div style="color: #7D7D7D"><br />
                                                     Hola '.ucwords($usuario->va_nombre_cliente).',<br /><br />  
-                                                    Para recuperar tu contraseña debes hacer <a href="' . $config['host']['base'] . '/?value=' . utf8_decode($results) . '">Clic Aquí</a><br /><br /> 
+                                                    Para poder culminar tu registro debes ingresar una contraseña debes hacer hacer <a href="' . $config['host']['base'] . '/?value=' . utf8_decode($results) . '">Clic Aquí</a><br /><br /> 
                                                     o copiar la siguiente url en su navegador:<br /><br />' . $config['host']['base'] . '/?value=' . utf8_decode($results) .'          
                                                      </div>
                                                      <br /><br /><br />
+                                                     <p>Listadelsabor te da la bienvenida</p>
+                                                     <br />
                                                      <img src="'.$config['host']['img'].'/img/logo.png" title="listadelsabor.com"/>
                                                </body>
                                                </html>';

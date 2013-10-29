@@ -468,7 +468,7 @@ public function guardarplatoregistro($dataregistro) {
                 ->from('ta_plato')
                 ->join(array('tc' => 'ta_comentario'), 'tc.ta_plato_in_id=ta_plato.in_id', array('tx_descripcion', 'ta_puntaje_in_id','en_estado'), 'left')
                 ->join(array('tcli' => 'ta_cliente'), 'tcli.in_id=tc.ta_cliente_in_id', array('va_nombre_cliente', 'va_email'), 'left')
-                ->where(array('ta_plato.in_id' => $idplato,'tc.en_estado'=>'aprobado'))
+                ->where(array('ta_plato.in_id' => $idplato,'tc.Ta_puntaje_in_id>?'=>0,'tc.en_estado'=>'aprobado'))
                 ->order('tc.in_id DESC');
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
