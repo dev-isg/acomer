@@ -50,7 +50,7 @@ public function __construct()
         $view = new ViewModel();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();  
-       if (session_status() === PHP_SESSION_NONE) {
+       if (session_status() === PHP_SESSION_ACTIVE) {
           $this->layout()->face = $_SESSION['face'];
         }else{$face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
@@ -242,7 +242,7 @@ public function __construct()
         $request = $this->getRequest();
          $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
-       if (session_status() === PHP_SESSION_NONE) {
+       if (session_status() === PHP_SESSION_ACTIVE) {
           $this->layout()->face = $_SESSION['face'];
         }else{$face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
