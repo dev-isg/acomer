@@ -50,9 +50,9 @@ public function __construct()
         $view = new ViewModel();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();  
-       if (session_status() === PHP_SESSION_NONE) { echo 'hay session';exit;
+       if (session_status() === PHP_SESSION_NONE) { 
           $this->layout()->face = $_SESSION['face'];
-        }else{echo 'no hay session';exit;
+        }else{
             $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
