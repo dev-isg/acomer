@@ -39,6 +39,7 @@ class IndexController extends AbstractActionController
     protected $configTable;
     protected $restauranteTable;
     protected $clientesTable;
+     protected $authservice;
     public $dbAdapter;
 public function __construct()
 	{
@@ -63,7 +64,9 @@ public function __construct()
             $correo = $id_face[0]['va_email'];
                          if($id_face[0]['id_facebook']=='')  
                                 { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                               $auth->sessionfacebook($correo,$facebook['id_facebook']); }     
+                              $auth->sessionfacebook($correo,$facebook['id_facebook']);
+              
+                               }     
                          else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
                              $auth->sessionfacebook($correo,$facebook['id_facebook']); }
                              
@@ -1449,7 +1452,13 @@ public function __construct()
         }
         return $this->clientesTable;
     }
-    
+     public function getAuthService() {
+        if (!$this->authservice) {
+            $this->authservice = $this->getServiceLocator()->get('AuthService');
+        }
+
+        return $this->authservice;
+    }
       public function getRestauranteTable() {
         if (!$this->restauranteTable) {
             $sm = $this->getServiceLocator();
