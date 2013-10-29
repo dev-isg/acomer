@@ -23,7 +23,7 @@ use Zend\Json\Json;
 use Application\Model\Entity\Album;
 use Zend\Mail\Message;
 use Zend\Http\Request;
-use SanAuth\Controller\AuthController; 
+//use SanAuth\Controller\AuthController; 
 use Usuario\Model\ClientesTable;
 use Zend\Mail\Transport\Sendmail as SendmailTransport;
 // use Zend\I18n\Filter\Alnum;
@@ -56,18 +56,18 @@ public function __construct()
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
-  
+    $auth = new \SanAuth\Controller\AuthController();
        if(count($id_face)>0)
                          {   $correo = $id_face[0]['va_email'];
                          if($id_face[0]['id_facebook']=='')  
                                 { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                                 AuthController::sessionfacebook($correo,$facebook['id_facebook']); }     
+                               $auth->$this->sessionfacebook($correo,$facebook['id_facebook']); }     
                          else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['id_facebook']);
-                             AuthController::sessionfacebook($correo,$facebook['id_facebook']); }}
+                             $auth->$this->sessionfacebook($correo,$facebook['id_facebook']); }}
                          else
                           { 
                               $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['id_facebook']); 
-                              AuthController::sessionfacebook($facebook['email'],$facebook['id_facebook']); }
+                             $auth->$this->sessionfacebook($facebook['email'],$facebook['id_facebook']); }
    
        }
         }
