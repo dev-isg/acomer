@@ -217,7 +217,7 @@ class ComentariosTable
                         ->where(array('ta_plato.in_id'=>$coment['Ta_plato_in_id']));//$prom[0]['in_id']
                 $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
                 $statementup->execute();
-                $this->cromSolar($coment['Ta_plato_in_id'], '');
+            
     
              
     }

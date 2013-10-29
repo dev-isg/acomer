@@ -797,26 +797,16 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         if ($request->isPost()) {
             if ($session) {
                 $datos = $this->getRequest()->getPost()->toArray();
- //var_dump($datos);exit;
                 $datos['Ta_plato_in_id'] = $id;
-                                //var_dump($session->in_id);exit;
                 $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
-//                $datos['va_nombre'] = htmlspecialchars($datos['va_nombre']);
-//                $datos['va_email'] = htmlspecialchars($datos['va_email']);
                 $validar = explode('http://', $datos['tx_descripcion']);
                 if(count($validar)==2){
                 return $this->redirect()->toUrl('/plato/'.$resta.'/'.$urlerror.'?m=1');}
                 else {
                 $form->setData($datos);
                 if (!$form->isValid()) {
-//                    setcookie('va_nombre',$datos['va_nombre']);
-//                    setcookie('va_email',$datos['va_email']);
                     $this->getComentariosTable()->agregarComentario($form->getData(),$participa->in_id);
-                  //  $this->getComentariosTable()->cromSolar($id,''); 
-//                    setcookie('id' . $id, 1);
-//                    setcookie('nombre',$datos['va_nombre']);
-//                    setcookie('email',$datos['va_email']);
-//                    $form->setData(array('va_nombre' => '', 'va_email' => '', 'tx_descripcion' => '')); 
+                    $this->getComentariosTable()->cromSolar($id,''); 
                     $datos =$this->params()->fromRoute();               
                     $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']);
                   }
