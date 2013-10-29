@@ -50,7 +50,7 @@ public function __construct()
         $view = new ViewModel();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();  
-       if (session_status() === PHP_SESSION_ACTIVE) { echo 'hay session';exit;
+       if (session_status() === PHP_SESSION_NONE) { echo 'hay session';exit;
           $this->layout()->face = $_SESSION['face'];
         }else{echo 'no hay session';exit;
             $face = new \Usuario\Controller\ClientesController();
