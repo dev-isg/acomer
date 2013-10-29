@@ -57,7 +57,174 @@
               <a href="javascript:window.history.back();">Regresar</a>
            </div>
    			</div>
-   			
+   			<div class="ficha-product">
+   				<div class="ficha-img">
+            <div class="flexslider carousel">
+              <ul class="slides">
+                <li>
+                  <img src="<?php if ($this->lista[0]['va_imagen']=='platos-default.png')
+                                            {echo $this->host('images') . '/defecto/' . $this->lista[0]['va_imagen'];}
+                                        else{echo $this->host('images') . '/plato/principal/' . $this->lista[0]['va_imagen'];}?>" title="<?php echo $this->lista[0]['va_nombre'];?>" alt="<?php echo $this->lista[0]['va_nombre'];?>" />
+                </li>
+                <li>
+                  <img src="<?php if($this->lista[0]['restaurant_img']=='default-img.jpg')
+                        {echo $this->host('images') . '/defecto/' . $this->lista[0]['restaurant_img'];}
+                        else
+                            {echo $this->host('images') . '/restaurante/principal/' . $this->lista[0]['restaurant_img'];}?>" title="<?php echo $this->lista[0]['restaurant_nombre']?>" alt="<?php echo $this->lista[0]['restaurant_nombre']?>">
+                </li>
+              </ul>
+            </div>
+   				</div>
+   				<div class="ficha-desc">
+            <h3><?php echo $this->lista[0]['va_nombre'];?></h3>
+   					<div class="puntuaciones c<?php echo $this->lista[0]['Ta_puntaje_in_id'];?>"></div>
+   					<!--<p class="desc"><?php echo $this->lista[0]['tx_descripcion'];?></p>-->
+   					<?php if($this->lista[0]['va_precio']){?>
+              <p class="costo">Precio: <span><?php echo $this->lista[0]['va_precio'];?></span></p>
+   					  <!--<p class="precio"><?php echo $this->lista[0]['va_precio'];?></p>-->
+            <?php }?>
+            <h4>Dirección y teléfono</h4>
+            <ul class="ubi-lupa">
+               <li>
+                <div class="ubicancion"><?php echo $this->lista[0]['va_direccion'];?>-<?php echo $this->lista[0]['distrito'];?> (<?php echo $this->lista[0]['departamento'];?>)</div>
+               </li>
+            </ul>
+            <?php if($this->lista[0]['va_direccion_referencia']){?>
+              <!--<h4>Dirección de Referencia</h4>-->
+              <ul class="ubi-lupa">
+                <li>
+                  <div class="ubicancion1"><?php echo $this->lista[0]['va_direccion_referencia'];?></div>
+                </li>
+              </ul>
+               <?php } ?>                       
+              <!--<h4>Teléfono</h4>-->
+              <ul class="servicios-desc">
+                <li><?php echo $this->lista[0]['va_telefono'];?></li>
+              </ul>
+              <h4>Atención</h4>
+                <ul class="time">
+                  <li><span class="day"><?php echo $this->lista[0]['va_dia']; ?></span></li>
+                  <li><span class="hour"><?php echo $this->lista[0]['va_horario']; ?></span></li>
+                   <?php if($this->lista[0]['va_horario_opcional']){?>
+                  <li><span class="day">Horario Opcional</span></li>
+                  <li><span class="hour"><?php echo $this->lista[0]['va_horario_opcional']; ?></span></li>
+                  <?php } ?>
+                </ul>
+                <?php if($this->lista[0]['web']){?>
+                <h4>Página web</h4>
+                <ul class="time">
+                  <li><a class="link-web" href="<?php echo $this->lista[0]['web'];?>" target="_blank">Visíte su página</a></li>
+                </ul>
+                <?php }?>
+	        </div>
+   			</div>
+   			<div class="content-coments">
+   				<div class="coments-all">
+              <div class="cont-accesorios">
+                <h4 class="ubi-map">Mapa de ubicación <span></span></h4>
+                <div id="mapCont" class="map" data-lat="<?php echo $this->lista[0]['de_latitud']; ?>" data-lng="<?php echo $this->lista[0]['de_longitud']; ?>"></div>
+               <?php if(count($this->locales)>1){?>
+                <h4>Sucursales</h4>
+                <section class="list-suc">
+                    <ul class="ul-suc">
+                        <?php foreach ($this->locales as $local) : ?>
+                            <li class="li-suc"> 
+                                <a href="#" class="" data-lat="<?php echo $local->de_latitud ?>" data-lng="<?php echo $local->de_longitud ?>">
+                                    <header>                              
+                                        <h6 class="text-ellipsis"><?php echo $this->lista[0]['restaurant_nombre'];?></h6>
+                                        <span class="close-banch"></span>
+                                    </header>
+                                    <div class="descr">
+                                        <span class="house-icon"></span>
+                                        <ul>
+                                            <li class="text-ellipsis"><?php echo $local->va_direccion ?></li>
+                                            <li class="phone"><span class="text-ellipsis"><?php echo $local->distrito ?> (<?php echo $local->depa ?>)</span><em class="text-ellipsis"><?php echo $local->va_telefono ?></em></li>
+                                        </ul>
+                                    </div>
+                                </a>                                       
+                            </li>
+                        <?php endforeach; ?>
+
+                    </ul>
+                </section>
+                <?php }?>
+              </div>
+            </div>
+            
+            <div class="content-info">
+              <h4>Más Platos</h4> 
+                <div class="lista-plato-li recomendados-platos">
+                  <ul>
+                <?php foreach ($this->masplatos as $doc ) : ?>          
+                    <li>
+                        <div class="list-ver">
+                        <div class="list-img-p">
+                          <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($doc->restaurante))?>/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>">
+                            <img src="<?php if($doc->va_imagen=='platos-default.png')
+                                  { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
+                                  else
+                              {  echo $this->host('images') . '/plato/general/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" style="border:0;" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                          </a>
+                        </div>
+                        <div class="list-desc-p">
+                          <div class="left-resultado">
+                            <p class="nombre_r">
+                              <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($doc->restaurante))?>/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                              <?php 
+                                   if(strlen($doc->restaurante)>20){
+                                   $strres=trim(substr($doc->restaurante, 0, 19));
+                                    $strres.='..';
+                                   }else {$strres=$doc->restaurante;}
+                          echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?>
+                            </a> 
+                            </p>
+                            <p class="nom_plato"><?php echo $doc->name;?></p>
+                            <div class="punt" style="width:100%!important;text-align:left;">
+                              <div style="float:left!important;margin-left: 10px;" class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>"></div>
+                              <em><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i></em>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <?php endforeach; ?>   
+                      <?php foreach ($this->listades as $doc ) : ?>          
+                      <li>
+                        <div class="list-ver">
+                        <div class="list-img-p">
+                          <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($doc->restaurante))?>/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>">
+                            <img src="<?php if($doc->va_imagen=='platos-default.png')
+                                  { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
+                                  else
+                              {  echo $this->host('images') . '/plato/general/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8'); } ?>" style="border:0;" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                          </a>
+                        </div>
+                        <div class="list-desc-p">
+                          <div class="left-resultado">
+                            <p class="nombre_r">
+                              <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($doc->restaurante))?>/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                              <?php 
+                                   if(strlen($doc->restaurante)>20){
+                                   $strres=trim(substr($doc->restaurantee, 0, 19));
+                                    $strres.='..';
+                                   }else {$strres=$doc->restaurante;}
+                          echo htmlspecialchars($doc->restaurante, ENT_QUOTES, 'utf-8'); ?>
+                            </a> 
+                            </p>
+                            <p class="nom_plato"><?php echo $doc->name;?></p>
+                            <div class="punt" style="width:100%!important;text-align:left;">
+                              <div style="float:left!important;margin-left: 10px;" class="puntuaciones c<?php echo htmlspecialchars($doc->puntuacion, ENT_QUOTES, 'utf-8');?>"></div>
+                              <em><?php echo htmlspecialchars($doc->comentarios, ENT_QUOTES, 'utf-8'); ?><i class="icon-comment"></i></em>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                       </li>
+                    <?php endforeach; ?>    
+                  </ul>
+                </div>
+            </div>
+          
 
     </div>
           
