@@ -843,7 +843,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
             'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id,
             'listatitle'=>$listatitle, 'masplatos' => $resultados
-             ,'listades' => $consulta,'menus'=>$menu,'session'=>$session,
+             ,'listades' => $consulta,'menus'=>$menu,'session'=>$session,'resta'=>$resta,
             'participa'=>$activo,));
         
         return $view;
