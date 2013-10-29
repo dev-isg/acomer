@@ -55,7 +55,7 @@ public function __construct()
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
-        if(session_start()){$this->layout()->face = $facebook['name'];}
+        if(session_status() === PHP_SESSION_ACTIVE){$this->layout()->face = $facebook['name'];}
         else{
         if($facebook['id_facebook']){ 
         $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
@@ -242,12 +242,12 @@ public function __construct()
         $request = $this->getRequest();
          $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
-       if (!isset($session)) {
+      if (!isset($session)) {
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
-        if(session_start()){$this->layout()->face = $facebook['name'];}
+        if(session_status() === PHP_SESSION_ACTIVE){$this->layout()->face = $facebook['name'];}
         else{
         if($facebook['id_facebook']){ 
         $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 

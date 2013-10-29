@@ -366,7 +366,8 @@ public function getAuthService() {
                  'cookie' => false ,
                  'scope'  => 'email,publish_stream'
                    ));
-            if(!session_start()){$user = $facebook->getUser();
+          
+                $user = $facebook->getUser();
             if ($user) {
              try { $user_profile = $facebook->api('/me'); } 
              catch (FacebookApiException $e) {
@@ -383,7 +384,7 @@ public function getAuthService() {
                       else {
                        $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
                            ));  
-                       }   } 
+                       }    
             
                      
                  return array(
