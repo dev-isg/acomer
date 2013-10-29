@@ -55,19 +55,20 @@ public function __construct()
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
-       var_dump(count($id_face));exit;
-//        $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-//        $adapter = $this->dbAdapter;
-//        $sql = new Sql($adapter);
-//        $select = $sql->insert()
-//                ->into('ta_cliente')
-//                ->values(array('va_nombre_cliente'=>$facebook['name'],'va_email'=>$facebook['name'],'id_facebook'=>$facebook['name'],
-//                    'en_estado'=>'activo','va_contrasena'=>$facebook['name']
-//                   ,'va_logout'=>$facebook['name'],'va_notificacion'=>'si'));
-//        $selectString = $sql->getSqlStringForSqlObject($select);
-//        $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+  
+       if(count($id_face)>0)
+                         {   $correo = $id_face[0]['va_email'];
+                         if($id_face[0]['id_facebook']=='')  
+                                { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
+                                 AuthController::sessionfacebook($correo,$facebook['id_facebook']); }     
+                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['id_facebook']);
+                             AuthController::sessionfacebook($correo,$facebook['id_facebook']); }}
+                         else
+                          { echo 'no hay registro';exit;
+                              $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['id_facebook']); 
+                              AuthController::sessionfacebook($facebook['email'],$facebook['id_facebook']); }
    
-          $face->logueoface($facebook['id_facebook'],$facebook['logoutUrl'],$facebook['name'],$facebook['email']);}
+          $face->logueoface($facebook['id_facebook'],$facebook['id_facebook'],$facebook['name'],$facebook['email']);}
         }
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
