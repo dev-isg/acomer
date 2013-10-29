@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="<?php echo $this->basePath()?>/css/jquery-ui.css?v<?php echo $this->host('version')?>">
 <link rel="stylesheet" href="<?php echo $this->basePath()?>/js/flexslider/flexslider.css" type="text/css"/>
-<div class="content-left">
     <a style="margin-left: 10px;" class="disabled" id="buscarmap" disabled>Ver Mapa </a>
     <div id="esconder">
    		<div class="descrip-product">
@@ -10,9 +9,9 @@
           if ($detect4->isTablet()) {
              ?>
             <?php if ($session) { ?>
-      <div class="content-menu-home" style="position:fixed;top:0px;">
+      <div class="content-menu-home" style="position: relative; top: 0px;">
           <?php } else {  ?>
-          <div class="content-menu-home" style="position:fixed;top:35px;"> 
+          <div class="content-menu-home" style="position: relative; top: 0px;"> 
           <?php  } ?>
               <ul>
                <?php 
@@ -25,7 +24,11 @@
           <?php }elseif($detect4->isMobile()){?>   
             
           <?php } else {?> 
-            <div class="content-menu-home" style="position:fixed;top:35px;">
+            <?php if ($session) { ?>
+      <div class="content-menu-home" style="position: relative; top: 0px;">
+          <?php } else {  ?>
+          <div class="content-menu-home" style="position: relative; top: 0px;"> 
+          <?php  } ?>
               <ul>
                <?php 
                 foreach ($this->menus  as $menus) :
@@ -333,7 +336,7 @@
 </div>
 
 <div id="mapa-buscador"></div>
-</div></div>
+
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script> 
 <!--<script src="<?php echo $this->basePath()?>/js/jquery-ui.min.js?v<?php echo $this->host('version')?>"></script>-->
 <script src="<?php echo $this->basePath()?>/js/vendor/gmaps.min.js?v<?php echo $this->host('version')?>"></script>

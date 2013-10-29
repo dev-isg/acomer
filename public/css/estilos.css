@@ -1307,7 +1307,6 @@ width: 49%;
 .etiqueta-cat{
   display: block;
   width: 100%;
-  padding-top: 20px;
   float: left;
 }
 .etiqueta-dev h2{
@@ -3615,6 +3614,9 @@ span.input-help {
   }
 }
 @media (max-width: 767px) {
+  .iniciar-session{
+    display: none;
+  }
   .recomendados-platos ul li{
     margin-right: -10px;
   }
