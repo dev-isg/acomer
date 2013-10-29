@@ -50,14 +50,15 @@ public function __construct()
         $view = new ViewModel();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();  
-       if (!isset($session)) {
-        $face = new \Usuario\Controller\ClientesController();
+       if (session_status() === PHP_SESSION_NONE) {
+          $this->layout()->face = $_SESSION['face'];
+        }else{$face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
-        if(session_status() === PHP_SESSION_ACTIVE){$this->layout()->face = $facebook['name'];}
-        else{
-        if($facebook['id_facebook']){ 
+        if($facebook['id_facebook']){
+        session_start();
+        $_SESSION['face']=$facebook['name'];
         $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
@@ -68,7 +69,6 @@ public function __construct()
                          else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
                          $this->layout()->face = $facebook['name'];  }
                          }  }
-        }
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
         $mistura=$this->getConfigTable()->platoslistadelsabor();
@@ -242,14 +242,15 @@ public function __construct()
         $request = $this->getRequest();
          $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
-      if (!isset($session)) {
-        $face = new \Usuario\Controller\ClientesController();
+       if (session_status() === PHP_SESSION_NONE) {
+          $this->layout()->face = $_SESSION['face'];
+        }else{$face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
-        if(session_status() === PHP_SESSION_ACTIVE){$this->layout()->face = $facebook['name'];}
-        else{
-        if($facebook['id_facebook']){ echo 'mama';exit;
+        if($facebook['id_facebook']){
+        session_start();
+        $_SESSION['face']=$facebook['name'];
         $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
@@ -260,7 +261,6 @@ public function __construct()
                          else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
                          $this->layout()->face = $facebook['name'];  }
                          }  }
-        }
         $this->layout()->clase = 'buscar-distrito';
         if ($request->isGet()) {
             $datos = $this->request->getQuery();
