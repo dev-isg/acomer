@@ -23,6 +23,7 @@ use Zend\Json\Json;
 use Application\Model\Entity\Album;
 use Zend\Mail\Message;
 use Zend\Http\Request;
+use SanAuth\Controller\AuthController; 
 use Usuario\Model\ClientesTable;
 use Zend\Mail\Transport\Sendmail as SendmailTransport;
 // use Zend\I18n\Filter\Alnum;
