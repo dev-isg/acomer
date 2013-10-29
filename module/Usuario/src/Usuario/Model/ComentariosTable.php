@@ -188,19 +188,7 @@ class ComentariosTable
          
          
            public function agregarComentario($coment,$id){
-         
-//           $cliente=array(
-//                    'va_nombre_cliente'=>$coment['va_nombre'],
-//                    'va_email'=>$coment['va_email'],
-//                    'en_estado'=>'desactivo',
-//               );
-//           
-//            $insert = $this->tableGateway->getSql()->insert()->into('ta_cliente')
-//                    ->values($cliente);
-//            $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($insert);
-//            
-//            $statement->execute();    
-//            $idcliente=$this->tableGateway->getAdapter()->getDriver()->getLastGeneratedValue();
+
             $comentario = array(
             'tx_descripcion' => $coment['tx_descripcion'],
             'Ta_plato_in_id' => $coment['Ta_plato_in_id'],
@@ -229,7 +217,7 @@ class ComentariosTable
                         ->where(array('ta_plato.in_id'=>$coment['Ta_plato_in_id']));//$prom[0]['in_id']
                 $statementup = $this->tableGateway->getSql()->prepareStatementForSqlObject($update);  
                 $statementup->execute();
-                
+                $this->cromSolar($coment['Ta_plato_in_id'], '');
     
              
     }
