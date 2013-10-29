@@ -135,7 +135,7 @@
                     <li>
                         <div class="list-ver">
                         <div class="list-img-p">
-                          <a href="/plato/restaurante/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>">
+                          <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($doc->restaurante))?>/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>">
                             <img src="<?php if($doc->va_imagen=='platos-default.png')
                                   { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
                                   else
@@ -145,7 +145,7 @@
                         <div class="list-desc-p">
                           <div class="left-resultado">
                             <p class="nombre_r">
-                              <a href="/plato/restaurante/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                              <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($doc->restaurante))?>/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
                               <?php 
                                    if(strlen($doc->restaurante)>20){
                                    $strres=trim(substr($doc->restaurante, 0, 19));
@@ -168,7 +168,7 @@
                       <li>
                         <div class="list-ver">
                         <div class="list-img-p">
-                          <a href="/plato/restaurante/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>">
+                          <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($doc->restaurante))?>/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>">
                             <img src="<?php if($doc->va_imagen=='platos-default.png')
                                   { echo $this->host('images') . '/defecto/' . htmlspecialchars($doc->va_imagen, ENT_QUOTES, 'utf-8');}
                                   else
@@ -178,7 +178,7 @@
                         <div class="list-desc-p">
                           <div class="left-resultado">
                             <p class="nombre_r">
-                              <a href="/plato/restaurante/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
+                              <a href="/plato/<?php echo $this->canonicalUrl($this->canonical($doc->restaurante))?>/<?php echo $this->canonicalUrl($this->canonical($doc->name), array('suffix' => $doc->id));?>" title="<?php echo $doc->name;?>" alt="<?php echo $doc->name;?>">
                               <?php 
                                    if(strlen($doc->restaurante)>20){
                                    $strres=trim(substr($doc->restaurantee, 0, 19));
@@ -204,8 +204,12 @@
               <!--Comentarios-->
               <div class="top-coment">
                   <p><?php echo $this->cantidad; //$this->lista[0]['num']; //?> comentarios</p>
+                  <?php if ($this->session) { ?>  
                   <a href="#" class="btn btn-warning agregar-coment-1">Agregar comentario</a>
-          
+                  <?php  } else { ?>
+                   <a href="#modalSession" class="btn btn-warning agregar-coment-1" role="button" data-toggle="modal">Agregar comentario</a>
+                   
+                   <?php   }?>
               </div>
               <div class="agregar-comentario-desc" style="display:none;">
                 <?php
