@@ -31,6 +31,7 @@ class IndexController extends AbstractActionController {
 
     protected $platosTable;
     protected $configTable;
+    protected $authservice;
     protected $comentariosTable;
     protected $clientesTable;
     protected $_options;
@@ -932,6 +933,13 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         $selectString = $sql->getSqlStringForSqlObject($select);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
          return $results->toArray();
+    }
+    public function getAuthService() {
+        if (!$this->authservice) {
+            $this->authservice = $this->getServiceLocator()->get('AuthService');
+        }
+
+        return $this->authservice;
     }
  public function verplatos2Action() 
       {
