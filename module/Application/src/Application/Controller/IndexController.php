@@ -41,7 +41,7 @@ class IndexController extends AbstractActionController
     protected $clientesTable;
      protected $authservice;
     public $dbAdapter;
-public function __construct()
+  public function __construct()
 	{
 		$this->_options = new \Zend\Config\Config ( include APPLICATION_PATH . '/config/autoload/global.php' );
 	}
@@ -227,9 +227,7 @@ public function __construct()
         $view = new ViewModel();
         $request = $this->getRequest();
          $storage = new \Zend\Authentication\Storage\Session('Auth');
-        $session=$storage->read();
-        
-        
+        $session=$storage->read();       
        if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
@@ -242,11 +240,12 @@ public function __construct()
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
                           { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                          $this->layout()->face = $facebook['name']; }     
+                          AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }     
                          else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-                         $this->layout()->face = $facebook['name']; }    }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
                          else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-                         $this->layout()->face = $facebook['name'];  }  }  }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
+  }  }
         $this->layout()->clase = 'buscar-distrito';
         if ($request->isGet()) {
             $datos = $this->request->getQuery();

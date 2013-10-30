@@ -392,37 +392,37 @@ class ClientesController extends AbstractActionController {
             $name = $user_profile['name'];
             $email = $user_profile['email'];
             $naitik = $facebook->api('/naitik');
-           //$clientesTable = $this->facxe($id_facebook);
-           $sm = $this->getServiceLocator();
-           $this->clientesTable = $sm->get('Usuario\Model\ClientesTable');
-           var_dump( $this->clientesTable);exit;
-
-            if (count($id_face) > 0) {
-                $correo = $id_face[0]['va_email'];
-                if ($id_face[0]['id_facebook'] == '') {
-                    $this->getClientesTable()->idfacebook($id_face[0]['in_id'], $id_facebook, $logoutUrl);
-                    AuthController::sessionfacebook($correo, $id_facebook);
-                } else {
-                    $this->getClientesTable()->idfacebook2($id_face[0]['in_id'], $logoutUrl);
-                    AuthController::sessionfacebook($correo, $id_facebook);
-                }
-            } else {
-                $this->getClientesTable()->insertarusuariofacebbok($name, $email, $id_facebook, $logoutUrl);
-                AuthController::sessionfacebook($email, $id_facebook);
-            }
+//           //$clientesTable = $this->facxe($id_facebook);
+//           $sm = $this->getServiceLocator();
+//           $this->clientesTable = $sm->get('Usuario\Model\ClientesTable');
+//           var_dump($this->clientesTable);exit;
+//
+//            if (count($id_face) > 0) {
+//                $correo = $id_face[0]['va_email'];
+//                if ($id_face[0]['id_facebook'] == '') {
+//                    $this->getClientesTable()->idfacebook($id_face[0]['in_id'], $id_facebook, $logoutUrl);
+//                    AuthController::sessionfacebook($correo, $id_facebook);
+//                } else {
+//                    $this->getClientesTable()->idfacebook2($id_face[0]['in_id'], $logoutUrl);
+//                    AuthController::sessionfacebook($correo, $id_facebook);
+//                }
+//            } else {
+//                $this->getClientesTable()->insertarusuariofacebbok($name, $email, $id_facebook, $logoutUrl);
+//                AuthController::sessionfacebook($email, $id_facebook);
+          //  }
         } else {
             // $url  = $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');
             $loginUrl = $facebook->getLoginUrl(array('scope' => 'email,publish_stream,read_friendlists',
-                'redirect_uri' => $this->_options->host->ruta . '/'
+            //    'redirect_uri' => $this->_options->host->ruta . '/'
                     ));
         }
 
         return array(
             'user' => $user,
-////               'id_facebook'=> $id_facebook,     
-//               'logoutUrl'  =>$logoutUrl,
-//               'name'=>$name,
-//               'email'=>$email,      
+              'id_facebook'=> $id_facebook,     
+               'logoutUrl'  =>$logoutUrl,
+               'name'=>$name,
+               'email'=>$email,      
             'loginUrl' => $loginUrl
         );
     }
