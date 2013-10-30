@@ -406,7 +406,7 @@ public function getAuthService() {
                'logoutUrl'  =>$logoutUrl,
                'name'=>$name,
                'email'=>$email,      
-               'loginUrl' => $loginUrl,
+               'loginUrl' => $loginUrl
         );
       return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
     }
