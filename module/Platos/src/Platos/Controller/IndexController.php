@@ -803,13 +803,13 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                 if(count($validar)==2){
                 return $this->redirect()->toUrl('/plato/'.$resta.'/'.$urlerror.'?m=1');}
                 else {
-//                $form->setData($datos);
-//                if (!$form->isValid()) {
-                    $this->getComentariosTable()->agregarComentario($datos,$participa->in_id);
-                    $this->getComentariosTable()->cromSolar($datos['Ta_plato_in_id'],null); 
+                $form->setData($datos);
+                if (!$form->isValid()) {
+                    $this->getComentariosTable()->agregarComentario($form->getData(),$participa->in_id);
+                    $this->getComentariosTable()->cromSolar($id,null); 
                     $datos =$this->params()->fromRoute();               
                     $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']);
-                //  }
+                  }
                 }
             }
         }   
