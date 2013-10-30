@@ -51,9 +51,10 @@ public function __construct()
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();  
         if (!isset($session)) {
-        $facebook = new \Usuario\Controller\ClientesController();
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
-            $this->layout()->user = $facebook['user']; }
+        $this->layout()->user = $facebook['user']; }
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
         $mistura=$this->getConfigTable()->platoslistadelsabor();
