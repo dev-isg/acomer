@@ -425,10 +425,10 @@ class ClientesController extends AbstractActionController {
         if (!$this->clientesTable) {
             $sm = $this->getServiceLocator();
             $this->clientesTable = $sm->get('Usuario\Model\ClientesTable');
-            $config = $sm->get('Config');
-            self::$rutaStatic = $config['host']['images'];
-            self::$rutaStatic2 = $config['host']['img'];
-            self::$rutaStatic3 = $config['host']['ruta'];
+//            $config = $sm->get('Config');
+//            self::$rutaStatic = $config['host']['images'];
+//            self::$rutaStatic2 = $config['host']['img'];
+//            self::$rutaStatic3 = $config['host']['ruta'];
         }
         return $this->clientesTable;
     }
