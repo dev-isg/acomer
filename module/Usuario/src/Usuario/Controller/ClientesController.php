@@ -11,8 +11,7 @@
 namespace Usuario\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Db\TableGateway\AbstractTableGateway;
-use Zend\Db\TableGateway\TableGateway;
+
 
 
 use Zend\View\Model\ViewModel;
@@ -46,10 +45,10 @@ class ClientesController extends AbstractActionController {
     protected $comentariosTable;
     protected $storage;
     protected $authservice;
- protected $tableGateway;
-    public function __construct(TableGateway $tableGateway) {
+
+    public function __construct() {
         $this->_options = new \Zend\Config\Config(include APPLICATION_PATH . '/config/autoload/global.php');
-            $this->tableGateway = $tableGateway;
+ 
     }
 
     public function agregarclienteAction() {
@@ -393,8 +392,10 @@ class ClientesController extends AbstractActionController {
             $name = $user_profile['name'];
             $email = $user_profile['email'];
             $naitik = $facebook->api('/naitik');
-          $clientesTable = $this->facxe($id_facebook);
-          var_dump(count($clientesTable));exit;
+           //$clientesTable = $this->facxe($id_facebook);
+           $sm = $this->getServiceLocator();
+           $this->clientesTable = $sm->get('Usuario\Model\ClientesTable');
+           var_dump( $this->clientesTable);exit;
 
             if (count($id_face) > 0) {
                 $correo = $id_face[0]['va_email'];
@@ -439,29 +440,18 @@ class ClientesController extends AbstractActionController {
     }
 
     
-    public function facxe($id_face)
-    {
-        $adapter = $this->tableGateway->getAdapter();
-           $query='SELECT * from ta_cliente where id_facebook='.$id_face;
-           $cantidad = $this->tableGateway->getAdapter()
-            ->query($query, $adapter::QUERY_MODE_EXECUTE); 
-            return $cantidad->toArray();
-    }
+//    public function facxe($id_face)
+//    {
+//       $sql = new Sql($adapter);
+//        $select = $sql->select();
+//        $select->from('foo');
+//        $select->where(array('id' => 2));
+//
+//        $statement = $sql->prepareStatementForSqlObject($select);
+//        $results = $statement->execute();
+//    }
 
-    public function getComentariosTable() {
-        if (!$this->comentariosTable) {
-            $s = $this->getServiceLocator();
-            $this->comentariosTable = $s->get('Usuario\Model\ComentariosTable');
-        }
-        return $this->comentariosTable;
-    }
-     public function getUsuarioTable() {
-        if (!$this->usuarioTable) {
-            $sm = $this->getServiceLocator();
-            $this->usuarioTable = $sm->get('Usuario\Model\UsuarioTable');
-        }
-        return $this->usuarioTable;
-    }
+  
     public function logueoface($id_facebook, $logoutUrl, $name, $email) {
         $id_face = $this->getClientesTable()->usuarioface($id_facebook);
         if (count($id_face) > 0) {
