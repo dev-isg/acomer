@@ -183,6 +183,8 @@ class AuthController extends AbstractActionController {
         }
     }
     
+    
+
     public function validarAction(){
       $request = $this->getRequest();
         if ($request->isPost()) {
@@ -308,21 +310,18 @@ class AuthController extends AbstractActionController {
 
     public function sessionfacebook($email,$pass)
     {  
-       
-                $correo = $email;
+          $correo = $email;
                 $contrasena = $pass;
                 $this->getAuthService()
                         ->getAdapter()
                         ->setIdentity($correo)
                         ->setCredential($contrasena);
 
-              //  $usuario = $this->getClientesTable()->usuario1($correo);               
-             //   if ($usuario[0]['en_estado'] == 'activo') {
-                    $result = $this->getAuthService()->authenticate();
-                    foreach ($result->getMessages() as $message) {
-                        $this->flashmessenger()->addMessage($message);
-                    }
-                    if ($result->isValid()) {                 
+                  
+                        $urlorigen = $this->getRequest()->getHeader('Referer')->uri()->getPath();
+                        $arrurl = explode('/', $urlorigen);
+                        $id = end($arrurl);
+                       
                         $storage = $this->getAuthService()->getStorage();
                         $storage->write($this->getServiceLocator()
                                         ->get('TableAuthService')
@@ -330,25 +329,16 @@ class AuthController extends AbstractActionController {
                                             'in_id',
                                             'va_nombre_cliente',
                                             'va_contrasena',
+                                            'va_email',
                                             'va_logout',
                                             'id_facebook'
                                         )));
-                       
-                    }
-                //  } 
-//                
-             //   else{return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');}
-              
-            
-//            echo $id;
-//            echo $origen;
-//            echo $redirect;exit;
-            if($id){
-                 return $this->redirect()->toRoute($redirect, array('in_id' => $id));
-            }else{
-                
-                 return $this->redirect()->toRoute($redirect);
-            }
+                         return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
+                        if ($id) {
+                            return $this->redirect()->toRoute($redirect, array('in_id' => $id));
+                        } else {
+                            return $this->redirect()->toRoute($redirect);
+                        }
     }
     
 

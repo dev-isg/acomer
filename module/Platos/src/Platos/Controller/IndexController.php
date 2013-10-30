@@ -724,7 +724,6 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
        }}
         $datos =$this->params()->fromRoute();  
         $urlerror =  $datos['nombre'];
-       // var_dump($urlerror);exit';'
         $nombre = explode('-', $datos['nombre']); 
         $id = array_pop($nombre);
           $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray(); 
