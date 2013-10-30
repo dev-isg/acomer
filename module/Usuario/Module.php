@@ -84,7 +84,7 @@ class Module implements AutoloaderProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Comentarios());
                     return new TableGateway('ta_comentario', $dbAdapte, null, $resultSetPrototype);
                 },
-                      'Usuario\Model\ClientesTable' =>  function($sm) {
+                 'Usuario\Model\ClientesTable' =>  function($sm) {
                     $tableGateway = $sm->get('ClientesTableGateway');
                     $table = new Model\ClientesTable($tableGateway);
                     return $table;

@@ -33,7 +33,7 @@ use Zend\Mail\Message;
 class ClientesController extends AbstractActionController {
 
     protected $clientesTable;
-    static $usuarioTableStatic;
+     protected $usuarioTable;
     protected $ruta;
     protected $_options;
     static $rutaStatic;
@@ -388,7 +388,7 @@ class ClientesController extends AbstractActionController {
             $name = $user_profile['name'];
             $email = $user_profile['email'];
             $naitik = $facebook->api('/naitik');
-            $clientesTable = $this->getClientesTable();
+            $clientesTable = $this->getUsuarioTable();
             var_dump($clientesTable);exit;
 
             if (count($id_face) > 0) {
@@ -425,10 +425,10 @@ class ClientesController extends AbstractActionController {
         if (!$this->clientesTable) {
             $sm = $this->getServiceLocator();
             $this->clientesTable = $sm->get('Usuario\Model\ClientesTable');
-//            $config = $sm->get('Config');
-//            self::$rutaStatic = $config['host']['images'];
-//            self::$rutaStatic2 = $config['host']['img'];
-//            self::$rutaStatic3 = $config['host']['ruta'];
+            $config = $sm->get('Config');
+            self::$rutaStatic = $config['host']['images'];
+            self::$rutaStatic2 = $config['host']['img'];
+            self::$rutaStatic3 = $config['host']['ruta'];
         }
         return $this->clientesTable;
     }
@@ -440,7 +440,13 @@ class ClientesController extends AbstractActionController {
         }
         return $this->comentariosTable;
     }
-
+  public function getUsuarioTable() {
+        if (!$this->usuarioTable) {
+            $sm = $this->getServiceLocator();
+            $this->usuarioTable = $sm->get('Usuario\Model\UsuarioTable');
+        }
+        return $this->usuarioTable;
+    }
     public function logueoface($id_facebook, $logoutUrl, $name, $email) {
         $id_face = $this->getClientesTable()->usuarioface($id_facebook);
         if (count($id_face) > 0) {
