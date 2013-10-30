@@ -388,7 +388,7 @@ class ClientesController extends AbstractActionController {
             $name = $user_profile['name'];
             $email = $user_profile['email'];
             $naitik = $facebook->api('/naitik');
-            $clientesTable = $this->getUsuarioTable();
+            $clientesTable = $this->getComentariosTable();
             var_dump($clientesTable);exit;
 
             if (count($id_face) > 0) {
@@ -440,7 +440,7 @@ class ClientesController extends AbstractActionController {
         }
         return $this->comentariosTable;
     }
-  public function getUsuarioTable() {
+     public function getUsuarioTable() {
         if (!$this->usuarioTable) {
             $sm = $this->getServiceLocator();
             $this->usuarioTable = $sm->get('Usuario\Model\UsuarioTable');
