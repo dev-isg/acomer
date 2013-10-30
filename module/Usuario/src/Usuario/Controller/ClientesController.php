@@ -366,7 +366,6 @@ public function getAuthService() {
                  'cookie' => false ,
                  'scope'  => 'email,publish_stream'
                    ));
-          
             $user = $facebook->getUser();
             if ($user) {
              try { $user_profile = $facebook->api('/me'); } 
@@ -374,38 +373,35 @@ public function getAuthService() {
                            error_log($e);
                            $user = null; } }
                        if ($user) {
-                         $logoutUrl = $facebook->getLogoutUrl();
-                         $id_facebook = $user_profile['id'];
-                         $name = $user_profile['name'];
-                         $email = $user_profile['email'];
-                         $naitik = $facebook->api('/naitik');  } 
-                      else {$loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',   ));   }      
+                                    $logoutUrl = $facebook->getLogoutUrl();
+                                    $id_facebook = $user_profile['id'];
+                                    $name = $user_profile['name'];
+                                    $email = $user_profile['email'];
+                                    $naitik = $facebook->api('/naitik');
+                                    $id_face=$this->getClientesTable()->usuarioface($id_facebook);
+                                    var_dump(count($id_face));exit;
+                                    if(count($id_face)>0)
+                                    {if($id_face[0]['id_facebook']=='')  
+                                     { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
+                                     AuthController::sessionfacebook($email ,$id_facebook);         }     
+                                    else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
+                                    AuthController::sessionfacebook($email ,$id_facebook);  }    }
+                                     else{$this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl);  
+                                    AuthController::sessionfacebook($email ,$id_facebook); }
+                                  } 
+                      else {$loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',));}      
                return array(
-              'user' => $user,
-              'id_facebook'=> $id_facebook,     
-              'logoutUrl'  =>$logoutUrl,
-              'name'=>$name,
-              'email'=>$email,      
-              'loginUrl' => $loginUrl,
+               'user' => $user,
+               'id_facebook'=> $id_facebook,     
+               'logoutUrl'  =>$logoutUrl,
+               'name'=>$name,
+               'email'=>$email,      
+               'loginUrl' => $loginUrl,
         );
 
     }
 
-  public function logueoface($id_facebook,$logoutUrl,$name,$email)
-    {
-       $id_face=$this->getClientesTable()->usuarioface($id_facebook);
-       if(count($id_face)>0)
-                         {if($id_face[0]['id_facebook']=='')  
-                          { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
-                          $this->layout()->face = $name; }     
-                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
-                         $this->layout()->face = $name; }    }
-                         else{$this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl);  
-                         $this->layout()->face = $name; 
-                     }
-         
-              
- }
+ 
     
     
     
@@ -429,5 +425,22 @@ public function getAuthService() {
         }
         return $this->comentariosTable;
     }
+    
+    
+     public function logueoface($id_facebook,$logoutUrl,$name,$email)
+    {
+       $id_face=$this->getClientesTable()->usuarioface($id_facebook);
+       if(count($id_face)>0)
+                         {if($id_face[0]['id_facebook']=='')  
+                          { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$id_facebook,$logoutUrl);
+                          $this->layout()->face = $name; }     
+                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$logoutUrl);
+                         $this->layout()->face = $name; }    }
+                         else{$this->getClientesTable()->insertarusuariofacebbok($name,$email,$id_facebook,$logoutUrl);  
+                         $this->layout()->face = $name; 
+                     }
+         
+              
+ }
    
 }
