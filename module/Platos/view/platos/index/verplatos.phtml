@@ -26,22 +26,23 @@
             
           <?php } else {?> 
             <?php if ($session) { ?>
-      <div class="content-menu-home" style="position: relative; top: 0px;">
+          <div class="content-menu-home" style="position: relative; top: 0px;">
           <?php } else {  ?>
           <div class="content-menu-home" style="position: relative; top: 0px;"> 
           <?php  } ?>
               <ul>
-               <?php 
-                foreach ($this->menus  as $menus) :
+                <?php 
+                  foreach ($this->menus  as $menus) :
                     ?>
-              <li><a href="<?php echo $this->host('ruta')?><?php echo $menus['va_url'] ?>"><?php echo $menus['va_nombre'] ?></a></li>          
-              <?php endforeach; ?>
+                <li><a href="<?php echo $this->host('ruta')?><?php echo $menus['va_url'] ?>"><?php echo $menus['va_nombre'] ?></a></li>          
+                <?php endforeach; ?>
               </ul>
             </div>
          <?php }?> 
    			<div class="etiqueta-cat return-css">
    				<div class="etiqueta-dev jh">
             <?php
+              require './vendor/Classes/Mobile_Detect.php';
               $detect3 = new Mobile_Detect();
               if ($detect3->isTablet()) {
                  ?>                 

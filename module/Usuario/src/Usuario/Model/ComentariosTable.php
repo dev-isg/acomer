@@ -205,7 +205,7 @@ class ComentariosTable
              }
              
                     $adapter2=$this->tableGateway->getAdapter();
-        $promselect=$this->tableGateway->getAdapter()
+         $promselect=$this->tableGateway->getAdapter()
                 ->query('SELECT SUM(ta_puntaje_in_id)AS SumaPuntaje ,COUNT(ta_comentario.in_id ) AS NumeroComentarios,
                     ROUND(AVG(ta_comentario.ta_puntaje_in_id)) AS TotPuntaje
                     FROM ta_comentario
