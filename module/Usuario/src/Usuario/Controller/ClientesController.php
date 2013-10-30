@@ -366,6 +366,7 @@ public function getAuthService() {
                  'cookie' => false ,
                  'scope'  => 'email,publish_stream'
                    ));
+           var_dump($facebook['secret']);exit;
             $user = $facebook->getUser();
             if ($user) {
              try { $user_profile = $facebook->api('/me'); } 
@@ -408,7 +409,7 @@ public function getAuthService() {
 //               'email'=>$email,      
                'loginUrl' => $loginUrl
         );
-      return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
+     
     }
  
     
