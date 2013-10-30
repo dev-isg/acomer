@@ -397,7 +397,6 @@ public function getAuthService() {
                          // $url  = $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');
                        $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
                                                'redirect_uri'=>$this->_options->host->ruta.'/'));   
-                                           var_dump($loginUrl);exit;
 
                        }   
                      
