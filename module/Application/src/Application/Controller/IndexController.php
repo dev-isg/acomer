@@ -228,6 +228,8 @@ public function __construct()
         $request = $this->getRequest();
          $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
+        
+        
        if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
