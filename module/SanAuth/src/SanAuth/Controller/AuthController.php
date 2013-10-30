@@ -309,7 +309,7 @@ class AuthController extends AbstractActionController {
     
 
     public function sessionfacebook($email,$pass)
-    {  
+    {  $view =new ViewModel();
        
                 $correo = $email;
                 $contrasena = $pass;
@@ -334,8 +334,8 @@ class AuthController extends AbstractActionController {
                                         )));
                        
                     }
-
-        return $result;
+    $view->setTerminal(true);
+        return $view;
     }
     
 
