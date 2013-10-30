@@ -11,6 +11,10 @@
 namespace Usuario\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Db\TableGateway\AbstractTableGateway;
+use Zend\Db\TableGateway\TableGateway;
+
+
 use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
 use Zend\Json\Json;
@@ -42,9 +46,10 @@ class ClientesController extends AbstractActionController {
     protected $comentariosTable;
     protected $storage;
     protected $authservice;
-
-    public function __construct() {
+ protected $tableGateway;
+    public function __construct(TableGateway $tableGateway) {
         $this->_options = new \Zend\Config\Config(include APPLICATION_PATH . '/config/autoload/global.php');
+            $this->tableGateway = $tableGateway;
     }
 
     public function agregarclienteAction() {
@@ -388,9 +393,8 @@ class ClientesController extends AbstractActionController {
             $name = $user_profile['name'];
             $email = $user_profile['email'];
             $naitik = $facebook->api('/naitik');
-         // $clientesTable = $this->facxe($id_facebook);
-           $s = $this->getServiceLocator();
-            var_dump($s);exit;
+          $clientesTable = $this->facxe($id_facebook);
+            var_dump($clientesTable);exit;
 
             if (count($id_face) > 0) {
                 $correo = $id_face[0]['va_email'];
@@ -437,16 +441,13 @@ class ClientesController extends AbstractActionController {
     
     public function facxe($id_face)
     {
-        $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $adapter = $this->dbAdapter;
-        $sql = new Sql($adapter);
-        $select = $sql->select();
-        $select->from('ta_cliente')
-                  ->where(array('id_facebook'=>$id_face));;
-        $selectString = $sql->getSqlStringForSqlObject($select);
-        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-        return $results->toArray();
+        $adapter = $this->tableGateway->getAdapter();
+           $query='SELECT * from ta_cliente where id_facebook='.$id_face;
+           $cantidad = $this->tableGateway->getAdapter()
+            ->query($query, $adapter::QUERY_MODE_EXECUTE); 
+            return $cantidad->toArray();
     }
+
     public function getComentariosTable() {
         if (!$this->comentariosTable) {
             $s = $this->getServiceLocator();
