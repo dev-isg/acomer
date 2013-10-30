@@ -335,7 +335,7 @@ class AuthController extends AbstractActionController {
                        
                     }
 
-        
+        return $result;
     }
     
 
