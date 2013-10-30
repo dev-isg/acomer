@@ -310,7 +310,7 @@ class AuthController extends AbstractActionController {
 
     public function sessionfacebook($email,$pass)
     {  
-       $redirect = 'login';
+       
                 $correo = $email;
                 $contrasena = $pass;
                 $this->getAuthService()
@@ -321,10 +321,6 @@ class AuthController extends AbstractActionController {
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
                     }
-                    
-                    $urlorigen = $this->getRequest()->getHeader('Referer')->uri()->getPath();
-                     $arrurl = explode('/', $urlorigen);
-                     $id = end($arrurl);
                     if ($result->isValid()) {                 
                         $storage = $this->getAuthService()->getStorage();
                         $storage->write($this->getServiceLocator()
@@ -338,11 +334,7 @@ class AuthController extends AbstractActionController {
                                         )));
                        
                     }
-      if ($id) {
-                            return $this->redirect()->toRoute($redirect, array('in_id' => $id));
-                        } else {
-                            return $this->redirect()->toRoute($redirect);
-                        }
+      return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
     }
     
 
