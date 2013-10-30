@@ -388,7 +388,8 @@ class ClientesController extends AbstractActionController {
             $name = $user_profile['name'];
             $email = $user_profile['email'];
             $naitik = $facebook->api('/naitik');
-            $clientesTable = $this->getComentariosTable();
+         //   $clientesTable = $this->getComentariosTable();
+            AuthController::sessionfacebook($email, $id_facebook);exit;
             var_dump($clientesTable);exit;
 
             if (count($id_face) > 0) {
