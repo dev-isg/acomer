@@ -363,7 +363,7 @@ public function getAuthService() {
                $facebook = new \Facebook(array(
                  'appId'  => $this->_options->facebook->appId,
                  'secret' => $this->_options->facebook->secret,
-                 'cookie' => false ,
+                 'cookie' => true ,
                  'scope'  => 'email,publish_stream'
                    ));
             $user = $facebook->getUser();
