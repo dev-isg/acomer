@@ -53,7 +53,7 @@ public function __construct()
         if (!isset($session)) {
             $face = new \Usuario\Controller\ClientesController();
             $facebook = $face->facebook();
-            $this->layout()->login = $facebook['loginUrl'];
+            $this->layout()->loginUrl = $facebook['loginUrl'];
             $this->layout()->user = $facebook['user']; 
             //var_dump($facebook['loginUrl']);exit;
             $loginUrl=$facebook['loginUrl'];
