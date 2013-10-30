@@ -394,7 +394,7 @@ class ClientesController extends AbstractActionController {
             $email = $user_profile['email'];
             $naitik = $facebook->api('/naitik');
           $clientesTable = $this->facxe($id_facebook);
-            var_dump($clientesTable);exit;
+            var_dump(count($clientesTable));exit;
 
             if (count($id_face) > 0) {
                 $correo = $id_face[0]['va_email'];
