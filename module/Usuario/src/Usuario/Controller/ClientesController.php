@@ -365,10 +365,7 @@ public function getAuthService() {
                  'secret' => $this->_options->facebook->secret,
                  'cookie' => false ,
                  'scope'  => 'email,publish_stream'
-                   ));
-               
-             $dd=$this->_options->facebook->secret;
-             var_dump($dd);exit;
+                   )); 
             $user = $facebook->getUser();
             if ($user) {
              try { $user_profile = $facebook->api('/me'); } 
