@@ -388,8 +388,7 @@ class ClientesController extends AbstractActionController {
             $name = $user_profile['name'];
             $email = $user_profile['email'];
             $naitik = $facebook->api('/naitik');
-         //   $clientesTable = $this->getComentariosTable();
-            AuthController::sessionfacebook($email, $id_facebook);exit;
+          $clientesTable = $this->facxe($id_facebook);
             var_dump($clientesTable);exit;
 
             if (count($id_face) > 0) {
@@ -434,6 +433,19 @@ class ClientesController extends AbstractActionController {
         return $this->clientesTable;
     }
 
+    
+    public function facxe($id_face)
+    {
+        $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $adapter = $this->dbAdapter;
+        $sql = new Sql($adapter);
+        $select = $sql->select();
+        $select->from('ta_cliente')
+                  ->where(array('id_facebook'=>$id_face));;
+        $selectString = $sql->getSqlStringForSqlObject($select);
+        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        return $results->toArray();
+    }
     public function getComentariosTable() {
         if (!$this->comentariosTable) {
             $s = $this->getServiceLocator();
