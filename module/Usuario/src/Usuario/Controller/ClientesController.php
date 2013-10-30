@@ -393,12 +393,13 @@ public function getAuthService() {
                                          AuthController::sessionfacebook($email,$id_facebook);
                                      }
                             } 
-                      else {echo 'entrooo';exit;
+                    else {
+                         // $url  = $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');
                        $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
                     'redirect_uri'=>$this->_options->host->ruta.'/'
                            ));   
 
-                           }   
+                       }   
                      
            return array(
                'user' => $user,
