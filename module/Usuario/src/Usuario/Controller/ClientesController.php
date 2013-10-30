@@ -393,7 +393,7 @@ public function getAuthService() {
                                          AuthController::sessionfacebook($email,$id_facebook);
                                      }
                             } 
-                      else {
+                      else {echo 'entrooo';exit;
                        $loginUrl = $facebook->getLoginUrl(array('scope'=>'email,publish_stream,read_friendlists',  
                     'redirect_uri'=>$this->_options->host->ruta.'/'
                            ));   
