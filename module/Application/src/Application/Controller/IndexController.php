@@ -51,14 +51,9 @@ public function __construct()
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();  
         if (!isset($session)) {
-            $face = new \Usuario\Controller\ClientesController();
-            $facebook = $face->facebook();
-            $this->layout()->loginUrl = $facebook['loginUrl'];
-            $this->layout()->user = $facebook['user']; 
-            //var_dump($facebook['loginUrl']);exit;
-            $loginUrl=$facebook['loginUrl'];
-            $user=$facebook['user'];
-          }
+        $facebook = new \Usuario\Controller\ClientesController();
+        $this->layout()->loginUrl = $facebook['loginUrl'];
+            $this->layout()->user = $facebook['user']; }
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
         $mistura=$this->getConfigTable()->platoslistadelsabor();
@@ -232,23 +227,23 @@ public function __construct()
         $request = $this->getRequest();
          $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
-//       if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
-//        $face = new \Usuario\Controller\ClientesController();
-//        $facebook = $face->facebook();
-//        $this->layout()->loginUrl = $facebook['loginUrl'];
-//        $this->layout()->user = $facebook['user']; 
-//        if($facebook['id_facebook']){
-//        session_start();
-//        $_SESSION['face']=$facebook['name'];
-//        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
-//                         if(count($id_face)>0)
-//                         {if($id_face[0]['id_facebook']=='')  
-//                          { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-//                          $this->layout()->face = $facebook['name']; }     
-//                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-//                         $this->layout()->face = $facebook['name']; }    }
-//                         else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-//                         $this->layout()->face = $facebook['name'];  }  }  }
+       if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
+        $this->layout()->loginUrl = $facebook['loginUrl'];
+        $this->layout()->user = $facebook['user']; 
+        if($facebook['id_facebook']){
+        session_start();
+        $_SESSION['face']=$facebook['name'];
+        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
+                         if(count($id_face)>0)
+                         {if($id_face[0]['id_facebook']=='')  
+                          { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
+                          $this->layout()->face = $facebook['name']; }     
+                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
+                         $this->layout()->face = $facebook['name']; }    }
+                         else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
+                         $this->layout()->face = $facebook['name'];  }  }  }
         $this->layout()->clase = 'buscar-distrito';
         if ($request->isGet()) {
             $datos = $this->request->getQuery();
@@ -1160,23 +1155,23 @@ public function __construct()
         $comidas = $this->joinAction()->toArray();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read(); 
-//        if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
-//        $face = new \Usuario\Controller\ClientesController();
-//        $facebook = $face->facebook();
-//        $this->layout()->loginUrl = $facebook['loginUrl'];
-//        $this->layout()->user = $facebook['user']; 
-//        if($facebook['id_facebook']){
-//        session_start();
-//        $_SESSION['face']=$facebook['name'];
-//        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
-//                         if(count($id_face)>0)
-//                         {if($id_face[0]['id_facebook']=='')  
-//                          { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-//                          $this->layout()->face = $facebook['name']; }     
-//                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-//                         $this->layout()->face = $facebook['name']; }    }
-//                         else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-//                         $this->layout()->face = $facebook['name'];  }  }  }
+        if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
+        $this->layout()->loginUrl = $facebook['loginUrl'];
+        $this->layout()->user = $facebook['user']; 
+        if($facebook['id_facebook']){
+        session_start();
+        $_SESSION['face']=$facebook['name'];
+        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
+                         if(count($id_face)>0)
+                         {if($id_face[0]['id_facebook']=='')  
+                          { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
+                          $this->layout()->face = $facebook['name']; }     
+                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
+                         $this->layout()->face = $facebook['name']; }    }
+                         else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
+                         $this->layout()->face = $facebook['name'];  }  }  }
         $this->layout()->comidas = $comidas;
         // $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Nosotros';
@@ -1279,23 +1274,23 @@ public function __construct()
         $form = new Registro("form");
        $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read(); 
-//       if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
-//        $face = new \Usuario\Controller\ClientesController();
-//        $facebook = $face->facebook();
-//        $this->layout()->loginUrl = $facebook['loginUrl'];
-//        $this->layout()->user = $facebook['user']; 
-//        if($facebook['id_facebook']){
-//        session_start();
-//        $_SESSION['face']=$facebook['name'];
-//        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
-//                         if(count($id_face)>0)
-//                         {if($id_face[0]['id_facebook']=='')  
-//                          { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-//                          $this->layout()->face = $facebook['name']; }     
-//                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-//                         $this->layout()->face = $facebook['name']; }    }
-//                         else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-//                         $this->layout()->face = $facebook['name'];  }  }  }
+       if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
+        $this->layout()->loginUrl = $facebook['loginUrl'];
+        $this->layout()->user = $facebook['user']; 
+        if($facebook['id_facebook']){
+        session_start();
+        $_SESSION['face']=$facebook['name'];
+        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
+                         if(count($id_face)>0)
+                         {if($id_face[0]['id_facebook']=='')  
+                          { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
+                          $this->layout()->face = $facebook['name']; }     
+                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
+                         $this->layout()->face = $facebook['name']; }    }
+                         else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
+                         $this->layout()->face = $facebook['name'];  }  }  }
         $comidas =  $this->comidas()->toArray();
         $com = array();
         foreach($comidas as $y){
@@ -1380,23 +1375,23 @@ public function __construct()
         $comidas = $this->joinAction()->toArray();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read(); 
-//        if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
-//        $face = new \Usuario\Controller\ClientesController();
-//        $facebook = $face->facebook();
-//        $this->layout()->loginUrl = $facebook['loginUrl'];
-//        $this->layout()->user = $facebook['user']; 
-//        if($facebook['id_facebook']){
-//        session_start();
-//        $_SESSION['face']=$facebook['name'];
-//        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
-//                         if(count($id_face)>0)
-//                         {if($id_face[0]['id_facebook']=='')  
-//                          { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-//                          $this->layout()->face = $facebook['name']; }     
-//                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-//                         $this->layout()->face = $facebook['name']; }    }
-//                         else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-//                         $this->layout()->face = $facebook['name'];  }  }  }
+        if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
+        $this->layout()->loginUrl = $facebook['loginUrl'];
+        $this->layout()->user = $facebook['user']; 
+        if($facebook['id_facebook']){
+        session_start();
+        $_SESSION['face']=$facebook['name'];
+        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
+                         if(count($id_face)>0)
+                         {if($id_face[0]['id_facebook']=='')  
+                          { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
+                          $this->layout()->face = $facebook['name']; }     
+                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
+                         $this->layout()->face = $facebook['name']; }    }
+                         else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
+                         $this->layout()->face = $facebook['name'];  }  }  }
         $this->layout()->comidas = $comidas;
         $this->layout()->clase = 'Solicita';
         $form = new Contactenos("form");
@@ -1467,23 +1462,23 @@ public function __construct()
         $comidas = $this->joinAction()->toArray();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read(); 
-//       if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
-//        $face = new \Usuario\Controller\ClientesController();
-//        $facebook = $face->facebook();
-//        $this->layout()->loginUrl = $facebook['loginUrl'];
-//        $this->layout()->user = $facebook['user']; 
-//        if($facebook['id_facebook']){
-//        session_start();
-//        $_SESSION['face']=$facebook['name'];
-//        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
-//                         if(count($id_face)>0)
-//                         {if($id_face[0]['id_facebook']=='')  
-//                          { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-//                          $this->layout()->face = $facebook['name']; }     
-//                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-//                         $this->layout()->face = $facebook['name']; }    }
-//                         else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-//                         $this->layout()->face = $facebook['name'];  }  }  }
+       if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
+        $this->layout()->loginUrl = $facebook['loginUrl'];
+        $this->layout()->user = $facebook['user']; 
+        if($facebook['id_facebook']){
+        session_start();
+        $_SESSION['face']=$facebook['name'];
+        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
+                         if(count($id_face)>0)
+                         {if($id_face[0]['id_facebook']=='')  
+                          { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
+                          $this->layout()->face = $facebook['name']; }     
+                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
+                         $this->layout()->face = $facebook['name']; }    }
+                         else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
+                         $this->layout()->face = $facebook['name'];  }  }  }
         $this->layout()->comidas = $comidas;
         // $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Terminos';}
