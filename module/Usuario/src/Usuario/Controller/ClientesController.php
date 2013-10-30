@@ -402,10 +402,10 @@ public function getAuthService() {
                      
            return array(
                'user' => $user,
-               'id_facebook'=> $id_facebook,     
-               'logoutUrl'  =>$logoutUrl,
-               'name'=>$name,
-               'email'=>$email,      
+////               'id_facebook'=> $id_facebook,     
+//               'logoutUrl'  =>$logoutUrl,
+//               'name'=>$name,
+//               'email'=>$email,      
                'loginUrl' => $loginUrl
         );
       return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/'); 
