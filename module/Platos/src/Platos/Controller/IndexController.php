@@ -938,7 +938,6 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         if (!$this->authservice) {
             $this->authservice = $this->getServiceLocator()->get('AuthService');
         }
-
         return $this->authservice;
     }
  public function verplatos2Action() 
