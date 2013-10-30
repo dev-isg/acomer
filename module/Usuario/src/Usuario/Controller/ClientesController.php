@@ -358,7 +358,7 @@ public function getAuthService() {
       
    
    public  function facebook()       
-   {  echo 'holaaa';exit;
+   {  
     require './vendor/facebook/facebook.php';
                $facebook = new \Facebook(array(
                  'appId'  => $this->_options->facebook->appId,
