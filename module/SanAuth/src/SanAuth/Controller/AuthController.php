@@ -322,7 +322,6 @@ class AuthController extends AbstractActionController {
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
                     }
-
                     if ($result->isValid()) {                 
                         $storage = $this->getAuthService()->getStorage();
                         $storage->write($this->getServiceLocator()

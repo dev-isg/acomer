@@ -359,13 +359,11 @@
             <li><a id="tweet" href="https://twitter.com/listadelsabor" target="_blank" title="Twitter"><img src="<?php echo $this->host('ruta')?>/img/bann/tw.png"></a></li>
           </ul>
 
-          <?php  if ($session or $this->face){?>
+          <?php  if ($session){?>
             <ul>
-            <?php if(!empty($this->face)) { ?>  
-            <li><?php echo 'Bienvenid@ '.$this->face  ?></li>
-            <?php  } else {?>
+            
             <li><?php echo 'Bienvenid@ '.$this->session->va_nombre_cliente  ?></li>
-            <?php  }?>
+         
             <li><a role="button" data-toggle="modal" href="<?php echo $this->url('login/process', array('action'=>'logout')); ?> ">Salir</a></li>
           </ul>
             <?php  }else {?> <ul>

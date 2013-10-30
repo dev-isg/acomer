@@ -54,7 +54,18 @@ class IndexController extends AbstractActionController
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
-        $this->layout()->user = $facebook['user']; }
+        $this->layout()->user = $facebook['user']; 
+        if($facebook['id_facebook']){
+        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
+                         if(count($id_face)>0)
+                         {if($id_face[0]['id_facebook']=='')  
+                          { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
+                          AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }     
+                         else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
+                         else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
+       }}
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
         $mistura=$this->getConfigTable()->platoslistadelsabor();
@@ -228,14 +239,12 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
          $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();       
-       if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
+      if (!isset($session)) {
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
-        session_start();
-        $_SESSION['face']=$facebook['name'];
         $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
@@ -245,7 +254,7 @@ class IndexController extends AbstractActionController
                                                AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
                          else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
                                                AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
-  }  }
+       }}
         $this->layout()->clase = 'buscar-distrito';
         if ($request->isGet()) {
             $datos = $this->request->getQuery();
@@ -1157,23 +1166,22 @@ class IndexController extends AbstractActionController
         $comidas = $this->joinAction()->toArray();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read(); 
-        if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
+        if (!isset($session)) {
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
-        session_start();
-        $_SESSION['face']=$facebook['name'];
         $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
                           { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                          $this->layout()->face = $facebook['name']; }     
+                          AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }     
                          else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-                         $this->layout()->face = $facebook['name']; }    }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
                          else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-                         $this->layout()->face = $facebook['name'];  }  }  }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
+       }}
         $this->layout()->comidas = $comidas;
         // $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Nosotros';
@@ -1276,23 +1284,22 @@ class IndexController extends AbstractActionController
         $form = new Registro("form");
        $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read(); 
-       if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
+     if (!isset($session)) {
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
-        session_start();
-        $_SESSION['face']=$facebook['name'];
         $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
                           { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                          $this->layout()->face = $facebook['name']; }     
+                          AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }     
                          else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-                         $this->layout()->face = $facebook['name']; }    }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
                          else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-                         $this->layout()->face = $facebook['name'];  }  }  }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
+       }}
         $comidas =  $this->comidas()->toArray();
         $com = array();
         foreach($comidas as $y){
@@ -1377,7 +1384,7 @@ class IndexController extends AbstractActionController
         $comidas = $this->joinAction()->toArray();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read(); 
-        if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
+       if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
@@ -1389,11 +1396,12 @@ class IndexController extends AbstractActionController
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
                           { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                          $this->layout()->face = $facebook['name']; }     
+                          AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }     
                          else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-                         $this->layout()->face = $facebook['name']; }    }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
                          else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-                         $this->layout()->face = $facebook['name'];  }  }  }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
+       }}
         $this->layout()->comidas = $comidas;
         $this->layout()->clase = 'Solicita';
         $form = new Contactenos("form");
@@ -1464,23 +1472,22 @@ class IndexController extends AbstractActionController
         $comidas = $this->joinAction()->toArray();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read(); 
-       if ($_SESSION['face']) { $this->layout()->face = $_SESSION['face'];}else{
+       if (!isset($session)) {
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
-        session_start();
-        $_SESSION['face']=$facebook['name'];
         $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
                           { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                          $this->layout()->face = $facebook['name']; }     
+                          AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }     
                          else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-                         $this->layout()->face = $facebook['name']; }    }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
                          else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-                         $this->layout()->face = $facebook['name'];  }  }  }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
+       }}
         $this->layout()->comidas = $comidas;
         // $this->layout('layout/layout-portada');
         $this->layout()->clase = 'Terminos';}
