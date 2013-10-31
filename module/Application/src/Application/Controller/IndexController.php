@@ -56,11 +56,13 @@ class IndexController extends AbstractActionController
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
-        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
+        $id_face=$this->getClientesTable()->usuarioface($facebook['email']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
-                          { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                          AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }     
+                { //$this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
+                        //  AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); 
+                             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/id?1');exit;
+                          }     
                          else{$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
                                                AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
                          else{$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
