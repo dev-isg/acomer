@@ -336,7 +336,7 @@ class ClientesController extends AbstractActionController {
                                         O copia la siguiente dirección en tu navegador:<br /><br />
                                         <a href="' . self::$rutaStatic3 . '/?token=' . $valor . ' ">' . self::$rutaStatic3 . '/?token=' . $valor . '</a>
                                         <br /><br /><br />
-                                        <a href="' . self::$rutaStatic3 . '"><img src="' . self::$rutaStatic2 . '/juntate.png" title="listadelsabor.pe"/></a>
+                                        <a href="' . self::$rutaStatic3 . '"><img src="' . self::$rutaStatic2 . '/logo.png" title="listadelsabor.pe"/></a>
                                          
                                                      </div>
                                                </body>
