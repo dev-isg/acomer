@@ -250,7 +250,7 @@ class IndexController extends AbstractActionController
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
-        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
+         $id_face=$this->getClientesTable()->usuarioface($facebook['email']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
                           { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
@@ -1177,7 +1177,7 @@ class IndexController extends AbstractActionController
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
-        $id_face=$this->getClientesTable()->usuarioface($facebook['id_facebook']); 
+        $id_face=$this->getClientesTable()->usuarioface($facebook['email']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
                           { $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
