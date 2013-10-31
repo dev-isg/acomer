@@ -4,6 +4,12 @@
 $title = 'Editar Restaurante ';
 $this->headTitle($title);
 ?>
+ <?php if ($_GET['m']==1) { ?> <div class="row-fluid">
+      <div class="alert alert-margin alert-message">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <?php  echo 'ya existe un restaurante con el mismo nombre'; ?>
+      </div>
+    </div> <?php } ?>
 <div class="span12">
 <?php
 $form = $this->form;

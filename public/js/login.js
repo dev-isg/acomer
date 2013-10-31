@@ -1,11 +1,14 @@
 $(document).ready(function(){
-
   $(".recContrasenia").click(function(e){
     e.preventDefault();
     $('#modalSession').modal('hide');
     $('#modalRecuperar').modal('show');
   });
-
+  $(".recRegistro").click(function(e){
+    e.preventDefault();
+    $('#modalSession').modal('hide');
+    $('#modalRegister').modal('show');
+  })
   $(".go-back").click(function(e){
     e.preventDefault();
     $('#modalRecuperar').modal('hide');

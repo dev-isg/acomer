@@ -54,6 +54,17 @@ class RestauranteTable
         }
         return $row;
     }
+      public function getRestauranteNombre($id)
+    {
+         $adapter = $this->tableGateway->getAdapter();
+        $sql = new Sql($adapter);
+        $select = $sql->select()
+               ->from(array('f' => 'ta_restaurante'))
+               ->where(array('f.va_nombre'=>$id));
+        $selectString = $sql->getSqlStringForSqlObject($select);
+        $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        return $resultSet->current();
+    }
     public function getRestauranteRuc($ruc)
     {
       

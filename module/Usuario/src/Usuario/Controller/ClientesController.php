@@ -57,14 +57,17 @@ class ClientesController extends AbstractActionController {
         $form = new ClientesForm();
         $form->get('submit')->setValue('Crear Usuario');
         $request = $this->getRequest();
+        //var_dump($request);exit;
         if ($request->isPost()) {
-            $clientes = new Clieentes();
+            $clientes = new Clientes();
             $form->setInputFilter($clientes->getInputFilter());
             $form->setData($request->getPost());
             if (!$form->isValid()) {
                 $clientes->exchangeArray($form->getData());
+              
                 $correo = $this->getClientesTable()->verificaCorreo($request->getPost('va_email'));
-                if ($correo === false) {
+               
+                if ($correo === false) { //echo'1';exit;
                     $this->getClientesTable()->guardarClientes($clientes, md5($clientes->va_nombre_cliente));
                     $this->correo($clientes->va_email, $clientes->va_nombre_cliente, md5($clientes->va_nombre_cliente));
                     $bienvenido = 'Bienvenido  <html><body><strong>' . $clientes->va_nombre_cliente . '</strong></body></html> a Listadelsabor';

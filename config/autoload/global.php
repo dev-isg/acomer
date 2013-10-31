@@ -14,7 +14,7 @@ return array(
         'driver' => 'Pdo',
         'username' => 'kevin',
         'password' => '123456',
-        'dsn' => 'mysql:dbname=listadelsabor3;host=192.168.1.50',
+        'dsn' => 'mysql:dbname=listadelsabor33;host=192.168.1.50',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         )
@@ -29,24 +29,24 @@ return array(
         'secret' => '2e07ad7ea83185f20da1ca546fee0720'
     ),
     
-//    'host' => array(
-//        'base' => 'http://192.168.1.36:8080',
-//        'static' => 'http://192.168.1.36:8080',
-//        'images' => 'http://192.168.1.36:8080/imagenes',
-//        'img'=>'http://192.168.1.36:8080/img',
-//        'ruta' => 'http://192.168.1.36:8080',
-//        'version'=>1,
-//    ),
-
-    
     'host' => array(
-       'base' => 'http://dev.listadelsabor.com',
-        'static' => 'http://dev.listadelsabor.com',
+        'base' => 'http://192.168.1.36:8080',
+        'static' => 'http://192.168.1.36:8080',
         'images' => 'http://192.168.1.36:8080/imagenes',
         'img'=>'http://192.168.1.36:8080/img',
-       'ruta' => 'http://dev.listadelsabor.com',
+        'ruta' => 'http://192.168.1.36:8080',
         'version'=>1,
     ),
+
+    
+//    'host' => array(
+//       'base' => 'http://dev.listadelsabor.com',
+//        'static' => 'http://dev.listadelsabor.com',
+//        'images' => 'http://192.168.1.36:8080/imagenes',
+//        'img'=>'http://192.168.1.36:8080/img',
+//       'ruta' => 'http://dev.listadelsabor.com',
+//        'version'=>1,
+//    ),
   
    
     'upload' => array(

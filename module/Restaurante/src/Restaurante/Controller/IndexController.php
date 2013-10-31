@@ -116,6 +116,8 @@ class IndexController extends AbstractActionController
     $form->setData($data);     
     if ($form->isValid()) { 
             $nonFile = $request->getPost()->toArray();
+        $restnom = $this->getRestauranteTable()->getRestauranteNombre($nonFile['va_nombre']);
+        if($restnom===false){
         if($File['name']!='')
           {
             $restaurante->exchangeArray($form->getData());
@@ -184,13 +186,20 @@ class IndexController extends AbstractActionController
                   }
 
                }
-            }       
+            }     
           }
           else {   
               $restaurante->exchangeArray($form->getData());
               $name = 'default-img.jpg';
               $this->getRestauranteTable()->guardarRestaurante($restaurante,$comida,$name);
-                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante'); }
+              
+           return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/restaurante'); }
+           
+           }
+          else{
+              return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/restaurante/index/agregarrestaurante?m=1');
+             
+          }
            }
           } 
              
