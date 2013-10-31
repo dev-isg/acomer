@@ -59,16 +59,16 @@ class IndexController extends AbstractActionController
         $id_face=$this->getClientesTable()->usuarioface($facebook['email']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
-                {echo '1';exit;
+                {
                              //$this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
                         //  AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); 
                              return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/id?1');exit;
                           }     
                          else{
-                             echo '2';exit;$this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
+                            $this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
                                                AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
                          else{
-                             echo '3';exit;$this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
+                           $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
                                                AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
        }}
         $comidas = $this->joinAction()->toArray();
