@@ -61,13 +61,13 @@ class IndexController extends AbstractActionController
                          {if($id_face[0]['id_facebook']=='')  
                         {// $valor =HASHING($id_face[0]['va_contrasena']);
                            $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                           AuthController::sessionfacebook2($facebook['email']); 
+                            AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); 
                            //return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/id?1');exit;
                         }     
                          else{
                             $this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
                                                AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
-                         else{echo '3';exit;
+                         else{
                            $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
                                                AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
        }}

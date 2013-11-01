@@ -337,29 +337,7 @@ class AuthController extends AbstractActionController {
       return $this->redirect()->toUrl('/');
     }
     
-    public function sessionfacebook2($email)
-    {  
-       
-                $correo = $email;
-            
-                $this->getAuthService()
-                        ->getAdapter()
-                        ->setIdentity($correo);
-                        $storage = $this->getAuthService()->getStorage();
-                        $storage->write($this->getServiceLocator()
-                                        ->get('TableAuthService')
-                                        ->getResultRowObject(array(
-                                            'in_id',
-                                            'va_nombre_cliente',
-                                            'va_contrasena',
-                                            'va_logout',
-                                            'id_facebook'
-                                        )));
-                      
-                  
-     return $this->redirect()->toUrl('/');
-    }
-
+ 
     public function logoutAction() {
         session_destroy();
      //   $finsesion=  $this->params()->fromRoute('in_id_face');
