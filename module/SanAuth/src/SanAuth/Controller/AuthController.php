@@ -316,7 +316,7 @@ class AuthController extends AbstractActionController {
                 $this->getAuthService()
                         ->getAdapter()
                         ->setIdentity($correo)
-                        ->setCredential($contrasena);
+                    //    ->setCredential($contrasena);
                     $result = $this->getAuthService()->authenticate();
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
