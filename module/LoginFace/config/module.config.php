@@ -3,7 +3,7 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'LoginFace\Controller\Auth' => 'LoginFace\Controller\AuthController',
+            'LoginFace\Controller\Facebook' => 'LoginFace\Controller\FacebookController',
             'LoginFace\Controller\Success' => 'LoginFace\Controller\SuccessController',
             'LoginFace\Controller\Prueba' => 'LoginFace\Controller\PruebaController'
         ),
@@ -14,10 +14,10 @@ return array(
             'login' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/auth',
+                    'route'    => '/Facebook',
                     'defaults' => array(
                         '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller'    => 'Auth',
+                        'controller'    => 'Facebook',
                         'action'        => 'login',
                     ),
                 ),
@@ -43,7 +43,7 @@ return array(
                     'route' => '/cambio',
                     'defaults' => array(
                         '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller' => 'Auth',
+                        'controller' => 'Facebook',
                         'action' => 'changeemail'
                     )
                 )
@@ -76,7 +76,7 @@ return array(
                     'route' => '/validar-correo',
                     'defaults' => array(
                         '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller' => 'Auth',
+                        'controller' => 'Facebook',
                         'action' => 'validarcorreo'
                     )
                 )
@@ -87,7 +87,7 @@ return array(
                     'route' => '/validar-contrasena',
                     'defaults' => array(
                         '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller' => 'Auth',
+                        'controller' => 'Facebook',
                         'action' => 'validarcontrasena'
                     )
                 )
@@ -98,7 +98,7 @@ return array(
                     'route' => '/validar',
                     'defaults' => array(
                         '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller' => 'Auth',
+                        'controller' => 'Facebook',
                         'action' => 'validar'
                     )
                 )
@@ -109,7 +109,7 @@ return array(
                     'route' => '/cambio-contrasena',
                     'defaults' => array(
                         '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller' => 'Auth',
+                        'controller' => 'Facebook',
                         'action' => 'recuperar'
                     )
                 )
@@ -120,7 +120,7 @@ return array(
                     'route' => '/comprovar-value',
                     'defaults' => array(
                         '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller' => 'Auth',
+                        'controller' => 'Facebook',
                         'action' => 'comprovarvalue'
                     )
                 )

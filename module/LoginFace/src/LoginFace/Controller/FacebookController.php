@@ -14,11 +14,11 @@ use Zend\Mail\Message;
 use Usuario\Model\Usuario;
 use Zend\View\Model\JsonModel;
 
-class AuthController extends AbstractActionController {
+class FacebookController extends AbstractActionController {
 
     protected $form;
     protected $storage;
-    protected $authservice;
+    protected $Facebookservice;
     protected $clientesTable;
 
     
@@ -26,17 +26,17 @@ class AuthController extends AbstractActionController {
         $this->_options = new \Zend\Config\Config(include APPLICATION_PATH . '/config/autoload/global.php');     
     }
 
-    public function getAuthService() {
-        if (!$this->authservice) {
-            $this->authservice = $this->getServiceLocator()->get('AuthService');
+    public function getFacebookService() {
+        if (!$this->facebookservice) {
+            $this->facebookservice = $this->getServiceLocator()->get('FacebookService');
         }
 
-        return $this->authservice;
+        return $this->facebookservice;
     }
 
     public function getSessionStorage() {
         if (!$this->storage) {
-            $this->storage = $this->getServiceLocator()->get('LoginFace\Model\MyAuthStorage');
+            $this->storage = $this->getServiceLocator()->get('LoginFace\Model\MyFacebookStorage');
         }
 
         return $this->storage;
@@ -56,18 +56,18 @@ class AuthController extends AbstractActionController {
        
                 $correo = $email;
                 $contrasena = $pass;
-                $this->getAuthService()
+                $this->getFacebookService()
                         ->getAdapter()
                         ->setIdentity($correo)
                        ->setCredential($contrasena);
-                    $result = $this->getAuthService()->authenticate();
+                    $result = $this->getFacebookService()->authenticate();
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
                     }
                     if ($result->isValid()) {                 
-                        $storage = $this->getAuthService()->getStorage();
+                        $storage = $this->getFacebokService()->getStorage();
                         $storage->write($this->getServiceLocator()
-                                        ->get('TableAuthService')
+                                        ->get('TableFacebookService')
                                         ->getResultRowObject(array(
                                             'in_id',
                                             'va_nombre_cliente',
