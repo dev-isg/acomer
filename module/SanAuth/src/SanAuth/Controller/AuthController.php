@@ -34,7 +34,7 @@ class AuthController extends AbstractActionController {
     public function getAuthService($valor=null) {
         if (!$this->authservice) {
             if($valor!==null)
-               { 
+               { echo 'exxx';exit;
                     $this->authservice = $this->getServiceLocator()->get('AuthService2');
                     
                    }
@@ -57,8 +57,8 @@ class AuthController extends AbstractActionController {
     
       public function sessionfacebook($email,$pass)
        {  
-          var_dump($email);
-         var_dump($pass);exit;
+//          var_dump($email);
+//         var_dump($pass);exit;
                 $correo = $email;
                 $contrasena = $pass;
                 $this->getAuthService(1)
