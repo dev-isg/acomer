@@ -73,7 +73,7 @@ class FacebookController extends AbstractActionController {
                     if ($result->isValid()) {                 
                         $storage = $this->getAuthService()->getStorage();
                         $storage->write($this->getServiceLocator()
-                                        ->get('TableAuthService')
+                                        ->get('TableAuthsService')
                                         ->getResultRowObject(array(
                                             'in_id',
                                             'va_nombre_cliente',
