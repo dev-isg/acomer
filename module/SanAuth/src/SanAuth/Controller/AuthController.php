@@ -31,12 +31,15 @@ class AuthController extends AbstractActionController {
         $this->_options = new \Zend\Config\Config(include APPLICATION_PATH . '/config/autoload/global.php');     
     }
 
-    public function getAuthService($valor=null) {
+    public function getAuthService() {
         if (!$this->authservice) {
-            if($valor!==null)
-                { $this->authservice = $this->getServiceLocator()->get('Auth2Service');}
-                else
-               { $this->authservice = $this->getServiceLocator()->get('AuthService');}
+//            if($valor!==null)
+                //{ 
+                    $this->authservice = $this->getServiceLocator()->get('Auth2Service');
+                    
+                    //}
+//                else
+//               { $this->authservice = $this->getServiceLocator()->get('AuthService');}
            
         }
 
@@ -57,16 +60,16 @@ class AuthController extends AbstractActionController {
        
                 $correo = $email;
                 $contrasena = $pass;
-                $this->getAuthService(1)
+                $this->getAuthService()
                         ->getAdapter()
                         ->setIdentity($correo)
                        ->setCredential($contrasena);
-                    $result = $this->getAuthService(1)->authenticate();
+                    $result = $this->getAuthService()->authenticate();
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
                     }
                     if ($result->isValid()) {                 
-                        $storage = $this->getAuthService(1)->getStorage();
+                        $storage = $this->getAuthService()->getStorage();
                         $storage->write($this->getServiceLocator()
                                         ->get('TableAuth2Service')
                                         ->getResultRowObject(array(
@@ -79,7 +82,7 @@ class AuthController extends AbstractActionController {
                       
                     }
 //                    var_dump($storage->read());exit;
-//      return $this->redirect()->toUrl('/');
+     return $this->redirect()->toUrl('/');
     }
     public function getForm() {
         if (!$this->form) {

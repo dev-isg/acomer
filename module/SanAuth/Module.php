@@ -53,27 +53,20 @@ class Module implements AutoloaderProviderInterface
                     $authService->setAdapter($dbTableAuthAdapter);
                     return $authService;
                 },
+                          'TableAuth2Service' => function ($sm)
+                {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $dbTableAuthAdapter = new DbTableAuthAdapter($dbAdapter, 'ta_cliente', 'va_email', 'va_contrasena_facebook', 'SHA1(?)'); //
+                    return $dbTableAuthAdapter;
+                },
                 'TableAuthService' => function ($sm)
                 {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $dbTableAuthAdapter = new DbTableAuthAdapter($dbAdapter, 'ta_cliente', 'va_email', 'va_contrasena', 'SHA1(?)'); //
                     return $dbTableAuthAdapter;
                 },
-                'Auth2Service' => function ($sm)
-                {
-                    $dbTableAuthAdapter = $sm->get('TableAuthService');
-                    
-                    $authService = new AuthenticationService();
-                    $authService->setStorage(new \Zend\Authentication\Storage\Session('Auth')); // $authService->setStorage($sm->get('SanAuth\Model\MyAuthStorage')); //
-                    $authService->setAdapter($dbTableAuthAdapter);
-                    return $authService;
-                },
-                'TableAuth2Service' => function ($sm)
-                {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $dbTableAuthAdapter = new DbTableAuthAdapter($dbAdapter, 'ta_cliente', 'va_email', 'va_contrasena_facebook', 'SHA1(?)'); //
-                    return $dbTableAuthAdapter;
-                }
+             
+              
             )
         )
         ;
@@ -95,7 +88,7 @@ class Module implements AutoloaderProviderInterface
             $locator = $e->getApplication()
                 ->getServiceManager();
             $authAdapter = $locator->get('AuthService');
-            $authAdapter2 = $locator->get('Auth2Service');
+           // $authAdapter2 = $locator->get('Auth2Service');
             $controller = $e->getTarget();
             $routeMatch = $e->getRouteMatch();
            // $actionName = $routeMatch->getParam('action', 'not-found');
@@ -108,7 +101,7 @@ class Module implements AutoloaderProviderInterface
             $controller->layout()->accion = $actionName;
             
             if ($actionName == 'login') {
-                if ($authAdapter->hasIdentity() === true or $authAdapter2->hasIdentity() === true ) {
+                if ($authAdapter->hasIdentity() === true ) {
                     $storage = new \Zend\Authentication\Storage\Session('Auth');
                     $session = $storage->read();
                     $controller->layout()->session = $session;
