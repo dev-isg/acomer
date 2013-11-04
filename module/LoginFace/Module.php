@@ -87,7 +87,7 @@ class Module implements AutoloaderProviderInterface
                     $session = $storage->read();
                     $controller->layout()->sessionface = $session;
                     return $controller->redirect()
-                            ->toRoute('/');
+                            ->toRoute('home');
                 } else {
                     return;
                 }
