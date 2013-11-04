@@ -71,9 +71,7 @@ class FacebookController extends AbstractActionController {
                         $this->flashmessenger()->addMessage($message);
                     }
                     if ($result->isValid()) {
-                        $urlorigen = $this->getRequest()->getHeader('Referer')->uri()->getPath();
-                        $arrurl = explode('/', $urlorigen);
-                        $id = end($arrurl);
+                       
                         $storage = $this->getAuthService()->getStorage();
                         $storage->write($this->getServiceLocator()
                                         ->get('TableFacebookService')
@@ -86,13 +84,8 @@ class FacebookController extends AbstractActionController {
                                         )));
                        
                     }
-                   return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
-                        if ($id) {
-                            return $this->redirect()->toRoute($redirect, array('in_id' => $id));
-                        } else {
-                            return $this->redirect()->toRoute($redirect);
-                        }
-               ///  return $storage; 
+                  
+              return $storage; 
          }
   
     
