@@ -46,18 +46,18 @@ class Module implements AutoloaderProviderInterface
                 
                 'AuthsService' => function ($sm)
                 {
-                    $dbTableAuthAdapter = $sm->get('TableAuthsService');
+                    $dbTableAuthsAdapter = $sm->get('TableAuthsService');
                     
-                    $authService = new AuthenticationService();
-                    $authService->setStorage(new \Zend\Authentication\Storage\Session('Facebook')); // $authService->setStorage($sm->get('SanAuth\Model\MyAuthStorage')); //
-                    $authService->setAdapter($dbTableAuthAdapter);
-                    return $authService;
+                    $authsService = new AuthenticationService();
+                    $authsService->setStorage(new \Zend\Authentication\Storage\Session('Facebook')); // $authService->setStorage($sm->get('SanAuth\Model\MyAuthStorage')); //
+                    $authsService->setAdapter($dbTableAuthsAdapter);
+                    return $authsService;
                 },
                 'TableAuthsService' => function ($sm)
                 {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $dbTableAuthAdapter = new DbTableAuthAdapter($dbAdapter, 'ta_cliente', 'va_email', 'va_contrasena_facebook', 'SHA1(?)'); //
-                    return $dbTableAuthAdapter;
+                    $dbTableAuthsAdapter = new DbTableAuthAdapter($dbAdapter, 'ta_cliente', 'va_email', 'va_contrasena_facebook', 'SHA1(?)'); //
+                    return $dbTableAuthsAdapter;
                 }
             )
         )
