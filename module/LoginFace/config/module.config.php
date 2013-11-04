@@ -3,9 +3,7 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'LoginFace\Controller\Facebook' => 'LoginFace\Controller\FacebookController',
-            'LoginFace\Controller\Success' => 'LoginFace\Controller\SuccessController',
-            'LoginFace\Controller\Prueba' => 'LoginFace\Controller\PruebaController'
+            'LoginFace\Controller\Facebook' => 'LoginFace\Controller\FacebookController'
         ),
     ),
     'router' => array(
@@ -37,17 +35,17 @@ return array(
                     ),
                 ),
             ),
-            'cambio' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/cambio',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller' => 'Facebook',
-                        'action' => 'changeemail'
-                    )
-                )
-            ),  
+//            'cambio' => array(
+//                'type' => 'Literal',
+//                'options' => array(
+//                    'route' => '/cambio',
+//                    'defaults' => array(
+//                        '__NAMESPACE__' => 'LoginFace\Controller',
+//                        'controller' => 'Facebook',
+//                        'action' => 'changeemail'
+//                    )
+//                )
+//            ),  
             'prueba' => array(
                 'type' => 'Literal',
                 'options' => array(
@@ -59,72 +57,72 @@ return array(
                     )
                 )
             ), 
-            'prueba-login' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/prueba-login',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller' => 'Prueba',
-                        'action' => 'login'
-                    )
-                )
-            ), 
-            'validar-correo' => array(   
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/validar-correo',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller' => 'Facebook',
-                        'action' => 'validarcorreo'
-                    )
-                )
-            ),
-             'validar-contrasena' => array(   
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/validar-contrasena',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller' => 'Facebook',
-                        'action' => 'validarcontrasena'
-                    )
-                )
-            ),
-               'validar' => array(   
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/validar',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller' => 'Facebook',
-                        'action' => 'validar'
-                    )
-                )
-            ),
-            'cambio-contrasena' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/cambio-contrasena',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller' => 'Facebook',
-                        'action' => 'recuperar'
-                    )
-                )
-            ),
-            'comprovarvalue' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/comprovar-value',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller' => 'Facebook',
-                        'action' => 'comprovarvalue'
-                    )
-                )
-            ),
+//            'prueba-login' => array(
+//                'type' => 'Literal',
+//                'options' => array(
+//                    'route' => '/prueba-login',
+//                    'defaults' => array(
+//                        '__NAMESPACE__' => 'LoginFace\Controller',
+//                        'controller' => 'Prueba',
+//                        'action' => 'login'
+//                    )
+//                )
+//            ), 
+//            'validar-correo' => array(   
+//                'type' => 'Literal',
+//                'options' => array(
+//                    'route' => '/validar-correo',
+//                    'defaults' => array(
+//                        '__NAMESPACE__' => 'LoginFace\Controller',
+//                        'controller' => 'Facebook',
+//                        'action' => 'validarcorreo'
+//                    )
+//                )
+//            ),
+//             'validar-contrasena' => array(   
+//                'type' => 'Literal',
+//                'options' => array(
+//                    'route' => '/validar-contrasena',
+//                    'defaults' => array(
+//                        '__NAMESPACE__' => 'LoginFace\Controller',
+//                        'controller' => 'Facebook',
+//                        'action' => 'validarcontrasena'
+//                    )
+//                )
+//            ),
+//               'validar' => array(   
+//                'type' => 'Literal',
+//                'options' => array(
+//                    'route' => '/validar',
+//                    'defaults' => array(
+//                        '__NAMESPACE__' => 'LoginFace\Controller',
+//                        'controller' => 'Facebook',
+//                        'action' => 'validar'
+//                    )
+//                )
+//            ),
+//            'cambio-contrasena' => array(
+//                'type' => 'Literal',
+//                'options' => array(
+//                    'route' => '/cambio-contrasena',
+//                    'defaults' => array(
+//                        '__NAMESPACE__' => 'LoginFace\Controller',
+//                        'controller' => 'Facebook',
+//                        'action' => 'recuperar'
+//                    )
+//                )
+//            ),
+//            'comprovarvalue' => array(
+//                'type' => 'Literal',
+//                'options' => array(
+//                    'route' => '/comprovar-value',
+//                    'defaults' => array(
+//                        '__NAMESPACE__' => 'LoginFace\Controller',
+//                        'controller' => 'Facebook',
+//                        'action' => 'comprovarvalue'
+//                    )
+//                )
+//            ),
 
             'success' => array(
                 'type'    => 'Literal',
