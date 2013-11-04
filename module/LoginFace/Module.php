@@ -82,10 +82,18 @@ class Module implements AutoloaderProviderInterface
             $authAdapter = $locator->get('FacebookService');
             $controller = $e->getTarget();
             $routeMatch = $e->getRouteMatch();
-                
-                $storage = new \Zend\Authentication\Storage\Session('Facebook');
-                $session = $storage->read();
-                $controller->layout()->sessionface = $session;
+                 if ($authAdapter->hasIdentity() === true) {
+                    $storage = new \Zend\Authentication\Storage\Session('Facebook');
+                    $session = $storage->read();
+                    $controller->layout()->sessionface = $session;
+//                    return $controller->redirect()
+//                            ->toRoute('home');
+                } else {
+                    return;
+                }
+//                $storage = new \Zend\Authentication\Storage\Session('Facebook');
+//                $session = $storage->read();
+//                $controller->layout()->sessionface = $session;
 
  //////////////////////////////////////////////////////////////FINNNN///////////////////////////////////////////////////
 
