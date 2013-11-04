@@ -36,7 +36,7 @@ class AuthController extends AbstractActionController {
             if($valor!==null)
                { 
                     $this->authservice = $this->getServiceLocator()->get('AuthService2');
-                    var_dump($this->authservice);exit;
+                    
                    }
                else
             { $this->authservice = $this->getServiceLocator()->get('AuthService');}
@@ -69,7 +69,7 @@ class AuthController extends AbstractActionController {
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
                     }
-                    if ($result->isValid()) { echo 'entraste';exit;                
+                    if ($result->isValid()) {                 
                         $storage = $this->getAuthService(1)->getStorage();
                         $storage->write($this->getServiceLocator()
                                         ->get('TableAuth2Service')
