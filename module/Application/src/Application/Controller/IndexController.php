@@ -17,7 +17,7 @@ use Application\Form\Solicita;
 use Application\Form\Registro;
 use Application\Form\Registroplato;
 use Application\Form\Contactenos;
-use LoginFace\Controller\FacebookController; 
+use SanAuth2\Controller\AuthController; 
 use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
 use Application\Model\Entity\Album;
@@ -63,14 +63,14 @@ class IndexController extends AbstractActionController
                          {if($id_face[0]['id_facebook']=='')  
                         {
                            $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                            FacebookController::sessionfacebook($facebook['email'], $facebook['id_facebook']); 
+                            AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); 
                         }     
                          else{
                             $this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-                                               FacebookController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
+                            \SanAuth\Controller\AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
                          else{
                            $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-                                               FacebookController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
        }}
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
@@ -1539,7 +1539,7 @@ class IndexController extends AbstractActionController
     }
      public function getAuthService() {
         if (!$this->authservice) {
-            $this->authservice = $this->getServiceLocator()->get('FacebookService');
+            $this->authservice = $this->getServiceLocator()->get('Auth2Service');
         }
 
         return $this->authservice;
