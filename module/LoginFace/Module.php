@@ -39,10 +39,7 @@ class Module implements AutoloaderProviderInterface
             'factories' => array(
                 'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
                 
-                'LoginFace\Model\MyFacebookStorage' => function ($sm)
-                {
-                    return new \LoginFace\Model\MyAuthStorage('zf_tutorial');
-                },
+               
                 
                 'facebookService' => function ($sm)
                 {
@@ -77,17 +74,17 @@ class Module implements AutoloaderProviderInterface
             ->getSharedManager()
             ->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function ($e)
         {
-            $locator = $e->getApplication()
-                ->getServiceManager();
-            $facebookAdapter = $locator->get('FacebookService');
-            $controller = $e->getTarget();
-            $routeMatch = $e->getRouteMatch();
+//            $locator = $e->getApplication()
+//                ->getServiceManager();
+//            $facebookAdapter = $locator->get('FacebookService');
+//            $controller = $e->getTarget();
+//            $routeMatch = $e->getRouteMatch();
            // $actionName = $routeMatch->getParam('action', 'not-found');
 //            $actionName ='auth//authenticate';
 //            $controller->layout()->form = new \LoginFace\Form\UserForm();
 //            $controller->layout()->formCambio = new \LoginFace\Form\PasswordForm();
 //            $controller->layout()->formActualizar = new \LoginFace\Form\UpdatepassForm();
-            $controller->layout()->accion3 = '/cambio';
+//            $controller->layout()->accion3 = '/cambio';
           //  $controller->layout()->accion3 = '/cambio';
 //            $controller->layout()->accion = $actionName;
             

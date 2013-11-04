@@ -9,32 +9,32 @@ return array(
     'router' => array(
         'routes' => array(
             
-            'login' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/Facebook',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller'    => 'Facebook',
-                        'action'        => 'login',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'process' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[/:action[/:in_id_face]]',//[:controller
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
-                    ),
-                ),
-            ),
+//            'login' => array(
+//                'type'    => 'Literal',
+//                'options' => array(
+//                    'route'    => '/Facebook',
+//                    'defaults' => array(
+//                        '__NAMESPACE__' => 'LoginFace\Controller',
+//                        'controller'    => 'Facebook',
+//                        'action'        => 'login',
+//                    ),
+//                ),
+//                'may_terminate' => true,
+//                'child_routes' => array(
+//                    'process' => array(
+//                        'type'    => 'Segment',
+//                        'options' => array(
+//                            'route'    => '/[/:action[/:in_id_face]]',//[:controller
+//                            'constraints' => array(
+//                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+//                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+//                            ),
+//                            'defaults' => array(
+//                            ),
+//                        ),
+//                    ),
+//                ),
+//            ),
 //            'cambio' => array(
 //                'type' => 'Literal',
 //                'options' => array(
