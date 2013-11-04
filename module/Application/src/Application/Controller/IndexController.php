@@ -259,7 +259,8 @@ class IndexController extends AbstractActionController
                                                AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
        }}
         $this->layout()->clase = 'buscar-distrito';
-        if ($request->isGet()) {
+  
+        if ($request->isGet()) {     
             $datos = $this->request->getQuery();
             $plato = $datos['q'];      
             $paginas = $datos['page']; 
@@ -436,8 +437,9 @@ class IndexController extends AbstractActionController
                 //////////////////////////////////////////random de 5 DISTRITOS distinc////////////////////////////////////
               
                 ///////////////////////////////////////fin/////////////////////////////////////////////////////////
-                
+               
         }
+        
         $form = new Formularios();
          if($valor[0]=='restaurante:')
          { $form->get('q')->setValue($plato);
@@ -459,7 +461,7 @@ class IndexController extends AbstractActionController
             ->fromQuery('page', 1));
         $paginato->setItemCountPerPage($limite);
         
-       
+      
             if ($resultados)
                   {
                     $total = (int) $resultados->response->numFound;

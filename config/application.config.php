@@ -2,13 +2,15 @@
 return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
-        'Usuario',     
+        'Usuario', 
+        'Platos',
         'Application',       
         'Restaurante',
         'Admin',
         'Local',
         'SanAuth',
-        'Platos'
+        'Classes'
+       
     ),
 
     // These are various options for the listeners attached to the ModuleManager

@@ -707,7 +707,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         if ($session){           
                     $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
                     $activo=$participa->en_estado;}
-    if (!isset($session)) {
+    if (!isset($session)) { 
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
@@ -726,7 +726,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                          else{
                            $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
                                                AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
-       }}
+       }}  
         $datos =$this->params()->fromRoute();  
         $urlerror =  $datos['nombre'];
         $nombre = explode('-', $datos['nombre']); 
@@ -785,6 +785,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                     $resultados =$results->response->docs;
                     }   }
                   else{  $resultados =$results->response->docs;}
+                  
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
@@ -792,6 +793,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
 //        if($_COOKIE['va_nombre']and $_COOKIE['va_email'] )
 //       {$form->get('va_nombre')->setValue($_COOKIE['va_nombre']);
 //        $form->get('va_email')->setValue($_COOKIE['va_email']);}
+      
         $canonical = new \Application\View\Helper\Canonical;
         $canonicalurl = new \Application\View\Helper\CanonicalUrl;
         $resta=$canonicalurl($canonical($listarecomendacion[0]['restaurant_nombre']));
@@ -816,6 +818,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                 }
             }
         }   
+        
         $this->layout()->clase = 'Detalle';
         $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
@@ -838,7 +841,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
             'listatitle'=>$listatitle, 'masplatos' => $resultados
              ,'listades' => $consulta,'menus'=>$menu,'session'=>$session,'resta'=>$resta,
             'participa'=>$activo,));
-        
+       
         return $view;
     }
 
