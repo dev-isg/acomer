@@ -5,7 +5,7 @@ use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Authentication\AuthenticationService;
-use Zend\Authentication\Adapter\DbTable as DbTableFacebookAdapter;
+use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
 use Zend\Session\SessionManager;
 use Zend\Session\Container;
 
@@ -39,22 +39,25 @@ class Module implements AutoloaderProviderInterface
             'factories' => array(
                 'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
                 
-               
-                
-                'facebookService' => function ($sm)
+                'LoginFace\Model\MyAuthStorage' => function ($sm)
                 {
-                    $dbTableFacebookAdapter = $sm->get('TableFacebookService');
-                    
-                    $facebookService = new AuthenticationService();
-                    $facebookService->setStorage(new \Zend\Authentication\Storage\Session('Facebook')); // $authService->setStorage($sm->get('SanAuth\Model\MyAuthStorage')); //
-                    $facebookService->setAdapter($dbTableFacebookAdapter);
-                    return $facebookService;
+                    return new \LoginFace\Model\MyAuthStorage('zf_tutorial');
                 },
-                'TableFacebookService' => function ($sm)
+                
+                'AuthService' => function ($sm)
+                {
+                    $dbTableAuthAdapter = $sm->get('TableAuthService');
+                    
+                    $authService = new AuthenticationService();
+                    $authService->setStorage(new \Zend\Authentication\Storage\Session('Auth')); // $authService->setStorage($sm->get('SanAuth\Model\MyAuthStorage')); //
+                    $authService->setAdapter($dbTableAuthAdapter);
+                    return $authService;
+                },
+                'TableAuthService' => function ($sm)
                 {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $dbTableFacebookAdapter = new DbTableFacebookAdapter($dbAdapter, 'ta_cliente', 'va_email', 'va_contrasena_facebook', 'SHA1(?)'); //
-                    return $dbTableFacebookAdapter;
+                    $dbTableAuthAdapter = new DbTableAuthAdapter($dbAdapter, 'ta_cliente', 'va_email', 'va_contrasena_facebook', 'SHA1(?)'); //
+                    return $dbTableAuthAdapter;
                 }
             )
         )
@@ -76,16 +79,16 @@ class Module implements AutoloaderProviderInterface
         {
 //            $locator = $e->getApplication()
 //                ->getServiceManager();
-//            $facebookAdapter = $locator->get('FacebookService');
+//            $authAdapter = $locator->get('AuthService');
 //            $controller = $e->getTarget();
 //            $routeMatch = $e->getRouteMatch();
-           // $actionName = $routeMatch->getParam('action', 'not-found');
+//           // $actionName = $routeMatch->getParam('action', 'not-found');
 //            $actionName ='auth//authenticate';
 //            $controller->layout()->form = new \LoginFace\Form\UserForm();
 //            $controller->layout()->formCambio = new \LoginFace\Form\PasswordForm();
 //            $controller->layout()->formActualizar = new \LoginFace\Form\UpdatepassForm();
 //            $controller->layout()->accion3 = '/cambio';
-          //  $controller->layout()->accion3 = '/cambio';
+//          //  $controller->layout()->accion3 = '/cambio';
 //            $controller->layout()->accion = $actionName;
             
 //            if ($actionName == 'login') {

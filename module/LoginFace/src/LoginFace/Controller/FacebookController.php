@@ -13,12 +13,15 @@ use Zend\Session\Container;
 use Zend\Mail\Message;
 use Usuario\Model\Usuario;
 use Zend\View\Model\JsonModel;
+//use Grupo\Controller\IndexController;
 
-class FacebookController extends AbstractActionController {
+// SanAuth\Controller\UpdatepassForm;
+// use SanAuth\Model\User;
+class AuthController extends AbstractActionController {
 
     protected $form;
     protected $storage;
-    protected $Facebookservice;
+    protected $authservice;
     protected $clientesTable;
 
     
@@ -26,17 +29,17 @@ class FacebookController extends AbstractActionController {
         $this->_options = new \Zend\Config\Config(include APPLICATION_PATH . '/config/autoload/global.php');     
     }
 
-    public function getFacebookService() {
-        if (!$this->facebookservice) {
-            $this->facebookservice = $this->getServiceLocator()->get('FacebookService');
+    public function getAuthService() {
+        if (!$this->authservice) {
+            $this->authservice = $this->getServiceLocator()->get('AuthService');
         }
 
-        return $this->facebookservice;
+        return $this->authservice;
     }
 
     public function getSessionStorage() {
         if (!$this->storage) {
-            $this->storage = $this->getServiceLocator()->get('LoginFace\Model\MyFacebookStorage');
+            $this->storage = $this->getServiceLocator()->get('LoginFace\Model\MyAuthStorage');
         }
 
         return $this->storage;
@@ -44,30 +47,33 @@ class FacebookController extends AbstractActionController {
 
     public function getForm() {
         if (!$this->form) {
-            $this->form = new \LoginFace\Form\UserForm(); 
+            $this->form = new \LoginFace\Form\UserForm(); // $builder->createForm($user);
         }
 
         return $this->form;
     }
 
 
+
+ 
+
     public function sessionfacebook($email,$pass)
     {  
        
                 $correo = $email;
                 $contrasena = $pass;
-                $this->getFacebookService()
+                $this->getAuthService()
                         ->getAdapter()
                         ->setIdentity($correo)
                        ->setCredential($contrasena);
-                    $result = $this->getFacebookService()->authenticate();
+                    $result = $this->getAuthService()->authenticate();
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
                     }
                     if ($result->isValid()) {                 
-                        $storage = $this->getFacebokService()->getStorage();
+                        $storage = $this->getAuthService()->getStorage();
                         $storage->write($this->getServiceLocator()
-                                        ->get('TableFacebookService')
+                                        ->get('TableAuthService')
                                         ->getResultRowObject(array(
                                             'in_id',
                                             'va_nombre_cliente',
@@ -80,6 +86,35 @@ class FacebookController extends AbstractActionController {
       return $this->redirect()->toUrl('/');
     }
   
+    
+    
+    public function comprovarvalueAction()
+            
+    {
+        $password = $this->params()->fromQuery('value');
+        $results = $this->getClientesTable()->consultarPassword($password);
+      //  var_dump($results->in_id);exit;
+        if($results)
+        {
+             $mensajes='Ingrese su nueva Contraseña.';
+                         return new JsonModel(array(
+                          'menssage' =>$mensajes,
+                           'success'=>true
+                            ));exit;   
+        }else                  
+            {
+           $mensajes='El token recibido no es válido o es obsoleto. Por favor verifique el enlace recibido en su correo.';
+                    return new JsonModel(array(
+                          'menssage' =>$mensajes,
+                           'success'=>false
+                            ));exit;                       
+                                
+            }  
+    }
+  
+    
+   
+
     public function getClientesTable() {
         if (!$this->clientesTable) {
             $sm = $this->getServiceLocator();
