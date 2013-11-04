@@ -247,7 +247,7 @@ class IndexController extends AbstractActionController
         $session=$storage->read();       
         $storage2 = new \Zend\Authentication\Storage\Session('Facebok');
         $session2=$storage2->read(); 
-        var_dump($session2);exit;
+        var_dump($session);exit;
         if (!isset($session) or !isset($session2)) {
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
