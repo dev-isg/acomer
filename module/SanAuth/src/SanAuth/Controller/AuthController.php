@@ -78,6 +78,7 @@ class AuthController extends AbstractActionController {
                                         )));
                       
                     }
+                    var_dump($storage->read());exit;
       return $this->redirect()->toUrl('/');
     }
     public function getForm() {
