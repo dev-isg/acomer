@@ -25,7 +25,7 @@ use Zend\Validator\File\Size;
 use Zend\Http\Header\Cookie;
 use Zend\Http\Header;
 use Zend\Db\Sql\Sql;
-use LoginFace\Controller\FacebookController; 
+//use LoginFace\Controller\FacebookController; 
 
 class IndexController extends AbstractActionController {
 

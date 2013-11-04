@@ -17,20 +17,15 @@ use Application\Form\Solicita;
 use Application\Form\Registro;
 use Application\Form\Registroplato;
 use Application\Form\Contactenos;
-use LoginFace\Controller\FacebookController; 
+//use SanAuth\Controller\AuthController; 
 use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
 use Application\Model\Entity\Album;
 use Zend\Mail\Message;
 use Zend\Http\Request;
-//use SanAuth\Controller\AuthController; 
+use SanAuth\Controller\AuthController; 
 use Usuario\Model\ClientesTable;
 use Zend\Mail\Transport\Sendmail as SendmailTransport;
-// use Zend\I18n\Filter\Alnum;
-// use Zend\View\Helper\HeadTitle;
-// use Platos\Model\Platos;
-// use Platos\Model\PlatosTable;
-// use Classes\Solr;
 use Zend\View\Helper\HeadTitle;
 
 class IndexController extends AbstractActionController
@@ -50,9 +45,7 @@ class IndexController extends AbstractActionController
         $view = new ViewModel();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read(); 
-        $storage2 = new \Zend\Authentication\Storage\Session('Facebook');
-        $session2=$storage2->read(); 
-        if (!isset($session) or !isset($session2)) {
+        if (!isset($session)) {
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
@@ -63,14 +56,14 @@ class IndexController extends AbstractActionController
                          {if($id_face[0]['id_facebook']=='')  
                         {
                            $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                            FacebookController::sessionfacebook($facebook['email'], $facebook['id_facebook']); 
+                            AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); 
                         }     
                          else{
                             $this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-                                               FacebookController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
                          else{
                            $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-                                               FacebookController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
        }}
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
@@ -1539,7 +1532,7 @@ class IndexController extends AbstractActionController
     }
      public function getAuthService() {
         if (!$this->authservice) {
-            $this->authservice = $this->getServiceLocator()->get('FacebookService');
+            $this->authservice = $this->getServiceLocator()->get('AuthService');
         }
 
         return $this->authservice;

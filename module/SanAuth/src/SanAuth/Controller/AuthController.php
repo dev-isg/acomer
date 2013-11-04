@@ -6,6 +6,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Form\Annotation\AnnotationBuilder;
 use Zend\View\Model\ViewModel;
 use SanAuth\Form\UserForm;
+use LoginFace\Controller\FacebookController;
 use SanAuth\Form\PasswordForm;
 use SanAuth\Form\UpdatepassForm;
 use Zend\Session\SessionManager;
@@ -21,7 +22,9 @@ class AuthController extends AbstractActionController {
 
     protected $form;
     protected $storage;
+     protected $storage2;
     protected $authservice;
+     protected $authservice2;
     protected $clientesTable;
 
     
@@ -36,6 +39,7 @@ class AuthController extends AbstractActionController {
 
         return $this->authservice;
     }
+    
 
     public function getSessionStorage() {
         if (!$this->storage) {
@@ -44,7 +48,49 @@ class AuthController extends AbstractActionController {
 
         return $this->storage;
     }
+     public function getSessionStorage2() {
+        if (!$this->storage) {
+            $this->storage = $this->getServiceLocator()->get('LoginFace\Model\MyAuthStorage');
+        }
 
+        return $this->storage;
+    }
+     public function getAuthService2() {
+        if (!$this->authservice2) {
+            $this->authservice2 = $this->getServiceLocator()->get('FacebookService');
+        }
+
+        return $this->authservice2;
+    }
+    
+      public function sessionfacebook($email,$pass)
+       {  
+       
+                $correo = $email;
+                $contrasena = $pass;
+                $this->getAuthService2()
+                        ->getAdapter()
+                        ->setIdentity($correo)
+                       ->setCredential($contrasena);
+                    $result = $this->getAuthService2()->authenticate();
+                    foreach ($result->getMessages() as $message) {
+                        $this->flashmessenger()->addMessage($message);
+                    }
+                    if ($result->isValid()) {                 
+                        $storage = $this->getAuthService2()->getStorage();
+                        $storage->write($this->getServiceLocator()
+                                        ->get('TableFacebookService')
+                                        ->getResultRowObject(array(
+                                            'in_id',
+                                            'va_nombre_cliente',
+                                            'va_contrasena',
+                                            'va_logout',
+                                            'id_facebook'
+                                        )));
+                      
+                    }
+      return $this->redirect()->toUrl('/');
+    }
     public function getForm() {
         if (!$this->form) {
             // $user = new User();
@@ -308,34 +354,7 @@ class AuthController extends AbstractActionController {
     }
     
 
-//    public function sessionfacebook($email,$pass)
-//    {  
-//       
-//                $correo = $email;
-//                $contrasena = $pass;
-//                $this->getAuthService()
-//                        ->getAdapter()
-//                        ->setIdentity($correo)
-//                       ->setCredential($contrasena);
-//                    $result = $this->getAuthService()->authenticate();
-//                    foreach ($result->getMessages() as $message) {
-//                        $this->flashmessenger()->addMessage($message);
-//                    }
-//                    if ($result->isValid()) {                 
-//                        $storage = $this->getAuthService()->getStorage();
-//                        $storage->write($this->getServiceLocator()
-//                                        ->get('TableAuthService')
-//                                        ->getResultRowObject(array(
-//                                            'in_id',
-//                                            'va_nombre_cliente',
-//                                            'va_contrasena',
-//                                            'va_logout',
-//                                            'id_facebook'
-//                                        )));
-//                      
-//                    }
-//      return $this->redirect()->toUrl('/');
-//    }
+   
     
  
     public function logoutAction() {

@@ -85,7 +85,7 @@ class FacebookController extends AbstractActionController {
                        
                     }
                   
-           //   return $storage; 
+              return $storage; 
          }
   
 
