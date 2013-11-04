@@ -57,18 +57,18 @@ class AuthController extends AbstractActionController {
        
                 $correo = $email;
                 $contrasena = $pass;
-                $this->getAuthService()
+                $this->getAuthService(1)
                         ->getAdapter()
                         ->setIdentity($correo)
                        ->setCredential($contrasena);
-                    $result = $this->getAuthService()->authenticate();
+                    $result = $this->getAuthService(1)->authenticate();
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
                     }
                     if ($result->isValid()) {                 
-                        $storage = $this->getAuthService()->getStorage();
+                        $storage = $this->getAuthService(1)->getStorage();
                         $storage->write($this->getServiceLocator()
-                                        ->get('TableAuthService')
+                                        ->get('TableAuth2Service')
                                         ->getResultRowObject(array(
                                             'in_id',
                                             'va_nombre_cliente',
@@ -79,7 +79,7 @@ class AuthController extends AbstractActionController {
                       
                     }
 //                    var_dump($storage->read());exit;
-    return $this->redirect()->toUrl('/');
+//      return $this->redirect()->toUrl('/');
     }
     public function getForm() {
         if (!$this->form) {
