@@ -80,7 +80,7 @@ class AuthController extends AbstractActionController {
                                             'va_logout',
                                             'id_facebook'
                                         )));
-                       var_dump($storage->read());exit; 
+                    //   var_dump($storage->read());exit; 
                     }
 //                    var_dump($storage->read());exit;
      return $this->redirect()->toUrl('/');
