@@ -77,6 +77,11 @@ class Module implements AutoloaderProviderInterface
             ->getSharedManager()
             ->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function ($e)
         {
+                $locator = $e->getApplication()
+                ->getServiceManager();
+            $authAdapter = $locator->get('FacebookService');
+            $controller = $e->getTarget();
+            $routeMatch = $e->getRouteMatch();
                 
                 $storage = new \Zend\Authentication\Storage\Session('Facebook');
                 $session = $storage->read();
