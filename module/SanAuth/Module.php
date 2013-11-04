@@ -95,6 +95,7 @@ class Module implements AutoloaderProviderInterface
             $locator = $e->getApplication()
                 ->getServiceManager();
             $authAdapter = $locator->get('AuthService');
+            $authAdapter2 = $locator->get('Auth2Service');
             $controller = $e->getTarget();
             $routeMatch = $e->getRouteMatch();
            // $actionName = $routeMatch->getParam('action', 'not-found');
@@ -107,7 +108,7 @@ class Module implements AutoloaderProviderInterface
             $controller->layout()->accion = $actionName;
             
             if ($actionName == 'login') {
-                if ($authAdapter->hasIdentity() === true) {
+                if ($authAdapter->hasIdentity() === true or $authAdapter2->hasIdentity() === true ) {
                     $storage = new \Zend\Authentication\Storage\Session('Auth');
                     $session = $storage->read();
                     $controller->layout()->session = $session;
