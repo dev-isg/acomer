@@ -83,6 +83,7 @@ class FacebookController extends AbstractActionController {
                                         )));
                       
                     }
+                    echo 'entri hasta qui';exit;
     return $this->redirect()->toUrl('/');
     }
   
