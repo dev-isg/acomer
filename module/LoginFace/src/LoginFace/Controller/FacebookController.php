@@ -17,11 +17,11 @@ use Zend\View\Model\JsonModel;
 
 // SanAuth\Controller\UpdatepassForm;
 // use SanAuth\Model\User;
-class AuthController extends AbstractActionController {
+class FacebookController extends AbstractActionController {
 
     protected $form;
     protected $storage;
-    protected $authservice;
+    protected $authsservice;
     protected $clientesTable;
 
     
@@ -30,11 +30,11 @@ class AuthController extends AbstractActionController {
     }
 
     public function getAuthService() {
-        if (!$this->authservice) {
-            $this->authservice = $this->getServiceLocator()->get('AuthService');
+        if (!$this->authsservice) {
+            $this->authsservice = $this->getServiceLocator()->get('AuthsService');
         }
 
-        return $this->authservice;
+        return $this->authsservice;
     }
 
     public function getSessionStorage() {

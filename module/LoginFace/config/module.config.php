@@ -46,17 +46,17 @@ return array(
 //                    )
 //                )
 //            ),  
-            'prueba' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/prueba',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller' => 'Prueba',
-                        'action' => 'index'
-                    )
-                )
-            ), 
+//            'prueba' => array(
+//                'type' => 'Literal',
+//                'options' => array(
+//                    'route' => '/prueba',
+//                    'defaults' => array(
+//                        '__NAMESPACE__' => 'LoginFace\Controller',
+//                        'controller' => 'Prueba',
+//                        'action' => 'index'
+//                    )
+//                )
+//            ), 
 //            'prueba-login' => array(
 //                'type' => 'Literal',
 //                'options' => array(
@@ -125,15 +125,15 @@ return array(
 //            ),
 
             'success' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/success',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'LoginFace\Controller',
-                        'controller'    => 'Success',
-                        'action'        => 'index',
-                    ),
-                ),
+//                'type'    => 'Literal',
+//                'options' => array(
+//                    'route'    => '/success',
+//                    'defaults' => array(
+//                        '__NAMESPACE__' => 'LoginFace\Controller',
+//                        'controller'    => 'Success',
+//                        'action'        => 'index',
+//                    ),
+//                ),
 
                 'may_terminate' => true,
                 'child_routes' => array(

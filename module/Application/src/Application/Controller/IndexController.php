@@ -39,7 +39,7 @@ class IndexController extends AbstractActionController
     protected $configTable;
     protected $restauranteTable;
     protected $clientesTable;
-     protected $authservice;
+     protected $authsservice;
     public $dbAdapter;
   public function __construct()
 	{
@@ -1503,11 +1503,11 @@ class IndexController extends AbstractActionController
         return $this->clientesTable;
     }
      public function getAuthService() {
-        if (!$this->authservice) {
-            $this->authservice = $this->getServiceLocator()->get('AuthService');
+        if (!$this->authsservice) {
+            $this->authsservice = $this->getServiceLocator()->get('AuthsService');
         }
 
-        return $this->authservice;
+        return $this->authsservice;
     }
       public function getRestauranteTable() {
         if (!$this->restauranteTable) {
