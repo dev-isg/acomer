@@ -308,34 +308,34 @@ class AuthController extends AbstractActionController {
     }
     
 
-    public function sessionfacebook($email,$pass)
-    {  
-       
-                $correo = $email;
-                $contrasena = $pass;
-                $this->getAuthService()
-                        ->getAdapter()
-                        ->setIdentity($correo)
-                       ->setCredential($contrasena);
-                    $result = $this->getAuthService()->authenticate();
-                    foreach ($result->getMessages() as $message) {
-                        $this->flashmessenger()->addMessage($message);
-                    }
-                    if ($result->isValid()) {                 
-                        $storage = $this->getAuthService()->getStorage();
-                        $storage->write($this->getServiceLocator()
-                                        ->get('TableAuthService')
-                                        ->getResultRowObject(array(
-                                            'in_id',
-                                            'va_nombre_cliente',
-                                            'va_contrasena',
-                                            'va_logout',
-                                            'id_facebook'
-                                        )));
-                      
-                    }
-      return $this->redirect()->toUrl('/');
-    }
+//    public function sessionfacebook($email,$pass)
+//    {  
+//       
+//                $correo = $email;
+//                $contrasena = $pass;
+//                $this->getAuthService()
+//                        ->getAdapter()
+//                        ->setIdentity($correo)
+//                       ->setCredential($contrasena);
+//                    $result = $this->getAuthService()->authenticate();
+//                    foreach ($result->getMessages() as $message) {
+//                        $this->flashmessenger()->addMessage($message);
+//                    }
+//                    if ($result->isValid()) {                 
+//                        $storage = $this->getAuthService()->getStorage();
+//                        $storage->write($this->getServiceLocator()
+//                                        ->get('TableAuthService')
+//                                        ->getResultRowObject(array(
+//                                            'in_id',
+//                                            'va_nombre_cliente',
+//                                            'va_contrasena',
+//                                            'va_logout',
+//                                            'id_facebook'
+//                                        )));
+//                      
+//                    }
+//      return $this->redirect()->toUrl('/');
+//    }
     
  
     public function logoutAction() {
