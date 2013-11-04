@@ -31,15 +31,15 @@ class AuthController extends AbstractActionController {
         $this->_options = new \Zend\Config\Config(include APPLICATION_PATH . '/config/autoload/global.php');     
     }
 
-    public function getAuthService() {
+    public function getAuthService($valor=null) {
         if (!$this->authservice) {
-//            if($valor!==null)
-                //{ 
-                    $this->authservice = $this->getServiceLocator()->get('Auth2Service');
+            if($valor!==null)
+               { 
+                    $this->authservice = $this->getServiceLocator()->get('AuthService2');
                     
-                    //}
-//                else
-//               { $this->authservice = $this->getServiceLocator()->get('AuthService');}
+                   }
+               else
+            { $this->authservice = $this->getServiceLocator()->get('AuthService');}
            
         }
 
