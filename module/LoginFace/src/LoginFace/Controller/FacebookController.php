@@ -83,7 +83,7 @@ class FacebookController extends AbstractActionController {
                                         )));
                       
                     }
-     // return $this->redirect()->toUrl('/');
+    return $this->redirect()->toUrl('/');
     }
   
     
