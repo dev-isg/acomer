@@ -10,7 +10,7 @@ return array(
         'SanAuth',
         'Platos',
         'Classes',
-        'LoginFace',
+
 
     ),
 

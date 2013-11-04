@@ -25,7 +25,7 @@ use Zend\Validator\File\Size;
 use Zend\Http\Header\Cookie;
 use Zend\Http\Header;
 use Zend\Db\Sql\Sql;
-//use LoginFace\Controller\FacebookController; 
+use SanAuth\Controller\AuthController; 
 
 class IndexController extends AbstractActionController {
 
@@ -707,9 +707,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         if ($session){           
                     $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
                     $activo=$participa->en_estado;}
-    $storage2 = new \Zend\Authentication\Storage\Session('Facebook');
-        $session2=$storage2->read(); 
-        if (!isset($session) or !isset($session2)) {
+    if (!isset($session)) {
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
@@ -720,14 +718,14 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                          {if($id_face[0]['id_facebook']=='')  
                         {
                            $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                            FacebookController::sessionfacebook($facebook['email'], $facebook['id_facebook']); 
+                            AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); 
                         }     
                          else{
                             $this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-                                               FacebookController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
                          else{
                            $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-                                               FacebookController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
        }}
         $datos =$this->params()->fromRoute();  
         $urlerror =  $datos['nombre'];
@@ -942,7 +940,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
     }
     public function getAuthService() {
         if (!$this->authservice) {
-            $this->authservice = $this->getServiceLocator()->get('FacebookService');
+            $this->authservice = $this->getServiceLocator()->get('Auth2Service');
         }
         return $this->authservice;
     }

@@ -48,7 +48,6 @@ class AuthController extends AbstractActionController {
         if (!$this->storage) {
             $this->storage = $this->getServiceLocator()->get('SanAuth\Model\MyAuthStorage');
         }
-
         return $this->storage;
     }
 
@@ -79,7 +78,7 @@ class AuthController extends AbstractActionController {
                                         )));
                       
                     }
-      return $this->redirect()->toUrl('/');
+    //  return $this->redirect()->toUrl('/');
     }
     public function getForm() {
         if (!$this->form) {
