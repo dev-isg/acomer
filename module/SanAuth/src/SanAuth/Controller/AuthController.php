@@ -34,9 +34,9 @@ class AuthController extends AbstractActionController {
     public function getAuthService($valor=null) {
         if (!$this->authservice) {
             if($valor!==null)
-               { echo 'exxx';exit;
+               { 
                     $this->authservice = $this->getServiceLocator()->get('AuthService2');
-                    
+                    var_dump($this->authservice);exit;
                    }
                else
             { $this->authservice = $this->getServiceLocator()->get('AuthService');}
