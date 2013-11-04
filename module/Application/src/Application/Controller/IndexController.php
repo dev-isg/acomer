@@ -50,7 +50,7 @@ class IndexController extends AbstractActionController
         $view = new ViewModel();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read(); 
-        $storage2 = new \Zend\Authentication\Storage\Session('Facebok');
+        $storage2 = new \Zend\Authentication\Storage\Session('Auth2');
         $session2=$storage2->read(); 
         if (!isset($session) or !isset($session2)) {
         $face = new \Usuario\Controller\ClientesController();
