@@ -198,10 +198,11 @@ class ClientesTable
     
      public function idfacebook($id,$idfacebook,$logout)
     {
+         $contrasena = sha1($idfacebook) ;
         $adapter = $this->tableGateway->getAdapter();
         $sql = new Sql($adapter);
         $selecttot = $sql->update('ta_cliente')
-                ->set(array('id_facebook'=>$idfacebook,'va_logout'=>$logout))
+                ->set(array('id_facebook'=>$idfacebook,'va_logout'=>$logout,'va_contrasena_facebook'=>$contrasena))
                 ->where(array('in_id'=>$id));
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
                    $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
@@ -226,7 +227,7 @@ public function idfacebook2($id,$logout)
         $selecttot = $sql->insert()
                 ->into('ta_cliente')
                 ->values(array('va_nombre_cliente'=>$nombre,'va_email'=>$email,'id_facebook'=>$idfacebook,
-                    'en_estado'=>'activo','va_contrasena'=>$contrasena
+                    'en_estado'=>'activo','va_contrasena_facebook'=>$contrasena
                    ,'va_logout'=>$logout,'va_fecha_ingreso'=>$fecha,'va_notificacion'=>'si'));
         $selectString = $sql->getSqlStringForSqlObject($selecttot);
       $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);

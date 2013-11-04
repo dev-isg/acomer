@@ -8,6 +8,7 @@ return array(
         'Admin',
         'Local',
         'SanAuth',
+        'SanAuth2',
         'Platos',
         'Classes'
 
