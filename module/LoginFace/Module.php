@@ -83,30 +83,30 @@ class Module implements AutoloaderProviderInterface
             $controller = $e->getTarget();
             $routeMatch = $e->getRouteMatch();
            // $actionName = $routeMatch->getParam('action', 'not-found');
-            $actionName ='auth//authenticate';
-            $controller->layout()->form = new \LoginFace\Form\UserForm();
-            $controller->layout()->formCambio = new \LoginFace\Form\PasswordForm();
-            $controller->layout()->formActualizar = new \LoginFace\Form\UpdatepassForm();
+//            $actionName ='auth//authenticate';
+//            $controller->layout()->form = new \LoginFace\Form\UserForm();
+//            $controller->layout()->formCambio = new \LoginFace\Form\PasswordForm();
+//            $controller->layout()->formActualizar = new \LoginFace\Form\UpdatepassForm();
             $controller->layout()->accion3 = '/cambio';
           //  $controller->layout()->accion3 = '/cambio';
-            $controller->layout()->accion = $actionName;
+//            $controller->layout()->accion = $actionName;
             
-            if ($actionName == 'login') {
-                if ($authAdapter->hasIdentity() === true) {
-                    $storage = new \Zend\Authentication\Storage\Session('Auth');
-                    $session = $storage->read();
-                    $controller->layout()->session = $session;
-                    return $controller->redirect()
-                            ->toRoute('home');
-                } else {
-                    return;
-                }
-            } else {
-                $storage = new \Zend\Authentication\Storage\Session('Auth');
-                $session = $storage->read();
-                $controller->layout()->session = $session;
-                return;
-            }
+//            if ($actionName == 'login') {
+//                if ($authAdapter->hasIdentity() === true) {
+//                    $storage = new \Zend\Authentication\Storage\Session('Auth');
+//                    $session = $storage->read();
+//                    $controller->layout()->session = $session;
+//                    return $controller->redirect()
+//                            ->toRoute('home');
+//                } else {
+//                    return;
+//                }
+//            } else {
+//                $storage = new \Zend\Authentication\Storage\Session('Auth');
+//                $session = $storage->read();
+//                $controller->layout()->session = $session;
+//                return;
+//            }
    //////////////////////////////////////////////////////////INICIO//////////////////////////////////////////////////////////////////
 //            if ($authAdapter->hasIdentity() === true) {
 ////                echo 'aka entro session';exit;
