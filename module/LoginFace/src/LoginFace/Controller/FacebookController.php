@@ -81,12 +81,10 @@ class FacebookController extends AbstractActionController {
                                             'va_logout',
                                             'id_facebook'
                                         )));
-                       return $this->redirect()->toUrl('/');
+                       
                     }
-                    
-
-   
-    }
+                   return $result; 
+         }
   
     
     
