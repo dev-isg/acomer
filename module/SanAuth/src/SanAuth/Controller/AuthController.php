@@ -60,16 +60,16 @@ class AuthController extends AbstractActionController {
        
                 $correo = $email;
                 $contrasena = $pass;
-                $this->getAuthService()
+                $this->getAuthService(1)
                         ->getAdapter()
                         ->setIdentity($correo)
                        ->setCredential($contrasena);
-                    $result = $this->getAuthService()->authenticate();
+                    $result = $this->getAuthService(1)->authenticate();
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
                     }
-                    if ($result->isValid()) {                 
-                        $storage = $this->getAuthService()->getStorage();
+                    if ($result->isValid()) { echo 'entraste';exit;                
+                        $storage = $this->getAuthService(1)->getStorage();
                         $storage->write($this->getServiceLocator()
                                         ->get('TableAuth2Service')
                                         ->getResultRowObject(array(
