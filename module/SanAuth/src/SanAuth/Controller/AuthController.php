@@ -48,19 +48,21 @@ class AuthController extends AbstractActionController {
 
         return $this->storage;
     }
-     public function getSessionStorage2() {
-        if (!$this->storage) {
-            $this->storage = $this->getServiceLocator()->get('LoginFace\Model\MyAuthStorage');
-        }
-
-        return $this->storage;
-    }
      public function getAuthService2() {
         if (!$this->authservice2) {
-            $this->authservice2 = $this->getServiceLocator()->get('FacebookService');
+            $this->authservice2 = $this->getServiceLocator()->get('AuthService2');
         }
 
         return $this->authservice2;
+    }
+    
+
+    public function getSessionStorage2() {
+        if (!$this->storage2) {
+            $this->storage2 = $this->getServiceLocator()->get('SanAuth\Model\MyAuthStorage');
+        }
+
+        return $this->storage2;
     }
     
       public function sessionfacebook($email,$pass)

@@ -69,10 +69,6 @@ class Module implements AutoloaderProviderInterface
                     return $table;
                     
                  },
-
-
-
-
                 'Usuario\Model\ComentariosTable' =>  function($sm) {
                     $tableGateway = $sm->get('ComentariosTableGateway');
                     $table = new Model\ComentariosTable($tableGateway);
