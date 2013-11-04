@@ -1,6 +1,6 @@
 <?php
 
-namespace SanAuth\Model;
+namespace LoginFace\Model;
 
 use Zend\Form\Annotation;
 

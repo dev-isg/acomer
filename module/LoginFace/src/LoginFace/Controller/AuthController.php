@@ -1,13 +1,13 @@
 <?php
 
-namespace SanAuth2\Controller;
+namespace LoginFace\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Form\Annotation\AnnotationBuilder;
 use Zend\View\Model\ViewModel;
-use SanAuth2\Form\UserForm;
-use SanAuth2\Form\PasswordForm;
-use SanAuth2\Form\UpdatepassForm;
+use LoginFace\Form\UserForm;
+use LoginFace\Form\PasswordForm;
+use LoginFace\Form\UpdatepassForm;
 use Zend\Session\SessionManager;
 use Zend\Session\Container;
 use Zend\Mail\Message;
@@ -39,7 +39,7 @@ class AuthController extends AbstractActionController {
 
     public function getSessionStorage() {
         if (!$this->storage) {
-            $this->storage = $this->getServiceLocator()->get('SanAuth2\Model\MyAuthStorage');
+            $this->storage = $this->getServiceLocator()->get('LoginFace\Model\MyAuthStorage');
         }
 
         return $this->storage;
@@ -50,7 +50,7 @@ class AuthController extends AbstractActionController {
             // $user = new User();
             // $builder = new AnnotationBuilder();
 
-            $this->form = new \SanAuth\Form\UserForm(); // $builder->createForm($user);
+            $this->form = new \LoginFace\Form\UserForm(); // $builder->createForm($user);
         }
 
         return $this->form;

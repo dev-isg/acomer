@@ -1,5 +1,5 @@
 <?php
-namespace SanAuth2\Form;
+namespace LoginFace\Form;
 
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;

@@ -1,5 +1,5 @@
 <?php
-namespace SanAuth2;
+namespace LoginFace;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
@@ -39,9 +39,9 @@ class Module implements AutoloaderProviderInterface
             'factories' => array(
                 'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
                 
-                'SanAuth2\Model\MyAuthStorage' => function ($sm)
+                'LoginFace\Model\MyAuthStorage' => function ($sm)
                 {
-                    return new \SanAuth\Model\MyAuthStorage('zf_tutorial');
+                    return new \LoginFace\Model\MyAuthStorage('zf_tutorial');
                 },
                 
                 'AuthService' => function ($sm)
@@ -84,9 +84,9 @@ class Module implements AutoloaderProviderInterface
             $routeMatch = $e->getRouteMatch();
            // $actionName = $routeMatch->getParam('action', 'not-found');
             $actionName ='auth//authenticate';
-            $controller->layout()->form = new \SanAuth2\Form\UserForm();
-            $controller->layout()->formCambio = new \SanAuth2\Form\PasswordForm();
-            $controller->layout()->formActualizar = new \SanAuth2\Form\UpdatepassForm();
+            $controller->layout()->form = new \LoginFace\Form\UserForm();
+            $controller->layout()->formCambio = new \LoginFace\Form\PasswordForm();
+            $controller->layout()->formActualizar = new \LoginFace\Form\UpdatepassForm();
             $controller->layout()->accion3 = '/cambio';
           //  $controller->layout()->accion3 = '/cambio';
             $controller->layout()->accion = $actionName;

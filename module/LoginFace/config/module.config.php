@@ -3,9 +3,9 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'SanAuth2\Controller\Auth' => 'SanAuth2\Controller\AuthController',
-            'SanAuth2\Controller\Success' => 'SanAuth2\Controller\SuccessController',
-            'SanAuth2\Controller\Prueba' => 'SanAuth2\Controller\PruebaController'
+            'LoginFace\Controller\Auth' => 'LoginFace\Controller\AuthController',
+            'LoginFace\Controller\Success' => 'LoginFace\Controller\SuccessController',
+            'LoginFace\Controller\Prueba' => 'LoginFace\Controller\PruebaController'
         ),
     ),
     'router' => array(
@@ -16,7 +16,7 @@ return array(
                 'options' => array(
                     'route'    => '/auth',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'SanAuth2\Controller',
+                        '__NAMESPACE__' => 'LoginFace\Controller',
                         'controller'    => 'Auth',
                         'action'        => 'login',
                     ),
@@ -42,7 +42,7 @@ return array(
                 'options' => array(
                     'route' => '/cambio',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'SanAuth2\Controller',
+                        '__NAMESPACE__' => 'LoginFace\Controller',
                         'controller' => 'Auth',
                         'action' => 'changeemail'
                     )
@@ -53,7 +53,7 @@ return array(
                 'options' => array(
                     'route' => '/prueba',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'SanAuth2\Controller',
+                        '__NAMESPACE__' => 'LoginFace\Controller',
                         'controller' => 'Prueba',
                         'action' => 'index'
                     )
@@ -64,7 +64,7 @@ return array(
                 'options' => array(
                     'route' => '/prueba-login',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'SanAuth2\Controller',
+                        '__NAMESPACE__' => 'LoginFace\Controller',
                         'controller' => 'Prueba',
                         'action' => 'login'
                     )
@@ -75,7 +75,7 @@ return array(
                 'options' => array(
                     'route' => '/validar-correo',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'SanAuth2\Controller',
+                        '__NAMESPACE__' => 'LoginFace\Controller',
                         'controller' => 'Auth',
                         'action' => 'validarcorreo'
                     )
@@ -86,7 +86,7 @@ return array(
                 'options' => array(
                     'route' => '/validar-contrasena',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'SanAuth2\Controller',
+                        '__NAMESPACE__' => 'LoginFace\Controller',
                         'controller' => 'Auth',
                         'action' => 'validarcontrasena'
                     )
@@ -97,7 +97,7 @@ return array(
                 'options' => array(
                     'route' => '/validar',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'SanAuth2\Controller',
+                        '__NAMESPACE__' => 'LoginFace\Controller',
                         'controller' => 'Auth',
                         'action' => 'validar'
                     )
@@ -108,7 +108,7 @@ return array(
                 'options' => array(
                     'route' => '/cambio-contrasena',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'SanAuth2\Controller',
+                        '__NAMESPACE__' => 'LoginFace\Controller',
                         'controller' => 'Auth',
                         'action' => 'recuperar'
                     )
@@ -119,7 +119,7 @@ return array(
                 'options' => array(
                     'route' => '/comprovar-value',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'SanAuth2\Controller',
+                        '__NAMESPACE__' => 'LoginFace\Controller',
                         'controller' => 'Auth',
                         'action' => 'comprovarvalue'
                     )
@@ -131,7 +131,7 @@ return array(
                 'options' => array(
                     'route'    => '/success',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'SanAuth2\Controller',
+                        '__NAMESPACE__' => 'LoginFace\Controller',
                         'controller'    => 'Success',
                         'action'        => 'index',
                     ),
@@ -158,7 +158,7 @@ return array(
     ),
     'view_manager' => array(
         'template_path_stack' => array(
-            'SanAuth' => __DIR__ . '/../view',
+            'LoginFace' => __DIR__ . '/../view',
         ),
         'strategies' => array(
             'ViewJsonStrategy',

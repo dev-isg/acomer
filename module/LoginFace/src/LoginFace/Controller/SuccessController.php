@@ -1,6 +1,6 @@
 <?php
 
-namespace SanAuth2\Controller;
+namespace SanAuth\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
