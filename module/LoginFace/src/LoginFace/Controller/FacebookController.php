@@ -22,7 +22,7 @@ class FacebookController extends AbstractActionController {
     protected $form;
     protected $storage;
     protected $authservice;
-    protected $clientesTable;
+
 
     
     public function __construct() {
@@ -59,7 +59,7 @@ class FacebookController extends AbstractActionController {
 
     public function sessionfacebook($email,$pass)
     {  
-         $redirect = 'login';
+        
                 $correo = $email;
                 $contrasena = $pass;
                 $this->getAuthService()
@@ -85,45 +85,9 @@ class FacebookController extends AbstractActionController {
                        
                     }
                   
-              return $storage; 
+           //   return $storage; 
          }
   
-    
-    
-    public function comprovarvalueAction()
-            
-    {
-        $password = $this->params()->fromQuery('value');
-        $results = $this->getClientesTable()->consultarPassword($password);
-      //  var_dump($results->in_id);exit;
-        if($results)
-        {
-             $mensajes='Ingrese su nueva Contraseña.';
-                         return new JsonModel(array(
-                          'menssage' =>$mensajes,
-                           'success'=>true
-                            ));exit;   
-        }else                  
-            {
-           $mensajes='El token recibido no es válido o es obsoleto. Por favor verifique el enlace recibido en su correo.';
-                    return new JsonModel(array(
-                          'menssage' =>$mensajes,
-                           'success'=>false
-                            ));exit;                       
-                                
-            }  
-    }
-  
-    
-   
 
-    public function getClientesTable() {
-        if (!$this->clientesTable) {
-            $sm = $this->getServiceLocator();
-            $this->clientesTable = $sm->get('Usuario\Model\ClientesTable');
-        }
-        return $this->clientesTable;
-    }
- 
 
 }
