@@ -85,6 +85,7 @@ class AuthController extends AbstractActionController {
                                         )));
                       
                     }
+                    
      // return $this->redirect()->toUrl('/');
     }
     
