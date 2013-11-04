@@ -25,7 +25,7 @@ use Zend\Validator\File\Size;
 use Zend\Http\Header\Cookie;
 use Zend\Http\Header;
 use Zend\Db\Sql\Sql;
-use SanAuth\Controller\AuthController; 
+use LoginFace\Controller\FacebookController; 
 
 class IndexController extends AbstractActionController {
 
@@ -707,7 +707,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         if ($session){           
                     $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
                     $activo=$participa->en_estado;}
-     $storage2 = new \Zend\Authentication\Storage\Session('Facebok');
+    $storage2 = new \Zend\Authentication\Storage\Session('Facebook');
         $session2=$storage2->read(); 
         if (!isset($session) or !isset($session2)) {
         $face = new \Usuario\Controller\ClientesController();
