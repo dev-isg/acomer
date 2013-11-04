@@ -49,7 +49,7 @@ class Module implements AutoloaderProviderInterface
                     $dbTableAuthsAdapter = $sm->get('TableFacebookService');
                     
                     $authsService = new AuthenticationService();
-                    $authsService->setStorage(new \Zend\Authentication\Storage\Session('Facebook')); // $authService->setStorage($sm->get('SanAuth\Model\MyAuthStorage')); //
+                    $authsService->setStorage(new \Zend\Authentication\Storage\Session('Auth')); // $authService->setStorage($sm->get('SanAuth\Model\MyAuthStorage')); //
                     $authsService->setAdapter($dbTableAuthsAdapter);
                     return $authsService;
                 },
@@ -83,7 +83,7 @@ class Module implements AutoloaderProviderInterface
             $controller = $e->getTarget();
             $routeMatch = $e->getRouteMatch();
                  if ($authAdapter->hasIdentity() === true) {
-                    $storage = new \Zend\Authentication\Storage\Session('Facebook');
+                    $storage = new \Zend\Authentication\Storage\Session('Auth');
                     $session = $storage->read();
                     $controller->layout()->sessionface = $session;
                 } else {
