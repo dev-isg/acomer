@@ -29,14 +29,14 @@ return array(
         'secret' => '2e07ad7ea83185f20da1ca546fee0720'
     ),
     
-//    'host' => array(
-//        'base' => 'http://192.168.1.34:8080',
-//        'static' => 'http://192.168.1.34:8080',
-//        'images' => 'http://192.168.1.34:8080/imagenes',
-//        'img'=>'http://192.168.1.34:8080/img',
-//        'ruta' => 'http://192.168.1.34:8080',
-//        'version'=>1,
-//    ),
+    //    'host' => array(
+    //        'base' => 'http://192.168.1.34:8080',
+    //        'static' => 'http://192.168.1.34:8080',
+    //        'images' => 'http://192.168.1.34:8080/imagenes',
+    //        'img'=>'http://192.168.1.34:8080/img',
+    //        'ruta' => 'http://192.168.1.34:8080',
+    //        'version'=>1,
+    //    ),
 
     
     'host' => array(
