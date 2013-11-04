@@ -50,20 +50,12 @@ class AuthController extends AbstractActionController {
     }
      public function getAuthService2() {
         if (!$this->authservice2) {
-            $this->authservice2 = $this->getServiceLocator()->get('AuthService2');
+            $this->authservice2 = $this->getServiceLocator()->get('Auth2Service');
         }
-
         return $this->authservice2;
     }
     
 
-    public function getSessionStorage2() {
-        if (!$this->storage2) {
-            $this->storage2 = $this->getServiceLocator()->get('SanAuth\Model\MyAuthStorage');
-        }
-
-        return $this->storage2;
-    }
     
       public function sessionfacebook($email,$pass)
        {  
@@ -81,7 +73,7 @@ class AuthController extends AbstractActionController {
                     if ($result->isValid()) {                 
                         $storage = $this->getAuthService2()->getStorage();
                         $storage->write($this->getServiceLocator()
-                                        ->get('TableFacebookService')
+                                        ->get('TableAuth2Service')
                                         ->getResultRowObject(array(
                                             'in_id',
                                             'va_nombre_cliente',
