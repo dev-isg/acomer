@@ -8,10 +8,7 @@ return array(
         'Admin',
         'Local',
         'SanAuth',
-        'Platos',
-        'Classes',
-
-
+        'Platos'
     ),
 
     // These are various options for the listeners attached to the ModuleManager
