@@ -86,8 +86,8 @@ class Module implements AutoloaderProviderInterface
                     $storage = new \Zend\Authentication\Storage\Session('Facebook');
                     $session = $storage->read();
                     $controller->layout()->sessionface = $session;
-//                    return $controller->redirect()
-//                            ->toRoute('home');
+                    return $controller->redirect()
+                            ->toRoute('/');
                 } else {
                     return;
                 }
