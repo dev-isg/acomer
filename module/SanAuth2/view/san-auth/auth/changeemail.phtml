@@ -1,0 +1,57 @@
+<script type="text/javascript" src="<?php echo $this->host('ruta')?>/js/jquery.validate.min.js"></script>
+
+		<?php if($this->mensaje[0]){?>
+		<div class="row-fluid">
+			<div class="alert alert-success alert-message" style="margin-bottom:0;margin-top:20px;">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<?php echo $this->mensaje[0];?>
+			</div>
+		</div>
+		<?php }?>
+		<div class="row-fluid">
+			<div class="span12 recuperacion group-sidebar">
+	            <h1>Recuperar tu clave</h1>
+	            <small>
+	            Para recuperarla ingrese el email con el que se registró
+	            </small>
+                    <?php
+                            $form = $this->form;
+                            $form->setAttributes(array(
+                                'action' => $this->url.'/cambio', 
+                                'method' => 'post',
+                                'id' => 'recuperacion'
+                            ));
+
+                            $form->prepare();
+                            echo $this->form()->openTag($form);
+                    ?>
+	                <p>
+	                <label for="">Correo Electrónico</label>
+                         <?php echo $this->formRow($form->get('va_email'));?>
+	                </p> 
+                          <?php echo $this->formSubmit($form->get('submit'));?>                 
+	            </form>
+	        </div>      
+
+</div> <!-- #main-container -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".alert-message").alert();
+		window.setTimeout(function() { $(".alert-message").alert('close'); }, 15000);
+
+		$("#recuperacion").validate({
+            rules: {
+                va_email:{
+	                required : true,
+	                email:8             
+	            }
+            },
+            messages: {
+              	va_email: {
+	                required : "Por favor ingrese su correo electrónico",
+	                email:"Debe ingresar un correo válido"
+	            }
+            }
+        });
+	});
+</script>
