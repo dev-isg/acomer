@@ -24,7 +24,6 @@ class AuthController extends AbstractActionController {
     protected $storage;
      protected $storage2;
     protected $authservice;
-     protected $authservice2;
     protected $clientesTable;
 
     
@@ -32,9 +31,13 @@ class AuthController extends AbstractActionController {
         $this->_options = new \Zend\Config\Config(include APPLICATION_PATH . '/config/autoload/global.php');     
     }
 
-    public function getAuthService() {
+    public function getAuthService($valor=null) {
         if (!$this->authservice) {
-            $this->authservice = $this->getServiceLocator()->get('AuthService');
+            if($valor!==null)
+                { $this->authservice = $this->getServiceLocator()->get('Auth2Service');}
+                else
+               { $this->authservice = $this->getServiceLocator()->get('AuthService');}
+           
         }
 
         return $this->authservice;
@@ -48,13 +51,6 @@ class AuthController extends AbstractActionController {
 
         return $this->storage;
     }
-     public function getAuthService2() {
-        if (!$this->authservice2) {
-            $this->authservice2 = $this->getServiceLocator()->get('Auth2Service');
-        }
-        return $this->authservice2;
-    }
-    
 
     
       public function sessionfacebook($email,$pass)
@@ -62,16 +58,16 @@ class AuthController extends AbstractActionController {
        
                 $correo = $email;
                 $contrasena = $pass;
-                $this->getAuthService2()
+                $this->getAuthService(1)
                         ->getAdapter()
                         ->setIdentity($correo)
                        ->setCredential($contrasena);
-                    $result = $this->getAuthService2()->authenticate();
+                    $result = $this->getAuthService(1)->authenticate();
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
                     }
                     if ($result->isValid()) {                 
-                        $storage = $this->getAuthService2()->getStorage();
+                        $storage = $this->getAuthService(1)->getStorage();
                         $storage->write($this->getServiceLocator()
                                         ->get('TableAuth2Service')
                                         ->getResultRowObject(array(
