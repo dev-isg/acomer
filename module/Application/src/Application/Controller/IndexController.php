@@ -1530,7 +1530,7 @@ class IndexController extends AbstractActionController
     }
      public function getAuthService() {
         if (!$this->authservice) {
-            $this->authservice = $this->getServiceLocator()->get('AuthService');
+            $this->authservice = $this->getServiceLocator()->get('AuthService2');
         }
 
         return $this->authservice;
