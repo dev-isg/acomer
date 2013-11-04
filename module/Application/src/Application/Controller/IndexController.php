@@ -245,7 +245,9 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
          $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();       
-       if (!isset($session)) {
+        $storage2 = new \Zend\Authentication\Storage\Session('Facebok');
+        $session2=$storage2->read(); 
+        if (!isset($session) or !isset($session2)) {
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
