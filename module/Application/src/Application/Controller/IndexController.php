@@ -1504,7 +1504,7 @@ class IndexController extends AbstractActionController
     }
      public function getAuthService() {
         if (!$this->authservice) {
-            $this->authservice = $this->getServiceLocator()->get('AuthsService');
+            $this->authservice = $this->getServiceLocator()->get('FacebookService');
         }
 
         return $this->authservice;

@@ -31,7 +31,7 @@ class FacebookController extends AbstractActionController {
 
     public function getAuthService() {
         if (!$this->authservice) {
-            $this->authservice = $this->getServiceLocator()->get('AuthsService');
+            $this->authservice = $this->getServiceLocator()->get('FacebookService');
         }
 
         return $this->authservice;
@@ -73,7 +73,7 @@ class FacebookController extends AbstractActionController {
                     if ($result->isValid()) {                 
                         $storage = $this->getAuthService()->getStorage();
                         $storage->write($this->getServiceLocator()
-                                        ->get('TableAuthsService')
+                                        ->get('TableFacebookService')
                                         ->getResultRowObject(array(
                                             'in_id',
                                             'va_nombre_cliente',

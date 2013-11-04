@@ -44,16 +44,16 @@ class Module implements AutoloaderProviderInterface
                     return new \LoginFace\Model\MyAuthStorage('zf_tutorial');
                 },
                 
-                'AuthsService' => function ($sm)
+                'FacebookService' => function ($sm)
                 {
-                    $dbTableAuthsAdapter = $sm->get('TableAuthsService');
+                    $dbTableAuthsAdapter = $sm->get('TableFacebookService');
                     
                     $authsService = new AuthenticationService();
                     $authsService->setStorage(new \Zend\Authentication\Storage\Session('Facebook')); // $authService->setStorage($sm->get('SanAuth\Model\MyAuthStorage')); //
                     $authsService->setAdapter($dbTableAuthsAdapter);
                     return $authsService;
                 },
-                'TableAuthsService' => function ($sm)
+                'TableFacebookService' => function ($sm)
                 {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $dbTableAuthsAdapter = new DbTableAuthAdapter($dbAdapter, 'ta_cliente', 'va_email', 'va_contrasena_facebook', 'SHA1(?)'); //
