@@ -49,7 +49,7 @@ class Module implements AutoloaderProviderInterface
                     $dbTableAuthAdapter = $sm->get('TableAuthsService');
                     
                     $authService = new AuthenticationService();
-                    $authService->setStorage(new \Zend\Authentication\Storage\Session('Auth')); // $authService->setStorage($sm->get('SanAuth\Model\MyAuthStorage')); //
+                    $authService->setStorage(new \Zend\Authentication\Storage\Session('Facebook')); // $authService->setStorage($sm->get('SanAuth\Model\MyAuthStorage')); //
                     $authService->setAdapter($dbTableAuthAdapter);
                     return $authService;
                 },

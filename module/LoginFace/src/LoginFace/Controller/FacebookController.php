@@ -21,7 +21,7 @@ class FacebookController extends AbstractActionController {
 
     protected $form;
     protected $storage;
-    protected $authsservice;
+    protected $authservice;
     protected $clientesTable;
 
     
@@ -30,11 +30,11 @@ class FacebookController extends AbstractActionController {
     }
 
     public function getAuthService() {
-        if (!$this->authsservice) {
-            $this->authsservice = $this->getServiceLocator()->get('AuthsService');
+        if (!$this->authservice) {
+            $this->authservice = $this->getServiceLocator()->get('AuthsService');
         }
 
-        return $this->authsservice;
+        return $this->authservice;
     }
 
     public function getSessionStorage() {
