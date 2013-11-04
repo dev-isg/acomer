@@ -940,7 +940,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
     }
     public function getAuthService() {
         if (!$this->authservice) {
-            $this->authservice = $this->getServiceLocator()->get('Auth2Service');
+            $this->authservice = $this->getServiceLocator()->get('AuthService');
         }
         return $this->authservice;
     }
