@@ -59,7 +59,7 @@ class FacebookController extends AbstractActionController {
 
     public function sessionfacebook($email,$pass)
     {  
-       
+         $redirect = 'login';
                 $correo = $email;
                 $contrasena = $pass;
                 $this->getAuthService()
