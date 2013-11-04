@@ -244,7 +244,8 @@ class IndexController extends AbstractActionController
         $view = new ViewModel();
         $request = $this->getRequest();
          $storage = new \Zend\Authentication\Storage\Session('Auth');
-        $session=$storage->read();       
+        $session=$storage->read();   
+        var_dump($session);exit;
         $storage2 = new \Zend\Authentication\Storage\Session('Facebok');
         $session2=$storage2->read(); 
         if (!isset($session) or !isset($session2)) {
