@@ -84,7 +84,7 @@ class FacebookController extends AbstractActionController {
                        
                     }
                 //   var_dump($storage->read());exit;
-                   return $result; 
+             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');
          }
   
     
