@@ -158,19 +158,20 @@ class ClientesTable
             'va_contrasena' => sha1($clientes['va_contrasena']),
             'va_verificacion' => $valor,  
             'va_notificacion' => $clientes['va_notificacion'],
-            'en_estado' =>'desactivo',   
+            'en_estado' =>'desactivo',
+          'va_fecha_ingreso'  =>date("Y-m-d H:i:s")
                 );
-        $id = (int) $clientes->in_id;
+      //  $id = (int) $clientes->in_id;
      
-        foreach($data as $key=>$value){
-           if(empty($value)){
-               $data[$key]=0;
-           }
-       }
-        if ($id == 0) { 
-            $data['va_fecha_ingreso'] = date("Y-m-d H:i:s");
+//        foreach($data as $key=>$value){
+//           if(empty($value)){
+//               $data[$key]=0;
+//           }
+//       }
+       // if ($id == 0) { 
+           // $data['va_fecha_ingreso'] = ;
            $clientes = $this->tableGateway->insert($data);
-        } else { 
+//        } else { 
 //            if ($this->getUsuario($id)) {
 //                 $this->updateCategoria($catg_ingresada, $id);
 //                if ($pass == '') {
@@ -191,7 +192,7 @@ class ClientesTable
 //            } else {
 //                throw new \Exception('no existe el usuario');
 //            }
-        }
+      //  }
     }
     
 
