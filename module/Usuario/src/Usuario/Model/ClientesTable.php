@@ -150,14 +150,14 @@ class ClientesTable
         return $resultSet->toArray();
     }
 
-    public function guardarClientes(Clientes $clientes,$valor=null)
+    public function guardarClientes($clientes,$valor=null)
     {  
         $data = array(
-            'va_nombre_cliente' => $clientes->va_nombre_cliente,
-            'va_email' => $clientes->va_email,
-            'va_contrasena' => sha1($clientes->va_contrasena),
+            'va_nombre_cliente' => $clientes['va_nombre_cliente'],
+            'va_email' => $clientes['va_email'],
+            'va_contrasena' => sha1($clientes['va_contrasena']),
             'va_verificacion' => $valor,  
-            'va_notificacion' => $clientes->va_notificacion,
+            'va_notificacion' => $clientes['va_notificacion'],
             'en_estado' =>'desactivo',   
                 );
         $id = (int) $clientes->in_id;

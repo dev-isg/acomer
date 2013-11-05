@@ -54,23 +54,31 @@ class ClientesController extends AbstractActionController {
     public function agregarclienteAction() {
         $view = new ViewModel();
         $this->layout('layout/layout-portada2');
-        $form = new ClientesForm();
-        $form->get('submit')->setValue('Crear Usuario');
-        $request = $this->getRequest();
+       // $form = new ClientesForm();
+     //   $form->get('submit')->setValue('Crear Usuario');
+       // $request = $this->getRequest();
         //var_dump($request);exit;
-        if ($request->isPost()) {
-            $clientes = new Clientes();
-            $form->setInputFilter($clientes->getInputFilter());
-            $form->setData($request->getPost());
-            if (!$form->isValid()) {
-                $clientes->exchangeArray($form->getData());
+       // if ($request->isPost()) {
+             $va_nombre_cliente = $this->params()->fromPost('va_nombre_cliente');
+             $va_email = $this->params()->fromPost('va_email');
+             $va_notificacion = $this->params()->fromPost('va_notificacion');
+             $va_contrasena = $this->params()->fromPost('va_contrasena');
+             $clientes = array('va_nombre_cliente'=>$va_nombre_cliente,
+              'va_email'  =>$va_email,
+              'va_notificacion'=>$va_notificacion,
+              'va_contrasena'=> $va_contrasena );
+          //  $clientes = new Clientes();
+            //$form->setInputFilter($clientes->getInputFilter());
+         //   $form->setData($request->getPost());
+//            if (!$form->isValid()) {
+              //  $clientes->exchangeArray($form->getData());
               
-                $correo = $this->getClientesTable()->verificaCorreo($request->getPost('va_email'));
+                $correo = $this->getClientesTable()->verificaCorreo($va_email);
                
-                if ($correo === false) { //echo'1';exit;
-                    $this->getClientesTable()->guardarClientes($clientes, md5($clientes->va_nombre_cliente));
-                    $this->correo($clientes->va_email, $clientes->va_nombre_cliente, md5($clientes->va_nombre_cliente));
-                    $bienvenido = 'Bienvenido  <html><body><strong>' . $clientes->va_nombre_cliente . '</strong></body></html> a Listadelsabor';
+                if ($correo === false) { 
+                    $this->getClientesTable()->guardarClientes($clientes, md5($va_nombre_cliente));
+                    $this->correo($va_email, $va_nombre_cliente, md5($va_nombre_cliente));
+                    $bienvenido = 'Bienvenido  <html><body><strong>' . $va_nombre_cliente . '</strong></body></html> a Listadelsabor';
                     $mensaje = 'Tu cuenta está casi lista para usarse, solo tienes que activarla desde tu correo electrónico';
                     return new JsonModel(array(
                                 'menssage' => array('bienvenido' => $bienvenido, 'saludo' => $mensaje),
@@ -78,24 +86,24 @@ class ClientesController extends AbstractActionController {
                             ));
                     exit;
                 } else {
-                    $mensaje = 'El correo electrónico ' . $request->getPost('va_email') . ' ya esta asociado a un usuario';
+                    $mensaje = 'El correo electrónico ' . $va_email . ' ya esta asociado a un usuario';
                     return new JsonModel(array(
                                 'menssage' => $mensaje,
                                 'success' => false
                             ));
                     exit;
                 }
-            } else {
-                foreach ($form->getInputFilter()->getInvalidInput() as $error) {
-                    print_r($error->getMessages());
-                }
-                return new JsonModel(array(
-                            'menssage' => $error->getMessages(),
-                            'success' => false
-                        ));
-                exit;
-            }
-        }
+//            } else {
+//                foreach ($form->getInputFilter()->getInvalidInput() as $error) {
+//                    print_r($error->getMessages());
+//                }
+//                return new JsonModel(array(
+//                            'menssage' => $error->getMessages(),
+//                            'success' => false
+//                        ));
+//                exit;
+//            }
+      //  }
         $view->setVariables(array(
             'form' => $form,
             'mensaje' => $mensaje,
