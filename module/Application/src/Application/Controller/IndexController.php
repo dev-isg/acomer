@@ -265,6 +265,9 @@ class IndexController extends AbstractActionController
             $plato = $datos['q'];      
             $paginas = $datos['page']; 
             $distrit = $datos['distrito'];
+            if($datos['limite']=='')
+            {$limite=10;}
+            else{$limite= $datos['limite'];}
             $valorubigeo =  explode(',', $distrit);
             $distrito = $valorubigeo[0];
             $valor = explode(" ",$plato);
@@ -295,11 +298,10 @@ class IndexController extends AbstractActionController
                 $this->redirect()->toUrl('/');
             }
             if (strtoupper($distrito)and strtoupper($distrito)!='LIMA') {
-                $limite = 10;
                 $distrits = '"'.$distrito.'"';
                 if($paginas=='')
                  {$start = 0;}
-                  else{$start=($paginas-1)*10;}
+                  else{$start=($paginas-1)*$limite;}
                 $resultados = false;
                 $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
                 $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
@@ -323,7 +325,7 @@ class IndexController extends AbstractActionController
           $limit_distritos = 9999;
                 $query_distritos = "-($palabraBuscar)";
                 $fq_distritos = array(
-                    'sort' => 'random_' . uniqid() . ' asc',
+                  //  'sort' => 'random_' . uniqid() . ' asc',
                     'fq' => 'en_estado:activo AND restaurant_estado:activo AND -distrito:' .$distrito,
                     'wt' => 'json',
                     'fl'=>'distrito'
@@ -342,10 +344,9 @@ class IndexController extends AbstractActionController
                 }
                 
             } elseif (strtoupper($distrito)=='LIMA') {
-                $limite = 10;
                 if($paginas=='')
                  {$start = 0;}
-               else{$start=($paginas-1)*10;}
+               else{$start=($paginas-1)*$limite;}
                 $resultados = false;
                 $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
                 $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
@@ -368,7 +369,7 @@ class IndexController extends AbstractActionController
           $limit_distritos = 9999;
                 $query_distritos = "-($palabraBuscar)";
                 $fq_distritos = array(
-                    'sort' => 'random_' . uniqid() . ' asc',
+                   // 'sort' => 'random_' . uniqid() . ' asc',
                     'fq' => 'en_estado:activo AND restaurant_estado:activo AND -distrito:' .$distrito,
                     'wt' => 'json',
                     'fl'=>'distrito'
@@ -387,10 +388,9 @@ class IndexController extends AbstractActionController
                 }
                 
             }else{
-                $limite = 10;
                 if($paginas=='')
                  {$start = 0;}
-                  else{$start=($paginas-1)*10;}
+                  else{$start=($paginas-1)*$limite;}
                 $resultados = false;
                 $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
                 $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
@@ -416,7 +416,7 @@ class IndexController extends AbstractActionController
                 $limit_platos = 9999;
                 $query_platos = "-($palabraBuscar)";
                 $fq_platos = array(
-                    'sort' => 'random_' . uniqid() . ' asc',
+                  //  'sort' => 'random_' . uniqid() . ' asc',
                     'fq' => 'en_estado:activo AND restaurant_estado:activo',
                     'wt' => 'json',
                     'fl'=>'name'

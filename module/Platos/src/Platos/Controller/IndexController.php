@@ -649,7 +649,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
             $palabraBuscar = isset($texto) ? $texto : false;
                 $query = "($palabraBuscar)";
                 $fq = array(
-                    'sort' => 'random_' . uniqid() . ' asc, puntuacion desc',
+                //    'sort' => 'random_' . uniqid() . ' asc, puntuacion desc',
                     'fq' => 'en_estado:activo  AND restaurant_estado:activo AND -id:'.$id.'AND plato_tipo:'.$tipo,
                     'wt' => 'json'
                 );
@@ -739,7 +739,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                 $palabraBuscar = isset($texto) ? $texto : false;
                 $query = "($palabraBuscar)";
                 $fq = array(
-                    'sort' => 'random_' . uniqid() . ' asc',
+                  //  'sort' => 'random_' . uniqid() . ' asc',
                     'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:'.$listarecomendacion[0]['in_id'] ,
                     'wt' => 'json'
                 );
