@@ -55,8 +55,10 @@ class AuthController extends AbstractActionController {
     }
 
     
-      public function sessionfacebook($email,$pass)
+   public function sessionfacebook($email,$pass)
        {  
+//          var_dump($email);
+//         var_dump($pass);exit;
                 $correo = $email;
                 $contrasena = $pass;
                 $this->getAuthService(1)
@@ -67,11 +69,7 @@ class AuthController extends AbstractActionController {
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
                     }
-                    if ($result->isValid()) { 
-                        
-                        $urlorigen = $this->getRequest()->getHeader('Referer')->uri()->getPath();
-                        $arrurl = explode('/', $urlorigen);
-                        $id = end($arrurl);
+                    if ($result->isValid()) {                 
                         $storage = $this->getAuthService(1)->getStorage();
                         $storage->write($this->getServiceLocator()
                                         ->get('TableAuth2Service')
@@ -82,8 +80,7 @@ class AuthController extends AbstractActionController {
                                             'va_logout',
                                             'id_facebook'
                                         )));
-
-
+                    //   var_dump($storage->read());exit; 
                     }
 //                    var_dump($storage->read());exit;
      return $this->redirect()->toUrl('/');
