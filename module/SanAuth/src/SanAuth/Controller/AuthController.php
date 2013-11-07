@@ -85,15 +85,20 @@ class AuthController extends AbstractActionController {
                                         )));
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 3f8275a88c88e189f2005a05b6a89b261aaaf8b9
+=======
+
+>>>>>>> 227a8b88988b8224be6c9f7c4be6c89db18e580b
                       return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
                         if ($id) {
                             return $this->redirect()->toRoute($redirect, array('in_id' => $id));
                         } else {
                             return $this->redirect()->toRoute($redirect);
                         }
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 //                      return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
@@ -106,6 +111,9 @@ class AuthController extends AbstractActionController {
 =======
 
 >>>>>>> 3f8275a88c88e189f2005a05b6a89b261aaaf8b9
+=======
+
+>>>>>>> 227a8b88988b8224be6c9f7c4be6c89db18e580b
                     }
 //                    var_dump($storage->read());exit;
      //return $this->redirect()->toUrl('/');
