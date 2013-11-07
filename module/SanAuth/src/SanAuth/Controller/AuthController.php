@@ -82,7 +82,7 @@ class AuthController extends AbstractActionController {
                    
                  }
 
-          return $this->redirect()->toUrl($url);
+          return $this->redirect()->toUrl($url);exit;
     }
     
     public function authenticateAction() {
