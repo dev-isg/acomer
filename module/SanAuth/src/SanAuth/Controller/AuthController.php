@@ -57,9 +57,8 @@ class AuthController extends AbstractActionController {
     
       public function sessionfacebook($email,$pass)
        {  
-//          var_dump($email);
-//         var_dump($pass);exit;
                 $correo = $email;
+                $redirect = 'login';
                 $contrasena = $pass;
                 $this->getAuthService(1)
                         ->getAdapter()
@@ -69,7 +68,11 @@ class AuthController extends AbstractActionController {
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
                     }
-                    if ($result->isValid()) {                 
+                    if ($result->isValid()) { 
+                        
+                        $urlorigen = $this->getRequest()->getHeader('Referer')->uri()->getPath();
+                        $arrurl = explode('/', $urlorigen);
+                        $id = end($arrurl);
                         $storage = $this->getAuthService(1)->getStorage();
                         $storage->write($this->getServiceLocator()
                                         ->get('TableAuth2Service')
@@ -80,76 +83,12 @@ class AuthController extends AbstractActionController {
                                             'va_logout',
                                             'id_facebook'
                                         )));
-                    //   var_dump($storage->read());exit; 
+                
                     }
 //                    var_dump($storage->read());exit;
      return $this->redirect()->toUrl('/');
     }
-    public function getForm() {
-        if (!$this->form) {
-            // $user = new User();
-            // $builder = new AnnotationBuilder();
-
-            $this->form = new \SanAuth\Form\UserForm(); // $builder->createForm($user);
-        }
-
-        return $this->form;
-    }
-
-
-    public function loginAction() {
-          $view =new ViewModel();
-        $this->layout('layout/layout-portada2');
-        $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
-        $renderer->inlineScript()
-                ->prependFile($this->_options->host->base . '/js/main.js');
-        $storage = new \Zend\Authentication\Storage\Session('Auth');
-        $session = $storage->read();
-        if (!isset($session)) {
-            $face = new \Usuario\Controller\ClientesController();
-            $facebook = $face->facebook();
-            $this->layout()->login = $facebook['loginUrl'];
-            $this->layout()->user = $facebook['user'];
-        }
-        $token = $this->params()->fromQuery('token');
-        if ($token) {
-            $usuario = $this->getClientesTable()->clientes($token);
-            if (count($usuario) > 0) {
-                $this->getClientesTable()->cambiarestado($usuario[0]['in_id']);
-                $mensaje = 'Bienvenido '.ucwords($usuario[0]['va_nombre_cliente']).'. Tu cuenta ya esta lista para usarse. ';
-                      return new JsonModel(array(
-                          'menssage' =>$mensaje,
-                           'success'=>true
-                            ));  
-            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
-            } else {
-           $mensaje = 'Esta cuenta ya ha sido activada. Inicie Sesión. '; 
-                return new JsonModel(array(
-                          'menssage' =>$mensaje,
-                           'success'=>false
-                            ));
-                
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
-            }
-        }
-        
-       $form = $this->getForm();   
-       $flashMessenger = $this->flashMessenger();
-        if ($flashMessenger->hasMessages()) {
-            $mensajes = $flashMessenger->getMessages();
-        }
-
-
-         $view->setVariables(array(
-            'form' => $form,
-            'mensaje' => $mensaje,
-            'messages' => $mensajes//$this->flashmessenger()->getMessages()
-        ));
-        return $view;
-    }
-
-
-
+    
     public function authenticateAction() {
         $form = $this->getForm();
         $redirect = 'login';
@@ -223,6 +162,89 @@ class AuthController extends AbstractActionController {
         }
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public function getForm() {
+        if (!$this->form) {
+            // $user = new User();
+            // $builder = new AnnotationBuilder();
+
+            $this->form = new \SanAuth\Form\UserForm(); // $builder->createForm($user);
+        }
+
+        return $this->form;
+    }
+
+
+    public function loginAction() {
+          $view =new ViewModel();
+        $this->layout('layout/layout-portada2');
+        $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
+        $renderer->inlineScript()
+                ->prependFile($this->_options->host->base . '/js/main.js');
+        $storage = new \Zend\Authentication\Storage\Session('Auth');
+        $session = $storage->read();
+        if (!isset($session)) {
+            $face = new \Usuario\Controller\ClientesController();
+            $facebook = $face->facebook();
+            $this->layout()->login = $facebook['loginUrl'];
+            $this->layout()->user = $facebook['user'];
+        }
+        $token = $this->params()->fromQuery('token');
+        if ($token) {
+            $usuario = $this->getClientesTable()->clientes($token);
+            if (count($usuario) > 0) {
+                $this->getClientesTable()->cambiarestado($usuario[0]['in_id']);
+                $mensaje = 'Bienvenido '.ucwords($usuario[0]['va_nombre_cliente']).'. Tu cuenta ya esta lista para usarse. ';
+                      return new JsonModel(array(
+                          'menssage' =>$mensaje,
+                           'success'=>true
+                            ));  
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
+            } else {
+           $mensaje = 'Esta cuenta ya ha sido activada. Inicie Sesión. '; 
+                return new JsonModel(array(
+                          'menssage' =>$mensaje,
+                           'success'=>false
+                            ));
+                
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
+            }
+        }
+        
+       $form = $this->getForm();   
+       $flashMessenger = $this->flashMessenger();
+        if ($flashMessenger->hasMessages()) {
+            $mensajes = $flashMessenger->getMessages();
+        }
+
+
+         $view->setVariables(array(
+            'form' => $form,
+            'mensaje' => $mensaje,
+            'messages' => $mensajes//$this->flashmessenger()->getMessages()
+        ));
+        return $view;
+    }
+
+
+
     
 
     public function validarAction(){

@@ -48,6 +48,8 @@ class Module implements AutoloaderProviderInterface
                 'Platos\Model\PlatosTable' =>  function($sm) {
                     $tableGateway = $sm->get('PlatosTableGateway');
                     $table = new PlatosTable($tableGateway);
+                    $cacheAdapter = $sm->get('Zend\Cache\Storage\Filesystem');
+                    $table->setCache($cacheAdapter);
                     return $table;
                 },
                 'PlatosTableGateway' => function ($sm) {
@@ -56,6 +58,7 @@ class Module implements AutoloaderProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Platos());
                     return new TableGateway('ta_plato', $dbAdapter, null, $resultSetPrototype);//
                 },
+                        
                         
 //               'Platos\Model\beta'=>function($sm){
 //                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');

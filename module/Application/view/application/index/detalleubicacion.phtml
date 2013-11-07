@@ -112,7 +112,6 @@ if((count($this->general)>0))
         {{for($i=0;$i<=$this->total-1;$i+=10)
            { if((int)(($i/10)+1)!=1) {?>  
                <a href="buscar-por-distrito?distrito=<?php echo $this->canonical2($this->distrito) ?>&q=<?php echo  $this->canonical2($this->plat)?>&page=<?php echo (int)(($i/10)+1)?>" ><?php echo ((int)($i/10)+1)?></a><?php
-            
                } else {?> <span>1</span> <?php }} }}
            else{{for($i=0;$i<=$this->total;$i+=10)
            { if((int)(($i/10)+1)!=1) {?> 

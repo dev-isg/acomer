@@ -848,21 +848,21 @@ class IndexController extends AbstractActionController
                 $view = new ViewModel();
                 header('Content-type: application/x-javascript');
                 header("Status: 200");
-                        $datos=$this->getRestauranteTable()->platosMovil($id);
+                       // $datos=$this->getRestauranteTable()->platosMovil($id);
                         $comentarios=$this->getRestauranteTable()->comentariosPlatos($id);
                         for($i=0;$i<count($comentarios);$i++)
                          { if(strlen($comentarios[$i]['va_nombre_cliente'])>19){
                             $comentarios[$i]['va_nombre_cliente']=trim(substr($comentarios[$i]['va_nombre_cliente'], 0, 17));
                             $comentarios[$i]['va_nombre_cliente'].='...';
                             }else{$comentarios[$i]['va_nombre_cliente']==$comentarios[$i]['va_nombre_cliente'];}}
-                            $datos[0]['Comentarios'] =$comentarios;
-                            $telefono = explode(';', $datos[0]['telefono']); 
-                           // $valores = array('va_telefono'=>$telefono);
-                            $datos[0]['telefono']=$telefono[0];
-                            if($datos[0]['va_imagen']=='platos-default.png')
-                            { $datos[0]['va_imagen']= $this->_options->host->base .'/img/platos-default.png';}
-                            else{ $datos[0]['va_imagen']= $this->_options->host->base .'/imagenes/plato/principal/'.$datos[0]['va_imagen'];}
-                        echo "jsonpCallback(".json_encode($datos).")";
+//                            $datos[0]['Comentarios'] =$comentarios;
+//                            $telefono = explode(';', $datos[0]['telefono']); 
+//     
+//                            $datos[0]['telefono']=$telefono[0];
+//                            if($datos[0]['va_imagen']=='platos-default.png')
+//                            { $datos[0]['va_imagen']= $this->_options->host->base .'/img/platos-default.png';}
+//                            else{ $datos[0]['va_imagen']= $this->_options->host->base .'/imagenes/plato/principal/'.$datos[0]['va_imagen'];}
+                        echo "jsonpCallback(".json_encode($comentarios).")";
                         exit();
                         $view->setTerminal(true);
                         return $view;

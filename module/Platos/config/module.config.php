@@ -80,6 +80,83 @@ return array(
                     )
                 )
             ), 
+              'platoindex' => array(
+                'type' => 'Segment',
+                'options' => array(                   
+                   'route' => '/plato/listar',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Platos\Controller',
+                        'controller' => 'Index',
+                        'action' => 'index'
+                    )
+                )
+            ), 
+              'agregarplatos' => array(
+                'type' => 'Segment',
+                'options' => array(                   
+                   'route' => '/plato/agregar-plato',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Platos\Controller',
+                        'controller' => 'Index',
+                        'action' => 'agregarplatos'
+                    )
+                )
+            ),
+              'eliminarsolar' => array(
+                'type' => 'Segment',
+                'options' => array(                   
+                   'route' => '/plato/eliminar-solar',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Platos\Controller',
+                        'controller' => 'Index',
+                        'action' => 'eliminarsolar'
+                    )
+                )
+            ), 
+             'cronsolar' => array(
+                'type' => 'Segment',
+                'options' => array(                   
+                   'route' => '/plato/cron-solar',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Platos\Controller',
+                        'controller' => 'Index',
+                        'action' => 'cronsolar'
+                    )
+                )
+            ), 
+               'editarplatos' => array(
+                'type' => 'Segment',
+                'options' => array(                   
+                   'route' => '/editar-plato[/:id_pa/:in_id]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Platos\Controller',
+                        'controller' => 'Index',
+                        'action' => 'editarplatos'
+                    )
+                )
+            ),
+            'cambiaestado' => array(
+                'type' => 'Segment',
+                'options' => array(                   
+                   'route' => '/plato/destaque-plato',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Platos\Controller',
+                        'controller' => 'Index',
+                        'action' => 'cambiaestado'
+                    )
+                )
+            ),
+            'eliminar' => array(
+                'type' => 'Segment',
+                'options' => array(                   
+                   'route' => '/plato/eliminar-plato',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Platos\Controller',
+                        'controller' => 'Index',
+                        'action' => 'eliminar'
+                    )
+                )
+            ),
         ),
     ),
     'view_manager' => array(

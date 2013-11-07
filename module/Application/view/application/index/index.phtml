@@ -133,9 +133,21 @@
           </li> 
           <?php } ?>
       </ul>
-
-      <?php echo (count($this->promociones)> 0)?$this->paginationControl($this->promociones, 'Sliding', 'application/index/paginador.phtml',array('variable'=>$this->urlac)):"";?>
-    </div>
+ 
+    <div class="pagination" role="navigation" >
+                    
+       <?php if($this->cantidad){
+            if ($this->cantidad % 9 == 0)
+            {
+        {for($i=0;$i<=$this->cantidad;$i+=9)
+           { if((int)(($i/9)+1)!=1) {?>  
+               <a href="/?page=<?php echo (int)(($i/9))?>" ><?php echo ((int)($i/9))?></a><?php
+               } } }
+          }else{{for($i=0;$i<=$this->cantidad+9;$i+=9)
+           { if((int)(($i/9)+1)!=1) {?>  
+               <a href="/?page=<?php echo (int)(($i/9))?>" ><?php echo ((int)($i/9))?></a><?php
+               }} }}}?> 
+    </div> </div>
     <?php 
       } ?>
   </div>

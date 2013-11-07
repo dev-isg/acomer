@@ -7,7 +7,7 @@ $this->headTitle($title);
 	$form = $this->form;
 	//$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
 	$form->setAttributes(array(
-	    'action' => $this->url.'/platos/index/editarplatos/'.$this->idlocal.'/'.$this->in_id,//.'/'.$this->va_nombre,//?in_id='.$this->in_id.'&va_nombre='.$this->va_nombre,
+	    'action' => $this->url.'/editar-plato/'.$this->idlocal.'/'.$this->in_id,//.'/'.$this->va_nombre,//?in_id='.$this->in_id.'&va_nombre='.$this->va_nombre,
 	    'method' => 'post',
 	    'in_id'   =>$this->in_id,
 	));

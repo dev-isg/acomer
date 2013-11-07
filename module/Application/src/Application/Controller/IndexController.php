@@ -65,48 +65,29 @@ class IndexController extends AbstractActionController
                            $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
                                                AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
        }}
-        $comidas = $this->joinAction()->toArray();
+       $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
-        $mistura=$this->getConfigTable()->platoslistadelsabor();
-        $page2 = (int) $this->params()->fromQuery('page', 1);
-        $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($mistura));
-        $paginator->setCurrentPageNumber($page2);
-         $paginator->setItemCountPerPage(9); 
-         $cante=count($mistura->toArray());
-         if(ceil($cante/9) <$page2){
-             $view->setTerminal(true);
-            $view->setTemplate('layout/layout-error');}
-         $url = $_SERVER['REQUEST_URI'];
-        if ($url != '/') {
-            if ($url) {
-                $page = strpos($url, 'page=');
-                if ($page) {
-                    $urlf = substr($url, 0, $page - 1);
-                } else {
-                    $urlf = $url;
-                }
-                $urlf = $urlf . '?';
-            } else {
-                $urlf = $urlf . '?';
-            }
-        } else {
-            $auxurl = strpos($url, '/');
-            $urlf = substr($url, 0, $auxurl);
-            $urlf = $urlf . '?';
-        }
+        $page2 = (int) $this->params()->fromQuery('page',1);
+           if($_COOKIE['cantidad']){
+            $canti=$_COOKIE['cantidad'];  }
+           else{$cantid=$this->getConfigTable()->cantidad();
+               $canti =$cantid[0]['NumeroResultados'];
+             setcookie('cantidad', $cantid[0]['NumeroResultados']); } 
+         if(ceil($canti/9)>=$page2){$mistura=$this->getConfigTable()->platoslistadelsabor($page2);}
+         else{ $view->setTerminal(true);
+        return $view->setTemplate('layout/layout-error');}
+      //  $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($mistura));
         $this->layout()->clase = 'Home';
         $menus = $this->menu();
         $banner = $this->banner();
         $view->setVariables(array(
-            'promociones'=>$paginator,
+            'promociones'=>$mistura,
             'clase' => 'Home',
-              'urlac' => $urlf,
+            'urlac' => $urlf,
             'menus'=>$menus,
             'banner'=>$banner,
             'session'=>$session,
-            'user' => $user,
-            'loginUrl'  =>$loginUrl, 
-            'w'=>$ddd
+            'cantidad'=>$canti
         ));
         return $view;
     }
@@ -265,6 +246,9 @@ class IndexController extends AbstractActionController
             $plato = $datos['q'];      
             $paginas = $datos['page']; 
             $distrit = $datos['distrito'];
+            if($datos['limite']=='')
+            {$limite=10;}
+            else{$limite= $datos['limite'];}
             $valorubigeo =  explode(',', $distrit);
             $distrito = $valorubigeo[0];
             $valor = explode(" ",$plato);
@@ -295,17 +279,21 @@ class IndexController extends AbstractActionController
                 $this->redirect()->toUrl('/');
             }
             if (strtoupper($distrito)and strtoupper($distrito)!='LIMA') {
-                $limite = 10;
+              
                 $distrits = '"'.$distrito.'"';
                 if($paginas=='')
                  {$start = 0;}
-                  else{$start=($paginas-1)*10;}
+                  else{$start=($paginas-1)*$limite;}
                 $resultados = false;
                 $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
                 $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
-                $fd = array(
+                if($distrito=='TODOS LOS DISTRITOS')
+                {$fd = array(
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND departamento:LIMA',
+                );}else{$fd = array(
                     'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' .$distrits,
-                );
+                );}
+                
                 
                 $solar = \Classes\Solr::getInstance()->getSolr();
                 if ($palabraBuscar) {
@@ -323,7 +311,7 @@ class IndexController extends AbstractActionController
           $limit_distritos = 9999;
                 $query_distritos = "-($palabraBuscar)";
                 $fq_distritos = array(
-                    'sort' => 'random_' . uniqid() . ' asc',
+                  //  'sort' => 'random_' . uniqid() . ' asc',
                     'fq' => 'en_estado:activo AND restaurant_estado:activo AND -distrito:' .$distrito,
                     'wt' => 'json',
                     'fl'=>'distrito'
@@ -342,15 +330,14 @@ class IndexController extends AbstractActionController
                 }
                 
             } elseif (strtoupper($distrito)=='LIMA') {
-                $limite = 10;
                 if($paginas=='')
                  {$start = 0;}
-               else{$start=($paginas-1)*10;}
+               else{$start=($paginas-1)*$limite;}
                 $resultados = false;
                 $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
                 $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
                 $fd = array(
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND  departamento:' .$distrito,
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND  departamento:LIMA' ,
                 );
                 
                 $solar = \Classes\Solr::getInstance()->getSolr();
@@ -368,7 +355,7 @@ class IndexController extends AbstractActionController
           $limit_distritos = 9999;
                 $query_distritos = "-($palabraBuscar)";
                 $fq_distritos = array(
-                    'sort' => 'random_' . uniqid() . ' asc',
+                   // 'sort' => 'random_' . uniqid() . ' asc',
                     'fq' => 'en_estado:activo AND restaurant_estado:activo AND -distrito:' .$distrito,
                     'wt' => 'json',
                     'fl'=>'distrito'
@@ -387,10 +374,9 @@ class IndexController extends AbstractActionController
                 }
                 
             }else{
-                $limite = 10;
                 if($paginas=='')
                  {$start = 0;}
-                  else{$start=($paginas-1)*10;}
+                  else{$start=($paginas-1)*$limite;}
                 $resultados = false;
                 $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
                 $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
@@ -416,7 +402,7 @@ class IndexController extends AbstractActionController
                 $limit_platos = 9999;
                 $query_platos = "-($palabraBuscar)";
                 $fq_platos = array(
-                    'sort' => 'random_' . uniqid() . ' asc',
+                  //  'sort' => 'random_' . uniqid() . ' asc',
                     'fq' => 'en_estado:activo AND restaurant_estado:activo',
                     'wt' => 'json',
                     'fl'=>'name'
@@ -475,12 +461,40 @@ class IndexController extends AbstractActionController
           //  $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
             $mostrar =  $total . ' resultados';
         }
-         if($_GET['callback'])
-       { 
+       if($_GET['callback'])
+       {
         $view = new ViewModel();
         header('Content-type: application/x-javascript');
         header("Status: 200");
-          echo "jsonpCallback(".$resultados->getRawResponse().")";
+          $arrpl=array();
+            for($i=0;$i<count($resultados->response->docs);$i++)
+            {         $arrpl['numFound'] =  $resultados->response->numFound;
+               foreach ($resultados->response->docs as $plat) 
+                   {
+                    if($plat->va_imagen=='platos-default.png')
+                            {$imagen=$this->_options->host->base .'/img/platos-default.png';
+                            $imagen2=$this->_options->host->base .'/img/platos-default.png';}
+                             else{$imagen=$this->_options->host->base .'/imagenes/plato/general/'. $plat->va_imagen;
+                             $imagen2=$this->_options->host->base .'/imagenes/plato/principal/'. $plat->va_imagen;}
+                             $telefono = explode(';', $plat->va_telefono);
+                              $arrpl['docs'][$i] = array(
+                             'va_imagen'=>$imagen,
+                             'va_imagen_detalle'=>$imagen2,
+                             'name'=> $plat->name,
+                             'restaurante'=> $plat->restaurante,
+                             'distrito'=> $plat->distrito,
+                             'va_telefono'=> $telefono[0],
+                             'tipo_comida'=> $plat->tipo_comida,
+                             'en_destaque'=>$plat->en_destaque,
+                             'departamento'=>$plat->departamento,
+                             'comentarios'=>$plat->comentarios,
+                             'puntuacion'=>$plat->puntuacion,
+                             'tx_descripcion'=> $plat->tx_descripcion,
+                             'tag'=> $plat->tag);
+                              $i++; 
+                  } 
+            }
+          echo "jsonpCallback(".json_encode($arrpl).")";
                 exit();
                 $view->setTerminal(true);
                 return $view;
