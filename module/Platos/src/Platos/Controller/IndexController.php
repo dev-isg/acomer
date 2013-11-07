@@ -695,19 +695,20 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
+           $url='/plato/'.$datos['restaurante'].'/'.$datos['nombre'];
         $id_face=$this->getClientesTable()->usuarioface($facebook['email']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
                         {
                            $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                            AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook'],$datos); 
+                            AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook'],$url); 
                         }     
                          else{
                             $this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook'],$datos); }   }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook'],$url); }   }
                          else{
                            $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook'],$datos); }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook'],$url); }
        }}  
         
         $urlerror =  $datos['nombre'];

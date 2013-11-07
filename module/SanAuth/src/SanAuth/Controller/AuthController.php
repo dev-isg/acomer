@@ -81,7 +81,7 @@ class AuthController extends AbstractActionController {
                                         )));
                  }
 //                    var_dump($storage->read());exit;
-   return $this->redirect()->toUrl('/'.$url);
+   return $this->redirect()->toUrl($url);
                   //   return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
     }
     
