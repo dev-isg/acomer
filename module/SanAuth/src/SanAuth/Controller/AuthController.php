@@ -58,7 +58,6 @@ class AuthController extends AbstractActionController {
       public function sessionfacebook($email,$pass)
        {  
                 $correo = $email;
-                $redirect = 'login';
                 $contrasena = $pass;
                 $this->getAuthService(1)
                         ->getAdapter()
@@ -84,12 +83,6 @@ class AuthController extends AbstractActionController {
                                             'id_facebook'
                                         )));
 
-//                      return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
-//                        if ($id) {
-//                            return $this->redirect()->toRoute($redirect, array('in_id' => $id));
-//                        } else {
-//                            return $this->redirect()->toRoute($redirect);
-//                        }
 
                     }
 //                    var_dump($storage->read());exit;
