@@ -10386,3 +10386,4 @@ mariscos , TODOS LOS DISTRITOS
 Caplina    , 
 Caplina    , 
 ceviche , LIMA
+ceviche , LIMA
