@@ -33,7 +33,7 @@ class PlatosTable {
         $valores=$this->minimomaximo();
         $rango= rand($valores[0]['minimo'],$valores[0]['maximo']);
          $adapter = $this->tableGateway->getAdapter();  
-         if( ($resultadosHome = $this->cache->getItem('platoscache')) == FALSE) {
+       // if( ($resultadosHome = $this->cache->getItem('platoscache')) == FALSE) {
          $resultadosHome = $this->tableGateway->getAdapter()
                 ->query('SELECT ta_plato.in_id AS id ,ta_plato.va_nombre,ta_plato.Ta_puntaje_in_id,ta_plato.va_imagen,ta_plato.en_destaque,tr.va_nombre AS restaurant_nombre ,COUNT(ta_comentario.in_id ) AS NumeroComentarios
                 ,tu.ch_distrito AS Distrito,tu.ch_departamento AS Departamento,tl.va_telefono AS telefono,tl.va_direccion AS direccion
@@ -46,15 +46,17 @@ class PlatosTable {
                 LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
                 WHERE    ta_plato.en_estado=1 AND tr.en_estado=1 AND tr.va_nombre IS NOT NULL  
                 GROUP BY id,ta_plato.en_destaque
-                ORDER BY ta_plato.en_destaque ASC,ta_plato.Ta_puntaje_in_id DESC,NumeroComentarios DESC' , $adapter::QUERY_MODE_EXECUTE);
-                    $resultadosHome->next();
-                    $prime = $resultadosHome->toArray();
-                    $this->cache->setItem('platoscache',  $prime ); 
+                ORDER BY ta_plato.en_destaque ASC,ta_plato.Ta_puntaje_in_id DESC,NumeroComentarios DESC  ' , $adapter::QUERY_MODE_EXECUTE);
+                   // $resultadosHome->next();
+                   // $resultadosHome = $resultadosHome->toArray();
+                   // var_dump($resultadosHome);exit;
+//                    $this->cache->setItem('platoscache',  $resultadosHome ); 
                      
-                   $resultadosHome = $this->cache->getItem('platoscache');
-          }else{ 
-         $resultadosHome = $this->cache->getItem('platoscache'); }
-       return $resultadosHome;
+              //     $resultadosHome = $this->cache->getItem('platoscache');
+          //}
+//          else{ 
+//         $resultadosHome = $this->cache->getItem('platoscache'); }
+       return $resultadosHome->buffer();
     }
 
     public function fetchAll($consulta = null,$consulta2 = null) {

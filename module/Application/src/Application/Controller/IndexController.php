@@ -67,10 +67,11 @@ class IndexController extends AbstractActionController
        }}
         $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
-        $mistura=$this->getConfigTable()->platoslistadelsabor();
         $page2 = (int) $this->params()->fromQuery('page', 1);
+        $mistura=$this->getConfigTable()->platoslistadelsabor();
+        
       //  var_dump($page2);exit;
-       $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($mistura));
+       $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($mistura));
 //        $paginator = \Zend\Paginator\Paginator::setCache($mistura);
 //        var_dump($mistura);exit;
 //        //$paginador = new Zend\Paginator\Paginator::setCache($cache);
@@ -78,7 +79,7 @@ class IndexController extends AbstractActionController
        // $paginator->setItemCountPerPage(9); 
         $paginator->getItemsByPage(9);
        // var_dump($f);exit;
-        $cante=count($mistura);
+        $cante=count($mistura->toArray());
          if(ceil($cante/9) <$page2){
              $view->setTerminal(true);
             $view->setTemplate('layout/layout-error');}
@@ -467,25 +468,44 @@ class IndexController extends AbstractActionController
           //  $mostrar = 'Mostrando ' . $inicio . ' - ' . $end . ' de ' . $total . ' resultados';
             $mostrar =  $total . ' resultados';
         }
-         if($_GET['callback'])
-        { 
+       if($_GET['callback'])
+       {
         $view = new ViewModel();
         header('Content-type: application/x-javascript');
         header("Status: 200");
-//      var_dump($resultados->response->docs);exit;
-//        for($i=0;$i<count($resultados->response->docs);$i++)   
-//        {
-//            var_dump($resultados->response->docs->name[$i]) ; 
-//        }
-//        exit;
-//        if($datos[0]['va_imagen']=='platos-default.png')
-//                           { $datos[0]['va_imagen']= $this->_options->host->base .'/img/platos-default.png';}
-//                           else{ $datos[0]['va_imagen']= $this->_options->host->base .'/imagenes/plato/principal/'.$datos[0]['va_imagen'];}
-          echo "jsonpCallback(".$resultados->getRawResponse().")";
+          $arrpl=array();
+            for($i=0;$i<count($resultados->response->docs);$i++)
+            {         $arrpl['numFound'] =  $resultados->response->numFound;
+               foreach ($resultados->response->docs as $plat) 
+                   {
+                    if($plat->va_imagen=='platos-default.png')
+                            {$imagen=$this->_options->host->base .'/img/platos-default.png';
+                            $imagen2=$this->_options->host->base .'/img/platos-default.png';}
+                             else{$imagen=$this->_options->host->base .'/imagenes/plato/general/'. $plat->va_imagen;
+                             $imagen2=$this->_options->host->base .'/imagenes/plato/principal/'. $plat->va_imagen;}
+                             $telefono = explode(';', $plat->va_telefono);
+                              $arrpl['docs'][$i] = array(
+                             'va_imagen'=>$imagen,
+                             'va_imagen_detalle'=>$imagen2,
+                             'name'=> $plat->name,
+                             'restaurante'=> $plat->restaurante,
+                             'distrito'=> $plat->distrito,
+                             'va_telefono'=> $telefono[0],
+                             'tipo_comida'=> $plat->tipo_comida,
+                             'en_destaque'=>$plat->en_destaque,
+                             'departamento'=>$plat->departamento,
+                             'comentarios'=>$plat->comentarios,
+                             'puntuacion'=>$plat->puntuacion,
+                             'tx_descripcion'=> $plat->tx_descripcion,
+                             'tag'=> $plat->tag);
+                              $i++; 
+                  } 
+            }
+          echo "jsonpCallback(".json_encode($arrpl).")";
                 exit();
                 $view->setTerminal(true);
                 return $view;
-         }
+       }
         $arrpl=array();
         $arrest=array();
         if (count($resultados->response->docs) < 5 && count($resultados->response->docs) > 0) {
