@@ -84,12 +84,17 @@ class AuthController extends AbstractActionController {
                                             'id_facebook'
                                         )));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3f8275a88c88e189f2005a05b6a89b261aaaf8b9
                       return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
                         if ($id) {
                             return $this->redirect()->toRoute($redirect, array('in_id' => $id));
                         } else {
                             return $this->redirect()->toRoute($redirect);
                         }
+<<<<<<< HEAD
 =======
 //                      return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
 //                        if ($id) {
@@ -98,6 +103,9 @@ class AuthController extends AbstractActionController {
 //                            return $this->redirect()->toRoute($redirect);
 //                        }
 >>>>>>> 31d5796e80c1c6142845c4acbf945b97e072b7ec
+=======
+
+>>>>>>> 3f8275a88c88e189f2005a05b6a89b261aaaf8b9
                     }
 //                    var_dump($storage->read());exit;
      //return $this->redirect()->toUrl('/');
