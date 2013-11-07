@@ -26,14 +26,13 @@ class PlatosTable {
     } 
     
        
-     public function platoslistadelsabor(){
-
-       $cantidad=$this->cantidad();
-        $total=$cantidad[0]['NumeroResultados']; 
-        $valores=$this->minimomaximo();
-        $rango= rand($valores[0]['minimo'],$valores[0]['maximo']);
+     public function platoslistadelsabor($limit){
+            if($limit == 1)
+            {$limite=9;
+           $constante= '';}else{$constante=',9';
+            $limite= ($limit-1)*9; }
          $adapter = $this->tableGateway->getAdapter();  
-       // if( ($resultadosHome = $this->cache->getItem('platoscache')) == FALSE) {
+       if( ($resultadosHome = $this->cache->getItem('platoscache'.$limit)) == FALSE) {
          $resultadosHome = $this->tableGateway->getAdapter()
                 ->query('SELECT ta_plato.in_id AS id ,ta_plato.va_nombre,ta_plato.Ta_puntaje_in_id,ta_plato.va_imagen,ta_plato.en_destaque,tr.va_nombre AS restaurant_nombre ,COUNT(ta_comentario.in_id ) AS NumeroComentarios
                 ,tu.ch_distrito AS Distrito,tu.ch_departamento AS Departamento,tl.va_telefono AS telefono,tl.va_direccion AS direccion
@@ -46,17 +45,11 @@ class PlatosTable {
                 LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
                 WHERE    ta_plato.en_estado=1 AND tr.en_estado=1 AND tr.va_nombre IS NOT NULL  
                 GROUP BY id,ta_plato.en_destaque
-                ORDER BY ta_plato.en_destaque ASC,ta_plato.Ta_puntaje_in_id DESC,NumeroComentarios DESC  ' , $adapter::QUERY_MODE_EXECUTE);
-                   // $resultadosHome->next();
-                   // $resultadosHome = $resultadosHome->toArray();
-                   // var_dump($resultadosHome);exit;
-//                    $this->cache->setItem('platoscache',  $resultadosHome ); 
-                     
-              //     $resultadosHome = $this->cache->getItem('platoscache');
-          //}
-//          else{ 
-//         $resultadosHome = $this->cache->getItem('platoscache'); }
-       return $resultadosHome->buffer();
+                ORDER BY ta_plato.en_destaque ASC,ta_plato.Ta_puntaje_in_id DESC,NumeroComentarios DESC  LIMIT '.$limite.''.'' . $constante.'' , $adapter::QUERY_MODE_EXECUTE);
+                    $resultadosHome = $resultadosHome->toArray();
+                  $this->cache->setItem('platoscache'.$limit,  $resultadosHome ); 
+          }
+       return $resultadosHome;
     }
 
     public function fetchAll($consulta = null,$consulta2 = null) {
@@ -556,8 +549,7 @@ public function guardarplatoregistro($dataregistro) {
                 LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id`
                 LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
                 LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
-                WHERE  ta_plato.en_destaque=1 
-                 AND ta_plato.en_estado=1  AND tr.en_estado=1';
+               WHERE    ta_plato.en_estado=1 AND tr.en_estado=1 AND tr.va_nombre IS NOT NULL ';
            $cantidad = $this->tableGateway->getAdapter()
             ->query($query, $adapter::QUERY_MODE_EXECUTE); 
             return $cantidad->toArray();

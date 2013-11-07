@@ -65,41 +65,29 @@ class IndexController extends AbstractActionController
                            $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
                                                AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
        }}
-        $comidas = $this->joinAction()->toArray();
+       $comidas = $this->joinAction()->toArray();
         $this->layout()->comidas = $comidas;
-        $page2 = (int) $this->params()->fromQuery('page', 1);
-        $mistura=$this->getConfigTable()->platoslistadelsabor();
-        
-      //  var_dump($page2);exit;
-       $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($mistura));
-//        $paginator = \Zend\Paginator\Paginator::setCache($mistura);
-//        var_dump($mistura);exit;
-//        //$paginador = new Zend\Paginator\Paginator::setCache($cache);
-        $paginator->setCurrentPageNumber($page2);
-       // $paginator->setItemCountPerPage(9); 
-        $paginator->getItemsByPage(9);
-       // var_dump($f);exit;
-        $cante=count($mistura->toArray());
-         if(ceil($cante/9) <$page2){
-             $view->setTerminal(true);
-            $view->setTemplate('layout/layout-error');}
-            $url = $_SERVER['REQUEST_URI'];
-            $auxurl = strpos($url, '/');
-            $urlf = substr($url, 0, $auxurl);
-            $urlf = $urlf . '?';
+        $page2 = (int) $this->params()->fromQuery('page',1);
+           if($_COOKIE['cantidad']){
+            $canti=$_COOKIE['cantidad'];  }
+           else{$cantid=$this->getConfigTable()->cantidad();
+               $canti =$cantid[0]['NumeroResultados'];
+             setcookie('cantidad', $cantid[0]['NumeroResultados']); } 
+         if(ceil($canti/9)>=$page2){$mistura=$this->getConfigTable()->platoslistadelsabor($page2);}
+         else{ $view->setTerminal(true);
+        return $view->setTemplate('layout/layout-error');}
+      //  $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($mistura));
         $this->layout()->clase = 'Home';
         $menus = $this->menu();
         $banner = $this->banner();
         $view->setVariables(array(
-            'promociones'=>$paginator,
+            'promociones'=>$mistura,
             'clase' => 'Home',
-              'urlac' => $urlf,
+            'urlac' => $urlf,
             'menus'=>$menus,
             'banner'=>$banner,
             'session'=>$session,
-            'user' => $user,
-            'loginUrl'  =>$loginUrl, 
-            'w'=>$ddd
+            'cantidad'=>$canti
         ));
         return $view;
     }
@@ -291,6 +279,7 @@ class IndexController extends AbstractActionController
                 $this->redirect()->toUrl('/');
             }
             if (strtoupper($distrito)and strtoupper($distrito)!='LIMA') {
+              
                 $distrits = '"'.$distrito.'"';
                 if($paginas=='')
                  {$start = 0;}
@@ -298,9 +287,13 @@ class IndexController extends AbstractActionController
                 $resultados = false;
                 $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
                 $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
-                $fd = array(
+                if($distrito=='TODOS LOS DISTRITOS')
+                {$fd = array(
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND departamento:LIMA',
+                );}else{$fd = array(
                     'fq' => 'en_estado:activo AND restaurant_estado:activo AND distrito:' .$distrits,
-                );
+                );}
+                
                 
                 $solar = \Classes\Solr::getInstance()->getSolr();
                 if ($palabraBuscar) {
@@ -344,7 +337,7 @@ class IndexController extends AbstractActionController
                 $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
                 $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
                 $fd = array(
-                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND  departamento:' .$distrito,
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND  departamento:LIMA' ,
                 );
                 
                 $solar = \Classes\Solr::getInstance()->getSolr();
