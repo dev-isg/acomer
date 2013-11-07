@@ -55,16 +55,11 @@ class AuthController extends AbstractActionController {
     }
 
     
-   public function sessionfacebook($email,$pass)
+   public function sessionfacebook($email,$pass,$url)
        {  
-//          var_dump($email);
-//         var_dump($pass);exit;
+
                 $correo = $email;
                 $contrasena = $pass;
-                 $redirect = 'login';
-        $request = $this->getRequest();
-
-        if ($request->isPost()) {
                 $this->getAuthService(1)
                         ->getAdapter()
                         ->setIdentity($correo)
@@ -73,9 +68,6 @@ class AuthController extends AbstractActionController {
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
                     }
-                 $urlorigen = $this->getRequest()->getHeader('Referer')->uri()->getPath();
-                        $arrurl = explode('/', $urlorigen);
-                        $id = end($arrurl);
                     if ($result->isValid()) {                 
                         $storage = $this->getAuthService(1)->getStorage();
                         $storage->write($this->getServiceLocator()
@@ -87,16 +79,10 @@ class AuthController extends AbstractActionController {
                                             'va_logout',
                                             'id_facebook'
                                         )));
-                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
-                        if ($id) {
-                            return $this->redirect()->toRoute($redirect, array('in_id' => $id));
-                        } else {
-                            return $this->redirect()->toRoute($redirect);
-                        }
-                    }
+                 }
 //                    var_dump($storage->read());exit;
-   //  return $this->redirect()->toUrl('/');
-                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');}
+   return $this->redirect()->toUrl('/'.$url);
+                  //   return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
     }
     
     public function authenticateAction() {
