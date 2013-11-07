@@ -84,7 +84,8 @@ class AuthController extends AbstractActionController {
                     //   var_dump($storage->read());exit; 
                     }
 //                    var_dump($storage->read());exit;
-     return $this->redirect()->toUrl('/');
+   //  return $this->redirect()->toUrl('/');
+                     return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
     }
     
     public function authenticateAction() {
