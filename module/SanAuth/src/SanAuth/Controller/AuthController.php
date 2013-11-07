@@ -69,6 +69,7 @@ class AuthController extends AbstractActionController {
                     foreach ($result->getMessages() as $message) {
                         $this->flashmessenger()->addMessage($message);
                     }
+                     $urlorigen = $this->getRequest()->getHeader('Referer')->uri()->getPath();
                     if ($result->isValid()) {                 
                         $storage = $this->getAuthService(1)->getStorage();
                         $storage->write($this->getServiceLocator()
@@ -83,7 +84,7 @@ class AuthController extends AbstractActionController {
                     //   var_dump($storage->read());exit; 
                     }
 //                    var_dump($storage->read());exit;
-    // return $this->redirect()->toUrl('/');
+     return $this->redirect()->toUrl($urlorigen);
     }
     
     public function authenticateAction() {
