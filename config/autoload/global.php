@@ -29,24 +29,24 @@ return array(
         'secret' => '2e07ad7ea83185f20da1ca546fee0720'
     ),
     
-//        'host' => array(
-//            'base' => 'http://192.168.1.34:8080',
-//            'static' => 'http://192.168.1.34:8080',
-//            'images' => 'http://192.168.1.34:8080/imagenes',
-//            'img'=>'http://192.168.1.34:8080/img',
-//            'ruta' => 'http://192.168.1.34:8080',
-//            'version'=>1,
-//        ),
+        'host' => array(
+            'base' => 'http://192.168.1.34:8080',
+            'static' => 'http://192.168.1.34:8080',
+            'images' => 'http://192.168.1.34:8080/imagenes',
+            'img'=>'http://192.168.1.34:8080/img',
+            'ruta' => 'http://192.168.1.34:8080',
+            'version'=>1,
+        ),
 
     
-    'host' => array(
-       'base' => 'http://dev.listadelsabor.com',
-        'static' => 'http://dev.listadelsabor.com',
-        'images' => 'http://192.168.1.34:8080/imagenes',
-        'img'=>'http://192.168.1.34:8080/img',
-       'ruta' => 'http://dev.listadelsabor.com',
-        'version'=>1,
-    ),
+//    'host' => array(
+//       'base' => 'http://dev.listadelsabor.com',
+//        'static' => 'http://dev.listadelsabor.com',
+//        'images' => 'http://192.168.1.34:8080/imagenes',
+//        'img'=>'http://192.168.1.34:8080/img',
+//       'ruta' => 'http://dev.listadelsabor.com',
+//        'version'=>1,
+//    ),
   
    
     'upload' => array(
@@ -77,11 +77,24 @@ return array(
 
     'service_manager' => array(
         'factories' => array(
-            'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory'
+            'Zend\Db\TableGateway\TableGateway' => 'Zend\Db\Adapter\AdapterServiceFactory',
+            'Zend\Cache\Storage\Filesystem' => function($sm){
+		    $cache = Zend\Cache\StorageFactory::factory(array(
+			'adapter' => 'filesystem',
+			'plugins' => array(
+			    'exception_handler' => array('throw_exceptions' => false),
+			    'serializer'
+			)
+		    ));
+		    
+		    $cache->setOptions(array(
+			    'cache_dir' => './data/cache',
+                             'ttl'      => 5*60,
+		    ));
+                    
+                    return $cache;
+	    },
         ),
-//        'aliases' => array(
-//                'translator' => 'MvcTranslator',
-//            ),
     ),
     'module_layouts' => array(
 //         'Application' => 'layout/layout-portada',

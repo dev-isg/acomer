@@ -8,18 +8,54 @@ use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Select;
 use Platos\Model\Platos;
 use Zend\Mvc\Controller\Plugin\FlashMessenger;
-
+use Zend\Db\ResultSet\HydratingResultSet;
+use Zend\Cache\Storage\StorageInterface;
 class PlatosTable {
 
     protected $tableGateway;
+    protected $cache;
 
     public function __construct(TableGateway $tableGateway) {
         $this->tableGateway = $tableGateway;
+        $this->resultSetPrototype = new HydratingResultSet();
+         $this->resultSetPrototype->setObjectPrototype(new Platos());
     }
+ public function setCache(StorageInterface $cache)
+    {
+        $this->cache = $cache;
+    } 
+    
+       
+     public function platoslistadelsabor(){
 
-    /*
-     * 2 maneras distina de hacer joins
-     */
+       $cantidad=$this->cantidad();
+        $total=$cantidad[0]['NumeroResultados']; 
+        $valores=$this->minimomaximo();
+        $rango= rand($valores[0]['minimo'],$valores[0]['maximo']);
+         $adapter = $this->tableGateway->getAdapter();  
+         if( ($resultadosHome = $this->cache->getItem('platoscache')) == FALSE) {
+         $resultadosHome = $this->tableGateway->getAdapter()
+                ->query('SELECT ta_plato.in_id AS id ,ta_plato.va_nombre,ta_plato.Ta_puntaje_in_id,ta_plato.va_imagen,ta_plato.en_destaque,tr.va_nombre AS restaurant_nombre ,COUNT(ta_comentario.in_id ) AS NumeroComentarios
+                ,tu.ch_distrito AS Distrito,tu.ch_departamento AS Departamento,tl.va_telefono AS telefono,tl.va_direccion AS direccion
+                FROM ta_plato
+                LEFT JOIN  ta_comentario ON ta_plato.in_id = ta_comentario.ta_plato_in_id
+                LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id`
+                LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id` 
+                LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
+                LEFT JOIN `ta_ubigeo` AS `tu` ON `tu`.`in_id` = `tl`.`ta_ubigeo_in_id`
+                LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
+                WHERE    ta_plato.en_estado=1 AND tr.en_estado=1 AND tr.va_nombre IS NOT NULL  
+                GROUP BY id,ta_plato.en_destaque
+                ORDER BY ta_plato.en_destaque ASC,ta_plato.Ta_puntaje_in_id DESC,NumeroComentarios DESC' , $adapter::QUERY_MODE_EXECUTE);
+                    $resultadosHome->next();
+                    $prime = $resultadosHome->toArray();
+                    $this->cache->setItem('platoscache',  $prime ); 
+                     
+                   $resultadosHome = $this->cache->getItem('platoscache');
+          }else{ 
+         $resultadosHome = $this->cache->getItem('platoscache'); }
+       return $resultadosHome;
+    }
 
     public function fetchAll($consulta = null,$consulta2 = null) {
 
@@ -34,26 +70,9 @@ class PlatosTable {
             $sqlSelect->where(array('pl.ta_local_in_id'=>$consulta))->where->and->like('ta_plato.va_nombre', '%'.$consulta2.'%');//where(array('pl.ta_local_in_id' => $consulta));
         }
         $sqlSelect->group('ta_plato.in_id')->order('ta_plato.in_id desc');
-//             $selectString = $this->tableGateway->getSql()->getSqlStringForSqlObject($sqlSelect);
-//             var_dump($selectString);exit;
-        /*
-         * con este es = q el siguiente pero en este no muestra los campos q no quieres imprimir
-         * no hace uso de la estructura del tablegetway para hcer los joins
-         */
 
-//            $adapter=$this->tableGateway->getAdapter();
-//            $resultSet = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-        /*
-         * muestra todos los campos, los q no especificaste a imprimer los imprime como null
-         * para los alias es necesario ponerlos en clase de entidad sino no los imprime
-         */
         $resultSet = $this->tableGateway->selectWith($sqlSelect);
-        //$this->tableGateway->select($sqlSelect);
-//            $array=array();
-//             foreach($resultSet as $result){
-//                 $array[]=$result;
-//             }
-//            var_dump($array);exit;
+
         return $resultSet;
     }
 
@@ -525,39 +544,7 @@ public function guardarplatoregistro($dataregistro) {
        
     }
     
-       public function platoslistadelsabor(){
-       $cantidad=$this->cantidad();
-        $total=$cantidad[0]['NumeroResultados']; 
-        $valores=$this->minimomaximo();
-        $rango= rand($valores[0]['minimo'],$valores[0]['maximo']);
-         $adapter = $this->tableGateway->getAdapter();  
-         $primer = $this->tableGateway->getAdapter()
-                ->query('(SELECT DISTINCT ta_plato.in_id AS id ,ta_plato.va_nombre,ta_plato.Ta_puntaje_in_id,ta_plato.va_imagen,ta_plato.en_destaque,tr.va_nombre AS restaurant_nombre ,COUNT(ta_comentario.in_id ) AS NumeroComentarios
-                     ,tu.ch_distrito AS Distrito,tu.ch_departamento AS Departamento,tl.va_telefono AS telefono,tl.va_direccion AS direccion
-                FROM ta_plato
-                LEFT JOIN  ta_comentario ON ta_plato.in_id = ta_comentario.ta_plato_in_id
-                LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id`
-                LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id` 
-                LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
-                LEFT JOIN `ta_ubigeo` AS `tu` ON `tu`.`in_id` = `tl`.`ta_ubigeo_in_id`
-                LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
-                where ta_plato.en_destaque=1 and ta_plato.en_estado=1 and tr.en_estado=1 and tr.va_nombre is not null  
-                GROUP BY id,tl.in_id 
-                ORDER BY RAND('.$rango.') LIMIT '.$total.') 
-                UNION 
-                (SELECT DISTINCT ta_plato.in_id AS id,ta_plato.va_nombre,ta_plato.Ta_puntaje_in_id,ta_plato.va_imagen,ta_plato.en_destaque,tr.va_nombre AS restaurant_nombre ,COUNT(ta_comentario.in_id ) AS NumeroComentarios
-                     ,tu.ch_distrito AS Distrito,tu.ch_departamento AS Departamento,tl.va_telefono AS telefono,tl.va_direccion AS direccion
-                FROM ta_plato
-                LEFT JOIN  ta_comentario ON ta_plato.in_id = ta_comentario.ta_plato_in_id
-                LEFT JOIN `ta_tipo_plato` ON `ta_plato`.`ta_tipo_plato_in_id`=`ta_tipo_plato`.`in_id`
-                LEFT JOIN `ta_plato_has_ta_local` AS `pl` ON `pl`.`ta_plato_in_id` = `ta_plato`.`in_id` 
-                LEFT JOIN `ta_local` AS `tl` ON `tl`.`in_id` = `pl`.`ta_local_in_id`
-                LEFT JOIN `ta_ubigeo` AS `tu` ON `tu`.`in_id` = `tl`.`ta_ubigeo_in_id`
-                LEFT JOIN `ta_restaurante` AS `tr` ON `tr`.`in_id` = `tl`.`ta_restaurante_in_id`
-                where ta_plato.en_destaque=2 and ta_plato.en_estado=1 and tr.en_estado=1  and tr.va_nombre is not null  
-                 GROUP BY id)' , $adapter::QUERY_MODE_EXECUTE);
-       return $primer->buffer();
-    }
+      
     
      public function cantidad(){      
       $adapter = $this->tableGateway->getAdapter();

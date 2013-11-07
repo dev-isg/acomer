@@ -69,31 +69,23 @@ class IndexController extends AbstractActionController
         $this->layout()->comidas = $comidas;
         $mistura=$this->getConfigTable()->platoslistadelsabor();
         $page2 = (int) $this->params()->fromQuery('page', 1);
-        $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($mistura));
+      //  var_dump($page2);exit;
+       $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($mistura));
+//        $paginator = \Zend\Paginator\Paginator::setCache($mistura);
+//        var_dump($mistura);exit;
+//        //$paginador = new Zend\Paginator\Paginator::setCache($cache);
         $paginator->setCurrentPageNumber($page2);
-         $paginator->setItemCountPerPage(9); 
-         $cante=count($mistura->toArray());
+       // $paginator->setItemCountPerPage(9); 
+        $paginator->getItemsByPage(9);
+       // var_dump($f);exit;
+        $cante=count($mistura);
          if(ceil($cante/9) <$page2){
              $view->setTerminal(true);
             $view->setTemplate('layout/layout-error');}
-         $url = $_SERVER['REQUEST_URI'];
-        if ($url != '/') {
-            if ($url) {
-                $page = strpos($url, 'page=');
-                if ($page) {
-                    $urlf = substr($url, 0, $page - 1);
-                } else {
-                    $urlf = $url;
-                }
-                $urlf = $urlf . '?';
-            } else {
-                $urlf = $urlf . '?';
-            }
-        } else {
+            $url = $_SERVER['REQUEST_URI'];
             $auxurl = strpos($url, '/');
             $urlf = substr($url, 0, $auxurl);
             $urlf = $urlf . '?';
-        }
         $this->layout()->clase = 'Home';
         $menus = $this->menu();
         $banner = $this->banner();
@@ -476,15 +468,24 @@ class IndexController extends AbstractActionController
             $mostrar =  $total . ' resultados';
         }
          if($_GET['callback'])
-       { 
+        { 
         $view = new ViewModel();
         header('Content-type: application/x-javascript');
         header("Status: 200");
+//      var_dump($resultados->response->docs);exit;
+//        for($i=0;$i<count($resultados->response->docs);$i++)   
+//        {
+//            var_dump($resultados->response->docs->name[$i]) ; 
+//        }
+//        exit;
+//        if($datos[0]['va_imagen']=='platos-default.png')
+//                           { $datos[0]['va_imagen']= $this->_options->host->base .'/img/platos-default.png';}
+//                           else{ $datos[0]['va_imagen']= $this->_options->host->base .'/imagenes/plato/principal/'.$datos[0]['va_imagen'];}
           echo "jsonpCallback(".$resultados->getRawResponse().")";
                 exit();
                 $view->setTerminal(true);
                 return $view;
-       }
+         }
         $arrpl=array();
         $arrest=array();
         if (count($resultados->response->docs) < 5 && count($resultados->response->docs) > 0) {

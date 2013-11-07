@@ -297,7 +297,7 @@ class IndexController extends AbstractActionController {
               $adapter = new \Zend\File\Transfer\Adapter\Http();
               $name = 'platos-default.png';
               $this->getPlatosTable()->guardarPlato($plato,$name,$local,$plato_otro,$promoc);
-              return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);
+              return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/plato/listar?id='.$local);
                }
         }
         }
@@ -339,7 +339,7 @@ class IndexController extends AbstractActionController {
         }
         catch (\Exception $ex) {
             return $this->redirect()->toUrl($this->
-            getRequest()->getBaseUrl().'/platos'); 
+            getRequest()->getBaseUrl().'/plato/listar'); 
              
         }
       $adpter=$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
@@ -559,7 +559,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
               $adapter = new \Zend\File\Transfer\Adapter\Http();
              $name = $platos->va_imagen;
               $this->getPlatosTable()->guardarPlato($restaurante,$name,$idlocal,$plato_otro,$promoc);
-                    $this->redirect()->toUrl('/platos/index?id='.$idlocal); 
+                    $this->redirect()->toUrl('/plato/listar?id='.$idlocal); 
                }
             }      
         }
@@ -590,12 +590,8 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
 
         $id = $this->params()->fromQuery('id');
         $estado = $this->params()->fromQuery('estado');
-
-//        $this->getPlatosTable()->estadoPlato((int) $id, $estado);
-//        $this->redirect()->toUrl('/platos/index');
-//        $id = $this->params()->fromPost('id');
         $this->getPlatosTable()->eliminarPlato((int) $id, $estado);
-        $this->redirect()->toUrl('/platos/index');
+        $this->redirect()->toUrl('/plato/listar');
     }
 
     /*
@@ -626,21 +622,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                 ));
 //        return array('lista'=>$listarecomendacion);
     }
-//    public function ss()
-//    {
-//       //$headers = use \Zend\Http\Headers::fromString($headerString);
-//       ->setHeader();
-////        $this->headScript()->appendScript('$(function(){
-////    var autocompletar = new Array();
-////    
-////    'for($i = 0;$i< count($this->distritos); $i++){. '
-////       autocompletar.push('. echo $this->distritos[$i]['ch_distrito'].' , '.$this->distritos[$i]['ch_provincia'].' , '.$this->distritos[$i]['ch_departamento']; .');
-////    '. } .' 
-////     $("#fq").autocomplete({
-////       source: autocompletar 
-////     });
-////  });');
-//    }
+
     
     
     public function consultaAction($limit,$id,$tipo)       
@@ -811,7 +793,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                 $form->setData($datos);
                 if (!$form->isValid()) {
                     $this->getComentariosTable()->agregarComentario($form->getData(),$participa->in_id);
-                   $this->getComentariosTable()->cromSolar($id,''); 
+                    $this->getComentariosTable()->cromSolar($id,''); 
                     $datos =$this->params()->fromRoute();               
                     $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']);
                   }

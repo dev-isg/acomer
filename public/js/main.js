@@ -393,7 +393,7 @@ $(".eli-lo").on("click",function(){
   var es=$(this).attr('data-name');
   console.log(id , es);
   var request = $.ajax({
-  url: "/platos/index/eliminar?id="+id + "&estado=" + es,
+  url: "/plato/eliminar-plato?id="+id + "&estado=" + es,
   type: "POST",
   data: {id: id, estado:es}  
   });
@@ -426,7 +426,7 @@ $('.check-plato').mousedown(function() {
           if (confirm("Desea Destacar el plato ?") ){
             var est="si";
             var request = $.ajax({
-            url: "/platos/index/cambiaestado?id="+id + "&estado=" + est,
+            url: "/plato/destaque-plato?id="+id + "&estado=" + est,
             type: "get"
            
                    });
@@ -439,7 +439,7 @@ $('.check-plato').mousedown(function() {
         }else{
           var est="no";
             var request = $.ajax({
-            url: "/platos/index/cambiaestado?id="+id + "&estado=" + est,
+            url: "/plato/destaque-plato?id="+id + "&estado=" + est,
             type: "get"
             
                    });
