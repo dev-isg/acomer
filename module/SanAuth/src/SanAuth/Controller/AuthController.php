@@ -83,12 +83,14 @@ class AuthController extends AbstractActionController {
                                             'va_logout',
                                             'id_facebook'
                                         )));
-//                      return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
-//                        if ($id) {
-//                            return $this->redirect()->toRoute($redirect, array('in_id' => $id));
-//                        } else {
-//                            return $this->redirect()->toRoute($redirect);
-//                        }
+
+                      return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . '/');
+                        if ($id) {
+                            return $this->redirect()->toRoute($redirect, array('in_id' => $id));
+                        } else {
+                            return $this->redirect()->toRoute($redirect);
+                        }
+
                     }
 //                    var_dump($storage->read());exit;
      //return $this->redirect()->toUrl('/');

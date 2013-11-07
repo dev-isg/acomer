@@ -7,7 +7,6 @@ nbproject
 .project
 .settings
 composer.lock
-composer.phar
 vendor/bin
 vendor/zendframework
 public/imagenes/*jpg
@@ -16,4 +15,3 @@ public/imagenes/*png
 public/stats/*
 sitemap.xml
 public/sitemap.xml
-composer.phar
