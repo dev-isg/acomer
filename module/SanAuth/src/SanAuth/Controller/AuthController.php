@@ -55,7 +55,7 @@ class AuthController extends AbstractActionController {
     }
 
     
-   public function sessionfacebook($email,$pass,$url)
+   public function sessionfacebook($email,$pass,$url=null)
        {  
 
                 $correo = $email;
@@ -81,8 +81,10 @@ class AuthController extends AbstractActionController {
                                         )));
                    
                  }
-
-          return $this->redirect()->toUrl($url);exit;
+          if($url==null) 
+          {return $this->redirect()->toUrl('/');}
+          else{  return $this->redirect()->toUrl($url);exit;} 
+        
     }
     
     public function authenticateAction() {
