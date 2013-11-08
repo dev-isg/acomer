@@ -216,30 +216,10 @@ class IndexController extends AbstractActionController
     public function detalleubicacionAction()
     {
         $view = new ViewModel();
-    
         $request = $this->getRequest();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();   
-        if (!isset($session)) {
-        $face = new \Usuario\Controller\ClientesController();
-        $facebook = $face->facebook();
-        $this->layout()->loginUrl = $facebook['loginUrl'];
-        $this->layout()->user = $facebook['user']; 
-        if($facebook['id_facebook']){
-        $id_face=$this->getClientesTable()->usuarioface($facebook['email']); 
-                         if(count($id_face)>0)
-                         {if($id_face[0]['id_facebook']=='')  
-                        {
-                           $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                            AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); 
-                        }     
-                         else{
-                            $this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
-                         else{
-                           $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
-       }}
+        
         $this->layout()->clase = 'buscar-distrito';
   
         if ($request->isGet()) {     
@@ -277,8 +257,19 @@ class IndexController extends AbstractActionController
             }
              
             if ($texto == '') {
-                $this->redirect()->toUrl('/');
-            }
+                
+                if($_GET['callback'])
+       {
+        $view = new ViewModel();
+        header('Content-type: application/x-javascript');
+        header("Status: 200");
+       $arrpl=array('numFound'=>0,'docs'=>array(0));
+          echo "jsonpCallback(".json_encode($arrpl).")";
+                exit();
+                $view->setTerminal(true);
+                return $view;
+       }
+        }
             if (strtoupper($distrito)and strtoupper($distrito)!='LIMA') {
               
                 $distrits = '"'.$distrito.'"';
@@ -426,7 +417,27 @@ class IndexController extends AbstractActionController
                 ///////////////////////////////////////fin/////////////////////////////////////////////////////////
                
         }
-        
+        if (!isset($session)) {
+        $face = new \Usuario\Controller\ClientesController();
+        $facebook = $face->facebook();
+        $this->layout()->loginUrl = $facebook['loginUrl'];
+        $this->layout()->user = $facebook['user']; 
+        if($facebook['id_facebook']){
+            $url='/buscar-por-distrito?q='.$texto.'&distrito='.$distrito;
+        $id_face=$this->getClientesTable()->usuarioface($facebook['email']); 
+                         if(count($id_face)>0)
+                         {if($id_face[0]['id_facebook']=='')  
+                        {
+                           $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
+                            AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook'],$url); 
+                        }     
+                         else{
+                            $this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook'],$url); }   }
+                         else{
+                           $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook'],$url); }
+       }}
         $form = new Formularios();
          if($valor[0]=='restaurante:')
          { $form->get('q')->setValue($plato);
@@ -467,7 +478,9 @@ class IndexController extends AbstractActionController
         $view = new ViewModel();
         header('Content-type: application/x-javascript');
         header("Status: 200");
-         if(count($resultados->response->docs)==0)
+
+       
+        if(count($resultados->response->docs)==0)
          {$arrpl=array('numFound'=>count($resultados->response->docs),'docs'=>array(0));}
          else
              {$arrpl=array();
@@ -499,6 +512,7 @@ class IndexController extends AbstractActionController
                               $i++; 
                   } 
             }}
+         
           
           echo "jsonpCallback(".json_encode($arrpl).")";
                 exit();
