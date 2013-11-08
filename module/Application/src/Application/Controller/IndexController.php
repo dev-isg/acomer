@@ -257,19 +257,89 @@ class IndexController extends AbstractActionController
             }
              
             if ($texto == '') {
-                
-                if($_GET['callback'])
-       {
-        $view = new ViewModel();
+         if($_GET['callback'])
+         {  $view = new ViewModel();
         header('Content-type: application/x-javascript');
         header("Status: 200");
-       $arrpl=array('numFound'=>0,'docs'=>array(0));
+        if(strtoupper($distrito)=='LIMA') {
+            $texto= 'departamento : "LIMA"';
+                if($paginas=='')
+                 {$start = 0;}
+               else{$start=($paginas-1)*$limite;}
+                $resultados = false;
+                $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
+                $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
+                $fd = array(
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo' ,
+                );
+                $solar = \Classes\Solr::getInstance()->getSolr();
+                if ($palabraBuscar) {
+                    $solar = \Classes\Solr::getInstance()->getSolr();
+                    if (get_magic_quotes_gpc() == 1) {
+                        $palabraBuscar = stripslashes($palabraBuscar);   }
+                    try {
+                        $resultados = $solar->search($palabraBuscar,$start, $limite, $fd);
+                    } catch (Exception $e) {
+                        echo ("<div>ingrese algun valor</div>");
+                    }
+                }   }else{
+                  $texto= 'distrito : "'.$distrito.'"';
+                if($paginas=='')
+                 {$start = 0;}
+                  else{$start=($paginas-1)*$limite;}
+                $resultados = false;
+                $buscarsolar= '(('.$texto.') AND en_destaque:si)^100 OR ('.$texto.')';
+                $palabraBuscar = isset($buscarsolar) ? $buscarsolar : false;
+                $fd = array(
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo',
+                );
+                if ($palabraBuscar) {
+                    $solar = \Classes\Solr::getInstance()->getSolr();
+                    if (get_magic_quotes_gpc() == 1) {
+                        $palabraBuscar = stripslashes($palabraBuscar); }
+                    try {
+                        $resultados = $solar->search($palabraBuscar, $start, $limite, $fd);   } catch (Exception $e) {     
+                        $this->redirect()->toUrl('/application');
+                    }} }
+
+         if(count($resultados->response->docs)==0)
+         {$arrpl=array('numFound'=>count($resultados->response->docs),'docs'=>array(0));}
+         else
+             {$arrpl=array();
+            for($i=0;$i<count($resultados->response->docs);$i++)
+            {         $arrpl['numFound'] =  $resultados->response->numFound;
+               foreach ($resultados->response->docs as $plat) 
+                   {
+                    if($plat->va_imagen=='platos-default.png')
+                            {$imagen=$this->_options->host->base .'/img/platos-default.png';
+                            $imagen2=$this->_options->host->base .'/img/platos-default.png';}
+                             else{$imagen=$this->_options->host->base .'/imagenes/plato/general/'. $plat->va_imagen;
+                             $imagen2=$this->_options->host->base .'/imagenes/plato/destacado/'. $plat->va_imagen;}
+                             $telefono = explode(';', $plat->va_telefono);
+                              $arrpl['docs'][$i] = array(
+                             'id'=> $plat->id,
+                             'va_imagen'=>$imagen,
+                             'va_imagen_detalle'=>$imagen2,
+                             'name'=> $plat->name,
+                             'restaurante'=> $plat->restaurante,
+                             'distrito'=> $plat->distrito,
+                             'va_telefono'=> $telefono[0],
+                             'tipo_comida'=> $plat->tipo_comida,
+                             'en_destaque'=>$plat->en_destaque,
+                             'va_direccion'=>$plat->va_direccion,
+                             'departamento'=>$plat->departamento,
+                             'comentarios'=>$plat->comentarios,
+                             'puntuacion'=>$plat->puntuacion,
+                             'tx_descripcion'=> $plat->tx_descripcion,
+                             'tag'=> $plat->tag);
+                              $i++; 
+                  } 
+            }}
           echo "jsonpCallback(".json_encode($arrpl).")";
                 exit();
                 $view->setTerminal(true);
-                return $view;
-       }
-        }
+                return $view;} }
+                
             if (strtoupper($distrito)and strtoupper($distrito)!='LIMA') {
               
                 $distrits = '"'.$distrito.'"';
@@ -492,7 +562,7 @@ class IndexController extends AbstractActionController
                             {$imagen=$this->_options->host->base .'/img/platos-default.png';
                             $imagen2=$this->_options->host->base .'/img/platos-default.png';}
                              else{$imagen=$this->_options->host->base .'/imagenes/plato/general/'. $plat->va_imagen;
-                             $imagen2=$this->_options->host->base .'/imagenes/plato/principal/'. $plat->va_imagen;}
+                             $imagen2=$this->_options->host->base .'/imagenes/plato/destacado/'. $plat->va_imagen;}
                              $telefono = explode(';', $plat->va_telefono);
                               $arrpl['docs'][$i] = array(
                              'id'=> $plat->id,
@@ -504,6 +574,7 @@ class IndexController extends AbstractActionController
                              'va_telefono'=> $telefono[0],
                              'tipo_comida'=> $plat->tipo_comida,
                              'en_destaque'=>$plat->en_destaque,
+                             'va_direccion'=>$plat->va_direccion,
                              'departamento'=>$plat->departamento,
                              'comentarios'=>$plat->comentarios,
                              'puntuacion'=>$plat->puntuacion,
