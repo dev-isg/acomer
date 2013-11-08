@@ -216,6 +216,7 @@ class IndexController extends AbstractActionController
     public function detalleubicacionAction()
     {
         $view = new ViewModel();
+    
         $request = $this->getRequest();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();   
@@ -466,7 +467,10 @@ class IndexController extends AbstractActionController
         $view = new ViewModel();
         header('Content-type: application/x-javascript');
         header("Status: 200");
-          $arrpl=array();
+         if(count($resultados->response->docs)==0)
+         {$arrpl=array('numFound'=>count($resultados->response->docs),'docs'=>array(0));}
+         else
+             {$arrpl=array();
             for($i=0;$i<count($resultados->response->docs);$i++)
             {         $arrpl['numFound'] =  $resultados->response->numFound;
                foreach ($resultados->response->docs as $plat) 
@@ -494,7 +498,8 @@ class IndexController extends AbstractActionController
                              'tag'=> $plat->tag);
                               $i++; 
                   } 
-            }
+            }}
+          
           echo "jsonpCallback(".json_encode($arrpl).")";
                 exit();
                 $view->setTerminal(true);
@@ -1328,7 +1333,7 @@ class IndexController extends AbstractActionController
        $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read(); 
       if (!isset($session)) {
-          $url='/Solicita';
+          $url='/solicita';
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
         $this->layout()->loginUrl = $facebook['loginUrl'];
