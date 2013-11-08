@@ -684,8 +684,6 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                                 return $view;     
                }
         $datos =$this->params()->fromRoute();
-//        $dats =$this->fromRoute();
-//        var_dump($dats);exit;
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
         if ($session){           
@@ -703,14 +701,14 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                          {if($id_face[0]['id_facebook']=='')  
                         {
                            $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
-                            AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); 
+                            AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook'],$url); 
                         }     
                          else{
                             $this->getClientesTable()->idfacebook2($id_face[0]['in_id'],$facebook['logoutUrl']);
-                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }   }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook'],$url); }   }
                          else{
                            $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
-                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook']); }
+                                               AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook'],$url); }
        }}  
         
         $urlerror =  $datos['nombre'];
