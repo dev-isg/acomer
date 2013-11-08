@@ -478,6 +478,7 @@ class IndexController extends AbstractActionController
                              $imagen2=$this->_options->host->base .'/imagenes/plato/principal/'. $plat->va_imagen;}
                              $telefono = explode(';', $plat->va_telefono);
                               $arrpl['docs'][$i] = array(
+                             'id'=> $plat->id,
                              'va_imagen'=>$imagen,
                              'va_imagen_detalle'=>$imagen2,
                              'name'=> $plat->name,
