@@ -782,7 +782,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         $resta=$canonicalurl($canonical($listarecomendacion[0]['restaurant_nombre']));
         $form->get('submit')->setValue('Agregar');
         $request = $this->getRequest();
-        if ($request->isPost()) {
+        if ($request->isPost()) {echo 'ss';exit;
             if ($session) {
                 $datos = $this->getRequest()->getPost()->toArray();
                 $datos['Ta_plato_in_id'] = $id;
