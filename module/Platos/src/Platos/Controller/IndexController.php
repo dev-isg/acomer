@@ -695,7 +695,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
-           $url='/plato/'.$datos['nombre'];
+           $url='/plato/'.$datos['nombre'].'/'.$datos['nombre'];
         $id_face=$this->getClientesTable()->usuarioface($facebook['email']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
