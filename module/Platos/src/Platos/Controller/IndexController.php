@@ -938,5 +938,5 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
        $canonical = new \Application\View\Helper\Canonical;
        $canonicalurl = new \Application\View\Helper\CanonicalUrl;
         $resta=$canonicalurl($canonical($restaurante));
-       $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']); }
+       return $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']); }
 }
