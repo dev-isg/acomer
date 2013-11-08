@@ -777,28 +777,28 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         $canonicalurl = new \Application\View\Helper\CanonicalUrl;
         $resta=$canonicalurl($canonical($listarecomendacion[0]['restaurant_nombre']));
         $form->get('submit')->setValue('Agregar');
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-           // if ($session) {
-                $datos = $this->getRequest()->getPost()->toArray();
-                $datos['Ta_plato_in_id'] = $id;
-                $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
-                $validar = explode('http://', $datos['tx_descripcion']);
-//                if(count($validar)==2){
-//                return $this->redirect()->toUrl('/plato/'.$urlerror.'?m=1');
-//                }
-//                else {
-                $form->setData($datos);
-                if (!$form->isValid()) {
-                    $this->getComentariosTable()->agregarComentario($form->getData(),$participa->in_id);
-                    $this->getComentariosTable()->cromSolar($id,''); 
-                    $datos =$this->params()->fromRoute(); 
-                  //  if($datos['tx_descripcion']){$this->redirect()->toUrl('/plato/'.$datos['nombre']);}
-                   
-                  }
-              //  }
-           // }
-        }   
+       // $request = $this->getRequest();
+//        if ($request->isPost()) {
+//           // if ($session) {
+//                $datos = $this->getRequest()->getPost()->toArray();
+//                $datos['Ta_plato_in_id'] = $id;
+//                $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
+//                $validar = explode('http://', $datos['tx_descripcion']);
+////                if(count($validar)==2){
+////                return $this->redirect()->toUrl('/plato/'.$urlerror.'?m=1');
+////                }
+////                else {
+//                $form->setData($datos);
+//                if (!$form->isValid()) {
+//                    $this->getComentariosTable()->agregarComentario($form->getData(),$participa->in_id);
+//                    $this->getComentariosTable()->cromSolar($id,''); 
+//                    $datos =$this->params()->fromRoute(); 
+//                  //  if($datos['tx_descripcion']){$this->redirect()->toUrl('/plato/'.$datos['nombre']);}
+//                   
+//                  }
+//              //  }
+//           // }
+//        }   
         
         $this->layout()->clase = 'Detalle';
         $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
