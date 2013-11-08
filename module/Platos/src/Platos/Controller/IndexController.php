@@ -715,8 +715,8 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         $nombre = explode('-', $datos['nombre']); 
         $id = array_pop($nombre);
           $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray(); 
-          if(count($listarecomendacion)<1)
-          {$this->redirect()->toUrl('/');}
+//          if(count($listarecomendacion)<1)
+//          {$this->redirect()->toUrl('/');}
           $texto = 'restaurante:"'.$listarecomendacion[0]['restaurant_nombre'].'"'; 
                 $limit = 10;
                 $palabraBuscar = isset($texto) ? $texto : false;
