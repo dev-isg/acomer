@@ -547,7 +547,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                                                  imagejpeg($viejaimagen,$original);  
                              $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' .$name; 
                        $this->getPlatosTable()->guardarPlato($restaurante,$nombre,$idlocal,$plato_otro,$promoc);
-                    $this->redirect()->toUrl('/platos/index?id='.$idlocal);   
+                    $this->redirect()->toUrl('/plato/listar?id='.$idlocal);   
                   }
                }
                 }
