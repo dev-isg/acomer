@@ -772,49 +772,49 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
-        $form = new \Usuario\Form\ComentariosForm();
-        $canonical = new \Application\View\Helper\Canonical;
-        $canonicalurl = new \Application\View\Helper\CanonicalUrl;
-        $resta=$canonicalurl($canonical($listarecomendacion[0]['restaurant_nombre']));
-        $form->get('submit')->setValue('Agregar');
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            if ($session) {
-                $datos = $this->getRequest()->getPost()->toArray();
-                $datos['Ta_plato_in_id'] = $id;
-                $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
-                $validar = explode('http://', $datos['tx_descripcion']);
-               // if(count($validar)==2){
-//                return $this->redirect()->toUrl('/plato/'.$urlerror.'?m=1');
-//                }
-               // else {
-                $form->setData($datos);
-                if (!$form->isValid()) {
-                    $this->getComentariosTable()->agregarComentario($form->getData(),$participa->in_id);
-                    $this->getComentariosTable()->cromSolar($id,''); 
-                    $datos =$this->params()->fromRoute(); 
-                   if($datos['tx_descripcion']){$this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']);}
-                   
-                  }
-                //}
-            }
-        }   
+//        $form = new \Usuario\Form\ComentariosForm();
+//        $canonical = new \Application\View\Helper\Canonical;
+//        $canonicalurl = new \Application\View\Helper\CanonicalUrl;
+//        $resta=$canonicalurl($canonical($listarecomendacion[0]['restaurant_nombre']));
+//        $form->get('submit')->setValue('Agregar');
+//        $request = $this->getRequest();
+//        if ($request->isPost()) {
+//            if ($session) {
+//                $datos = $this->getRequest()->getPost()->toArray();
+//                $datos['Ta_plato_in_id'] = $id;
+//                $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
+//                $validar = explode('http://', $datos['tx_descripcion']);
+//               // if(count($validar)==2){
+////                return $this->redirect()->toUrl('/plato/'.$urlerror.'?m=1');
+////                }
+//               // else {
+//                $form->setData($datos);
+//                if (!$form->isValid()) {
+//                    $this->getComentariosTable()->agregarComentario($form->getData(),$participa->in_id);
+//                    $this->getComentariosTable()->cromSolar($id,''); 
+//                    $datos =$this->params()->fromRoute(); 
+//                   if($datos['tx_descripcion']){$this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']);}
+//                   
+//                  }
+//                //}
+//            }
+//        }   
         
         $this->layout()->clase = 'Detalle';
         $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
         $paginator->setItemCountPerPage(10);    
-//        $config = $this->getServiceLocator()->get('Config');                                
-//        $this->layout()->title=$listarecomendacion[0]['va_nombre'];   
-//        $this->layout()->image=$listarecomendacion[0]['va_imagen']=='platos-default.png'?$config['host']['images']. '/defecto/' . $listarecomendacion[0]['va_imagen']:$config['host']['images'] . '/plato/principal/' . $listarecomendacion[0]['va_imagen'];
-//        $this->layout()->description=trim($listarecomendacion[0]['restaurant_nombre']).'-'.trim($listarecomendacion[0]['tx_descripcion']).'-'.trim($listarecomendacion[0]['va_direccion']).'-'.trim($listarecomendacion[0]['va_direccion_referencia'].'-('.trim($listarecomendacion[0]['distrito']).')- teléfono:'.trim($listarecomendacion[0]['va_telefono']));
-//        $this->layout()->url=$config['host']['ruta'].'/plato/'.$resta.'/'.$datos['nombre'];
-//        $listatitle=trim($listarecomendacion[0]['va_nombre']).':'.
-//                trim($listarecomendacion[0]['tx_descripcion']).':'.
-//                trim($listarecomendacion[0]['tipo_plato_nombre']).':'.
-//                trim($listarecomendacion[0]['restaurant_nombre']).':'.
-//                trim($listarecomendacion[0]['distrito']).' │ ';
+        $config = $this->getServiceLocator()->get('Config');                                
+        $this->layout()->title=$listarecomendacion[0]['va_nombre'];   
+        $this->layout()->image=$listarecomendacion[0]['va_imagen']=='platos-default.png'?$config['host']['images']. '/defecto/' . $listarecomendacion[0]['va_imagen']:$config['host']['images'] . '/plato/principal/' . $listarecomendacion[0]['va_imagen'];
+        $this->layout()->description=trim($listarecomendacion[0]['restaurant_nombre']).'-'.trim($listarecomendacion[0]['tx_descripcion']).'-'.trim($listarecomendacion[0]['va_direccion']).'-'.trim($listarecomendacion[0]['va_direccion_referencia'].'-('.trim($listarecomendacion[0]['distrito']).')- teléfono:'.trim($listarecomendacion[0]['va_telefono']));
+        $this->layout()->url=$config['host']['ruta'].'/plato/'.$resta.'/'.$datos['nombre'];
+        $listatitle=trim($listarecomendacion[0]['va_nombre']).':'.
+                trim($listarecomendacion[0]['tx_descripcion']).':'.
+                trim($listarecomendacion[0]['tipo_plato_nombre']).':'.
+                trim($listarecomendacion[0]['restaurant_nombre']).':'.
+                trim($listarecomendacion[0]['distrito']).' │ ';
        $menu = $this->menu();
        $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 
             'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
