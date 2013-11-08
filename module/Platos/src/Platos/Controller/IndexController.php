@@ -683,13 +683,12 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                                 $view->setTerminal(true);
                                 return $view;     
                }
-               echo 's';exit;
                $datos =$this->params()->fromRoute();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
-        if ($session){           
-                    $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
-                    $activo=$participa->en_estado;}
+//        if ($session){           
+//                    $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
+//                    $activo=$participa->en_estado;}
     if (!isset($session)) { 
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
