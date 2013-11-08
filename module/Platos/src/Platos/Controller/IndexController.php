@@ -695,8 +695,8 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
-     //      $url='/plato/'.$datos['nombre'].'/'.$datos['nombre'];
-            $url='/plato/'.$datos['nombre'];
+          $url='/plato/'.$datos['nombre'].'/'.$datos['nombre'];
+           // $url='/plato/'.$datos['nombre'];
         $id_face=$this->getClientesTable()->usuarioface($facebook['email']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
@@ -718,56 +718,56 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
           $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray(); 
 //          if(count($listarecomendacion)<1)
 //          {$this->redirect()->toUrl('/');}
-//          $texto = 'restaurante:"'.$listarecomendacion[0]['restaurant_nombre'].'"'; 
-//                $limit = 10;
-//                $palabraBuscar = isset($texto) ? $texto : false;
-//                $query = "($palabraBuscar)";
-//                $fq = array(
-//                  //  'sort' => 'random_' . uniqid() . ' asc',
-//                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:'.$listarecomendacion[0]['in_id'] ,
-//                    'wt' => 'json'
-//                );
-//                $results = false;
-//                if ($query) {
-//                    $solr = \Classes\Solr::getInstance()->getSolr();
-//                    if (get_magic_quotes_gpc() == 1) {
-//                        $query = stripslashes($query);}
-//                    try { $results = $solr->search($query, 0, $limit, $fq);
-//                    } catch (Exception $e) {
-//                  echo ("<div>ingrese algun valor</div>"); }}
-//                  if(count($results->response->docs)<10)     
-//                  {if(count($results->response->docs)==0)
-//                    {  $consulta = $this->consultaAction(10,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
-//                    $resultados =$results->response->docs; }
-//                    elseif(count($results->response->docs)==1)
-//                    { $consulta = $this->consultaAction(9,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
-//                    $resultados =$results->response->docs;}
-//                     elseif(count($results->response->docs)==2)
-//                    { $consulta = $this->consultaAction(8,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']);  
-//                    $resultados =$results->response->docs;
-//                    } elseif(count($results->response->docs)==3)
-//                    {$consulta = $this->consultaAction(7,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
-//                    $resultados =$results->response->docs;
-//                    }  elseif(count($results->response->docs)==4)
-//                    {$consulta = $this->consultaAction(6,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
-//                    $resultados =$results->response->docs;
-//                    }  elseif(count($results->response->docs)==5)
-//                    {$consulta = $this->consultaAction(5,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
-//                    $resultados =$results->response->docs;
-//                    }  elseif(count($results->response->docs)==6)
-//                    {$consulta = $this->consultaAction(4,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
-//                    $resultados =$results->response->docs;
-//                    }  elseif(count($results->response->docs)==7)
-//                    {$consulta = $this->consultaAction(3,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
-//                    $resultados =$results->response->docs;
-//                    }  elseif(count($results->response->docs)==8)
-//                    {$consulta = $this->consultaAction(2,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
-//                    $resultados =$results->response->docs;
-//                    }  elseif(count($results->response->docs)==9)
-//                    {$consulta = $this->consultaAction(1,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
-//                    $resultados =$results->response->docs;
-//                    }   }
-//                  else{  $resultados =$results->response->docs;}
+          $texto = 'restaurante:"'.$listarecomendacion[0]['restaurant_nombre'].'"'; 
+                $limit = 10;
+                $palabraBuscar = isset($texto) ? $texto : false;
+                $query = "($palabraBuscar)";
+                $fq = array(
+                  //  'sort' => 'random_' . uniqid() . ' asc',
+                    'fq' => 'en_estado:activo AND restaurant_estado:activo AND -id:'.$listarecomendacion[0]['in_id'] ,
+                    'wt' => 'json'
+                );
+                $results = false;
+                if ($query) {
+                    $solr = \Classes\Solr::getInstance()->getSolr();
+                    if (get_magic_quotes_gpc() == 1) {
+                        $query = stripslashes($query);}
+                    try { $results = $solr->search($query, 0, $limit, $fq);
+                    } catch (Exception $e) {
+                  echo ("<div>ingrese algun valor</div>"); }}
+                  if(count($results->response->docs)<10)     
+                  {if(count($results->response->docs)==0)
+                    {  $consulta = $this->consultaAction(10,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs; }
+                    elseif(count($results->response->docs)==1)
+                    { $consulta = $this->consultaAction(9,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;}
+                     elseif(count($results->response->docs)==2)
+                    { $consulta = $this->consultaAction(8,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']);  
+                    $resultados =$results->response->docs;
+                    } elseif(count($results->response->docs)==3)
+                    {$consulta = $this->consultaAction(7,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;
+                    }  elseif(count($results->response->docs)==4)
+                    {$consulta = $this->consultaAction(6,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;
+                    }  elseif(count($results->response->docs)==5)
+                    {$consulta = $this->consultaAction(5,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;
+                    }  elseif(count($results->response->docs)==6)
+                    {$consulta = $this->consultaAction(4,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;
+                    }  elseif(count($results->response->docs)==7)
+                    {$consulta = $this->consultaAction(3,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;
+                    }  elseif(count($results->response->docs)==8)
+                    {$consulta = $this->consultaAction(2,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;
+                    }  elseif(count($results->response->docs)==9)
+                    {$consulta = $this->consultaAction(1,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
+                    $resultados =$results->response->docs;
+                    }   }
+                  else{  $resultados =$results->response->docs;}
                   
         $servicios = $this->getPlatosTable()->getServicioxPlato($id);
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
@@ -928,15 +928,15 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         }
         return $this->authservice;
     }
- public function verplatos2Action() 
-      {
-       $datos =$this->params()->fromRoute();  
-       $nombre = explode('-', $datos['nombre']); 
-       $id = array_pop($nombre);
-       $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray(); 
-       $restaurante=$listarecomendacion[0]['restaurant_nombre'];
-       $canonical = new \Application\View\Helper\Canonical;
-       $canonicalurl = new \Application\View\Helper\CanonicalUrl;
-        $resta=$canonicalurl($canonical($restaurante));
-       return $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']); }
+// public function verplatos2Action() 
+//      {
+//       $datos =$this->params()->fromRoute();  
+//       $nombre = explode('-', $datos['nombre']); 
+//       $id = array_pop($nombre);
+//       $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray(); 
+//       $restaurante=$listarecomendacion[0]['restaurant_nombre'];
+//       $canonical = new \Application\View\Helper\Canonical;
+//       $canonicalurl = new \Application\View\Helper\CanonicalUrl;
+//        $resta=$canonicalurl($canonical($restaurante));
+//       return $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']); }
 }
