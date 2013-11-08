@@ -10717,3 +10717,31 @@ ceviche , LIMA
 ceviche , SAN BORJA
 Mariscos , 
 Lomo Saltado , 
+Lomo Saltado , 
+ceviche , LIMA
+Lomo Saltado , 
+Lomo Saltado , 
+Lomo Saltado , 
+ceviche , SAN BORJA
+Lomo Saltado , 
+Lomo Saltado , 
+ceviche , LIMA
+Lomo Saltado , 
+Lomo Saltado , 
+ , MIRAFLORES
+ , MIRAFLORES
+ , MIRAFLORES
+ , LURIN
+ , SAN JUNA DE MIRAFLORES
+ , MIRAFLORES
+Lomo Saltado , 
+Lomo Saltado , 
+ , LIMA
+ , LIMA
+ , LIMA
+ , LIMA
+ , LIMA
+ , LIMA
+ , LIMA
+ , LIMA
+ , LIMA

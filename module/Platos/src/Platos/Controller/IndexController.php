@@ -737,8 +737,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                   if(count($results->response->docs)<10)     
                   {if(count($results->response->docs)==0)
                     {  $consulta = $this->consultaAction(10,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
-                    $resultados =$results->response->docs;
-                    }
+                    $resultados =$results->response->docs; }
                     elseif(count($results->response->docs)==1)
                     { $consulta = $this->consultaAction(9,$listarecomendacion[0]['in_id'], $listarecomendacion[0]['tipo_plato_nombre']); 
                     $resultados =$results->response->docs;}
@@ -784,10 +783,10 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                 $datos['Ta_plato_in_id'] = $id;
                 $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
                 $validar = explode('http://', $datos['tx_descripcion']);
-//                if(count($validar)==2){
-//                return $this->redirect()->toUrl('/plato/'.$urlerror.'?m=1');
-//                }
-//                else {
+                if(count($validar)==2){
+                return $this->redirect()->toUrl('/plato/'.$urlerror.'?m=1');
+                }
+                else {
                 $form->setData($datos);
                 if (!$form->isValid()) {
                     $this->getComentariosTable()->agregarComentario($form->getData(),$participa->in_id);
@@ -796,7 +795,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                    if($datos['tx_descripcion']){$this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']);}
                    
                   }
-              //  }
+                }
             }
         }   
         
