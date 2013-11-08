@@ -789,7 +789,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                 $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
                 $validar = explode('http://', $datos['tx_descripcion']);
                 if(count($validar)==2){
-                return $this->redirect()->toUrl('/plato/'.$resta.'/'.$urlerror.'?m=1');
+                return $this->redirect()->toUrl('/plato/'.$urlerror.'?m=1');
                 
                 }
                 else {
@@ -798,7 +798,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                     $this->getComentariosTable()->agregarComentario($form->getData(),$participa->in_id);
                     $this->getComentariosTable()->cromSolar($id,''); 
                     $datos =$this->params()->fromRoute();               
-                    $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']);
+                    $this->redirect()->toUrl('/plato/'.$datos['nombre']);
                   }
                 }
             }
