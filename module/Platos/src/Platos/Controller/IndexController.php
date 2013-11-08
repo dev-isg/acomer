@@ -928,15 +928,15 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         }
         return $this->authservice;
     }
-// public function verplatos2Action() 
-//      {
-//       $datos =$this->params()->fromRoute();  
-//       $nombre = explode('-', $datos['nombre']); 
-//       $id = array_pop($nombre);
-//       $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray(); 
-//       $restaurante=$listarecomendacion[0]['restaurant_nombre'];
-//       $canonical = new \Application\View\Helper\Canonical;
-//       $canonicalurl = new \Application\View\Helper\CanonicalUrl;
-//        $resta=$canonicalurl($canonical($restaurante));
-//       return $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']); }
+ public function verplatos2Action() 
+      {
+       $datos =$this->params()->fromRoute();  
+       $nombre = explode('-', $datos['nombre']); 
+       $id = array_pop($nombre);
+       $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray(); 
+       $restaurante=$listarecomendacion[0]['restaurant_nombre'];
+       $canonical = new \Application\View\Helper\Canonical;
+       $canonicalurl = new \Application\View\Helper\CanonicalUrl;
+        $resta=$canonicalurl($canonical($restaurante));
+       return $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']); }
 }
