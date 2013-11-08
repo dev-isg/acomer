@@ -715,8 +715,8 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         $nombre = explode('-', $datos['nombre']); 
         $id = array_pop($nombre);
           $listarecomendacion = $this->getPlatosTable()->getPlatoxRestaurant($id)->toArray(); 
-          if(count($listarecomendacion)<1)
-          {$this->redirect()->toUrl('/');}
+//          if(count($listarecomendacion)<1)
+//          {$this->redirect()->toUrl('/');}
           $texto = 'restaurante:"'.$listarecomendacion[0]['restaurant_nombre'].'"'; 
                 $limit = 10;
                 $palabraBuscar = isset($texto) ? $texto : false;
@@ -789,7 +789,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                 $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
                 $validar = explode('http://', $datos['tx_descripcion']);
                 if(count($validar)==2){
-                //return $this->redirect()->toUrl('/plato/'.$resta.'/'.$urlerror.'?m=1');
+                return $this->redirect()->toUrl('/plato/'.$resta.'/'.$urlerror.'?m=1');
                 
                 }
                 else {
@@ -798,7 +798,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                     $this->getComentariosTable()->agregarComentario($form->getData(),$participa->in_id);
                     $this->getComentariosTable()->cromSolar($id,''); 
                     $datos =$this->params()->fromRoute();               
-                   // $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']);
+                    $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']);
                   }
                 }
             }
