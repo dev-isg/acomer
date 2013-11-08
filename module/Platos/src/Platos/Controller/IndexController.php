@@ -695,7 +695,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         $this->layout()->loginUrl = $facebook['loginUrl'];
         $this->layout()->user = $facebook['user']; 
         if($facebook['id_facebook']){
-           $url='/plato/'.$datos['nombre'];
+           $url='/plato/'.$datos['restaurante'].'/'.$datos['nombre'];
         $id_face=$this->getClientesTable()->usuarioface($facebook['email']); 
                          if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
@@ -773,6 +773,10 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
         $form = new \Usuario\Form\ComentariosForm();
+//        if($_COOKIE['va_nombre']and $_COOKIE['va_email'] )
+//       {$form->get('va_nombre')->setValue($_COOKIE['va_nombre']);
+//        $form->get('va_email')->setValue($_COOKIE['va_email']);}
+      
         $canonical = new \Application\View\Helper\Canonical;
         $canonicalurl = new \Application\View\Helper\CanonicalUrl;
         $resta=$canonicalurl($canonical($listarecomendacion[0]['restaurant_nombre']));
@@ -784,17 +788,17 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                 $datos['Ta_plato_in_id'] = $id;
                 $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
                 $validar = explode('http://', $datos['tx_descripcion']);
-//                if(count($validar)==2){
-//                return $this->redirect()->toUrl('/plato/'.$resta.'/'.$urlerror.'?m=1');
-//                
-//                }
+                if(count($validar)==2){
+                //return $this->redirect()->toUrl('/plato/'.$resta.'/'.$urlerror.'?m=1');
+                
+                }
                 else {
                 $form->setData($datos);
                 if (!$form->isValid()) {
                     $this->getComentariosTable()->agregarComentario($form->getData(),$participa->in_id);
                     $this->getComentariosTable()->cromSolar($id,''); 
                     $datos =$this->params()->fromRoute();               
-                  //  $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']);
+                   // $this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']);
                   }
                 }
             }
