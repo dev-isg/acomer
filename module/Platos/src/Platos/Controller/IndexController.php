@@ -201,7 +201,7 @@ class IndexController extends AbstractActionController {
                                             imagejpeg($viejaimagen,$original);
                              $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$local.'/' .$name;               
                              $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro,$promoc);
-                             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);
+                             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/plato/listar?id='.$local);
                              
                        }
                        else{   
@@ -220,7 +220,7 @@ class IndexController extends AbstractActionController {
                                                  imagejpeg($viejaimagen,$original);  
                              $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$local.'/' .$name;                
                              $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro,$promoc);
-                             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);                                       
+                             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/plato/listar?id='.$local);                                       
                                   // }        
                              }                                      
                          }
@@ -268,7 +268,7 @@ class IndexController extends AbstractActionController {
                                             imagejpeg($viejaimagen,$original);
                              $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$local.'/' .$name;               
                              $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro,$promoc);
-                             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);                                   
+                             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/plato/listar?id='.$local);                                   
                        }
                        else{   
 //                           if($platos[0]['cantidad']>=5)
@@ -285,7 +285,7 @@ class IndexController extends AbstractActionController {
                                                  imagejpeg($viejaimagen,$original);  
                              $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$local.'/' .$name;                
                              $this->getPlatosTable()->guardarPlato($plato,$nombre,$local,$plato_otro,$promoc);
-                             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/platos?id='.$local);                                       
+                             return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/plato/listar?id='.$local);                                       
                                  //  }        
                           } 
                    }    
@@ -487,7 +487,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                                                  imagejpeg($viejaimagen,$original);             
                              $nombre = $array[0]['Ta_restaurante_in_id'].'/'.$idlocal.'/' .$name; 
                        $this->getPlatosTable()->guardarPlato($restaurante,$nombre,$idlocal,$plato_otro,$promoc);
-                    $this->redirect()->toUrl('/platos/index?id='.$idlocal);   
+                    $this->redirect()->toUrl('/plato/listar?id='.$idlocal);   
                   }
                }
   
