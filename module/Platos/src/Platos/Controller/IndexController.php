@@ -683,7 +683,8 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                                 $view->setTerminal(true);
                                 return $view;     
                }
-        $datos =$this->params()->fromRoute();
+               echo 's';exit;
+               $datos =$this->params()->fromRoute();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
         if ($session){           
@@ -773,16 +774,12 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         $locales = $this->getPlatosTable()->getLocalesxRestaurante($listarecomendacion[0]['restaurant_id']);
         $pagos = $this->getPlatosTable()->getPagoxPlato($id);
         $form = new \Usuario\Form\ComentariosForm();
-//        if($_COOKIE['va_nombre']and $_COOKIE['va_email'] )
-//       {$form->get('va_nombre')->setValue($_COOKIE['va_nombre']);
-//        $form->get('va_email')->setValue($_COOKIE['va_email']);}
-      
         $canonical = new \Application\View\Helper\Canonical;
         $canonicalurl = new \Application\View\Helper\CanonicalUrl;
         $resta=$canonicalurl($canonical($listarecomendacion[0]['restaurant_nombre']));
         $form->get('submit')->setValue('Agregar');
         $request = $this->getRequest();
-        if ($request->isPost()) {echo 'ss';exit;
+        if ($request->isPost()) {
             if ($session) {
                 $datos = $this->getRequest()->getPost()->toArray();
                 $datos['Ta_plato_in_id'] = $id;
