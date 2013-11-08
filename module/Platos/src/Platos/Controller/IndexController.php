@@ -793,7 +793,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                     $this->getComentariosTable()->agregarComentario($form->getData(),$participa->in_id);
                     $this->getComentariosTable()->cromSolar($id,''); 
                     $datos =$this->params()->fromRoute(); 
-                  //  if($datos['tx_descripcion']){$this->redirect()->toUrl('/plato/'.$datos['nombre']);}
+                   if($datos['tx_descripcion']){$this->redirect()->toUrl('/plato/'.$resta.'/'.$datos['nombre']);}
                    
                   }
               //  }
