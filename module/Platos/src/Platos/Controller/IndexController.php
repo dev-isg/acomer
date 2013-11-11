@@ -710,7 +710,8 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                          else{
                            $this->getClientesTable()->insertarusuariofacebbok($facebook['name'],$facebook['email'],$facebook['id_facebook'],$facebook['logoutUrl']);  
                                                AuthController::sessionfacebook($facebook['email'], $facebook['id_facebook'],$url); }
-       }}  
+        }  
+    }
         
 //        $urlerror =  $datos['nombre'];
 //        $nombre = explode('-', $datos['nombre']); 
