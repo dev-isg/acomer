@@ -779,7 +779,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         $form->get('submit')->setValue('Agregar');
         $request = $this->getRequest();
         if ($request->isPost()) {
-            if ($session) {
+            if($session){
                 $datos = $this->getRequest()->getPost()->toArray();
                 $datos['Ta_plato_in_id'] = $id;
                 $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
