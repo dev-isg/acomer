@@ -699,7 +699,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
           //$url='/plato/'.$datos['nombre'].'/'.$datos['nombre'];
            // $url='/plato/'.$datos['nombre'];
         $id_face=$this->getClientesTable()->usuarioface($facebook['email']); 
-                         if(count($id_face)>0)
+                  if(count($id_face)>0)
                          {if($id_face[0]['id_facebook']=='')  
                         {
                            $this->getClientesTable()->idfacebook($id_face[0]['in_id'],$facebook['id_facebook'],$facebook['logoutUrl']);
