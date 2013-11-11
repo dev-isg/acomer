@@ -800,8 +800,8 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
 //            }
 //        }   
         
-        $this->layout()->clase = 'Detalle';
-        $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
+//        $this->layout()->clase = 'Detalle';
+//        $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
 //        $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
 //        $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
 //        $paginator->setItemCountPerPage(10);    
