@@ -682,7 +682,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
 //                                exit();
 //                                $view->setTerminal(true);
 //                                return $view;     
-//               }
+//}
         $datos =$this->params()->fromRoute();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
