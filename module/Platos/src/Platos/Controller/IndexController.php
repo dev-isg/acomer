@@ -686,9 +686,9 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
         $datos =$this->params()->fromRoute();
         $storage = new \Zend\Authentication\Storage\Session('Auth');
         $session=$storage->read();
-        if ($session){           
-                    $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
-                    $activo=$participa->en_estado;}
+//        if ($session){           
+//                    $participa=$this->getClientesTable()->compruebarUsuariox($session->in_id);
+//                    $activo=$participa->en_estado;}
     if (!isset($session)) { 
         $face = new \Usuario\Controller\ClientesController();
         $facebook = $face->facebook();
@@ -813,13 +813,14 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
 //                trim($listarecomendacion[0]['tx_descripcion']).':'.
 //                trim($listarecomendacion[0]['tipo_plato_nombre']).':'.
 //                trim($listarecomendacion[0]['restaurant_nombre']).':'.
-                trim($listarecomendacion[0]['distrito']).' │ ';
-       $menu = $this->menu();
-       $view->setVariables(array('lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 
-            'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
-            'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id,
-            'listatitle'=>$listatitle, 'masplatos' => $resultados
-             ,'listades' => $consulta,'menus'=>$menu,'session'=>$session,'resta'=>$resta,
+              //  trim($listarecomendacion[0]['distrito']).' │ ';
+     //  $menu = $this->menu();
+       $view->setVariables(array(
+           //'lista' => $listarecomendacion, 'comentarios' => $paginator, 'form' => $form, 
+//            'servicios' => $servicios,'urlplato'=>$id,'urlnombre'=>$datos['nombre'],
+//            'pagos' => $pagos, 'locales' => $locales, 'cantidad' => $this->getCount($listarcomentarios),'variable'=>$id,
+//            'listatitle'=>$listatitle, 'masplatos' => $resultados
+//             ,'listades' => $consulta,'menus'=>$menu,'session'=>$session,'resta'=>$resta,
             'participa'=>$activo,));
        
         return $view;
