@@ -785,8 +785,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                 $datos['tx_descripcion'] = htmlspecialchars($datos['tx_descripcion']);
                 $validar = explode('http://', $datos['tx_descripcion']);
                 if(count($validar)==2){
-                return $this->redirect()->toUrl('/plato/'.$urlerror.'?m=1');
-                }
+                return $this->redirect()->toUrl('/plato/'.$urlerror.'?m=1'); }
                 else {
                 $form->setData($datos);
                 if (!$form->isValid()) {
@@ -798,8 +797,7 @@ imagecopy($viejaimagen, $estampa,  $sx,$alto-100, 0, 0, imagesx($estampa), image
                   }
                 }
             }
-        }   
-        
+        }    
         $this->layout()->clase = 'Detalle';
         $listarcomentarios = $this->getPlatosTable()->getComentariosxPlatos($id);
         $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\Iterator($listarcomentarios));
